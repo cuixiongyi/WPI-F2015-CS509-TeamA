@@ -3,6 +3,8 @@ package com.wpi.cs509.teamA.ui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +21,23 @@ public class UserScreen {
 	private JPanel northPanel;
 
 	public UserScreen() {
+		
+		initUserScreen();
+		addListeners();
+		
+	}
+
+	
+	/**
+	 * This is the start of our program?
+	 * Do we need a Login page first?
+	 * Or have an button for admin Login?
+	 */
+	public static void main(String[] args) {
+		new UserScreen();
+	}
+	
+	private void initUserScreen(){
 		startPoint = new JTextField("Start");
 		endPoint = new JTextField("End");
 		btnSearch = new JButton("Search");
@@ -40,15 +59,17 @@ public class UserScreen {
 		frame.setLocation((screen_width - frame.getWidth()) / 2, (screen_height - frame.getHeight()) / 2);
 		frame.setVisible(true);
 	}
-
 	
-	/**
-	 * This is the start of our program?
-	 * Do we need a Login page first?
-	 * Or have an button for admin Login?
-	 */
-	public static void main(String[] args) {
-		new UserScreen();
+	private void addListeners(){
+		btnSearch.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				// do search work here?
+			}
+			
+		});
 	}
 
 }
