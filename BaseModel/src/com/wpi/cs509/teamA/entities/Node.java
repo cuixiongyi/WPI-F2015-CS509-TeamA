@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.wpi.cs509.teamA.misc.Coordinate;
@@ -23,6 +24,43 @@ public class Node {
 	
 	public Node(){
 		
+	}
+	
+	/**
+	 * @param id
+	 * @param name
+	 * @param x
+	 * @param y
+	 * @param mapId
+	 * @param neighbors should be used as Node(..., new HashSet<String>(), ...)
+	 * @param nodeType
+	 * @param isEntrance
+	 */
+	
+	public Node(String id, String name, int x, int y, String mapId, Set<String> neighbors, String nodeType, boolean isEntrance){
+		
+		this.id = id;
+		this.name = name;
+		this.location = new Coordinate(x, y);
+		this.mapId = mapId;
+		this.neighbors = neighbors;
+		this.nodeType = NodeType.valueOf(nodeType);
+		this.isEntrance = isEntrance;
+		
+	}
+	
+	public void saveNode(){
+		Node node = new Node();
+		node.setNeighbors(new HashSet<String>());
+		node.setId("1");
+		// more setters for the node
+		
+		
+		// add node id as the neighbours
+		
+		node.getNeighbors().add("2");
+		node.getNeighbors().add("3");
+		node.getNeighbors().add("4");
 	}
 	
 	// add neighbors to the node
@@ -87,6 +125,8 @@ public class Node {
 		return neighbors;
 	}
 
+	
+	// 
 	public void setNeighbors(Set<String> neighbors) {
 		this.neighbors = neighbors;
 	}

@@ -11,6 +11,11 @@ public class Coordinate {
 		
 	}
 	
+	public Coordinate(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
 	// calculate the distance between this node and the anotherNode
 	public void getDistance(Node anotherNode){
 		
