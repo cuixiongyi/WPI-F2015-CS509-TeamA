@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.controller;
+package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.entities.Node;
 
@@ -38,5 +38,4 @@ public class InteractWithFrontEnd {
 		this.endNode = endNode;
 	}
 
-	
 }
