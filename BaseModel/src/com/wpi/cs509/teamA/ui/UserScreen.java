@@ -5,12 +5,17 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.wpi.cs509.teamA.controller.AlogController;
+import com.wpi.cs509.teamA.entities.Node;
 
 public class UserScreen {
 
@@ -61,12 +66,25 @@ public class UserScreen {
 	}
 	
 	private void addListeners(){
+		
+		// search
 		btnSearch.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
+				
+				// check what kind of two places are
+				// proxy design pattern?
 				// do search work here?
+				// let the controller decide which algorithm will be called?
+				AlogController controller = new AlogController(startPoint.getText().trim(), endPoint.getText().trim());
+				List<Node> route = new ArrayList<Node>();
+				route = controller.getRoute();
+				// how to make feedback to the image? more discussion..
+				
+				
+				
 			}
 			
 		});

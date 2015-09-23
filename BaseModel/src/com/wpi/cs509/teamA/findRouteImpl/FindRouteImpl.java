@@ -10,7 +10,7 @@ public class FindRouteImpl implements FindRoute{
 	private Node startNode;
 	private Node endNode;
 	
-	public List<Node> findRouteBetweenSimpleTwoNodes(Node startNode, Node endNode){
+	public List<Node> findRouteSameMap(Node startNode, Node endNode){
 		return null;
 	}
 
