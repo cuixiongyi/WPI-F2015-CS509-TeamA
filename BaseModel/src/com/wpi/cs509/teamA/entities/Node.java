@@ -8,14 +8,14 @@ import com.wpi.cs509.teamA.misc.NodeType;
 
 public class Node {
 	
-	private String id;
+	private int id;
 	private String name;
 	private Coordinate location;
 	// which map this node belongs to
 	private String mapId;
 	// neighbor node id and distance
 	// private Map<String, Integer> neighbors;
-	private Set<String> neighbors;
+	private Set<Integer> neighbors;
 	private NodeType nodeType;
 	// Activity will contain location
 	// many activities can be hold in one place
@@ -37,7 +37,7 @@ public class Node {
 	 * @param isEntrance
 	 */
 	
-	public Node(String id, String name, int x, int y, String mapId, Set<String> neighbors, String nodeType, boolean isEntrance){
+	public Node(int id, String name, int x, int y, String mapId, Set<Integer> neighbors, String nodeType, boolean isEntrance){
 		
 		this.id = id;
 		this.name = name;
@@ -51,16 +51,16 @@ public class Node {
 	
 	public void saveNode(){
 		Node node = new Node();
-		node.setNeighbors(new HashSet<String>());
-		node.setId("1");
+		node.setNeighbors(new HashSet<Integer>());
+		node.setId(1);
 		// more setters for the node
 		
 		
 		// add node id as the neighbours
 		
-		node.getNeighbors().add("2");
-		node.getNeighbors().add("3");
-		node.getNeighbors().add("4");
+		node.getNeighbors().add(2);
+		node.getNeighbors().add(3);
+		node.getNeighbors().add(4);
 	}
 	
 	// add neighbors to the node
@@ -81,11 +81,11 @@ public class Node {
 		
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -121,13 +121,13 @@ public class Node {
 		this.mapId = mapId;
 	}
 
-	public Set<String> getNeighbors() {
+	public Set<Integer> getNeighbors() {
 		return neighbors;
 	}
 
 	
 	// 
-	public void setNeighbors(Set<String> neighbors) {
+	public void setNeighbors(Set<Integer> neighbors) {
 		this.neighbors = neighbors;
 	}
 

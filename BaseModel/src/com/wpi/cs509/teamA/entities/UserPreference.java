@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.entities;
 
 import com.wpi.cs509.teamA.misc.UserCookies;
 
-public class Users extends UserLogin{
+public class UserPreference extends UserAccount{
 
 	private UserCookies userCookies;
 

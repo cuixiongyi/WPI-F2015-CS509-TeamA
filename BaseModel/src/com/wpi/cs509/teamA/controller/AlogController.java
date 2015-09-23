@@ -32,6 +32,8 @@ public class AlogController {
 			List<Node> result = ac.pathFinding();
 			return result;
 			
+		// can we have just two condition, sigleMap and Multiple Map?
+		// find a way which is easier for programming
 		}else if(startMapId != endMapId && (startMapId == "0" || endMapId == "0")){ // campus to building
 			
 		}else{ // building to building
