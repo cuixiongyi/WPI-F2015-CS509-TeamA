@@ -41,6 +41,12 @@ public class UserScreen {
 		frame.setVisible(true);
 	}
 
+	
+	/**
+	 * This is the start of our program?
+	 * Do we need a Login page first?
+	 * Or have an button for admin Login?
+	 */
 	public static void main(String[] args) {
 		new UserScreen();
 	}
