@@ -30,6 +30,9 @@ public class UserScreen {
 		initUserScreen();
 		addListeners();
 		
+		// maybe we can use facade pattern here?
+		// https://en.wikipedia.org/wiki/Facade_pattern
+		
 	}
 
 	
