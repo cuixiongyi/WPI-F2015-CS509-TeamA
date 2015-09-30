@@ -1,14 +1,22 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -57,14 +65,16 @@ public class UserScreen {
 		northPanel.add(new JLabel("To: "));
 		northPanel.add(endPoint);
 		northPanel.add(btnSearch);
-
+				
 		frame = new JFrame("Path Finding");
 		frame.setLayout(new BorderLayout());
 		frame.add(northPanel, "North");
+		frame.add("South", new MapCanvas());
 		frame.setSize(600, 400);
 		int screen_width = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int screen_height = Toolkit.getDefaultToolkit().getScreenSize().height;
 		frame.setLocation((screen_width - frame.getWidth()) / 2, (screen_height - frame.getHeight()) / 2);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	
@@ -94,3 +104,35 @@ public class UserScreen {
 	}
 
 }
+
+class MapCanvas extends Canvas{
+	
+	@Override
+	public void update(Graphics g) {
+		// Image csp = Toolkit.getDefaultToolkit().createImage(UserScreen.class.getResource("CSP.jpg"));
+				Image csp;
+				try {
+					csp = ImageIO.read(new File("C:/PathFinding/WPI-F2015-CS509-TeamA/BaseModel/src/CSP.jpg"));
+					g.drawImage(csp, 100, 100, this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+
+	@Override
+	public void paintAll(Graphics g) {
+		// Image csp = Toolkit.getDefaultToolkit().createImage(UserScreen.class.getResource("CSP.jpg"));
+				Image csp;
+				try {
+					csp = ImageIO.read(new File("C:/PathFinding/WPI-F2015-CS509-TeamA/BaseModel/src/CSP.jpg"));
+					g.drawImage(csp, 100, 100, this);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+
+}
+
+
