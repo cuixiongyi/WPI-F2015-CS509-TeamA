@@ -48,22 +48,43 @@ public class AlogController {
 		return null;
 	}
 	
+	/**
+	 * Gets the starting node for a route
+	 * @return starting node of the route
+	 */
 	public String getStartNode() {
 		return startNode;
 	}
 
+	/**
+	 * Sets the starting node for a route
+	 * @param startNode starting node of the route
+	 */
 	public void setStartNode(String startNode) {
 		this.startNode = startNode;
 	}
 
+	/**
+	 * Gets the ending node for a route
+	 * @return ending node of the route
+	 */
 	public String getEndNode() {
 		return endNode;
 	}
 
+	/**
+	 * Sets the ending node for a route
+	 * @param ending node of the route
+	 */
 	public void setEndNode(String endNode) {
 		this.endNode = endNode;
 	}
 	
+	/**
+	 * Gets the node cooresponding to a given location name
+	 * @param nodeName The name of the location
+	 * @return node cooresponding to the location name
+	 */
 	private Node getNodeFromName(String nodeName){
 		
 		// use node name to find the Node we need
