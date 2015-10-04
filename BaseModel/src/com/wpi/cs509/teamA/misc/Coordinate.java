@@ -4,7 +4,9 @@ import com.wpi.cs509.teamA.entities.Node;
 
 public class Coordinate {
 	
-	private int x;
+	/** x coordinate in the coordinate pair */
+	private int x; 
+	/** y coordinate in the coordinate pair */
 	private int y;
 
 	/**
