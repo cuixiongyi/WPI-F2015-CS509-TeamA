@@ -5,6 +5,11 @@ import java.util.List;
 import com.wpi.cs509.teamA.entities.*;
 import com.wpi.cs509.teamA.findRoute.FindRoute;
 
+/**The implementation of the route finding method
+ * @author CS 509-Team A 
+ * @version Oct 5th 
+ * */
+
 public class FindRouteImpl implements FindRoute{
 
 	/** 

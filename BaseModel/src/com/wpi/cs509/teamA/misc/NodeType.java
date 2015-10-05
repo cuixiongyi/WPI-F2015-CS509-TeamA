@@ -1,5 +1,11 @@
 package com.wpi.cs509.teamA.misc;
 
+/**
+ * type of node definition
+ * @author CS 509-Team A 
+ * @version Oct 5th
+*/
+
 public enum NodeType {
 	
 	OFFICE("office"),

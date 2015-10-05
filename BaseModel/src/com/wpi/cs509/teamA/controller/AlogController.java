@@ -4,21 +4,36 @@ import java.util.List;
 
 import com.wpi.cs509.teamA.entities.Node;
 
+/**
+ * implementation of routes finding
+ * @author CS 509-Team A 
+ * @version Oct 5th
+*/
 public class AlogController {
 	
+	/**the node representing for the source*/
 	private String startNode;
+	/**the node representing for the destination*/
 	private String endNode;
 	
+	/**default constructor*/
 	public AlogController(){
 		
 	}
 	
+	/**construtor,initiate with the source and destination
+	 *@param from  the source node
+	 *@param to  the destination node
+	 * */
 	public AlogController(String from, String to){
 		
 		this.startNode = from;
 		this.endNode = to;		
 	}
-	
+	/**
+	 * find the route using the specific algorithm
+	 * @return the route difined by a list of nodes
+	 */
 	public List<Node> getRoute(){
 		Node fromNode = getNodeFromName(startNode);
 		Node toNode = getNodeFromName(endNode);
@@ -43,6 +58,10 @@ public class AlogController {
 		return null;
 	}
 	
+	/**
+	 * Find the path between two nodes
+	 * @return the path difined by a list of nodes
+	 */
 	public List<Node> pathFinding(){
 		System.out.println("you must specify a implement class!");
 		return null;

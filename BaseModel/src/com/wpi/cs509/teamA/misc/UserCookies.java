@@ -3,6 +3,11 @@ package com.wpi.cs509.teamA.misc;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * user cookie definition
+ * @author CS 509-Team A 
+ * @version Oct 5th
+*/  
 public class UserCookies {
 
 	/** User's unique identification string */
