@@ -69,7 +69,6 @@ public class UserScreen {
 		frame = new JFrame("Path Finding");
 		frame.setLayout(new BorderLayout());
 		frame.add(northPanel, "North");
-		frame.add("South", new MapCanvas());
 		frame.setSize(600, 400);
 		int screen_width = Toolkit.getDefaultToolkit().getScreenSize().width;
 		int screen_height = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -105,34 +104,6 @@ public class UserScreen {
 
 }
 
-class MapCanvas extends Canvas{
-	
-	@Override
-	public void update(Graphics g) {
-		// Image csp = Toolkit.getDefaultToolkit().createImage(UserScreen.class.getResource("CSP.jpg"));
-				Image csp;
-				try {
-					csp = ImageIO.read(new File("C:/PathFinding/WPI-F2015-CS509-TeamA/BaseModel/src/CSP.jpg"));
-					g.drawImage(csp, 100, 100, this);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	}
 
-	@Override
-	public void paintAll(Graphics g) {
-		// Image csp = Toolkit.getDefaultToolkit().createImage(UserScreen.class.getResource("CSP.jpg"));
-				Image csp;
-				try {
-					csp = ImageIO.read(new File("C:/PathFinding/WPI-F2015-CS509-TeamA/BaseModel/src/CSP.jpg"));
-					g.drawImage(csp, 100, 100, this);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	}
-
-}
 
 
