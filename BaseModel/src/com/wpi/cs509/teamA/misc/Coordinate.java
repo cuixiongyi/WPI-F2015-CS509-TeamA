@@ -2,6 +2,12 @@ package com.wpi.cs509.teamA.misc;
 
 import com.wpi.cs509.teamA.entities.Node;
 
+/**
+ * the coordinate definition
+ * @author CS 509-Team A 
+ * @version Oct 5th
+*/
+
 public class Coordinate {
 	
 	/** x coordinate in the coordinate pair */

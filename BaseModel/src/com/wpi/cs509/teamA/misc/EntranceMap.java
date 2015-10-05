@@ -1,6 +1,11 @@
 package com.wpi.cs509.teamA.misc;
 
 import java.util.Map;
+/**
+ * Details of the entrance map
+ * @author CS 509-Team A 
+ * @version Oct 5th
+*/
 
 public class EntranceMap {
 	

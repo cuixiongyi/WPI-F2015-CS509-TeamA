@@ -13,7 +13,6 @@ public class BuildingMap extends RoadMap{
 
 	/**
 	 * get the name of the building
-	 * @author CS509-Team A
 	 * @return name of the building
 	 */
 	public String getBuildingName() {
@@ -22,7 +21,6 @@ public class BuildingMap extends RoadMap{
 	
 	/**
 	 * set the name of the building
-	 * @author CS509-Team A
 	 * @param name of the building
 	 */
 	public void setBuildingName(String buildingName) {
