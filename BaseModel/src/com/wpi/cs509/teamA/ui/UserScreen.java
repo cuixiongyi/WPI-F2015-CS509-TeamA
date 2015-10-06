@@ -61,7 +61,7 @@ public class UserScreen extends JFrame{
 		container.setLayout(new BorderLayout());
 
 		imgPanel = new ImagePanel();
-		imgPanel.setImagePath("C:/Users/jlou/Desktop/Jie.jpg");
+		imgPanel.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
 		imgPanel.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
 		imgPanel.setVisible(true);
 		
