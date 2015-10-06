@@ -60,18 +60,19 @@ public class ImageComponent extends JComponent implements MouseListener {
 				System.out.println("the linstener has been triggered!");
 				
 				// check what kind of two places are
-				// proxy design pattern?
+				// proxy design pattern? no need to, 
+				// proxy will be used only there are multiple classes that need the same operation
+				
 				// do search work here?
 				// let the controller decide which algorithm will be called?
-				// AlogController controller = new
-				// AlogController(startPoint.getText().trim(),
-				// endPoint.getText().trim());
+				
+				// AlogController controller = new AlogController(startPoint.getText().trim(), endPoint.getText().trim());
 				// List<Node> route = new ArrayList<Node>();
 				// route = controller.getRoute();
+				
 				// how to make feedback to the image? more discussion..
 
-				// give all the information to the repaint method
-
+				// we need to give all the information to the repaint method
 				repaint();
 
 			}
@@ -250,7 +251,7 @@ public class ImageComponent extends JComponent implements MouseListener {
 	}
 	
 	// add all the listener in this method
-	private void addButtonListener(){
+	private void addButtonListeners(){
 		
 	}
 }

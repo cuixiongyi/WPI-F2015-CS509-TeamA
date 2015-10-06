@@ -1,22 +1,39 @@
 package com.wpi.cs509.teamA.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wpi.cs509.teamA.entities.Node;
+import com.wpi.cs509.teamA.findRoute.FindRoute;
+import com.wpi.cs509.teamA.findRouteImpl.FindRouteImpl;
 
 /**
- * implementation of routes finding
+ * This class will get the start and end nodes from the front end.
+ * The node got from the front end is in String form,
+ * So this class will get a Node from database based on the string it receive.
  * @author CS 509-Team A 
  * @version Oct 5th
 */
 public class AlogController {
 	
-	/**the node representing for the source*/
+	/**
+	 * The start node get from front end
+	 * It is a String
+	 */
 	private String startNode;
-	/**the node representing for the destination*/
+	/**
+	 * The destination node get from the front end
+	 * It is a String
+	 */
 	private String endNode;
 	
-	/**default constructor*/
+	
+	
+	/**
+	 * default constructor
+	 */
 	public AlogController(){
 		
 	}
@@ -30,40 +47,41 @@ public class AlogController {
 		this.startNode = from;
 		this.endNode = to;		
 	}
+	
 	/**
-	 * find the route using the specific algorithm
-	 * @return the route difined by a list of nodes
+	 * This method will decide which algorithm will be called to find a route between two different points
+	 * It will make a decision by the id of the map.
+	 * To decide a algorithm, find route between several maps, or just a single map
+	 * @return the route presented by a list of nodes
 	 */
 	public List<Node> getRoute(){
+		
+		// get the node from database
 		Node fromNode = getNodeFromName(startNode);
 		Node toNode = getNodeFromName(endNode);
+		FindRoute fr = new FindRouteImpl();
+		
+		// get more information from the node we get
 		String startMapId = fromNode.getMapId();
 		String endMapId = toNode.getMapId();
-		// decide which algorithm to use
 		
+		// decide which algorithm to use
 		// walking through the same map
 		if(startMapId == endMapId){
-			AlogController ac= new FindRouteSameMap();
-			List<Node> result = ac.pathFinding();
-			return result;
+			List<Node> result = new ArrayList<Node>();
+			result = fr.findRouteSameMap(fromNode, toNode);
 			
 		// can we have just two condition, sigleMap and Multiple Map?
 		// find a way which is easier for programming
 		}else if(startMapId != endMapId && (startMapId == "0" || endMapId == "0")){ // campus to building
+			Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
+			result = fr.findRouteMultipleMap(fromNode, toNode);
+			
 			
 		}else{ // building to building
-			
+			// ??
 		}
 		
-		return null;
-	}
-	
-	/**
-	 * Find the path between two nodes
-	 * @return the path difined by a list of nodes
-	 */
-	public List<Node> pathFinding(){
-		System.out.println("you must specify a implement class!");
 		return null;
 	}
 	
@@ -100,13 +118,14 @@ public class AlogController {
 	}
 	
 	/**
-	 * Gets the node cooresponding to a given location name
+	 * Gets the node that corresponding to a given location name
 	 * @param nodeName The name of the location
-	 * @return node cooresponding to the location name
+	 * @return node corresponding to the location name
 	 */
 	private Node getNodeFromName(String nodeName){
 		
 		// use node name to find the Node we need
+		// search database?
 		
 		return null;
 		

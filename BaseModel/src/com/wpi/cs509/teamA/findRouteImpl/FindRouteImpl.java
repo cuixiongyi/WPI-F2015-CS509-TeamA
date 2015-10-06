@@ -1,11 +1,12 @@
 package com.wpi.cs509.teamA.findRouteImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.wpi.cs509.teamA.entities.*;
 import com.wpi.cs509.teamA.findRoute.FindRoute;
 
-/**The implementation of the route finding method
+/**The implementation of the route finding Interface
  * @author CS 509-Team A 
  * @version Oct 5th 
  * */
@@ -28,10 +29,8 @@ public class FindRouteImpl implements FindRoute{
 	 * @param endNode Ending location of the route
 	 * @return Route from source to destination across multiple maps
 	 */
-	public List<List<Node>> findRouteMultipleMap(Node startNode, Node endNode){
+	public Map<Integer, List<Node>> findRouteMultipleMap(Node startNode, Node endNode){
 		return null;
 	}
-
-	
 
 }
