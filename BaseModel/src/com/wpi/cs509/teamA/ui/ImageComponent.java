@@ -25,10 +25,9 @@ public class ImageComponent extends JComponent implements MouseListener {
 	private int xPos;
 	private int yPos;
 	
-	// this is for set event handlers for the button
-	private InputPanel inputPanel;
-	
 	private static int num = 1;
+	
+	private static int adminClicked = 2;
 
 	// admin will get a different repaint method
 	private boolean isAdmin;
@@ -38,8 +37,9 @@ public class ImageComponent extends JComponent implements MouseListener {
 	}
 	
 	public ImageComponent(InputPanel inputPanel){
+		
+		// add listener to the search button
 		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -63,6 +63,30 @@ public class ImageComponent extends JComponent implements MouseListener {
 
 			}
 
+		});
+		
+		/**
+		 * Add listener to the admin login button
+		 */
+		inputPanel.getAdminLogin().addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				// we need a pop up window here to verify the admin role
+				
+				if(adminClicked%2 == 0){
+					System.out.println("Login");
+					isAdmin = true;
+					adminClicked++;
+				}else{
+					System.out.println("Log off");
+					isAdmin = false;
+					adminClicked++;
+				}
+			}
+			
 		});
 		
 	}
@@ -121,19 +145,25 @@ public class ImageComponent extends JComponent implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
-		// this operation is only for admin
-		xPos = e.getX();
-		yPos = e.getY();
-
-		System.out.println(xPos);
-		System.out.println(yPos);
-
-		// make a pop up window here
-		// save the point that we have clicked to database
-		// it doesnt matter if we repaint the window
 		
-		repaint();
+		// this operation is only for admin
+		if(isAdmin){
+			xPos = e.getX();
+			yPos = e.getY();
+
+			System.out.println(xPos);
+			System.out.println(yPos);
+
+			// make a pop up window here
+			// save the point that we have clicked to database
+			// it doesnt matter if we repaint the window
+			
+			repaint();
+
+		}else{
+			System.out.println("You are not able to get the coordinates");
+		}
+		
 
 	}
 
@@ -206,6 +236,7 @@ public class ImageComponent extends JComponent implements MouseListener {
 
 	}
 	
+	// add all the listener in this method
 	private void addButtonListener(){
 		
 	}
