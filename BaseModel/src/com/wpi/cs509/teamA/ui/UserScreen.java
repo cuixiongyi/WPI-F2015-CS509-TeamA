@@ -47,10 +47,10 @@ public class UserScreen extends JFrame{
 
 	private Container container;
 	
-	private ImagePanel imgPanel;
+	private ImageComponent imgPanel;
 	private JScrollPane imgSp;
 	
-	private JPanel inputPanel;
+	private InputPanel inputPanel;
 
 	private UserScreen() {
 		container = getContentPane();
@@ -59,7 +59,7 @@ public class UserScreen extends JFrame{
 		inputPanel = new InputPanel();
 
 		// the panel to show image
-		imgPanel = new ImagePanel(inputPanel);
+		imgPanel = new ImageComponent(inputPanel);
 		
 		// display the image
 		imgPanel.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");

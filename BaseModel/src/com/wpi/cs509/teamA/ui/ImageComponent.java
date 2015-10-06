@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public class ImagePanel extends JComponent implements MouseListener {
+public class ImageComponent extends JComponent implements MouseListener {
 
 	private Image image;
 	private int imgWidth;
@@ -33,12 +33,12 @@ public class ImagePanel extends JComponent implements MouseListener {
 	// admin will get a different repaint method
 	private boolean isAdmin;
 
-	public ImagePanel() {
+	public ImageComponent() {
 
 	}
 	
-	public ImagePanel(JPanel inputPanel){
-		((InputPanel) inputPanel).getBtnSearch().addActionListener(new ActionListener() {
+	public ImageComponent(InputPanel inputPanel){
+		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

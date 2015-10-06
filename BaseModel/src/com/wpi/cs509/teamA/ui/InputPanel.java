@@ -22,9 +22,8 @@ public class InputPanel extends JPanel {
 	private JButton btnSearch;
 	private JButton adminLogin;
 
-	// will be used in the inner class
 	public InputPanel() {
-		// button panel
+		
 		this.startPoint = new JTextField("Start");
 		this.endPoint = new JTextField("End");
 		this.btnSearch = new JButton("Search");
