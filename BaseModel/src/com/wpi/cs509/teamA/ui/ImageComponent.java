@@ -16,6 +16,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+/**
+ * An component to show the images
+ * This component implements the MouseListener Interface,
+ * which enable this component have interactive with the user
+ * @author JLou
+ *
+ */
 public class ImageComponent extends JComponent implements MouseListener {
 
 	private Image image;
@@ -36,6 +43,12 @@ public class ImageComponent extends JComponent implements MouseListener {
 
 	}
 	
+	/**
+	 * Constructor for image component
+	 * The constructor will also add all the Listeners to the inputPanel it got
+	 * 
+	 * @param inputPanel an instance of inputPanel will add listeners to the buttons in the inputPanel
+	 */
 	public ImageComponent(InputPanel inputPanel){
 		
 		// add listener to the search button

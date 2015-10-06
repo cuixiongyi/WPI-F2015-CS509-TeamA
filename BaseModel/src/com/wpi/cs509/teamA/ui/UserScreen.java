@@ -43,15 +43,27 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+/**
+ * This is the class that construct the main user interface of the application
+ * @author JLou
+ *
+ */
+
 public class UserScreen extends JFrame{
 
 	private Container container;
 	
 	private ImageComponent imgPanel;
 	private JScrollPane imgSp;
-	
+	/*
+	 * A JPanel that have input text fields and buttons
+	 * which will be shown on the top of the UI
+	 */
 	private InputPanel inputPanel;
 
+	/**
+	 * Initialize the user screen, constructor
+	 */
 	private UserScreen() {
 		container = getContentPane();
 		container.setLayout(new BorderLayout());
@@ -88,6 +100,10 @@ public class UserScreen extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/**
+	 * The start of the program
+	 * @param args command line..
+	 */
 	public static void main(String[] args) {
 		
 		// just use sigleton here

@@ -15,6 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ *  JPanel that have input text fields and buttons
+ * which will be shown on the top of the UI
+ * @author JLou
+ *
+ */
 public class InputPanel extends JPanel {
 
 	private JTextField startPoint;
