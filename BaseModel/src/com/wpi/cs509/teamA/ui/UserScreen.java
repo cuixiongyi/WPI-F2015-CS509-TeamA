@@ -25,61 +25,75 @@ import javax.swing.JTextField;
 import com.wpi.cs509.teamA.controller.AlogController;
 import com.wpi.cs509.teamA.entities.Node;
 
-public class UserScreen {
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
 
-	private JFrame frame;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+public class UserScreen extends JFrame{
+
+	private Container container;
+	
+	private ImagePanel imgPanel;
+	private JScrollPane imgSp;
+	
+	private JPanel inputPanel;
 	private JTextField startPoint;
 	private JTextField endPoint;
 	private JButton btnSearch;
-	private JPanel northPanel;
+	private JButton adminLogin;
 
-	public UserScreen() {
-		
-		initUserScreen();
-		addListeners();
-		
-		// maybe we can use facade pattern here?
-		// https://en.wikipedia.org/wiki/Facade_pattern
-		
-	}
+	private UserScreen() {
+		container = getContentPane();
+		container.setLayout(new BorderLayout());
 
-	
-	/**
-	 * This is the start of our program?
-	 * Do we need a Login page first?
-	 * Or have an button for admin Login?
-	 */
-	public static void main(String[] args) {
-		new UserScreen();
-	}
-	
-	private void initUserScreen(){
+		imgPanel = new ImagePanel();
+		imgPanel.setImagePath("C:/Users/jlou/Desktop/Jie.jpg");
+		imgPanel.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
+		imgPanel.setVisible(true);
+		
+		// add an implementation class
+		// imgPanel.addMouseListener(new MouseEventImpl());
+		imgPanel.addMouseListener(imgPanel);
+		
+		imgSp = new JScrollPane();
+		imgSp.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
+		// for scroll panel
+		imgSp.setViewportView(imgPanel);
+		imgSp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		imgSp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		// button panel
 		startPoint = new JTextField("Start");
 		endPoint = new JTextField("End");
 		btnSearch = new JButton("Search");
-
-		northPanel = new JPanel();
-		northPanel.setLayout(new GridLayout(1, 7));
-		northPanel.add(new JLabel("From: "));
-		northPanel.add(startPoint);
-		northPanel.add(new JLabel("To: "));
-		northPanel.add(endPoint);
-		northPanel.add(btnSearch);
-				
-		frame = new JFrame("Path Finding");
-		frame.setLayout(new BorderLayout());
-		frame.add(northPanel, "North");
-		frame.setSize(600, 400);
-		int screen_width = Toolkit.getDefaultToolkit().getScreenSize().width;
-		int screen_height = Toolkit.getDefaultToolkit().getScreenSize().height;
-		frame.setLocation((screen_width - frame.getWidth()) / 2, (screen_height - frame.getHeight()) / 2);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
-	
-	private void addListeners(){
+		adminLogin = new JButton("Login as Admin");
 		
-		// search
+		inputPanel = new JPanel();
+		inputPanel.setLayout(new GridLayout(1, 7));
+		inputPanel.add(new JLabel("From: "));
+		inputPanel.add(startPoint);
+		inputPanel.add(new JLabel("To: "));
+		inputPanel.add(endPoint);
+		inputPanel.add(btnSearch);
+		inputPanel.add(adminLogin);
+
+		container.add(imgSp, BorderLayout.CENTER);
+		container.add(inputPanel, BorderLayout.NORTH);
+		
 		btnSearch.addActionListener(new ActionListener(){
 
 			@Override
@@ -90,20 +104,35 @@ public class UserScreen {
 				// proxy design pattern?
 				// do search work here?
 				// let the controller decide which algorithm will be called?
-				AlogController controller = new AlogController(startPoint.getText().trim(), endPoint.getText().trim());
-				List<Node> route = new ArrayList<Node>();
-				route = controller.getRoute();
+				// AlogController controller = new AlogController(startPoint.getText().trim(), endPoint.getText().trim());
+				// List<Node> route = new ArrayList<Node>();
+				// route = controller.getRoute();
 				// how to make feedback to the image? more discussion..
 				
-				
+				// we draw two demon lines here
+				BufferedImage sourceImage = (BufferedImage) imgPanel.getImage();
+				Graphics2D g2 = (Graphics2D) sourceImage.getGraphics();
+				g2.setPaint(Color.white);
+				g2.draw(new Line2D.Double(10,10,600,10));
+				g2.draw(new Line2D.Double(10,80,600,80));
+				repaint();
 				
 			}
 			
 		});
+
+		setTitle("Path Finding");
+		setLocation(0, 0);
+		setSize(1200, 900);
+		setVisible(true);
+		setResizable(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	public static void main(String[] args) {
+		
+		// just use sigleton here
+		new UserScreen();
+	}
+	
 }
-
-
-
-
