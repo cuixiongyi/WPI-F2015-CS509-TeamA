@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.entities;
+package com.wpi.cs509.teamA.bean;
 
 import com.wpi.cs509.teamA.misc.UserCookies;
 /**

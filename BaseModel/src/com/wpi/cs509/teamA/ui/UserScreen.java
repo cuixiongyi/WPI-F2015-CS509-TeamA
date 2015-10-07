@@ -22,8 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlogController;
-import com.wpi.cs509.teamA.entities.Node;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

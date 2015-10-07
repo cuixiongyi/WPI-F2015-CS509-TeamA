@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.findRouteImpl;
 import java.util.List;
 import java.util.Map;
 
-import com.wpi.cs509.teamA.entities.*;
+import com.wpi.cs509.teamA.bean.*;
 import com.wpi.cs509.teamA.findRoute.FindRoute;
 
 /**The implementation of the route finding Interface

@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.findRoute;
 import java.util.List;
 import java.util.Map;
 
-import com.wpi.cs509.teamA.entities.Node;
+import com.wpi.cs509.teamA.bean.Node;
 
 /**This is the interface for different path finding algorithm
  * @author CS 509-Team A 

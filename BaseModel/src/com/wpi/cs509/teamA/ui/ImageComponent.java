@@ -21,8 +21,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlogController;
-import com.wpi.cs509.teamA.entities.Node;
 
 /**
  * An component to show the images This component implements the MouseListener

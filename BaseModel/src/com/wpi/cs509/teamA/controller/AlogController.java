@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.wpi.cs509.teamA.entities.Node;
+import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.findRoute.FindRoute;
 import com.wpi.cs509.teamA.findRouteImpl.FindRouteImpl;
 

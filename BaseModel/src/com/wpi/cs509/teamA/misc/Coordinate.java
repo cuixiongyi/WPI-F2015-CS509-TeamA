@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.misc;
 
-import com.wpi.cs509.teamA.entities.Node;
+import com.wpi.cs509.teamA.bean.Node;
 
 /**
  * the coordinate definition
