@@ -27,16 +27,11 @@ public class Node {
 	
 	// neighbor node id and distance
 	// private Map<String, Integer> neighbors;
-	/**neighbor node id and distance*/
-	private Set<Integer> neighbors;
+	/**neighbor node*/
+	private Set<Integer> neighbors = new HashSet<Integer>();
 	
 	/**type of the node*/
 	private NodeType nodeType;
-	// Activity will contain location
-	// many activities can be hold in one place
-	// private Activity activity;
-	/**if the node is an entrance*/
-	private boolean isEntrance;
 	
 	/**default constructor*/
 	public Node(){
@@ -53,7 +48,7 @@ public class Node {
 	 * @param nodeType
 	 * @param isEntrance
 	 */
-	public Node(int id, String name, int x, int y, String mapId, Set<Integer> neighbors, String nodeType, boolean isEntrance){
+	public Node(int id, String name, int x, int y, String mapId, Set<Integer> neighbors, String nodeType){
 		
 		this.id = id;
 		this.name = name;
@@ -61,7 +56,6 @@ public class Node {
 		this.mapId = mapId;
 		this.neighbors = neighbors;
 		this.nodeType = NodeType.valueOf(nodeType);
-		this.isEntrance = isEntrance;
 		
 	}
 	
@@ -161,16 +155,5 @@ public class Node {
 	public void setNeighbors(Set<Integer> neighbors) {
 		this.neighbors = neighbors;
 	}
-
-	/**get if the node is an entrance*/
-	public boolean isEntrance() {
-		return isEntrance;
-	}
-
-	/**set the map as an entrance*/
-	public void setEntrance(boolean isEntrance) {
-		this.isEntrance = isEntrance;
-	}
-	
 
 }
