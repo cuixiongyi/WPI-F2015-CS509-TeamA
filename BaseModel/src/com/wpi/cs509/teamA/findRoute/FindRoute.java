@@ -14,7 +14,7 @@ public interface FindRoute {
 	 * @param startNode  the start node
 	 * @param endNode the destination node
 	 * return List<Node>  the route defined by a list of nodes*/
-	public List<Node> findRouteSameMap(Node startNode, Node endNode);
+	public Map<Integer, List<Node>> findRouteSameMap(Node startNode, Node endNode);
 	
 	// the return type of different path find will be different?
 	// three types? Or just 2 types?

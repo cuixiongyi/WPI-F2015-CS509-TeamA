@@ -7,7 +7,7 @@ import java.util.Set;
  * @version Oct 5th
 */
 // marks all the buildings and other facilities in campus
-public class CampusMap extends RoadMap{
+public class CampusMap extends GeneralMap{
 
 	// parking lot, fountain
 	/**the set for parking lot and foutatin*/

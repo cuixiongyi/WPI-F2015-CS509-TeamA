@@ -12,14 +12,22 @@ import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.wpi.cs509.teamA.controller.AlogController;
+import com.wpi.cs509.teamA.entities.Node;
+
 /**
- * An component to show the images
- * This component implements the MouseListener Interface,
- * which enable this component have interactive with the user
+ * An component to show the images This component implements the MouseListener
+ * Interface, which enable this component have interactive with the user
+ * 
  * @author JLou
  *
  */
@@ -32,25 +40,31 @@ public class ImageComponent extends JComponent implements MouseListener {
 	private int xPos;
 	private int yPos;
 	
-	private static int num = 1;
-	
-	private static int adminClicked = 2;
+	private Map<Integer, List<Node>> diffMapResult;
+	private List<Node> sameMapReuslt;
 
+	private static int num = 1;
+
+	private static int adminClicked = 2;
+	
 	// admin will get a different repaint method
 	private boolean isAdmin;
 
 	public ImageComponent() {
 
 	}
-	
+
 	/**
-	 * Constructor for image component
-	 * The constructor will also add all the Listeners to the inputPanel it got
+	 * Constructor for image component The constructor will also add all the
+	 * Listeners to the inputPanel it got
 	 * 
-	 * @param inputPanel an instance of inputPanel will add listeners to the buttons in the inputPanel
+	 * @param inputPanel
+	 *            an instance of inputPanel will add listeners to the buttons in
+	 *            the inputPanel. inputPanel must be final since it will be used
+	 *            in the inner class
 	 */
-	public ImageComponent(InputPanel inputPanel){
-		
+	public ImageComponent(final InputPanel inputPanel) {
+
 		// add listener to the search button
 		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
@@ -58,51 +72,52 @@ public class ImageComponent extends JComponent implements MouseListener {
 				// TODO Auto-generated method stub
 
 				System.out.println("the linstener has been triggered!");
-				
+
 				// check what kind of two places are
-				// proxy design pattern? no need to, 
-				// proxy will be used only there are multiple classes that need the same operation
-				
+				// proxy design pattern?
+				// maybe need to check the result type all the time?
+
 				// do search work here?
 				// let the controller decide which algorithm will be called?
 				
-				// AlogController controller = new AlogController(startPoint.getText().trim(), endPoint.getText().trim());
-				// List<Node> route = new ArrayList<Node>();
-				// route = controller.getRoute();
-				
-				// how to make feedback to the image? more discussion..
+				// TODO: need to check if the input is valid!!
 
+				AlogController controller = new AlogController(inputPanel.getStartPoint().getText().trim(),	inputPanel.getEndPoint().getText().trim());
+		
+				
+
+				// how to make feedback to the image? more discussion..
 				// we need to give all the information to the repaint method
 				repaint();
 
 			}
 
 		});
-		
+
 		/**
 		 * Add listener to the admin login button
 		 */
-		inputPanel.getAdminLogin().addActionListener(new ActionListener(){
+		inputPanel.getAdminLogin().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				// we need a pop up window here to verify the admin role
-				
-				if(adminClicked%2 == 0){
+
+				if (adminClicked % 2 == 0) {
 					System.out.println("Login");
 					isAdmin = true;
 					adminClicked++;
-				}else{
+				} else {
 					System.out.println("Log off");
 					isAdmin = false;
 					adminClicked++;
 				}
 			}
-			
+
 		});
-		
+
 	}
 
 	public void setImagePath(String imgPath) {
@@ -159,9 +174,9 @@ public class ImageComponent extends JComponent implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 		// this operation is only for admin
-		if(isAdmin){
+		if (isAdmin) {
 			xPos = e.getX();
 			yPos = e.getY();
 
@@ -171,13 +186,12 @@ public class ImageComponent extends JComponent implements MouseListener {
 			// make a pop up window here
 			// save the point that we have clicked to database
 			// it doesnt matter if we repaint the window
-			
+
 			repaint();
 
-		}else{
+		} else {
 			System.out.println("You are not able to get the coordinates");
 		}
-		
 
 	}
 
@@ -216,42 +230,40 @@ public class ImageComponent extends JComponent implements MouseListener {
 		if (null == image) {
 			return;
 		}
-		
-		Graphics2D g2 = (Graphics2D)g;
+
+		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
 
-		if(!(xPos == 0 && yPos == 0)){
+		if (!(xPos == 0 && yPos == 0)) {
 			g2.setPaint(Color.WHITE);
-			g2.drawString("("+xPos+","+yPos+")",xPos,yPos);
-			
+			g2.drawString("(" + xPos + "," + yPos + ")", xPos, yPos);
+
 			// whenever call the repaint method
 			// we draw two demon lines here
-			if(num%2 == 0){
+			if (num % 2 == 0) {
 				g2.draw(new Line2D.Double(10, 10, 600, 10));
 				g2.draw(new Line2D.Double(10, 80, 600, 80));
 				num++;
-			}else{
+			} else {
 				g2.draw(new Line2D.Double(10, 600, 600, 600));
 				g2.draw(new Line2D.Double(10, 700, 600, 700));
 				num++;
 			}
-			
+
 		}
-		
-		
-		
+
 		// since it will be repaint again
 		// so the string will not be save on the image
 		// we should figure out an idea to save all the point we have clicked
 		// but I think maybe we can first save it
 		// then load all the points back to draw them on the image?
-		
+
 		g2 = null;
 
 	}
-	
+
 	// add all the listener in this method
-	private void addButtonListeners(){
-		
+	private void addButtonListeners() {
+
 	}
 }

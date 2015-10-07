@@ -28,8 +28,8 @@ public class AlogController {
 	 * It is a String
 	 */
 	private String endNode;
-	
-	
+
+	private  Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
 	
 	/**
 	 * default constructor
@@ -37,7 +37,7 @@ public class AlogController {
 	public AlogController(){
 		
 	}
-	
+
 	/**construtor,initiate with the source and destination
 	 *@param from  the source node
 	 *@param to  the destination node
@@ -52,9 +52,9 @@ public class AlogController {
 	 * This method will decide which algorithm will be called to find a route between two different points
 	 * It will make a decision by the id of the map.
 	 * To decide a algorithm, find route between several maps, or just a single map
-	 * @return the route presented by a list of nodes
+	 * @return the id of the solution
 	 */
-	public List<Node> getRoute(){
+	public Map<Integer, List<Node>> getRoute(){
 		
 		// get the node from database
 		Node fromNode = getNodeFromName(startNode);
@@ -68,14 +68,15 @@ public class AlogController {
 		// decide which algorithm to use
 		// walking through the same map
 		if(startMapId == endMapId){
-			List<Node> result = new ArrayList<Node>();
 			result = fr.findRouteSameMap(fromNode, toNode);
+			return result;
+			
 			
 		// can we have just two condition, sigleMap and Multiple Map?
 		// find a way which is easier for programming
 		}else if(startMapId != endMapId && (startMapId == "0" || endMapId == "0")){ // campus to building
-			Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
 			result = fr.findRouteMultipleMap(fromNode, toNode);
+			return result;
 			
 			
 		}else{ // building to building
@@ -83,6 +84,21 @@ public class AlogController {
 		}
 		
 		return null;
+
+	}
+	
+	/**
+	 * Gets the node that corresponding to a given location name
+	 * @param nodeName The name of the location
+	 * @return node corresponding to the location name
+	 */
+	private Node getNodeFromName(String nodeName){
+		
+		// use node name to find the Node we need
+		// search database?
+		
+		return null;
+		
 	}
 	
 	/**
@@ -115,20 +131,6 @@ public class AlogController {
 	 */
 	public void setEndNode(String endNode) {
 		this.endNode = endNode;
-	}
-	
-	/**
-	 * Gets the node that corresponding to a given location name
-	 * @param nodeName The name of the location
-	 * @return node corresponding to the location name
-	 */
-	private Node getNodeFromName(String nodeName){
-		
-		// use node name to find the Node we need
-		// search database?
-		
-		return null;
-		
 	}
 	
 }

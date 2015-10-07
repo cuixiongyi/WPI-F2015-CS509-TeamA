@@ -6,7 +6,7 @@ package com.wpi.cs509.teamA.entities;
  * @author CS509-Team A
  * @version Oct 4th
  */
-public class BuildingMap extends RoadMap{
+public class BuildingMap extends GeneralMap{
 	
 	/** the name of the building*/
 	private String buildingName;

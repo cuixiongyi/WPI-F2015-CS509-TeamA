@@ -19,7 +19,7 @@ public class FindRouteImpl implements FindRoute{
 	 * @param endNode Ending location of the route
 	 * @return Route from source to destination
 	 */
-	public List<Node> findRouteSameMap(Node startNode, Node endNode){
+	public Map<Integer, List<Node>> findRouteSameMap(Node startNode, Node endNode){
 		return null;
 	}
 	

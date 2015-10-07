@@ -6,7 +6,7 @@ import java.util.Set;
  * @author CS 509-Team A 
  * @version Oct 5th*/
 
-public class RoadMap {
+public class GeneralMap {
 
 	/**the map id*/
 	private String mapId;
@@ -17,8 +17,6 @@ public class RoadMap {
 	// in spite of it is a building or campus
 	/**the place/node that can arrive in the map*/
 	protected Set<Node> roadMap;
-
-	// protected Set<Activity> activities;
 
 	// add node to map
 	/**add node to the map*/
@@ -63,11 +61,5 @@ public class RoadMap {
 		Scale = scale;
 	}
 
-	/*
-	 * public Set<Activity> getActivities() { return activities; }
-	 * 
-	 * public void setActivities(Set<Activity> activities) { this.activities =
-	 * activities; }
-	 */
 
 }
