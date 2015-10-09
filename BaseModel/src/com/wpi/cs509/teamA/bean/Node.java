@@ -3,8 +3,8 @@ package com.wpi.cs509.teamA.bean;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.wpi.cs509.teamA.misc.Coordinate;
-import com.wpi.cs509.teamA.misc.NodeType;
+import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.NodeType;
 /**
  * Node definition
  * @author CS 509-Team A 

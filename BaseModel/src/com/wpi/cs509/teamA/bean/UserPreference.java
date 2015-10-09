@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.bean;
 
-import com.wpi.cs509.teamA.misc.UserCookies;
+import com.wpi.cs509.teamA.util.UserCookies;
 /**
  * Details of user preference, get from cookies
  * @author CS 509-Team A 

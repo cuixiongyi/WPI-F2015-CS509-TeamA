@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.misc;
+package com.wpi.cs509.teamA.util;
 
 /**
  * type of node definition

@@ -2,8 +2,8 @@ package com.wpi.cs509.teamA.bean;
 
 import java.util.Set;
 
-import com.wpi.cs509.teamA.misc.Coordinate;
-import com.wpi.cs509.teamA.misc.NodeType;
+import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.NodeType;
 
 /**
  * @author JLou
