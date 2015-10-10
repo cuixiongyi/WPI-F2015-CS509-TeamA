@@ -1,26 +1,25 @@
 package com.wpi.cs509.teamA.util;
 
-import com.wpi.cs509.teamA.bean.BuildingMap;
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 
-public class ProxyBuildingMap implements AdjacencyMatrix {
+public class ProxyMap implements AdjacencyMatrix {
 	
-	// this instance name is in honor of blade master -- bm
-	private BuildingMap bm = null;
+	private GeneralMap generalMap = null;
 
 	@Override
 	public InputMatrix getAdjacencyMatrix() {
 		// TODO Auto-generated method stub
-		if(bm == null){
-			bm = new BuildingMap();
+		if(generalMap == null){
+			generalMap = new GeneralMap();
 		}
 		
-		return bm.getAdjacencyMatrix();
+		return generalMap.getAdjacencyMatrix();
 		
 	}
 	
 	// the parameter is still under discussion
-	public ProxyBuildingMap(String dbTableName){
+	public ProxyMap(String dbTableName){
 		
 	}
 
@@ -28,7 +27,7 @@ public class ProxyBuildingMap implements AdjacencyMatrix {
 	// this is for test
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		final AdjacencyMatrix FULLER = new ProxyBuildingMap("fuller");
+		final AdjacencyMatrix FULLER = new ProxyMap("fuller");
 		Node testMatrix [][] = new Node[10][10];
 		InputMatrix im1 = FULLER.getAdjacencyMatrix();
 		InputMatrix im2 = FULLER.getAdjacencyMatrix();
