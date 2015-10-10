@@ -2,73 +2,78 @@ package com.wpi.cs509.teamA.bean;
 
 /**
  * user account definition
- * @author CS 509-Team A 
+ * 
+ * @author CS 509-Team A
  * @version Oct 5th
-*/
+ */
 public class UserAccount {
 
-	/**account ID */
+	/** account ID */
 	private int id;
-	/**username of the account*/
+	/** username of the account */
 	private String username;
-	/**pass word of the account*/
+	/** pass word of the account */
 	private String password;
-	/**user type:admin or regular user */
+	/** user type:admin or normal user */
 	int userType;
-	
-	/**default constructor*/
-	public UserAccount(){
-		
+
+	/** default constructor */
+	public UserAccount() {
+
 	}
-	
-	/**constructor with information
-	 * @param id account id
+
+	/**
+	 * constructor with information
+	 * 
+	 * @param id
+	 *            account id
 	 * @param username
 	 * @param password
-	 * @param userType*/
-	public UserAccount(int id, String username, String password, int userType){
+	 * @param userType
+	 */
+	public UserAccount(int id, String username, String password, int userType) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.userType = userType;
 	}
-	
-	/**id getter*/
+
+	/** id getter */
 	public int getId() {
 		return id;
 	}
-	
-	/**id setter*/
+
+	/** id setter */
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	/**userType getter*/
+
+	/** userType getter */
 	public int getUserType() {
 		return userType;
 	}
-	
-	/**userType setter*/
+
+	/** userType setter */
 	public void setUserType(int userType) {
 		this.userType = userType;
 	}
-	
-	/**username getter*/
+
+	/** username getter */
 	public String getUsername() {
 		return username;
 	}
 
-	/**user setter*/
+	/** user setter */
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	/**password getter*/
+
+	/** password getter */
 	public String getPassword() {
 		return password;
 	}
 
-	/**password setter*/
+	/** password setter */
 	public void setPassword(String password) {
 		this.password = password;
 	}

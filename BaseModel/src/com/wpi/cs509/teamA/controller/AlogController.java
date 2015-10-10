@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.findRoute.FindRoute;
-import com.wpi.cs509.teamA.findRouteImpl.FindRouteImpl;
+import com.wpi.cs509.teamA.findRoute.impl.FindRouteImpl;
 
 /**
  * This class will get the start and end nodes from the front end.
