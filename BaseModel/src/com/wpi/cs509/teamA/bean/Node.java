@@ -33,6 +33,7 @@ public class Node {
 	private Set<Integer> neighbors = new HashSet<Integer>();
 
 	/** type of the node */
+	// this may cause great complex when input data
 	private NodeType nodeType;
 
 	/** default constructor */

@@ -1,20 +1,13 @@
 package com.wpi.cs509.teamA.util;
 
-public class AdjacencyMatrix {
-	
-	private static AdjacencyMatrix aMatrix;
-	
-	// add some fields here that need to get from the matrix
+import com.wpi.cs509.teamA.bean.Node;
 
-	private AdjacencyMatrix() {
-	}
-
-	public static AdjacencyMatrix getInitializedMatrix() {
-		if (aMatrix == null) {
-			aMatrix = new AdjacencyMatrix();
-		}
-		
-		return aMatrix;
-	}
+public interface AdjacencyMatrix {
 	
+	/**
+	 * This method will get an Matrix for Dijkstra as input
+	 * @return a 2D array that contains all the Node in it
+	 */
+	public InputMatrix getAdjacencyMatrix();
+
 }

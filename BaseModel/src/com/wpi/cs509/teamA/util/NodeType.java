@@ -2,36 +2,34 @@ package com.wpi.cs509.teamA.util;
 
 /**
  * type of node definition
- * @author CS 509-Team A 
+ * 
+ * @author CS 509-Team A
  * @version Oct 5th
-*/
+ */
 
 public enum NodeType {
-	
-	OFFICE("office"),
-	CLASSROOM("classroom"),
-	MEETINGROOM("meetingroom"),
-	RESTROOM("restroom"),
-	PATHDOT("pathdot"),
-	LAB("lab"),
-	PARKING("parkinglot");
-	
+
+	UNDEFINED("undefined"), PATHDOT("pathdot"), OFFICE("office"), CLASSROOM("classroom"), MEETINGROOM("meetingroom"), RESTROOM(
+			"restroom"), LAB("lab"), PARKING("parkinglot");
+
 	/** String representation of the node's type */
 	private String nodeType;
-	
+
 	/**
 	 * Constructor
-	 * @param nodeType The type of node cooresponding to the node instance
-	 */ 
-	private NodeType(String nodeType){
+	 * 
+	 * @param nodeType
+	 *            The type of node corresponding to the node instance
+	 */
+	private NodeType(String nodeType) {
 		this.nodeType = nodeType;
 	}
-	
+
 	/**
 	 * @todo: Function header comments
-	 */ 
-	public String getNode(NodeType node){
+	 */
+	public String getNode(NodeType node) {
 		return this.nodeType;
 	}
-	
+
 }

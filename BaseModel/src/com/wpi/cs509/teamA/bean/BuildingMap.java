@@ -10,6 +10,10 @@ public class BuildingMap extends GeneralMap{
 	
 	/** the name of the building*/
 	private String buildingName;
+	
+	public BuildingMap(){
+		System.out.println("initialize building map...");
+	}
 
 	/**
 	 * get the name of the building
