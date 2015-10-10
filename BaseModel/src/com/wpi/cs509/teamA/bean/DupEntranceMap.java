@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.util;
+package com.wpi.cs509.teamA.bean;
 
 import java.util.HashMap;
 import java.util.Map;
