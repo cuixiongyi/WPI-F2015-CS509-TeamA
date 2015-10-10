@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.findRoute.FindRoute;
-import com.wpi.cs509.teamA.findRoute.impl.FindRouteImpl;
+import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
