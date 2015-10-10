@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.findRoute.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 public class DijkstraAlgoStrategy implements AlgoStrategy{
