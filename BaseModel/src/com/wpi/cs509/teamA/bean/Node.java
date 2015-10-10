@@ -25,11 +25,12 @@ public class Node {
 
 	// which map this node belongs to
 	/** define which map the node belongs to */
-	private String mapId;
+	private int mapId;
 
 	// neighbor node id and distance
 	// private Map<String, Integer> neighbors;
 	/** neighbor node */
+	// 
 	private Set<Integer> neighbors = new HashSet<Integer>();
 
 	/** type of the node */
@@ -51,7 +52,7 @@ public class Node {
 	 * @param neighbors
 	 * @param nodeType
 	 */
-	public Node(int id, String name, int x, int y, String mapId, Set<Integer> neighbors, String nodeType) {
+	public Node(int id, String name, int x, int y, int mapId, Set<Integer> neighbors, String nodeType) {
 
 		this.id = id;
 		this.name = name;
@@ -144,12 +145,12 @@ public class Node {
 	}
 
 	/** node map id getter */
-	public String getMapId() {
+	public int getMapId() {
 		return mapId;
 	}
 
 	/** node map id setter */
-	public void setMapId(String mapId) {
+	public void setMapId(int mapId) {
 		this.mapId = mapId;
 	}
 

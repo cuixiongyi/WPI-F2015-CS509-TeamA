@@ -19,9 +19,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	/** the map scale */
 	private int Scale;
 
-	// the place that can arrive in the map
-	// in spite of it is a building or campus
-	/** the place/node that can arrive in the map */
+	/** the places/nodes that can arrive in the map */
 	private Set<Node> GeneralMap;
 
 	public GeneralMap() {

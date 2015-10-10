@@ -16,10 +16,11 @@ public class Coordinate {
 	private int y;
 
 	/**
-	 * Default constructor
+	 * Default constructor, default initialize to 0
 	 */ 
 	public Coordinate(){
-		
+		this.x = 0;
+		this.y = 0;
 	}
 	
 	/**

@@ -1,0 +1,21 @@
+package com.wpi.cs509.teamA.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.InputMatrix;
+
+public class DijkstraAlgoStrategy implements AlgoStrategy{
+
+	@Override
+	public Map<Integer, List<Node>> getRoute(Node startNode, Node endNode,
+			List<InputMatrix> matrixes) {
+		// TODO Auto-generated method stub
+		System.out.println("Dijkstra Strategy..");
+		
+		return null;
+	}
+
+
+}
