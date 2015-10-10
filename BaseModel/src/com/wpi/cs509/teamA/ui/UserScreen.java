@@ -50,6 +50,8 @@ import javax.swing.JTextField;
  */
 
 public class UserScreen extends JFrame{
+	
+	private static UserScreen userScreen;
 
 	private Container container;
 	
@@ -99,6 +101,14 @@ public class UserScreen extends JFrame{
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public static UserScreen launchUserScreen(){
+		if( userScreen == null ){
+			userScreen = new UserScreen();
+		}
+		
+		return userScreen;
+	}
 
 	/**
 	 * The start of the program
@@ -106,8 +116,8 @@ public class UserScreen extends JFrame{
 	 */
 	public static void main(String[] args) {
 		
-		// just use sigleton here
-		new UserScreen();
+		// singleton
+		UserScreen.launchUserScreen();
 	}
 	
 }
