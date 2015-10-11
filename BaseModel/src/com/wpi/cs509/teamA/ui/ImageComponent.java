@@ -72,20 +72,13 @@ public class ImageComponent extends JComponent implements MouseListener {
 
 				System.out.println("the linstener has been triggered!");
 
-				// check what kind of two places are
-				// proxy design pattern?
-				// maybe need to check the result type all the time?
-
-				// do search work here?
-				// let the controller decide which algorithm will be called?
-
 				// TODO: need to check if the input is valid!!
 
 				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
 						inputPanel.getEndPoint().getText().trim());
 				result = algoController.getRoute();
 
-				// use the result to draw the lines
+				// TODO: use the result to draw the lines
 				
 				// we need to give all the information to the repaint method
 				repaint();
@@ -166,11 +159,6 @@ public class ImageComponent extends JComponent implements MouseListener {
 		this.imgHeight = imgHeight;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -190,7 +178,7 @@ public class ImageComponent extends JComponent implements MouseListener {
 			repaint();
 
 		} else {
-			System.out.println("You are not able to get the coordinates");
+			System.out.println("You are not able to get the coordinates..");
 		}
 
 	}
