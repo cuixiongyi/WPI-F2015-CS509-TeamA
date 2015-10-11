@@ -1,12 +1,17 @@
 package com.wpi.cs509.teamA.util;
 
-import com.wpi.cs509.teamA.bean.Node;
-
+/**
+ * This is the interface for the Map Proxy pattern.
+ * 
+ * @author CS 509-Team A
+ *
+ */
 public interface AdjacencyMatrix {
-	
+
 	/**
 	 * This method will get an Matrix for Dijkstra as input
-	 * @return a 2D array that contains all the Node in it
+	 * 
+	 * @return an InputMatrix data structure that contains all the Node in it
 	 */
 	public InputMatrix getAdjacencyMatrix();
 

@@ -23,7 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.AlogController;
+import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.dao.impl.InitAllMatrixImpl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -116,6 +117,8 @@ public class UserScreen extends JFrame{
 	 */
 	public static void main(String[] args) {
 		
+		// initialize all the matrix for the map
+		InitAllMatrixImpl.getInitAllMatrixImpl();
 		// singleton
 		UserScreen.launchUserScreen();
 	}

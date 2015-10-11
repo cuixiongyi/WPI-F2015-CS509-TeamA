@@ -40,7 +40,8 @@ public class GeneralAlgorithm {
 		// add this one by one to the result
 		List<Node> routeOnOneMap = new ArrayList<Node>();
 		
-		algoStrategy.getRoute(startNode, endNode, im);
+		// different strategy will use different algorithm..
+		result = algoStrategy.getRoute(startNode, endNode, im);
 		
 		return result;
 	}

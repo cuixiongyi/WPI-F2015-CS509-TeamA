@@ -1,12 +1,10 @@
 package com.wpi.cs509.teamA.bean;
 
-import java.util.Set;
-
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
- * General map definition
+ * General map definition, this is a map that defines all the map we want
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -14,43 +12,52 @@ import com.wpi.cs509.teamA.util.InputMatrix;
 
 public class GeneralMap implements AdjacencyMatrix {
 
-	/** the map id */
+	/**
+	 * the map id
+	 */
 	private String mapId;
-	/** the map scale */
+	/**
+	 * Map name
+	 */
+	private String mapName;
+	/**
+	 * the map scale
+	 */
 	private int Scale;
-
-	/** the places/nodes that can arrive in the map */
-	private Set<Node> GeneralMap;
+	/**
+	 * the adjacency matrix of this map
+	 */
+	private InputMatrix adjacencyMatrix;
 
 	public GeneralMap() {
 
 	}
 
+	/**
+	 * Constructor. The ProxyMap will use this constructor to create a new
+	 * instance of the map, also use this instance's getAdjacencyMatrix() method
+	 * to get the adjacency matrix. The constructor should be responsible for
+	 * getting data from the database and then generate a adjacency matrix.
+	 * 
+	 * @param mapName the name of the map in the database
+	 */
+	public GeneralMap(String mapName) {
+
+		// get data from database here
+		System.out.println(
+				"general map is getting data from database and making a matrix.. this should happen only once.. ");
+		// plz assign value to the adjacencyMatrix
+
+	}
+
 	@Override
 	/**
-	 * the implementation of getting an adjacency matrix
+	 * the implementation of getting an adjacency matrix, this method will
+	 * return a Adjacency Matrix that created in the initialization time.
 	 */
 	public InputMatrix getAdjacencyMatrix() {
 		// TODO Auto-generated method stub
-
-		System.out.println("this method is from general map!");
-
-		return null;
-	}
-
-	/** add node to the map */
-	protected void addNode(String nodeId) {
-
-	}
-
-	/**
-	 * delete node from the map set
-	 * 
-	 * @param nodeId
-	 *            the id of the node
-	 */
-	protected void deleteNode(String nodeId) {
-		// this.deleteNode();
+		return adjacencyMatrix;
 	}
 
 	/** map id getter */
@@ -63,19 +70,14 @@ public class GeneralMap implements AdjacencyMatrix {
 		this.mapId = mapId;
 	}
 
-	/**
-	 * @return the generalMap
-	 */
-	public Set<Node> getGeneralMap() {
-		return GeneralMap;
+	/** map name getter */
+	public String getMapName() {
+		return mapName;
 	}
 
-	/**
-	 * @param generalMap
-	 *            the generalMap to set
-	 */
-	public void setGeneralMap(Set<Node> generalMap) {
-		GeneralMap = generalMap;
+	/** map name setter */
+	public void setMapName(String mapName) {
+		this.mapName = mapName;
 	}
 
 	/** map scale getter */

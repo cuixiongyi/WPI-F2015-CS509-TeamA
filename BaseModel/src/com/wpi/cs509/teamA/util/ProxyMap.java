@@ -3,25 +3,43 @@ package com.wpi.cs509.teamA.util;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 
+/**
+ * Proxy map class, we init a map from database by using this class
+ * 
+ * @author CS 509-Team A
+ *
+ */
 public class ProxyMap implements AdjacencyMatrix {
-	
-	private GeneralMap generalMap = null;
 
+	/**
+	 * 
+	 */
+	private GeneralMap generalMap;
+	/**
+	 * 
+	 */
+	private String mapName;
+
+	/**
+	 * This is the proxy way of getting a matrix. It will use the method from
+	 * generalMap to get the matrix. If the instance for generalMap is null,
+	 * create a new generalMap. If not, just use the one that have already
+	 * created.
+	 */
 	@Override
 	public InputMatrix getAdjacencyMatrix() {
 		// TODO Auto-generated method stub
-		if(generalMap == null){
-			System.out.println("Initializing the general map.. should initialize only once..");
-			generalMap = new GeneralMap();
+		if (generalMap == null) {
+			generalMap = new GeneralMap(mapName);
 		}
-		
+
 		return generalMap.getAdjacencyMatrix();
-		
+
 	}
-	
-	// the parameter is still under discussion
-	public ProxyMap(String dbTableName){
-		
+
+	public ProxyMap(String mapName) {
+		this.mapName = mapName;
+		System.out.println("you are using  ProxyMap to init " + mapName + "..");
 	}
 
 }

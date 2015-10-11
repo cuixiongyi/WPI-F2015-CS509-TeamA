@@ -22,7 +22,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.AlogController;
+import com.wpi.cs509.teamA.controller.AlgoController;
 
 /**
  * An component to show the images This component implements the MouseListener
@@ -39,14 +39,13 @@ public class ImageComponent extends JComponent implements MouseListener {
 
 	private int xPos;
 	private int yPos;
-	
-	private Map<Integer, List<Node>> diffMapResult;
-	private List<Node> sameMapReuslt;
+
+	private Map<Integer, List<Node>> result;
 
 	private static int num = 1;
 
 	private static int adminClicked = 2;
-	
+
 	// admin will get a different repaint method
 	private boolean isAdmin;
 
@@ -79,14 +78,15 @@ public class ImageComponent extends JComponent implements MouseListener {
 
 				// do search work here?
 				// let the controller decide which algorithm will be called?
-				
+
 				// TODO: need to check if the input is valid!!
 
-				AlogController controller = new AlogController(inputPanel.getStartPoint().getText().trim(),	inputPanel.getEndPoint().getText().trim());
-		
-				
+				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
+						inputPanel.getEndPoint().getText().trim());
+				result = algoController.getRoute();
 
-				// how to make feedback to the image? more discussion..
+				// use the result to draw the lines
+				
 				// we need to give all the information to the repaint method
 				repaint();
 
