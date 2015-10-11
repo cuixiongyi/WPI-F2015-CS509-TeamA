@@ -11,6 +11,7 @@ public class ProxyMap implements AdjacencyMatrix {
 	public InputMatrix getAdjacencyMatrix() {
 		// TODO Auto-generated method stub
 		if(generalMap == null){
+			System.out.println("Initializing the general map.. should initialize only once..");
 			generalMap = new GeneralMap();
 		}
 		
@@ -23,13 +24,4 @@ public class ProxyMap implements AdjacencyMatrix {
 		
 	}
 
-	
-	// this is for test
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		final AdjacencyMatrix FULLER = new ProxyMap("fuller");
-		Node testMatrix [][] = new Node[10][10];
-		InputMatrix im1 = FULLER.getAdjacencyMatrix();
-		InputMatrix im2 = FULLER.getAdjacencyMatrix();
-	}
 }

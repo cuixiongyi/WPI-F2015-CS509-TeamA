@@ -28,8 +28,7 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	@Override
 	/**
-	 * the implementation of getting an adjacency matrix, this method will be
-	 * used by building map, but will be override in the campus map
+	 * the implementation of getting an adjacency matrix
 	 */
 	public InputMatrix getAdjacencyMatrix() {
 		// TODO Auto-generated method stub
