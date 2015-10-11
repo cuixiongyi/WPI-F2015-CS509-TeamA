@@ -25,6 +25,7 @@ public class SystemFacade {
 		InitAllMatrixImpl.getInitAllMatrixImpl();
 		// singleton
 		UserScreen.launchUserScreen();
+		
 	}
 
 }

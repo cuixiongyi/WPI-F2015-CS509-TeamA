@@ -42,14 +42,15 @@ public class GeneralMap implements AdjacencyMatrix {
 	 * to get the adjacency matrix. The constructor should be responsible for
 	 * getting data from the database and then generate a adjacency matrix.
 	 * 
-	 * @param mapName the name of the map in the database
+	 * @param mapName
+	 *            the name of the map in the database
 	 */
 	public GeneralMap(String mapName) {
 
 		// get data from database here
 		System.out.println(
 				"general map is getting data from database and making a matrix.. this should happen only once.. ");
-		// plz assign value to the adjacencyMatrix
+		// assign value to the adjacencyMatrix
 
 	}
 

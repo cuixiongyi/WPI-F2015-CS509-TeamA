@@ -28,11 +28,13 @@ public class InitAllMatrixImpl implements InitAllMatrix {
 		// we init all the matrix here
 		// traverse all the maps in the Maps enum class
 		System.out.println("initializing all the maps.. should happen only once..");
+
+		// TODO: read data from database..
+		
 		for (Maps map : Maps.values()) {
 			// get the matrix according to the info from database
-			AdjacencyMatrix tempMap = new ProxyMap(map.getDataBaseMapName());
 			// get the matrix
-			InputMatrix im = tempMap.getAdjacencyMatrix();
+			InputMatrix im = new ProxyMap(map.getDataBaseMapName()).getAdjacencyMatrix();
 			int mapId = map.getMapId();
 			// result.put(mapId, im);
 		}
@@ -42,7 +44,7 @@ public class InitAllMatrixImpl implements InitAllMatrix {
 		if (initAllMatrixImpl == null) {
 			initAllMatrixImpl = new InitAllMatrixImpl();
 		}
-
+		System.out.println("try to get all matrix.. the matrix has been init already..");
 		return initAllMatrixImpl;
 
 	}
@@ -50,7 +52,7 @@ public class InitAllMatrixImpl implements InitAllMatrix {
 	@Override
 	public Map<Integer, InputMatrix> initAllMatrix() {
 		// TODO Auto-generated method stub
-		System.out.println("try to get all matrix..");
+		
 		return allMatrix;
 	}
 

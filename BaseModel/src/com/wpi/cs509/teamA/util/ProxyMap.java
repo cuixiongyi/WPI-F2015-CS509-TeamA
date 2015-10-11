@@ -4,7 +4,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 
 /**
- * Proxy map class, we init a map from database by using this class
+ * Proxy map class, we init a matrix for a map from database by using this class
  * 
  * @author CS 509-Team A
  *
@@ -36,7 +36,11 @@ public class ProxyMap implements AdjacencyMatrix {
 		return generalMap.getAdjacencyMatrix();
 
 	}
-
+	
+	/**
+	 * This is the wrap class for initializing the map.
+	 * @param mapName
+	 */
 	public ProxyMap(String mapName) {
 		this.mapName = mapName;
 		System.out.println("you are using  ProxyMap to init " + mapName + "..");
