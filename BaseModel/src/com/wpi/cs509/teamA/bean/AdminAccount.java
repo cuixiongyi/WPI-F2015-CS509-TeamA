@@ -26,31 +26,11 @@ public class AdminAccount extends UserAccount {
 	 *            username of the user
 	 * @param password
 	 *            password of the user
-	 * @param userType
-	 *            type of the user
 	 * @author CS509-Team A
 	 */
 	public AdminAccount(int id, String username, String password) {
 
 		super(id, username, password);
-
-	}
-
-	/**
-	 * Add activity to one location
-	 * 
-	 * @author CS509-Team A
-	 */
-	public void addActivity() {
-
-	}
-
-	/**
-	 * delete an activity of one location
-	 * 
-	 * @author CS509-Team A
-	 */
-	public void deleteActivity() {
 
 	}
 
@@ -73,27 +53,6 @@ public class AdminAccount extends UserAccount {
 	 */
 	public void setId(int id) {
 		this.setId(id);
-	}
-
-	/**
-	 * get type of the user
-	 * 
-	 * @return type of the user
-	 * @author CS509-Team A
-	 */
-	public int getUserType() {
-		return this.getUserType();
-	}
-
-	/**
-	 * set type of the user
-	 * 
-	 * @param type
-	 *            of the user
-	 * @author CS509-Team A
-	 */
-	public void setUserType(int userType) {
-		this.setUserType(userType);
 	}
 
 	/**
@@ -136,37 +95,6 @@ public class AdminAccount extends UserAccount {
 	 */
 	public void setPassword(String password) {
 		this.setPassword(password);
-	}
-
-	/**
-	 * call methods from Node class, update nodes
-	 * 
-	 * @param nodeId
-	 *            id of the node that needs update
-	 * @author CS509-Team A
-	 */
-	public void updateNode(String nodeId) {
-
-	}
-
-	/**
-	 * call methods from Node class, delete nodes
-	 * 
-	 * @param nodeId
-	 *            id of the node that needs delete
-	 * @author CS509-Team A
-	 */
-	public void deleteNode(String nodeId) {
-
-	}
-
-	/**
-	 * save all nodes to a file
-	 * 
-	 * @author CS509-Team A
-	 */
-	public void saveNodeToFile() {
-
 	}
 
 }
