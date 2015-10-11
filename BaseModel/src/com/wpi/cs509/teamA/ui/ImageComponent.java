@@ -28,7 +28,7 @@ import com.wpi.cs509.teamA.controller.AlgoController;
  * An component to show the images This component implements the MouseListener
  * Interface, which enable this component have interactive with the user
  * 
- * @author JLou
+ * @author CS 509-Team A
  *
  */
 public class ImageComponent extends JComponent implements MouseListener {

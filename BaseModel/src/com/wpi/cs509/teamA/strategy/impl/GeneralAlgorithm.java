@@ -9,6 +9,11 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
+/**
+ * 
+ * @author CS 509-Team A
+ *
+ */
 public class GeneralAlgorithm {
 
 	/**

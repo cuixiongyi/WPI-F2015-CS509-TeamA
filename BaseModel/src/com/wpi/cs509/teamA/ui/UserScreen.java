@@ -46,21 +46,22 @@ import javax.swing.JTextField;
 
 /**
  * This is the class that construct the main user interface of the application
- * @author JLou
+ * 
+ * @author CS 509-Team A
  *
  */
 
-public class UserScreen extends JFrame{
-	
+public class UserScreen extends JFrame {
+
 	private static UserScreen userScreen;
 
 	private Container container;
-	
+
 	private ImageComponent imgPanel;
 	private JScrollPane imgSp;
 	/*
-	 * A JPanel that have input text fields and buttons
-	 * which will be shown on the top of the UI
+	 * A JPanel that have input text fields and buttons which will be shown on
+	 * the top of the UI
 	 */
 	private InputPanel inputPanel;
 
@@ -70,19 +71,19 @@ public class UserScreen extends JFrame{
 	private UserScreen() {
 		container = getContentPane();
 		container.setLayout(new BorderLayout());
-		
+
 		inputPanel = new InputPanel();
 
 		// the panel to show image
 		imgPanel = new ImageComponent(inputPanel);
-		
+
 		// display the image
 		imgPanel.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
 		imgPanel.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
 		imgPanel.setVisible(true);
 		// add listener
 		imgPanel.addMouseListener(imgPanel);
-		
+
 		// scroll panel
 		imgSp = new JScrollPane();
 		imgSp.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
@@ -90,8 +91,7 @@ public class UserScreen extends JFrame{
 		imgSp.setViewportView(imgPanel);
 		imgSp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imgSp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		
+
 		container.add(imgSp, BorderLayout.CENTER);
 		container.add(inputPanel, BorderLayout.NORTH);
 
@@ -102,25 +102,23 @@ public class UserScreen extends JFrame{
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	public static UserScreen launchUserScreen(){
-		if( userScreen == null ){
+
+	public static UserScreen launchUserScreen() {
+		if (userScreen == null) {
 			userScreen = new UserScreen();
 		}
-		
+
 		return userScreen;
 	}
 
 	/**
 	 * The start of the program
-	 * @param args command line..
+	 * 
+	 * @param args
+	 *            command line..
 	 */
 	public static void main(String[] args) {
-		
-		// initialize all the matrix for the map
-		InitAllMatrixImpl.getInitAllMatrixImpl();
-		// singleton
-		UserScreen.launchUserScreen();
+		new SystemFacade();
 	}
-	
+
 }

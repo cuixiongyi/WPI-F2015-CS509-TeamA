@@ -14,8 +14,6 @@ public class UserAccount {
 	private String username;
 	/** pass word of the account */
 	private String password;
-	/** user type:admin or normal user */
-	int userType;
 
 	/** default constructor */
 	public UserAccount() {
@@ -31,11 +29,11 @@ public class UserAccount {
 	 * @param password
 	 * @param userType
 	 */
-	public UserAccount(int id, String username, String password, int userType) {
+	public UserAccount(int id, String username, String password) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.userType = userType;
+		
 	}
 
 	/** id getter */
@@ -46,16 +44,6 @@ public class UserAccount {
 	/** id setter */
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	/** userType getter */
-	public int getUserType() {
-		return userType;
-	}
-
-	/** userType setter */
-	public void setUserType(int userType) {
-		this.userType = userType;
 	}
 
 	/** username getter */

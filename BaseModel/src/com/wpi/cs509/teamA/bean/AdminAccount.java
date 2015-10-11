@@ -23,9 +23,11 @@ public class AdminAccount extends UserAccount{
 	 * @param userType type of the user
 	 * @author CS509-Team A
 	 */
-	public AdminAccount(int id, String username, String password, int userType){
+	public AdminAccount(int id, String username, String password){
 		
-		super(id, username, password, userType);
+		super(id, username, password);
+		
+		
 		
 	}
 	
