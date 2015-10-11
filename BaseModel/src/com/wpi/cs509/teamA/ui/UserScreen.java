@@ -79,14 +79,16 @@ public class UserScreen extends JFrame {
 
 		// display the image
 		imgPanel.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
-		imgPanel.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
+		imgPanel.setPreferredSize(new Dimension(imgPanel.getImgWidth(),
+				imgPanel.getImgHeight()));
 		imgPanel.setVisible(true);
 		// add listener
 		imgPanel.addMouseListener(imgPanel);
 
 		// scroll panel
 		imgSp = new JScrollPane();
-		imgSp.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
+		imgSp.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel
+				.getImgHeight()));
 		// for scroll panel
 		imgSp.setViewportView(imgPanel);
 		imgSp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

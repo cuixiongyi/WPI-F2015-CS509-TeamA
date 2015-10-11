@@ -32,7 +32,11 @@ public class DupEntranceMap {
 	 */
 	private DupEntranceMap() {
 
-		// get data from database
+		// TODO: get data from database to build a relation map, assign the
+		// return value to resultMap
+
+		System.out
+				.println("initializing the relationship map.. getting data from database..this should happen only once");
 
 	}
 

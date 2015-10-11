@@ -4,7 +4,7 @@ import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
- * General map definition, this is a map that defines all the map we want
+ * This is a class that defines all the map we want
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -29,6 +29,9 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	private InputMatrix adjacencyMatrix;
 
+	/**
+	 * Default constructor
+	 */
 	public GeneralMap() {
 
 	}

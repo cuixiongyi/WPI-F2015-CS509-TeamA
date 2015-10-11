@@ -7,7 +7,8 @@ import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
 
 /**
- * Node definition
+ * Node definition. This class represent the smallest unit of a map. It include
+ * all the information we need in a point on the map.
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -30,7 +31,7 @@ public class Node {
 	// neighbor node id and distance
 	// private Map<String, Integer> neighbors;
 	/** neighbor node */
-	// 
+	//
 	private Set<Integer> neighbors = new HashSet<Integer>();
 
 	/** type of the node */
@@ -45,14 +46,22 @@ public class Node {
 	/**
 	 * 
 	 * @param id
+	 *            the id of the node in the database
 	 * @param name
+	 *            the name of the node in the database
 	 * @param x
+	 *            coordinate x
 	 * @param y
+	 *            coordinate y
 	 * @param mapId
+	 *            the map where the node is on
 	 * @param neighbors
+	 *            the neighbors this node has
 	 * @param nodeType
+	 *            the type of the node, an enum class
 	 */
-	public Node(int id, String name, int x, int y, int mapId, Set<Integer> neighbors, String nodeType) {
+	public Node(int id, String name, int x, int y, int mapId,
+			Set<Integer> neighbors, String nodeType) {
 
 		this.id = id;
 		this.name = name;
@@ -63,7 +72,9 @@ public class Node {
 
 	}
 
-	/** add an new node on the map and set it's attributes */
+	/**
+	 * add an new node on the map and set it's attributes
+	 */
 	public void saveNode() {
 		Node node = new Node();
 		node.setNeighbors(new HashSet<Integer>());

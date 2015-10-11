@@ -2,53 +2,61 @@ package com.wpi.cs509.teamA.bean;
 
 /**
  * tool to record the map
+ * 
  * @version Oct 4th
  * @author CS509-Team A
-*/
-public class AdminAccount extends UserAccount{
-	
+ */
+public class AdminAccount extends UserAccount {
+
 	/**
 	 * default constructor
+	 * 
 	 * @author CS509-Team A
 	 */
-	public AdminAccount(){
-		
+	public AdminAccount() {
+
 	}
-	
+
 	/**
 	 * constructor
-	 * @param id id of the user
-	 * @param username username of the user
-	 * @param password password of the user
-	 * @param userType type of the user
+	 * 
+	 * @param id
+	 *            id of the user
+	 * @param username
+	 *            username of the user
+	 * @param password
+	 *            password of the user
+	 * @param userType
+	 *            type of the user
 	 * @author CS509-Team A
 	 */
-	public AdminAccount(int id, String username, String password){
-		
+	public AdminAccount(int id, String username, String password) {
+
 		super(id, username, password);
-		
-		
-		
+
 	}
-	
+
 	/**
 	 * Add activity to one location
+	 * 
 	 * @author CS509-Team A
 	 */
-	public void addActivity(){
-		
+	public void addActivity() {
+
 	}
-	
+
 	/**
 	 * delete an activity of one location
+	 * 
 	 * @author CS509-Team A
 	 */
-	public void deleteActivity(){
-		
+	public void deleteActivity() {
+
 	}
-	
+
 	/**
 	 * get id of the user
+	 * 
 	 * @return id of the user
 	 * @author CS509-Team A
 	 */
@@ -58,7 +66,9 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * set id of the user
-	 * @param id of the user
+	 * 
+	 * @param id
+	 *            of the user
 	 * @author CS509-Team A
 	 */
 	public void setId(int id) {
@@ -67,6 +77,7 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * get type of the user
+	 * 
 	 * @return type of the user
 	 * @author CS509-Team A
 	 */
@@ -76,7 +87,9 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * set type of the user
-	 * @param type of the user
+	 * 
+	 * @param type
+	 *            of the user
 	 * @author CS509-Team A
 	 */
 	public void setUserType(int userType) {
@@ -85,6 +98,7 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * get username of the user
+	 * 
 	 * @return username of the user
 	 * @author CS509-Team A
 	 */
@@ -94,7 +108,9 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * set username of the user
-	 * @param username of the user
+	 * 
+	 * @param username
+	 *            of the user
 	 * @author CS509-Team A
 	 */
 	public void setUsername(String username) {
@@ -103,6 +119,7 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * get password of the user
+	 * 
 	 * @return password of the user
 	 * @author CS509-Team A
 	 */
@@ -112,38 +129,44 @@ public class AdminAccount extends UserAccount{
 
 	/**
 	 * set password of the user
-	 * @param password of the user
+	 * 
+	 * @param password
+	 *            of the user
 	 * @author CS509-Team A
 	 */
 	public void setPassword(String password) {
 		this.setPassword(password);
 	}
 
-	
 	/**
 	 * call methods from Node class, update nodes
-	 * @param nodeId id of the node that needs update
+	 * 
+	 * @param nodeId
+	 *            id of the node that needs update
 	 * @author CS509-Team A
 	 */
-	public void updateNode(String nodeId){
-		
+	public void updateNode(String nodeId) {
+
 	}
-	
+
 	/**
 	 * call methods from Node class, delete nodes
-	 * @param nodeId id of the node that needs delete
+	 * 
+	 * @param nodeId
+	 *            id of the node that needs delete
 	 * @author CS509-Team A
 	 */
-	public void deleteNode(String nodeId){
-		
+	public void deleteNode(String nodeId) {
+
 	}
-	
+
 	/**
 	 * save all nodes to a file
+	 * 
 	 * @author CS509-Team A
 	 */
-	public void saveNodeToFile(){
-		
+	public void saveNodeToFile() {
+
 	}
-	
+
 }

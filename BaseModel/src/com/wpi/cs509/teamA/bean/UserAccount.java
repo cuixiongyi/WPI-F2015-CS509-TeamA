@@ -26,14 +26,15 @@ public class UserAccount {
 	 * @param id
 	 *            account id
 	 * @param username
+	 *            the name of the user
 	 * @param password
-	 * @param userType
+	 *            user password
 	 */
 	public UserAccount(int id, String username, String password) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		
+
 	}
 
 	/** id getter */
