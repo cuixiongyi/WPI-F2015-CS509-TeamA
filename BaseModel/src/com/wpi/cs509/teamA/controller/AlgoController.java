@@ -58,7 +58,11 @@ public class AlgoController {
 	}
 
 	/**
-	 * @return the id of the solution
+	 * This method will get source and destination from the AlgoController class
+	 * and get the route use strategy pattern
+	 * 
+	 * @return a map data structure that the key is the map id and the value is
+	 *         a list of nodes that represents the path on that map
 	 */
 	public Map<Integer, List<Node>> getRoute() {
 
@@ -111,9 +115,10 @@ public class AlgoController {
 
 	/**
 	 * This method will decide how many maps will be used in this searching
-	 * based on the points user inputed.
+	 * based on the source and destination user has inputed.
 	 * 
-	 * @return
+	 * @return a list of input matrix that we will need as the input of the
+	 *         algorithm
 	 */
 	private List<InputMatrix> getAlgoMatrix(int startMapId, int endMapId) {
 
@@ -121,7 +126,8 @@ public class AlgoController {
 		// we can initialize it in a much more earlier phase of the system
 		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixImpl.getInitAllMatrixImpl().initAllMatrix();
 
-		// TODO: find the maps we need from the allMatrixes and return a list of matrix that we want
+		// TODO: find the maps we need from the allMatrixes and return a list of
+		// matrix that we want
 
 		// test only
 		List<InputMatrix> testRes = new ArrayList<InputMatrix>();
