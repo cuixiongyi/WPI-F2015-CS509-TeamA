@@ -10,7 +10,7 @@ import com.wpi.cs509.teamA.util.ProxyMap;
 
 // I will handle all the stuff related to this class -- Jie
 /**
- * This class must be a singleton since the map should be only initialized once
+ * This class must be a singleton since all the maps should be only initialized once
  * 
  * @author CS 509-Team A
  *

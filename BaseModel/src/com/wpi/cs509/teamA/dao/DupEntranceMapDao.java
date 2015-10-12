@@ -1,5 +1,13 @@
 package com.wpi.cs509.teamA.dao;
 
-public class DupEntranceMapDao {
+/**
+ * 
+ * The declaration for the DupEntranceMap, it defines the method we will use to
+ * get data from the database for the DupEntranceMap
+ * 
+ * @author CS 509-Team A
+ *
+ */
+public interface DupEntranceMapDao {
 
 }
