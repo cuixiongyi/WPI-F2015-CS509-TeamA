@@ -16,9 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *  JPanel that have input text fields and buttons
- * which will be shown on the top of the UI
- * @author JLou
+ * JPanel that have input text fields and buttons which will be shown on the top
+ * of the UI
+ * 
+ * @author CS 509-Team A
  *
  */
 public class InputPanel extends JPanel {
@@ -28,13 +29,16 @@ public class InputPanel extends JPanel {
 	private JButton btnSearch;
 	private JButton adminLogin;
 
+	/**
+	 * Constructor. Initialize all the input panel.
+	 */
 	public InputPanel() {
-		
+
 		this.startPoint = new JTextField("Start");
 		this.endPoint = new JTextField("End");
 		this.btnSearch = new JButton("Search");
 		this.adminLogin = new JButton("Login as Admin");
-		
+
 		this.setLayout(new GridLayout(1, 7));
 		this.add(new JLabel("From: "));
 		this.add(startPoint);
@@ -52,7 +56,8 @@ public class InputPanel extends JPanel {
 	}
 
 	/**
-	 * @param startPoint the startPoint to set
+	 * @param startPoint
+	 *            the startPoint to set
 	 */
 	public void setStartPoint(JTextField startPoint) {
 		this.startPoint = startPoint;
@@ -66,7 +71,8 @@ public class InputPanel extends JPanel {
 	}
 
 	/**
-	 * @param endPoint the endPoint to set
+	 * @param endPoint
+	 *            the endPoint to set
 	 */
 	public void setEndPoint(JTextField endPoint) {
 		this.endPoint = endPoint;
@@ -80,7 +86,8 @@ public class InputPanel extends JPanel {
 	}
 
 	/**
-	 * @param btnSearch the btnSearch to set
+	 * @param btnSearch
+	 *            the btnSearch to set
 	 */
 	public void setBtnSearch(JButton btnSearch) {
 		this.btnSearch = btnSearch;
@@ -94,7 +101,8 @@ public class InputPanel extends JPanel {
 	}
 
 	/**
-	 * @param adminLogin the adminLogin to set
+	 * @param adminLogin
+	 *            the adminLogin to set
 	 */
 	public void setAdminLogin(JButton adminLogin) {
 		this.adminLogin = adminLogin;
