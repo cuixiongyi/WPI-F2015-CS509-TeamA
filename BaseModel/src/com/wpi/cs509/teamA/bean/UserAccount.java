@@ -14,6 +14,10 @@ public class UserAccount {
 	private String username;
 	/** pass word of the account */
 	private String password;
+	/**
+	 * if this account is an admin
+	 */
+	private boolean isAdmin;
 
 	/** default constructor */
 	public UserAccount() {
@@ -65,6 +69,20 @@ public class UserAccount {
 	/** password setter */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the isAdmin
+	 */
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	/**
+	 * @param isAdmin the isAdmin to set
+	 */
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }
