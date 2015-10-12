@@ -1,15 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.Line2D;
-import java.awt.image.BufferedImage;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +13,7 @@ import javax.swing.JTextField;
  * @author CS 509-Team A
  *
  */
+@SuppressWarnings("serial")
 public class InputPanel extends JPanel {
 
 	private JTextField startPoint;

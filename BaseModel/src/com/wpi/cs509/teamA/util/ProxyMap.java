@@ -12,11 +12,11 @@ import com.wpi.cs509.teamA.bean.Node;
 public class ProxyMap implements AdjacencyMatrix {
 
 	/**
-	 * 
+	 * Map class
 	 */
 	private GeneralMap generalMap;
 	/**
-	 * 
+	 * Name of the map
 	 */
 	private String mapName;
 
