@@ -4,7 +4,9 @@ import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
- * This is a class that defines all the map we want
+ * This is a class that defines all the map we want. It is also the class that
+ * really get the matrix from the data from database. In the other words, it
+ * provides the matrix to the ProxyMap class.
  * 
  * @author CS 509-Team A
  * @version Oct 5th
