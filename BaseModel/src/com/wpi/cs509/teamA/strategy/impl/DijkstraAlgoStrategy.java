@@ -7,16 +7,23 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
-public class DijkstraAlgoStrategy implements AlgoStrategy{
+/**
+ * Dijkstra Strategy
+ * 
+ * @author CS 509-Team A
+ *
+ */
+public class DijkstraAlgoStrategy implements AlgoStrategy {
 
+	/**
+	 * use Dijkstra to implement a strategy
+	 */
 	@Override
-	public Map<Integer, List<Node>> getRoute(Node startNode, Node endNode,
-			List<InputMatrix> matrixes) {
+	public Map<Integer, List<Node>> getRoute(Node startNode, Node endNode, List<InputMatrix> matrixes) {
 		// TODO Auto-generated method stub
 		System.out.println("Dijkstra Strategy..");
-		
+
 		return null;
 	}
-
 
 }

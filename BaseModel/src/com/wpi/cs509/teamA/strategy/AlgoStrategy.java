@@ -8,7 +8,7 @@ import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
  * 
- * @author jielou
+ * @author CS 509-Team A
  *
  */
 public interface AlgoStrategy {
