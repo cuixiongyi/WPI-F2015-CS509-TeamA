@@ -6,31 +6,29 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
-
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 
 /**
- * An component to show the images This component implements the MouseListener
- * Interface, which enable this component have interactive with the user
+ * An component to show the images. This component has two different states
+ * based on whether the user logged in or not. The state of this component will
+ * change in the run time. As a admin user, a person would have more mouse
+ * operation.
  * 
  * @author CS 509-Team A
  *
  */
+@SuppressWarnings("serial")
 public class ImageComponent extends JComponent {
 
 	private Image image;
@@ -38,11 +36,12 @@ public class ImageComponent extends JComponent {
 	private int imgHeight;
 	private StateContext stateContext;
 
-	private MouseListener normalUserMouseListener = new NormalUserMouseListener();
-	private MouseListener adminMouseListener = new AdminMouseListener();
-
-	// private int xPos;
-	// private int yPos;
+	// TODO: make these to classes singleton. We should avoid to initialize them
+	// here.
+	private MouseListener normalUserMouseListener;
+	private MouseListener adminMouseListener;
+	private int xPos;
+	private int yPos;
 
 	private Map<Integer, List<Node>> result;
 
@@ -54,6 +53,7 @@ public class ImageComponent extends JComponent {
 	// private boolean isAdmin;
 
 	public ImageComponent() {
+
 		// initialize the mouse litener state
 		stateContext = new StateContext();
 	}
@@ -71,6 +71,10 @@ public class ImageComponent extends JComponent {
 
 		// initialize the mouse litener state
 		stateContext = new StateContext();
+
+		normalUserMouseListener = new NormalUserMouseListener(this);
+		adminMouseListener = new AdminMouseListener(this);
+
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
 
@@ -112,14 +116,10 @@ public class ImageComponent extends JComponent {
 
 				if (adminClicked % 2 == 0) {
 					System.out.println("Login...");
-					// ImageComponent.this.removeMouseListener(normalUserMouseListener);
-					// ImageComponent.this.addMouseListener(adminMouseListener);
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
 					adminClicked++;
 				} else {
 					System.out.println("Log off...");
-					// ImageComponent.this.removeMouseListener(adminMouseListener);
-					// ImageComponent.this.addMouseListener(normalUserMouseListener);
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
 					adminClicked++;
 				}
@@ -143,69 +143,80 @@ public class ImageComponent extends JComponent {
 
 	}
 
+	/**
+	 * @return the image
+	 */
 	public Image getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
+	/**
+	 * @return the imgWidth
+	 */
 	public int getImgWidth() {
 		return imgWidth;
 	}
 
-	public void setImgWidth(int imgWidth) {
-		this.imgWidth = imgWidth;
-	}
-
+	/**
+	 * @return the imgHeight
+	 */
 	public int getImgHeight() {
 		return imgHeight;
 	}
 
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	/**
+	 * @param imgWidth
+	 *            the imgWidth to set
+	 */
+	public void setImgWidth(int imgWidth) {
+		this.imgWidth = imgWidth;
+	}
+
+	/**
+	 * @param imgHeight
+	 *            the imgHeight to set
+	 */
 	public void setImgHeight(int imgHeight) {
 		this.imgHeight = imgHeight;
 	}
 
-	/*
-	 * @Override public void mouseClicked(MouseEvent e) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * // this operation is only for admin if (isAdmin) { xPos = e.getX(); yPos
-	 * = e.getY();
-	 * 
-	 * System.out.println(xPos); System.out.println(yPos);
-	 * 
-	 * // make a pop up window here // save the point that we have clicked to
-	 * database // it doesnt matter if we repaint the window
-	 * 
-	 * repaint();
-	 * 
-	 * } else { System.out.println("You are not able to get the coordinates..");
-	 * }
-	 * 
-	 * }
-	 * 
-	 * @Override public void mouseEntered(MouseEvent e) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void mouseExited(MouseEvent e) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void mousePressed(MouseEvent e) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * }
-	 * 
-	 * @Override public void mouseReleased(MouseEvent e) { // TODO
-	 * Auto-generated method stub
-	 * 
-	 * }
+	/**
+	 * @return the xPos
 	 */
+	public int getxPos() {
+		return xPos;
+	}
+
+	/**
+	 * @return the yPos
+	 */
+	public int getyPos() {
+		return yPos;
+	}
+
+	/**
+	 * @param xPos
+	 *            the xPos to set
+	 */
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+
+	/**
+	 * @param yPos
+	 *            the yPos to set
+	 */
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -222,23 +233,28 @@ public class ImageComponent extends JComponent {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
 
-		// if (!(xPos == 0 && yPos == 0)) {
-		g2.setPaint(Color.WHITE);
-		// g2.drawString("(" + xPos + "," + yPos + ")", xPos, yPos);
+		// xPos = ((NormalUserMouseListener) normalUserMouseListener).getxPos();
+		// yPos = ((NormalUserMouseListener) normalUserMouseListener).getyPos();
 
-		// whenever call the repaint method
-		// we draw two demon lines here
-		if (num % 2 == 0) {
-			g2.draw(new Line2D.Double(10, 10, 600, 10));
-			g2.draw(new Line2D.Double(10, 80, 600, 80));
-			num++;
-		} else {
-			g2.draw(new Line2D.Double(10, 600, 600, 600));
-			g2.draw(new Line2D.Double(10, 700, 600, 700));
-			num++;
+		System.out.println(xPos + " " + yPos);
+
+		if (!(xPos == 0 && yPos == 0)) {
+			g2.setPaint(Color.WHITE);
+			g2.drawString("(" + xPos + "," + yPos + ")", xPos, yPos);
+
+			// whenever call the repaint method
+			// we draw two demon lines here
+			if (num % 2 == 0) {
+				g2.draw(new Line2D.Double(10, 10, 600, 10));
+				g2.draw(new Line2D.Double(10, 80, 600, 80));
+				num++;
+			} else {
+				g2.draw(new Line2D.Double(10, 600, 600, 600));
+				g2.draw(new Line2D.Double(10, 700, 600, 700));
+				num++;
+			}
+
 		}
-
-		// }
 
 		// since it will be repaint again
 		// so the string will not be save on the image
@@ -250,8 +266,4 @@ public class ImageComponent extends JComponent {
 
 	}
 
-	// add all the listener in this method
-	private void addButtonListeners() {
-
-	}
 }

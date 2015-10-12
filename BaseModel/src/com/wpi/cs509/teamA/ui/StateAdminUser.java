@@ -10,7 +10,8 @@ import java.awt.event.MouseListener;
 public class StateAdminUser implements StateMouseListener {
 
 	@Override
-	public void switchMouseListener(StateContext stateContext, ImageComponent imageComponent, MouseListener normalUserMouseListener, MouseListener adminMouseListener) {
+	public void switchMouseListener(StateContext stateContext, ImageComponent imageComponent,
+			MouseListener normalUserMouseListener, MouseListener adminMouseListener) {
 		// TODO Auto-generated method stub
 		System.out.println("admin mouse event.. switch to normal user..");
 		imageComponent.removeMouseListener(adminMouseListener);

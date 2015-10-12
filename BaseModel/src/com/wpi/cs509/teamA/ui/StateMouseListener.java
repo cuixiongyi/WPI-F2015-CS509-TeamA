@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
  */
 public interface StateMouseListener {
 
-	public void switchMouseListener(StateContext stateContext, ImageComponent imageComponent,  MouseListener normalUserMouseListener, MouseListener adminMouseListener);
+	public void switchMouseListener(StateContext stateContext, ImageComponent imageComponent,
+			MouseListener normalUserMouseListener, MouseListener adminMouseListener);
 
 }
