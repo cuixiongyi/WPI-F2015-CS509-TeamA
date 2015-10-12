@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.bean;
 
 /**
- * user account definition
+ * this class represents all the users, if this user is an admin
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -79,7 +79,8 @@ public class UserAccount {
 	}
 
 	/**
-	 * @param isAdmin the isAdmin to set
+	 * @param isAdmin
+	 *            the isAdmin to set
 	 */
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;

@@ -7,8 +7,8 @@ import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
 
 /**
- * Node definition. This class represent the smallest unit of a map. It include
- * all the information we need in a point on the map.
+ * Node definition. This class represents the smallest unit of a map. It include
+ * all the information we need on a point of the map.
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -60,8 +60,7 @@ public class Node {
 	 * @param nodeType
 	 *            the type of the node, an enum class
 	 */
-	public Node(int id, String name, int x, int y, int mapId,
-			Set<Integer> neighbors, String nodeType) {
+	public Node(int id, String name, int x, int y, int mapId, Set<Integer> neighbors, String nodeType) {
 
 		this.id = id;
 		this.name = name;
