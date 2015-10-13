@@ -10,8 +10,9 @@ import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
- * This is the general algorithm for the strategy pattern. TODO: add more
- * description here for this class
+ * This is the general algorithm for the strategy pattern. This is the class
+ * that we can set our strategy.
+ * 
  * 
  * @author CS 509-Team A
  *

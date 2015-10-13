@@ -114,64 +114,88 @@ public class Node {
 
 	}
 
-	/** node id getter */
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
-	/** node id setter */
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	/** node name getter */
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
-	/** node name setter */
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/** node coordinate getter */
+	/**
+	 * @return the location
+	 */
 	public Coordinate getLocation() {
 		return location;
 	}
 
-	/** node coordinate setter */
+	/**
+	 * @param location the location to set
+	 */
 	public void setLocation(Coordinate location) {
 		this.location = location;
 	}
 
-	/** node type getter */
-	public NodeType getNodeType() {
-		return nodeType;
-	}
-
-	/** node type setter */
-	public void setNodeType(NodeType nodeType) {
-		this.nodeType = nodeType;
-	}
-
-	/** node map id getter */
+	/**
+	 * @return the mapId
+	 */
 	public int getMapId() {
 		return mapId;
 	}
 
-	/** node map id setter */
+	/**
+	 * @param mapId the mapId to set
+	 */
 	public void setMapId(int mapId) {
 		this.mapId = mapId;
 	}
 
-	/** node neighbor getter */
+	/**
+	 * @return the neighbors
+	 */
 	public Set<Integer> getNeighbors() {
 		return neighbors;
 	}
 
-	/** node neighbor setter */
+	/**
+	 * @param neighbors the neighbors to set
+	 */
 	public void setNeighbors(Set<Integer> neighbors) {
 		this.neighbors = neighbors;
+	}
+
+	/**
+	 * @return the nodeType
+	 */
+	public NodeType getNodeType() {
+		return nodeType;
+	}
+
+	/**
+	 * @param nodeType the nodeType to set
+	 */
+	public void setNodeType(NodeType nodeType) {
+		this.nodeType = nodeType;
 	}
 
 }

@@ -66,32 +66,44 @@ public class GeneralMap implements AdjacencyMatrix {
 		return adjacencyMatrix;
 	}
 
-	/** map id getter */
+	/**
+	 * @return the mapId
+	 */
 	public String getMapId() {
 		return mapId;
 	}
 
-	/** map id setter */
+	/**
+	 * @param mapId the mapId to set
+	 */
 	public void setMapId(String mapId) {
 		this.mapId = mapId;
 	}
 
-	/** map name getter */
+	/**
+	 * @return the mapName
+	 */
 	public String getMapName() {
 		return mapName;
 	}
 
-	/** map name setter */
+	/**
+	 * @param mapName the mapName to set
+	 */
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
 
-	/** map scale getter */
+	/**
+	 * @return the scale
+	 */
 	public int getScale() {
 		return Scale;
 	}
 
-	/** map scale setter */
+	/**
+	 * @param scale the scale to set
+	 */
 	public void setScale(int scale) {
 		Scale = scale;
 	}
