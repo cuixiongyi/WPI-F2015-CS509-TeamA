@@ -1,0 +1,6 @@
+.DS_Store
+.classpath
+.project
+.reverse.properties
+.settings
+BaseModel/bin
