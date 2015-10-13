@@ -4,7 +4,7 @@ import java.awt.event.MouseListener;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
- * object, a state machine design pattern is a better solution that’s more
+ * object, a state machine design pattern is a better solution that's more
  * powerful and expandable. The state of the control class is tracked by the
  * state machine and the user input will cause a state change, with all the
  * related parameters stored in the control class. States changes will occur

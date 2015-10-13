@@ -7,8 +7,8 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
- * We decided to use a Strategy Pattern for the pathfinding algorithms. We did
- * this because we might try out different algorithms, for example Dijkstra’s
+ * We decided to use a Strategy Pattern for the path finding algorithms. We did
+ * this because we might try out different algorithms, for example Dijkstra's
  * and A*, to determine which is more suitable for this application. The scope
  * of the algorithm should be flexible, run the map as a whole to get a global
  * optimum, or run each map individually to get a high performance, greedy
