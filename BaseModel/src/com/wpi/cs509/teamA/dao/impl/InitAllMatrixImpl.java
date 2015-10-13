@@ -34,6 +34,10 @@ public class InitAllMatrixImpl implements InitAllMatrix {
 		// traverse all the maps in the Maps enum class
 		System.out.println("initializing all the maps.. should happen only once..");
 
+		// TODO: we need to read database twice, first to get the map id, second
+		// to get the corresponding node id on that map, can we make any
+		// optimization here?
+		
 		// TODO: read data from database..
 
 		for (Maps map : Maps.values()) {
