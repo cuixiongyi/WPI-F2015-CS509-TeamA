@@ -10,7 +10,7 @@ package com.wpi.cs509.teamA.util;
 public enum Maps {
 
 	// lists for maps as an example
-	CAMPUS("campus", 0), FL1("fuller_1", 1), FL2("fuller_2", 2), FL3("fuller_3", 3);
+	CAMPUS("campus", 0), AK1("AK_1", 1), AK2("AK_2", 2), AK3("AK3", 3);
 
 	/**
 	 * The map name in the database
