@@ -18,12 +18,11 @@ import javax.swing.JScrollPane;
 public class UserScreen extends JFrame {
 
 	private static UserScreen userScreen;
-
 	private Container container;
-
-	private ImageComponent imgPanel;
-	private JScrollPane imgSp;
-	/*
+	private ImageComponent imgComponent;
+	private JScrollPane imgScrollPanel;
+	
+	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
 	 */
@@ -33,34 +32,31 @@ public class UserScreen extends JFrame {
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
+
 		container = getContentPane();
 		container.setLayout(new BorderLayout());
 
 		inputPanel = new InputPanel();
 
 		// the panel to show image
-		imgPanel = new ImageComponent(inputPanel);
-
+		imgComponent = new ImageComponent(inputPanel);
 		// display the image
-		imgPanel.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
-		imgPanel.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
-		imgPanel.setVisible(true);
-
-		// add mouse listener
-		// imgPanel.addMouseListener(imgPanel);
+		imgComponent.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
+		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
+		imgComponent.setVisible(true);
 
 		// scroll panel
-		imgSp = new JScrollPane();
-		imgSp.setPreferredSize(new Dimension(imgPanel.getImgWidth(), imgPanel.getImgHeight()));
+		imgScrollPanel = new JScrollPane();
+		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// for scroll panel
-		imgSp.setViewportView(imgPanel);
-		imgSp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		imgSp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		imgScrollPanel.setViewportView(imgComponent);
+		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		container.add(imgSp, BorderLayout.CENTER);
+		container.add(imgScrollPanel, BorderLayout.CENTER);
 		container.add(inputPanel, BorderLayout.NORTH);
 
-		setTitle("Path Finding");
+		setTitle("Route Finder");
 		setLocation(0, 0);
 		setSize(1200, 900);
 		setVisible(true);
@@ -77,7 +73,7 @@ public class UserScreen extends JFrame {
 	}
 
 	/**
-	 * The start of the program
+	 * The entrance of the program
 	 * 
 	 * @param args
 	 *            command line..

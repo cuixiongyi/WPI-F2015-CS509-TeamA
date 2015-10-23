@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.dao.impl;
 
 import java.util.Map;
 
-import com.wpi.cs509.teamA.dao.InitAllMatrix;
+import com.wpi.cs509.teamA.dao.AllInitializedMatrix;
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.InputMatrix;
 import com.wpi.cs509.teamA.util.Maps;
@@ -16,20 +16,20 @@ import com.wpi.cs509.teamA.util.ProxyMap;
  * @author CS 509-Team A
  *
  */
-public class InitAllMatrixImpl implements InitAllMatrix {
+public class AllInitializedMatrixImpl implements AllInitializedMatrix {
 
-	private static InitAllMatrixImpl initAllMatrixImpl;
+	private static AllInitializedMatrixImpl initAllMatrixImpl;
 
 	/**
 	 * The map id and its corresponding map matrix
 	 */
-	private Map<Integer, InputMatrix> allMatrix;
+	private Map<Integer, InputMatrix> allInitilaizedMatrix;
 
 	/**
 	 * Constructor. It will initialize all the maps and get there corresponding
 	 * matrix. We use proxy pattern here to get all the map.
 	 */
-	private InitAllMatrixImpl() {
+	private AllInitializedMatrixImpl() {
 		// we init all the matrix here
 		// traverse all the maps in the Maps enum class
 		System.out.println("initializing all the maps.. should happen only once..");
@@ -54,9 +54,9 @@ public class InitAllMatrixImpl implements InitAllMatrix {
 	 * 
 	 * @return return an instance of InitAllMatrixImpl
 	 */
-	public static InitAllMatrixImpl getInitAllMatrixImpl() {
+	public static AllInitializedMatrixImpl getAllInitializedMatrixImpl() {
 		if (initAllMatrixImpl == null) {
-			initAllMatrixImpl = new InitAllMatrixImpl();
+			initAllMatrixImpl = new AllInitializedMatrixImpl();
 		}
 		System.out.println("try to get all matrix.. the matrix has been init already..");
 		return initAllMatrixImpl;
@@ -70,10 +70,10 @@ public class InitAllMatrixImpl implements InitAllMatrix {
 	 *         its corresponding matrix as the value
 	 */
 	@Override
-	public Map<Integer, InputMatrix> initAllMatrix() {
+	public Map<Integer, InputMatrix> getAllInitializedMatrix() {
 		// TODO Auto-generated method stub
 
-		return allMatrix;
+		return allInitilaizedMatrix;
 	}
 
 }

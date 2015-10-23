@@ -12,7 +12,7 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  * @author CS 509-Team A
  *
  */
-public interface InitAllMatrix {
+public interface AllInitializedMatrix {
 
 	/**
 	 * get all the matrix for every single map
@@ -20,5 +20,5 @@ public interface InitAllMatrix {
 	 * @return a map data structure that takes the id of the map as key and the
 	 *         its corresponding matrix as the value
 	 */
-	public Map<Integer, InputMatrix> initAllMatrix();
+	public Map<Integer, InputMatrix> getAllInitializedMatrix();
 }

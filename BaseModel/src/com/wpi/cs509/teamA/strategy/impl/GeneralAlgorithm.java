@@ -19,6 +19,8 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  */
 public class GeneralAlgorithm {
 
+	// TODO: Make this class singleton..
+
 	/**
 	 * the strategy will be applied on the path finding
 	 */
@@ -35,7 +37,7 @@ public class GeneralAlgorithm {
 	 * Constructor.
 	 * 
 	 * @param algoStrategy
-	 *            the strategy will be applied, usually should be the defualt
+	 *            the strategy will be applied, usually should be the default
 	 *            strategy
 	 */
 	public GeneralAlgorithm(AlgoStrategy algoStrategy) {
@@ -55,7 +57,7 @@ public class GeneralAlgorithm {
 	 */
 	public Map<Integer, List<Node>> findPath(Node startNode, Node endNode, List<InputMatrix> im) {
 
-		System.out.println("General Algorithm");
+		System.out.println("General Algorithm..");
 
 		Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
 		// add this one by one to the result

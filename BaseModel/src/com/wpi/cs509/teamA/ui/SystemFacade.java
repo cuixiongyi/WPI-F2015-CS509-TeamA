@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.bean.DupEntranceMap;
-import com.wpi.cs509.teamA.dao.impl.InitAllMatrixImpl;
+import com.wpi.cs509.teamA.dao.impl.AllInitializedMatrixImpl;
 
 /**
  * This is class is to initialize all the resources that will be used in the
@@ -22,7 +22,7 @@ public class SystemFacade {
 		// initialize the relationship map
 		DupEntranceMap.initDupEntranceMap();
 		// initialize all the matrix for the map
-		InitAllMatrixImpl.getInitAllMatrixImpl();
+		AllInitializedMatrixImpl.getAllInitializedMatrixImpl().getAllInitializedMatrix();
 		// singleton
 		UserScreen.launchUserScreen();
 		
