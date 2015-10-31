@@ -12,7 +12,7 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  * @author CS 509-Team A
  *
  */
-public interface AllInitializedMatrix {
+public interface InitAllMatrixDao {
 
 	/**
 	 * get all the matrix for every single map

@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.dao.impl;
 
 import java.util.Map;
 
-import com.wpi.cs509.teamA.dao.AllInitializedMatrix;
+import com.wpi.cs509.teamA.dao.InitAllMatrixDao;
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.InputMatrix;
 import com.wpi.cs509.teamA.util.Maps;
@@ -16,9 +16,9 @@ import com.wpi.cs509.teamA.util.ProxyMap;
  * @author CS 509-Team A
  *
  */
-public class AllInitializedMatrixImpl implements AllInitializedMatrix {
+public class InitAllMatrixDaoImpl implements InitAllMatrixDao {
 
-	private static AllInitializedMatrixImpl initAllMatrixImpl;
+	private static InitAllMatrixDaoImpl initAllMatrixImpl;
 
 	/**
 	 * The map id and its corresponding map matrix
@@ -29,7 +29,7 @@ public class AllInitializedMatrixImpl implements AllInitializedMatrix {
 	 * Constructor. It will initialize all the maps and get there corresponding
 	 * matrix. We use proxy pattern here to get all the map.
 	 */
-	private AllInitializedMatrixImpl() {
+	private InitAllMatrixDaoImpl() {
 		// we init all the matrix here
 		// traverse all the maps in the Maps enum class
 		System.out.println("initializing all the maps.. should happen only once..");
@@ -54,11 +54,12 @@ public class AllInitializedMatrixImpl implements AllInitializedMatrix {
 	 * 
 	 * @return return an instance of InitAllMatrixImpl
 	 */
-	public static AllInitializedMatrixImpl getAllInitializedMatrixImpl() {
+	public static InitAllMatrixDaoImpl initAllMatrix() {
 		if (initAllMatrixImpl == null) {
-			initAllMatrixImpl = new AllInitializedMatrixImpl();
+			initAllMatrixImpl = new InitAllMatrixDaoImpl();
 		}
-		System.out.println("try to get all matrix.. the matrix has been init already..");
+		System.out.println("try to init all matrix.. the matrix has been init already..");
+		
 		return initAllMatrixImpl;
 
 	}

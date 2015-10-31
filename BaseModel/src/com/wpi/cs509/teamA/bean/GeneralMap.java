@@ -49,11 +49,20 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	public GeneralMap(String mapName) {
 
-		// get data from database here
+		// TODO:get data from database here, what data we need?
 		System.out.println(
 				"general map is getting data from database and making a matrix.. this should happen only once.. ");
-		// assign value to the adjacencyMatrix
+		// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
+		// adjacencyMatrix = makeMatrix();
 
+	}
+	
+	// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
+	private InputMatrix makeMatrix(){
+		
+		// test..
+		return new InputMatrix();
+		
 	}
 
 	@Override

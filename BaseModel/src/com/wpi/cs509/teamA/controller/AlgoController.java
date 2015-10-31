@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.dao.AllInitializedMatrix;
-import com.wpi.cs509.teamA.dao.impl.AllInitializedMatrixImpl;
+import com.wpi.cs509.teamA.dao.InitAllMatrixDao;
+import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
@@ -129,8 +129,7 @@ public class AlgoController {
 		// Initialize all the matrix
 		// we can initialize it in a much more earlier phase of the system
 		// check the workflow here..
-		AllInitializedMatrix allInitializedMatrix = AllInitializedMatrixImpl.getAllInitializedMatrixImpl();
-		Map<Integer, InputMatrix> allMatrixes = allInitializedMatrix.getAllInitializedMatrix();		
+		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();		
 		
 		// TODO: find the maps we need from the allMatrixes and return a list of
 		// matrix that we want
