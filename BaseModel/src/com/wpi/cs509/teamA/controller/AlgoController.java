@@ -10,6 +10,8 @@ import com.wpi.cs509.teamA.dao.InitAllMatrix;
 import com.wpi.cs509.teamA.dao.impl.InitAllMatrixImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.Edge;
+import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -77,24 +79,28 @@ public class AlgoController {
 		// decide the context of the algorithm
 		// get a list of matrixes that we will use in the algorithm
 		// System.out.println("The system begin to get the matrix resource..");
-		List<InputMatrix> im = this.getAlgoMatrix(startMapId, endMapId);
+		//List<InputMatrix> im = this.getAlgoMatrix(startMapId, endMapId);
+		Graph inputData = new Graph (edges);
+		//TODO: Build Graph of all nodes in scenario in the following format: (int nodeid1, int nodeid2, int distance)
 		// System.out.println("The system has successfully get the matrix
 		// resource..");
 
 		// the algorithm strategy is not set here, we can add it later
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-		if (im.size() == 1) {
-			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, im);
-			return result;
-
-		} else {
+		if (true) // always use Dijkstra's for now
+		{
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, im);
+			result = generalAlgorithm.findPath(fromNode, toNode, inputData);
 			return result;
-
 		}
+		else
+		{
+			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+			result = generalAlgorithm.findPath(fromNode, toNode, inputData);
+			return result;
+		}
+		
 	}
 
 	/**
