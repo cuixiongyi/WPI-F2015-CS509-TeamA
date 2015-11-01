@@ -80,7 +80,7 @@ public class AlgoController {
 		// get a list of matrixes that we will use in the algorithm
 		// System.out.println("The system begin to get the matrix resource..");
 		//List<InputMatrix> im = this.getAlgoMatrix(startMapId, endMapId);
-		Graph inputData = new Graph (edges);
+		Graph context = new Graph (edges);
 		//TODO: Build Graph of all nodes in scenario in the following format: (int nodeid1, int nodeid2, int distance)
 		// System.out.println("The system has successfully get the matrix
 		// resource..");
@@ -91,13 +91,13 @@ public class AlgoController {
 		if (true) // always use Dijkstra's for now
 		{
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, inputData);
+			result = generalAlgorithm.findPath(fromNode, toNode, context);
 			return result;
 		}
 		else
 		{
 			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, inputData);
+			result = generalAlgorithm.findPath(fromNode, toNode, context);
 			return result;
 		}
 		

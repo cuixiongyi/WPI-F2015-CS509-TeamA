@@ -71,6 +71,11 @@ public class Node {
 
 	}
 
+	public Node(int id)
+	{
+		this.id = id;
+	}
+	
 	/**
 	 * add an new node on the map and set it's attributes
 	 */
