@@ -19,7 +19,7 @@ public class Vertex implements Comparable<Vertex> {
 	@SuppressWarnings("null")
 	public int getNext() {
 		if (this == this.previous) {
-			System.out.printf("%s", this.id);
+			//System.out.printf("%s", this.id);
 			return this.id;
 		} else if (this.previous == null) {
 			System.out.printf("%s(unreached)", this.id);
@@ -30,6 +30,7 @@ public class Vertex implements Comparable<Vertex> {
 			{
 				pathNodeIds.add(tmp);
 			}
+			
 			return this.id;
 		}
 	}

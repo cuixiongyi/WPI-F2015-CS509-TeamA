@@ -26,7 +26,12 @@ public class AlgoTest {
 		Graph context = new Graph (edges);
 		DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
 		route = d.getRoute(startNode, endNode, context);
-		System.out.println(route.toString());
+		System.out.println();
+		System.out.println();
+		for (int i : route)
+		{
+			System.out.print(i + ", ");
+		}
 	}
 
 	

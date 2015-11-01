@@ -40,7 +40,9 @@ public class Graph {
 
 		graph.get(endId).clearPathNodeIds();
 		graph.get(endId).getNext();
-		return graph.get(endId).getPathNodeIds(); // return list of node ids that make
+		List<Integer> result = graph.get(endId).getPathNodeIds();
+		result.add(endId);
+		return result; // return list of node ids that make
 											// up the path
 	}
 
