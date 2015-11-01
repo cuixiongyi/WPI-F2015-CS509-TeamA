@@ -7,7 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.Coordinate;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +31,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
     private JTextField idTextField;
     private JTextField nameTextField;
     private JTextField mapidTextField;
+    private int xPos;
+    private int yPos;
     
 
 	/**
@@ -37,7 +45,9 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeInformationDialog(int xPos, int yPos) {
+	public NodeInformationDialog(int xPosition, int yPosition) {
+		xPos = xPosition;
+		yPos = yPosition;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -92,6 +102,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		
 		mapidTextField = new JTextField();
 		mapidTextField.setBounds(192, 144, 96, 27);
+		mapidTextField.getText().matches("[1-4]");
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
 		
@@ -102,6 +113,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		saveButton = new JButton("Save");
 		saveButton.setFont(new Font("Arial", Font.PLAIN, 18));
 		saveButton.setActionCommand("Save");
+		saveButton.addActionListener(this);
 		buttonPane.add(saveButton);
 		getRootPane().setDefaultButton(saveButton);
 	
@@ -122,7 +134,25 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		 if(e.getActionCommand().equals("Cancel")) 
 			 NodeInformationDialog.this.setVisible(false);
 		 if(e.getActionCommand().equals("Save")){
-                // not finished yet
+			 System.out.println("hhe");
+			 if(idTextField.getText().trim().equals("")||
+					 nameTextField.getText().trim().equals("")||
+					 	mapidTextField.getText().trim().equals("")){
+				 
+				 JOptionPane.showMessageDialog(null,
+			                "Please fill all fields.");		 
+			 }else if(!mapidTextField.getText().matches("[1-4]")){
+				 JOptionPane.showMessageDialog(null,
+			                "Invalid input.");	 
+			 }else{ 
+				 Node node = new Node();
+					node.setId(Integer.parseInt(idTextField.getText()));
+					node.setLocation(new Coordinate(xPos, yPos));
+					node.setMapId(Integer.parseInt(mapidTextField.getText()));
+					node.setName(nameTextField.getText());
+					node.saveNode();
+			 }
+                
 
              //this.dispose();
         }    

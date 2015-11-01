@@ -75,16 +75,16 @@ public class Node {
 	 * add an new node on the map and set it's attributes
 	 */
 	public void saveNode() {
-		Node node = new Node();
-		node.setNeighbors(new HashSet<Integer>());
-		node.setId(1);
-		// more setters for the node
-
-		// add node id as the neighbours
-
-		node.getNeighbors().add(2);
-		node.getNeighbors().add(3);
-		node.getNeighbors().add(4);
+//		Node node = new Node();
+//		node.setNeighbors(new HashSet<Integer>());
+//		node.setId(1);
+//		// more setters for the node
+//
+//		// add node id as the neighbours
+//
+//		node.getNeighbors().add(2);
+//		node.getNeighbors().add(3);
+//		node.getNeighbors().add(4);
 	}
 
 	// add neighbors to the node
