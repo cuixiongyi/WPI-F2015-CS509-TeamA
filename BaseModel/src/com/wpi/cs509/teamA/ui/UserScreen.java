@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
+import javax.swing.plaf.basic.BasicArrowButton;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -33,30 +34,45 @@ public class UserScreen extends JFrame {
 	 */
 	private UserScreen() {
 
-		container = getContentPane();
-		container.setLayout(new BorderLayout());
-
+container = getContentPane();
+		
+		//input panel and components
 		inputPanel = new InputPanel();
+		
 
 		// the panel to show image
 		imgComponent = new ImageComponent(inputPanel);
+		
 		// display the image
-		imgComponent.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
+		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/CSP.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
-
+		getContentPane().setLayout(null);
+		// add listener
+		//imgComponent.addMouseListener(imgComponent);
+		
 		// scroll panel
 		imgScrollPanel = new JScrollPane();
+		imgScrollPanel.setBounds(181, 215, 834, 557);
 		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		//button to change map
+		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
+		WestArrowButton.setBounds(109, 632, 57, 140);
+			
+		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
+		EastArrowButton.setBounds(1030, 632, 57, 140);
+		
+		container.add(WestArrowButton);
+		container.add(EastArrowButton);
+		container.add(imgScrollPanel);
+		container.add(inputPanel);
 
-		container.add(imgScrollPanel, BorderLayout.CENTER);
-		container.add(inputPanel, BorderLayout.NORTH);
-
-		setTitle("Route Finder");
+		
+		setTitle("Path Finding");
 		setLocation(0, 0);
 		setSize(1200, 900);
 		setVisible(true);

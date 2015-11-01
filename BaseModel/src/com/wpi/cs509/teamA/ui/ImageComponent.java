@@ -16,6 +16,8 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 
@@ -35,6 +37,7 @@ public class ImageComponent extends JComponent {
 	private int imgWidth;
 	private int imgHeight;
 	private StateContext stateContext;
+	
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
@@ -120,10 +123,19 @@ public class ImageComponent extends JComponent {
 
 				if (adminClicked % 2 == 0) {
 					System.out.println("Login...");
-					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-					adminClicked++;
+					AdminDialog adminDialog = new AdminDialog(ImageComponent.this);
+					adminDialog.setVisible(isFocusable());
+//					while(adminDialog.isVisible()){
+//						
+//					}
+//					if(isAdmin()){
+//						stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
+//						adminClicked++;
+//					}
 				} else {
 					System.out.println("Log off...");
+					 JOptionPane.showMessageDialog(null,
+				                "You have logged out");
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
 					adminClicked++;
 				}
@@ -230,6 +242,18 @@ public class ImageComponent extends JComponent {
 	 */
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
+	}
+	
+	public NormalUserMouseListener getNormalUserMouseListener() {
+		return (NormalUserMouseListener) this.normalUserMouseListener;
+	}
+	
+	public AdminMouseListener getAdminMouseListener() {
+		return (AdminMouseListener) this.adminMouseListener;
+	}
+	
+	public void incrementAdminClicked(){
+		this.adminClicked++;
 	}
 
 	@Override
