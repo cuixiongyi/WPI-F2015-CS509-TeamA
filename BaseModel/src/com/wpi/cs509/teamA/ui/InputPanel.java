@@ -10,6 +10,8 @@ import javax.swing.JTextField;
  * JPanel that have input text fields and buttons which will be shown on the top
  * of the UI
  * 
+ * TODO: we need a singleton here..
+ * 
  * @author CS 509-Team A
  *
  */
