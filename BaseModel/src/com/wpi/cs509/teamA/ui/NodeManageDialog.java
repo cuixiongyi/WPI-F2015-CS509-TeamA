@@ -57,22 +57,23 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 		contentPanel.setLayout(null);
 		
 		btnAddNode = new JButton("Add");
-		btnAddNode.setBounds(112, 15, 216, 45);
+		btnAddNode.setBounds(112, 15, 216, 29);
 		btnAddNode.setActionCommand("Add");
 		btnAddNode.addActionListener(this);
 		contentPanel.add(btnAddNode);
 		
 		btnDeleteNode = new JButton("Delete");
-		btnDeleteNode.setBounds(112, 85, 216, 45);
+		btnDeleteNode.setBounds(112, 60, 216, 29);
 		btnDeleteNode.setActionCommand("Delete");
 		btnDeleteNode.addActionListener(this);
 		contentPanel.add(btnDeleteNode);
 		
 		btnEditNode = new JButton("Edit");
-		btnEditNode.setBounds(112, 155, 215, 45);
+		btnEditNode.setBounds(112, 105, 216, 29);
 		btnEditNode.setActionCommand("Edit");
 		btnEditNode.addActionListener(this);
 		contentPanel.add(btnEditNode);
+		
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -107,6 +108,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 		 if(e.getActionCommand().equals("Edit")){
              
          } 
+
 			
 	}
 }

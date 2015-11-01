@@ -63,6 +63,7 @@ public class AdminMouseListener implements MouseListener {
 			NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
 	    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 	    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
+	    	
 		}
 		
 

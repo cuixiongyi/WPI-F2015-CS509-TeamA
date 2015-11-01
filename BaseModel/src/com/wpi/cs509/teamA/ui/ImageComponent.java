@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dialog.ModalityType;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -71,7 +72,7 @@ public class ImageComponent extends JComponent {
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
 	 */
-	public ImageComponent(final InputPanel inputPanel) {
+	public ImageComponent(final InputPanel inputPanel, final UserScreen userScreen) {
 
 		// initialize the mouse listener state
 		stateContext = new StateContext();
@@ -127,6 +128,8 @@ public class ImageComponent extends JComponent {
 					AdminDialog adminDialog = new AdminDialog(ImageComponent.this);
 					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 					adminDialog.setVisible(isFocusable());
+					userScreen.getBtnNeighborManage().setVisible(true);
+					inputPanel.getAdminLogin().setText("Log out");
 //					while(adminDialog.isVisible()){
 //						
 //					}
@@ -139,6 +142,8 @@ public class ImageComponent extends JComponent {
 					 JOptionPane.showMessageDialog(null,
 				                "You have logged out");
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
+					userScreen.getBtnNeighborManage().setVisible(false);
+					inputPanel.getAdminLogin().setText("Login as admin");
 					adminClicked++;
 				}
 			}
