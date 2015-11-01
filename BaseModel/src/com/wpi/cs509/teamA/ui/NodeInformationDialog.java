@@ -28,7 +28,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
     private JLabel lbCoordinate;
     private JTextField xPosField;
     private JTextField yPosField;
-    private JTextField idTextField;
+    private JTextField typeTextField; 
     private JTextField nameTextField;
     private JTextField mapidTextField;
     private int xPos;
@@ -75,15 +75,15 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		contentPanel.add(yPosField);
 		yPosField.setColumns(10);
 		
-		JLabel lbID = new JLabel("Node ID");
-		lbID.setFont(new Font("Arial", Font.PLAIN, 18));
-		lbID.setBounds(15, 64, 81, 21);
-		contentPanel.add(lbID);
+		JLabel lbType = new JLabel("Node Type");
+		lbType.setFont(new Font("Arial", Font.PLAIN, 18));
+		lbType.setBounds(15, 64, 119, 21);
+		contentPanel.add(lbType);
 		
-		idTextField = new JTextField();
-		idTextField.setBounds(192, 60, 96, 27);
-		contentPanel.add(idTextField);
-		idTextField.setColumns(10);
+		typeTextField = new JTextField();
+		typeTextField.setBounds(192, 60, 96, 27);
+		contentPanel.add(typeTextField);
+		typeTextField.setColumns(10);
 		
 		JLabel lbName = new JLabel("Node Name");
 		lbName.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -134,8 +134,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		 if(e.getActionCommand().equals("Cancel")) 
 			 NodeInformationDialog.this.setVisible(false);
 		 if(e.getActionCommand().equals("Save")){
-			 System.out.println("hhe");
-			 if(idTextField.getText().trim().equals("")||
+	
+			 if(typeTextField.getText().trim().equals("")||
 					 nameTextField.getText().trim().equals("")||
 					 	mapidTextField.getText().trim().equals("")){
 				 
@@ -145,11 +145,11 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				 JOptionPane.showMessageDialog(null,
 			                "Invalid input.");	 
 			 }else{ 
-				 Node node = new Node();
-					node.setId(Integer.parseInt(idTextField.getText()));
+				    Node node = new Node();
 					node.setLocation(new Coordinate(xPos, yPos));
 					node.setMapId(Integer.parseInt(mapidTextField.getText()));
 					node.setName(nameTextField.getText());
+					
 					node.saveNode();
 			 }
                 

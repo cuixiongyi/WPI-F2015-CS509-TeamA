@@ -102,7 +102,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
              
          } 
 		 if(e.getActionCommand().equals("Delete")){
-             
+             //Database
          } 
 		 if(e.getActionCommand().equals("Edit")){
              
