@@ -21,13 +21,16 @@ import java.awt.Dialog.ModalityType;
  *
  */
 
+@SuppressWarnings("serial")
 public class NodeManageDialog extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
-	private JButton okButton;
-	private JButton cancelButton;
-
-
+	private JButton btnCancel;
+    private JButton btnAddNode;
+    private JButton btnEditNode;
+    private JButton btnDeleteNode;
+    private int xPos;
+    private int yPos;
 	/**
 	 * Launch the application.
 	 */
@@ -44,53 +47,67 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeManageDialog (UserScreen frame) {
+	public NodeManageDialog (ImageComponent imageComponent, int xPosition, int yPosition) {
+		xPos = xPosition;
+		yPos = yPosition;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				okButton.addActionListener(this);
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				cancelButton.addActionListener(this);
-				buttonPane.add(cancelButton);
-			}
-			
-		}
+		
+		btnAddNode = new JButton("Add");
+		btnAddNode.setBounds(112, 15, 216, 45);
+		btnAddNode.setActionCommand("Add");
+		btnAddNode.addActionListener(this);
+		contentPanel.add(btnAddNode);
+		
+		btnDeleteNode = new JButton("Delete");
+		btnDeleteNode.setBounds(112, 85, 216, 45);
+		btnDeleteNode.setActionCommand("Delete");
+		btnDeleteNode.addActionListener(this);
+		contentPanel.add(btnDeleteNode);
+		
+		btnEditNode = new JButton("Edit");
+		btnEditNode.setBounds(112, 155, 215, 45);
+		btnEditNode.setActionCommand("Edit");
+		btnEditNode.addActionListener(this);
+		contentPanel.add(btnEditNode);
+		
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.setActionCommand("Cancel");
+		btnCancel.addActionListener(this);
+		buttonPane.add(btnCancel);
+	
+		
+		
 	}
 	
-	public void setFieldTitle(int xPos,int yPos){
-		  xPosField.setText(String.valueOf(xPos));
-		  yPosField.setText(String.valueOf(yPos));
-	}
+
 
 	
 		@Override
 	public void actionPerformed(ActionEvent e) {
-		 if(e.getActionCommand().equals("Cancel")) 
+		 if(e.getActionCommand().equals("Cancel")){
 			 NodeManageDialog.this.setVisible(false);
-		 if(e.getActionCommand().equals("OK")){
-                 // not finished yet
-
-              //this.dispose();
-         }    
+		 }	 
+		 if(e.getActionCommand().equals("Add")){
+             NodeInformationDialog nodeInfo = new NodeInformationDialog(xPos, yPos);
+             nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
+             nodeInfo.setVisible(nodeInfo.isFocusable());
+             
+         } 
+		 if(e.getActionCommand().equals("Delete")){
+             
+         } 
+		 if(e.getActionCommand().equals("Edit")){
+             
+         } 
 			
 	}
-		
-		
-	
-	
 }
 	

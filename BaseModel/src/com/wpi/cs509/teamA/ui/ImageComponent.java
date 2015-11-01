@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
+import java.awt.Dialog.ModalityType;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -72,7 +73,7 @@ public class ImageComponent extends JComponent {
 	 */
 	public ImageComponent(final InputPanel inputPanel) {
 
-		// initialize the mouse litener state
+		// initialize the mouse listener state
 		stateContext = new StateContext();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
@@ -124,6 +125,7 @@ public class ImageComponent extends JComponent {
 				if (adminClicked % 2 == 0) {
 					System.out.println("Login...");
 					AdminDialog adminDialog = new AdminDialog(ImageComponent.this);
+					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 					adminDialog.setVisible(isFocusable());
 //					while(adminDialog.isVisible()){
 //						
@@ -252,6 +254,9 @@ public class ImageComponent extends JComponent {
 		return (AdminMouseListener) this.adminMouseListener;
 	}
 	
+	public StateContext getStateContext(){
+		return this.stateContext;
+	}
 	public void incrementAdminClicked(){
 		this.adminClicked++;
 	}

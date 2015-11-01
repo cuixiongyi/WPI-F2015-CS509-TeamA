@@ -31,7 +31,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private JButton okButton;
 	private JButton cancelButton;
 	private ImageComponent imgPanel;
-	private StateContext stateContext;
+	
 	//private JFrame controllingFrame;
 	/**
 	 * Launch the application.
@@ -62,25 +62,22 @@ public class AdminDialog extends JDialog implements ActionListener {
 		passwordField.setColumns(10);
 		contentPanel.add(passwordField);
 		
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				okButton.addActionListener(this);
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				cancelButton.addActionListener(this);
-				buttonPane.add(cancelButton);
-			}
-		}
+		okButton = new JButton("OK");
+		okButton.setActionCommand("OK");
+		okButton.addActionListener(this);
+		buttonPane.add(okButton);
+		getRootPane().setDefaultButton(okButton);
+		
+		cancelButton = new JButton("Cancel");
+		cancelButton.setActionCommand("Cancel");
+		cancelButton.addActionListener(this);
+		buttonPane.add(cancelButton);
+		
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -92,7 +89,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 		            JOptionPane.showMessageDialog(null,
 		                "Success! You typed the right password.");
 		                AdminDialog.this.setVisible(false);		        
-	//	                stateContext.switchState(imgPanel, imgPanel.getNormalUserMouseListener(), imgPanel.getAdminMouseListener());
+		                imgPanel.getStateContext().switchState(imgPanel, imgPanel.getNormalUserMouseListener(), imgPanel.getAdminMouseListener());
 		                imgPanel.incrementAdminClicked();
 		        } else {
 		            JOptionPane.showMessageDialog(null,

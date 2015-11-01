@@ -1,7 +1,9 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.Dialog.ModalityType;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 
 /**
  * The admin mouse listener implementation.
@@ -45,20 +47,28 @@ public class AdminMouseListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
-		xPos = e.getX();
-		yPos = e.getY();
-
-		System.out.println("This click from admin user..");
-		System.out.println(xPos);
-		System.out.println(yPos);
-
-		imagePanel.setxPos(xPos);
-		imagePanel.setyPos(yPos);
-
-		imagePanel.repaint();
+		if(e.getButton()==MouseEvent.BUTTON1){
+			xPos = e.getX();
+			yPos = e.getY();
+	
+			System.out.println("This click from admin user..");
+			System.out.println(xPos);
+			System.out.println(yPos);
+	
+			imagePanel.setxPos(xPos);
+			imagePanel.setyPos(yPos);
+	
+			imagePanel.repaint();
+		} else if(e.getButton()==MouseEvent.BUTTON3){
+			NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
+	    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+	    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
+		}
+		
 
 	}
+	
+ 
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
