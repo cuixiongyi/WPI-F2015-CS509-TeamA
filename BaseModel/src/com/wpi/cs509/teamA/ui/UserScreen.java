@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
+
 import javax.swing.JScrollPane;
 
 /**
@@ -21,7 +23,7 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
-	
+
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
@@ -32,6 +34,8 @@ public class UserScreen extends JFrame {
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
+		
+		System.out.println("initialize user screen..");
 
 		container = getContentPane();
 		container.setLayout(new BorderLayout());
@@ -62,6 +66,7 @@ public class UserScreen extends JFrame {
 		setVisible(true);
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 
 	public static UserScreen launchUserScreen() {
@@ -79,7 +84,17 @@ public class UserScreen extends JFrame {
 	 *            command line..
 	 */
 	public static void main(String[] args) {
+				
+		// singleton
+		EventQueue.invokeLater(new Runnable() {
+		      public void run() {
+		    	  
+		    	  UserScreen.launchUserScreen();	    	  		    	  
+		      }
+		});
+
 		new SystemFacade();
+	
 	}
 
 }
