@@ -74,6 +74,8 @@ public class AlgoController {
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
 
+		Edge [] edges = new Edge[10000];
+		
 		// decide the context of the algorithm
 		// get a list of matrixes that we will use in the algorithm
 		// System.out.println("The system begin to get the matrix resource..");
