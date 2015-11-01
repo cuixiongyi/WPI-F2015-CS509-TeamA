@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.dao.InitAllMatrix;
-import com.wpi.cs509.teamA.dao.impl.InitAllMatrixImpl;
+import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
@@ -24,6 +23,8 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  * @version Oct 5th
  */
 public class AlgoController {
+
+	// TODO: Make this class singleton, we use setter and getter to operate it..
 
 	/**
 	 * The start node get from front end It is a String
@@ -46,7 +47,7 @@ public class AlgoController {
 	}
 
 	/**
-	 * construtor,initiate with the source and destination
+	 * Constructor,initiate with the source and destination
 	 *
 	 * @param from
 	 *            the source node
@@ -76,16 +77,12 @@ public class AlgoController {
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
 
-		// decide the context of the algorithm
-		// get a list of matrixes that we will use in the algorithm
-		// System.out.println("The system begin to get the matrix resource..");
-		//List<InputMatrix> im = this.getAlgoMatrix(startMapId, endMapId);
+
+		Edge[] edges = {new Edge (1, 1, 1)}; // junk to test
 		Graph context = new Graph (edges);
 		//TODO: Build Graph of all nodes in scenario in the following format: (int nodeid1, int nodeid2, int distance)
-		// System.out.println("The system has successfully get the matrix
-		// resource..");
 
-		// the algorithm strategy is not set here, we can add it later
+		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
 		if (true) // always use Dijkstra's for now
@@ -94,12 +91,13 @@ public class AlgoController {
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
 			return result;
 		}
-		else
+			
+		else // for later use
 		{
 			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
 			return result;
-		}
+		} 
 		
 	}
 
@@ -130,8 +128,9 @@ public class AlgoController {
 
 		// Initialize all the matrix
 		// we can initialize it in a much more earlier phase of the system
-		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixImpl.getInitAllMatrixImpl().initAllMatrix();
-
+		// check the workflow here..
+		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();		
+		
 		// TODO: find the maps we need from the allMatrixes and return a list of
 		// matrix that we want
 

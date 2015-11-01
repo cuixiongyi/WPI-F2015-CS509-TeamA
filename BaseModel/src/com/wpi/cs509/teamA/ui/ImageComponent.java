@@ -88,8 +88,12 @@ public class ImageComponent extends JComponent {
 
 				// TODO: need to check if the input is valid!!
 
+				// TODO: make the AlgoController singleton and use setter and getter to operate the instance..
+				
+				// We will go to the backend here.. For now, all the resources should be ready!
 				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
 						inputPanel.getEndPoint().getText().trim());
+				
 				result = algoController.getRoute();
 
 				// TODO: use the result to draw the lines
@@ -129,7 +133,17 @@ public class ImageComponent extends JComponent {
 
 	}
 
+	/**
+	 * Get the path of the image we will load. Temporary use..
+	 * 
+	 * @param imgPath
+	 *            path of the image, or in the database?
+	 */
 	public void setImagePath(String imgPath) {
+
+		// TODO: It seems that we will store our image in the database.. so how
+		// to implement that?
+
 		try {
 			image = ImageIO.read(new FileInputStream(imgPath));
 			this.setImgWidth(image.getWidth(this));
