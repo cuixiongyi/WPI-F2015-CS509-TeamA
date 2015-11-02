@@ -65,11 +65,14 @@ public class AdminMouseListener implements MouseListener {
 			imagePanel.repaint();
 		} else if(e.getButton()==MouseEvent.BUTTON3){
 			boolean tooclose=false;
-			int closeRange = 50; 
+			int closeRange = 10; 
 			for(int i=0;i<imagePanel.getCoorList().size();i++)
 			{
-				if(Math.abs(xPos-imagePanel.getCoorList().get(i).getX())<closeRange 
-						|| Math.abs(yPos-imagePanel.getCoorList().get(i).getY())<closeRange)
+//				System.out.println("nodelist loop");
+//				System.out.println("xpos"+xPos);
+//				System.out.println("list"+imagePanel.getCoorList().get(i).getX());
+				if(Math.abs(e.getX()-imagePanel.getCoorList().get(i).getX())<closeRange 
+						|| Math.abs(e.getY()-imagePanel.getCoorList().get(i).getY())<closeRange)
 				{	
 					tooclose=true;
 				}
