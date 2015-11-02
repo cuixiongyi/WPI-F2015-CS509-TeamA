@@ -16,14 +16,13 @@ public class Vertex implements Comparable<Vertex> {
 		this.id = id;
 	}
 
-	@SuppressWarnings("null")
-	public int getNext() {
+	public Integer getNext() {
 		if (this == this.previous) {
 			//System.out.printf("%s", this.id);
 			return this.id;
 		} else if (this.previous == null) {
 			System.out.printf("%s(unreached)", this.id);
-			return (Integer)null;
+			return null;
 		} else {
 			Integer tmp = this.previous.getNext();
 			if (null != tmp)
@@ -35,6 +34,7 @@ public class Vertex implements Comparable<Vertex> {
 		}
 	}
 
+	/*
 	public void printPath() {
 		if (this == this.previous) {
 			System.out.printf("%s", this.id);
@@ -44,10 +44,25 @@ public class Vertex implements Comparable<Vertex> {
 			this.previous.printPath();
 			System.out.printf(" -> %s(%d)", this.id, this.dist);
 		}
-	}
+	}*/
 
 	public int compareTo(Vertex other) {
 		return Integer.compare(dist, other.dist);
+	}
+	
+	/**
+	 * @return the pathNodeIds
+	 */
+	public List<Integer> getPathNodeIds() {
+		return pathNodeIds;
+	}
+	
+	/**
+	 * @param pathNodeIds
+	 *            the pathNodeIds to set
+	 */
+	public void clearPathNodeIds() {
+		pathNodeIds = new ArrayList<Integer>();
 	}
 
 	/**
@@ -110,18 +125,4 @@ public class Vertex implements Comparable<Vertex> {
 		this.neighbours = neighbours;
 	}
 
-	/**
-	 * @return the pathNodeIds
-	 */
-	public List<Integer> getPathNodeIds() {
-		return pathNodeIds;
-	}
-	
-	/**
-	 * @param pathNodeIds
-	 *            the pathNodeIds to set
-	 */
-	public void clearPathNodeIds() {
-		pathNodeIds = new ArrayList<Integer>();
-	}
 }
