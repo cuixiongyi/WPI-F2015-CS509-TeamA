@@ -4,6 +4,8 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
+
 
 /**
  * The admin mouse listener implementation.
@@ -26,6 +28,7 @@ public class AdminMouseListener implements MouseListener {
 	 */
 	private ImageComponent imagePanel;
 
+	private NeighborDialog neighborDialog;
 	/**
 	 * Default constructor
 	 */
@@ -39,15 +42,24 @@ public class AdminMouseListener implements MouseListener {
 	 * @param imagePanel
 	 *            the image component that the listener will be added to
 	 */
-	public AdminMouseListener(ImageComponent imagePanel) {
+	public AdminMouseListener(ImageComponent imagePanel, NeighborDialog neighborDialog) {
 		System.out.println("init AdminMouseListener.. this should happen only once..");
 		this.imagePanel = imagePanel;
+		this.neighborDialog = neighborDialog;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getButton()==MouseEvent.BUTTON1){
+		if(e.getButton()==MouseEvent.BUTTON1&&neighborDialog.isVisible()){
+			System.out.println(neighborDialog);
+			//if(neighborDialog.getFocusedTextField()==null){
+			//	JOptionPane.showMessageDialog(null,
+		    //            "Please select text field");
+			//}else{
+				neighborDialog.setFieldTitle(e.getX(), e.getY());
+			//}
+		}else if(e.getButton()==MouseEvent.BUTTON1&&!neighborDialog.isVisible()){
 			xPos = e.getX();
 			yPos = e.getY();
 	
@@ -59,12 +71,12 @@ public class AdminMouseListener implements MouseListener {
 			imagePanel.setyPos(yPos);
 	
 			imagePanel.repaint();
-		} else if(e.getButton()==MouseEvent.BUTTON3){
+		}else if(e.getButton()==MouseEvent.BUTTON3){
 			NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
 	    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 	    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
 	    	
-		}
+		} 
 		
 
 	}

@@ -25,6 +25,7 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
+	private NeighborDialog neighborDialog;
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -42,9 +43,12 @@ public class UserScreen extends JFrame {
 
 		// input panel and components
 		inputPanel = new InputPanel();
+		
+		neighborDialog = new NeighborDialog();
+		neighborDialog.setVisible(false);
 
 		// the panel to show image
-		imgComponent = new ImageComponent(inputPanel, this);
+		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
 
 		// display the image
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/CSP.jpg");
@@ -73,13 +77,15 @@ public class UserScreen extends JFrame {
 		container.add(EastArrowButton);
 		container.add(imgScrollPanel);
 		container.add(inputPanel);
+		
 
 		btnNeighborManage = new JButton("Neighbor Manage Tool");
 		btnNeighborManage.setVisible(false);
 		btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NeighborDialog neighborDialog = new NeighborDialog();
-				neighborDialog.setVisible(neighborDialog.isFocusable());
+				//NeighborDialog neighborDialog = new NeighborDialog();
+				neighborDialog.setVisible(true);
+				neighborDialog.setAlwaysOnTop(true);
 
 			}
 		});

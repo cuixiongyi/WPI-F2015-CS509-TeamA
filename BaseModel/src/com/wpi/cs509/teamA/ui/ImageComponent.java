@@ -72,13 +72,14 @@ public class ImageComponent extends JComponent {
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
 	 */
-	public ImageComponent(final InputPanel inputPanel, final UserScreen userScreen) {
+	public ImageComponent(final InputPanel inputPanel, final UserScreen userScreen, NeighborDialog neighborDialog) {
 
 		// initialize the mouse listener state
 		stateContext = new StateContext();
+		
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
-		adminMouseListener = new AdminMouseListener(this);
+		adminMouseListener = new AdminMouseListener(this, neighborDialog);
 
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
