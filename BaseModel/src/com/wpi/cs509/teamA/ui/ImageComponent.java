@@ -12,6 +12,7 @@ import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 /**
  * An component to show the images. This component has two different states
@@ -46,6 +48,10 @@ public class ImageComponent extends JComponent {
 	private MouseListener adminMouseListener;
 	private int xPos;
 	private int yPos;
+	//
+	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();;
+//	private int[] xPosArray;
+//	private int[] yPosArray;
 
 	private Map<Integer, List<Node>> result;
 
@@ -103,6 +109,7 @@ public class ImageComponent extends JComponent {
 				// TODO: use the result to draw the lines
 
 				// we need to give all the information to the repaint method
+				System.out.println("112!");
 				repaint();
 
 			}
@@ -163,6 +170,7 @@ public class ImageComponent extends JComponent {
 			this.setImgWidth(image.getWidth(this));
 			this.setImgHeight(image.getHeight(this));
 			this.repaint();
+			System.out.println("171");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -246,6 +254,8 @@ public class ImageComponent extends JComponent {
 		this.yPos = yPos;
 	}
 	
+	
+	
 	public NormalUserMouseListener getNormalUserMouseListener() {
 		return (NormalUserMouseListener) this.normalUserMouseListener;
 	}
@@ -260,7 +270,22 @@ public class ImageComponent extends JComponent {
 	public void incrementAdminClicked(){
 		this.adminClicked++;
 	}
-
+	
+	/**
+	 * @param List<Coordinate> coordinateList
+	 *            return the nodelist
+	 */
+	public List<Coordinate> getCoorList(){
+		return coordinateList;		
+	}
+	
+	public void addNodeList(int x,int y)
+	{
+		Coordinate coor=new Coordinate(x,y);
+		coordinateList.add(coor);
+	}
+	
+	
 	@Override
 	public void paintComponent(Graphics g) {
 
@@ -278,6 +303,23 @@ public class ImageComponent extends JComponent {
 
 		// xPos = ((NormalUserMouseListener) normalUserMouseListener).getxPos();
 		// yPos = ((NormalUserMouseListener) normalUserMouseListener).getyPos();
+		
+//		g.drawOval(500,500,10,10);
+		setForeground(Color.RED); 
+//		g.fillOval(250,250,50,50); 
+		
+		if(coordinateList.size()!=0)
+		{
+			for(int i=0;i<coordinateList.size();i++)
+			{
+				xPos=coordinateList.get(i).getX();
+				yPos=coordinateList.get(i).getY();
+				g.fillOval(xPos,yPos,10,10); 
+			}
+		}
+		
+		
+//		g.fillOval(xPos,yPos,10,10); 
 
 		System.out.println(xPos + " " + yPos);
 

@@ -1,6 +1,10 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Dialog.ModalityType;
+import java.lang.Math;
+
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -60,9 +64,26 @@ public class AdminMouseListener implements MouseListener {
 	
 			imagePanel.repaint();
 		} else if(e.getButton()==MouseEvent.BUTTON3){
-			NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
-	    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-	    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
+			boolean tooclose=false;
+			int closeRange = 50; 
+			for(int i=0;i<imagePanel.getCoorList().size();i++)
+			{
+				if(Math.abs(xPos-imagePanel.getCoorList().get(i).getX())<closeRange 
+						|| Math.abs(yPos-imagePanel.getCoorList().get(i).getY())<closeRange)
+				{	
+					tooclose=true;
+				}
+
+			}
+			if(tooclose){
+				JOptionPane.showMessageDialog(null,"Too close from another node.");	
+			}
+			else{
+			
+				NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
+		    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+		    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
+			}
 		}
 		
 
