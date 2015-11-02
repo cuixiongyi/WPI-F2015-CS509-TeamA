@@ -1,10 +1,12 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Dialog.ModalityType;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.lang.Math;
 
 import javax.swing.JOptionPane;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 
 /**
@@ -71,12 +73,31 @@ public class AdminMouseListener implements MouseListener {
 			imagePanel.setyPos(yPos);
 	
 			imagePanel.repaint();
-		}else if(e.getButton()==MouseEvent.BUTTON3){
-			NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
-	    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-	    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
-	    	
-		} 
+		} else if(e.getButton()==MouseEvent.BUTTON3){
+			boolean tooclose=false;
+			int closeRange = 10; 
+			for(int i=0;i<imagePanel.getCoorList().size();i++)
+			{
+//				System.out.println("nodelist loop");
+//				System.out.println("xpos"+xPos);
+//				System.out.println("list"+imagePanel.getCoorList().get(i).getX());
+				if(Math.abs(e.getX()-imagePanel.getCoorList().get(i).getX())<closeRange 
+						|| Math.abs(e.getY()-imagePanel.getCoorList().get(i).getY())<closeRange)
+				{	
+					tooclose=true;
+				}
+
+			}
+			if(tooclose){
+				JOptionPane.showMessageDialog(null,"Too close from another node.");	
+			}
+			else{
+			
+				NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
+		    	nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+		    	nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
+			}
+		}
 		
 
 	}

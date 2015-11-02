@@ -33,7 +33,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
     private JTextField mapidTextField;
     private int xPos;
     private int yPos;
-    
+    private ImageComponent imagePanel;
 
 	/**
 	 * Launch the application.
@@ -45,9 +45,10 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeInformationDialog(int xPosition, int yPosition) {
+	public NodeInformationDialog(ImageComponent imageComponent,int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
+		imagePanel=imageComponent;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -151,6 +152,10 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 					node.setName(nameTextField.getText());
 					
 					node.saveNode();
+					imagePanel.addNodeList(xPos,yPos);
+					imagePanel.repaint();
+//					System.out.println("hhe");
+//					System.out.println(xPos + " " + yPos);
 			 }
                 
 

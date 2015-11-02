@@ -31,6 +31,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
     private JButton btnDeleteNode;
     private int xPos;
     private int yPos;
+    private ImageComponent imagePanel;
 	/**
 	 * Launch the application.
 	 */
@@ -50,6 +51,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 	public NodeManageDialog (ImageComponent imageComponent, int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
+		imagePanel=imageComponent;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,7 +99,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 			 NodeManageDialog.this.setVisible(false);
 		 }	 
 		 if(e.getActionCommand().equals("Add")){
-             NodeInformationDialog nodeInfo = new NodeInformationDialog(xPos, yPos);
+             NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel,xPos, yPos);
              nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
              nodeInfo.setVisible(nodeInfo.isFocusable());
              
