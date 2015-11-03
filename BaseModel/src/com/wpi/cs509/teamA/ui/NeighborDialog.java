@@ -1,27 +1,22 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 
+@SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
 
 	private JButton saveButton;
 	private JButton cancelButton;
-	// private static int edgeNumber = 0;
 
 	private JPanel pairPanel;
 	private JLabel lbPair_1;
@@ -62,13 +57,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private final String NEIGHBOR = "Neighbor Pairs";
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public NeighborDialog() {
@@ -76,8 +64,7 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		setBounds(100, 100, 450, 736);
 		getContentPane().setLayout(null);
 
-		// SAVE and CANCEL button block
-
+		// set up SAVE and CANCEL button
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBounds(0, 641, 428, 39);
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -95,7 +82,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		buttonPane.add(cancelButton);
 
 		// Edge pair block. 20 textFieldNodePairs show coordinate of node.
-
 		pairPanel = new JPanel();
 		pairPanel.setBounds(0, 0, 428, 641);
 		getContentPane().add(pairPanel);
