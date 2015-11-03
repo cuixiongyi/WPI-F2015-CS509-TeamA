@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
+
 import javax.swing.JScrollPane;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.JButton;
@@ -38,8 +40,11 @@ public class UserScreen extends JFrame {
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
+		
+		System.out.println("initialize user screen..");
 
 		container = getContentPane();
+		//container.setLayout(new BorderLayout());
 
 		// input panel and components
 		inputPanel = new InputPanel();
@@ -119,6 +124,15 @@ public class UserScreen extends JFrame {
 	 *            command line..
 	 */
 	public static void main(String[] args) {
+				
+		// singleton
+		EventQueue.invokeLater(new Runnable() {
+		      public void run() {
+		    	  
+		    	  UserScreen.launchUserScreen();	    	  		    	  
+		      }
+		});
+
 		new SystemFacade();
 	}
 

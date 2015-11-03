@@ -12,7 +12,9 @@ import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
  * @author CS 509-Team A
  *
  */
-public class SystemFacade {
+public class SystemFacade implements Runnable {
+
+	Thread t;
 
 	/**
 	 * The method to initialize all the resources
@@ -21,13 +23,25 @@ public class SystemFacade {
 
 		// TODO: We may use mutli-thread here..
 		
+		t = new Thread(this, "initialize data thread");
+		t.start();
+		try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void run() {
+		
+		// TODO Auto-generated method stub
 		// initialize the relationship map
 		DupEntranceMap.initDupEntranceMap();
 		// initialize all the matrix for the map
 		InitAllMatrixDaoImpl.initAllMatrix();
-		// singleton
-		UserScreen.launchUserScreen();
-		
 	}
 
 }

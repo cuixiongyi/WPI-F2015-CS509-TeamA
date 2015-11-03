@@ -43,6 +43,12 @@ public class Node {
 
 	}
 
+	// TODO: We may remove this method in the future, for now it is just for
+	// testing..
+	public Node(int id) {
+		this.id = id;
+	}
+
 	/**
 	 * 
 	 * @param id
@@ -124,7 +130,8 @@ public class Node {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -138,7 +145,8 @@ public class Node {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -152,7 +160,8 @@ public class Node {
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param location
+	 *            the location to set
 	 */
 	public void setLocation(Coordinate location) {
 		this.location = location;
@@ -166,7 +175,8 @@ public class Node {
 	}
 
 	/**
-	 * @param mapId the mapId to set
+	 * @param mapId
+	 *            the mapId to set
 	 */
 	public void setMapId(int mapId) {
 		this.mapId = mapId;
@@ -180,7 +190,8 @@ public class Node {
 	}
 
 	/**
-	 * @param neighbors the neighbors to set
+	 * @param neighbors
+	 *            the neighbors to set
 	 */
 	public void setNeighbors(Set<Integer> neighbors) {
 		this.neighbors = neighbors;
@@ -194,7 +205,8 @@ public class Node {
 	}
 
 	/**
-	 * @param nodeType the nodeType to set
+	 * @param nodeType
+	 *            the nodeType to set
 	 */
 	public void setNodeType(NodeType nodeType) {
 		this.nodeType = nodeType;

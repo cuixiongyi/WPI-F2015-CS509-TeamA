@@ -19,7 +19,7 @@ public class AstarAlgoStrategy implements AlgoStrategy {
 	 * use A* to implement a strategy
 	 */
 	@Override
-	public Map<Integer, List<Node>> getRoute(Node startNode, Node endNode, List<InputMatrix> matrixes) {
+	public List<Integer> getRoute(Node startNode, Node endNode, Graph context) {
 		// TODO Auto-generated method stub
 		System.out.println("Astar Strategy..");
 
