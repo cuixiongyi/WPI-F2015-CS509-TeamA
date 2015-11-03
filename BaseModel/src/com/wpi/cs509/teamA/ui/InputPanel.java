@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,23 +24,40 @@ public class InputPanel extends JPanel {
 	private JButton btnSearch;
 	private JButton adminLogin;
 
+	private final String START = "Start";
+	private final String END = "End";
+	private final String SEARCH = "Search";
+	private final String LOGIN = "Login as Admin";
+	private final String TO = "To: ";
+	private final String FROM = "From: ";
+
 	/**
 	 * Constructor. Initialize all the input panel.
 	 */
 	public InputPanel() {
+		// User input block
+		this.startPoint = new JTextField(START);
+		this.endPoint = new JTextField(END);
+		this.btnSearch = new JButton(SEARCH);
+		this.adminLogin = new JButton(LOGIN);
 
-		this.startPoint = new JTextField("Start");
-		this.endPoint = new JTextField("End");
-		this.btnSearch = new JButton("Search");
-		this.adminLogin = new JButton("Login as Admin");
-
-		this.setLayout(new GridLayout(1, 7));
-		this.add(new JLabel("From: "));
+		this.setLayout(null);
+		this.add(new JLabel(TO));
 		this.add(startPoint);
-		this.add(new JLabel("To: "));
+		this.add(new JLabel(FROM));
 		this.add(endPoint);
 		this.add(btnSearch);
 		this.add(adminLogin);
+
+		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 20));
+		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 25));
+		this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 22));
+		this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 22));
+		this.getAdminLogin().setBounds(981, 0, 196, 29);
+		this.getBtnSearch().setBounds(603, 69, 132, 89);
+		this.getEndPoint().setBounds(200, 120, 310, 38);
+		this.getStartPoint().setBounds(200, 69, 310, 38);
+		this.setBounds(0, 0, 1178, 214);
 	}
 
 	/**
