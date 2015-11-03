@@ -226,12 +226,11 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		textFieldNodePair20.addFocusListener(this);
 		textFieldNodePair20.setColumns(10);
 		
+		
+		
 			
 	}
 
-	public JTextField getFocusedTextField(){
-		return this.getCoordinateTextField;
-	}
 	
 	public void setFieldTitle(int xPos,int yPos){
 		  this.getCoordinateTextField.setText(String.valueOf(xPos)+" , "+String.valueOf(yPos));
@@ -246,9 +245,23 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		
 		 if(e.getActionCommand().equals("Save")){
 			 
+			 String v1 = textFieldNodePair4.getText();
+			 
+			 // PANDUAN
+			 
+			 // CUN
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 		 }
 		if(e.getActionCommand().equals("test")){
-			System.out.println("testhehe");
+			
 		}
 		
 	}
