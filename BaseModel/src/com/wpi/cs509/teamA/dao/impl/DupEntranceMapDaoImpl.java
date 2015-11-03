@@ -191,31 +191,6 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
 		}
 	}
 
-	/**
-	 * insert edges to the database at once execute
-	 * 
-	 * @author CS 509-Team A
-	 */
-	
-	public boolean insertEdges(int [][] edgeSaver) {
-		int [][] edgeSaver = new int[10][4];
-		Field[] fields = this.getClass().getDeclaredFields();
-		Type[] paramTypeList = this.getGenericParameterTypes();
-		for(Field field:fields){
-            System.out.println(field.getName());
-		}
-		for(int i=0; i< 10; i++){
-			
-			String []splits_1 = (String.valueOf("str_"+(2*i+1))).split(",");
-			edgeSaver[i][0] = Integer.valueOf(splits_1[0]);
-			edgeSaver[i][1] = Integer.valueOf(splits_1[1]);
-			String []splits_2 = (String.valueOf("str_"+(2*i+2))).split(",");
-			edgeSaver[i][2] = Integer.valueOf(splits_2[0]);
-			edgeSaver[i][3] = Integer.valueOf(splits_2[1]);
-			System.out.println(edgeSaver[i][0]+ "----"+ edgeSaver[i][1]+"-----"+ edgeSaver[i][2]+ "-----"+ edgeSaver[i][3]);
-		}
-		return true;
-	}
 
 	/**
 	 * insert one edge to the database at once execute
@@ -307,8 +282,8 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
 		DupEntranceMapDaoImpl demp = new DupEntranceMapDaoImpl();
 		// Set<Node> nodes_list = demp.initAllNodes();
 		// demp.insertNodes("323", 4, 5, 1, "OFFICE");
-		demp.insertEdges("1,1", "1,2", "1,3","1,4", "1,5", "1,6","1,7","","","1,8",
-				"","","","","1,10","1,11","","","","");
+	//	demp.insertEdges("1,1", "1,2", "1,3","1,4", "1,5", "1,6","1,7","","","1,8",
+	//			"","","","","1,10","1,11","","","","");
 		demp.insertoneEdge(3, 4, 2, 6);
 	}
 

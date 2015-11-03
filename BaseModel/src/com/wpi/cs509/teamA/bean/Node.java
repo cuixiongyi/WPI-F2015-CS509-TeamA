@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.bean;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
 
@@ -81,8 +82,11 @@ public class Node {
 	 * add an new node on the map and set it's attributes
 	 */
 	public void saveNode() {
-		Node node = new Node();
-		node.setNeighbors(new HashMap<Integer,Double>());
+		DupEntranceMapDaoImpl demp = new DupEntranceMapDaoImpl();
+		String nodetype = "OFFICE";
+		demp.insertNodes(name, location.getX(), location.getY(), mapId, nodetype);
+	//	Node node = new Node();
+	//	node.setNeighbors(new HashMap<Integer,Double>());
 	//	node.setId(1);
 		// more setters for the node
 
