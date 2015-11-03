@@ -91,6 +91,7 @@ public class Node {
 	//	node.getNeighbors().add(2);
 	//	node.getNeighbors().add(3);
 	//	node.getNeighbors().add(4);
+
 	}
 
 	// add neighbors to the node

@@ -22,7 +22,7 @@ public class SystemFacade implements Runnable {
 	public SystemFacade() {
 
 		// TODO: We may use mutli-thread here..
-		
+
 		t = new Thread(this, "initialize data thread");
 		t.start();
 		try {
@@ -36,7 +36,7 @@ public class SystemFacade implements Runnable {
 
 	@Override
 	public void run() {
-		
+
 		// TODO Auto-generated method stub
 		// initialize the relationship map
 		DupEntranceMap.initDupEntranceMap();

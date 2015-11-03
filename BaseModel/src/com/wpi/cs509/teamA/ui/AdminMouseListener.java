@@ -1,5 +1,10 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.Dialog.ModalityType;
+import java.lang.Math;
+
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,6 +29,8 @@ public class AdminMouseListener implements MouseListener {
 	 */
 	private ImageComponent imagePanel;
 
+	private NeighborDialog neighborDialog;
+
 	/**
 	 * Default constructor
 	 */
@@ -37,26 +44,43 @@ public class AdminMouseListener implements MouseListener {
 	 * @param imagePanel
 	 *            the image component that the listener will be added to
 	 */
-	public AdminMouseListener(ImageComponent imagePanel) {
-		System.out.println("init AdminMouseListener.. this should happen only once..");
+	public AdminMouseListener(ImageComponent imagePanel, NeighborDialog neighborDialog) {
 		this.imagePanel = imagePanel;
+		this.neighborDialog = neighborDialog;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog.isVisible()) {
+			neighborDialog.setFieldTitle(e.getX(), e.getY());
+		} else if (e.getButton() == MouseEvent.BUTTON1 && !neighborDialog.isVisible()) {
+			xPos = e.getX();
+			yPos = e.getY();
 
-		xPos = e.getX();
-		yPos = e.getY();
+			imagePanel.setxPos(xPos);
+			imagePanel.setyPos(yPos);
 
-		System.out.println("This click from admin user..");
-		System.out.println(xPos);
-		System.out.println(yPos);
+			imagePanel.repaint();
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+			boolean tooclose = false;
+			int closeRange = 10;
+			for (int i = 0; i < imagePanel.getCoorList().size(); i++) {
+				if (Math.abs(e.getX() - imagePanel.getCoorList().get(i).getX()) < closeRange
+						|| Math.abs(e.getY() - imagePanel.getCoorList().get(i).getY()) < closeRange) {
+					tooclose = true;
+				}
 
-		imagePanel.setxPos(xPos);
-		imagePanel.setyPos(yPos);
+			}
+			if (tooclose) {
+				JOptionPane.showMessageDialog(null, "Too close from another node.");
+			} else {
 
-		imagePanel.repaint();
+				NodeManageDialog nodeManageDialog = new NodeManageDialog(imagePanel, e.getX(), e.getY());
+				nodeManageDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+				nodeManageDialog.setVisible(nodeManageDialog.isFocusable());
+			}
+		}
 
 	}
 

@@ -8,6 +8,10 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JScrollPane;
+import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -23,50 +27,84 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
+	private NeighborDialog neighborDialog;
+	private final String NEIGHBOR = "Neighbor Manage Tool";
+	private final String PATH = "Path Finding";
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
 	 */
 	private InputPanel inputPanel;
+	private JButton btnNeighborManage;
 
 	/**
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
-		
-		System.out.println("initialize user screen..");
 
 		container = getContentPane();
-		container.setLayout(new BorderLayout());
+		// container.setLayout(new BorderLayout());
 
+		// input panel and components
 		inputPanel = new InputPanel();
+		// initialize neighborDialog to be used later
+		neighborDialog = new NeighborDialog();
+		neighborDialog.setVisible(false);
 
 		// the panel to show image
-		imgComponent = new ImageComponent(inputPanel);
+		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
+
 		// display the image
-		imgComponent.setImagePath(System.getProperty("user.dir") + "\\src\\CSP.jpg");
+		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
+		getContentPane().setLayout(null);
+		// add listener
+		// imgComponent.addMouseListener(imgComponent);
 
 		// scroll panel
 		imgScrollPanel = new JScrollPane();
+		imgScrollPanel.setBounds(181, 215, 834, 557);
 		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		// button to change map
+		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
+		WestArrowButton.setBounds(109, 632, 57, 140);
 
-		container.add(imgScrollPanel, BorderLayout.CENTER);
-		container.add(inputPanel, BorderLayout.NORTH);
+		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
+		EastArrowButton.setBounds(1030, 632, 57, 140);
 
-		setTitle("Route Finder");
+		container.add(WestArrowButton);
+		container.add(EastArrowButton);
+		container.add(imgScrollPanel);
+		container.add(inputPanel);
+		// button to set neighbordialog visible
+		btnNeighborManage = new JButton(NEIGHBOR);
+		btnNeighborManage.setVisible(false);
+		btnNeighborManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				neighborDialog.setVisible(true);
+				neighborDialog.setAlwaysOnTop(true);
+
+			}
+		});
+		btnNeighborManage.setBounds(0, 815, 269, 29);
+		getContentPane().add(btnNeighborManage);
+
+		setTitle(PATH);
 		setLocation(0, 0);
 		setSize(1200, 900);
 		setVisible(true);
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+	}
+
+	public JButton getBtnNeighborManage() {
+		return this.btnNeighborManage;
 	}
 
 	public static UserScreen launchUserScreen() {
@@ -84,17 +122,16 @@ public class UserScreen extends JFrame {
 	 *            command line..
 	 */
 	public static void main(String[] args) {
-				
+
 		// singleton
 		EventQueue.invokeLater(new Runnable() {
-		      public void run() {
-		    	  
-		    	  UserScreen.launchUserScreen();	    	  		    	  
-		      }
+			public void run() {
+
+				UserScreen.launchUserScreen();
+			}
 		});
 
 		new SystemFacade();
-	
 	}
 
 }
