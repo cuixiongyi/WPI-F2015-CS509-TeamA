@@ -9,8 +9,6 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -76,7 +74,6 @@ public class AlgoController {
 		// get more information from the node we get
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
-
 
 		Edge[] edges = {new Edge (1, 1, 1)}; // junk to test
 		Graph context = new Graph (edges);
