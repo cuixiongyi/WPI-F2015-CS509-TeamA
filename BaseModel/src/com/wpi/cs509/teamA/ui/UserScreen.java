@@ -28,6 +28,8 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
 	private NeighborDialog neighborDialog;
+	private final String NEIGHBOR = "Neighbor Manage Tool";
+	private final String PATH = "Path Finding";
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -40,15 +42,13 @@ public class UserScreen extends JFrame {
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
-		
-		System.out.println("initialize user screen..");
 
 		container = getContentPane();
-		//container.setLayout(new BorderLayout());
+		// container.setLayout(new BorderLayout());
 
 		// input panel and components
 		inputPanel = new InputPanel();
-		
+		// initialize neighborDialog to be used later
 		neighborDialog = new NeighborDialog();
 		neighborDialog.setVisible(false);
 
@@ -82,13 +82,11 @@ public class UserScreen extends JFrame {
 		container.add(EastArrowButton);
 		container.add(imgScrollPanel);
 		container.add(inputPanel);
-		
-
-		btnNeighborManage = new JButton("Neighbor Manage Tool");
+		// button to set neighbordialog visible
+		btnNeighborManage = new JButton(NEIGHBOR);
 		btnNeighborManage.setVisible(false);
 		btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//NeighborDialog neighborDialog = new NeighborDialog();
 				neighborDialog.setVisible(true);
 				neighborDialog.setAlwaysOnTop(true);
 
@@ -97,7 +95,7 @@ public class UserScreen extends JFrame {
 		btnNeighborManage.setBounds(0, 815, 269, 29);
 		getContentPane().add(btnNeighborManage);
 
-		setTitle("Path Finding");
+		setTitle(PATH);
 		setLocation(0, 0);
 		setSize(1200, 900);
 		setVisible(true);
@@ -124,13 +122,13 @@ public class UserScreen extends JFrame {
 	 *            command line..
 	 */
 	public static void main(String[] args) {
-				
+
 		// singleton
 		EventQueue.invokeLater(new Runnable() {
-		      public void run() {
-		    	  
-		    	  UserScreen.launchUserScreen();	    	  		    	  
-		      }
+			public void run() {
+
+				UserScreen.launchUserScreen();
+			}
 		});
 
 		new SystemFacade();

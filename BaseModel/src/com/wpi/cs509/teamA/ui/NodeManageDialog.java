@@ -17,6 +17,7 @@ import java.awt.Dialog.ModalityType;
 
 /**
  * This is the class that administrators uses to add nodes to database
+ * 
  * @author ZYang
  *
  */
@@ -24,94 +25,90 @@ import java.awt.Dialog.ModalityType;
 @SuppressWarnings("serial")
 public class NodeManageDialog extends JDialog implements ActionListener {
 
-	private final JPanel contentPanel = new JPanel();
+	private JPanel contentPanel = new JPanel();
 	private JButton btnCancel;
-    private JButton btnAddNode;
-    private JButton btnEditNode;
-    private JButton btnDeleteNode;
-    private int xPos;
-    private int yPos;
-    private ImageComponent imagePanel;
+	private JButton btnAddNode;
+	private JButton btnEditNode;
+	private JButton btnDeleteNode;
+	private int xPos;
+	private int yPos;
+	private ImageComponent imagePanel;
+
+	private final String ADD = "Add";
+	private final String DELETE = "Delete";
+	private final String EDIT = "Edit";
+	private final String CANCEL = "Cancel";
+
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-//		try {
-//			MapDialog dialog = new MapDialog();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+
 	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public NodeManageDialog (ImageComponent imageComponent, int xPosition, int yPosition) {
+	public NodeManageDialog(ImageComponent imageComponent, int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
-		imagePanel=imageComponent;
+		imagePanel = imageComponent;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		btnAddNode = new JButton("Add");
+
+		// ADD, DELETE, EDIT button block
+		btnAddNode = new JButton(ADD);
 		btnAddNode.setBounds(112, 15, 216, 29);
-		btnAddNode.setActionCommand("Add");
+		btnAddNode.setActionCommand(ADD);
 		btnAddNode.addActionListener(this);
 		contentPanel.add(btnAddNode);
-		
-		btnDeleteNode = new JButton("Delete");
+
+		btnDeleteNode = new JButton(DELETE);
 		btnDeleteNode.setBounds(112, 60, 216, 29);
-		btnDeleteNode.setActionCommand("Delete");
+		btnDeleteNode.setActionCommand(DELETE);
 		btnDeleteNode.addActionListener(this);
 		contentPanel.add(btnDeleteNode);
-		
-		btnEditNode = new JButton("Edit");
+
+		btnEditNode = new JButton(EDIT);
 		btnEditNode.setBounds(112, 105, 216, 29);
-		btnEditNode.setActionCommand("Edit");
+		btnEditNode.setActionCommand(EDIT);
 		btnEditNode.addActionListener(this);
 		contentPanel.add(btnEditNode);
-		
-		
+
+		// CANCEL button block
+
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-		
-		btnCancel = new JButton("Cancel");
-		btnCancel.setActionCommand("Cancel");
+
+		btnCancel = new JButton(CANCEL);
+		btnCancel.setActionCommand(CANCEL);
 		btnCancel.addActionListener(this);
 		buttonPane.add(btnCancel);
-	
-		
-		
+
 	}
-	
 
-
-	
-		@Override
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if(e.getActionCommand().equals("Cancel")){
-			 NodeManageDialog.this.setVisible(false);
-		 }	 
-		 if(e.getActionCommand().equals("Add")){
-             NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel,xPos, yPos);
-             nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
-             nodeInfo.setVisible(nodeInfo.isFocusable());
-             
-         } 
-		 if(e.getActionCommand().equals("Delete")){
-             //Database
-         } 
-		 if(e.getActionCommand().equals("Edit")){
-             
-         } 
+		if (e.getActionCommand().equals(CANCEL)) {
+			NodeManageDialog.this.setVisible(false);
+		}
+		if (e.getActionCommand().equals(ADD)) {
+			// Create a NodeInformationDialog
+			NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel, xPos, yPos);
+			nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
+			nodeInfo.setVisible(nodeInfo.isFocusable());
 
-			
+		}
+		if (e.getActionCommand().equals(DELETE)) {
+			// Database
+		}
+		if (e.getActionCommand().equals(EDIT)) {
+
+		}
+
 	}
 }
-	

@@ -41,7 +41,7 @@ public class ImageComponent extends JComponent {
 	private int imgWidth;
 	private int imgHeight;
 	private StateContext stateContext;
-	
+	private final String LOGIN = "Log in as Admin";
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
@@ -49,10 +49,8 @@ public class ImageComponent extends JComponent {
 	private MouseListener adminMouseListener;
 	private int xPos;
 	private int yPos;
-	//
+
 	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();;
-//	private int[] xPosArray;
-//	private int[] yPosArray;
 
 	private Map<Integer, List<Node>> result;
 
@@ -82,7 +80,6 @@ public class ImageComponent extends JComponent {
 
 		// initialize the mouse listener state
 		stateContext = new StateContext();
-		
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
 		adminMouseListener = new AdminMouseListener(this, neighborDialog);
@@ -94,24 +91,22 @@ public class ImageComponent extends JComponent {
 		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
-				System.out.println("the linstener has been triggered!");
 
 				// TODO: need to check if the input is valid!!
 
-				// TODO: make the AlgoController singleton and use setter and getter to operate the instance..
-				
-				// We will go to the backend here.. For now, all the resources should be ready!
+				// TODO: make the AlgoController singleton and use setter and
+				// getter to operate the instance..
+
+				// We will go to the backend here.. For now, all the resources
+				// should be ready!
 				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
 						inputPanel.getEndPoint().getText().trim());
-				
+
 				result = algoController.getRoute();
 
 				// TODO: use the result to draw the lines
 
-				// we need to give all the information to the repaint method
-				System.out.println("112!");
+				// we need to give all the information to the repaint metho
 				repaint();
 
 			}
@@ -132,26 +127,16 @@ public class ImageComponent extends JComponent {
 				// not, give it normal user
 
 				if (adminClicked % 2 == 0) {
-					System.out.println("Login...");
-					AdminDialog adminDialog = new AdminDialog(ImageComponent.this);
+					AdminDialog adminDialog = new AdminDialog(ImageComponent.this, userScreen, inputPanel);
 					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 					adminDialog.setVisible(isFocusable());
-					userScreen.getBtnNeighborManage().setVisible(true);
-					inputPanel.getAdminLogin().setText("Log out");
-//					while(adminDialog.isVisible()){
-//						
-//					}
-//					if(isAdmin()){
-//						stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-//						adminClicked++;
-//					}
+
 				} else {
-					System.out.println("Log off...");
-					 JOptionPane.showMessageDialog(null,
-				                "You have logged out");
+
+					JOptionPane.showMessageDialog(null, "You have logged out");
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
 					userScreen.getBtnNeighborManage().setVisible(false);
-					inputPanel.getAdminLogin().setText("Login as admin");
+					inputPanel.getAdminLogin().setText(LOGIN);
 					adminClicked++;
 				}
 			}
@@ -176,7 +161,6 @@ public class ImageComponent extends JComponent {
 			this.setImgWidth(image.getWidth(this));
 			this.setImgHeight(image.getHeight(this));
 			this.repaint();
-			System.out.println("171");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -259,46 +243,41 @@ public class ImageComponent extends JComponent {
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
-	
-	
-	
+
 	public NormalUserMouseListener getNormalUserMouseListener() {
 		return (NormalUserMouseListener) this.normalUserMouseListener;
 	}
-	
+
 	public AdminMouseListener getAdminMouseListener() {
 		return (AdminMouseListener) this.adminMouseListener;
 	}
-	
-	public StateContext getStateContext(){
+
+	public StateContext getStateContext() {
 		return this.stateContext;
 	}
-	public void incrementAdminClicked(){
+
+	public void incrementAdminClicked() {
 		this.adminClicked++;
 	}
-	
+
 	/**
-	 * @param List<Coordinate> coordinateList
-	 *            return the nodelist
+	 * @param List<Coordinate>
+	 *            coordinateList return the nodelist
 	 */
-	public List<Coordinate> getCoorList(){
-		return coordinateList;		
+	public List<Coordinate> getCoorList() {
+		return coordinateList;
 	}
-	
-	public void addNodeList(int x,int y)
-	{
-		Coordinate coor=new Coordinate(x,y);
+
+	public void addNodeList(int x, int y) {
+		Coordinate coor = new Coordinate(x, y);
 		coordinateList.add(coor);
 	}
-	
-	
+
 	@Override
 	public void paintComponent(Graphics g) {
 
 		// if isInitilized
 		// no need to paint the image again
-
-		System.out.println("paintComponent() is called!");
 
 		if (null == image) {
 			return;
@@ -306,45 +285,18 @@ public class ImageComponent extends JComponent {
 
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
-
-		// xPos = ((NormalUserMouseListener) normalUserMouseListener).getxPos();
-		// yPos = ((NormalUserMouseListener) normalUserMouseListener).getyPos();
-		
-//		g.drawOval(500,500,10,10);
-		setForeground(Color.RED); 
-//		g.fillOval(250,250,50,50); 
-		
-		if(coordinateList.size()!=0)
-		{
-			for(int i=0;i<coordinateList.size();i++)
-			{
-				xPos=coordinateList.get(i).getX();
-				yPos=coordinateList.get(i).getY();
-				g.fillOval(xPos,yPos,10,10); 
+		setForeground(Color.RED);
+		if (coordinateList.size() != 0) {
+			for (int i = 0; i < coordinateList.size(); i++) {
+				xPos = coordinateList.get(i).getX();
+				yPos = coordinateList.get(i).getY();
+				g.fillOval(xPos, yPos, 10, 10);
 			}
 		}
-		
-		
-//		g.fillOval(xPos,yPos,10,10); 
-
-		System.out.println(xPos + " " + yPos);
 
 		if (!(xPos == 0 && yPos == 0)) {
 			g2.setPaint(Color.WHITE);
 			g2.drawString("(" + xPos + "," + yPos + ")", xPos, yPos);
-
-			// whenever call the repaint method
-			// we draw two demon lines here
-			if (num % 2 == 0) {
-				g2.draw(new Line2D.Double(10, 10, 600, 10));
-				g2.draw(new Line2D.Double(10, 80, 600, 80));
-				num++;
-			} else {
-				g2.draw(new Line2D.Double(10, 600, 600, 600));
-				g2.draw(new Line2D.Double(10, 700, 600, 700));
-				num++;
-			}
-
 		}
 
 		// since it will be repaint again

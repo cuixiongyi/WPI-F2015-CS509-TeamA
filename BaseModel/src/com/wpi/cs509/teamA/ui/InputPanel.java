@@ -24,24 +24,31 @@ public class InputPanel extends JPanel {
 	private JButton btnSearch;
 	private JButton adminLogin;
 
+	private final String START = "Start";
+	private final String END = "End";
+	private final String SEARCH = "Search";
+	private final String LOGIN = "Login as Admin";
+	private final String TO = "To: ";
+	private final String FROM = "From: ";
+
 	/**
 	 * Constructor. Initialize all the input panel.
 	 */
 	public InputPanel() {
+		// User input block
+		this.startPoint = new JTextField(START);
+		this.endPoint = new JTextField(END);
+		this.btnSearch = new JButton(SEARCH);
+		this.adminLogin = new JButton(LOGIN);
 
-		this.startPoint = new JTextField("Start");
-		this.endPoint = new JTextField("End");
-		this.btnSearch = new JButton("Search");
-		this.adminLogin = new JButton("Login as Admin");
-		
 		this.setLayout(null);
-		this.add(new JLabel("From: "));
+		this.add(new JLabel(TO));
 		this.add(startPoint);
-		this.add(new JLabel("To: "));
+		this.add(new JLabel(FROM));
 		this.add(endPoint);
 		this.add(btnSearch);
 		this.add(adminLogin);
-		
+
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 20));
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 25));
 		this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 22));
