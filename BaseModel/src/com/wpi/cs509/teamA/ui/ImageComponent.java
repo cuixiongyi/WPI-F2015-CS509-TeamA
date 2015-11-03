@@ -1,6 +1,8 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dialog.ModalityType;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,13 +13,17 @@ import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 /**
  * An component to show the images. This component has two different states
@@ -35,6 +41,7 @@ public class ImageComponent extends JComponent {
 	private int imgWidth;
 	private int imgHeight;
 	private StateContext stateContext;
+	private final String LOGIN = "Log in as Admin";
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
@@ -42,6 +49,8 @@ public class ImageComponent extends JComponent {
 	private MouseListener adminMouseListener;
 	private int xPos;
 	private int yPos;
+
+	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();;
 
 	private Map<Integer, List<Node>> result;
 
@@ -67,13 +76,13 @@ public class ImageComponent extends JComponent {
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
 	 */
-	public ImageComponent(final InputPanel inputPanel) {
+	public ImageComponent(final InputPanel inputPanel, final UserScreen userScreen, NeighborDialog neighborDialog) {
 
-		// initialize the mouse litener state
+		// initialize the mouse listener state
 		stateContext = new StateContext();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
-		adminMouseListener = new AdminMouseListener(this);
+		adminMouseListener = new AdminMouseListener(this, neighborDialog);
 
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
@@ -82,19 +91,22 @@ public class ImageComponent extends JComponent {
 		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
-				System.out.println("the linstener has been triggered!");
 
 				// TODO: need to check if the input is valid!!
 
+				// TODO: make the AlgoController singleton and use setter and
+				// getter to operate the instance..
+
+				// We will go to the backend here.. For now, all the resources
+				// should be ready!
 				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
 						inputPanel.getEndPoint().getText().trim());
+
 				result = algoController.getRoute();
 
 				// TODO: use the result to draw the lines
 
-				// we need to give all the information to the repaint method
+				// we need to give all the information to the repaint metho
 				repaint();
 
 			}
@@ -115,12 +127,16 @@ public class ImageComponent extends JComponent {
 				// not, give it normal user
 
 				if (adminClicked % 2 == 0) {
-					System.out.println("Login...");
-					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-					adminClicked++;
+					AdminDialog adminDialog = new AdminDialog(ImageComponent.this, userScreen, inputPanel);
+					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+					adminDialog.setVisible(isFocusable());
+
 				} else {
-					System.out.println("Log off...");
+
+					JOptionPane.showMessageDialog(null, "You have logged out");
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
+					userScreen.getBtnNeighborManage().setVisible(false);
+					inputPanel.getAdminLogin().setText(LOGIN);
 					adminClicked++;
 				}
 			}
@@ -129,7 +145,17 @@ public class ImageComponent extends JComponent {
 
 	}
 
+	/**
+	 * Get the path of the image we will load. Temporary use..
+	 * 
+	 * @param imgPath
+	 *            path of the image, or in the database?
+	 */
 	public void setImagePath(String imgPath) {
+
+		// TODO: It seems that we will store our image in the database.. so how
+		// to implement that?
+
 		try {
 			image = ImageIO.read(new FileInputStream(imgPath));
 			this.setImgWidth(image.getWidth(this));
@@ -218,13 +244,40 @@ public class ImageComponent extends JComponent {
 		this.yPos = yPos;
 	}
 
+	public NormalUserMouseListener getNormalUserMouseListener() {
+		return (NormalUserMouseListener) this.normalUserMouseListener;
+	}
+
+	public AdminMouseListener getAdminMouseListener() {
+		return (AdminMouseListener) this.adminMouseListener;
+	}
+
+	public StateContext getStateContext() {
+		return this.stateContext;
+	}
+
+	public void incrementAdminClicked() {
+		this.adminClicked++;
+	}
+
+	/**
+	 * @param List<Coordinate>
+	 *            coordinateList return the nodelist
+	 */
+	public List<Coordinate> getCoorList() {
+		return coordinateList;
+	}
+
+	public void addNodeList(int x, int y) {
+		Coordinate coor = new Coordinate(x, y);
+		coordinateList.add(coor);
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 
 		// if isInitilized
 		// no need to paint the image again
-
-		System.out.println("paintComponent() is called!");
 
 		if (null == image) {
 			return;
@@ -232,28 +285,18 @@ public class ImageComponent extends JComponent {
 
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
-
-		// xPos = ((NormalUserMouseListener) normalUserMouseListener).getxPos();
-		// yPos = ((NormalUserMouseListener) normalUserMouseListener).getyPos();
-
-		System.out.println(xPos + " " + yPos);
+		setForeground(Color.RED);
+		if (coordinateList.size() != 0) {
+			for (int i = 0; i < coordinateList.size(); i++) {
+				xPos = coordinateList.get(i).getX();
+				yPos = coordinateList.get(i).getY();
+				g.fillOval(xPos, yPos, 10, 10);
+			}
+		}
 
 		if (!(xPos == 0 && yPos == 0)) {
 			g2.setPaint(Color.WHITE);
 			g2.drawString("(" + xPos + "," + yPos + ")", xPos, yPos);
-
-			// whenever call the repaint method
-			// we draw two demon lines here
-			if (num % 2 == 0) {
-				g2.draw(new Line2D.Double(10, 10, 600, 10));
-				g2.draw(new Line2D.Double(10, 80, 600, 80));
-				num++;
-			} else {
-				g2.draw(new Line2D.Double(10, 600, 600, 600));
-				g2.draw(new Line2D.Double(10, 700, 600, 700));
-				num++;
-			}
-
 		}
 
 		// since it will be repaint again

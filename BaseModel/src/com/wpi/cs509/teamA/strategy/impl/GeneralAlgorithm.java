@@ -19,6 +19,8 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  */
 public class GeneralAlgorithm {
 
+	// TODO: Make this class singleton..
+
 	/**
 	 * the strategy will be applied on the path finding
 	 */
@@ -35,7 +37,7 @@ public class GeneralAlgorithm {
 	 * Constructor.
 	 * 
 	 * @param algoStrategy
-	 *            the strategy will be applied, usually should be the defualt
+	 *            the strategy will be applied, usually should be the default
 	 *            strategy
 	 */
 	public GeneralAlgorithm(AlgoStrategy algoStrategy) {
@@ -53,17 +55,19 @@ public class GeneralAlgorithm {
 	 * @return a map data structure that takes the id of the map as key and the
 	 *         its corresponding matrix as the value
 	 */
-	public Map<Integer, List<Node>> findPath(Node startNode, Node endNode, List<InputMatrix> im) {
+	public Map<Integer, List<Node>> findPath(Node startNode, Node endNode, Graph context) {
 
-		System.out.println("General Algorithm");
+		System.out.println("General Algorithm..");
 
 		Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
 		// add this one by one to the result
 		List<Node> routeOnOneMap = new ArrayList<Node>();
-
+		
 		// different strategy will use different algorithm..
-		result = algoStrategy.getRoute(startNode, endNode, im);
-
+		List<Integer> nodeIds = algoStrategy.getRoute(startNode, endNode, context);
+		
+		// TODO: Query node objects from node Id's and add all node objects to result
+		
 		return result;
 	}
 
