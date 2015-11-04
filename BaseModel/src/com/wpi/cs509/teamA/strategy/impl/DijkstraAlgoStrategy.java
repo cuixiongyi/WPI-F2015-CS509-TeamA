@@ -13,12 +13,17 @@ import com.wpi.cs509.teamA.strategy.AlgoStrategy;
  * Dijkstra Strategy
  * 
  * @author CS 509-Team A
- *
+ * 
+ * Referenced RosettaCode for this implementation of Dijkstra's Algorithm
+ * Link: http://rosettacode.org/wiki/Dijkstra's_algorithm 
  */
 public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int startNodeId;
 	private int endNodeId;
 
+	/*
+	 * Dijkstra's algorithm implementation to find a route on one or multiple maps
+	 */
 	@Override
 	public List<Integer> getRoute(Node startNode, Node endNode, Graph context) {
 		this.startNodeId = startNode.getId();

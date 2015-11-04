@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,15 +15,21 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  *
  */
 public class AstarAlgoStrategy implements AlgoStrategy {
-
-	/**
-	 * use A* to implement a strategy
+	private int startNodeId;
+	private int endNodeId;
+	
+	/*
+	 * A* algorithm implementation to find a route on one or multiple maps
 	 */
 	@Override
-	public List<Integer> getRoute(Node startNode, Node endNode, Graph context) {
-		// TODO Auto-generated method stub
-		System.out.println("Astar Strategy..");
+	public List<Integer> getRoute(Node startNode, Node endNode, Graph context) 
+	{
+		this.startNodeId = startNode.getId();
+		this.endNodeId = endNode.getId();
 
+		HashMap<Integer, Vertex> graph = context.getGraph();
+
+		
 		return null;
 	}
 
