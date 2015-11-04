@@ -1,25 +1,28 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JTextField;
 
+/**
+ * This is the class that administrators uses to input information of nodes
+ * 
+ * @author CS 509-Team A
+ *
+ */
+@SuppressWarnings("serial")
 public class NodeInformationDialog extends JDialog implements ActionListener {
 
 	private JPanel contentPanel = new JPanel();
@@ -41,13 +44,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private final String SAVE = "SAVE";
 	private final String ID = "Map ID";
 	private final String CANCEL = "Cancel";
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-	}
 
 	/**
 	 * Create the dialog.
@@ -115,8 +111,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
 
-		// SAVE and CANCEL button block
-
+		// SAVE and CANCEL button
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -156,13 +151,14 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				node.setMapId(Integer.parseInt(mapidTextField.getText()));
 				node.setName(nameTextField.getText());
 
+				// call database save function..
+				// TODO: Maybe we can use mutlti-thread here..
 				node.saveNode();
+				// show what we have saved..
 				imagePanel.addNodeList(xPos, yPos);
 				imagePanel.repaint();
 				this.setVisible(false);
 			}
-
-			// this.dispose();
 		}
 
 	}

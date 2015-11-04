@@ -28,7 +28,9 @@ public class AdminMouseListener implements MouseListener {
 	 * The image component that the listener will be added to
 	 */
 	private ImageComponent imagePanel;
-
+	/**
+	 * Component for entering edge
+	 */
 	private NeighborDialog neighborDialog;
 
 	/**
@@ -63,16 +65,16 @@ public class AdminMouseListener implements MouseListener {
 
 			imagePanel.repaint();
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
-			boolean tooclose = false;
+			boolean tooClose = false;
 			int closeRange = 10;
 			for (int i = 0; i < imagePanel.getCoorList().size(); i++) {
 				if (Math.abs(e.getX() - imagePanel.getCoorList().get(i).getX()) < closeRange
 						|| Math.abs(e.getY() - imagePanel.getCoorList().get(i).getY()) < closeRange) {
-					tooclose = true;
+					tooClose = true;
 				}
 
 			}
-			if (tooclose) {
+			if (tooClose) {
 				JOptionPane.showMessageDialog(null, "Too close from another node.");
 			} else {
 

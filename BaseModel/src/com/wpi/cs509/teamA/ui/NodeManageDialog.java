@@ -18,7 +18,7 @@ import java.awt.Dialog.ModalityType;
 /**
  * This is the class that administrators uses to add nodes to database
  * 
- * @author ZYang
+ * @author CS 509-Team A
  *
  */
 
@@ -59,7 +59,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		// ADD, DELETE, EDIT button block
+		// set up ADD, DELETE, EDIT buttons
 		btnAddNode = new JButton(ADD);
 		btnAddNode.setBounds(112, 15, 216, 29);
 		btnAddNode.setActionCommand(ADD);
@@ -78,8 +78,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 		btnEditNode.addActionListener(this);
 		contentPanel.add(btnEditNode);
 
-		// CANCEL button block
-
+		// set up CANCEL button
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -97,6 +96,7 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 			NodeManageDialog.this.setVisible(false);
 		}
 		if (e.getActionCommand().equals(ADD)) {
+			
 			// Create a NodeInformationDialog
 			NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel, xPos, yPos);
 			nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
@@ -104,7 +104,8 @@ public class NodeManageDialog extends JDialog implements ActionListener {
 
 		}
 		if (e.getActionCommand().equals(DELETE)) {
-			// Database
+			// TODO: Show a dialog to ask the user if they really want to delete
+			// TODO: Database
 		}
 		if (e.getActionCommand().equals(EDIT)) {
 

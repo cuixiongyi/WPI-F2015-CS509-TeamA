@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 /**
  * This is the class that administrators uses to log in
  * 
- * @author ZYang
+ * @author CS 509-Team A
  *
  */
 public class AdminDialog extends JDialog implements ActionListener {
