@@ -3,105 +3,85 @@ package com.wpi.cs509.teamA.dao.impl;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
-
+/**
+ * 
+ * Helper class to connect to the database
+ * 
+ * @author CS 509-Team A
+ *
+ */
 public class JdbcConnect {
+
+	// TODO: Make this in the file
 	private static String url = "jdbc:mysql://localhost:3306/RouteFinder";
 	private static String user = "root";
-	private static String password = "hammer";
-
+	private static String password = "susie19910401";
 	private static Connection conn = null;
 
-	//this is private
-	private JdbcConnect(){
-		
+	private JdbcConnect() {
+
 	}
 
-	static{
-		try{
+	static {
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch (ClassNotFoundException e){
+		} catch (ClassNotFoundException e) {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
 
-	public static Connection getConnection() throws SQLException
-	{
-		
-		conn = (Connection) DriverManager.getConnection(url, user, password);
-		//should commit
+	public static Connection getConnection() throws SQLException {
+
+		conn = DriverManager.getConnection(url, user, password);
+		// should commit
 		conn.setAutoCommit(false);
 		return conn;
 	}
 
-	//ResultSet and Statement closed together
-	public static void resultClose(ResultSet rs, Statement st)
-	{
-		try
-		{
+	// ResultSet and Statement closed together
+	public static void resultClose(ResultSet rs, Statement st) {
+		try {
 			if (rs != null)
 				rs.close();
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
+		} finally {
+			try {
 				if (st != null)
 					st.close();
-			}
-			catch (SQLException e)
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public static void connClose()
-	{
-		try
-		{
-			if (conn != null || !conn.isClosed())
-			{
+	public static void connClose() {
+		try {
+			if (conn != null || !conn.isClosed()) {
 				conn.close();
 			}
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void commit()
-	{
-		try
-		{
+	public static void commit() {
+		try {
 			conn.commit();
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void rollback()
-	{
-		try
-		{
+	public static void rollback() {
+		try {
 			conn.rollback();
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

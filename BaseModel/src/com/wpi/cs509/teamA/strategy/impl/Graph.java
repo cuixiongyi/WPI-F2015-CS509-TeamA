@@ -3,6 +3,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 import java.util.HashMap;
 import java.util.List;
 
+import com.wpi.cs509.teamA.bean.Edge;
+
 public class Graph {
 
 	// mapping of vertex names to Vertex objects, built from a set of Edges

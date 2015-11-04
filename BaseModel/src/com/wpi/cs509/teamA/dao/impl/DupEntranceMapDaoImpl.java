@@ -1,6 +1,5 @@
 package com.wpi.cs509.teamA.dao.impl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,9 +10,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.DupEntranceMapDao;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
 
 /**
  * The implementation class of DupEntranceMapDao
@@ -21,12 +20,13 @@ import com.wpi.cs509.teamA.strategy.impl.Edge;
  * @author CS 509-Team A
  *
  */
-public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
+public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
+
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private Statement stmt = null;
-	
+
 	/**
 	 * Construction of DupEntranceMapDaoImpl, connect to the local database
 	 * 
@@ -40,7 +40,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * get count of nodes in the database execute "select count(*) from node"
 	 * 
@@ -58,13 +58,13 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, stmt);
 			JdbcConnect.connClose();
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * get count of neighbors given a node_id in the database execute
 	 * "select count(*) from relations where node_from = ?"
@@ -84,7 +84,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 			JdbcConnect.connClose();
 		}
@@ -98,7 +98,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 	 * @return an array of nodes
 	 */
 	public Map<Integer, Double> initNodesNeighbors(int node_id) {
-		
+
 		Map<Integer, Double> allNeighbors = new HashMap<Integer, Double>();
 		int iter_neighbors = 0;
 		String selectNeighbors = "select node_to,distance from RouteFinder.relations where node_from= ?";
@@ -113,13 +113,13 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			return allNeighbors;
 		} catch (SQLException se) {
 			se.printStackTrace();
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 			JdbcConnect.connClose();
 		}
 		return null;
 	}
-	
+
 	/**
 	 * initialize nodes from the database at once execute select * from node
 	 * 
@@ -127,7 +127,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 	 * @return an array of nodes
 	 */
 	public Set<Node> initAllNodes() {
-		
+
 		Set<Node> allNodes = new HashSet<Node>();
 		int iter_nodes = 0;
 		try {
@@ -147,7 +147,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, stmt);
 			JdbcConnect.connClose();
 		}
@@ -175,12 +175,12 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 		} catch (SQLException se) {
 			System.out.println("fail to connect database");
 			se.printStackTrace();
-		}finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 			JdbcConnect.connClose();
 		}
 	}
-	
+
 	/**
 	 * insert one edge to the database at once execute
 	 * 
@@ -188,7 +188,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 	 */
 
 	public boolean insertoneEdge(int x1, int y1, int x2, int y2) {
-	
+
 		int from_id = -1;
 		int to_id = -1;
 		// check if the nodes are in database
@@ -207,7 +207,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 		} catch (SQLException se) {
 			se.printStackTrace();
 			return false;
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 		}
 
@@ -226,14 +226,14 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			System.out.println("fail to connect database");
 			se.printStackTrace();
 			return false;
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 		}
 
 		// check if the edges are in database
 		String checkEdgeInDB = "select id from RouteFinder.relations where node_from=? and node_to=?";
 		try {
-			pstmt =  conn.prepareStatement(checkEdgeInDB);
+			pstmt = conn.prepareStatement(checkEdgeInDB);
 			pstmt.setInt(1, from_id);
 			pstmt.setInt(2, to_id);
 			ResultSet rs = pstmt.executeQuery();
@@ -245,10 +245,10 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			System.out.println("fail to connect database");
 			se.printStackTrace();
 			return false;
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 		}
-		
+
 		double distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 		String insertEdgeToDB = "INSERT INTO RouteFinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)";
 		try {
@@ -262,7 +262,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 			System.out.println("fail to connect database");
 			se.printStackTrace();
 			return false;
-		} finally{
+		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 			JdbcConnect.connClose();
 		}
@@ -270,21 +270,9 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao{
 	}
 
 	// initialize edges at once
-		public Set<Edge> initAllEdges() {
-			Set<Edge> alledges = new HashSet<Edge>();
-			return alledges;
-		}
-		
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	//	DupEntranceMapDaoImpl2 demp = new DupEntranceMapDaoImpl2();
-		// Set<Node> nodes_list = demp.initAllNodes();
-//		System.out.println(demp.getCountofNodes());
-	//	 demp.insertNodes("323", 4, 5, 1, "OFFICE");
-	//	demp.insertEdges("1,1", "1,2", "1,3","1,4", "1,5", "1,6","1,7","","","1,8",
-	//			"","","","","1,10","1,11","","","","");
-	//	demp.insertoneEdge(504, 504, 329, 541);
-
+	public Set<Edge> initAllEdges() {
+		Set<Edge> alledges = new HashSet<Edge>();
+		return alledges;
 	}
 
 }
