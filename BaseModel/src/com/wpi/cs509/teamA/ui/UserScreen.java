@@ -28,8 +28,8 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
 	private NeighborDialog neighborDialog;
-	private final String NEIGHBOR = "Neighbor Manage Tool";
-	private final String PATH = "Path Finding";
+	private final static String NEIGHBOR = "Neighbor Manage Tool";
+	private final static String PATH = "Path Finding";
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -55,7 +55,7 @@ public class UserScreen extends JFrame {
 		// the panel to show image
 		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
 
-		// display the image
+		// display the image. Note that "/" only works on UNIX
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
@@ -92,7 +92,8 @@ public class UserScreen extends JFrame {
 
 			}
 		});
-		btnNeighborManage.setBounds(28, 363, 82, 29);
+		
+		btnNeighborManage.setBounds(0, 500, 40, 29);
 		getContentPane().add(btnNeighborManage);
 
 		setTitle(PATH);

@@ -1,11 +1,11 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
@@ -18,15 +18,26 @@ import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
 
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+
+/**
+ * This is the class that administrators uses to input edges
+ * 
+ * @author CS 509-Team A
+ *
+ */
 
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
 
 	private JButton saveButton;
 	private JButton cancelButton;
-	// private static int edgeNumber = 0;
 
 	private JPanel pairPanel;
 	private JLabel lbPair_1;
@@ -62,16 +73,9 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 	private JTextField getCoordinateTextField = null;
 
-	private final String SAVE = "Save";
-	private final String CANCEL = "Cancel";
-	private final String NEIGHBOR = "Neighbor Pairs";
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-
-	}
+	private final static String SAVE = "Save";
+	private final static String CANCEL = "Cancel";
+	private final static String NEIGHBOR = "Neighbor Pairs";
 
 	/**
 	 * Create the dialog.
@@ -81,8 +85,7 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		setBounds(100, 100, 450, 736);
 		getContentPane().setLayout(null);
 
-		// SAVE and CANCEL button block
-
+		// set up SAVE and CANCEL button
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBounds(0, 641, 428, 39);
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -100,7 +103,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		buttonPane.add(cancelButton);
 
 		// Edge pair block. 20 textFieldNodePairs show coordinate of node.
-
 		pairPanel = new JPanel();
 		pairPanel.setBounds(0, 0, 428, 641);
 		getContentPane().add(pairPanel);
