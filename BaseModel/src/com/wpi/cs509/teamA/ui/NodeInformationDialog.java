@@ -38,12 +38,12 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private int yPos;
 	private ImageComponent imagePanel;
 
-	private final String COORDINATE = "Node Coordinate";
-	private final String TYPE = "Node Type";
-	private final String NAME = "Node Name";
-	private final String SAVE = "SAVE";
-	private final String ID = "Map ID";
-	private final String CANCEL = "Cancel";
+	private final static String COORDINATE = "Node Coordinate";
+	private final static String TYPE = "Node Type";
+	private final static String NAME = "Node Name";
+	private final static String SAVE = "SAVE";
+	private final static String ID = "Map ID";
+	private final static String CANCEL = "Cancel";
 
 	/**
 	 * Create the dialog.
@@ -87,6 +87,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		typeTextField = new JTextField();
 		typeTextField.setBounds(192, 60, 96, 27);
+		typeTextField.setText("Campus");
 		contentPanel.add(typeTextField);
 		typeTextField.setColumns(10);
 
@@ -97,6 +98,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		nameTextField = new JTextField();
 		nameTextField.setBounds(192, 102, 96, 27);
+		nameTextField.setText("Location");
 		contentPanel.add(nameTextField);
 		nameTextField.setColumns(10);
 
@@ -107,7 +109,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		mapidTextField = new JTextField();
 		mapidTextField.setBounds(192, 144, 96, 27);
-		mapidTextField.getText().matches("[1-4]");
+		mapidTextField.setText("1");
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
 

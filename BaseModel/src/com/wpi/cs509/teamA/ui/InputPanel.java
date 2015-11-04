@@ -24,12 +24,12 @@ public class InputPanel extends JPanel {
 	private JButton btnSearch;
 	private JButton adminLogin;
 
-	private final String START = "Start";
-	private final String END = "End";
-	private final String SEARCH = "Search";
-	private final String LOGIN = "Login as Admin";
-	private final String TO = "To: ";
-	private final String FROM = "From: ";
+	private final static String START = "Start";
+	private final static String END = "End";
+	private final static String SEARCH = "Search";
+	private final static String LOGIN = "Login as Admin";
+	private final static String TO = "To: ";
+	private final static String FROM = "From: ";
 
 	/**
 	 * Constructor. Initialize all the input panel.

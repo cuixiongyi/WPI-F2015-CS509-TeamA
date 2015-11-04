@@ -28,8 +28,8 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
 	private NeighborDialog neighborDialog;
-	private final String NEIGHBOR = "Neighbor Manage Tool";
-	private final String PATH = "Path Finding";
+	private final static String NEIGHBOR = "Neighbor Manage Tool";
+	private final static String PATH = "Path Finding";
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -92,7 +92,7 @@ public class UserScreen extends JFrame {
 
 			}
 		});
-		btnNeighborManage.setBounds(0, 815, 269, 29);
+		btnNeighborManage.setBounds(0, 500, 40, 29);
 		getContentPane().add(btnNeighborManage);
 
 		setTitle(PATH);

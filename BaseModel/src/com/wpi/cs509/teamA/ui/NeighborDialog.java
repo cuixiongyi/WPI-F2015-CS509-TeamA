@@ -58,9 +58,9 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 	private JTextField getCoordinateTextField = null;
 
-	private final String SAVE = "Save";
-	private final String CANCEL = "Cancel";
-	private final String NEIGHBOR = "Neighbor Pairs";
+	private final static String SAVE = "Save";
+	private final static String CANCEL = "Cancel";
+	private final static String NEIGHBOR = "Neighbor Pairs";
 
 	/**
 	 * Create the dialog.
