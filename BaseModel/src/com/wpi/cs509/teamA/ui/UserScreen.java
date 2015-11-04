@@ -55,7 +55,7 @@ public class UserScreen extends JFrame {
 		// the panel to show image
 		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
 
-		// display the image
+		// display the image. Note that "/" only works on UNIX
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);

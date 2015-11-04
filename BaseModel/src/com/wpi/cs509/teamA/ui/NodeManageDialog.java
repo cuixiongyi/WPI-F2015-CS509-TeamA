@@ -18,7 +18,7 @@ import java.awt.Dialog.ModalityType;
 /**
  * This is the class that administrators uses to add nodes to database
  * 
- * @author ZYang
+ * @author CS 509-Team A
  *
  */
 

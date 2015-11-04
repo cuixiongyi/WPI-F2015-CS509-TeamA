@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,6 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
+/**
+ * This is the class that administrators uses to input information of nodes
+ * 
+ * @author CS 509-Team A
+ *
+ */
 @SuppressWarnings("serial")
 public class NodeInformationDialog extends JDialog implements ActionListener {
 

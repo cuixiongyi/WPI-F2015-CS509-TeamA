@@ -12,6 +12,12 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 
+/**
+ * This is the class that administrators uses to input edges
+ * 
+ * @author CS 509-Team A
+ *
+ */
 @SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
 
