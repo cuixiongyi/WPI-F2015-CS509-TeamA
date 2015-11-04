@@ -54,7 +54,7 @@ public class NodeDaoImpl implements NodeDao {
 	}
 
 	@Override
-	public int getNeighborsNum(int nodeId) {
+	public int getNeighborsNum() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -72,8 +72,27 @@ public class NodeDaoImpl implements NodeDao {
 	}
 
 	@Override
-	public void saveNodes(String name, int x, int y, int mapId, String classification) {
+	public void saveNode(Node node) {
 		// TODO Auto-generated method stub
+		try {
+			String insertNodeToDB = "INSERT INTO RouteFinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(insertNodeToDB);
+			pstmt.setString(1, node.getName());
+			pstmt.setInt(2, node.getLocation().getX());
+			pstmt.setInt(3, node.getLocation().getY());
+			pstmt.setInt(4, node.getMapId());
+			// get the node type from the node and then transhform it to string
+			// to store it in the db
+			pstmt.setString(5, node.getNodeType().toString());
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}
 
 	}
 

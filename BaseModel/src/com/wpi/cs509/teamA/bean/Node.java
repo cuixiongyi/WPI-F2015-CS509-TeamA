@@ -3,7 +3,9 @@ package com.wpi.cs509.teamA.bean;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
 
@@ -23,7 +25,7 @@ public class Node {
 	private String name;
 
 	/** the coordinate of the node */
-	private Coordinate location;
+	private Coordinate location = new Coordinate();
 
 	// which map this node belongs to
 	/** define which map the node belongs to */
@@ -82,19 +84,16 @@ public class Node {
 	 * add an new node on the map and set it's attributes
 	 */
 	public void saveNode() {
-		DupEntranceMapDaoImpl demp = new DupEntranceMapDaoImpl();
-		String nodetype = "OFFICE";
-		demp.insertNodes(name, location.getX(), location.getY(), mapId, nodetype);
-	//	Node node = new Node();
-	//	node.setNeighbors(new HashMap<Integer,Double>());
-	//	node.setId(1);
-		// more setters for the node
-
-		// add node id as the neighbours
-
-	//	node.getNeighbors().add(2);
-	//	node.getNeighbors().add(3);
-	//	node.getNeighbors().add(4);
+		
+		// DupEntranceMapDaoImpl demp = new DupEntranceMapDaoImpl();
+		// String nodetype = "OFFICE";
+		// demp.insertNodes(name, location.getX(), location.getY(), mapId, nodetype);
+		
+		// TODO: need to assmeble the node in the front end..
+		
+		NodeDao nd = new NodeDaoImpl();
+		nd.saveNode(this);
+		
 
 	}
 

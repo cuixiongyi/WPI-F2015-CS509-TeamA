@@ -16,11 +16,11 @@ public interface NodeDao {
 	public int getNodeNum();
 
 	/**
-	 * get count of neighbors given a node_id in the database execute
+	 * get count of neighbors
 	 * 
 	 * @return the number of neighbor nodes
 	 */
-	public int getNeighborsNum(int nodeId);
+	public int getNeighborsNum();
 	
 	/**
 	 * Get all the initialized nodes
@@ -50,7 +50,7 @@ public interface NodeDao {
 	 * @param mapId
 	 * @param classification
 	 */
-	public void saveNodes(String name, int x, int y, int mapId, String classification);
+	public void saveNode(Node node);
 	
 	
 	

@@ -30,7 +30,8 @@ public enum NodeType {
 	 * @param node Node instance
 	 * @return the String field of the Node instance
 	 */
-	public String getNode(NodeType node) {
+	@ Override
+	public String toString() {
 		return this.nodeType;
 	}
 
