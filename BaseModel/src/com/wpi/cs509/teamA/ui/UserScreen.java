@@ -92,7 +92,7 @@ public class UserScreen extends JFrame {
 
 			}
 		});
-		btnNeighborManage.setBounds(0, 815, 269, 29);
+		btnNeighborManage.setBounds(28, 363, 82, 29);
 		getContentPane().add(btnNeighborManage);
 
 		setTitle(PATH);

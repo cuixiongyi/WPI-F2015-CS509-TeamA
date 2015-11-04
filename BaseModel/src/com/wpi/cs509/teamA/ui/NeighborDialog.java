@@ -260,13 +260,13 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 			int x1 = -1,x2 = -1,y1 = -1,y2 = -1;
 			String []splits_1 = (textFieldNodePair1.getText()).split(",");
 			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
+				x1 = Integer.valueOf(splits_1[0].trim());
+				y1 = Integer.valueOf(splits_1[1].trim());
 			}
 			String []splits_2 = (textFieldNodePair2.getText()).split(",");
 			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
+				x2 = Integer.valueOf(splits_2[0].trim());
+				y2 = Integer.valueOf(splits_2[1].trim());
 			}
 			if((splits_1.length==2) && (splits_2.length==2))
 				demp.insertoneEdge(x1, y1, x2, y2); 
