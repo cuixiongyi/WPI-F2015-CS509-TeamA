@@ -33,9 +33,9 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
 
-	private final String ADD = "Add Node";
-	private final String DELETE = "Delete Node";
-	private final String EDIT = "Edit Node";
+	private final static String ADD = "Add Node";
+	private final static String DELETE = "Delete Node";
+	private final static String EDIT = "Edit Node";
 
 	/**
 	 * Create the Menu.

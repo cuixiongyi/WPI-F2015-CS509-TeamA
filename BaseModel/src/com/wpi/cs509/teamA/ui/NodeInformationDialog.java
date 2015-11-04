@@ -38,12 +38,12 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private int yPos;
 	private ImageComponent imagePanel;
 
-	private final String COORDINATE = "Node Coordinate";
-	private final String TYPE = "Node Type";
-	private final String NAME = "Node Name";
-	private final String SAVE = "SAVE";
-	private final String ID = "Map ID";
-	private final String CANCEL = "Cancel";
+	private final static String COORDINATE = "Node Coordinate";
+	private final static String TYPE = "Node Type";
+	private final static String NAME = "Node Name";
+	private final static String SAVE = "SAVE";
+	private final static String ID = "Map ID";
+	private final static String CANCEL = "Cancel";
 
 	/**
 	 * Create the dialog.

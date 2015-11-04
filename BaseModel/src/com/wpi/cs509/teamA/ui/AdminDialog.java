@@ -35,10 +35,10 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private UserScreen userScreen;
 	private InputPanel inputPanel;
 
-	private final String OK = "OK";
-	private final String CANCEL = "Cancel";
-	private final String LOG = "Log in";
-	private final String LOGOUT = "Log out";
+	private final static String OK = "OK";
+	private final static String CANCEL = "Cancel";
+	private final static String LOG = "Log in";
+	private final static String LOGOUT = "Log out";
 
 	// private JFrame controllingFrame;
 	/**
