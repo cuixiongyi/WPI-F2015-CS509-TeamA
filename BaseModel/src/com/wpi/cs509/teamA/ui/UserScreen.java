@@ -55,10 +55,11 @@ public class UserScreen extends JFrame {
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setBounds(100, 100, 1200,750);
 		GridBagLayout gblContentPane = new GridBagLayout();
 		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 50 };
 		gblContentPane.rowHeights = new int[] { 0 };
@@ -131,7 +132,7 @@ public class UserScreen extends JFrame {
 			}
 		});
 		GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
-		gbcBtnNeighborManage.gridx = 15;
+		gbcBtnNeighborManage.gridx = 14;
 		gbcBtnNeighborManage.gridy = 9;
 		contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
 
