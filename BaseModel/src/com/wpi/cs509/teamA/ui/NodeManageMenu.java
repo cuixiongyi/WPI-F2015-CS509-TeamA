@@ -29,6 +29,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private int xPos;
 	private int yPos;
 	private ImageComponent imagePanel;
+	private NeighborDialog neighborDialog;
 	private JMenuItem mntmAdd;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
@@ -40,10 +41,11 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition) {
+	public NodeManageMenu(ImageComponent imageComponent,NeighborDialog neighborDialog, int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
+		this.neighborDialog=neighborDialog;
 		setBounds(100, 100, 450, 300);
 
 		// set up menu item
@@ -66,7 +68,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 		if (e.getSource() == mntmAdd) {
 
 			// Create a NodeInformationDialog
-			NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel, xPos, yPos);
+			NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel,neighborDialog, xPos, yPos);
 			nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
 			nodeInfo.setVisible(nodeInfo.isFocusable());
 

@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
  */
 public class AdminMouseListener implements MouseListener {
 	
-	private final static int closeRange = 10;
+	private final static int closeRange = 5;
 
 	/**
 	 * The x position that the user clicked
@@ -67,16 +67,16 @@ public class AdminMouseListener implements MouseListener {
 			imagePanel.repaint();
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			boolean tooClose = false;
-			for (int i = 0; i < imagePanel.getCoorList().size(); i++) {
-				if (Math.abs(e.getX() - imagePanel.getCoorList().get(i).getX()) < closeRange
-						|| Math.abs(e.getY() - imagePanel.getCoorList().get(i).getY()) < closeRange) {
+			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
+				if (Math.abs(e.getX() - neighborDialog.getCoorList().get(i).getX()) < closeRange
+						|| Math.abs(e.getY() - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
 					tooClose = true;
 				}
 			}
 			if (tooClose) {
 				JOptionPane.showMessageDialog(null, "Too close from another node.");
 			} else {
-				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, e.getX(), e.getY());
+				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel,neighborDialog, e.getX(), e.getY());
 				nodeManageMenu.show(e.getComponent(), e.getX(), e.getY());
 			}
 		}
