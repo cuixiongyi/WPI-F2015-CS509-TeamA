@@ -35,6 +35,8 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
 	private NeighborDialog neighborDialog;
+	
+	
 	private final static String NEIGHBOR = "Neighbor Manage Tool";
 	private final static String PATH = "Path Finding";
 
@@ -58,13 +60,12 @@ public class UserScreen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gblContentPane = new GridBagLayout();
-		gblContentPane.columnWidths = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,30,30,30,50};
-		gblContentPane.rowHeights = new int[]{0};
-		gblContentPane.columnWeights = new double[]{Double.MIN_VALUE};
-		gblContentPane.rowWeights = new double[]{Double.MIN_VALUE};
+		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 50 };
+		gblContentPane.rowHeights = new int[] { 0 };
+		gblContentPane.columnWeights = new double[] { Double.MIN_VALUE };
+		gblContentPane.rowWeights = new double[] { Double.MIN_VALUE };
 		contentPane.setLayout(gblContentPane);
-		
-		
+
 		// input panel and components
 		inputPanel = new InputPanel();
 		GridBagConstraints gbcInputPanel = new GridBagConstraints();
@@ -74,8 +75,7 @@ public class UserScreen extends JFrame {
 		gbcInputPanel.gridx = 12;
 		gbcInputPanel.gridy = 0;
 		contentPane.add(inputPanel, gbcInputPanel);
-		
-		
+
 		// initialize neighborDialog to be used later
 		neighborDialog = new NeighborDialog();
 		neighborDialog.setVisible(false);
@@ -87,7 +87,7 @@ public class UserScreen extends JFrame {
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
-		
+
 		JScrollPane imgScrollPanel = new JScrollPane();
 		GridBagConstraints gbcScrollPane = new GridBagConstraints();
 		gbcScrollPane.insets = new Insets(0, 0, 0, 5);
@@ -98,21 +98,18 @@ public class UserScreen extends JFrame {
 		gbcScrollPane.gridy = 0;
 		contentPane.add(imgScrollPanel, gbcScrollPane);
 		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
-//		// for scroll panel
+		// // for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		
-		
-		
+
 		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
 		GridBagConstraints gbcWestArrowButton = new GridBagConstraints();
 		gbcWestArrowButton.fill = GridBagConstraints.BOTH;
 		gbcWestArrowButton.gridx = 12;
 		gbcWestArrowButton.gridy = 9;
 		contentPane.add(WestArrowButton, gbcWestArrowButton);
-		
+
 		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
 		EastArrowButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,8 +121,8 @@ public class UserScreen extends JFrame {
 		gbcEastArrowButton.gridy = 9;
 		contentPane.add(EastArrowButton, gbcEastArrowButton);
 
-		
-		JButton btnNeighborManage = new JButton(NEIGHBOR);
+		btnNeighborManage = new JButton(NEIGHBOR);
+		btnNeighborManage.setVisible(false);
 		btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				neighborDialog.setVisible(true);
@@ -173,6 +170,5 @@ public class UserScreen extends JFrame {
 
 		new SystemFacade();
 	}
-	
 
 }

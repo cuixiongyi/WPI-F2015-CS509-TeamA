@@ -58,7 +58,7 @@ public class InputPanel extends JPanel {
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
 		this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-		this.getAdminLogin().setBounds(210, 0, 60, 30);
+		this.getAdminLogin().setBounds(50, 0, 60, 30);
 		this.getBtnSearch().setBounds(50, 300, 150, 38);
 		this.getEndPoint().setBounds(50, 200, 150, 38);
 		this.getStartPoint().setBounds(50, 100, 150, 38);
