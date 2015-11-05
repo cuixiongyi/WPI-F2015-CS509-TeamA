@@ -23,7 +23,7 @@ public interface NodeRelationDao {
 	 * @param nodeRelation
 	 * @return
 	 */
-	public boolean insertMultipleEdges(Set<NodeRelation> nodeRelation);
+	public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation);
 
 	/**
 	 * Check if an relation has already exists in DB

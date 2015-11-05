@@ -148,11 +148,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 				}
 			}
 
-			for (NodeRelation edge : edgesToSave) {
-				System.out.println(edge.getFirstNodeCoordinate().getX() + " " + edge.getFirstNodeCoordinate().getY()
-						+ " " + edge.getSecondNodeCoordinate().getX() + " " + edge.getSecondNodeCoordinate().getY());
-			}
-
 			// database..
 			NodeRelationDao nrd = new NodeRelationDaoImpl();
 			nrd.insertMultipleEdges(edgesToSave);
