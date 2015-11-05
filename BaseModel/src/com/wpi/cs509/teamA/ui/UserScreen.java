@@ -35,6 +35,8 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
 	private NeighborDialog neighborDialog;
+	
+	
 	private final static String NEIGHBOR = "Neighbor Manage Tool";
 	private final static String PATH = "Path Finding";
 
@@ -119,7 +121,7 @@ public class UserScreen extends JFrame {
 		gbcEastArrowButton.gridy = 9;
 		contentPane.add(EastArrowButton, gbcEastArrowButton);
 
-		JButton btnNeighborManage = new JButton(NEIGHBOR);
+		btnNeighborManage = new JButton(NEIGHBOR);
 		btnNeighborManage.setVisible(false);
 		btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
