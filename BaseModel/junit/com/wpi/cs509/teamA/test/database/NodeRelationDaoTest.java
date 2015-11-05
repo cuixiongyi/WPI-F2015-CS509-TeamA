@@ -15,6 +15,9 @@ public class NodeRelationDaoTest {
 	@Test
 	public void insertMultipleEdgesTestReturnValue() {
 
+		Set<NodeRelation> testSet = new HashSet<NodeRelation>();
+		
+		//
 		Coordinate firstNodeCoordinate = new Coordinate();
 		firstNodeCoordinate.setX(202);
 		firstNodeCoordinate.setY(100);
@@ -24,11 +27,23 @@ public class NodeRelationDaoTest {
 
 		NodeRelation nr = new NodeRelation();
 		nr.setFirstNodeCoordinate(firstNodeCoordinate);
-		nr.setSecondNodeCoordinate(secondNodeCoordinate);
-
-		Set<NodeRelation> testSet = new HashSet<NodeRelation>();
+		nr.setSecondNodeCoordinate(secondNodeCoordinate);		
 		testSet.add(nr);
 		
+		//
+		firstNodeCoordinate = new Coordinate();
+		firstNodeCoordinate.setX(170);
+		firstNodeCoordinate.setY(127);
+		secondNodeCoordinate = new Coordinate();
+		secondNodeCoordinate.setX(242);
+		secondNodeCoordinate.setY(150);
+
+		nr = new NodeRelation();
+		nr.setFirstNodeCoordinate(firstNodeCoordinate);
+		nr.setSecondNodeCoordinate(secondNodeCoordinate);
+		testSet.add(nr);
+		
+		//
 		NodeRelationDao nrd = new NodeRelationDaoImpl();
 		Set<NodeRelation> res = nrd.insertMultipleEdges(testSet);
 		for (NodeRelation edge : res) {
