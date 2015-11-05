@@ -35,10 +35,15 @@ public class JdbcConnect {
 
 	public static Connection getConnection() throws SQLException {
 
-		conn = DriverManager.getConnection(url, user, password);
-		// should commit
-		conn.setAutoCommit(false);
+		if (conn == null || conn.isClosed()) {
+			
+			conn = DriverManager.getConnection(url, user, password);
+			// should commit
+			conn.setAutoCommit(false);
+		}
+		
 		return conn;
+
 	}
 
 	// ResultSet and Statement closed together

@@ -46,8 +46,9 @@ public class NodeRelationDaoTest {
 		//
 		NodeRelationDao nrd = new NodeRelationDaoImpl();
 		Set<NodeRelation> res = nrd.insertMultipleEdges(testSet);
+		
 		for (NodeRelation edge : res) {
-			System.out.println(edge.getFirstNodeCoordinate().getX() + " " + edge.getFirstNodeCoordinate().getY() + " "
+			System.out.println("Exists Edge: " + edge.getFirstNodeCoordinate().getX() + " " + edge.getFirstNodeCoordinate().getY() + " "
 					+ edge.getSecondNodeCoordinate().getX() + " " + edge.getSecondNodeCoordinate().getY());
 		}
 

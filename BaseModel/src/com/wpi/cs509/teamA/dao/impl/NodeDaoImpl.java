@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 public class NodeDaoImpl implements NodeDao {
 
@@ -74,6 +75,8 @@ public class NodeDaoImpl implements NodeDao {
 	@Override
 	public void saveNode(Node node) {
 		// TODO Auto-generated method stub
+		
+		// TODO: Check if the node exists.. the same coordinate should be considered the same node..F
 		try {
 			String insertNodeToDB = "INSERT INTO RouteFinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(insertNodeToDB);
@@ -100,6 +103,37 @@ public class NodeDaoImpl implements NodeDao {
 	public boolean checkNodeInDB(Node node) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Coordinate getNodeCoordinateFromId(int nodeId) {
+		// TODO Auto-generated method stub
+
+		ResultSet resultSet = null;
+
+		try {
+
+			String getAllEdges = "SELECT x, y FROM routefinder.node where id=?";
+			pstmt = conn.prepareStatement(getAllEdges);
+			pstmt.setInt(1, nodeId);
+			resultSet = null;
+			resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+				Coordinate coordinate = new Coordinate();
+				coordinate.setX(resultSet.getInt("x"));
+				coordinate.setY(resultSet.getInt("y"));
+
+				return coordinate;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+		}
+
+		return null;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 public interface NodeDao {
 
@@ -58,5 +59,14 @@ public interface NodeDao {
 	 * @return
 	 */
 	public boolean checkNodeInDB(Node node);
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param nodeId
+	 * @return the coordinate of that node
+	 */
+	public Coordinate getNodeCoordinateFromId(int nodeId);
 	
 }

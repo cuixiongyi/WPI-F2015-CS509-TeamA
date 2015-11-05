@@ -85,16 +85,9 @@ public class Node {
 	 */
 	public void saveNode() {
 		
-		// DupEntranceMapDaoImpl demp = new DupEntranceMapDaoImpl();
-		// String nodetype = "OFFICE";
-		// demp.insertNodes(name, location.getX(), location.getY(), mapId, nodetype);
-		
-		// TODO: need to assmeble the node in the front end..
-		
 		NodeDao nd = new NodeDaoImpl();
 		nd.saveNode(this);
 		
-
 	}
 
 	// add neighbors to the node

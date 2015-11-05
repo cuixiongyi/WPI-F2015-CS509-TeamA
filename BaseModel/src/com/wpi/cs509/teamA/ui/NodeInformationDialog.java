@@ -157,12 +157,14 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				node.setLocation(coordinate);
 				node.setMapId(Integer.parseInt(mapidTextField.getText()));
 				node.setName(nameTextField.getText());
-				// get string from the front end then we can process it
+				// TODO: get string from the front end then we can process it
+				// for now we only store undefined..
 				node.setNodeType(NodeType.UNDEFINED);
 
 				// call database save function..
 				// TODO: Maybe we can use mutlti-thread here..
 				node.saveNode();
+				
 				// show what we have saved..
 				imagePanel.addNodeList(xPos, yPos);
 				imagePanel.repaint();
