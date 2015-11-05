@@ -5,32 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
-import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
-
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -42,6 +25,7 @@ import java.awt.GridLayout;
  *
  */
 
+@SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
 
 	private JButton saveButton;
@@ -95,16 +79,15 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 			lbPair[i] = new JLabel(edgeName);
 			pairPanel.add(lbPair[i]);
 
-			for (int j = i, num = i + 1; j <= num; j++) {
-				JTextField nodePair = textFieldNodePair[j];
-				nodePair = new JTextField();
-				pairPanel.add(nodePair);
-				nodePair.addFocusListener(this);
-				nodePair.setColumns(10);
+			for (int j = 2 * i, num = 2 * i + 1; j <= num; j++) {
+
+				// must initialize like this, cannot use other reference
+				textFieldNodePair[j] = new JTextField();
+				pairPanel.add(textFieldNodePair[j]);
+				textFieldNodePair[j].addFocusListener(this);
+				textFieldNodePair[j].setColumns(10);
 			}
-
 		}
-
 	}
 
 	public void setFieldTitle(int xPos, int yPos) {
@@ -114,10 +97,10 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {
 
-		if(tf1 == null || tf2 == null){
+		if (tf1 == null || tf2 == null) {
 			return null;
 		}
-		
+
 		Coordinate startCorrdinate;
 		Coordinate endCorrdinate;
 
@@ -126,8 +109,8 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 		if ((startCorrdinate != null) && (endCorrdinate != null)) {
 			NodeRelation nodeRelation = new NodeRelation();
-			nodeRelation.setFirstNode(startCorrdinate);
-			nodeRelation.setSecondNode(endCorrdinate);
+			nodeRelation.setFirstNodeCoordinate(startCorrdinate);
+			nodeRelation.setSecondNodeCoordinate(endCorrdinate);
 			return nodeRelation;
 		}
 
@@ -140,6 +123,7 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		if (corrdinate.length == 2) {
 			resCorrdinate.setX(Integer.valueOf(corrdinate[0].trim()));
 			resCorrdinate.setY(Integer.valueOf(corrdinate[1].trim()));
+
 			return resCorrdinate;
 		}
 
@@ -159,9 +143,14 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 			Set<NodeRelation> edgesToSave = new HashSet<NodeRelation>();
 			for (int i = 0; i < 10; i++) {
 				NodeRelation edge = this.getEdgeToSave(textFieldNodePair[2 * i], textFieldNodePair[2 * i + 1]);
-				if(edge != null){
+				if (edge != null) {
 					edgesToSave.add(edge);
-				}				
+				}
+			}
+
+			for (NodeRelation edge : edgesToSave) {
+				System.out.println(edge.getFirstNodeCoordinate().getX() + " " + edge.getFirstNodeCoordinate().getY()
+						+ " " + edge.getSecondNodeCoordinate().getX() + " " + edge.getSecondNodeCoordinate().getY());
 			}
 
 			// database..

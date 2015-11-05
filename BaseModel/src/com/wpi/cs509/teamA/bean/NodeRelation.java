@@ -14,37 +14,31 @@ import com.wpi.cs509.teamA.util.Coordinate;
 public class NodeRelation {
 
 	// must initialize the Coordinate here..
-	private Coordinate firstNode = new Coordinate();
-	private Coordinate secondNode = new Coordinate();
-
+	private Coordinate firstNodeCoordinate = new Coordinate();
+	private Coordinate secondNodeCoordinate = new Coordinate();
 	/**
-	 * @return the firstNode
+	 * @return the firstNodeCoordinate
 	 */
-	public Coordinate getFirstNode() {
-		return firstNode;
+	public Coordinate getFirstNodeCoordinate() {
+		return firstNodeCoordinate;
 	}
-
 	/**
-	 * @param firstNode
-	 *            the firstNode to set
+	 * @param firstNodeCoordinate the firstNodeCoordinate to set
 	 */
-	public void setFirstNode(Coordinate firstNode) {
-		this.firstNode = firstNode;
+	public void setFirstNodeCoordinate(Coordinate firstNodeCoordinate) {
+		this.firstNodeCoordinate = firstNodeCoordinate;
 	}
-
 	/**
-	 * @return the secondNode
+	 * @return the secondNodeCoordinate
 	 */
-	public Coordinate getSecondNode() {
-		return secondNode;
+	public Coordinate getSecondNodeCoordinate() {
+		return secondNodeCoordinate;
 	}
-
 	/**
-	 * @param secondNode
-	 *            the secondNode to set
+	 * @param secondNodeCoordinate the secondNodeCoordinate to set
 	 */
-	public void setSecondNode(Coordinate secondNode) {
-		this.secondNode = secondNode;
+	public void setSecondNodeCoordinate(Coordinate secondNodeCoordinate) {
+		this.secondNodeCoordinate = secondNodeCoordinate;
 	}
 
 }
