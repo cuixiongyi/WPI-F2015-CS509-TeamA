@@ -57,23 +57,23 @@ public class UserScreen extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,30,30,30,50};
-		gbl_contentPane.rowHeights = new int[]{0};
-		gbl_contentPane.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		GridBagLayout gblContentPane = new GridBagLayout();
+		gblContentPane.columnWidths = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,30,30,30,50};
+		gblContentPane.rowHeights = new int[]{0};
+		gblContentPane.columnWeights = new double[]{Double.MIN_VALUE};
+		gblContentPane.rowWeights = new double[]{Double.MIN_VALUE};
+		contentPane.setLayout(gblContentPane);
 		
 		
 		// input panel and components
 		inputPanel = new InputPanel();
-		GridBagConstraints gbc_inputPanel = new GridBagConstraints();
-		gbc_inputPanel.gridwidth = 4;
-		gbc_inputPanel.insets = new Insets(0, 0, 5, 5);
-		gbc_inputPanel.fill = GridBagConstraints.BOTH;
-		gbc_inputPanel.gridx = 12;
-		gbc_inputPanel.gridy = 0;
-		contentPane.add(inputPanel, gbc_inputPanel);
+		GridBagConstraints gbcInputPanel = new GridBagConstraints();
+		gbcInputPanel.gridwidth = 4;
+		gbcInputPanel.insets = new Insets(0, 0, 5, 5);
+		gbcInputPanel.fill = GridBagConstraints.BOTH;
+		gbcInputPanel.gridx = 12;
+		gbcInputPanel.gridy = 0;
+		contentPane.add(inputPanel, gbcInputPanel);
 		
 		
 		// initialize neighborDialog to be used later
@@ -89,14 +89,14 @@ public class UserScreen extends JFrame {
 		imgComponent.setVisible(true);
 		
 		JScrollPane imgScrollPanel = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_inputPanel.gridwidth = 10;
-		gbc_inputPanel.gridheight = 10;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 0;
-		contentPane.add(imgScrollPanel, gbc_scrollPane);
+		GridBagConstraints gbcScrollPane = new GridBagConstraints();
+		gbcScrollPane.insets = new Insets(0, 0, 0, 5);
+		gbcScrollPane.fill = GridBagConstraints.BOTH;
+		gbcInputPanel.gridwidth = 10;
+		gbcInputPanel.gridheight = 10;
+		gbcScrollPane.gridx = 0;
+		gbcScrollPane.gridy = 0;
+		contentPane.add(imgScrollPanel, gbcScrollPane);
 		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 //		// for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
@@ -107,22 +107,22 @@ public class UserScreen extends JFrame {
 		
 		
 		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
-		GridBagConstraints gbc_WestArrowButton = new GridBagConstraints();
-		gbc_WestArrowButton.fill = GridBagConstraints.BOTH;
-		gbc_WestArrowButton.gridx = 12;
-		gbc_WestArrowButton.gridy = 9;
-		contentPane.add(WestArrowButton, gbc_WestArrowButton);
+		GridBagConstraints gbcWestArrowButton = new GridBagConstraints();
+		gbcWestArrowButton.fill = GridBagConstraints.BOTH;
+		gbcWestArrowButton.gridx = 12;
+		gbcWestArrowButton.gridy = 9;
+		contentPane.add(WestArrowButton, gbcWestArrowButton);
 		
 		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
 		EastArrowButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		GridBagConstraints gbc_EastArrowButton = new GridBagConstraints();
-		gbc_EastArrowButton.fill = GridBagConstraints.BOTH;
-		gbc_EastArrowButton.gridx = 13;
-		gbc_EastArrowButton.gridy = 9;
-		contentPane.add(EastArrowButton, gbc_EastArrowButton);
+		GridBagConstraints gbcEastArrowButton = new GridBagConstraints();
+		gbcEastArrowButton.fill = GridBagConstraints.BOTH;
+		gbcEastArrowButton.gridx = 13;
+		gbcEastArrowButton.gridy = 9;
+		contentPane.add(EastArrowButton, gbcEastArrowButton);
 
 		
 		JButton btnNeighborManage = new JButton(NEIGHBOR);
@@ -133,10 +133,10 @@ public class UserScreen extends JFrame {
 
 			}
 		});
-		GridBagConstraints gbc_btnNeighborManage = new GridBagConstraints();
-		gbc_btnNeighborManage.gridx = 15;
-		gbc_btnNeighborManage.gridy = 9;
-		contentPane.add(btnNeighborManage, gbc_btnNeighborManage);
+		GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
+		gbcBtnNeighborManage.gridx = 15;
+		gbcBtnNeighborManage.gridy = 9;
+		contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
 
 		setSize(800, 500);
 		setVisible(true);
