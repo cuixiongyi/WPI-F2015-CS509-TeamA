@@ -14,15 +14,20 @@ public class AlgoTest {
 
 	@Test
 	public void testAlgoStrategy1() {
-		Node startNode = new Node(1);
-		Node endNode = new Node(5);
-		Edge edge1 = new Edge(1, 2, 10);
-		Edge edge2 = new Edge(2, 3, 1);
-		Edge edge3 = new Edge(3, 4, 3);
-		Edge edge4 = new Edge(4, 5, 6);
+		Node startNode = new Node(0, 10, 10);
+		Node node1 = new Node(1, 10, 20);
+		Node node2 = new Node(2, 10, 25);
+		Node node3 = new Node(3, 10, 30);
+		Node node4 = new Node(4, 10, 45);
+		Node endNode = new Node(5, 10, 50);
+		Edge edge1 = new Edge(startNode, node1, 10);
+		Edge edge2 = new Edge(node1, node2, 5);
+		Edge edge3 = new Edge(node2, node3, 5);
+		Edge edge4 = new Edge(node3, node4, 15);
+		Edge edge5 = new Edge(node4, endNode, 5);
 		
 		List<Integer> route = new ArrayList<Integer>();
-		Edge[] edges = {edge1, edge2, edge3, edge4};
+		Edge[] edges = {edge1, edge2, edge3, edge4, edge5};
 		Graph context = new Graph (edges);
 		DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
 		route = d.getRoute(startNode, endNode, context);
