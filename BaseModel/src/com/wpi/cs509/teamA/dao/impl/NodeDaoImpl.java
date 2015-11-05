@@ -96,4 +96,10 @@ public class NodeDaoImpl implements NodeDao {
 
 	}
 
+	@Override
+	public boolean checkNodeInDB(Node node) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

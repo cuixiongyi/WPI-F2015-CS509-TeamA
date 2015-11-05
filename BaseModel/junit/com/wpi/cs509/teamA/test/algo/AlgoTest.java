@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 
 public class AlgoTest {

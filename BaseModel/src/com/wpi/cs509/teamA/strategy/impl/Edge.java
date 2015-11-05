@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.bean;
+package com.wpi.cs509.teamA.strategy.impl;
 
 public class Edge {
 	private int id1, id2; // ID's of two nodes

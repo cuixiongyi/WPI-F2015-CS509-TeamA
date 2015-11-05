@@ -42,7 +42,7 @@ public interface NodeDao {
 
 	/**
 	 * 
-	 * insert nodes to the database
+	 * Insert a node into database
 	 * 
 	 * @param name
 	 * @param x
@@ -52,7 +52,11 @@ public interface NodeDao {
 	 */
 	public void saveNode(Node node);
 	
-	
-	
+	/**
+	 * Check if a node exists in the database..
+	 * 
+	 * @return
+	 */
+	public boolean checkNodeInDB(Node node);
 	
 }
