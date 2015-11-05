@@ -10,13 +10,17 @@ public class NodeRelationDaoImpl implements NodeRelationDao{
 
 	@Override
 	public boolean insertOneEdge(NodeRelation nodeRelation) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
 		return false;
 	}
 
 	@Override
-	public boolean insertMultipleEdges(NodeRelation[] nodeRelation) {
+	public boolean insertMultipleEdges(Set<NodeRelation> nodeRelation) {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
 		return false;
 	}
 

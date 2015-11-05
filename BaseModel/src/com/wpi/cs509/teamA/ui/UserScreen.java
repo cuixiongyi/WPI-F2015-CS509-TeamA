@@ -1,12 +1,9 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-
 import javax.swing.JScrollPane;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.JButton;

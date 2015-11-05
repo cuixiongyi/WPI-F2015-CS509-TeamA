@@ -8,13 +8,21 @@ import java.awt.event.FocusListener;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.wpi.cs509.teamA.bean.NodeRelation;
+import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -40,37 +48,9 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private JButton cancelButton;
 
 	private JPanel pairPanel;
-	private JLabel lbPair_1;
-	private JTextField textFieldNodePair2;
-	private JTextField textFieldNodePair3;
-	private JLabel lbEdge;
-	private JLabel lbEdge_1;
-	private JLabel lbEdge_2;
-	private JTextField textFieldNodePair4;
-	private JTextField textFieldNodePair5;
-	private JTextField textFieldNodePair6;
-	private JTextField textFieldNodePair7;
-	private JTextField textFieldNodePair8;
-	private JTextField textFieldNodePair9;
-	private JLabel lbEdge_3;
-	private JTextField textFieldNodePair10;
-	private JTextField textFieldNodePair11;
-	private JLabel lbEdge_4;
-	private JTextField textFieldNodePair12;
-	private JTextField textFieldNodePair13;
-	private JLabel lbEdge_5;
-	private JTextField textFieldNodePair14;
-	private JTextField textFieldNodePair15;
-	private JLabel lbEdge_6;
-	private JTextField textFieldNodePair16;
-	private JTextField textFieldNodePair17;
-	private JLabel lbEdge_7;
-	private JTextField textFieldNodePair18;
-	private JTextField textFieldNodePair19;
-	private JLabel lbPair_2;
-	private JTextField textFieldNodePair20;
-	private JTextField textFieldNodePair1;
-
+	// Label and Text Field
+	private JLabel[] lbPair = new JLabel[10];
+	private JTextField[] textFieldNodePair = new JTextField[20];
 	private JTextField getCoordinateTextField = null;
 
 	private final static String SAVE = "Save";
@@ -102,147 +82,68 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		cancelButton.addActionListener(this);
 		buttonPane.add(cancelButton);
 
-		// Edge pair block. 20 textFieldNodePairs show coordinate of node.
+		// Edge Pairs
 		pairPanel = new JPanel();
 		pairPanel.setBounds(0, 0, 428, 641);
 		getContentPane().add(pairPanel);
 		pairPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
-		lbPair_1 = new JLabel("Edge 1");
-		pairPanel.add(lbPair_1);
+		for (int i = 0; i < 10; i++) {
 
-		textFieldNodePair1 = new JTextField();
-		pairPanel.add(textFieldNodePair1);
-		textFieldNodePair1.addFocusListener(this);
-		textFieldNodePair1.setColumns(10);
+			// pair
+			String edgeName = "Edge " + (i + 1);
+			lbPair[i] = new JLabel(edgeName);
+			pairPanel.add(lbPair[i]);
 
-		textFieldNodePair2 = new JTextField();
-		pairPanel.add(textFieldNodePair2);
-		textFieldNodePair2.addFocusListener(this);
-		textFieldNodePair2.setColumns(10);
+			for (int j = i, num = i + 1; j <= num; j++) {
+				JTextField nodePair = textFieldNodePair[j];
+				nodePair = new JTextField();
+				pairPanel.add(nodePair);
+				nodePair.addFocusListener(this);
+				nodePair.setColumns(10);
+			}
 
-		lbEdge = new JLabel("Edge 2");
-		pairPanel.add(lbEdge);
-
-		textFieldNodePair3 = new JTextField();
-		textFieldNodePair3.setColumns(10);
-		textFieldNodePair3.addFocusListener(this);
-		pairPanel.add(textFieldNodePair3);
-
-		textFieldNodePair4 = new JTextField();
-		textFieldNodePair4.setColumns(10);
-		textFieldNodePair4.addFocusListener(this);
-		pairPanel.add(textFieldNodePair4);
-
-		lbEdge_1 = new JLabel("Edge 3");
-		pairPanel.add(lbEdge_1);
-
-		textFieldNodePair5 = new JTextField();
-		textFieldNodePair5.setColumns(10);
-		textFieldNodePair5.addFocusListener(this);
-		pairPanel.add(textFieldNodePair5);
-
-		textFieldNodePair6 = new JTextField();
-		textFieldNodePair6.setColumns(10);
-		textFieldNodePair6.addFocusListener(this);
-		pairPanel.add(textFieldNodePair6);
-
-		lbEdge_2 = new JLabel("Edge 4");
-		pairPanel.add(lbEdge_2);
-
-		textFieldNodePair7 = new JTextField();
-		textFieldNodePair7.setColumns(10);
-		textFieldNodePair7.addFocusListener(this);
-		pairPanel.add(textFieldNodePair7);
-
-		textFieldNodePair8 = new JTextField();
-		textFieldNodePair8.setColumns(10);
-		textFieldNodePair8.addFocusListener(this);
-		pairPanel.add(textFieldNodePair8);
-
-		lbEdge_3 = new JLabel("Edge 5");
-		pairPanel.add(lbEdge_3);
-
-		textFieldNodePair9 = new JTextField();
-		textFieldNodePair9.setColumns(10);
-		textFieldNodePair9.addFocusListener(this);
-		pairPanel.add(textFieldNodePair9);
-
-		textFieldNodePair10 = new JTextField();
-		textFieldNodePair10.setColumns(10);
-		textFieldNodePair10.addFocusListener(this);
-		pairPanel.add(textFieldNodePair10);
-
-		lbEdge_4 = new JLabel("Edge 6");
-		pairPanel.add(lbEdge_4);
-
-		textFieldNodePair11 = new JTextField();
-		textFieldNodePair11.setColumns(10);
-		textFieldNodePair11.addFocusListener(this);
-		pairPanel.add(textFieldNodePair11);
-
-		textFieldNodePair12 = new JTextField();
-		textFieldNodePair12.setColumns(10);
-		textFieldNodePair12.addFocusListener(this);
-		pairPanel.add(textFieldNodePair12);
-
-		lbEdge_5 = new JLabel("Edge 7");
-		pairPanel.add(lbEdge_5);
-
-		textFieldNodePair13 = new JTextField();
-		textFieldNodePair13.setColumns(10);
-		textFieldNodePair13.addFocusListener(this);
-		pairPanel.add(textFieldNodePair13);
-
-		textFieldNodePair14 = new JTextField();
-		textFieldNodePair14.setColumns(10);
-		textFieldNodePair14.addFocusListener(this);
-		pairPanel.add(textFieldNodePair14);
-
-		lbEdge_6 = new JLabel("Edge 8");
-		pairPanel.add(lbEdge_6);
-
-		textFieldNodePair15 = new JTextField();
-		textFieldNodePair15.setColumns(10);
-		textFieldNodePair15.addFocusListener(this);
-		pairPanel.add(textFieldNodePair15);
-
-		textFieldNodePair16 = new JTextField();
-		textFieldNodePair16.setColumns(10);
-		textFieldNodePair16.addFocusListener(this);
-		pairPanel.add(textFieldNodePair16);
-
-		lbPair_2 = new JLabel("Edge 9");
-		pairPanel.add(lbPair_2);
-
-		textFieldNodePair17 = new JTextField();
-		textFieldNodePair17.setColumns(10);
-		textFieldNodePair17.addFocusListener(this);
-		pairPanel.add(textFieldNodePair17);
-
-		textFieldNodePair18 = new JTextField();
-		textFieldNodePair18.setColumns(10);
-		textFieldNodePair18.addFocusListener(this);
-		pairPanel.add(textFieldNodePair18);
-
-		lbEdge_7 = new JLabel("Edge 10");
-		pairPanel.add(lbEdge_7);
-
-		textFieldNodePair19 = new JTextField();
-		pairPanel.add(textFieldNodePair19);
-		textFieldNodePair19.addFocusListener(this);
-		textFieldNodePair19.setColumns(10);
-
-		textFieldNodePair20 = new JTextField();
-		pairPanel.add(textFieldNodePair20);
-		textFieldNodePair20.addFocusListener(this);
-		textFieldNodePair20.setColumns(10);
+		}
 
 	}
 
 	public void setFieldTitle(int xPos, int yPos) {
 		this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));
 
+	}
+
+	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {
+
+		if(tf1 == null || tf2 == null){
+			return null;
+		}
+		
+		Coordinate startCorrdinate;
+		Coordinate endCorrdinate;
+
+		startCorrdinate = this.getCoordinate(tf1);
+		endCorrdinate = this.getCoordinate(tf2);
+
+		if ((startCorrdinate != null) && (endCorrdinate != null)) {
+			NodeRelation nodeRelation = new NodeRelation();
+			nodeRelation.setFirstNode(startCorrdinate);
+			nodeRelation.setSecondNode(endCorrdinate);
+			return nodeRelation;
+		}
+
+		return null;
+	}
+
+	private Coordinate getCoordinate(JTextField textField) {
+		Coordinate resCorrdinate = new Coordinate();
+		String[] corrdinate = (textField.getText()).split(",");
+		if (corrdinate.length == 2) {
+			resCorrdinate.setX(Integer.valueOf(corrdinate[0].trim()));
+			resCorrdinate.setY(Integer.valueOf(corrdinate[1].trim()));
+			return resCorrdinate;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -255,178 +156,17 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 			this.setVisible(false);
 
-			DupEntranceMapDaoImpl demp = new DupEntranceMapDaoImpl();
-			
-			// database
-			
-			int x1 = -1,x2 = -1,y1 = -1,y2 = -1;
-			String []splits_1 = (textFieldNodePair1.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0].trim());
-				y1 = Integer.valueOf(splits_1[1].trim());
+			Set<NodeRelation> edgesToSave = new HashSet<NodeRelation>();
+			for (int i = 0; i < 10; i++) {
+				NodeRelation edge = this.getEdgeToSave(textFieldNodePair[2 * i], textFieldNodePair[2 * i + 1]);
+				if(edge != null){
+					edgesToSave.add(edge);
+				}				
 			}
-			String []splits_2 = (textFieldNodePair2.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0].trim());
-				y2 = Integer.valueOf(splits_2[1].trim());
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair3.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair4.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair5.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair6.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair7.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair8.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair9.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair10.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair11.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair12.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair13.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair14.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair15.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair16.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair17.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair18.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
-			
-			x1 = -1;
-			x2 = -1;
-			y1 = -1;
-			y2 = -1;
-			splits_1 = (textFieldNodePair19.getText()).split(",");
-			if(splits_1.length==2){
-				x1 = Integer.valueOf(splits_1[0]);
-				y1 = Integer.valueOf(splits_1[1]);
-			}
-			splits_2 = (textFieldNodePair20.getText()).split(",");
-			if(splits_1.length==2){
-				x2 = Integer.valueOf(splits_2[0]);
-				y2 = Integer.valueOf(splits_2[1]);
-			}
-			if((splits_1.length==2) && (splits_2.length==2))
-				demp.insertoneEdge(x1, y1, x2, y2); 
+
+			// database..
+			NodeRelationDao nrd = new NodeRelationDaoImpl();
+			nrd.insertMultipleEdges(edgesToSave);
 		}
 
 	}
