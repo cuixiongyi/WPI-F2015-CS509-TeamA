@@ -5,15 +5,48 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wpi.cs509.teamA.util.Coordinate;
+
 public class Vertex implements Comparable<Vertex> {
 	private int id;
 	private int dist = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
 	private Vertex previous = null;
+	private int hcost;
 	private Map<Vertex, Integer> neighbours = new HashMap<>();
 	private static List<Integer> pathNodeIds = new ArrayList<Integer>();
+	private Coordinate coordinate;
 
-	public Vertex(int id) {
+	public Vertex(int id, Coordinate coordinate) {
 		this.id = id;
+		this.coordinate = coordinate;
+	}
+
+	/**
+	 * @return the hcost
+	 */
+	public int getHcost() {
+		return hcost;
+	}
+
+	/**
+	 * @param hcost the hcost to set
+	 */
+	public void setHcost(int hcost) {
+		this.hcost = hcost;
+	}
+
+	/**
+	 * @return the coordinate
+	 */
+	public Coordinate getCoordinate() {
+		return coordinate;
+	}
+
+	/**
+	 * @param coordinate the coordinate to set
+	 */
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
 	}
 
 	public Integer getNext() {

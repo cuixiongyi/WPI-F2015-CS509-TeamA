@@ -12,6 +12,7 @@ import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
+import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -77,8 +78,9 @@ public class AlgoController {
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
 
-
-		Edge[] edges = {new Edge (1, 1, 1)}; // junk to test
+		Node node1 = new Node(1, 100, 100);
+		Node node2 = new Node(1, 200, 200);
+		Edge[] edges = {new Edge (node1, node2, 1)}; // junk to test
 		Graph context = new Graph (edges);
 		//TODO: Build Graph of all nodes in scenario in the following format: (int nodeid1, int nodeid2, int distance)
 

@@ -1,43 +1,43 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
+import com.wpi.cs509.teamA.bean.Node;
+
 public class Edge {
-	private int id1, id2; // ID's of two nodes
+	private Node node1, node2;
 	private int dist; // distance between the two nodes
 
-	public Edge(int id1, int id2, int dist) {
-		this.id1 = id1;
-		this.id2 = id2;
+	public Edge(Node node1, Node node2, int dist) {
+		this.node1 = node1;
+		this.node2 = node2;
 		this.dist = dist;
 	}
-
+	
 	/**
-	 * @return the id1
+	 * @return the node1
 	 */
-	public int getId1() {
-		return id1;
+	public Node getNode1() {
+		return node1;
 	}
 
 	/**
-	 * @param id1
-	 *            the id1 to set
+	 * @param node1 the node1 to set
 	 */
-	public void setId1(int id1) {
-		this.id1 = id1;
+	public void setNode1(Node node1) {
+		this.node1 = node1;
 	}
 
 	/**
-	 * @return the id2
+	 * @return the node2
 	 */
-	public int getId2() {
-		return id2;
+	public Node getNode2() {
+		return node2;
 	}
 
 	/**
-	 * @param id2
-	 *            the id2 to set
+	 * @param node2 the node2 to set
 	 */
-	public void setId2(int id2) {
-		this.id2 = id2;
+	public void setNode2(Node node2) {
+		this.node2 = node2;
 	}
 
 	/**

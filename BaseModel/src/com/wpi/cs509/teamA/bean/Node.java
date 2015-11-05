@@ -45,8 +45,9 @@ public class Node {
 
 	// TODO: We may remove this method in the future, for now it is just for
 	// testing..
-	public Node(int id) {
+	public Node(int id, int x, int y) {
 		this.id = id;
+		this.location = new Coordinate(x,y);
 	}
 
 	/**
