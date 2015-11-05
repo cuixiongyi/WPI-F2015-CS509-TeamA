@@ -46,7 +46,8 @@ public class UserScreen extends JFrame {
 	 */
 	private InputPanel inputPanel;
 	private JButton btnNeighborManage;
-	private JPanel wrappingPanel;
+	private JPanel wrappingImgPanel;
+	private JPanel wrappingInputPanel;
 
 	/**
 	 * Initialize the user screen, constructor
@@ -56,7 +57,7 @@ public class UserScreen extends JFrame {
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 1000, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,11 +71,14 @@ public class UserScreen extends JFrame {
 		// input panel and components
 		inputPanel = new InputPanel();
 		GridBagConstraints gbcInputPanel = new GridBagConstraints();
-		gbcInputPanel.gridwidth = 4;
+		gbcInputPanel.gridwidth = 7;
 		gbcInputPanel.insets = new Insets(0, 0, 5, 5);
 		gbcInputPanel.fill = GridBagConstraints.BOTH;
-		gbcInputPanel.gridx = 12;
+		gbcInputPanel.gridx = 10;
 		gbcInputPanel.gridy = 0;
+		gbcInputPanel.weightx = 0.1;
+	//	gbcInputPanel.weighty = 0.2;
+				
 		contentPane.add(inputPanel, gbcInputPanel);
 
 		// initialize neighborDialog to be used later
@@ -82,15 +86,17 @@ public class UserScreen extends JFrame {
 		neighborDialog.setVisible(false);
 
 		// initialize image block, wrapping panel to limit size of image component
-		wrappingPanel = new JPanel();
-		wrappingPanel.setMaximumSize(new Dimension(1024, 1024));
-		GridBagConstraints gbcWrappingPanel = new GridBagConstraints();
-		gbcWrappingPanel.insets = new Insets(0, 0, 5, 5);
-		gbcWrappingPanel.fill = GridBagConstraints.BOTH;
-		gbcWrappingPanel.gridx = 0;
-		gbcWrappingPanel.gridy = 0;
-		contentPane.add(wrappingPanel, gbcWrappingPanel);
-		wrappingPanel.setLayout(new BoxLayout(wrappingPanel, BoxLayout.X_AXIS));
+		wrappingImgPanel = new JPanel();
+		wrappingImgPanel.setMaximumSize(new Dimension(1024, 1024));
+		GridBagConstraints gbcwrappingImgPanel = new GridBagConstraints();
+		gbcwrappingImgPanel.insets = new Insets(0, 0, 5, 5);
+		gbcwrappingImgPanel.fill = GridBagConstraints.BOTH;
+		gbcwrappingImgPanel.gridx = 0;
+		gbcwrappingImgPanel.gridy = 0;
+		gbcwrappingImgPanel.weightx = 0.6;
+		gbcwrappingImgPanel.weighty = 0.5;
+		contentPane.add(wrappingImgPanel, gbcwrappingImgPanel);
+		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
 		// the panel to show image
 		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
@@ -115,7 +121,7 @@ public class UserScreen extends JFrame {
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		wrappingPanel.add(imgScrollPanel);
+		wrappingImgPanel.add(imgScrollPanel);
 
 		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
 		GridBagConstraints gbcWestArrowButton = new GridBagConstraints();
