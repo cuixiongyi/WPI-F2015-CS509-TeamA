@@ -87,12 +87,7 @@ public class UserScreen extends JFrame {
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
-		// add listener
-		// imgComponent.addMouseListener(imgComponent);
-
-//		// scroll panel
-//		imgScrollPanel = new JScrollPane();
-//		imgScrollPanel.setBounds(181, 215, 834, 557);
+		
 		JScrollPane imgScrollPanel = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
@@ -110,12 +105,6 @@ public class UserScreen extends JFrame {
 		
 		
 		
-//		// button to change map
-//		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
-//		WestArrowButton.setBounds(109, 632, 57, 140);
-//
-//		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
-//		EastArrowButton.setBounds(1030, 632, 57, 140);
 		
 		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
 		GridBagConstraints gbc_WestArrowButton = new GridBagConstraints();
@@ -135,15 +124,6 @@ public class UserScreen extends JFrame {
 		gbc_EastArrowButton.gridy = 9;
 		contentPane.add(EastArrowButton, gbc_EastArrowButton);
 
-//		container.add(WestArrowButton);
-//		container.add(EastArrowButton);
-//		container.add(imgScrollPanel);
-//		container.add(inputPanel);
-		// button to set neighbordialog visible
-		
-		
-//		btnNeighborManage = new JButton(NEIGHBOR);
-//		btnNeighborManage.setVisible(false);
 		
 		JButton btnNeighborManage = new JButton(NEIGHBOR);
 		btnNeighborManage.addActionListener(new ActionListener() {
@@ -157,28 +137,23 @@ public class UserScreen extends JFrame {
 		gbc_btnNeighborManage.gridx = 15;
 		gbc_btnNeighborManage.gridy = 9;
 		contentPane.add(btnNeighborManage, gbc_btnNeighborManage);
-//		btnNeighborManage.setBounds(0, 500, 40, 29);
-//		getContentPane().add(btnNeighborManage);
 
-//		setTitle(PATH);
-//		setLocation(0, 0);
 		setSize(800, 500);
 		setVisible(true);
 		setResizable(true);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public JButton getBtnNeighborManage() {
 		return this.btnNeighborManage;
 	}
 
-//	public static UserScreen launchUserScreen() {
-//		if (userScreen == null) {
-//			userScreen = new UserScreen();
-//		}
-//
-//		return userScreen;
-//	}
+	public static UserScreen launchUserScreen() {
+		if (userScreen == null) {
+			userScreen = new UserScreen();
+		}
+
+		return userScreen;
+	}
 
 	/**
 	 * The entrance of the program
@@ -186,31 +161,18 @@ public class UserScreen extends JFrame {
 	 * @param args
 	 *            command line..
 	 */
-//	public static void main(String[] args) {
-//
-//		// singleton
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//
-//				UserScreen.launchUserScreen();
-//			}
-//		});
-//
-//		new SystemFacade();
-//	}
-	
 	public static void main(String[] args) {
+
+		// singleton
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					UserScreen frame = new UserScreen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+
+				UserScreen.launchUserScreen();
 			}
 		});
+
 		new SystemFacade();
 	}
+	
 
 }
