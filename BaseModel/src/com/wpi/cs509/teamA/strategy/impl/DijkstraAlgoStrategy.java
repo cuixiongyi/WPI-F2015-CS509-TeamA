@@ -32,7 +32,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
-			// return 0;
+			// return 0;/
 		}
 		Vertex source = graph.get(startNodeId);
 		NavigableSet<Vertex> q = new TreeSet<>();
@@ -40,7 +40,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		// set-up vertices
 		for (Vertex v : graph.values()) {
 			v.setPrevious((v == source) ? source : null);
-			v.setDist((v == source) ? 0 : Integer.MAX_VALUE);
+			v.setDist((v == source) ? 0 : Integer.MAX_VALUE);			
 			q.add(v);
 		}
 
@@ -55,6 +55,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 
 			u = q.pollFirst(); // vertex with shortest distance (first iteration
 								// will return source)
+			
 			if (u.getDist() == Integer.MAX_VALUE)
 				break; // we can ignore u (and any other remaining vertices)
 						// since they are unreachable

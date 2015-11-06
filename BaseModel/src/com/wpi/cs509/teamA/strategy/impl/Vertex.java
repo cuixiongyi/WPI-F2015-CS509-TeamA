@@ -12,6 +12,9 @@ public class Vertex implements Comparable<Vertex> {
 	private int dist = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
 	private Vertex previous = null;
 	private int hcost;
+	private int gcost;
+
+
 	private Map<Vertex, Integer> neighbours = new HashMap<>();
 	private static List<Integer> pathNodeIds = new ArrayList<Integer>();
 	private Coordinate coordinate;
@@ -21,6 +24,14 @@ public class Vertex implements Comparable<Vertex> {
 		this.coordinate = coordinate;
 	}
 
+	
+	public int getGcost() {
+		return gcost;
+	}
+
+	public void setGcost(int gcost) {
+		this.gcost = gcost;
+	}
 	/**
 	 * @return the hcost
 	 */

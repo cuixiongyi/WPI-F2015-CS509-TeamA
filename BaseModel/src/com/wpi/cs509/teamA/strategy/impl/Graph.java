@@ -13,11 +13,11 @@ public class Graph {
 	public Graph(Edge[] edges) {
 		graph = new HashMap<>(edges.length);
 
-		for (Edge e : edges)
-		{
-			this.edges.add(e);
-		}
-		
+//		for (Edge e : edges)
+//		{
+//			this.edges.add(e);
+//		}
+//		
 		// one pass to find all vertices
 		for (Edge e : edges) {
 			if (!graph.containsKey(e.getNode1().getId())) {
@@ -30,6 +30,7 @@ public class Graph {
 
 		// another pass to set neighbouring vertices
 		for (Edge e : edges) {
+			graph.get(e.getNode1().getId()).getNeighbours().put(graph.get(e.getNode2().getId()), e.getDist());
 			graph.get(e.getNode2().getId()).getNeighbours().put(graph.get(e.getNode1().getId()), e.getDist());
 		}
 	}
