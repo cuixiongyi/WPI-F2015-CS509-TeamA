@@ -5,19 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.NodeType;
 
 public class NodeDaoImpl implements NodeDao {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	private Statement stmt = null;
 
 	public NodeDaoImpl() {
 		try {
@@ -44,7 +47,7 @@ public class NodeDaoImpl implements NodeDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			JdbcConnect.resultClose(rs, stmt);
+			JdbcConnect.resultClose(rs, pstmt);
 			JdbcConnect.connClose();
 		}
 
@@ -75,8 +78,9 @@ public class NodeDaoImpl implements NodeDao {
 	@Override
 	public void saveNode(Node node) {
 		// TODO Auto-generated method stub
-		
-		// TODO: Check if the node exists.. the same coordinate should be considered the same node..F
+
+		// TODO: Check if the node exists.. the same coordinate should be
+		// considered the same node..F
 		try {
 			String insertNodeToDB = "INSERT INTO RouteFinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(insertNodeToDB);
@@ -134,6 +138,55 @@ public class NodeDaoImpl implements NodeDao {
 		}
 
 		return null;
+	}
+
+	@Override
+	public Node getNodeFromId(int nodeId) {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+
+		try {
+
+			String getAllEdges = "SELECT id, name, x, y, map_id, classification FROM routefinder.node where id=?";
+			pstmt = conn.prepareStatement(getAllEdges);
+			pstmt.setInt(1, nodeId);
+			resultSet = null;
+			resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+
+				Node node = new Node();
+				node.setId(resultSet.getInt("id"));
+				node.setName(resultSet.getString("name"));
+				Coordinate c = new Coordinate();
+				c.setX(resultSet.getInt("x"));
+				c.setY(resultSet.getInt("y"));
+				node.setLocation(c);
+				node.setMapId(resultSet.getInt("map_id"));
+				node.setNodeType(NodeType.valueOf(resultSet.getString("classification").toUpperCase()));
+				return node;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<Node> getNodeFromIds(List<Integer> nodeIds) {
+		// TODO Auto-generated method stub
+		List<Node> res = new ArrayList<Node>();
+		Iterator<Integer> iter = nodeIds.iterator();
+		while (iter.hasNext()) {
+			int nodeId = iter.next();
+			res.add(this.getNodeFromId(nodeId));
+		}
+
+		return res;
 	}
 
 }

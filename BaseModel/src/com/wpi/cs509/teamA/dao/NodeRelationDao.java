@@ -7,6 +7,12 @@ import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
 
 public interface NodeRelationDao {
+	
+	/**
+	 * 
+	 * @return the number of NodeRelation in the relation table
+	 */
+	public int getNodeRelationNum();
 
 	/**
 	 * 

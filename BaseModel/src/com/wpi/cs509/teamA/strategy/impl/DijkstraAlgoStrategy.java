@@ -55,10 +55,10 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 						// since they are unreachable
 
 			// look at distances to each neighbor
-			for (Map.Entry<Vertex, Integer> a : u.getNeighbours().entrySet()) {
+			for (Map.Entry<Vertex, Double> a : u.getNeighbours().entrySet()) {
 				v = a.getKey(); // the neighbor in this iteration
 
-				int alternateDist = u.getDist() + a.getValue();
+				double alternateDist = u.getDist() + a.getValue();
 				if (alternateDist < v.getDist()) { // shorter path to neighbor
 													// found
 					q.remove(v);

@@ -30,6 +30,31 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	}
 
 	@Override
+	public int getNodeRelationNum() {
+		// TODO Auto-generated method stub
+		try {
+			String getNodeNum = "select count(*) from RouteFinder.relations";
+			pstmt = conn.prepareStatement(getNodeNum);
+			rs = pstmt.executeQuery();
+			// if there is a result..
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+		}
+
+		// means you get nothing from database..
+		// which means error occurs..
+		// this line may never get execute then?
+		return -1;
+
+	}
+
+	@Override
 	public boolean insertOneEdge(NodeRelation nodeRelation) {
 		// TODO Auto-generated method stub
 		return false;
@@ -171,6 +196,34 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	@Override
 	public Set<Edge> getAllEdges() {
 		// TODO Auto-generated method stub
+
+		Set<Edge> res = new HashSet<Edge>();
+		ResultSet resultSet = null;
+
+		try {
+			String getAllEdges = "SELECT node_from, node_to, distance FROM RouteFinder.relations";
+			resultSet = null;
+			pstmt = conn.prepareStatement(getAllEdges);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+
+				Edge edge = new Edge();
+				edge.setId1(resultSet.getInt("node_from"));
+				edge.setId2(resultSet.getInt("node_to"));
+				edge.setDist(resultSet.getDouble("distance"));
+				res.add(edge);
+
+			}
+
+			return res;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+		}
+
 		return null;
 	}
 

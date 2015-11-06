@@ -44,5 +44,21 @@ public class NodeDaoTest {
 		nd.saveNode(node);
 
 	}
+	
+	@Test
+	public void getNodeFromIdTest(){
+		
+		NodeDao nd = new NodeDaoImpl();
+		System.out.println(nd.getNodeFromId(40));
+		
+	}
+	
+	@Test
+	public void getNodeFromIdsTest(){
+		
+		NodeDao nd = new NodeDaoImpl();
+		// nd.getNodeFromIds(nodeIds)
+		
+	}
 
 }

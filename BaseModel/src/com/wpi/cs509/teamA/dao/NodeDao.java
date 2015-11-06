@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.dao;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -62,11 +63,22 @@ public interface NodeDao {
 	
 	/**
 	 * 
-	 * 
-	 * 
 	 * @param nodeId
 	 * @return the coordinate of that node
 	 */
 	public Coordinate getNodeCoordinateFromId(int nodeId);
+	
+	/**
+	 * 
+	 * @param nodeId
+	 * @return
+	 */
+	public Node getNodeFromId(int nodeId);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Node> getNodeFromIds(List<Integer> nodeIds);
 	
 }

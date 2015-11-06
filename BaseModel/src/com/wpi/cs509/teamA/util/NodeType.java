@@ -9,8 +9,8 @@ package com.wpi.cs509.teamA.util;
 
 public enum NodeType {
 
-	UNDEFINED("undefined"), PATHDOT("pathdot"), OFFICE("office"), CLASSROOM("classroom"), MEETINGROOM("meetingroom"), RESTROOM(
-			"restroom"), LAB("lab"), PARKING("parkinglot");
+	UNDEFINED("UNDEFINED"), PATHDOT("PATHDOT"), OFFICE("OFFICE"), CLASSROOM("CLASSROOM"), MEETINGROOM("MEETINGROOM"), RESTROOM(
+			"RESTROOM"), LAB("LAB"), PARKING("PARKING");
 
 	/** String representation of the node's type */
 	private String nodeType;

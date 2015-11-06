@@ -22,10 +22,10 @@ public class Graph {
 			}
 		}
 
-		// another pass to set neighbouring vertices
-		for (Edge e : edges) {
-			graph.get(e.getId1()).getNeighbours().put(graph.get(e.getId2()), e.getDist());
-			graph.get(e.getId2()).getNeighbours().put(graph.get(e.getId1()), e.getDist());
+		// another pass to set neighboring vertices
+		for (Edge edge : edges) {
+			graph.get(edge.getId1()).getNeighbours().put(graph.get(edge.getId2()), edge.getDist());
+			graph.get(edge.getId2()).getNeighbours().put(graph.get(edge.getId1()), edge.getDist());
 		}
 	}
 
@@ -40,31 +40,26 @@ public class Graph {
 		List<Integer> result = graph.get(endId).getPathNodeIds();
 		result.add(endId);
 		// return list of node ids that make up the path
-		return result; 
+		return result;
 	}
 
 	/** Prints a path from the source to the specified vertex */
-	/*public void printPath(int endId) {
-		if (!graph.containsKey(endId)) {
-			System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endId);
-			return;
-		}
-
-		graph.get(endId).printPath();
-		System.out.println();
-	}*/
+	/*
+	 * public void printPath(int endId) { if (!graph.containsKey(endId)) {
+	 * System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endId);
+	 * return; }
+	 * 
+	 * graph.get(endId).printPath(); System.out.println(); }
+	 */
 
 	/**
 	 * Prints the path from the source to every vertex (output order is not
 	 * guaranteed)
 	 */
 	/*
-	public void printAllPaths() {
-		for (Vertex v : graph.values()) {
-			v.printPath();
-			System.out.println();
-		}
-	}*/
+	 * public void printAllPaths() { for (Vertex v : graph.values()) {
+	 * v.printPath(); System.out.println(); } }
+	 */
 
 	public HashMap<Integer, Vertex> getGraph() {
 		return graph;
