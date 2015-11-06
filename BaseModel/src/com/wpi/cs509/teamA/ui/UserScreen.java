@@ -15,6 +15,7 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,7 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 	private JScrollPane imgScrollPanel;
 	private NeighborDialog neighborDialog;
+
 	private final static String NEIGHBOR = "Neighbor Manage Tool";
 	private final static String PATH = "Path Finding";
 
@@ -44,6 +46,10 @@ public class UserScreen extends JFrame {
 	 */
 	private InputPanel inputPanel;
 	private JButton btnNeighborManage;
+	private JPanel wrappingImgPanel;
+	private JPanel wrappingButtonPanel;
+	private JPanel wrappingInputPanel;
+	private JPanel wrappingButtonPanelE;
 
 	/**
 	 * Initialize the user screen, constructor
@@ -53,79 +59,98 @@ public class UserScreen extends JFrame {
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		
+		setBounds(100, 100, 1000, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setBounds(100, 100, 1200,750);
 		GridBagLayout gblContentPane = new GridBagLayout();
-		gblContentPane.columnWidths = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,30,30,30,50};
-		gblContentPane.rowHeights = new int[]{0};
-		gblContentPane.columnWeights = new double[]{Double.MIN_VALUE};
-		gblContentPane.rowWeights = new double[]{Double.MIN_VALUE};
+		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 50 };
+		gblContentPane.rowHeights = new int[] { 0 };
+		gblContentPane.columnWeights = new double[] { Double.MIN_VALUE };
+		gblContentPane.rowWeights = new double[] { Double.MIN_VALUE };
 		contentPane.setLayout(gblContentPane);
-		
+
 		
 		// input panel and components
+		
+		
 		inputPanel = new InputPanel();
 		GridBagConstraints gbcInputPanel = new GridBagConstraints();
-		gbcInputPanel.gridwidth = 4;
+		gbcInputPanel.gridwidth = 7;
+//		gbcInputPanel.gridheight = GridBagConstraints.RELATIVE;
 		gbcInputPanel.insets = new Insets(0, 0, 5, 5);
 		gbcInputPanel.fill = GridBagConstraints.BOTH;
-		gbcInputPanel.gridx = 12;
+		gbcInputPanel.gridx = 10;
 		gbcInputPanel.gridy = 0;
+		gbcInputPanel.weightx = 0.1;
+				
 		contentPane.add(inputPanel, gbcInputPanel);
-		
-		
+
 		// initialize neighborDialog to be used later
 		neighborDialog = new NeighborDialog();
 		neighborDialog.setVisible(false);
 
+		// initialize image block, wrapping panel to limit size of image component
+		wrappingImgPanel = new JPanel();
+		wrappingImgPanel.setMaximumSize(new Dimension(1024, 1024));
+		GridBagConstraints gbcwrappingImgPanel = new GridBagConstraints();
+		gbcwrappingImgPanel.insets = new Insets(0, 0, 5, 5);
+		gbcwrappingImgPanel.fill = GridBagConstraints.BOTH;
+		gbcwrappingImgPanel.gridx = 0;
+		gbcwrappingImgPanel.gridy = 0;
+		gbcwrappingImgPanel.weightx = 0.6;
+		gbcwrappingImgPanel.weighty = 0.5;
+		contentPane.add(wrappingImgPanel, gbcwrappingImgPanel);
+		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
+
 		// the panel to show image
 		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
+		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
 		// display the image. Note that "/" only works on UNIX
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
-		
+
 		JScrollPane imgScrollPanel = new JScrollPane();
-		GridBagConstraints gbcScrollPane = new GridBagConstraints();
-		gbcScrollPane.insets = new Insets(0, 0, 0, 5);
-		gbcScrollPane.fill = GridBagConstraints.BOTH;
-		gbcInputPanel.gridwidth = 10;
-		gbcInputPanel.gridheight = 10;
-		gbcScrollPane.gridx = 0;
-		gbcScrollPane.gridy = 0;
-		contentPane.add(imgScrollPanel, gbcScrollPane);
+		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
+		// contentPane.add(imgScrollPanel, gbcScrollPane);
 		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
-//		// for scroll panel
+		// // for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+		wrappingImgPanel.add(imgScrollPanel);
 		
+		wrappingButtonPanel=new JPanel();
+		wrappingButtonPanel.setMinimumSize(new Dimension(30, 30));
+		wrappingButtonPanel.setMaximumSize(new Dimension(50, 50));
+		GridBagConstraints gbcWrappingButtonPanel = new GridBagConstraints();
+		gbcWrappingButtonPanel.gridx = 13;
+		gbcWrappingButtonPanel.gridy = 8;
+		contentPane.add(wrappingButtonPanel, gbcWrappingButtonPanel);
+		wrappingButtonPanel.setLayout(new BoxLayout(wrappingButtonPanel, BoxLayout.X_AXIS));
 		
-		
-		
+		wrappingButtonPanelE=new JPanel();
+		wrappingButtonPanelE.setMinimumSize(new Dimension(30, 30));
+		wrappingButtonPanelE.setMaximumSize(new Dimension(50, 50));
+		GridBagConstraints gbcWrappingButtonPanelE = new GridBagConstraints();
+		gbcWrappingButtonPanelE.gridx = 14;
+		gbcWrappingButtonPanelE.gridy = 8;
+		contentPane.add(wrappingButtonPanelE, gbcWrappingButtonPanelE);
+		wrappingButtonPanelE.setLayout(new BoxLayout(wrappingButtonPanelE, BoxLayout.X_AXIS));
+
 		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
-		GridBagConstraints gbcWestArrowButton = new GridBagConstraints();
-		gbcWestArrowButton.fill = GridBagConstraints.BOTH;
-		gbcWestArrowButton.gridx = 12;
-		gbcWestArrowButton.gridy = 9;
-		contentPane.add(WestArrowButton, gbcWestArrowButton);
+		wrappingButtonPanel.add(WestArrowButton);
 		
 		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
-		EastArrowButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		GridBagConstraints gbcEastArrowButton = new GridBagConstraints();
-		gbcEastArrowButton.fill = GridBagConstraints.BOTH;
-		gbcEastArrowButton.gridx = 13;
-		gbcEastArrowButton.gridy = 9;
-		contentPane.add(EastArrowButton, gbcEastArrowButton);
-
+		wrappingButtonPanelE.add(EastArrowButton);
 		
-		JButton btnNeighborManage = new JButton(NEIGHBOR);
+		btnNeighborManage = new JButton("NEIGHBOR");
+		btnNeighborManage.setVisible(false);
 		btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				neighborDialog.setVisible(true);
@@ -134,8 +159,8 @@ public class UserScreen extends JFrame {
 			}
 		});
 		GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
-		gbcBtnNeighborManage.gridx = 15;
-		gbcBtnNeighborManage.gridy = 9;
+		gbcBtnNeighborManage.gridx = 0;
+		gbcBtnNeighborManage.gridy = 10;
 		contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
 
 		setSize(800, 500);
@@ -173,6 +198,5 @@ public class UserScreen extends JFrame {
 
 		new SystemFacade();
 	}
-	
 
 }
