@@ -106,8 +106,8 @@ public class AlgoController {
 		if (startMapId == endMapId) {
 
 			// assemble 2 nodes just for test..
-			fromNode.setId(38);
-			toNode.setId(40);
+			fromNode.setId(47);
+			toNode.setId(45);
 
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
