@@ -1,8 +1,11 @@
 package com.wpi.cs509.teamA.bean;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.wpi.cs509.teamA.dao.NodeDao;
+import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
 
@@ -22,7 +25,7 @@ public class Node {
 	private String name;
 
 	/** the coordinate of the node */
-	private Coordinate location;
+	private Coordinate location = new Coordinate();
 
 	// which map this node belongs to
 	/** define which map the node belongs to */
@@ -32,7 +35,7 @@ public class Node {
 	// private Map<String, Integer> neighbors;
 	/** neighbor node */
 	//
-	private Set<Integer> neighbors = new HashSet<Integer>();
+	private Map<Integer,Double> neighbors = new HashMap<Integer,Double>();
 
 	/** type of the node */
 	// this may cause great complex when input data
@@ -66,7 +69,7 @@ public class Node {
 	 * @param nodeType
 	 *            the type of the node, an enum class
 	 */
-	public Node(int id, String name, int x, int y, int mapId, Set<Integer> neighbors, String nodeType) {
+	public Node(int id, String name, int x, int y, int mapId, Map<Integer,Double> neighbors, String nodeType) {
 
 		this.id = id;
 		this.name = name;
@@ -81,18 +84,10 @@ public class Node {
 	 * add an new node on the map and set it's attributes
 	 */
 	public void saveNode() {
-//		Node node = new Node();
-//		node.setNeighbors(new HashSet<Integer>());
-//		node.setId(1);
-//		// more setters for the node
-//
-//		// add node id as the neighbours
-//
-//		node.getNeighbors().add(2);
-//		node.getNeighbors().add(3);
-//		node.getNeighbors().add(4);
 		
-		// database
+		NodeDao nd = new NodeDaoImpl();
+		nd.saveNode(this);
+		
 	}
 
 	// add neighbors to the node
@@ -185,7 +180,7 @@ public class Node {
 	/**
 	 * @return the neighbors
 	 */
-	public Set<Integer> getNeighbors() {
+	public Map<Integer,Double> getNeighbors() {
 		return neighbors;
 	}
 
@@ -193,7 +188,7 @@ public class Node {
 	 * @param neighbors
 	 *            the neighbors to set
 	 */
-	public void setNeighbors(Set<Integer> neighbors) {
+	public void setNeighbors(Map<Integer,Double> neighbors) {
 		this.neighbors = neighbors;
 	}
 

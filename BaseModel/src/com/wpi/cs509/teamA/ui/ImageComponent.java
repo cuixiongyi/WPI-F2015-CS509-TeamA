@@ -63,7 +63,7 @@ public class ImageComponent extends JComponent {
 
 	public ImageComponent() {
 
-		// initialize the mouse litener state
+		// initialize the mouse listener state
 		stateContext = new StateContext();
 	}
 
@@ -85,6 +85,8 @@ public class ImageComponent extends JComponent {
 		normalUserMouseListener = new NormalUserMouseListener(this);
 		adminMouseListener = new AdminMouseListener(this, neighborDialog);
 
+		
+		// TODO: Move this part to input panel..
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
 

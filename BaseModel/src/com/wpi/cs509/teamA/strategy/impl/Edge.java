@@ -1,10 +1,26 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
 public class Edge {
-	private int id1, id2; // ID's of two nodes
-	private int dist; // distance between the two nodes
 
-	public Edge(int id1, int id2, int dist) {
+	// ID's of two nodes
+	private int id1, id2;
+	// distance between the two nodes
+	private double dist;
+
+	/**
+	 * 
+	 */
+	public Edge() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 
+	 * @param id1
+	 * @param id2
+	 * @param dist
+	 */
+	public Edge(int id1, int id2, double dist) {
 		this.id1 = id1;
 		this.id2 = id2;
 		this.dist = dist;
@@ -43,7 +59,7 @@ public class Edge {
 	/**
 	 * @return the dist
 	 */
-	public int getDist() {
+	public double getDist() {
 		return dist;
 	}
 
@@ -51,7 +67,7 @@ public class Edge {
 	 * @param dist
 	 *            the dist to set
 	 */
-	public void setDist(int dist) {
+	public void setDist(double dist) {
 		this.dist = dist;
 	}
 

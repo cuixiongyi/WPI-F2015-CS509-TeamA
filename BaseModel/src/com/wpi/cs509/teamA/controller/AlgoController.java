@@ -2,16 +2,20 @@ package com.wpi.cs509.teamA.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
+import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -73,32 +77,49 @@ public class AlgoController {
 		Node fromNode = this.getNodeFromName(startNode);
 		Node toNode = this.getNodeFromName(endNode);
 
-		// get more information from the node we get
+		// use this two to decide how which maps are involved in searching..
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
 
+		// get all edges from database..
+		NodeRelationDao nrd = new NodeRelationDaoImpl();
+		Edge[] inputEdges = new Edge[nrd.getNodeRelationNum()];
+		Set<Edge> edges = nrd.getAllEdges();
+		int temp = 0;
+		for (Edge edge : edges) {
+			inputEdges[temp++] = edge;
+			System.out.println("edge: " + edge.getId1() + " " + edge.getId2());
 
-		Edge[] edges = {new Edge (1, 1, 1)}; // junk to test
-		Graph context = new Graph (edges);
-		//TODO: Build Graph of all nodes in scenario in the following format: (int nodeid1, int nodeid2, int distance)
+		}
+
+		// Edge[] edges = { new Edge(1, 1, 1) }; // junk to test
+		Graph context = new Graph(inputEdges);
+		// TODO: Build Graph of all nodes in scenario in the following format:
+		// (int nodeid1, int nodeid2, int distance)
 
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-		if (true) // always use Dijkstra's for now
-		{
+		// TODO: Make a decision here which strategy we will use..
+		// always use Dijkstra's for now
+		// in the same map..
+		if (startMapId == endMapId) {
+
+			// assemble 2 nodes just for test..
+			fromNode.setId(47);
+			toNode.setId(45);
+
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
 			return result;
-		}
-			
-		else // for later use
-		{
+		} else {
+			// for later use
+
 			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
 			return result;
-		} 
-		
+		}
+
 	}
 
 	/**
@@ -129,8 +150,8 @@ public class AlgoController {
 		// Initialize all the matrix
 		// we can initialize it in a much more earlier phase of the system
 		// check the workflow here..
-		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();		
-		
+		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();
+
 		// TODO: find the maps we need from the allMatrixes and return a list of
 		// matrix that we want
 

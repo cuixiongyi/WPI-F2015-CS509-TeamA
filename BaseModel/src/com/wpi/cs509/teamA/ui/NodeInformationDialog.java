@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.NodeType;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
@@ -151,13 +153,20 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 			} else {
 				// Save node information
 				Node node = new Node();
-				node.setLocation(new Coordinate(xPos, yPos));
+				Coordinate coordinate = new Coordinate();
+				coordinate.setX(xPos);
+				coordinate.setY(yPos);
+				node.setLocation(coordinate);
 				node.setMapId(Integer.parseInt(mapidTextField.getText()));
 				node.setName(nameTextField.getText());
+				// TODO: get string from the front end then we can process it
+				// for now we only store undefined..
+				node.setNodeType(NodeType.UNDEFINED);
 
 				// call database save function..
 				// TODO: Maybe we can use mutlti-thread here..
 				node.saveNode();
+				
 				// show what we have saved..
 				neighborDialog.addNodeList(xPos, yPos);
 				imagePanel.repaint();

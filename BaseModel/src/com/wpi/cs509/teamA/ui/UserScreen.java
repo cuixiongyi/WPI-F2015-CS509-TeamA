@@ -1,7 +1,5 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,7 +9,6 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -158,6 +155,7 @@ public class UserScreen extends JFrame {
 
 			}
 		});
+
 		GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
 		gbcBtnNeighborManage.gridx = 0;
 		gbcBtnNeighborManage.gridy = 10;
