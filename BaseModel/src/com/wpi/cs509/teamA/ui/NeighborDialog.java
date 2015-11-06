@@ -7,6 +7,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -27,6 +29,8 @@ import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
+	
+	private final static int nodeRange = 10;
 
 	private JButton saveButton;
 	private JButton cancelButton;
@@ -36,6 +40,8 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private JLabel[] lbPair = new JLabel[10];
 	private JTextField[] textFieldNodePair = new JTextField[20];
 	private JTextField getCoordinateTextField = null;
+	
+	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 
 	private final static String SAVE = "Save";
 	private final static String CANCEL = "Cancel";
@@ -91,8 +97,32 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	}
 
 	public void setFieldTitle(int xPos, int yPos) {
-		this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));
+		boolean sameNode = false;
+		for (int i = 0; i <  coordinateList.size(); i++) {
+			if (Math.abs(xPos -  coordinateList.get(i).getX()) < nodeRange
+					|| Math.abs(yPos -  coordinateList.get(i).getY()) < nodeRange) {
+				sameNode = true;
+				xPos= coordinateList.get(i).getX();
+				yPos= coordinateList.get(i).getY();
+			}
+		}
+		if(sameNode){
+		this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));}
 
+	}
+	
+	
+	/**
+	 * @param List<Coordinate>
+	 *            coordinateList return the nodelist
+	 */
+	public List<Coordinate> getCoorList() {
+		return coordinateList;
+	}
+	
+	public void addNodeList(int x, int y) {
+		Coordinate coor = new Coordinate(x, y);
+		coordinateList.add(coor);
 	}
 
 	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {

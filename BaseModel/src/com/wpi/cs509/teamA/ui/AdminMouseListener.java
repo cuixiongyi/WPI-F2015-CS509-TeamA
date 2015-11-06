@@ -14,8 +14,8 @@ import java.awt.event.MouseListener;
  *
  */
 public class AdminMouseListener implements MouseListener {
-	
-	private final static int closeRange = 10;
+
+	private final static int closeRange = 5;
 
 	/**
 	 * The x position that the user clicked
@@ -54,30 +54,30 @@ public class AdminMouseListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// we have to minus 5 to correct deviation
+		xPos = e.getX() - 5;
+		yPos = e.getY() - 5;
 		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog.isVisible()) {
-			neighborDialog.setFieldTitle(e.getX(), e.getY());
+			neighborDialog.setFieldTitle(xPos, yPos);
 		} else if (e.getButton() == MouseEvent.BUTTON1 && !neighborDialog.isVisible()) {
-			xPos = e.getX();
-			yPos = e.getY();
-
 			imagePanel.setxPos(xPos);
 			imagePanel.setyPos(yPos);
 
 			imagePanel.repaint();
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			boolean tooClose = false;
-			for (int i = 0; i < imagePanel.getCoorList().size(); i++) {
-				if (Math.abs(e.getX() - imagePanel.getCoorList().get(i).getX()) < closeRange
-						|| Math.abs(e.getY() - imagePanel.getCoorList().get(i).getY()) < closeRange) {
+			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
+				if (Math.abs(xPos - neighborDialog.getCoorList().get(i).getX()) < closeRange
+						&& Math.abs(yPos - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
 					tooClose = true;
 				}
 			}
 			if (tooClose) {
 				JOptionPane.showMessageDialog(null, "Too close from another node.");
 			} else {
-				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, e.getX(), e.getY());
-				nodeManageMenu.show(e.getComponent(), e.getX(), e.getY());
+				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, neighborDialog, xPos, yPos);
+				nodeManageMenu.show(e.getComponent(), xPos, yPos);
 			}
 		}
 	}
