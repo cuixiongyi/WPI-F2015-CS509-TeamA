@@ -28,7 +28,6 @@ public class StateContext {
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
-		System.out.println("initilizing state context.. Should be only initialize once..");
 		this.setState(new StateNormalUser());
 	}
 
@@ -39,7 +38,6 @@ public class StateContext {
 	 *            the new state the context will be.
 	 */
 	public void setState(StateMouseListener newState) {
-		System.out.println("set a new state now..");
 		this.mouseListenerState = newState;
 	}
 

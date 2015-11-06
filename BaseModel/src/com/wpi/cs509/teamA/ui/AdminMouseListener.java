@@ -1,5 +1,9 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.lang.Math;
+
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,6 +14,8 @@ import java.awt.event.MouseListener;
  *
  */
 public class AdminMouseListener implements MouseListener {
+
+	private final static int closeRange = 5;
 
 	/**
 	 * The x position that the user clicked
@@ -23,6 +29,10 @@ public class AdminMouseListener implements MouseListener {
 	 * The image component that the listener will be added to
 	 */
 	private ImageComponent imagePanel;
+	/**
+	 * Component for entering edge
+	 */
+	private NeighborDialog neighborDialog;
 
 	/**
 	 * Default constructor
@@ -37,27 +47,39 @@ public class AdminMouseListener implements MouseListener {
 	 * @param imagePanel
 	 *            the image component that the listener will be added to
 	 */
-	public AdminMouseListener(ImageComponent imagePanel) {
-		System.out.println("init AdminMouseListener.. this should happen only once..");
+	public AdminMouseListener(ImageComponent imagePanel, NeighborDialog neighborDialog) {
 		this.imagePanel = imagePanel;
+		this.neighborDialog = neighborDialog;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// we have to minus 5 to correct deviation
+		xPos = e.getX() - 5;
+		yPos = e.getY() - 5;
 		// TODO Auto-generated method stub
+		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog.isVisible()) {
+			neighborDialog.setFieldTitle(xPos, yPos);
+		} else if (e.getButton() == MouseEvent.BUTTON1 && !neighborDialog.isVisible()) {
+			imagePanel.setxPos(xPos);
+			imagePanel.setyPos(yPos);
 
-		xPos = e.getX();
-		yPos = e.getY();
-
-		System.out.println("This click from admin user..");
-		System.out.println(xPos);
-		System.out.println(yPos);
-
-		imagePanel.setxPos(xPos);
-		imagePanel.setyPos(yPos);
-
-		imagePanel.repaint();
-
+			imagePanel.repaint();
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+			boolean tooClose = false;
+			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
+				if (Math.abs(xPos - neighborDialog.getCoorList().get(i).getX()) < closeRange
+						&& Math.abs(yPos - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
+					tooClose = true;
+				}
+			}
+			if (tooClose) {
+				JOptionPane.showMessageDialog(null, "Too close from another node.");
+			} else {
+				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, neighborDialog, xPos, yPos);
+				nodeManageMenu.show(e.getComponent(), xPos, yPos);
+			}
+		}
 	}
 
 	@Override

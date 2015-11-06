@@ -2,15 +2,20 @@ package com.wpi.cs509.teamA.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.dao.InitAllMatrix;
-import com.wpi.cs509.teamA.dao.impl.InitAllMatrixImpl;
+import com.wpi.cs509.teamA.dao.NodeRelationDao;
+import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
+import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -22,6 +27,8 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  * @version Oct 5th
  */
 public class AlgoController {
+
+	// TODO: Make this class singleton, we use setter and getter to operate it..
 
 	/**
 	 * The start node get from front end It is a String
@@ -44,7 +51,7 @@ public class AlgoController {
 	}
 
 	/**
-	 * construtor,initiate with the source and destination
+	 * Constructor,initiate with the source and destination
 	 *
 	 * @param from
 	 *            the source node
@@ -70,31 +77,49 @@ public class AlgoController {
 		Node fromNode = this.getNodeFromName(startNode);
 		Node toNode = this.getNodeFromName(endNode);
 
-		// get more information from the node we get
+		// use this two to decide how which maps are involved in searching..
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
 
-		// decide the context of the algorithm
-		// get a list of matrixes that we will use in the algorithm
-		// System.out.println("The system begin to get the matrix resource..");
-		List<InputMatrix> im = this.getAlgoMatrix(startMapId, endMapId);
-		// System.out.println("The system has successfully get the matrix
-		// resource..");
-
-		// the algorithm strategy is not set here, we can add it later
-		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
-
-		if (im.size() == 1) {
-			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, im);
-			return result;
-
-		} else {
-			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, im);
-			return result;
+		// get all edges from database..
+		NodeRelationDao nrd = new NodeRelationDaoImpl();
+		Edge[] inputEdges = new Edge[nrd.getNodeRelationNum()];
+		Set<Edge> edges = nrd.getAllEdges();
+		int temp = 0;
+		for (Edge edge : edges) {
+			inputEdges[temp++] = edge;
+			System.out.println("edge: " + edge.getId1() + " " + edge.getId2());
 
 		}
+
+		// Edge[] edges = { new Edge(1, 1, 1) }; // junk to test
+		Graph context = new Graph(inputEdges);
+		// TODO: Build Graph of all nodes in scenario in the following format:
+		// (int nodeid1, int nodeid2, int distance)
+
+		// TODO: use singleton here..
+		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
+
+		// TODO: Make a decision here which strategy we will use..
+		// always use Dijkstra's for now
+		// in the same map..
+		if (startMapId == endMapId) {
+
+			// assemble 2 nodes just for test..
+			fromNode.setId(47);
+			toNode.setId(45);
+
+			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+			result = generalAlgorithm.findPath(fromNode, toNode, context);
+			return result;
+		} else {
+			// for later use
+
+			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+			result = generalAlgorithm.findPath(fromNode, toNode, context);
+			return result;
+		}
+
 	}
 
 	/**
@@ -124,7 +149,8 @@ public class AlgoController {
 
 		// Initialize all the matrix
 		// we can initialize it in a much more earlier phase of the system
-		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixImpl.getInitAllMatrixImpl().initAllMatrix();
+		// check the workflow here..
+		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();
 
 		// TODO: find the maps we need from the allMatrixes and return a list of
 		// matrix that we want

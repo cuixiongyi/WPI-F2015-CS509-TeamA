@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -20,7 +21,7 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  *
  */
 public interface AlgoStrategy {
-
-	Map<Integer, List<Node>> getRoute(Node startNode, Node endNode, List<InputMatrix> matrixes);
+	
+	List<Integer> getRoute(Node startNode, Node endNode, Graph context);
 
 }

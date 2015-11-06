@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.dao.NodeDao;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -18,6 +20,8 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  *
  */
 public class GeneralAlgorithm {
+
+	// TODO: Make this class singleton..
 
 	/**
 	 * the strategy will be applied on the path finding
@@ -35,7 +39,7 @@ public class GeneralAlgorithm {
 	 * Constructor.
 	 * 
 	 * @param algoStrategy
-	 *            the strategy will be applied, usually should be the defualt
+	 *            the strategy will be applied, usually should be the default
 	 *            strategy
 	 */
 	public GeneralAlgorithm(AlgoStrategy algoStrategy) {
@@ -44,25 +48,28 @@ public class GeneralAlgorithm {
 
 	/**
 	 * 
+	 * 
+	 * 
 	 * @param startNode
-	 *            the source
 	 * @param endNode
-	 *            the destination
-	 * @param im
-	 *            a list of matrix that will be used in the path finding
-	 * @return a map data structure that takes the id of the map as key and the
-	 *         its corresponding matrix as the value
+	 * @param context
+	 * @return
 	 */
-	public Map<Integer, List<Node>> findPath(Node startNode, Node endNode, List<InputMatrix> im) {
-
-		System.out.println("General Algorithm");
+	public Map<Integer, List<Node>> findPath(Node startNode, Node endNode, Graph context) {
 
 		Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
-		// add this one by one to the result
-		List<Node> routeOnOneMap = new ArrayList<Node>();
 
 		// different strategy will use different algorithm..
-		result = algoStrategy.getRoute(startNode, endNode, im);
+		List<Integer> nodeIds = algoStrategy.getRoute(startNode, endNode, context);
+
+		// TODO: Query node objects from node Id's and add all node objects to
+		// result
+		NodeDao nd = new NodeDaoImpl();
+		// add this one by one to the result
+		List<Node> routeOnOneMap = nd.getNodeFromIds(nodeIds);
+
+		// for now we only have one list..
+		result.put(1, routeOnOneMap);
 
 		return result;
 	}

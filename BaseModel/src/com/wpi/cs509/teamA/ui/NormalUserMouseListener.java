@@ -38,7 +38,6 @@ public class NormalUserMouseListener implements MouseListener {
 	 *            the image component that the listener will be added to
 	 */
 	public NormalUserMouseListener(ImageComponent imagePanel) {
-		System.out.println("init NormalUserMouseListener.. this should happen only once..");
 		this.imagePanel = imagePanel;
 	}
 
@@ -48,10 +47,6 @@ public class NormalUserMouseListener implements MouseListener {
 
 		xPos = e.getX();
 		yPos = e.getY();
-
-		System.out.println("This click from normal user..");
-		System.out.println(xPos);
-		System.out.println(yPos);
 
 		imagePanel.setxPos(xPos);
 		imagePanel.setyPos(yPos);
