@@ -1,10 +1,13 @@
-package com.wpi.cs509.teamA.dao.impl;
+package com.wpi.cs509.teamA.util;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 /**
  * 
@@ -15,33 +18,32 @@ import java.sql.Statement;
  */
 public class JdbcConnect {
 
-	// TODO: Make this in the file
-	private static String url = "jdbc:mysql://localhost:3306/RouteFinder";
-	private static String user = "root";
-	private static String password = "susie19910401";
+	private static DataSource ds = null;
 	private static Connection conn = null;
 
 	private JdbcConnect() {
 
 	}
 
+	// 在静态代码块中创建数据库连接池
 	static {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+			// 加载dbcp.properties配置文件
+			InputStream in = JdbcConnect.class.getClassLoader().getResourceAsStream("dbcp.properties");
+			Properties prop = new Properties();
+			prop.load(in);
+			// 创建数据源
+			ds = BasicDataSourceFactory.createDataSource(prop);
+		} catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
 
 	public static Connection getConnection() throws SQLException {
 
-		if (conn == null || conn.isClosed()) {
-			
-			conn = DriverManager.getConnection(url, user, password);
-			// should commit
-			conn.setAutoCommit(false);
-		}
-		
+		conn = ds.getConnection();
+		conn.setAutoCommit(false);
+
 		return conn;
 
 	}
@@ -64,13 +66,13 @@ public class JdbcConnect {
 	}
 
 	public static void connClose() {
-		try {
-			if (conn != null || !conn.isClosed()) {
+		if (conn != null) {
+			try {
+				// 将Connection连接对象还给数据库连接池
 				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

@@ -14,6 +14,7 @@ import java.util.Set;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
 
 public class NodeDaoImpl implements NodeDao {
@@ -23,17 +24,19 @@ public class NodeDaoImpl implements NodeDao {
 	private ResultSet rs = null;
 
 	public NodeDaoImpl() {
-		try {
-			// Connect to Database
-			conn = JdbcConnect.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	@Override
 	public int getNodeNum() {
 		// TODO Auto-generated method stub
+
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		try {
 			String getNodeNum = "select count(*) from RouteFinder.node";
@@ -81,6 +84,14 @@ public class NodeDaoImpl implements NodeDao {
 
 		// TODO: Check if the node exists.. the same coordinate should be
 		// considered the same node..F
+
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		try {
 			String insertNodeToDB = "INSERT INTO RouteFinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(insertNodeToDB);
@@ -113,6 +124,13 @@ public class NodeDaoImpl implements NodeDao {
 	public Coordinate getNodeCoordinateFromId(int nodeId) {
 		// TODO Auto-generated method stub
 
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		ResultSet resultSet = null;
 
 		try {
@@ -135,6 +153,7 @@ public class NodeDaoImpl implements NodeDao {
 			e.printStackTrace();
 		} finally {
 			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
 		}
 
 		return null;
@@ -143,6 +162,13 @@ public class NodeDaoImpl implements NodeDao {
 	@Override
 	public Node getNodeFromId(int nodeId) {
 		// TODO Auto-generated method stub
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		ResultSet resultSet = null;
 
 		try {
@@ -171,6 +197,7 @@ public class NodeDaoImpl implements NodeDao {
 			e.printStackTrace();
 		} finally {
 			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
 		}
 
 		return null;
@@ -179,6 +206,7 @@ public class NodeDaoImpl implements NodeDao {
 	@Override
 	public List<Node> getNodeFromIds(List<Integer> nodeIds) {
 		// TODO Auto-generated method stub
+		
 		List<Node> res = new ArrayList<Node>();
 		Iterator<Integer> iter = nodeIds.iterator();
 		while (iter.hasNext()) {

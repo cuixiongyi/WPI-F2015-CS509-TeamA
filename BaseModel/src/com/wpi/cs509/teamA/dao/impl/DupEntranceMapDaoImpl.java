@@ -13,6 +13,7 @@ import java.util.Set;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.DupEntranceMapDao;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
+import com.wpi.cs509.teamA.util.JdbcConnect;
 
 /**
  * The implementation class of DupEntranceMapDao

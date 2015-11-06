@@ -11,6 +11,7 @@ import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.JdbcConnect;
 
 // TODO: Using proxy pattern to handle all the database connection
 
@@ -21,17 +22,19 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	private ResultSet rs = null;
 
 	public NodeRelationDaoImpl() {
-		try {
-			// connect to Database
-			conn = JdbcConnect.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	@Override
 	public int getNodeRelationNum() {
 		// TODO Auto-generated method stub
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		try {
 			String getNodeNum = "select count(*) from RouteFinder.relations";
 			pstmt = conn.prepareStatement(getNodeNum);
@@ -45,6 +48,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			e.printStackTrace();
 		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
 		}
 
 		// means you get nothing from database..
@@ -63,6 +67,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	@Override
 	public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation) {
 		// TODO Auto-generated method stub
+
 		if (nodeRelation == null) {
 			System.out.println(
 					"public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation) ... set of node relations cannot be null..");
@@ -88,6 +93,14 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 								+ (secondNodeCoordinate.getY() - firstNodeCoordinate.getY())
 										* (secondNodeCoordinate.getY() - firstNodeCoordinate.getY()));
 						String insertEdgeToDB = "INSERT INTO RouteFinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)";
+
+						try {
+							conn = JdbcConnect.getConnection();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
 						pstmt = conn.prepareStatement(insertEdgeToDB);
 						pstmt.setInt(1, fromId);
 						pstmt.setInt(2, endId);
@@ -137,6 +150,13 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	 */
 	private boolean checkNodeRelationInDBHelper(int id1, int id2) {
 
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		ResultSet resultSet = null;
 
 		try {
@@ -154,6 +174,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			e.printStackTrace();
 		} finally {
 			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
 		}
 
 		return false;
@@ -162,6 +183,13 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	@Override
 	public int checkNodeInDBByCoordinate(Coordinate coordinate) {
+
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		ResultSet resultSet = null;
 		int x = coordinate.getX();
@@ -184,6 +212,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			return -1;
 		} finally {
 			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
 		}
 	}
 
@@ -196,6 +225,13 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	@Override
 	public Set<Edge> getAllEdges() {
 		// TODO Auto-generated method stub
+
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		Set<Edge> res = new HashSet<Edge>();
 		ResultSet resultSet = null;
@@ -222,6 +258,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			e.printStackTrace();
 		} finally {
 			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
 		}
 
 		return null;
@@ -229,6 +266,13 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	@Override
 	public Set<NodeRelation> getAllNodeRelations() {
+
+		try {
+			conn = JdbcConnect.getConnection();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		Set<NodeRelation> res = new HashSet<NodeRelation>();
 		// get all the edges from db
@@ -257,6 +301,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			e.printStackTrace();
 		} finally {
 			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
 		}
 
 		return null;
