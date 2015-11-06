@@ -49,6 +49,7 @@ public class UserScreen extends JFrame {
 	private JPanel wrappingImgPanel;
 	private JPanel wrappingButtonPanel;
 	private JPanel wrappingInputPanel;
+	private JPanel wrappingButtonPanelE;
 
 	/**
 	 * Initialize the user screen, constructor
@@ -78,13 +79,12 @@ public class UserScreen extends JFrame {
 		inputPanel = new InputPanel();
 		GridBagConstraints gbcInputPanel = new GridBagConstraints();
 		gbcInputPanel.gridwidth = 7;
-		gbcInputPanel.gridheight = GridBagConstraints.RELATIVE;
+//		gbcInputPanel.gridheight = GridBagConstraints.RELATIVE;
 		gbcInputPanel.insets = new Insets(0, 0, 5, 5);
 		gbcInputPanel.fill = GridBagConstraints.BOTH;
 		gbcInputPanel.gridx = 10;
 		gbcInputPanel.gridy = 0;
 		gbcInputPanel.weightx = 0.1;
-	//	gbcInputPanel.weighty = 0.2;
 				
 		contentPane.add(inputPanel, gbcInputPanel);
 
@@ -116,11 +116,6 @@ public class UserScreen extends JFrame {
 
 		JScrollPane imgScrollPanel = new JScrollPane();
 		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
-//		GridBagConstraints gbcScrollPane = new GridBagConstraints();
-//		gbcScrollPane.insets = new Insets(0, 0, 0, 5);
-//		gbcScrollPane.fill = GridBagConstraints.BOTH;
-//		gbcScrollPane.gridx = 0;
-//		gbcScrollPane.gridy = 1;
 		// contentPane.add(imgScrollPanel, gbcScrollPane);
 		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// // for scroll panel
@@ -134,36 +129,26 @@ public class UserScreen extends JFrame {
 		wrappingButtonPanel.setMinimumSize(new Dimension(30, 30));
 		wrappingButtonPanel.setMaximumSize(new Dimension(50, 50));
 		GridBagConstraints gbcWrappingButtonPanel = new GridBagConstraints();
-		gbcWrappingButtonPanel.gridx = 12;
-		gbcWrappingButtonPanel.gridy = 9;
+		gbcWrappingButtonPanel.gridx = 13;
+		gbcWrappingButtonPanel.gridy = 8;
 		contentPane.add(wrappingButtonPanel, gbcWrappingButtonPanel);
-		
 		wrappingButtonPanel.setLayout(new BoxLayout(wrappingButtonPanel, BoxLayout.X_AXIS));
-
-        
+		
+		wrappingButtonPanelE=new JPanel();
+		wrappingButtonPanelE.setMinimumSize(new Dimension(30, 30));
+		wrappingButtonPanelE.setMaximumSize(new Dimension(50, 50));
+		GridBagConstraints gbcWrappingButtonPanelE = new GridBagConstraints();
+		gbcWrappingButtonPanelE.gridx = 14;
+		gbcWrappingButtonPanelE.gridy = 8;
+		contentPane.add(wrappingButtonPanelE, gbcWrappingButtonPanelE);
+		wrappingButtonPanelE.setLayout(new BoxLayout(wrappingButtonPanelE, BoxLayout.X_AXIS));
 
 		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
-//		WestArrowButton.setMaximumSize(new Dimension(100, 100));
-//		WestArrowButton.setMinimumSize(new Dimension(100, 100));
-//		GridBagConstraints gbcWestArrowButton = new GridBagConstraints();
-//		gbcWestArrowButton.fill = GridBagConstraints.BOTH;
-//		gbcWestArrowButton.gridx = 12;
-//		gbcWestArrowButton.gridy = 9;
-	//	contentPane.add(WestArrowButton, gbcWestArrowButton);
 		wrappingButtonPanel.add(WestArrowButton);
 		
 		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
-		EastArrowButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		GridBagConstraints gbcEastArrowButton = new GridBagConstraints();
-		gbcEastArrowButton.fill = GridBagConstraints.BOTH;
-//		gbcEastArrowButton.gridheight=GridBagConstraints.REMAINDER;
-		gbcEastArrowButton.gridx = 13;
-		gbcEastArrowButton.gridy = 9;
-		contentPane.add(EastArrowButton, gbcEastArrowButton);
-
+		wrappingButtonPanelE.add(EastArrowButton);
+		
 		btnNeighborManage = new JButton("NEIGHBOR");
 		btnNeighborManage.setVisible(false);
 		btnNeighborManage.addActionListener(new ActionListener() {
