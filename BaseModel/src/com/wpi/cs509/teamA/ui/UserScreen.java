@@ -85,10 +85,6 @@ public class UserScreen extends JFrame {
 				
 		contentPane.add(inputPanel, gbcInputPanel);
 
-		// initialize neighborDialog to be used later
-		neighborDialog = new NeighborDialog();
-		neighborDialog.setVisible(false);
-
 		// initialize image block, wrapping panel to limit size of image component
 		wrappingImgPanel = new JPanel();
 		wrappingImgPanel.setMaximumSize(new Dimension(1024, 1024));
@@ -103,7 +99,7 @@ public class UserScreen extends JFrame {
 		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
 		// the panel to show image
-		imgComponent = new ImageComponent(inputPanel, this, neighborDialog);
+		imgComponent = new ImageComponent(inputPanel);
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
 		// display the image. Note that "/" only works on UNIX
@@ -146,20 +142,12 @@ public class UserScreen extends JFrame {
 		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
 		wrappingButtonPanelE.add(EastArrowButton);
 		
-		btnNeighborManage = new JButton("NEIGHBOR");
-		btnNeighborManage.setVisible(false);
-		btnNeighborManage.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				neighborDialog.setVisible(true);
-				neighborDialog.setAlwaysOnTop(true);
-
-			}
-		});
-
-		GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
-		gbcBtnNeighborManage.gridx = 0;
-		gbcBtnNeighborManage.gridy = 10;
-		contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
+		
+//
+//		GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
+//		gbcBtnNeighborManage.gridx = 0;
+//		gbcBtnNeighborManage.gridy = 10;
+//		contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
 
 		setSize(800, 500);
 		setVisible(true);
@@ -190,6 +178,8 @@ public class UserScreen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
+				
+				
 				UserScreen.launchUserScreen();
 			}
 		});

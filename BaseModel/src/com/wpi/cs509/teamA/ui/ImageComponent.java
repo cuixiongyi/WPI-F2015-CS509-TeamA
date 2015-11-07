@@ -16,14 +16,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 /**
  * An component to show the images. This component has two different states
@@ -51,18 +54,21 @@ public class ImageComponent extends JComponent {
 	private int yPos;
 
 	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
+	private List<Node> pathNodeList;
 
 	private Map<Integer, List<Node>> result;
 
 	private static int num = 1;
 
 	private static int adminClicked = 2;
+	
+	private InputPanel inputPanel;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
 
 	public ImageComponent() {
-
+		
 		// initialize the mouse listener state
 		stateContext = new StateContext();
 	}
@@ -76,14 +82,14 @@ public class ImageComponent extends JComponent {
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
 	 */
-	public ImageComponent(final InputPanel inputPanel, final UserScreen userScreen, NeighborDialog neighborDialog) {
-
+	public ImageComponent(final InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
 		// initialize the mouse listener state
 		stateContext = new StateContext();
-		coordinateList=neighborDialog.getCoorList();
+	//	coordinateList=neighborDialog.getCoorList();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
-		adminMouseListener = new AdminMouseListener(this, neighborDialog);
+		adminMouseListener = new AdminMouseListener(this);
 
 		
 		// TODO: Move this part to input panel..
@@ -106,6 +112,8 @@ public class ImageComponent extends JComponent {
 						inputPanel.getEndPoint().getText().trim());
 
 				result = algoController.getRoute();
+				
+//				pathNodeList=result.get(1);
 
 				// TODO: use the result to draw the lines
 
@@ -130,7 +138,7 @@ public class ImageComponent extends JComponent {
 				// not, give it normal user
 
 				if (adminClicked % 2 == 0) {
-					AdminDialog adminDialog = new AdminDialog(ImageComponent.this, userScreen, inputPanel);
+					AdminDialog adminDialog = new AdminDialog(ImageComponent.this,inputPanel);
 					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 					adminDialog.setVisible(isFocusable());
 
@@ -138,7 +146,7 @@ public class ImageComponent extends JComponent {
 
 					JOptionPane.showMessageDialog(null, "You have logged out");
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-					userScreen.getBtnNeighborManage().setVisible(false);
+					inputPanel.getBtnNeighborManage().setVisible(false);
 					inputPanel.getAdminLogin().setText(LOGIN);
 					adminClicked++;
 				}
@@ -170,6 +178,15 @@ public class ImageComponent extends JComponent {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+
+	/**
+	 * @return the inputPanel
+	 */
+	public InputPanel getInputPanel() {
+		return inputPanel;
 	}
 
 	/**
@@ -263,6 +280,7 @@ public class ImageComponent extends JComponent {
 		this.adminClicked++;
 	}
 
+	
 	/**
 //	 * @param List<Coordinate>
 //	 *            coordinateList return the nodelist
@@ -288,14 +306,54 @@ public class ImageComponent extends JComponent {
 
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+		
+		//paint all of the nodes
+		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 		setForeground(Color.RED);
-		if (coordinateList.size() != 0) {
-			for (int i = 0; i < coordinateList.size(); i++) {
-				xPos = coordinateList.get(i).getX();
-				yPos = coordinateList.get(i).getY();
+		if (allNodes.get(1).size() != 0) {
+			for (int i = 0; i < allNodes.get(1).size(); i++) {
+				xPos = allNodes.get(1).get(i).getLocation().getX();
+				yPos = allNodes.get(1).get(i).getLocation().getY();
 				g.fillOval(xPos, yPos, 10, 10);
 			}
 		}
+		
+		
+		//paint all the edges
+		Set<NodeRelation> allEdges=UIDataBuffer.getAllEdges();
+		if (allEdges.size() != 0) {
+			for( NodeRelation edge : allEdges ){
+				int xstart,ystart,xend,yend;
+				xstart=edge.getFirstNodeCoordinate().getX();
+				ystart=edge.getFirstNodeCoordinate().getY();
+				
+				xend=edge.getSecondNodeCoordinate().getX();
+				yend=edge.getSecondNodeCoordinate().getY();
+				
+				g.drawLine(xstart, ystart, xend, yend);
+			}
+		}
+		
+		
+		//paint the route
+		/*
+		if (pathNodeList.size() != 0) {
+			for (int i = 0; i < pathNodeList.size()-1; i++) {
+				int xstart,ystart,xend,yend;
+				xstart = pathNodeList.get(i).getLocation().getX();
+				ystart = pathNodeList.get(i).getLocation().getY();
+				
+				xend = pathNodeList.get(i+1).getLocation().getX();
+				yend = pathNodeList.get(i+1).getLocation().getY();
+				
+				g.drawLine(xstart, ystart, xend, yend);
+				System.out.println(i);
+				System.out.println(xstart+" "+ystart+" "+xend+" "+yend);
+			}
+		}*/
+		
+		
+		
 
 		if (!(xPos == 0 && yPos == 0)) {
 			g2.setPaint(Color.WHITE);
