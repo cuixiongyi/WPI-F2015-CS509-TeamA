@@ -11,6 +11,7 @@ import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.JdbcConnect;
 
 // TODO: Using proxy pattern to handle all the database connection
 

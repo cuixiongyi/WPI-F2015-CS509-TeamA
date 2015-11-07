@@ -15,6 +15,7 @@ import java.util.Set;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
 
 public class NodeDaoImpl implements NodeDao {

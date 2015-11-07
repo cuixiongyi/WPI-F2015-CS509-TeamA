@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.dao.impl;
+package com.wpi.cs509.teamA.util;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ public class JdbcConnect {
 	// TODO: Make this in the file
 	private static String url = "jdbc:mysql://localhost:3306/RouteFinder";
 	private static String user = "root";
-	private static String password = "666666";
+	private static String password = "susie19910401";
 	private static Connection conn = null;
 
 	private JdbcConnect() {
