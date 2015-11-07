@@ -45,7 +45,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private JTextField[] textFieldNodePair = new JTextField[20];
 	private JTextField getCoordinateTextField = null;
 
-	// private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 	private ImageComponent imageComponent;
 
 	private final static String SAVE = "Save";
@@ -120,19 +119,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		}
 
 	}
-
-	/**
-	 * @param List<Coordinate>
-	 *            coordinateList return the nodelist
-	 */
-	// public List<Coordinate> getCoorList() {
-	// return coordinateList;
-	// }
-	//
-	// public void addNodeList(int x, int y) {
-	// Coordinate coor = new Coordinate(x, y);
-	// coordinateList.add(coor);
-	// }
 
 	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {
 
