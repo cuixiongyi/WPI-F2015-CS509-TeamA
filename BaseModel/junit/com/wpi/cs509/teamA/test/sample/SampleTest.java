@@ -18,6 +18,8 @@ import com.wpi.cs509.teamA.util.ProxyMap;
 /**
  * This is a sample test class to show you how to use JUnit
  * 
+ * This test is aim to test the whole workflow of the system..
+ * 
  * @author CS 509-Team A 
  *
  */

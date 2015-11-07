@@ -50,7 +50,7 @@ public class ImageComponent extends JComponent {
 	private int xPos;
 	private int yPos;
 
-	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();;
+	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 
 	private Map<Integer, List<Node>> result;
 
@@ -63,7 +63,7 @@ public class ImageComponent extends JComponent {
 
 	public ImageComponent() {
 
-		// initialize the mouse litener state
+		// initialize the mouse listener state
 		stateContext = new StateContext();
 	}
 
@@ -80,10 +80,13 @@ public class ImageComponent extends JComponent {
 
 		// initialize the mouse listener state
 		stateContext = new StateContext();
+		coordinateList=neighborDialog.getCoorList();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
 		adminMouseListener = new AdminMouseListener(this, neighborDialog);
 
+		
+		// TODO: Move this part to input panel..
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
 
@@ -261,17 +264,17 @@ public class ImageComponent extends JComponent {
 	}
 
 	/**
-	 * @param List<Coordinate>
-	 *            coordinateList return the nodelist
-	 */
-	public List<Coordinate> getCoorList() {
-		return coordinateList;
-	}
-
-	public void addNodeList(int x, int y) {
-		Coordinate coor = new Coordinate(x, y);
-		coordinateList.add(coor);
-	}
+//	 * @param List<Coordinate>
+//	 *            coordinateList return the nodelist
+//	 */
+//	public List<Coordinate> getCoorList() {
+//		return coordinateList;
+//	}
+//
+//	public void addNodeList(int x, int y) {
+//		Coordinate coor = new Coordinate(x, y);
+//		coordinateList.add(coor);
+//	}
 
 	@Override
 	public void paintComponent(Graphics g) {

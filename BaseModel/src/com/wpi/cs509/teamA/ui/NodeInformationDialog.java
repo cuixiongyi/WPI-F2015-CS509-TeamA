@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.NodeType;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
@@ -37,6 +39,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private int xPos;
 	private int yPos;
 	private ImageComponent imagePanel;
+	private NeighborDialog neighborDialog;
 
 	private final static String COORDINATE = "Node Coordinate";
 	private final static String TYPE = "Node Type";
@@ -48,10 +51,11 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeInformationDialog(ImageComponent imageComponent, int xPosition, int yPosition) {
+	public NodeInformationDialog(ImageComponent imageComponent,NeighborDialog neighborDialog, int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
+		this.neighborDialog=neighborDialog;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -149,15 +153,22 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 			} else {
 				// Save node information
 				Node node = new Node();
-				node.setLocation(new Coordinate(xPos, yPos));
+				Coordinate coordinate = new Coordinate();
+				coordinate.setX(xPos);
+				coordinate.setY(yPos);
+				node.setLocation(coordinate);
 				node.setMapId(Integer.parseInt(mapidTextField.getText()));
 				node.setName(nameTextField.getText());
+				// TODO: get string from the front end then we can process it
+				// for now we only store undefined..
+				node.setNodeType(NodeType.UNDEFINED);
 
 				// call database save function..
 				// TODO: Maybe we can use mutlti-thread here..
 				node.saveNode();
+				
 				// show what we have saved..
-				imagePanel.addNodeList(xPos, yPos);
+				neighborDialog.addNodeList(xPos, yPos);
 				imagePanel.repaint();
 				this.setVisible(false);
 			}

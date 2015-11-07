@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.test.sample;
+package com.wpi.cs509.teamA.test.algo;
 
 import java.util.ArrayList;
 import java.util.List;
