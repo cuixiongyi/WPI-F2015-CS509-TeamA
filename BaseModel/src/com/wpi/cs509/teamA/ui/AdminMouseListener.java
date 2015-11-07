@@ -52,12 +52,12 @@ public class AdminMouseListener implements MouseListener {
 	 * @param imagePanel
 	 *            the image component that the listener will be added to
 	 */
-	public AdminMouseListener(ImageComponent imagePanel) {
+	public AdminMouseListener(final ImageComponent imagePanel) {
 		this.imagePanel = imagePanel;
 		this.btnNeighborManage = imagePanel.getInputPanel().getBtnNeighborManage();
 		this.btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				neighborDialog = new NeighborDialog();
+				neighborDialog = new NeighborDialog(imagePanel);
 				neighborDialog.setVisible(true);
 				neighborDialog.setAlwaysOnTop(true);
 
@@ -80,16 +80,16 @@ public class AdminMouseListener implements MouseListener {
 			imagePanel.repaint();
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			boolean tooClose = false;
-			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
-				if (Math.abs(xPos - neighborDialog.getCoorList().get(i).getX()) < closeRange
-						&& Math.abs(yPos - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
-					tooClose = true;
-				}
-			}
+//			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
+//				if (Math.abs(xPos - neighborDialog.getCoorList().get(i).getX()) < closeRange
+//						&& Math.abs(yPos - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
+//					tooClose = true;
+//				}
+//			}
 			if (tooClose) {
 				JOptionPane.showMessageDialog(null, "Too close from another node.");
 			} else {
-				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, neighborDialog, xPos, yPos);
+				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, xPos, yPos);
 				nodeManageMenu.show(e.getComponent(), xPos, yPos);
 			}
 		}

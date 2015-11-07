@@ -7,11 +7,14 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+
+import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
@@ -19,6 +22,7 @@ import com.wpi.cs509.teamA.util.Coordinate;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 /**
  * This is the class that administrators uses to input edges
@@ -29,7 +33,7 @@ import java.awt.GridLayout;
 
 @SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
-	
+
 	private final static int nodeRange = 10;
 
 	private JButton saveButton;
@@ -40,8 +44,9 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private JLabel[] lbPair = new JLabel[10];
 	private JTextField[] textFieldNodePair = new JTextField[20];
 	private JTextField getCoordinateTextField = null;
-	
-	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
+
+//	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
+	private ImageComponent imageComponent;
 
 	private final static String SAVE = "Save";
 	private final static String CANCEL = "Cancel";
@@ -50,7 +55,8 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	/**
 	 * Create the dialog.
 	 */
-	public NeighborDialog() {
+	public NeighborDialog(ImageComponent imageComponent) {
+		this.imageComponent = imageComponent;
 		setTitle(NEIGHBOR);
 		setBounds(100, 100, 450, 736);
 		getContentPane().setLayout(null);
@@ -97,33 +103,39 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	}
 
 	public void setFieldTitle(int xPos, int yPos) {
+
+		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+		
+		
+		
 		boolean sameNode = false;
-		for (int i = 0; i <  coordinateList.size(); i++) {
-			if (Math.abs(xPos -  coordinateList.get(i).getX()) < nodeRange
-					|| Math.abs(yPos -  coordinateList.get(i).getY()) < nodeRange) {
+		for (int i = 0; i < allNodes.get(1).size(); i++) {
+			if (Math.abs(xPos - allNodes.get(1).get(i).getLocation().getX()) < nodeRange
+					|| Math.abs(yPos - allNodes.get(1).get(i).getLocation().getY()) < nodeRange) {
 				sameNode = true;
-				xPos= coordinateList.get(i).getX();
-				yPos= coordinateList.get(i).getY();
+				xPos = allNodes.get(1).get(i).getLocation().getX();
+				yPos = allNodes.get(1).get(i).getLocation().getY();
 			}
 		}
-		if(sameNode){
-		this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));}
+		if (sameNode) {
+			this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));
+		}
+		
 
 	}
-	
-	
+
 	/**
 	 * @param List<Coordinate>
 	 *            coordinateList return the nodelist
 	 */
-	public List<Coordinate> getCoorList() {
-		return coordinateList;
-	}
-	
-	public void addNodeList(int x, int y) {
-		Coordinate coor = new Coordinate(x, y);
-		coordinateList.add(coor);
-	}
+//	public List<Coordinate> getCoorList() {
+//		return coordinateList;
+//	}
+//
+//	public void addNodeList(int x, int y) {
+//		Coordinate coor = new Coordinate(x, y);
+//		coordinateList.add(coor);
+//	}
 
 	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {
 
@@ -181,6 +193,8 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 			// database..
 			NodeRelationDao nrd = new NodeRelationDaoImpl();
 			nrd.insertMultipleEdges(edgesToSave);
+			imageComponent.repaint();
+
 		}
 
 	}
