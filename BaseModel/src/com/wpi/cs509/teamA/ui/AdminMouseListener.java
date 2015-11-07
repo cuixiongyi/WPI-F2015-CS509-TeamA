@@ -2,8 +2,11 @@ package com.wpi.cs509.teamA.ui;
 
 import java.lang.Math;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -33,6 +36,8 @@ public class AdminMouseListener implements MouseListener {
 	 * Component for entering edge
 	 */
 	private NeighborDialog neighborDialog;
+	
+	private JButton btnNeighborManage;
 
 	/**
 	 * Default constructor
@@ -47,9 +52,17 @@ public class AdminMouseListener implements MouseListener {
 	 * @param imagePanel
 	 *            the image component that the listener will be added to
 	 */
-	public AdminMouseListener(ImageComponent imagePanel, NeighborDialog neighborDialog) {
+	public AdminMouseListener(ImageComponent imagePanel) {
 		this.imagePanel = imagePanel;
-		this.neighborDialog = neighborDialog;
+		this.btnNeighborManage = imagePanel.getInputPanel().getBtnNeighborManage();
+		this.btnNeighborManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				neighborDialog = new NeighborDialog();
+				neighborDialog.setVisible(true);
+				neighborDialog.setAlwaysOnTop(true);
+
+			}
+		});
 	}
 
 	@Override
@@ -58,7 +71,7 @@ public class AdminMouseListener implements MouseListener {
 		xPos = e.getX() - 5;
 		yPos = e.getY() - 5;
 		// TODO Auto-generated method stub
-		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog.isVisible()) {
+		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog==null) {
 			neighborDialog.setFieldTitle(xPos, yPos);
 		} else if (e.getButton() == MouseEvent.BUTTON1 && !neighborDialog.isVisible()) {
 			imagePanel.setxPos(xPos);

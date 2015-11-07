@@ -57,12 +57,14 @@ public class ImageComponent extends JComponent {
 	private static int num = 1;
 
 	private static int adminClicked = 2;
+	
+	private InputPanel inputPanel;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
 
 	public ImageComponent() {
-
+		
 		// initialize the mouse listener state
 		stateContext = new StateContext();
 	}
@@ -76,14 +78,14 @@ public class ImageComponent extends JComponent {
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
 	 */
-	public ImageComponent(final InputPanel inputPanel, final UserScreen userScreen, NeighborDialog neighborDialog) {
-
+	public ImageComponent(final InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
 		// initialize the mouse listener state
 		stateContext = new StateContext();
-		coordinateList=neighborDialog.getCoorList();
+	//	coordinateList=neighborDialog.getCoorList();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
-		adminMouseListener = new AdminMouseListener(this, neighborDialog);
+		adminMouseListener = new AdminMouseListener(this);
 
 		
 		// TODO: Move this part to input panel..
@@ -130,7 +132,7 @@ public class ImageComponent extends JComponent {
 				// not, give it normal user
 
 				if (adminClicked % 2 == 0) {
-					AdminDialog adminDialog = new AdminDialog(ImageComponent.this, userScreen, inputPanel);
+					AdminDialog adminDialog = new AdminDialog(ImageComponent.this, inputPanel);
 					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
 					adminDialog.setVisible(isFocusable());
 
@@ -138,7 +140,7 @@ public class ImageComponent extends JComponent {
 
 					JOptionPane.showMessageDialog(null, "You have logged out");
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-					userScreen.getBtnNeighborManage().setVisible(false);
+					inputPanel.getBtnNeighborManage().setVisible(false);
 					inputPanel.getAdminLogin().setText(LOGIN);
 					adminClicked++;
 				}
@@ -170,6 +172,15 @@ public class ImageComponent extends JComponent {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+
+	/**
+	 * @return the inputPanel
+	 */
+	public InputPanel getInputPanel() {
+		return inputPanel;
 	}
 
 	/**
@@ -263,6 +274,7 @@ public class ImageComponent extends JComponent {
 		this.adminClicked++;
 	}
 
+	
 	/**
 //	 * @param List<Coordinate>
 //	 *            coordinateList return the nodelist

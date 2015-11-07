@@ -51,9 +51,8 @@ public class AdminDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public AdminDialog(ImageComponent imageComponent, UserScreen userScreen, InputPanel inputPanel) {
+	public AdminDialog(ImageComponent imageComponent, InputPanel inputPanel) {
 		this.imgPanel = imageComponent;
-		this.userScreen = userScreen;
 		this.inputPanel = inputPanel;
 		setTitle(LOG);
 		setBounds(100, 100, 450, 300);
@@ -103,7 +102,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 				imgPanel.getStateContext().switchState(imgPanel, imgPanel.getNormalUserMouseListener(),
 						imgPanel.getAdminMouseListener());
 				imgPanel.incrementAdminClicked();
-				userScreen.getBtnNeighborManage().setVisible(true);
+				inputPanel.getBtnNeighborManage().setVisible(true);
 				inputPanel.getAdminLogin().setText(LOGOUT);
 			} else {
 				JOptionPane.showMessageDialog(null, "Invalid password. Try again.", "Error Message",
