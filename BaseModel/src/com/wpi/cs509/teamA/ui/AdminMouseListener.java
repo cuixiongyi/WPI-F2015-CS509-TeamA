@@ -64,6 +64,7 @@ public class AdminMouseListener implements MouseListener {
 			public void actionPerformed(ActionEvent e) {
 				neighborDialog = new NeighborDialog(imagePanel);
 				neighborDialog.setVisible(true);
+				neighborDialog.setLocation(1024, 10);
 				neighborDialog.setAlwaysOnTop(true);
 
 			}
