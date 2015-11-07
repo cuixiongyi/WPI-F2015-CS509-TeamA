@@ -79,10 +79,7 @@ public class AdminMouseListener implements MouseListener {
 		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog != null && neighborDialog.isVisible()) {
 			neighborDialog.setFieldTitle(xPos, yPos);
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
-			imagePanel.setxPos(xPos);
-			imagePanel.setyPos(yPos);
-
-			imagePanel.repaint();
+			//
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			boolean tooClose = false;
 

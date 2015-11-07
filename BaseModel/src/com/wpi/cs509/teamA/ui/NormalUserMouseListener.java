@@ -45,13 +45,6 @@ public class NormalUserMouseListener implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-		xPos = e.getX();
-		yPos = e.getY();
-
-		imagePanel.setxPos(xPos);
-		imagePanel.setyPos(yPos);
-
-		imagePanel.repaint();
 
 	}
 

@@ -305,11 +305,11 @@ public class ImageComponent extends JComponent {
 			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 			setForeground(Color.RED);
 			if (allNodes.get(1).size() != 0) {
+				int x, y;
 				for (int i = 0; i < allNodes.get(1).size(); i++) {
-					xPos = allNodes.get(1).get(i).getLocation().getX();
-					yPos = allNodes.get(1).get(i).getLocation().getY();
-					g.fillOval(xPos - ovalOffset, yPos - ovalOffset, 10, 10);
-
+					x = allNodes.get(1).get(i).getLocation().getX();
+					y = allNodes.get(1).get(i).getLocation().getY();
+					g.fillOval(x - ovalOffset, y - ovalOffset, 10, 10);
 				}
 			}
 
@@ -327,35 +327,30 @@ public class ImageComponent extends JComponent {
 					g.drawLine(xstart, ystart, xend, yend);
 				}
 			}
-
-			// paint the route
-			/*
-			 * if (pathNodeList.size() != 0) { for (int i = 0; i <
-			 * pathNodeList.size()-1; i++) { int xstart,ystart,xend,yend; xstart
-			 * = pathNodeList.get(i).getLocation().getX(); ystart =
-			 * pathNodeList.get(i).getLocation().getY();
-			 * 
-			 * xend = pathNodeList.get(i+1).getLocation().getX(); yend =
-			 * pathNodeList.get(i+1).getLocation().getY();
-			 * 
-			 * g.drawLine(xstart, ystart, xend, yend); System.out.println(i);
-			 * System.out.println(xstart+" "+ystart+" "+xend+" "+yend); } }
-			 */
-
-			if (!(xPos == 0 && yPos == 0)) {
-				g2.setPaint(Color.WHITE);
-				g2.drawString("(" + xPos + "," + yPos + ")", xPos, yPos);
-			}
-
-			// since it will be repaint again
-			// so the string will not be save on the image
-			// we should figure out an idea to save all the point we have
-			// clicked
-			// but I think maybe we can first save it
-			// then load all the points back to draw them on the image?
-
-			g2 = null;
-
 		}
+
+		// paint the route
+		/*
+		 * if (pathNodeList.size() != 0) { for (int i = 0; i <
+		 * pathNodeList.size()-1; i++) { int xstart,ystart,xend,yend; xstart =
+		 * pathNodeList.get(i).getLocation().getX(); ystart =
+		 * pathNodeList.get(i).getLocation().getY();
+		 * 
+		 * xend = pathNodeList.get(i+1).getLocation().getX(); yend =
+		 * pathNodeList.get(i+1).getLocation().getY();
+		 * 
+		 * g.drawLine(xstart, ystart, xend, yend); System.out.println(i);
+		 * System.out.println(xstart+" "+ystart+" "+xend+" "+yend); } }
+		 */
+
+		// since it will be repaint again
+		// so the string will not be save on the image
+		// we should figure out an idea to save all the point we have
+		// clicked
+		// but I think maybe we can first save it
+		// then load all the points back to draw them on the image?
+
+		g2 = null;
+
 	}
 }
