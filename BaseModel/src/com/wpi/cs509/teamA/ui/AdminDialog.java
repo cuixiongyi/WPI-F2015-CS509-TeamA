@@ -104,8 +104,8 @@ public class AdminDialog extends JDialog implements ActionListener {
 				imgPanel.incrementAdminClicked();
 				inputPanel.getBtnNeighborManage().setVisible(true);
 				inputPanel.getAdminLogin().setText(LOGOUT);
-				imgPanel.repaint();
-				
+				ImageComponent.setIsAdmin(true);
+				imgPanel.repaint();			
 			} else {
 				JOptionPane.showMessageDialog(null, "Invalid password. Try again.", "Error Message",
 						JOptionPane.ERROR_MESSAGE);
