@@ -1,0 +1,27 @@
+The first line
+Node ID:	24
+Node coor	709  191
+Node ID:	26
+Node coor	908  65
+Node ID:	25
+Node coor	837  63
+Node ID:	14
+Node coor	234  150
+Node ID:	19
+Node coor	349  160
+Node ID:	15
+Node coor	283  180
+Node ID:	16
+Node coor	209  252
+Node ID:	18
+Node coor	354  109
+Node ID:	21
+Node coor	96  202
+Node ID:	20
+Node coor	135  109
+Node ID:	22
+Node coor	75  249
+Node ID:	17
+Node coor	311  218
+Node ID:	23
+Node coor	670  248

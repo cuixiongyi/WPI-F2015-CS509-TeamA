@@ -13,6 +13,8 @@ import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +55,6 @@ public class ImageComponent extends JComponent {
 	private int xPos;
 	private int yPos;
 
-	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 	private List<Node> pathNodeList;
 
 	private Map<Integer, List<Node>> result;
@@ -63,6 +64,7 @@ public class ImageComponent extends JComponent {
 	private static int adminClicked = 2;
 	
 	private InputPanel inputPanel;
+	private final static int ovalOffset = 5;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -86,7 +88,6 @@ public class ImageComponent extends JComponent {
 		this.inputPanel = inputPanel;
 		// initialize the mouse listener state
 		stateContext = new StateContext();
-	//	coordinateList=neighborDialog.getCoorList();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
 		adminMouseListener = new AdminMouseListener(this);
@@ -281,18 +282,6 @@ public class ImageComponent extends JComponent {
 	}
 
 	
-	/**
-//	 * @param List<Coordinate>
-//	 *            coordinateList return the nodelist
-//	 */
-//	public List<Coordinate> getCoorList() {
-//		return coordinateList;
-//	}
-//
-//	public void addNodeList(int x, int y) {
-//		Coordinate coor = new Coordinate(x, y);
-//		coordinateList.add(coor);
-//	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -307,34 +296,39 @@ public class ImageComponent extends JComponent {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
 		
-		//paint all of the nodes
-		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-		setForeground(Color.RED);
-		if (allNodes.get(1).size() != 0) {
-			for (int i = 0; i < allNodes.get(1).size(); i++) {
-				xPos = allNodes.get(1).get(i).getLocation().getX();
-				yPos = allNodes.get(1).get(i).getLocation().getY();
-				g.fillOval(xPos, yPos, 10, 10);
+	
+			//paint all of the nodes
+			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+			setForeground(Color.RED);
+			if (allNodes.get(1).size() != 0) {
+				for (int i = 0; i < allNodes.get(1).size(); i++) {
+					xPos = allNodes.get(1).get(i).getLocation().getX();
+					yPos = allNodes.get(1).get(i).getLocation().getY();
+					g.fillOval(xPos-ovalOffset, yPos-ovalOffset, 10, 10);
+					
+				}
 			}
-		}
-		
-		
-		//paint all the edges
-		Set<NodeRelation> allEdges=UIDataBuffer.getAllEdges();
-		if (allEdges.size() != 0) {
-			for( NodeRelation edge : allEdges ){
-				int xstart,ystart,xend,yend;
-				xstart=edge.getFirstNodeCoordinate().getX();
-				ystart=edge.getFirstNodeCoordinate().getY();
-				
-				xend=edge.getSecondNodeCoordinate().getX();
-				yend=edge.getSecondNodeCoordinate().getY();
-				
-				g.drawLine(xstart, ystart, xend, yend);
+			
+			
+			//paint all the edges
+			Set<NodeRelation> allEdges=UIDataBuffer.getAllEdges();
+			if (allEdges.size() != 0) {
+				for( NodeRelation edge : allEdges ){
+					int xstart,ystart,xend,yend;
+					xstart=edge.getFirstNodeCoordinate().getX();
+					ystart=edge.getFirstNodeCoordinate().getY();
+					
+					xend=edge.getSecondNodeCoordinate().getX();
+					yend=edge.getSecondNodeCoordinate().getY();
+					
+					g.drawLine(xstart, ystart, xend, yend);
+				}
 			}
-		}
-		
-		
+			
+			
+			
+			
+			
 		//paint the route
 		/*
 		if (pathNodeList.size() != 0) {

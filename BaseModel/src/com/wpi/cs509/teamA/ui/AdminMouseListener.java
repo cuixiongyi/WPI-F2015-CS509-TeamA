@@ -73,8 +73,8 @@ public class AdminMouseListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// we have to minus 5 to correct deviation
-		xPos = e.getX() - 5;
-		yPos = e.getY() - 5;
+		xPos = e.getX();
+		yPos = e.getY();
 		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog != null && neighborDialog.isVisible()) {
 			neighborDialog.setFieldTitle(xPos, yPos);

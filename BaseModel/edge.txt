@@ -1,0 +1,9 @@
+The first line
+Node 1st coor:	 283  180
+Node 1st coor:	 311  218
+Node 1st coor:	 234  150
+Node 1st coor:	 209  252
+Node 1st coor:	 837  63
+Node 1st coor:	 908  65
+Node 1st coor:	 75  249
+Node 1st coor:	 96  202
