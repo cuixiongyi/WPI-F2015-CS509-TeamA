@@ -1,9 +1,14 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.lang.Math;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +41,7 @@ public class AdminMouseListener implements MouseListener {
 	 * Component for entering edge
 	 */
 	private NeighborDialog neighborDialog;
-	
+
 	private JButton btnNeighborManage;
 
 	/**
@@ -71,21 +76,24 @@ public class AdminMouseListener implements MouseListener {
 		xPos = e.getX() - 5;
 		yPos = e.getY() - 5;
 		// TODO Auto-generated method stub
-		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog==null) {
+		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog != null && neighborDialog.isVisible()) {
 			neighborDialog.setFieldTitle(xPos, yPos);
-		} else if (e.getButton() == MouseEvent.BUTTON1 && !neighborDialog.isVisible()) {
+		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			imagePanel.setxPos(xPos);
 			imagePanel.setyPos(yPos);
 
 			imagePanel.repaint();
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			boolean tooClose = false;
-//			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
-//				if (Math.abs(xPos - neighborDialog.getCoorList().get(i).getX()) < closeRange
-//						&& Math.abs(yPos - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
-//					tooClose = true;
-//				}
-//			}
+
+			Map<Integer, List<Node>> allNodesNow = UIDataBuffer.getAllNodes();
+			List<Node> temp = allNodesNow.get(1);
+			for (int i = 0; i < temp.size(); i++) {
+				if (Math.abs(xPos - temp.get(i).getLocation().getX()) < closeRange
+						&& Math.abs(yPos - temp.get(i).getLocation().getY()) < closeRange) {
+					tooClose = true;
+				}
+			}
 			if (tooClose) {
 				JOptionPane.showMessageDialog(null, "Too close from another node.");
 			} else {

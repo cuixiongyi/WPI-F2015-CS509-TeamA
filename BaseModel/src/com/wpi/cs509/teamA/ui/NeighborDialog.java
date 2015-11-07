@@ -34,7 +34,7 @@ import com.wpi.cs509.teamA.util.UIDataBuffer;
 @SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
 
-	private final static int nodeRange = 10;
+	private final static int nodeRange = 5;
 
 	private JButton saveButton;
 	private JButton cancelButton;
@@ -45,7 +45,7 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private JTextField[] textFieldNodePair = new JTextField[20];
 	private JTextField getCoordinateTextField = null;
 
-//	private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
+	// private List<Coordinate> coordinateList = new ArrayList<Coordinate>();
 	private ImageComponent imageComponent;
 
 	private final static String SAVE = "Save";
@@ -105,13 +105,11 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	public void setFieldTitle(int xPos, int yPos) {
 
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-		
-		
-		
+
 		boolean sameNode = false;
 		for (int i = 0; i < allNodes.get(1).size(); i++) {
 			if (Math.abs(xPos - allNodes.get(1).get(i).getLocation().getX()) < nodeRange
-					|| Math.abs(yPos - allNodes.get(1).get(i).getLocation().getY()) < nodeRange) {
+					&& Math.abs(yPos - allNodes.get(1).get(i).getLocation().getY()) < nodeRange) {
 				sameNode = true;
 				xPos = allNodes.get(1).get(i).getLocation().getX();
 				yPos = allNodes.get(1).get(i).getLocation().getY();
@@ -120,7 +118,6 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		if (sameNode) {
 			this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));
 		}
-		
 
 	}
 
@@ -128,14 +125,14 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	 * @param List<Coordinate>
 	 *            coordinateList return the nodelist
 	 */
-//	public List<Coordinate> getCoorList() {
-//		return coordinateList;
-//	}
-//
-//	public void addNodeList(int x, int y) {
-//		Coordinate coor = new Coordinate(x, y);
-//		coordinateList.add(coor);
-//	}
+	// public List<Coordinate> getCoorList() {
+	// return coordinateList;
+	// }
+	//
+	// public void addNodeList(int x, int y) {
+	// Coordinate coor = new Coordinate(x, y);
+	// coordinateList.add(coor);
+	// }
 
 	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {
 
