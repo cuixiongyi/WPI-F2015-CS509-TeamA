@@ -1,9 +1,17 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.lang.Math;
+import java.util.List;
+import java.util.Map;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -34,6 +42,8 @@ public class AdminMouseListener implements MouseListener {
 	 */
 	private NeighborDialog neighborDialog;
 
+	private JButton btnNeighborManage;
+
 	/**
 	 * Default constructor
 	 */
@@ -47,36 +57,44 @@ public class AdminMouseListener implements MouseListener {
 	 * @param imagePanel
 	 *            the image component that the listener will be added to
 	 */
-	public AdminMouseListener(ImageComponent imagePanel, NeighborDialog neighborDialog) {
+	public AdminMouseListener(final ImageComponent imagePanel) {
 		this.imagePanel = imagePanel;
-		this.neighborDialog = neighborDialog;
+		this.btnNeighborManage = imagePanel.getInputPanel().getBtnNeighborManage();
+		this.btnNeighborManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				neighborDialog = new NeighborDialog(imagePanel);
+				neighborDialog.setVisible(true);
+				neighborDialog.setAlwaysOnTop(true);
+
+			}
+		});
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// we have to minus 5 to correct deviation
-		xPos = e.getX() - 5;
-		yPos = e.getY() - 5;
+		xPos = e.getX();
+		yPos = e.getY();
 		// TODO Auto-generated method stub
-		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog.isVisible()) {
+		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog != null && neighborDialog.isVisible()) {
 			neighborDialog.setFieldTitle(xPos, yPos);
-		} else if (e.getButton() == MouseEvent.BUTTON1 && !neighborDialog.isVisible()) {
-			imagePanel.setxPos(xPos);
-			imagePanel.setyPos(yPos);
-
-			imagePanel.repaint();
+		} else if (e.getButton() == MouseEvent.BUTTON1) {
+			//
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
 			boolean tooClose = false;
-			for (int i = 0; i < neighborDialog.getCoorList().size(); i++) {
-				if (Math.abs(xPos - neighborDialog.getCoorList().get(i).getX()) < closeRange
-						&& Math.abs(yPos - neighborDialog.getCoorList().get(i).getY()) < closeRange) {
+
+			Map<Integer, List<Node>> allNodesNow = UIDataBuffer.getAllNodes();
+			List<Node> temp = allNodesNow.get(1);
+			for (int i = 0; i < temp.size(); i++) {
+				if (Math.abs(xPos - temp.get(i).getLocation().getX()) < closeRange
+						&& Math.abs(yPos - temp.get(i).getLocation().getY()) < closeRange) {
 					tooClose = true;
 				}
 			}
 			if (tooClose) {
 				JOptionPane.showMessageDialog(null, "Too close from another node.");
 			} else {
-				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, neighborDialog, xPos, yPos);
+				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, xPos, yPos);
 				nodeManageMenu.show(e.getComponent(), xPos, yPos);
 			}
 		}

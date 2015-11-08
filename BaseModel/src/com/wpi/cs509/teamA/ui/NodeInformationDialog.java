@@ -39,7 +39,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private int xPos;
 	private int yPos;
 	private ImageComponent imagePanel;
-	private NeighborDialog neighborDialog;
 
 	private final static String COORDINATE = "Node Coordinate";
 	private final static String TYPE = "Node Type";
@@ -51,11 +50,10 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeInformationDialog(ImageComponent imageComponent,NeighborDialog neighborDialog, int xPosition, int yPosition) {
+	public NodeInformationDialog(ImageComponent imageComponent, int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
-		this.neighborDialog=neighborDialog;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -168,7 +166,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				node.saveNode();
 				
 				// show what we have saved..
-				neighborDialog.addNodeList(xPos, yPos);
 				imagePanel.repaint();
 				this.setVisible(false);
 			}

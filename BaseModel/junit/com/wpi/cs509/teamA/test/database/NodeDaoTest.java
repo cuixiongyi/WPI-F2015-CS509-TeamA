@@ -24,6 +24,9 @@ public class NodeDaoTest {
 	@Test
 	public void getAllNodesTest() {
 
+		NodeDao nd = new NodeDaoImpl();
+		System.out.println(nd.getAllNodes().size());
+
 	}
 
 	@Test
@@ -44,21 +47,21 @@ public class NodeDaoTest {
 		nd.saveNode(node);
 
 	}
-	
+
 	@Test
-	public void getNodeFromIdTest(){
-		
+	public void getNodeFromIdTest() {
+
 		NodeDao nd = new NodeDaoImpl();
 		System.out.println(nd.getNodeFromId(40));
-		
+
 	}
-	
+
 	@Test
-	public void getNodeFromIdsTest(){
-		
+	public void getNodeFromIdsTest() {
+
 		NodeDao nd = new NodeDaoImpl();
 		// nd.getNodeFromIds(nodeIds)
-		
+
 	}
 
 }

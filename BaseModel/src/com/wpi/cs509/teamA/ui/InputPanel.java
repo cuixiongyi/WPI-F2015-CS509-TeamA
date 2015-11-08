@@ -31,6 +31,7 @@ public class InputPanel extends JPanel {
 	private JButton adminLogin;
 	private JLabel lblFrom;
 	private JLabel lblTo;
+	private JButton btnNeighborManage;
 	
 
 	private final static String SEARCH = "Search";
@@ -47,12 +48,17 @@ public class InputPanel extends JPanel {
 		this.endPoint = new JTextField();
 		this.btnSearch = new JButton(SEARCH);
 		this.adminLogin = new JButton(LOGIN);
+		this.btnNeighborManage = new JButton("NEIGHBOR");
+		btnNeighborManage.setSize(150, 30);
+		btnNeighborManage.setLocation(50, 50);
+		this.btnNeighborManage.setVisible(false);
 
 		this.setLayout(null);
 		this.add(startPoint);
 		this.add(endPoint);
 		this.add(btnSearch);
 		this.add(adminLogin);
+		this.add(btnNeighborManage);
 
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
@@ -63,6 +69,8 @@ public class InputPanel extends JPanel {
 		this.getEndPoint().setBounds(50, 200, 150, 38);
 		this.getStartPoint().setBounds(50, 100, 150, 38);
 		this.setBounds(0, 0, 1178, 214);
+	
+		
 		
 		lblFrom = new JLabel(FROM);
 		lblFrom.setBounds(15, 110, 61, 16);
@@ -133,4 +141,12 @@ public class InputPanel extends JPanel {
 	public void setAdminLogin(JButton adminLogin) {
 		this.adminLogin = adminLogin;
 	}
+
+	/**
+	 * @return the btnNeighborManage
+	 */
+	public JButton getBtnNeighborManage() {
+		return btnNeighborManage;
+	}
+	
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Set;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
 
 public class NodeDaoImpl implements NodeDao {
@@ -66,6 +68,36 @@ public class NodeDaoImpl implements NodeDao {
 	@Override
 	public Set<Node> getAllNodes() {
 		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		Set<Node> res = new HashSet<Node>();
+		try {
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node;";
+			pstmt = conn.prepareStatement(selectAllNodes);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				Node node = new Node();
+				node.setId(resultSet.getInt("id"));
+				node.setName(resultSet.getString("name"));
+				Coordinate location = new Coordinate();
+				location.setX(resultSet.getInt("x"));
+				location.setY(resultSet.getInt("y"));
+				node.setLocation(location);
+				node.setMapId(resultSet.getInt("map_id"));
+				node.setNodeType(NodeType.valueOf(resultSet.getString("classification")));
+				res.add(node);
+
+			}
+
+			return res;
+
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+
 		return null;
 	}
 

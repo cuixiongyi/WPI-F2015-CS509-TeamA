@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.dao.impl;
+package com.wpi.cs509.teamA.util;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
