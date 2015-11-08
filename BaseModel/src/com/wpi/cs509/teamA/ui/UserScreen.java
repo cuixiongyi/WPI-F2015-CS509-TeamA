@@ -2,7 +2,6 @@ package com.wpi.cs509.teamA.ui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -16,8 +15,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -33,12 +30,6 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
-	private JScrollPane imgScrollPanel;
-	private NeighborDialog neighborDialog;
-
-	private final static String NEIGHBOR = "Neighbor Manage Tool";
-	private final static String PATH = "Path Finding";
-
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
@@ -47,7 +38,6 @@ public class UserScreen extends JFrame {
 	private JButton btnNeighborManage;
 	private JPanel wrappingImgPanel;
 	private JPanel wrappingButtonPanel;
-	private JPanel wrappingInputPanel;
 	private JPanel wrappingButtonPanelE;
 
 	/**

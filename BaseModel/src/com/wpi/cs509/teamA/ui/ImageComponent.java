@@ -1,7 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dialog.ModalityType;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,25 +8,18 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
-import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 /**
@@ -59,8 +51,6 @@ public class ImageComponent extends JComponent {
 
 	private Map<Integer, List<Node>> result;
 
-	private static int num = 1;
-
 	private static int adminClicked = 2;
 
 	private InputPanel inputPanel;
@@ -87,7 +77,7 @@ public class ImageComponent extends JComponent {
 	 *            in the inner class
 	 */
 	public ImageComponent(final InputPanel inputPanel) {
-		this.isAdmin = false;
+		ImageComponent.isAdmin = false;
 		this.inputPanel = inputPanel;
 		// initialize the mouse listener state
 		stateContext = new StateContext();
@@ -114,11 +104,13 @@ public class ImageComponent extends JComponent {
 				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
 						inputPanel.getEndPoint().getText().trim());
 
+				// get the result of the search..
+				result = null;
 				result = algoController.getRoute();
 
-				// pathNodeList=result.get(1);
-
-				// TODO: use the result to draw the lines
+				// get a list of a map, so that we can draw line on that map..
+				pathNodeList = null;
+				pathNodeList = result.get(1);
 
 				// we need to give all the information to the repaint metho
 				repaint();
@@ -280,7 +272,7 @@ public class ImageComponent extends JComponent {
 	}
 
 	public void incrementAdminClicked() {
-		this.adminClicked++;
+		ImageComponent.adminClicked++;
 	}
 
 	public static void setIsAdmin(boolean isAdmin) {
@@ -304,7 +296,7 @@ public class ImageComponent extends JComponent {
 			// paint all of the nodes
 			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 			setForeground(Color.RED);
-			if (allNodes.get(1).size() != 0) {
+			if (allNodes != null && allNodes.get(1).size() != 0) {
 				int x, y;
 				for (int i = 0; i < allNodes.get(1).size(); i++) {
 					x = allNodes.get(1).get(i).getLocation().getX();
@@ -330,25 +322,20 @@ public class ImageComponent extends JComponent {
 		}
 
 		// paint the route
-		/*
-		 * if (pathNodeList.size() != 0) { for (int i = 0; i <
-		 * pathNodeList.size()-1; i++) { int xstart,ystart,xend,yend; xstart =
-		 * pathNodeList.get(i).getLocation().getX(); ystart =
-		 * pathNodeList.get(i).getLocation().getY();
-		 * 
-		 * xend = pathNodeList.get(i+1).getLocation().getX(); yend =
-		 * pathNodeList.get(i+1).getLocation().getY();
-		 * 
-		 * g.drawLine(xstart, ystart, xend, yend); System.out.println(i);
-		 * System.out.println(xstart+" "+ystart+" "+xend+" "+yend); } }
-		 */
+		if (pathNodeList != null && pathNodeList.size() != 0) {
+			for (int i = 0; i < pathNodeList.size() - 1; i++) {
+				int xstart, ystart, xend, yend;
+				xstart = pathNodeList.get(i).getLocation().getX();
+				ystart = pathNodeList.get(i).getLocation().getY();
 
-		// since it will be repaint again
-		// so the string will not be save on the image
-		// we should figure out an idea to save all the point we have
-		// clicked
-		// but I think maybe we can first save it
-		// then load all the points back to draw them on the image?
+				xend = pathNodeList.get(i + 1).getLocation().getX();
+				yend = pathNodeList.get(i + 1).getLocation().getY();
+
+				g.drawLine(xstart, ystart, xend, yend);
+				// System.out.println("draw line.." + xstart + " " + ystart + "
+				// " + xend + " " + yend);
+			}
+		}
 
 		g2 = null;
 

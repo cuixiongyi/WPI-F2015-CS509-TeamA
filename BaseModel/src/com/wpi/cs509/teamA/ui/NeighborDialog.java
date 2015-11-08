@@ -142,6 +142,8 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		return null;
 	}
 
+	// TODO: Remove this method and use static method from Coordinate class
+	// instead..
 	private Coordinate getCoordinate(JTextField textField) {
 		Coordinate resCorrdinate = new Coordinate();
 		String[] corrdinate = (textField.getText()).split(",");
