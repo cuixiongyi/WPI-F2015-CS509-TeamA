@@ -118,36 +118,6 @@ public class UserScreen extends JFrame {
 
 		wrappingImgPanel.add(imgScrollPanel);
 
-		wrappingButtonPanel = new JPanel();
-		wrappingButtonPanel.setMinimumSize(new Dimension(30, 30));
-		wrappingButtonPanel.setMaximumSize(new Dimension(50, 50));
-		GridBagConstraints gbcWrappingButtonPanel = new GridBagConstraints();
-		gbcWrappingButtonPanel.gridx = 13;
-		gbcWrappingButtonPanel.gridy = 8;
-		contentPane.add(wrappingButtonPanel, gbcWrappingButtonPanel);
-		wrappingButtonPanel.setLayout(new BoxLayout(wrappingButtonPanel, BoxLayout.X_AXIS));
-
-		wrappingButtonPanelE = new JPanel();
-		wrappingButtonPanelE.setMinimumSize(new Dimension(30, 30));
-		wrappingButtonPanelE.setMaximumSize(new Dimension(50, 50));
-		GridBagConstraints gbcWrappingButtonPanelE = new GridBagConstraints();
-		gbcWrappingButtonPanelE.gridx = 14;
-		gbcWrappingButtonPanelE.gridy = 8;
-		contentPane.add(wrappingButtonPanelE, gbcWrappingButtonPanelE);
-		wrappingButtonPanelE.setLayout(new BoxLayout(wrappingButtonPanelE, BoxLayout.X_AXIS));
-
-		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
-		wrappingButtonPanel.add(WestArrowButton);
-
-		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
-		wrappingButtonPanelE.add(EastArrowButton);
-
-		//
-		// GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
-		// gbcBtnNeighborManage.gridx = 0;
-		// gbcBtnNeighborManage.gridy = 10;
-		// contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
-
 		setSize(800, 500);
 		setVisible(true);
 		setResizable(true);
