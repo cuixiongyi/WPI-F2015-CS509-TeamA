@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 /**
  * JPanel that have input text fields and buttons which will be shown on the top
@@ -32,8 +33,7 @@ public class InputPanel extends JPanel {
 	private JLabel lblFrom;
 	private JLabel lblTo;
 	private JButton btnNeighborManage;
-	
-
+	private JComboBox comboBoxMap;
 	private final static String SEARCH = "Search";
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
@@ -50,7 +50,7 @@ public class InputPanel extends JPanel {
 		this.adminLogin = new JButton(LOGIN);
 		this.btnNeighborManage = new JButton("NEIGHBOR");
 		btnNeighborManage.setSize(150, 30);
-		btnNeighborManage.setLocation(50, 50);
+		btnNeighborManage.setLocation(80, 55);
 		this.btnNeighborManage.setVisible(false);
 
 		this.setLayout(null);
@@ -64,24 +64,43 @@ public class InputPanel extends JPanel {
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
 		this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-		this.getAdminLogin().setBounds(50, 0, 150, 30);
-		this.getBtnSearch().setBounds(50, 300, 150, 38);
-		this.getEndPoint().setBounds(50, 200, 150, 38);
-		this.getStartPoint().setBounds(50, 100, 150, 38);
-		this.setBounds(0, 0, 1178, 214);
+		this.getAdminLogin().setBounds(80, 0, 150, 30);
+		this.getBtnSearch().setBounds(80, 258, 150, 38);
+		this.getEndPoint().setBounds(80, 188, 150, 38);
+		this.getStartPoint().setBounds(80, 114, 150, 38);
+		this.setBounds(0, 0, 1178, 516);
 	
 		
 		
 		lblFrom = new JLabel(FROM);
-		lblFrom.setBounds(15, 110, 61, 16);
+		lblFrom.setBounds(15, 122, 61, 16);
 		add(lblFrom);
 		
 		lblTo = new JLabel(TO);
-		lblTo.setBounds(30, 210, 61, 16);
+		lblTo.setBounds(15, 196, 61, 16);
 		add(lblTo);
 		
+		comboBoxMap = new JComboBox();
+		comboBoxMap.setBounds(80, 345, 150, 27);
+		comboBoxMap.addItem("Campus Map");
+		comboBoxMap.addItem("AK-G");
+		comboBoxMap.addItem("AK-1");
+		comboBoxMap.addItem("AK-2");
+		comboBoxMap.addItem("AK-3");
+		comboBoxMap.addItem("AK-4");
+		comboBoxMap.addItem("PC-1");
+		comboBoxMap.addItem("PC=2");
+		add(comboBoxMap);
+		
+		JLabel lblMap = new JLabel("Map: ");
+		lblMap.setBounds(15, 348, 61, 21);
+		add(lblMap);
+		
 	}
-
+	
+	public JComboBox getComboBoxMap() {
+		return comboBoxMap;
+	}
 	/**
 	 * @return the startPoint
 	 */
@@ -148,5 +167,4 @@ public class InputPanel extends JPanel {
 	public JButton getBtnNeighborManage() {
 		return btnNeighborManage;
 	}
-	
 }

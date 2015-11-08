@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -151,6 +153,30 @@ public class ImageComponent extends JComponent {
 
 		});
 
+		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
+					ImageComponent.this.repaint();
+				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/CSP.jpg");
+					ImageComponent.this.repaint();
+				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
+
+				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/CSP.jpg");
+					ImageComponent.this.repaint();
+				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
+
+				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/CSP.jpg");
+					ImageComponent.this.repaint();
+				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
+
+				}
+			}
+
+		});
 	}
 
 	/**
