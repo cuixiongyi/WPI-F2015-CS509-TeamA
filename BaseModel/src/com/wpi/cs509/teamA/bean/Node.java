@@ -2,9 +2,7 @@ package com.wpi.cs509.teamA.bean;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.wpi.cs509.teamA.dao.NodeDao;
-import com.wpi.cs509.teamA.dao.impl.DupEntranceMapDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -104,16 +102,6 @@ public class Node {
 	public void deleteNode() {
 		// deleteFromNeighbour
 		// this.deleteFromNeighbour(this.id);
-
-	}
-
-	/**
-	 * delete the node from one of it's neighbor
-	 * 
-	 * @param nodeId
-	 *            the neighbor id
-	 */
-	private void deleteFromNeighbour(String nodeId) {
 
 	}
 

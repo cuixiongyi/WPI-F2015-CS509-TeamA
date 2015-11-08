@@ -73,6 +73,8 @@ public class AlgoController {
 	 */
 	public Map<Integer, List<Node>> getRoute() {
 
+		// we support searching node now only..
+
 		// get the node from database
 		Node fromNode = this.getNodeFromName(startNode);
 		Node toNode = this.getNodeFromName(endNode);
@@ -88,14 +90,14 @@ public class AlgoController {
 		int temp = 0;
 		for (Edge edge : edges) {
 			inputEdges[temp++] = edge;
-			System.out.println("edge: " + edge.getId1() + " " + edge.getId2());
+			// System.out.println("edge: " + edge.getId1() + " " +
+			// edge.getId2());
 
 		}
 
-		// Edge[] edges = { new Edge(1, 1, 1) }; // junk to test
-		Graph context = new Graph(inputEdges);
 		// TODO: Build Graph of all nodes in scenario in the following format:
 		// (int nodeid1, int nodeid2, int distance)
+		Graph context = new Graph(inputEdges);
 
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
@@ -106,8 +108,8 @@ public class AlgoController {
 		if (startMapId == endMapId) {
 
 			// assemble 2 nodes just for test..
-			fromNode.setId(47);
-			toNode.setId(45);
+			fromNode.setId(Integer.valueOf(startNode));
+			toNode.setId(Integer.valueOf(endNode));
 
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
