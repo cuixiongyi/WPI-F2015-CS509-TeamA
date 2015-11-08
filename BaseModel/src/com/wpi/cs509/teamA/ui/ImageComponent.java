@@ -322,7 +322,6 @@ public class ImageComponent extends JComponent {
 		}
 
 		// paint the route
-		setForeground(Color.BLUE);
 		if (pathNodeList != null && pathNodeList.size() != 0) {
 			for (int i = 0; i < pathNodeList.size() - 1; i++) {
 				int xstart, ystart, xend, yend;
