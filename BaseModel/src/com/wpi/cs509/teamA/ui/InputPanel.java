@@ -89,7 +89,7 @@ public class InputPanel extends JPanel {
 		comboBoxMap.addItem("AK-3");
 		comboBoxMap.addItem("AK-4");
 		comboBoxMap.addItem("PC-1");
-		comboBoxMap.addItem("PC=2");
+		comboBoxMap.addItem("PC-2");
 		add(comboBoxMap);
 		
 		JLabel lblMap = new JLabel("Map: ");

@@ -163,16 +163,19 @@ public class ImageComponent extends JComponent {
 					ImageComponent.this.repaint();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
 					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_First_Floor.jpg");
+					ImageComponent.this.repaint();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
 					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_Second_Floor.jpg");
 					ImageComponent.this.repaint();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_Third_Floor.jpg");
+					ImageComponent.this.repaint();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/CSP.jpg");
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_Project_Center_First_Floor.jpg");
 					ImageComponent.this.repaint();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-
+					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_Project_Center_Second_Floor.jpg");
+					ImageComponent.this.repaint();
 				}
 			}
 
