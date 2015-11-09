@@ -17,6 +17,7 @@ import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 public class NodeDaoImpl implements NodeDao {
 
@@ -71,8 +72,10 @@ public class NodeDaoImpl implements NodeDao {
 		ResultSet resultSet = null;
 		Set<Node> res = new HashSet<Node>();
 		try {
-			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node;";
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node where map_id=?;";
 			pstmt = conn.prepareStatement(selectAllNodes);
+			// TODO: potential danger..
+			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
 				Node node = new Node();

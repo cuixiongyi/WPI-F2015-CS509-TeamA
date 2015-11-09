@@ -1,13 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,7 +27,7 @@ public class InputPanel extends JPanel {
 	private JLabel lblFrom;
 	private JLabel lblTo;
 	private JButton btnNeighborManage;
-	private JComboBox comboBoxMap;
+	private JComboBox<String> comboBoxMap;
 	private final static String SEARCH = "Search";
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
@@ -44,7 +37,7 @@ public class InputPanel extends JPanel {
 	 * Constructor. Initialize all the input panel.
 	 */
 	public InputPanel() {
-//		// User input block
+		// // User input block
 		this.startPoint = new JTextField();
 		this.endPoint = new JTextField();
 		this.btnSearch = new JButton(SEARCH);
@@ -70,42 +63,40 @@ public class InputPanel extends JPanel {
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
 		this.getEndPoint().setBounds(80, 225, 150, 38);
 		this.getStartPoint().setBounds(80, 150, 150, 38);
-//		this.setBounds(0, 0, 1178, 516);
-	
-		
-		
+		// this.setBounds(0, 0, 1178, 516);
+
 		lblFrom = new JLabel(FROM);
 		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFrom.setBounds(15, 150, 61, 16);
 		add(lblFrom);
-		
+
 		lblTo = new JLabel(TO);
 		lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTo.setBounds(15, 225, 61, 16);
 		add(lblTo);
-		
-		comboBoxMap = new JComboBox();
+
+		comboBoxMap = new JComboBox<String>();
 		comboBoxMap.setBounds(80, 55, 150, 30);
 		comboBoxMap.addItem("Campus Map");
 		comboBoxMap.addItem("AK-G");
 		comboBoxMap.addItem("AK-1");
 		comboBoxMap.addItem("AK-2");
 		comboBoxMap.addItem("AK-3");
-		comboBoxMap.addItem("AK-4");
 		comboBoxMap.addItem("PC-1");
 		comboBoxMap.addItem("PC-2");
 		add(comboBoxMap);
-		
+
 		JLabel lblMap = new JLabel("Map: ");
 		lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblMap.setBounds(15, 55, 61, 21);
 		add(lblMap);
-		
+
 	}
-	
-	public JComboBox getComboBoxMap() {
+
+	public JComboBox<String> getComboBoxMap() {
 		return comboBoxMap;
 	}
+
 	/**
 	 * @return the startPoint
 	 */

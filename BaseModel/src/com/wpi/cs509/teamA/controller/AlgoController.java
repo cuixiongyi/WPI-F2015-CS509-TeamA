@@ -107,7 +107,8 @@ public class AlgoController {
 		// in the same map..
 		if (startMapId == endMapId) {
 
-			// assemble 2 nodes just for test..
+			// assemble 2 nodes just for test.. definitely should not use id to
+			// search..
 			fromNode.setId(Integer.valueOf(startNode));
 			toNode.setId(Integer.valueOf(endNode));
 

@@ -8,17 +8,12 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.Color;
-
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.synth.SynthLookAndFeel;
 
 //import com.sun.prism.paint.Color;
 
@@ -46,14 +41,12 @@ public class UserScreen extends JFrame {
 	private InputPanel inputPanel;
 	private JButton btnNeighborManage;
 	private JPanel wrappingImgPanel;
-	private JPanel wrappingButtonPanel;
-	private JPanel wrappingButtonPanelE;
 
 	/**
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
@@ -63,35 +56,34 @@ public class UserScreen extends JFrame {
 			e.printStackTrace();
 		}
 
-		
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            break;
-		        }
-		    }
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
 		} catch (Exception e) {
-		    // If Nimbus is not available, you can set the GUI to another look and feel.
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
 		}
-		
-		UIManager.put("nimbusBase", new Color(142,143,145));
-//		UIManager.put("nimbusBlueGrey", new Color(169,46,3));
-//		UIManager.put("control", new Color(169,46,3));
-		
-//		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//		    if ("Nimbus".equals(info.getName())) {
-//		        UIManager.setLookAndFeel(info.getClassName());
-//		        break;
-//		    }
-//		}
-//		
-		
+
+		UIManager.put("nimbusBase", new Color(142, 143, 145));
+		// UIManager.put("nimbusBlueGrey", new Color(169,46,3));
+		// UIManager.put("control", new Color(169,46,3));
+
+		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		// if ("Nimbus".equals(info.getName())) {
+		// UIManager.setLookAndFeel(info.getClassName());
+		// break;
+		// }
+		// }
+		//
+
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		
 		this.setBounds(100, 100, 1600, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -136,6 +128,7 @@ public class UserScreen extends JFrame {
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
 		// display the image. Note that "/" only works on UNIX
+		// TODO: default map? change the way to do this...
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);

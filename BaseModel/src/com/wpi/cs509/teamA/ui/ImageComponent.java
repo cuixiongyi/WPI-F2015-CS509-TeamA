@@ -91,7 +91,7 @@ public class ImageComponent extends JComponent {
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
 
-		// add listener to the search button
+		// Click the SEARCH button..
 		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -112,7 +112,7 @@ public class ImageComponent extends JComponent {
 
 				// get a list of a map, so that we can draw line on that map..
 				pathNodeList = null;
-				pathNodeList = result.get(1);
+				pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
 
 				// we need to give all the information to the repaint metho
 				repaint();
@@ -153,33 +153,48 @@ public class ImageComponent extends JComponent {
 
 		});
 
+		// TODO: Make the map related things into a enum class..
 		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_Campus_Map", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(1);
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_Ground_Floor.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_AK_Ground_Floor", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(2);
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_First_Floor.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_AK_First_Floor", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(3);
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_Second_Floor.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_AK_Second_Floor", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(4);
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_AK_Third_Floor.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_AK_Third_Floor", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(5);
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_Project_Center_First_Floor.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(6);
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-					ImageComponent.this.setImagePath(System.getProperty("user.dir") + "/src/Final_Project_Center_Second_Floor.jpg");
-					ImageComponent.this.repaint();
+					selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
+					UIDataBuffer.setCurrentMapId(7);
 				}
 			}
 
 		});
+
+	}
+
+	/**
+	 * 
+	 * Select the right image and paint it on the image component
+	 * 
+	 * @param mapName
+	 * @param imageComponent
+	 */
+	private void selectImage(String mapName, ImageComponent imageComponent) {
+		imageComponent.setImagePath(System.getProperty("user.dir") + "/src/" + mapName + ".jpg");
+		imageComponent.repaint();
+
 	}
 
 	/**
@@ -350,19 +365,23 @@ public class ImageComponent extends JComponent {
 			}
 		}
 
-		// paint the route
-		if (pathNodeList != null && pathNodeList.size() != 0) {
-			for (int i = 0; i < pathNodeList.size() - 1; i++) {
-				int xstart, ystart, xend, yend;
-				xstart = pathNodeList.get(i).getLocation().getX();
-				ystart = pathNodeList.get(i).getLocation().getY();
+		if (pathNodeList != null && pathNodeList.get(1).getMapId() == UIDataBuffer.getCurrentMapId()) {
 
-				xend = pathNodeList.get(i + 1).getLocation().getX();
-				yend = pathNodeList.get(i + 1).getLocation().getY();
+			// paint the route
+			if (pathNodeList != null && pathNodeList.size() != 0) {
+				for (int i = 0; i < pathNodeList.size() - 1; i++) {
+					int xstart, ystart, xend, yend;
+					xstart = pathNodeList.get(i).getLocation().getX();
+					ystart = pathNodeList.get(i).getLocation().getY();
 
-				g.drawLine(xstart, ystart, xend, yend);
-				// System.out.println("draw line.." + xstart + " " + ystart + "
-				// " + xend + " " + yend);
+					xend = pathNodeList.get(i + 1).getLocation().getX();
+					yend = pathNodeList.get(i + 1).getLocation().getY();
+
+					g.drawLine(xstart, ystart, xend, yend);
+					// System.out.println("draw line.." + xstart + " " + ystart
+					// + "
+					// " + xend + " " + yend);
+				}
 			}
 		}
 
