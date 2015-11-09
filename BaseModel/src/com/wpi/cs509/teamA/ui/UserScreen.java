@@ -8,11 +8,20 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.Color;
+
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.plaf.synth.SynthLookAndFeel;
+
+//import com.sun.prism.paint.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
@@ -54,17 +63,41 @@ public class UserScreen extends JFrame {
 			e.printStackTrace();
 		}
 
+		
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+		
+		UIManager.put("nimbusBase", new Color(142,143,145));
+//		UIManager.put("nimbusBlueGrey", new Color(169,46,3));
+//		UIManager.put("control", new Color(169,46,3));
+		
+//		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//		    if ("Nimbus".equals(info.getName())) {
+//		        UIManager.setLookAndFeel(info.getClassName());
+//		        break;
+//		    }
+//		}
+//		
+		
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 1000, 1000);
+		
+		this.setBounds(100, 100, 1600, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setBounds(100, 100, 1200, 750);
 		GridBagLayout gblContentPane = new GridBagLayout();
-		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 50 };
+		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 50, 50 };
 		gblContentPane.rowHeights = new int[] { 0 };
 		gblContentPane.columnWeights = new double[] { Double.MIN_VALUE };
 		gblContentPane.rowWeights = new double[] { Double.MIN_VALUE };
@@ -94,7 +127,7 @@ public class UserScreen extends JFrame {
 		gbcwrappingImgPanel.gridx = 0;
 		gbcwrappingImgPanel.gridy = 0;
 		gbcwrappingImgPanel.weightx = 0.6;
-		gbcwrappingImgPanel.weighty = 0.5;
+		gbcwrappingImgPanel.weighty = 0.6;
 		contentPane.add(wrappingImgPanel, gbcwrappingImgPanel);
 		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
