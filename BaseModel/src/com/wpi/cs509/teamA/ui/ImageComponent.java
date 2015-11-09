@@ -40,7 +40,7 @@ public class ImageComponent extends JComponent {
 	private int imgWidth;
 	private int imgHeight;
 	private StateContext stateContext;
-	private final static String LOGIN = "Log in as Admin";
+	private final static String LOGIN = "Login";
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
