@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.JdbcConnect;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 // TODO: Using proxy pattern to handle all the database connection
 
@@ -235,9 +235,10 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 		// get all the edges from db
 		ResultSet resultSet = null;
 		try {
-			String getAllEdges = "SELECT node_from, node_to FROM RouteFinder.relations";
+			String getAllEdges = "SELECT * FROM routefinder.relations t1 inner join routefinder.node t2 where (t1.node_from = t2.id) AND t2.map_id=?;";
 			resultSet = null;
 			pstmt = conn.prepareStatement(getAllEdges);
+			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
 

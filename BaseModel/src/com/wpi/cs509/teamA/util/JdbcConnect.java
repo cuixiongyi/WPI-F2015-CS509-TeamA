@@ -18,7 +18,7 @@ public class JdbcConnect {
 	// TODO: Make this in the file
 	private static String url = "jdbc:mysql://localhost:3306/RouteFinder";
 	private static String user = "root";
-	private static String password = "666666";
+	private static String password = "susie19910401";
 	private static Connection conn = null;
 
 	private JdbcConnect() {
@@ -36,12 +36,12 @@ public class JdbcConnect {
 	public static Connection getConnection() throws SQLException {
 
 		if (conn == null || conn.isClosed()) {
-			
+
 			conn = DriverManager.getConnection(url, user, password);
 			// should commit
 			conn.setAutoCommit(false);
 		}
-		
+
 		return conn;
 
 	}
