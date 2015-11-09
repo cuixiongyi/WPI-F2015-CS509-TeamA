@@ -160,6 +160,7 @@ public class ImageComponent extends JComponent {
 				if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
 					selectImage("Final_Campus_Map", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(1);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
 					selectImage("Final_AK_Ground_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(2);
