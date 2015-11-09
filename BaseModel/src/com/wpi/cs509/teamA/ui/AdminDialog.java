@@ -99,7 +99,6 @@ public class AdminDialog extends JDialog implements ActionListener {
 			// Check password
 			char[] input = passwordField.getPassword();
 			if (isPasswordCorrect(input)) {
-				JOptionPane.showMessageDialog(null, "Success! You typed the right password.");
 				AdminDialog.this.setVisible(false);
 				imgPanel.getStateContext().switchState(imgPanel, imgPanel.getNormalUserMouseListener(),
 						imgPanel.getAdminMouseListener());

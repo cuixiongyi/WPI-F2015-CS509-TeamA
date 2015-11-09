@@ -164,21 +164,27 @@ public class ImageComponent extends JComponent {
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
 					selectImage("Final_AK_Ground_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(2);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
 					selectImage("Final_AK_First_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(3);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
 					selectImage("Final_AK_Second_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(4);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
 					selectImage("Final_AK_Third_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(5);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
 					selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(6);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
 					selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(7);
+					inputPanel.getBtnSynchronize().doClick();
 				}
 			}
 

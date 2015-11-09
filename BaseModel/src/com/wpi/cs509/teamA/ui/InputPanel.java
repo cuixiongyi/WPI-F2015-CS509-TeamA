@@ -39,7 +39,8 @@ public class InputPanel extends JPanel implements ActionListener {
 	private JButton btnNeighborManage;
 	private JButton btnSynchronize;
 	private JComboBox<String> comboBoxMap;
-	private DefaultComboBoxModel<String> model;	
+	private DefaultComboBoxModel<String> comboSourceModel;
+	private DefaultComboBoxModel<String> comboDesModel;	
 	private final static String SEARCH = "Search";
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
@@ -72,7 +73,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
-		this.getEndPoint().setBounds(80, 225, 150, 38);
+		
 //		this.getStartPoint().setBounds(80, 150, 150, 38);
 		// this.setBounds(0, 0, 1178, 516);
 
@@ -103,17 +104,24 @@ public class InputPanel extends JPanel implements ActionListener {
 		lblMap.setBounds(15, 55, 61, 21);
 		add(lblMap);
 		
-		model = new DefaultComboBoxModel<String>();
-		JComboBox<String> box = new JComboBox<String>(model);
+		comboSourceModel = new DefaultComboBoxModel<String>();
+		comboDesModel = new DefaultComboBoxModel<String>();
+		JComboBox<String> sourceBox = new JComboBox<String>(comboSourceModel);
+		JComboBox<String> desBox = new JComboBox<String>(comboDesModel);
 		//Add all nodes from 
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 		if (allNodes != null && allNodes.get(1).size() != 0) {
 			for (int i = 0; i < allNodes.get(1).size(); i++) {
-				model.addElement(allNodes.get(1).get(i).getName().toString());
+				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
 			}
 		}
-		this.add(box);
-		box.setBounds(80, 150, 150, 38);
+		
+		sourceBox.setBounds(80, 150, 150, 38);
+		desBox.setBounds(80, 225, 150, 38);
+		this.add(sourceBox);
+		this.add(desBox);
+
 		
 		btnSynchronize = new JButton("Synchronize");
 		btnSynchronize.addActionListener(this);
@@ -125,11 +133,13 @@ public class InputPanel extends JPanel implements ActionListener {
 	
     public void actionPerformed(ActionEvent ae) {
     	if(ae.getSource()==btnSynchronize){
-    	model.removeAllElements();
+    	comboSourceModel.removeAllElements();
+    	comboDesModel.removeAllElements();
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 		if (allNodes != null && allNodes.get(1).size() != 0) {
 			for (int i = 0; i < allNodes.get(1).size(); i++) {
-				model.addElement(allNodes.get(1).get(i).getName().toString());
+				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
 			}
 		}
     	}
