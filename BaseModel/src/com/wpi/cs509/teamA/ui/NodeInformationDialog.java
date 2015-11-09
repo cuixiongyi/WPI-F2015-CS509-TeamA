@@ -152,9 +152,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 			if (comboBoxType.getSelectedItem().toString().trim().equals("") || nameTextField.getText().trim().equals("")
 					|| mapidTextField.getText().trim().equals("")) {
 				JOptionPane.showMessageDialog(null, "Please fill all fields.");
-			} else if (!mapidTextField.getText().matches("[1-4]")) {
-				// There are only four maps
-				JOptionPane.showMessageDialog(null, "Invalid input.");
 			} else {
 				// Save node information
 				Node node = new Node();
