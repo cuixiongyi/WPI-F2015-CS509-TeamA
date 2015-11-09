@@ -10,6 +10,7 @@ import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.util.InputMatrix;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 /**
  * This is the general algorithm for the strategy pattern. This is the class
@@ -68,8 +69,8 @@ public class GeneralAlgorithm {
 		// add this one by one to the result
 		List<Node> routeOnOneMap = nd.getNodeFromIds(nodeIds);
 
-		// for now we only have one list..
-		result.put(1, routeOnOneMap);
+		// 
+		result.put(UIDataBuffer.getCurrentMapId(), routeOnOneMap);
 
 		return result;
 	}

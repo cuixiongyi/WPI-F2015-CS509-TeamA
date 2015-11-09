@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.NodeType;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 /**
  * This is the class that administrators uses to input information of nodes
@@ -33,7 +35,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private JLabel lbCoordinate;
 	private JTextField xPosField;
 	private JTextField yPosField;
-	private JTextField typeTextField;
 	private JTextField nameTextField;
 	private JTextField mapidTextField;
 	private int xPos;
@@ -46,6 +47,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private final static String SAVE = "SAVE";
 	private final static String ID = "Map ID";
 	private final static String CANCEL = "Cancel";
+	private JComboBox<String> comboBoxType;
 
 	/**
 	 * Create the dialog.
@@ -87,12 +89,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		lbType.setBounds(15, 64, 119, 21);
 		contentPanel.add(lbType);
 
-		typeTextField = new JTextField();
-		typeTextField.setBounds(192, 60, 96, 27);
-		typeTextField.setText("Campus");
-		contentPanel.add(typeTextField);
-		typeTextField.setColumns(10);
-
 		JLabel lbName = new JLabel(NAME);
 		lbName.setFont(new Font("Arial", Font.PLAIN, 18));
 		lbName.setBounds(15, 106, 109, 21);
@@ -111,9 +107,21 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		mapidTextField = new JTextField();
 		mapidTextField.setBounds(192, 144, 96, 27);
-		mapidTextField.setText("1");
+		mapidTextField.setText(String.valueOf(UIDataBuffer.getCurrentMapId()));
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
+
+		comboBoxType = new JComboBox<String>();
+		comboBoxType.setBounds(192, 60, 207, 27);
+		comboBoxType.addItem("UNDEFINED");
+		comboBoxType.addItem("PATHNODE");
+		comboBoxType.addItem("OFFICE");
+		comboBoxType.addItem("CLASSROOM");
+		comboBoxType.addItem("MEETINGROOM");
+		comboBoxType.addItem("RESTROOM");
+		comboBoxType.addItem("LAB");
+		comboBoxType.addItem("PARKING");
+		contentPanel.add(comboBoxType);
 
 		// SAVE and CANCEL button
 		JPanel buttonPane = new JPanel();
@@ -141,9 +149,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 			NodeInformationDialog.this.setVisible(false);
 		if (e.getActionCommand().equals(SAVE)) {
 			// Check if fields are filled
-			if (typeTextField.getText().trim().equals("") || nameTextField.getText().trim().equals("")
+			if (comboBoxType.getSelectedItem().toString().trim().equals("") || nameTextField.getText().trim().equals("")
 					|| mapidTextField.getText().trim().equals("")) {
-
 				JOptionPane.showMessageDialog(null, "Please fill all fields.");
 			} else if (!mapidTextField.getText().matches("[1-4]")) {
 				// There are only four maps
@@ -157,14 +164,12 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				node.setLocation(coordinate);
 				node.setMapId(Integer.parseInt(mapidTextField.getText()));
 				node.setName(nameTextField.getText());
-				// TODO: get string from the front end then we can process it
-				// for now we only store undefined..
-				node.setNodeType(NodeType.UNDEFINED);
+				node.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
 
 				// call database save function..
 				// TODO: Maybe we can use mutlti-thread here..
 				node.saveNode();
-				
+
 				// show what we have saved..
 				imagePanel.repaint();
 				this.setVisible(false);

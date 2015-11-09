@@ -55,9 +55,11 @@ DROP TABLE IF EXISTS `map`;
 CREATE TABLE `map` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
+  `image_name` varchar(256) DEFAULT NULL,
+  `image` blob,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,35 +68,8 @@ CREATE TABLE `map` (
 
 LOCK TABLES `map` WRITE;
 /*!40000 ALTER TABLE `map` DISABLE KEYS */;
+INSERT INTO `map` VALUES (1,'Campus Map',NULL,NULL),(2,'AK-G',NULL,NULL),(3,'AK-1',NULL,NULL),(4,'AK-2',NULL,NULL),(5,'AK-3',NULL,NULL),(6,'PC-1',NULL,NULL),(7,'PC-2',NULL,NULL);
 /*!40000 ALTER TABLE `map` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `neighbors`
---
-
-DROP TABLE IF EXISTS `neighbors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `neighbors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nodeid` int(11) NOT NULL,
-  `neighborid` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_node_id_idx` (`nodeid`),
-  KEY `fk_neighbor_id_idx` (`neighborid`),
-  CONSTRAINT `fk_neighbor_id` FOREIGN KEY (`neighborid`) REFERENCES `node` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_node_id` FOREIGN KEY (`nodeid`) REFERENCES `node` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `neighbors`
---
-
-LOCK TABLES `neighbors` WRITE;
-/*!40000 ALTER TABLE `neighbors` DISABLE KEYS */;
-/*!40000 ALTER TABLE `neighbors` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -115,7 +90,7 @@ CREATE TABLE `node` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_map_id_idx` (`map_id`),
   CONSTRAINT `fk_map_id` FOREIGN KEY (`map_id`) REFERENCES `map` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +119,7 @@ CREATE TABLE `relations` (
   KEY `fk_node_to_idx` (`node_to`),
   CONSTRAINT `fk_node_from` FOREIGN KEY (`node_from`) REFERENCES `node` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_node_to` FOREIGN KEY (`node_to`) REFERENCES `node` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +144,7 @@ CREATE TABLE `user_account` (
   `password` varchar(128) NOT NULL,
   `isAdmin` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-03 18:57:18
+-- Dump completed on 2015-11-08 15:18:16
