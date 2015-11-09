@@ -121,6 +121,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		comboBoxType.addItem("RESTROOM");
 		comboBoxType.addItem("LAB");
 		comboBoxType.addItem("PARKING");
+		comboBoxType.setMaximumRowCount(5);
 		contentPanel.add(comboBoxType);
 
 		// SAVE and CANCEL button

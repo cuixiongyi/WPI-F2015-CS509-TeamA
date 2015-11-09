@@ -145,6 +145,7 @@ public class ImageComponent extends JComponent {
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
 					inputPanel.getBtnNeighborManage().setVisible(false);
 					inputPanel.getAdminLogin().setText(LOGIN);
+					inputPanel.getBtnSynchronize().setVisible(false);
 					isAdmin = false;
 					adminClicked++;
 					ImageComponent.this.repaint();
