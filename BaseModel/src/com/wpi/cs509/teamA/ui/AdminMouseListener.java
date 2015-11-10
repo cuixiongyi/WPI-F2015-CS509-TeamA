@@ -23,8 +23,6 @@ import java.awt.event.MouseListener;
  */
 public class AdminMouseListener implements MouseListener {
 
-	private final static int closeRange = 5;
-
 	/**
 	 * The x position that the user clicked
 	 */
@@ -81,22 +79,10 @@ public class AdminMouseListener implements MouseListener {
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			//
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
-			boolean tooClose = false;
 
-			Map<Integer, List<Node>> allNodesNow = UIDataBuffer.getAllNodes();
-			List<Node> temp = allNodesNow.get(1);
-			for (int i = 0; i < temp.size(); i++) {
-				if (Math.abs(xPos - temp.get(i).getLocation().getX()) < closeRange
-						&& Math.abs(yPos - temp.get(i).getLocation().getY()) < closeRange) {
-					tooClose = true;
-				}
-			}
-			if (tooClose) {
-				JOptionPane.showMessageDialog(null, "Too close from another node.");
-			} else {
-				NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, xPos, yPos);
-				nodeManageMenu.show(e.getComponent(), xPos, yPos);
-			}
+			NodeManageMenu nodeManageMenu = new NodeManageMenu(imagePanel, xPos, yPos);
+			nodeManageMenu.show(e.getComponent(), xPos, yPos);
+
 		}
 	}
 
