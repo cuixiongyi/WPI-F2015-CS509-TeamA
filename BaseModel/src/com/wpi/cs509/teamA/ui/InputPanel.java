@@ -4,11 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -134,6 +139,18 @@ public class InputPanel extends JPanel implements ActionListener {
 		btnSynchronize.setVisible(false);
 		btnSynchronize.setBounds(155, 380, 75, 30);
 		add(btnSynchronize);		
+		
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File(System.getProperty("user.dir") + "/src/logo_iteration1.png"));
+			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			picLabel.setBounds(50, 480, 200, 200);
+			add(picLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 
