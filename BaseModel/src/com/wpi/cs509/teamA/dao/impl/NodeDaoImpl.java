@@ -74,9 +74,10 @@ public class NodeDaoImpl implements NodeDao {
 			// TODO: potential danger..
 			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
 			pstmt.setString(2, node_name);
+			
 			resultSet = pstmt.executeQuery();
 			if (resultSet.next()) {
-				resultSet.getInt("id");
+				return resultSet.getInt("id");
 			}
 			return -1;
 		} catch (SQLException se) {

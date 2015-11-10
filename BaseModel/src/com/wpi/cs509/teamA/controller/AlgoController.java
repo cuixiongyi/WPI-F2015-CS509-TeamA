@@ -78,9 +78,8 @@ public class AlgoController {
 
 		// get the node from database
 		Node fromNode = this.getNodeFromName(startNode);    /////////////////
-		int startNodeId = new NodeDaoImpl().getNodeIdFromName(startNode);
+		
 		Node toNode = this.getNodeFromName(endNode);        ////////////////
-		int endNodeId = new NodeDaoImpl().getNodeIdFromName(endNode);
 		
 		// use this two to decide how which maps are involved in searching..
 		int startMapId = fromNode.getMapId();
@@ -112,7 +111,9 @@ public class AlgoController {
 
 			// assemble 2 nodes just for test.. definitely should not use id to
 			// search..
+			int startNodeId = new NodeDaoImpl().getNodeIdFromName(startNode);
 			fromNode.setId(startNodeId);
+			int endNodeId = new NodeDaoImpl().getNodeIdFromName(endNode);
 			toNode.setId(endNodeId);
 
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
