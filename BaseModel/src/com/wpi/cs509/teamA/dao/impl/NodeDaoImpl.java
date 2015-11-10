@@ -66,6 +66,29 @@ public class NodeDaoImpl implements NodeDao {
 		return 0;
 	}
 
+	public int getNodeIdFromName(String node_name){
+		ResultSet resultSet = null;
+		try {
+			String selectAllNodes = "SELECT id FROM RouteFinder.node where map_id=? and name=?;";
+			pstmt = conn.prepareStatement(selectAllNodes);
+			// TODO: potential danger..
+			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
+			pstmt.setString(2, node_name);
+			resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+				resultSet.getInt("id");
+			}
+			return -1;
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+
+		return -1;
+	}
 	@Override
 	public Set<Node> getAllNodes() {
 		// TODO Auto-generated method stub
