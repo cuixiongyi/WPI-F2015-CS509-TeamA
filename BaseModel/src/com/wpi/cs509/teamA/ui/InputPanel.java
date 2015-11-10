@@ -2,12 +2,22 @@ package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+
+import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 /**
  * JPanel that have input text fields and buttons which will be shown on the top
@@ -19,7 +29,7 @@ import javax.swing.SwingConstants;
  *
  */
 @SuppressWarnings("serial")
-public class InputPanel extends JPanel {
+public class InputPanel extends JPanel implements ActionListener {
 
 	private JTextField startPoint;
 	private JTextField endPoint;
@@ -28,7 +38,10 @@ public class InputPanel extends JPanel {
 	private JLabel lblFrom;
 	private JLabel lblTo;
 	private JButton btnNeighborManage;
+	private JButton btnSynchronize;
 	private JComboBox<String> comboBoxMap;
+	private DefaultComboBoxModel<String> comboSourceModel;
+	private DefaultComboBoxModel<String> comboDesModel;	
 	private final static String SEARCH = "Search";
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
@@ -43,14 +56,14 @@ public class InputPanel extends JPanel {
 		this.endPoint = new JTextField();
 		this.btnSearch = new JButton(SEARCH);
 		this.adminLogin = new JButton(LOGIN);
-		this.btnNeighborManage = new JButton("Edges");
+		this.btnNeighborManage = new JButton("Edges");		
 		btnNeighborManage.setSize(75, 30);
-		btnNeighborManage.setLocation(80, 0);
+		btnNeighborManage.setLocation(80, 380);
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.btnNeighborManage.setVisible(false);
 
 		this.setLayout(null);
-		this.add(startPoint);
+//		this.add(startPoint);
 		this.add(endPoint);
 		this.add(btnSearch);
 		this.add(adminLogin);
@@ -62,20 +75,18 @@ public class InputPanel extends JPanel {
 		this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
-		this.getEndPoint().setBounds(80, 225, 150, 38);
-//		this.getEndPoint().setBackground(new Color(180, 180, 180));
-		this.getStartPoint().setBounds(80, 150, 150, 38);
-//		this.getStartPoint().setBackground(new Color(180, 180, 180));
-		// this.setBounds(0, 0, 1178, 516);
+		
+//		this.getStartPoint().setBounds(80, 150, 150, 38);
+//		 this.setBounds(0, 0, 1178, 516);
 
 		lblFrom = new JLabel(FROM);
 		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblFrom.setBounds(15, 160, 61, 16);
+		lblFrom.setBounds(15, 155, 61, 16);
 		add(lblFrom);
 
 		lblTo = new JLabel(TO);
 		lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTo.setBounds(15, 235, 61, 16);
+		lblTo.setBounds(15, 230, 61, 16);
 		add(lblTo);
 
 		comboBoxMap = new JComboBox<String>();
@@ -87,14 +98,57 @@ public class InputPanel extends JPanel {
 		comboBoxMap.addItem("AK-3");
 		comboBoxMap.addItem("PC-1");
 		comboBoxMap.addItem("PC-2");
-//		comboBoxMap.setBackground(new Color(180, 180, 180));
+		comboBoxMap.setMaximumRowCount(4);
 		add(comboBoxMap);
 
 		JLabel lblMap = new JLabel("Map: ");
 		lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMap.setBounds(15, 55, 61, 21);
+		lblMap.setBounds(15, 60, 61, 21);
 		add(lblMap);
+		
+		comboSourceModel = new DefaultComboBoxModel<String>();
+		comboDesModel = new DefaultComboBoxModel<String>();
+		JComboBox<String> sourceBox = new JComboBox<String>(comboSourceModel);
+		JComboBox<String> desBox = new JComboBox<String>(comboDesModel);
+		//Add all nodes from 
+		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+		if (allNodes != null && allNodes.get(1).size() != 0) {
+			for (int i = 0; i < allNodes.get(1).size(); i++) {
+				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+			}
+		}
+		
+		sourceBox.setBounds(80, 150, 150, 30);
+		desBox.setBounds(80, 225, 150, 30);
+		this.add(sourceBox);
+		this.add(desBox);
 
+		
+		btnSynchronize = new JButton("Sync");
+		btnSynchronize.addActionListener(this);
+		btnSynchronize.setVisible(false);
+		btnSynchronize.setBounds(155, 380, 75, 30);
+		add(btnSynchronize);		
+
+	}
+	
+    public void actionPerformed(ActionEvent ae) {
+    	if(ae.getSource()==btnSynchronize){
+    	comboSourceModel.removeAllElements();
+    	comboDesModel.removeAllElements();
+		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+		if (allNodes != null && allNodes.get(1).size() != 0) {
+			for (int i = 0; i < allNodes.get(1).size(); i++) {
+				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+			}
+		}
+    	}
+    }
+
+	public JButton getBtnSynchronize() {
+		return btnSynchronize;
 	}
 
 	public JComboBox<String> getComboBoxMap() {

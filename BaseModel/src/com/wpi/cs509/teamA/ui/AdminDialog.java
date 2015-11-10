@@ -107,6 +107,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 				imgPanel.incrementAdminClicked();
 				inputPanel.getBtnNeighborManage().setVisible(true);
 				inputPanel.getAdminLogin().setText(LOGOUT);
+				inputPanel.getBtnSynchronize().setVisible(true);
 				ImageComponent.setIsAdmin(true);
 				imgPanel.repaint();			
 			} else {
