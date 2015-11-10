@@ -105,8 +105,8 @@ public class ImageComponent extends JComponent {
 
 				// We will go to the backend here.. For now, all the resources
 				// should be ready!
-				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
-						inputPanel.getEndPoint().getText().trim());
+				AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
+						inputPanel.getDesPoint());
 
 				// get the result of the search..
 				result = null;
