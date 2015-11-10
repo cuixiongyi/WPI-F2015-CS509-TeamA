@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.ui;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dialog.ModalityType;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -12,6 +13,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
@@ -397,6 +402,19 @@ public class ImageComponent extends JComponent {
 					// " + xend + " " + yend);
 				}
 			}
+			int sourceX=pathNodeList.get(0).getLocation().getX();
+			int sourceY=pathNodeList.get(0).getLocation().getY();
+			
+			int desX=pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
+			int desY=pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
+			g2.drawOval(sourceX-ovalOffset, sourceY-ovalOffset, 10, 10);
+			g2.drawOval(desX-ovalOffset, desY-ovalOffset, 10, 10);
+			Font font = g.getFont().deriveFont( 20.0f );
+		    g.setFont( font );
+			g2.drawString("Source", sourceX, sourceY-ovalOffset);
+			g2.drawString("Destination", desX, desY-ovalOffset);
+			
+			
 		}
 
 		g2 = null;
