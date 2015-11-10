@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -72,6 +73,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 		passwordField = new JPasswordField(10);
 		passwordField.setBounds(135, 52, 126, 28);
 		passwordField.setColumns(10);
+		passwordField.setBackground(new Color(180, 180, 180));
 		contentPanel.add(passwordField);
 
 		// OK and CANCEL button block

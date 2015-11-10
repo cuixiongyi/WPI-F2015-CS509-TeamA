@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -62,17 +63,19 @@ public class InputPanel extends JPanel {
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
 		this.getEndPoint().setBounds(80, 225, 150, 38);
+//		this.getEndPoint().setBackground(new Color(180, 180, 180));
 		this.getStartPoint().setBounds(80, 150, 150, 38);
+//		this.getStartPoint().setBackground(new Color(180, 180, 180));
 		// this.setBounds(0, 0, 1178, 516);
 
 		lblFrom = new JLabel(FROM);
 		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblFrom.setBounds(15, 150, 61, 16);
+		lblFrom.setBounds(15, 160, 61, 16);
 		add(lblFrom);
 
 		lblTo = new JLabel(TO);
 		lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTo.setBounds(15, 225, 61, 16);
+		lblTo.setBounds(15, 235, 61, 16);
 		add(lblTo);
 
 		comboBoxMap = new JComboBox<String>();
@@ -84,6 +87,7 @@ public class InputPanel extends JPanel {
 		comboBoxMap.addItem("AK-3");
 		comboBoxMap.addItem("PC-1");
 		comboBoxMap.addItem("PC-2");
+//		comboBoxMap.setBackground(new Color(180, 180, 180));
 		add(comboBoxMap);
 
 		JLabel lblMap = new JLabel("Map: ");

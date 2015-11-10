@@ -56,7 +56,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 420, 250);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -64,13 +64,13 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		// Node information block
 		lbCoordinate = new JLabel(COORDINATE);
-		lbCoordinate.setFont(new Font("Arial", Font.PLAIN, 18));
-		lbCoordinate.setBounds(15, 15, 147, 34);
+		lbCoordinate.setFont(new Font("Arial", Font.PLAIN, 15));
+		lbCoordinate.setBounds(45, 15, 147, 34);
 		contentPanel.add(lbCoordinate);
 
 		xPosField = new JTextField();
 		xPosField.setEditable(false);
-		xPosField.setFont(new Font("Arial", Font.PLAIN, 18));
+		xPosField.setFont(new Font("Arial", Font.PLAIN, 15));
 		xPosField.setBounds(192, 18, 96, 27);
 		xPosField.setText(String.valueOf(xPos));
 		contentPanel.add(xPosField);
@@ -78,20 +78,20 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		yPosField = new JTextField();
 		yPosField.setEditable(false);
-		yPosField.setFont(new Font("Arial", Font.PLAIN, 18));
+		yPosField.setFont(new Font("Arial", Font.PLAIN, 15));
 		yPosField.setBounds(303, 18, 96, 27);
 		yPosField.setText(String.valueOf(yPos));
 		contentPanel.add(yPosField);
 		yPosField.setColumns(10);
 
 		JLabel lbType = new JLabel(TYPE);
-		lbType.setFont(new Font("Arial", Font.PLAIN, 18));
-		lbType.setBounds(15, 64, 119, 21);
+		lbType.setFont(new Font("Arial", Font.PLAIN, 15));
+		lbType.setBounds(45, 62, 119, 21);
 		contentPanel.add(lbType);
 
 		JLabel lbName = new JLabel(NAME);
-		lbName.setFont(new Font("Arial", Font.PLAIN, 18));
-		lbName.setBounds(15, 106, 109, 21);
+		lbName.setFont(new Font("Arial", Font.PLAIN, 15));
+		lbName.setBounds(45, 106, 109, 21);
 		contentPanel.add(lbName);
 
 		nameTextField = new JTextField();
@@ -101,8 +101,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		nameTextField.setColumns(10);
 
 		JLabel lblMapId = new JLabel(ID);
-		lblMapId.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblMapId.setBounds(15, 149, 81, 21);
+		lblMapId.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblMapId.setBounds(45, 148, 81, 21);
 		contentPanel.add(lblMapId);
 
 		mapidTextField = new JTextField();
@@ -129,14 +129,14 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
 		saveButton = new JButton(SAVE);
-		saveButton.setFont(new Font("Arial", Font.PLAIN, 18));
+		saveButton.setFont(new Font("Arial", Font.PLAIN, 15));
 		saveButton.setActionCommand(SAVE);
 		saveButton.addActionListener(this);
 		buttonPane.add(saveButton);
 		getRootPane().setDefaultButton(saveButton);
 
 		cancelButton = new JButton(CANCEL);
-		cancelButton.setFont(new Font("Arial", Font.PLAIN, 18));
+		cancelButton.setFont(new Font("Arial", Font.PLAIN, 15));
 		cancelButton.setActionCommand(CANCEL);
 		cancelButton.addActionListener(this);
 		buttonPane.add(cancelButton);
