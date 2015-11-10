@@ -40,7 +40,9 @@ public class InputPanel extends JPanel implements ActionListener {
 	private JButton btnSynchronize;
 	private JComboBox<String> comboBoxMap;
 	private DefaultComboBoxModel<String> comboSourceModel;
-	private DefaultComboBoxModel<String> comboDesModel;	
+	private DefaultComboBoxModel<String> comboDesModel;
+	private JComboBox<String> sourceBox;
+	private JComboBox<String> desBox;
 	private final static String SEARCH = "Search";
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
@@ -55,27 +57,20 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.endPoint = new JTextField();
 		this.btnSearch = new JButton(SEARCH);
 		this.adminLogin = new JButton(LOGIN);
-		this.btnNeighborManage = new JButton("Edges");		
+		this.btnNeighborManage = new JButton("Edges");
 		btnNeighborManage.setSize(75, 30);
 		btnNeighborManage.setLocation(80, 0);
 		this.btnNeighborManage.setVisible(false);
 
 		this.setLayout(null);
-//		this.add(startPoint);
-		this.add(endPoint);
 		this.add(btnSearch);
 		this.add(adminLogin);
 		this.add(btnNeighborManage);
 
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
-		this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-		this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
-		
-//		this.getStartPoint().setBounds(80, 150, 150, 38);
-		// this.setBounds(0, 0, 1178, 516);
 
 		lblFrom = new JLabel(FROM);
 		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -103,47 +98,50 @@ public class InputPanel extends JPanel implements ActionListener {
 		lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblMap.setBounds(15, 55, 61, 21);
 		add(lblMap);
-		
+
 		comboSourceModel = new DefaultComboBoxModel<String>();
 		comboDesModel = new DefaultComboBoxModel<String>();
-		JComboBox<String> sourceBox = new JComboBox<String>(comboSourceModel);
-		JComboBox<String> desBox = new JComboBox<String>(comboDesModel);
-		//Add all nodes from 
+		sourceBox = new JComboBox<String>(comboSourceModel);
+		desBox = new JComboBox<String>(comboDesModel);
+		// Add all nodes from
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 		if (allNodes != null && allNodes.get(1).size() != 0) {
 			for (int i = 0; i < allNodes.get(1).size(); i++) {
+				if (allNodes.get(1).get(i).getName().toString().equals("Location"))
+					continue;
 				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
 				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
 			}
 		}
-		
+
 		sourceBox.setBounds(80, 150, 150, 38);
 		desBox.setBounds(80, 225, 150, 38);
 		this.add(sourceBox);
 		this.add(desBox);
 
-		
 		btnSynchronize = new JButton("Synchronize");
 		btnSynchronize.addActionListener(this);
 		btnSynchronize.setVisible(false);
 		btnSynchronize.setBounds(80, 271, 150, 29);
-		add(btnSynchronize);		
+		add(btnSynchronize);
 
 	}
-	
-    public void actionPerformed(ActionEvent ae) {
-    	if(ae.getSource()==btnSynchronize){
-    	comboSourceModel.removeAllElements();
-    	comboDesModel.removeAllElements();
-		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-		if (allNodes != null && allNodes.get(1).size() != 0) {
-			for (int i = 0; i < allNodes.get(1).size(); i++) {
-				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == btnSynchronize) {
+			comboSourceModel.removeAllElements();
+			comboDesModel.removeAllElements();
+			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+			if (allNodes != null && allNodes.get(1).size() != 0) {
+				for (int i = 0; i < allNodes.get(1).size(); i++) {
+					if (allNodes.get(1).get(i).getName().toString().equals("Location"))
+						continue;
+					comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+					comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+				}
 			}
 		}
-    	}
-    }
+	}
 
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
@@ -156,8 +154,8 @@ public class InputPanel extends JPanel implements ActionListener {
 	/**
 	 * @return the startPoint
 	 */
-	public JTextField getStartPoint() {
-		return startPoint;
+	public String getSourcePoint() {
+		return sourceBox.getSelectedItem().toString();
 	}
 
 	/**
@@ -171,8 +169,8 @@ public class InputPanel extends JPanel implements ActionListener {
 	/**
 	 * @return the endPoint
 	 */
-	public JTextField getEndPoint() {
-		return endPoint;
+	public String getDesPoint() {
+		return desBox.getSelectedItem().toString();
 	}
 
 	/**
@@ -219,6 +217,5 @@ public class InputPanel extends JPanel implements ActionListener {
 	public JButton getBtnNeighborManage() {
 		return btnNeighborManage;
 	}
-	
-	
+
 }
