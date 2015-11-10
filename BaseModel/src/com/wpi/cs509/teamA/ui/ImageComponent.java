@@ -378,7 +378,7 @@ public class ImageComponent extends JComponent {
 			}
 		}
 
-		if (pathNodeList != null && pathNodeList.size() != 0 && pathNodeList.get(1).getMapId() == UIDataBuffer.getCurrentMapId()) {
+		if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
 
 			// paint the route
 			if (pathNodeList != null && pathNodeList.size() != 0) {
