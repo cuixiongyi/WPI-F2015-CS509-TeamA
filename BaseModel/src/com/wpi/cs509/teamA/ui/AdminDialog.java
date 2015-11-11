@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  * This is the class that administrators uses to log in
@@ -37,7 +38,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 
 	private final static String OK = "OK";
 	private final static String CANCEL = "Cancel";
-	private final static String LOG = "Log in";
+	private final static String LOG = "Login";
 	private final static String LOGOUT = "Log out";
 
 	// private JFrame controllingFrame;
@@ -55,7 +56,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 		this.imgPanel = imageComponent;
 		this.inputPanel = inputPanel;
 		setTitle(LOG);
-		setBounds(100, 100, 450, 300);
+		setBounds(200, 200, 320, 180);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -63,12 +64,13 @@ public class AdminDialog extends JDialog implements ActionListener {
 
 		// Password block
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Arial", Font.PLAIN, 22));
-		lblPassword.setBounds(15, 72, 121, 32);
+		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPassword.setFont(new Font("Arial", Font.PLAIN, 15));
+		lblPassword.setBounds(6, 50, 121, 32);
 		contentPanel.add(lblPassword);
 
 		passwordField = new JPasswordField(10);
-		passwordField.setBounds(174, 76, 126, 28);
+		passwordField.setBounds(135, 52, 126, 28);
 		passwordField.setColumns(10);
 		contentPanel.add(passwordField);
 
@@ -97,7 +99,6 @@ public class AdminDialog extends JDialog implements ActionListener {
 			// Check password
 			char[] input = passwordField.getPassword();
 			if (isPasswordCorrect(input)) {
-				JOptionPane.showMessageDialog(null, "Success! You typed the right password.");
 				AdminDialog.this.setVisible(false);
 				imgPanel.getStateContext().switchState(imgPanel, imgPanel.getNormalUserMouseListener(),
 						imgPanel.getAdminMouseListener());

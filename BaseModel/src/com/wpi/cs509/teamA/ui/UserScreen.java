@@ -8,11 +8,15 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicArrowButton;
+
+//import com.sun.prism.paint.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
@@ -37,14 +41,12 @@ public class UserScreen extends JFrame {
 	private InputPanel inputPanel;
 	private JButton btnNeighborManage;
 	private JPanel wrappingImgPanel;
-	private JPanel wrappingButtonPanel;
-	private JPanel wrappingButtonPanelE;
 
 	/**
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
@@ -54,17 +56,40 @@ public class UserScreen extends JFrame {
 			e.printStackTrace();
 		}
 
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+
+		UIManager.put("nimbusBase", new Color(142, 143, 145));
+		// UIManager.put("nimbusBlueGrey", new Color(169,46,3));
+		// UIManager.put("control", new Color(169,46,3));
+
+		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		// if ("Nimbus".equals(info.getName())) {
+		// UIManager.setLookAndFeel(info.getClassName());
+		// break;
+		// }
+		// }
+		//
+
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setBounds(100, 100, 1000, 1000);
+		this.setBounds(100, 100, 1600, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setBounds(100, 100, 1200, 750);
 		GridBagLayout gblContentPane = new GridBagLayout();
-		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 30, 50 };
+		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 50, 50 };
 		gblContentPane.rowHeights = new int[] { 0 };
 		gblContentPane.columnWeights = new double[] { Double.MIN_VALUE };
 		gblContentPane.rowWeights = new double[] { Double.MIN_VALUE };
@@ -94,7 +119,7 @@ public class UserScreen extends JFrame {
 		gbcwrappingImgPanel.gridx = 0;
 		gbcwrappingImgPanel.gridy = 0;
 		gbcwrappingImgPanel.weightx = 0.6;
-		gbcwrappingImgPanel.weighty = 0.5;
+		gbcwrappingImgPanel.weighty = 0.6;
 		contentPane.add(wrappingImgPanel, gbcwrappingImgPanel);
 		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
@@ -103,6 +128,7 @@ public class UserScreen extends JFrame {
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
 		// display the image. Note that "/" only works on UNIX
+		// TODO: default map? change the way to do this...
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
@@ -117,36 +143,6 @@ public class UserScreen extends JFrame {
 		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		wrappingImgPanel.add(imgScrollPanel);
-
-		wrappingButtonPanel = new JPanel();
-		wrappingButtonPanel.setMinimumSize(new Dimension(30, 30));
-		wrappingButtonPanel.setMaximumSize(new Dimension(50, 50));
-		GridBagConstraints gbcWrappingButtonPanel = new GridBagConstraints();
-		gbcWrappingButtonPanel.gridx = 13;
-		gbcWrappingButtonPanel.gridy = 8;
-		contentPane.add(wrappingButtonPanel, gbcWrappingButtonPanel);
-		wrappingButtonPanel.setLayout(new BoxLayout(wrappingButtonPanel, BoxLayout.X_AXIS));
-
-		wrappingButtonPanelE = new JPanel();
-		wrappingButtonPanelE.setMinimumSize(new Dimension(30, 30));
-		wrappingButtonPanelE.setMaximumSize(new Dimension(50, 50));
-		GridBagConstraints gbcWrappingButtonPanelE = new GridBagConstraints();
-		gbcWrappingButtonPanelE.gridx = 14;
-		gbcWrappingButtonPanelE.gridy = 8;
-		contentPane.add(wrappingButtonPanelE, gbcWrappingButtonPanelE);
-		wrappingButtonPanelE.setLayout(new BoxLayout(wrappingButtonPanelE, BoxLayout.X_AXIS));
-
-		BasicArrowButton WestArrowButton = new BasicArrowButton(BasicArrowButton.WEST);
-		wrappingButtonPanel.add(WestArrowButton);
-
-		BasicArrowButton EastArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
-		wrappingButtonPanelE.add(EastArrowButton);
-
-		//
-		// GridBagConstraints gbcBtnNeighborManage = new GridBagConstraints();
-		// gbcBtnNeighborManage.gridx = 0;
-		// gbcBtnNeighborManage.gridy = 10;
-		// contentPane.add(btnNeighborManage, gbcBtnNeighborManage);
 
 		setSize(800, 500);
 		setVisible(true);

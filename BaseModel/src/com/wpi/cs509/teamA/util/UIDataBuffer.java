@@ -2,11 +2,9 @@ package com.wpi.cs509.teamA.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
@@ -14,6 +12,16 @@ import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 
 public class UIDataBuffer {
+
+	private static int currentMapId = 1;
+
+	public static int getCurrentMapId() {
+		return currentMapId;
+	}
+
+	public static void setCurrentMapId(int mapId) {
+		currentMapId = mapId;
+	}
 
 	public static Map<Integer, List<Node>> getAllNodes() {
 		// get node from db

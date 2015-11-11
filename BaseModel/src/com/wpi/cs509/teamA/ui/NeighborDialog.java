@@ -20,6 +20,7 @@ import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
@@ -57,29 +58,31 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	public NeighborDialog(ImageComponent imageComponent) {
 		this.imageComponent = imageComponent;
 		setTitle(NEIGHBOR);
-		setBounds(100, 100, 450, 736);
+		setBounds(100, 100, 250, 380);
 		getContentPane().setLayout(null);
 
 		// set up SAVE and CANCEL button
 		JPanel buttonPane = new JPanel();
-		buttonPane.setBounds(0, 641, 428, 39);
+		buttonPane.setBounds(0, 320, 220, 35);
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane);
 
 		saveButton = new JButton(SAVE);
 		saveButton.setActionCommand(SAVE);
 		saveButton.addActionListener(this);
+		saveButton.setSize(80, 35);
 		buttonPane.add(saveButton);
 		getRootPane().setDefaultButton(saveButton);
 
 		cancelButton = new JButton(CANCEL);
 		cancelButton.setActionCommand(CANCEL);
 		cancelButton.addActionListener(this);
+		cancelButton.setSize(70, 35);
 		buttonPane.add(cancelButton);
 
 		// Edge Pairs
 		pairPanel = new JPanel();
-		pairPanel.setBounds(0, 0, 428, 641);
+		pairPanel.setBounds(0, 0, 200, 320);
 		getContentPane().add(pairPanel);
 		pairPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -88,6 +91,7 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 			// pair
 			String edgeName = "Edge " + (i + 1);
 			lbPair[i] = new JLabel(edgeName);
+			lbPair[i].setHorizontalAlignment(SwingConstants.RIGHT);
 			pairPanel.add(lbPair[i]);
 
 			for (int j = 2 * i, num = 2 * i + 1; j <= num; j++) {
