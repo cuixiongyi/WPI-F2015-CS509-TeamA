@@ -68,10 +68,13 @@ public class UserScreen extends JFrame {
 			// and feel.
 		}
 
-		UIManager.put("nimbusBase", new Color(142, 143, 145));
-		// UIManager.put("nimbusBlueGrey", new Color(169,46,3));
-		// UIManager.put("control", new Color(169,46,3));
-
+		UIManager.put("nimbusBase", new Color(50, 50, 50));
+		 UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
+		 UIManager.put("control", new Color(142, 143, 145));
+		 UIManager.put("text", new Color(255,255,255));
+		 UIManager.put("TextField.background", new Color(180, 180, 180));
+		 
+		 
 		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		// if ("Nimbus".equals(info.getName())) {
 		// UIManager.setLookAndFeel(info.getClassName());

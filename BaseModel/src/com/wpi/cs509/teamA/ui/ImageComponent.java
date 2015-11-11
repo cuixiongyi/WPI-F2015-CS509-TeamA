@@ -1,7 +1,9 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dialog.ModalityType;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
+import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
@@ -103,8 +110,8 @@ public class ImageComponent extends JComponent {
 
 				// We will go to the backend here.. For now, all the resources
 				// should be ready!
-				AlgoController algoController = new AlgoController(inputPanel.getStartPoint().getText().trim(),
-						inputPanel.getEndPoint().getText().trim());
+				AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
+						inputPanel.getDesPoint());
 
 				// get the result of the search..
 				result = null;
@@ -145,6 +152,7 @@ public class ImageComponent extends JComponent {
 					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
 					inputPanel.getBtnNeighborManage().setVisible(false);
 					inputPanel.getAdminLogin().setText(LOGIN);
+					inputPanel.getBtnSynchronize().setVisible(false);
 					isAdmin = false;
 					adminClicked++;
 					ImageComponent.this.repaint();
@@ -159,24 +167,31 @@ public class ImageComponent extends JComponent {
 				if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
 					selectImage("Final_Campus_Map", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(1);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
 					selectImage("Final_AK_Ground_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(2);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
 					selectImage("Final_AK_First_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(3);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
 					selectImage("Final_AK_Second_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(4);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
 					selectImage("Final_AK_Third_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(5);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
 					selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(6);
+					inputPanel.getBtnSynchronize().doClick();
 				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
 					selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
 					UIDataBuffer.setCurrentMapId(7);
+					inputPanel.getBtnSynchronize().doClick();
 				}
 			}
 
@@ -335,11 +350,12 @@ public class ImageComponent extends JComponent {
 
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+		setForeground(Color.RED);
 
 		if (isAdmin == true) {
 			// paint all of the nodes
 			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-			setForeground(Color.RED);
+			
 			if (allNodes != null && allNodes.get(1).size() != 0) {
 				int x, y;
 				for (int i = 0; i < allNodes.get(1).size(); i++) {
@@ -360,12 +376,14 @@ public class ImageComponent extends JComponent {
 					xend = edge.getSecondNodeCoordinate().getX();
 					yend = edge.getSecondNodeCoordinate().getY();
 
-					g.drawLine(xstart, ystart, xend, yend);
+					g2.setStroke(new BasicStroke(5));
+	                g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
+					
 				}
 			}
 		}
 
-		if (pathNodeList != null && pathNodeList.get(1).getMapId() == UIDataBuffer.getCurrentMapId()) {
+		if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
 
 			// paint the route
 			if (pathNodeList != null && pathNodeList.size() != 0) {
@@ -377,12 +395,26 @@ public class ImageComponent extends JComponent {
 					xend = pathNodeList.get(i + 1).getLocation().getX();
 					yend = pathNodeList.get(i + 1).getLocation().getY();
 
-					g.drawLine(xstart, ystart, xend, yend);
+					g2.setStroke(new BasicStroke(5));
+	                g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
 					// System.out.println("draw line.." + xstart + " " + ystart
 					// + "
 					// " + xend + " " + yend);
 				}
 			}
+			int sourceX=pathNodeList.get(0).getLocation().getX();
+			int sourceY=pathNodeList.get(0).getLocation().getY();
+			
+			int desX=pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
+			int desY=pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
+			g2.drawOval(sourceX-ovalOffset, sourceY-ovalOffset, 10, 10);
+			g2.drawOval(desX-ovalOffset, desY-ovalOffset, 10, 10);
+			Font font = g.getFont().deriveFont( 20.0f );
+		    g.setFont( font );
+			g2.drawString("Source", sourceX, sourceY-ovalOffset);
+			g2.drawString("Destination", desX, desY-ovalOffset);
+			
+			
 		}
 
 		g2 = null;

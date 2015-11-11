@@ -10,6 +10,7 @@ import java.util.Set;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
@@ -76,9 +77,10 @@ public class AlgoController {
 		// we support searching node now only..
 
 		// get the node from database
-		Node fromNode = this.getNodeFromName(startNode);
-		Node toNode = this.getNodeFromName(endNode);
-
+		Node fromNode = this.getNodeFromName(startNode);    /////////////////
+		
+		Node toNode = this.getNodeFromName(endNode);        ////////////////
+		
 		// use this two to decide how which maps are involved in searching..
 		int startMapId = fromNode.getMapId();
 		int endMapId = toNode.getMapId();
@@ -109,8 +111,10 @@ public class AlgoController {
 
 			// assemble 2 nodes just for test.. definitely should not use id to
 			// search..
-			fromNode.setId(Integer.valueOf(startNode));
-			toNode.setId(Integer.valueOf(endNode));
+			int startNodeId = new NodeDaoImpl().getNodeIdFromName(startNode);
+			fromNode.setId(startNodeId);
+			int endNodeId = new NodeDaoImpl().getNodeIdFromName(endNode);
+			toNode.setId(endNodeId);
 
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 			result = generalAlgorithm.findPath(fromNode, toNode, context);
@@ -136,9 +140,7 @@ public class AlgoController {
 
 		// use node name to find the Node we need
 		// search database?
-
 		return new Node();
-
 	}
 
 	/**
