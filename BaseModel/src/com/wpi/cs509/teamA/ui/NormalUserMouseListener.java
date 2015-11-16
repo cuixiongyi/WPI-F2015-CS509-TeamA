@@ -44,6 +44,11 @@ public class NormalUserMouseListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getButton() == MouseEvent.BUTTON1) {
+		imagePanel.setxPos(e.getX());
+		imagePanel.setyPos(e.getY());
+		imagePanel.repaint();
+		}
 
 
 	}

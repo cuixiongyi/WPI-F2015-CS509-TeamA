@@ -82,7 +82,7 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 		// Edge Pairs
 		pairPanel = new JPanel();
-		pairPanel.setBounds(0, 0, 200, 320);
+		pairPanel.setBounds(0, 0, 230, 320);
 		getContentPane().add(pairPanel);
 		pairPanel.setLayout(new GridLayout(0, 3, 0, 0));
 

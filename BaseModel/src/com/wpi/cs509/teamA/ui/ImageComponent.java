@@ -30,7 +30,6 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
-
 /**
  * An component to show the images. This component has two different states
  * based on whether the user logged in or not. The state of this component will
@@ -337,6 +336,12 @@ public class ImageComponent extends JComponent {
 	public static void setIsAdmin(boolean isAdmin) {
 		ImageComponent.isAdmin = isAdmin;
 	}
+	
+//	public void drawName(int x, int y)
+//	{
+//		this.xPos=x;
+//		this.yPos=y;
+//	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -352,9 +357,11 @@ public class ImageComponent extends JComponent {
 		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
 		setForeground(Color.RED);
 
+		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+		Set<NodeRelation> allEdges = UIDataBuffer.getAllEdges();
 		if (isAdmin == true) {
 			// paint all of the nodes
-			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+			
 			
 			if (allNodes != null && allNodes.get(1).size() != 0) {
 				int x, y;
@@ -366,7 +373,7 @@ public class ImageComponent extends JComponent {
 			}
 
 			// paint all the edges
-			Set<NodeRelation> allEdges = UIDataBuffer.getAllEdges();
+			
 			if (allEdges.size() != 0) {
 				for (NodeRelation edge : allEdges) {
 					int xstart, ystart, xend, yend;
@@ -415,7 +422,36 @@ public class ImageComponent extends JComponent {
 			g2.drawString("Destination", desX, desY-ovalOffset);
 			
 			
+			
+			
+			
 		}
+		
+		//draw the name of location, ugly ....
+//		if (allNodes != null && allNodes.get(1).size() != 0) {
+//			int x, y;
+//			for (int i = 0; i < allNodes.get(1).size(); i++) {
+//				x = allNodes.get(1).get(i).getLocation().getX();
+//				y = allNodes.get(1).get(i).getLocation().getY();
+//				if(!allNodes.get(1).get(i).getName().toString().equals("Location"))
+//					g.drawString(allNodes.get(1).get(i).getName(), x-ovalOffset, y-ovalOffset);
+//			}
+//		}
+		
+		//draw the name of the clicked area
+		for (int i = 0; i < allNodes.get(1).size(); i++) 
+		{
+			System.out.println(xPos+","+yPos);
+			System.out.println(allNodes.get(1).get(i).getLocation().getX()+","+allNodes.get(1).get(i).getLocation().getY());
+			if(Math.abs(this.xPos-allNodes.get(1).get(i).getLocation().getX())<50 && Math.abs(this.yPos-allNodes.get(1).get(i).getLocation().getY())<50)
+			{
+				
+				if(!allNodes.get(1).get(i).getName().toString().equals("Location"))
+					g.drawString(allNodes.get(1).get(i).getName(), allNodes.get(1).get(i).getLocation().getX(),allNodes.get(1).get(i).getLocation().getY());
+			}
+		}
+		
+		
 
 		g2 = null;
 

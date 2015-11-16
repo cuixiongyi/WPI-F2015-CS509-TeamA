@@ -10,10 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -29,8 +32,11 @@ import javax.swing.SwingConstants;
  */
 public class AdminDialog extends JDialog implements ActionListener {
 
-	private JPanel contentPanel = new JPanel();
+	private JPanel contentPanel;
+	private JTextField userName;
 	private JPasswordField passwordField;
+	private JLabel lbUserName;
+	private JLabel lbPassword;
 	private JButton okButton;
 	private JButton cancelButton;
 	private ImageComponent imgPanel;
@@ -57,50 +63,90 @@ public class AdminDialog extends JDialog implements ActionListener {
 		this.imgPanel = imageComponent;
 		this.inputPanel = inputPanel;
 		setTitle(LOG);
-		setBounds(200, 200, 320, 180);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		
+		contentPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints cs = new GridBagConstraints();
+        cs.fill = GridBagConstraints.HORIZONTAL;
+        
+        lbUserName = new JLabel("Username: ");
+        cs.gridx = 0;
+        cs.gridy = 0;
+        cs.gridwidth = 1;
+        contentPanel.add(lbUserName, cs);
+        
+        userName = new JTextField(20);
+        cs.gridx = 1;
+        cs.gridy = 0;
+        cs.gridwidth = 2;
+        contentPanel.add(userName, cs);
+        
+        lbPassword = new JLabel("Password: ");
+        cs.gridx = 0;
+        cs.gridy = 1;
+        cs.gridwidth = 1;
+        contentPanel.add(lbPassword, cs);
 
-		// Password block
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPassword.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblPassword.setBounds(6, 50, 121, 32);
-		contentPanel.add(lblPassword);
-
-		passwordField = new JPasswordField(10);
-		passwordField.setBounds(135, 52, 126, 28);
-		passwordField.setColumns(10);
-		passwordField.setBackground(new Color(180, 180, 180));
-		contentPanel.add(passwordField);
-
-		// OK and CANCEL button block
+        passwordField = new JPasswordField(20);
+        cs.gridx = 1;
+        cs.gridy = 1;
+        cs.gridwidth = 2;
+        contentPanel.add(passwordField, cs);
+        contentPanel.setBorder(new LineBorder(Color.GRAY));
+		
+		
+//		setBounds(200, 200, 320, 180);
+//		getContentPane().setLayout(new BorderLayout());
+//		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		getContentPane().add(contentPanel, BorderLayout.CENTER);
+//		contentPanel.setLayout(null);
+//
+//		// Password block
+//		JLabel lblPassword = new JLabel("Password:");
+//		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
+//		lblPassword.setFont(new Font("Arial", Font.PLAIN, 15));
+//		lblPassword.setBounds(6, 50, 121, 32);
+//		contentPanel.add(lblPassword);
+//
+//		passwordField = new JPasswordField(10);
+//		passwordField.setBounds(135, 52, 126, 28);
+//		passwordField.setColumns(10);
+//		passwordField.setBackground(new Color(180, 180, 180));
+//		contentPanel.add(passwordField);
+//
+//		// OK and CANCEL button block
 		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
+//		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+//		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+//
 		okButton = new JButton(OK);
 		okButton.setActionCommand(OK);
 		okButton.addActionListener(this);
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
-
+		
 		cancelButton = new JButton(CANCEL);
 		cancelButton.setActionCommand(CANCEL);
 		cancelButton.addActionListener(this);
 		buttonPane.add(cancelButton);
+        
+
+        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        getContentPane().add(buttonPane, BorderLayout.PAGE_END);
+        pack();
+        setResizable(false);
+        setLocation(100,100);
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(CANCEL))
+		{
 			AdminDialog.this.setVisible(false);
+			dispose();
+		}
 		if (e.getActionCommand().equals(OK)) {
 			// Check password
-			char[] input = passwordField.getPassword();
-			if (isPasswordCorrect(input)) {
+			if (isPasswordCorrect(getUsername(),getPassword())) {
 				AdminDialog.this.setVisible(false);
 				imgPanel.getStateContext().switchState(imgPanel, imgPanel.getNormalUserMouseListener(),
 						imgPanel.getAdminMouseListener());
@@ -110,14 +156,17 @@ public class AdminDialog extends JDialog implements ActionListener {
 				inputPanel.getBtnSynchronize().setVisible(true);
 				ImageComponent.setIsAdmin(true);
 				imgPanel.repaint();			
+				dispose();
 			} else {
 				JOptionPane.showMessageDialog(null, "Invalid password. Try again.", "Error Message",
 						JOptionPane.ERROR_MESSAGE);
 				passwordField.selectAll();
 				resetFocus();
+				userName.setText("");
+                passwordField.setText("");
+				
 			}
 			// Zero out the possible password, for security.
-			Arrays.fill(input, '0');
 
 		}
 	}
@@ -126,22 +175,24 @@ public class AdminDialog extends JDialog implements ActionListener {
 	 * Checks the passed-in array against the correct password. After this
 	 * method returns, you should invoke eraseArray on the passed-in array.
 	 */
-	private static boolean isPasswordCorrect(char[] input) {
-		boolean isCorrect = true;
-		char[] correctPassword = { '5', '0', '9' };
-
-		if (input.length != correctPassword.length) {
-			isCorrect = false;
-		} else {
-			isCorrect = Arrays.equals(input, correctPassword);
+	private static boolean isPasswordCorrect(String username,String password) {
+		if (username.equals("wpi") && password.equals("goodjob")) {
+            return true;	
 		}
+		else 
+			return false;
 
-		// Zero out the password.
-		Arrays.fill(correctPassword, '0');
-
-		return isCorrect;
 	}
+	
+	public String getUsername() {
+        return userName.getText().trim();
+    }
 
+    public String getPassword() {
+        return new String(passwordField.getPassword());
+    }
+
+	
 	protected void resetFocus() {
 		passwordField.requestFocusInWindow();
 	}
