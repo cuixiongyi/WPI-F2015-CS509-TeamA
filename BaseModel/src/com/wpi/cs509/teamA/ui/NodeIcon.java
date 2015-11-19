@@ -13,12 +13,11 @@ public class NodeIcon {
 	private BufferedImage image;
 	private String iconFileName = "/BaseModel/src/com/wpi/cs509/teamA/ui/icon_test1.png";
 
-	public NodeIcon(Node node) {
-		setNode(node);
-		CreateImage();
+	public NodeIcon() {
+		CreateImages();
 	}
 
-	void CreateImage() {
+	void CreateImages() {
 		try {
 			setImage(ImageIO.read(new File(getIconFileName())));
 		} catch (IOException e) {
@@ -58,7 +57,7 @@ public class NodeIcon {
 	/**
 	 * @return the image
 	 */
-	public BufferedImage getImage() {
+	public BufferedImage getImage(Node node) {
 		return image;
 	}
 
