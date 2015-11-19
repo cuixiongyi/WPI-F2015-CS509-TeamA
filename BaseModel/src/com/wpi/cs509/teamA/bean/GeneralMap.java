@@ -25,7 +25,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	/**
 	 * the map scale
 	 */
-	private int Scale;
+	private float measureScale;
 	/**
 	 * the adjacency matrix of this map
 	 */
