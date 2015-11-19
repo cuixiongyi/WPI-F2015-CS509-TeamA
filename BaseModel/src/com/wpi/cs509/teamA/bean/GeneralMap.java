@@ -37,6 +37,11 @@ public class GeneralMap implements AdjacencyMatrix {
 	public GeneralMap() {
 
 	}
+	////for algo testing
+	public GeneralMap(String id, int scale) {
+		this.mapId=id;
+		this.Scale=scale;
+	}
 
 	/**
 	 * Constructor. The ProxyMap will use this constructor to create a new

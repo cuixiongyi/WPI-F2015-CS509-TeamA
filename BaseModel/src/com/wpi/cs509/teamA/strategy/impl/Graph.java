@@ -1,5 +1,5 @@
 package com.wpi.cs509.teamA.strategy.impl;
-
+import com.wpi.cs509.teamA.bean.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,61 +7,44 @@ public class Graph {
 
 	// mapping of vertex names to Vertex objects, built from a set of Edges
 	private HashMap<Integer, Vertex> graph;
+	private List<Edge> edges;
 
 	/** Builds a graph from a set of edges */
 	public Graph(Edge[] edges) {
 		graph = new HashMap<>(edges.length);
 
+//		for (Edge e : edges)
+//		{
+//			this.edges.add(e);
+//		}
+//		
 		// one pass to find all vertices
 		for (Edge e : edges) {
-			if (!graph.containsKey(e.getId1())) {
-				graph.put(e.getId1(), new Vertex(e.getId1()));
+			if (!graph.containsKey(e.getNode1().getId())) {
+				graph.put(e.getNode1().getId(), new Vertex(e.getNode1()));
 			}
-			if (!graph.containsKey(e.getId2())) {
-				graph.put(e.getId2(), new Vertex(e.getId2()));
+			if (!graph.containsKey(e.getNode2().getId())) {
+				graph.put(e.getNode2().getId(), new Vertex(e.getNode2()));
 			}
 		}
 
 		// another pass to set neighboring vertices
-		for (Edge edge : edges) {
-			graph.get(edge.getId1()).getNeighbours().put(graph.get(edge.getId2()), edge.getDist());
-			graph.get(edge.getId2()).getNeighbours().put(graph.get(edge.getId1()), edge.getDist());
+		//must add vertex neighbor when all edges information are collected
+		for (Edge e : edges) {
+			graph.get(e.getNode1().getId()).getNeighborV().put(graph.get(e.getNode2().getId()), e.getDist());
+			graph.get(e.getNode2().getId()).getNeighborV().put(graph.get(e.getNode1().getId()), e.getDist());
 		}
+		
+		//add edges info to nodes for deletions
 	}
 
-	public List<Integer> getPath(int endId) {
-		if (!graph.containsKey(endId)) {
-			System.err.printf("Graph doesn't contain end vertex \"%d\"\n", endId);
-			return null;
-		}
-
-		graph.get(endId).clearPathNodeIds();
-		graph.get(endId).getNext();
-		List<Integer> result = graph.get(endId).getPathNodeIds();
-		result.add(endId);
-		// return list of node ids that make up the path
-		return result;
+	public List<Edge> getEdges()
+	{
+		return this.edges;
 	}
-
-	/** Prints a path from the source to the specified vertex */
-	/*
-	 * public void printPath(int endId) { if (!graph.containsKey(endId)) {
-	 * System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endId);
-	 * return; }
-	 * 
-	 * graph.get(endId).printPath(); System.out.println(); }
-	 */
-
-	/**
-	 * Prints the path from the source to every vertex (output order is not
-	 * guaranteed)
-	 */
-	/*
-	 * public void printAllPaths() { for (Vertex v : graph.values()) {
-	 * v.printPath(); System.out.println(); } }
-	 */
-
+	
 	public HashMap<Integer, Vertex> getGraph() {
 		return graph;
 	}
 }
+
