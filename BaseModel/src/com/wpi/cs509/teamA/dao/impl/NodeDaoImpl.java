@@ -91,7 +91,7 @@ public class NodeDaoImpl implements NodeDao {
 		return -1;
 	}
 	@Override
-	public Set<Node> getAllNodes() {
+	public Set<Node> getAllNodesForCurrentMap() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		Set<Node> res = new HashSet<Node>();
@@ -127,7 +127,7 @@ public class NodeDaoImpl implements NodeDao {
 
 		return null;
 	}
-
+	
 	@Override
 	public Map<Integer, Double> getNodeNeighbor(int nodeId) {
 		// TODO Auto-generated method stub

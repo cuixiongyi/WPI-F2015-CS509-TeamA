@@ -26,7 +26,7 @@ public class UIDataBuffer {
 	public static Map<Integer, List<Node>> getAllNodes() {
 		// get node from db
 		List<Node> allNodesInDB = new ArrayList<Node>();
-		allNodesInDB.addAll(new NodeDaoImpl().getAllNodes());
+		allNodesInDB.addAll(new NodeDaoImpl().getAllNodesForCurrentMap());
 		Map<Integer, List<Node>> resMap = new HashMap<Integer, List<Node>>();
 		resMap.put(1, allNodesInDB);
 		return resMap;
