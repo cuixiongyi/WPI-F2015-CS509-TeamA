@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -52,8 +54,13 @@ public class ImageComponent extends JComponent {
 	// here.
 	private MouseListener normalUserMouseListener;
 	private MouseListener adminMouseListener;
+	
 	private int xPos;
 	private int yPos;
+	private int imageXpos=0;
+	private int imageYpos=0;
+	private int pressxPos;
+	private int pressyPos;
 
 	private List<Node> pathNodeList;
 
@@ -96,6 +103,28 @@ public class ImageComponent extends JComponent {
 		// TODO: Move this part to input panel..
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
+		
+		
+		this.addMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				ImageComponent.this.setImageXpos(e.getX()-ImageComponent.this.pressxPos);
+				ImageComponent.this.setImageYpos(e.getY()-ImageComponent.this.pressyPos);
+				ImageComponent.this.repaint();
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		
 
 		// Click the SEARCH button..
 		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
@@ -316,6 +345,24 @@ public class ImageComponent extends JComponent {
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
+	
+	
+	public int getImageXpos() {
+		return imageXpos;
+	}
+
+	public void setImageXpos(int imageXpos) {
+		this.imageXpos = imageXpos;
+	}
+
+	public int getImageYpos() {
+		return imageYpos;
+	}
+
+	public void setImageYpos(int imageYpos) {
+		this.imageYpos = imageYpos;
+	}
+
 
 	public NormalUserMouseListener getNormalUserMouseListener() {
 		return (NormalUserMouseListener) this.normalUserMouseListener;
@@ -337,6 +384,22 @@ public class ImageComponent extends JComponent {
 		ImageComponent.isAdmin = isAdmin;
 	}
 	
+	public int getPressxPos() {
+		return pressxPos;
+	}
+
+	public void setPressxPos(int pressxPos) {
+		this.pressxPos = pressxPos;
+	}
+
+	public int getPressyPos() {
+		return pressyPos;
+	}
+
+	public void setPressyPos(int pressyPos) {
+		this.pressyPos = pressyPos;
+	}
+	
 //	public void drawName(int x, int y)
 //	{
 //		this.xPos=x;
@@ -354,7 +417,10 @@ public class ImageComponent extends JComponent {
 		}
 
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+		System.out.println(imageXpos+","+imageYpos+"hehe");
+		System.out.println(xPos+","+yPos+"haha");
+		
+		g2.drawImage(image, imageXpos, imageYpos, image.getWidth(this), image.getHeight(this), this);
 		setForeground(Color.RED);
 
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
@@ -441,8 +507,8 @@ public class ImageComponent extends JComponent {
 		//draw the name of the clicked area
 		for (int i = 0; i < allNodes.get(1).size(); i++) 
 		{
-			System.out.println(xPos+","+yPos);
-			System.out.println(allNodes.get(1).get(i).getLocation().getX()+","+allNodes.get(1).get(i).getLocation().getY());
+//			System.out.println(xPos+","+yPos);
+//			System.out.println(allNodes.get(1).get(i).getLocation().getX()+","+allNodes.get(1).get(i).getLocation().getY());
 			if(Math.abs(this.xPos-allNodes.get(1).get(i).getLocation().getX())<50 && Math.abs(this.yPos-allNodes.get(1).get(i).getLocation().getY())<50)
 			{
 				

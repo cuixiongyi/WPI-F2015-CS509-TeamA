@@ -47,6 +47,7 @@ public class NormalUserMouseListener implements MouseListener {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 		imagePanel.setxPos(e.getX());
 		imagePanel.setyPos(e.getY());
+		System.out.println(e.getX()+","+e.getY()+"what the hell");
 		imagePanel.repaint();
 		}
 
@@ -68,6 +69,10 @@ public class NormalUserMouseListener implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			imagePanel.setPressxPos(e.getX());
+			imagePanel.setPressyPos(e.getY());
+		}
 
 	}
 
@@ -76,6 +81,7 @@ public class NormalUserMouseListener implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 	/**
 	 * @return the xPos
