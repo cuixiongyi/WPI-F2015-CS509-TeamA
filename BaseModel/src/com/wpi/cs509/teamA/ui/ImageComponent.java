@@ -49,6 +49,11 @@ public class ImageComponent extends JComponent {
 	private StateContext stateContext;
 	private final static String LOGIN = "Login";
 
+    /// CXY img Scale
+    private float imgScale;
+    private float imgZoomRate;
+    private float imgZoomOutRate;
+    private float imgZoomInRate;
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
 	private MouseListener normalUserMouseListener;
@@ -74,6 +79,10 @@ public class ImageComponent extends JComponent {
 
 		// initialize the mouse listener state
 		stateContext = new StateContext();
+        imgScale = 1.0;
+        imgZoomRate = 0.1;
+        imgZoomInRate = 1 + imgZoomRate;
+        imgZoomOutRate = 1 - imgZoomRate;
 	}
 
 	/**
@@ -338,6 +347,20 @@ public class ImageComponent extends JComponent {
 		ImageComponent.isAdmin = isAdmin;
 	}
 
+	public void setImgScale(float imgScale) {
+		ImageComponent.imgScale = imgScale;
+	}
+
+    public void zoomInImg()
+    {
+        imgScale = imgScale * imgZoomInRate;
+        this.repaint();
+    }
+    public void zoomInImg()
+    {
+        imgScale = imgScale * imgZoomOutRate;
+        this.repaint();
+    }
 	@Override
 	public void paintComponent(Graphics g) {
 
@@ -349,7 +372,12 @@ public class ImageComponent extends JComponent {
 		}
 
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+
+        // scale the image  Ref : https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/2d/images/examples/ImageDrawingApplet.java
+		g2.drawImage(image,
+                0, 0, image.getWidth(this)*imgScale, image.getHeight(this)*imgScale,
+                0, 0, image.getWidth(this), image.getHeight(this),
+                this);
 		setForeground(Color.RED);
 
 		if (isAdmin == true) {
