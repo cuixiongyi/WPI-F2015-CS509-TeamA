@@ -56,7 +56,7 @@ public class ImageComponent extends JComponent {
 	private int xPos;
 	private int yPos;
 
-	private List<Node> pathNodeList;
+	private List<Node> prevPaintedNodes;
 
 	private Map<Integer, List<Node>> result;
 
@@ -67,14 +67,11 @@ public class ImageComponent extends JComponent {
 
 	private static boolean isAdmin;
 
+
+
+    private InputPanel inputPanel;
 	// admin will get a different repaint method
 	// private boolean isAdmin;
-
-	public ImageComponent() {
-
-		// initialize the mouse listener state
-		stateContext = new StateContext();
-	}
 
 	/**
 	 * Constructor for image component The constructor will also add all the
@@ -85,7 +82,7 @@ public class ImageComponent extends JComponent {
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
 	 */
-	public ImageComponent(final InputPanel inputPanel) {
+	public ImageComponent() {
 		ImageComponent.isAdmin = false;
 		this.inputPanel = inputPanel;
 		// initialize the mouse listener state
@@ -98,104 +95,14 @@ public class ImageComponent extends JComponent {
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
 
-		// Click the SEARCH button..
-		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+        //setImageComponent(this);
 
-				// TODO: need to check if the input is valid!!
-
-				// TODO: make the AlgoController singleton and use setter and
-				// getter to operate the instance..
-
-				// We will go to the backend here.. For now, all the resources
-				// should be ready!
-				AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
-						inputPanel.getDesPoint());
-
-				// get the result of the search..
-				result = null;
-				result = algoController.getRoute();
-
-				// get a list of a map, so that we can draw line on that map..
-				pathNodeList = null;
-				pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
-
-				// we need to give all the information to the repaint metho
-				repaint();
-
-			}
 
 		});
 
-		/**
-		 * Add listener to the admin login button
-		 */
-		inputPanel.getAdminLogin().addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 
-				// TODO: we need a pop up window here to verify the admin role.
-				// If it is the admin, give it the admin mouse click event. If
-				// not, give it normal user
 
-				if (adminClicked % 2 == 0) {
-					AdminDialog adminDialog = new AdminDialog(ImageComponent.this, inputPanel);
-					adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-					adminDialog.setVisible(isFocusable());
-
-				} else {
-
-					JOptionPane.showMessageDialog(null, "You have logged out");
-					stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-					inputPanel.getBtnNeighborManage().setVisible(false);
-					inputPanel.getAdminLogin().setText(LOGIN);
-					inputPanel.getBtnSynchronize().setVisible(false);
-					isAdmin = false;
-					adminClicked++;
-					ImageComponent.this.repaint();
-				}
-			}
-
-		});
-
-		// TODO: Make the map related things into a enum class..
-		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
-					selectImage("Final_Campus_Map", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(1);
-					inputPanel.getBtnSynchronize().doClick();
-				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
-					selectImage("Final_AK_Ground_Floor", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(2);
-					inputPanel.getBtnSynchronize().doClick();
-				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
-					selectImage("Final_AK_First_Floor", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(3);
-					inputPanel.getBtnSynchronize().doClick();
-				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
-					selectImage("Final_AK_Second_Floor", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(4);
-					inputPanel.getBtnSynchronize().doClick();
-				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-					selectImage("Final_AK_Third_Floor", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(5);
-					inputPanel.getBtnSynchronize().doClick();
-				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-					selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(6);
-					inputPanel.getBtnSynchronize().doClick();
-				} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-					selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
-					UIDataBuffer.setCurrentMapId(7);
-					inputPanel.getBtnSynchronize().doClick();
-				}
-			}
-
-		});
 
 	}
 
@@ -212,131 +119,46 @@ public class ImageComponent extends JComponent {
 
 	}
 
-	/**
-	 * Get the path of the image we will load. Temporary use..
-	 * 
-	 * @param imgPath
-	 *            path of the image, or in the database?
-	 */
-	public void setImagePath(String imgPath) {
+    /**
+     * Changes the currently displayed map
+     *
+     * @param newMap The map to be displayed
+     *
+     */
+	private void changeMap(GeneralMap newMap) {
+        // @TODO: finish the refactor
 
-		// TODO: It seems that we will store our image in the database.. so how
-		// to implement that?
-
-		try {
-			image = ImageIO.read(new FileInputStream(imgPath));
-			this.setImgWidth(image.getWidth(this));
-			this.setImgHeight(image.getHeight(this));
-			this.repaint();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        this.repaint();
 
 	}
 
-	/**
-	 * @return the inputPanel
-	 */
-	public InputPanel getInputPanel() {
-		return inputPanel;
-	}
 
-	/**
-	 * @return the image
-	 */
-	public Image getImage() {
-		return image;
-	}
+    public void clearPath() {
 
-	/**
-	 * @return the imgWidth
-	 */
-	public int getImgWidth() {
-		return imgWidth;
-	}
+    }
 
-	/**
-	 * @return the imgHeight
-	 */
-	public int getImgHeight() {
-		return imgHeight;
-	}
+    public void paintPath() {
 
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(Image image) {
-		this.image = image;
-	}
 
-	/**
-	 * @param imgWidth
-	 *            the imgWidth to set
-	 */
-	public void setImgWidth(int imgWidth) {
-		this.imgWidth = imgWidth;
-	}
+    }
 
-	/**
-	 * @param imgHeight
-	 *            the imgHeight to set
-	 */
-	public void setImgHeight(int imgHeight) {
-		this.imgHeight = imgHeight;
-	}
+    public void clearIcon() {
 
-	/**
-	 * @return the xPos
-	 */
-	public int getxPos() {
-		return xPos;
-	}
+    }
 
-	/**
-	 * @return the yPos
-	 */
-	public int getyPos() {
-		return yPos;
-	}
+    public void paintIcon() {
 
-	/**
-	 * @param xPos
-	 *            the xPos to set
-	 */
-	public void setxPos(int xPos) {
-		this.xPos = xPos;
-	}
+    }
 
-	/**
-	 * @param yPos
-	 *            the yPos to set
-	 */
-	public void setyPos(int yPos) {
-		this.yPos = yPos;
-	}
+    public void clearText() {
 
-	public NormalUserMouseListener getNormalUserMouseListener() {
-		return (NormalUserMouseListener) this.normalUserMouseListener;
-	}
+    }
 
-	public AdminMouseListener getAdminMouseListener() {
-		return (AdminMouseListener) this.adminMouseListener;
-	}
+    public void paintText() {
 
-	public StateContext getStateContext() {
-		return this.stateContext;
-	}
 
-	public void incrementAdminClicked() {
-		ImageComponent.adminClicked++;
-	}
+    }
 
-	public static void setIsAdmin(boolean isAdmin) {
-		ImageComponent.isAdmin = isAdmin;
-	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -420,4 +242,112 @@ public class ImageComponent extends JComponent {
 		g2 = null;
 
 	}
+
+    public void setInputPanel(InputPanel inputPanel) {
+        this.inputPanel = inputPanel;
+    }
+
+
+    /**
+     * @return the inputPanel
+     */
+    public InputPanel getInputPanel() {
+        return inputPanel;
+    }
+
+    /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @return the imgWidth
+     */
+    public int getImgWidth() {
+        return imgWidth;
+    }
+
+    /**
+     * @return the imgHeight
+     */
+    public int getImgHeight() {
+        return imgHeight;
+    }
+
+    /**
+     * @param image
+     *            the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    /**
+     * @param imgWidth
+     *            the imgWidth to set
+     */
+    public void setImgWidth(int imgWidth) {
+        this.imgWidth = imgWidth;
+    }
+
+    /**
+     * @param imgHeight
+     *            the imgHeight to set
+     */
+    public void setImgHeight(int imgHeight) {
+        this.imgHeight = imgHeight;
+    }
+
+    /**
+     * @return the xPos
+     */
+    public int getxPos() {
+        return xPos;
+    }
+
+    /**
+     * @return the yPos
+     */
+    public int getyPos() {
+        return yPos;
+    }
+
+    /**
+     * @param xPos
+     *            the xPos to set
+     */
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    /**
+     * @param yPos
+     *            the yPos to set
+     */
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+
+    public NormalUserMouseListener getNormalUserMouseListener() {
+        return (NormalUserMouseListener) this.normalUserMouseListener;
+    }
+
+    public AdminMouseListener getAdminMouseListener() {
+        return (AdminMouseListener) this.adminMouseListener;
+    }
+
+    public StateContext getStateContext() {
+        return this.stateContext;
+    }
+
+    public void incrementAdminClicked() {
+        ImageComponent.adminClicked++;
+    }
+
+    public static void setIsAdmin(boolean isAdmin) {
+        ImageComponent.isAdmin = isAdmin;
+    }
+
 }

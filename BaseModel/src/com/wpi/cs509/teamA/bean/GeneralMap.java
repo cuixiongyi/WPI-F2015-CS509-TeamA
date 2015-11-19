@@ -31,6 +31,14 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	private InputMatrix adjacencyMatrix;
 
+
+    // Refactor
+    private String mapImgPath;
+
+    private float displayScale;
+
+    private List<Node> nodes;
+
 	/**
 	 * Default constructor
 	 */
@@ -75,6 +83,7 @@ public class GeneralMap implements AdjacencyMatrix {
 		return adjacencyMatrix;
 	}
 
+
 	/**
 	 * @return the mapId
 	 */
@@ -116,5 +125,42 @@ public class GeneralMap implements AdjacencyMatrix {
 	public void setScale(int scale) {
 		Scale = scale;
 	}
+
+
+
+    public String getMapImgPath() {
+        return mapImgPath;
+    }
+
+    public void setMapImgPath(String mapImgPath) {
+
+        this.mapImgPath = mapImgPath;
+        try {
+            image = ImageIO.read(new FileInputStream(mapImgPath));
+            this.setImgWidth(image.getWidth(this));
+            this.setImgHeight(image.getHeight(this));
+            this.repaint();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public float getDisplayScale() {
+        return displayScale;
+    }
+
+    public void setDisplayScale(float displayScale) {
+        this.displayScale = displayScale;
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
+    }
 
 }

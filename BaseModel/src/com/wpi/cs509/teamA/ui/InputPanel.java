@@ -53,7 +53,7 @@ public class InputPanel extends JPanel implements ActionListener {
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
-
+    private ImageComponent imageComponent;
 	/**
 	 * Constructor. Initialize all the input panel.
 	 */
@@ -150,7 +150,75 @@ public class InputPanel extends JPanel implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+        /**
+         * Add listener to the admin login button
+         */
+        inputPanel.getAdminLogin().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+
+                // TODO: we need a pop up window here to verify the admin role.
+                // If it is the admin, give it the admin mouse click event. If
+                // not, give it normal user
+
+                if (adminClicked % 2 == 0) {
+                    AdminDialog adminDialog = new AdminDialog(ImageComponent.this, inputPanel);
+                    adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+                    adminDialog.setVisible(isFocusable());
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "You have logged out");
+                    stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
+                    inputPanel.getBtnNeighborManage().setVisible(false);
+                    inputPanel.getAdminLogin().setText(LOGIN);
+                    inputPanel.getBtnSynchronize().setVisible(false);
+                    isAdmin = false;
+                    adminClicked++;
+                    ImageComponent.this.repaint();
+                }
+            }
+
+        });
+
+	// TODO: Make the map related things into a enum class..
+				inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
+						public void itemStateChanged(ItemEvent e) {
+								if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
+										selectImage("Final_Campus_Map", ImageComponent.this);
+										UIDataBuffer.setCurrentMapId(1);
+										inputPanel.getBtnSynchronize().doClick();
+									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
+										selectImage("Final_AK_Ground_Floor", ImageComponent.this);
+									UIDataBuffer.setCurrentMapId(2);
+										inputPanel.getBtnSynchronize().doClick();
+									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
+										selectImage("Final_AK_First_Floor", ImageComponent.this);
+										UIDataBuffer.setCurrentMapId(3);
+										inputPanel.getBtnSynchronize().doClick();
+									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
+										selectImage("Final_AK_Second_Floor", ImageComponent.this);
+										UIDataBuffer.setCurrentMapId(4);
+										inputPanel.getBtnSynchronize().doClick();
+									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
+										selectImage("Final_AK_Third_Floor", ImageComponent.this);
+										UIDataBuffer.setCurrentMapId(5);
+										inputPanel.getBtnSynchronize().doClick();
+									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
+										selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
+										UIDataBuffer.setCurrentMapId(6);
+										inputPanel.getBtnSynchronize().doClick();
+									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
+										selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
+										UIDataBuffer.setCurrentMapId(7);
+										inputPanel.getBtnSynchronize().doClick();
+									}
+							}
+
+					});
 
 	}
 
@@ -170,6 +238,38 @@ public class InputPanel extends JPanel implements ActionListener {
 		}
 	}
 
+    // Click the SEARCH button..
+    this.btnSearch().addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+
+            // TODO: need to check if the input is valid!!
+
+            // TODO: make the AlgoController singleton and use setter and
+            // getter to operate the instance..
+
+            // We will go to the backend here.. For now, all the resources
+            // should be ready!
+            AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
+                    inputPanel.getDesPoint());
+
+            // get the result of the search..
+            result = null;
+            result = algoController.getRoute();
+
+            // get a list of a map, so that we can draw line on that map..
+            pathNodeList = null;
+            pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
+
+            // we need to give all the information to the repaint metho
+            imageComponent.paintPath(path);
+
+        }
+
+    public void setImageComponent(ImageComponent imageComponent2)
+	{
+        this.imageComponent = imageComponent2;
+    }
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
 	}
@@ -244,5 +344,6 @@ public class InputPanel extends JPanel implements ActionListener {
 	public JButton getBtnNeighborManage() {
 		return btnNeighborManage;
 	}
+
 
 }

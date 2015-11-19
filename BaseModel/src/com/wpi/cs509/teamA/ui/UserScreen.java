@@ -150,6 +150,9 @@ public class UserScreen extends JFrame {
 		setSize(800, 500);
 		setVisible(true);
 		setResizable(true);
+
+		imgComponent.setInputPanel(this.inputPanel);
+        inputPanel.setImageComponent(this.imgComponent);
 	}
 
 	public JButton getBtnNeighborManage() {
