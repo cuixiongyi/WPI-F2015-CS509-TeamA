@@ -364,6 +364,27 @@ public class ImageComponent extends JComponent {
 	@Override
 	public void paintComponent(Graphics g) {
 
+        static float lastScale = 0;
+        static int lastID = -1;
+        static List<Integer> x_display;
+        static List<Integer> y_display;
+        if ( lastScale != this.imgScale || lastID != UIDataBuffer.getCurrentMapId())
+        {
+            Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+
+            if (allNodes != null && allNodes.get(1).size() != 0) {
+                int x, y;
+                for (int i = 0; i < allNodes.get(1).size(); i++) {
+                    x_display.add( allNodes.get(1).get(i).getLocation().getX() * this.imgScale);
+                    y_display.add( allNodes.get(1).get(i).getLocation().getY() * this.imgScale);
+                }
+            }
+
+            lastScale = this.imgScale;
+            lastID = UIDataBuffer.getCurrentMapId();
+
+        }
+
 		// if isInitilized
 		// no need to paint the image again
 
@@ -386,10 +407,9 @@ public class ImageComponent extends JComponent {
 			
 			if (allNodes != null && allNodes.get(1).size() != 0) {
 				int x, y;
-				for (int i = 0; i < allNodes.get(1).size(); i++) {
-					x = allNodes.get(1).get(i).getLocation().getX();
-					y = allNodes.get(1).get(i).getLocation().getY();
-					g.fillOval(x - ovalOffset, y - ovalOffset, 10, 10);
+				for (int i = 0; i < x_display.size(); i++) {
+
+					g.fillOval(x_display[i] - ovalOffset, y_display[i] - ovalOffset, 10, 10);
 				}
 			}
 
