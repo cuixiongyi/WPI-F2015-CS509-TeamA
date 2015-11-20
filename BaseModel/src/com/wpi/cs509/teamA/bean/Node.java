@@ -39,6 +39,9 @@ public class Node {
 	// this may cause great complex when input data
 	private NodeType nodeType;
 
+    /** Display coordinate on map image */
+    private Coordinate displayCoor;
+
 	/** default constructor */
 	public Node() {
 
@@ -75,7 +78,7 @@ public class Node {
 		this.mapId = mapId;
 		this.neighbors = neighbors;
 		this.nodeType = NodeType.valueOf(nodeType);
-
+        this.displayCoor = new Coordinate(x, y);
 	}
 
 	/**

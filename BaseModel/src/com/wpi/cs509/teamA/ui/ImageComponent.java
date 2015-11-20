@@ -68,7 +68,6 @@ public class ImageComponent extends JComponent {
 	private static boolean isAdmin;
 
 
-
     private InputPanel inputPanel;
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -177,7 +176,7 @@ public class ImageComponent extends JComponent {
 		if (isAdmin == true) {
 			// paint all of the nodes
 			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-			
+
 			if (allNodes != null && allNodes.get(1).size() != 0) {
 				int x, y;
 				for (int i = 0; i < allNodes.get(1).size(); i++) {
@@ -200,7 +199,7 @@ public class ImageComponent extends JComponent {
 
 					g2.setStroke(new BasicStroke(5));
 	                g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
-					
+
 				}
 			}
 		}

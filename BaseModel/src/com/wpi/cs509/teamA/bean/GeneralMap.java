@@ -75,6 +75,8 @@ public class GeneralMap implements AdjacencyMatrix {
 		// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
 		// adjacencyMatrix = makeMatrix();
 
+        this.measureScale = 1.0;
+
 	}
 	
 	// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
