@@ -80,13 +80,12 @@ public class Node {
 	 * @param nodeType
 	 *            the type of the node, an enum class
 	 */
-	public Node(int id, String name, int x, int y, GeneralMap map, Set<Edge> neighborE, String nodeType) {
+	public Node(int id, String name, int x, int y, GeneralMap map, String nodeType) {
 
 		this.id = id;
 		this.name = name;
 		this.location = new Coordinate(x, y);
 		this.map = map;
-		this.neighborE = neighborE;
 		this.nodeType = NodeType.valueOf(nodeType);
         this.displayCoor = new Coordinate(x, y);
 	}

@@ -58,9 +58,9 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	}
 	////for algo testing
-	public GeneralMap(String id, int scale) {
+	public GeneralMap(String id, int measureScale) {
 		this.mapId=id;
-		this.Scale=scale;
+		this.measureScale=measureScale;
 	}
 
 	/**
