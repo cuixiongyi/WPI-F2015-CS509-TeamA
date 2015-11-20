@@ -140,13 +140,16 @@ public class GeneralMap implements AdjacencyMatrix {
 		measureScale = scale;
 	}
 
-
+	public void addMap(String mapImgPath, GeneralMap map) {
+		this = map;
+        setMapImgPath(mapImgPath);
+	}
 
     public String getMapImgPath() {
         return mapImgPath;
     }
 
-    public void setMapImgPath(String mapImgPath) {
+    private void setMapImgPath(String mapImgPath) {
 
         this.mapImgPath = mapImgPath;
         try {

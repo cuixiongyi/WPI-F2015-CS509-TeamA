@@ -30,7 +30,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
-import com.wpi.cs509.teamA.ui.StateContext.java;
+import com.wpi.cs509.teamA.ui.StateContext;
 
 
 /**

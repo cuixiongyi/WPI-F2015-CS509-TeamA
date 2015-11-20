@@ -129,11 +129,14 @@ public class UserScreen extends JFrame {
 		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
 		// the panel to show image
-		imgComponent = new ImageComponent(inputPanel);
+		imgComponent = new ImageComponent();
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
 		// display the image. Note that "/" only works on UNIX
 		// TODO: default map? change the way to do this...
+		List<GeneralMap> maps = database.getMaps();
+		stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",
+							)
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
