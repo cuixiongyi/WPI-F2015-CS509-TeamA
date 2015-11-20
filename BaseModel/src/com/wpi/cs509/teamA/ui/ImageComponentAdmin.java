@@ -43,7 +43,9 @@ import com.wpi.cs509.teamA.ui.ImageComponent;
  */
 public class ImageComponentAdmin extends ImageComponent {
 
-	/**
+    private MouseListener adminMouseListener;
+
+    /**
 	 * Constructor for image component The constructor will also add all the
 	 * Listeners to the inputPanel it got
 	 * 
@@ -53,6 +55,9 @@ public class ImageComponentAdmin extends ImageComponent {
 	 *            in the inner class
 	 */
 	public ImageComponentAdmin() {
+
+        adminMouseListener = new AdminMouseListener(this);
+
     }
 
 

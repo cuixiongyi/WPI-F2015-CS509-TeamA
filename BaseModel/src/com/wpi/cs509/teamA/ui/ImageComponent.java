@@ -52,7 +52,6 @@ public class ImageComponent extends JComponent {
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
 	private MouseListener normalUserMouseListener;
-	private MouseListener adminMouseListener;
 	private int xPos;
 	private int yPos;
 
@@ -88,7 +87,6 @@ public class ImageComponent extends JComponent {
 		stateContext = new StateContext();
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
-		adminMouseListener = new AdminMouseListener(this);
 
 		// TODO: Move this part to input panel..
 		// we need to add the event listener before the state pattern begins
