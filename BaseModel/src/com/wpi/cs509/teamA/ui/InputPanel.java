@@ -25,6 +25,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
+import com.wpi.cs509.teamA.ui.ImageComponent;
 
 /**
  * JPanel that have input text fields and buttons which will be shown on the top
@@ -278,6 +279,7 @@ public class InputPanel extends JPanel implements ActionListener {
     public void setImageComponent(ImageComponent imageComponent2)
 	{
         this.imageComponent = imageComponent2;
+       
     }
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;

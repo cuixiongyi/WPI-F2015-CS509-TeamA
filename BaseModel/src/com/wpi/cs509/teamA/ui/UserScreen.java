@@ -155,7 +155,7 @@ public class UserScreen extends JFrame {
 		for (int ii = 0; ii < maps.size(); ++ii)
 		{
 			stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",
-					maps[ii]);
+					maps.get(ii));
 		}
 		
 	/*	

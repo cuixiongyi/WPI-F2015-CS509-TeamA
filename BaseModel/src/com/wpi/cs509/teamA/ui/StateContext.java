@@ -1,7 +1,9 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.event.MouseListener;
+import java.util.List;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 /**
  * Instead of using a lot of if and else statements to capture the state of an
  * object, a state machine design pattern is a better solution that's more
@@ -44,6 +46,11 @@ public class StateContext {
 
 	}
 
+    public void addMap(String imgPathName, GeneralMap map) {
+        map.setMapImgPath(imgPathName);
+        allMaps.add(map);
+    }
+
 	/**
 	 * Changes the currently displayed map
 	 *
@@ -55,7 +62,7 @@ public class StateContext {
         this.currentMap = newMap;
 
         // TODO Do some clean up
-        
+
 	}
 	/**
      *

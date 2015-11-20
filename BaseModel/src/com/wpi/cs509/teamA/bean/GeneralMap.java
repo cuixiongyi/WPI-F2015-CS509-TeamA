@@ -153,7 +153,7 @@ public class GeneralMap implements AdjacencyMatrix {
         return mapImgPath;
     }
 
-    private void setMapImgPath(String mapImgPath) {
+    public void setMapImgPath(String mapImgPath) {
 
         this.mapImgPath = mapImgPath;
         try {
