@@ -34,6 +34,8 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
+
+	private StateContext stateContext;
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
@@ -153,6 +155,10 @@ public class UserScreen extends JFrame {
 
 		imgComponent.setInputPanel(this.inputPanel);
         inputPanel.setImageComponent(this.imgComponent);
+
+        stateContext = new StateContext();
+        imgComponent.setStateContext(stateContext);
+        inputPanel.setStateContext(stateContext);
 	}
 
 	public JButton getBtnNeighborManage() {

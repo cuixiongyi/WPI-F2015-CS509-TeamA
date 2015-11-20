@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
+import com.wpi.cs509.teamA.ui.StateContext;
 
 /**
  * JPanel that have input text fields and buttons which will be shown on the top
@@ -54,6 +55,12 @@ public class InputPanel extends JPanel implements ActionListener {
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
     private ImageComponent imageComponent;
+
+	public void setStateContext(StateContext stateContext) {
+		this.stateContext = stateContext;
+	}
+
+	private StateContext stateContext;
 	/**
 	 * Constructor. Initialize all the input panel.
 	 */
@@ -260,10 +267,9 @@ public class InputPanel extends JPanel implements ActionListener {
             // get a list of a map, so that we can draw line on that map..
             pathNodeList = null;
             pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
-
+            stateContext.setPath(pathNodeList);
             // we need to give all the information to the repaint metho
-            imageComponent.paintPath(path);
-
+            imageComponent.repaint();
         }
 
     public void setImageComponent(ImageComponent imageComponent2)

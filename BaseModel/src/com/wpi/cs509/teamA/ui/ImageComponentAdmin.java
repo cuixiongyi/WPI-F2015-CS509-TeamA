@@ -61,80 +61,26 @@ public class ImageComponentAdmin extends ImageComponent {
     }
 
 
-
+    private void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
+        for (int i = 0; i < nodes.size()-1; ++i) {
+            paintNode(nodes[i], g2);
+            paintEdge(nodes[i], nodes[i+1], g2);
+        }
+        paintNode(nodes[nodes.size()-1], g2);
+    }
         @Override
         public void paintComponent(Graphics g) {
 
             /** call the super class paint first */
-            super.paintComponent(g);
-            // if isInitilized
-            // no need to paint the image again
+            //super.paintComponent(g);
 
             if (null == image) {
                 return;
             }
 
             //paint all of the nodes
-            Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-
-            if (allNodes != null && allNodes.get(1).size() != 0) {
-                int x, y;
-                for (int i = 0; i < allNodes.get(1).size(); i++) {
-                    x = allNodes.get(1).get(i).getLocation().getX();
-                    y = allNodes.get(1).get(i).getLocation().getY();
-                    g.fillOval(x - ovalOffset, y - ovalOffset, 10, 10);
-                }
-            }
-
-            // paint all the edges
-            Set<NodeRelation> allEdges = UIDataBuffer.getAllEdges();
-            if (allEdges.size() != 0) {
-                for (NodeRelation edge : allEdges) {
-                    int xstart, ystart, xend, yend;
-                    xstart = edge.getFirstNodeCoordinate().getX();
-                    ystart = edge.getFirstNodeCoordinate().getY();
-
-                    xend = edge.getSecondNodeCoordinate().getX();
-                    yend = edge.getSecondNodeCoordinate().getY();
-
-                    g2.setStroke(new BasicStroke(5));
-                    g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
-
-                }
-            }
-
-            if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
-
-                // paint the route
-                if (pathNodeList != null && pathNodeList.size() != 0) {
-                    for (int i = 0; i < pathNodeList.size() - 1; i++) {
-                        int xstart, ystart, xend, yend;
-                        xstart = pathNodeList.get(i).getLocation().getX();
-                        ystart = pathNodeList.get(i).getLocation().getY();
-
-                        xend = pathNodeList.get(i + 1).getLocation().getX();
-                        yend = pathNodeList.get(i + 1).getLocation().getY();
-
-                        g2.setStroke(new BasicStroke(5));
-                        g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
-                        // System.out.println("draw line.." + xstart + " " + ystart
-                        // + "
-                        // " + xend + " " + yend);
-                    }
-                }
-                int sourceX=pathNodeList.get(0).getLocation().getX();
-                int sourceY=pathNodeList.get(0).getLocation().getY();
-
-                int desX=pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
-                int desY=pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
-                g2.drawOval(sourceX-ovalOffset, sourceY-ovalOffset, 10, 10);
-                g2.drawOval(desX-ovalOffset, desY-ovalOffset, 10, 10);
-                Font font = g.getFont().deriveFont( 20.0f );
-                g.setFont( font );
-                g2.drawString("Source", sourceX, sourceY-ovalOffset);
-                g2.drawString("Destination", desX, desY-ovalOffset);
-
-            }
+            GeneralMap currentMap = stateContext.getCurrentMap();
+            List<Node> nodes = currentMap.getNodes();
 
             g2 = null;
 

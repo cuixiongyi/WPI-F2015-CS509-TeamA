@@ -19,26 +19,40 @@ import java.awt.event.MouseListener;
 // TODO: make this class singleton
 public class StateContext {
 
-	/**
-	 * The state of the context.
-	 */
-	private StateMouseListener mouseListenerState;
 
-	/**
+
+	private Node startNode;
+	private Node endNode;
+	private List<Node> path;
+
+	/** if filterNodeType[i] == 1 then display that type of node
+	 * 	filterNodeType[i] == 0 don't display
+	 */
+	private List<int> filterNodeType;
+
+    private List<GeneralMap> allMaps;
+    private GeneralMap currentMap;
+
+
+    /**
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
-		this.setState(new StateNormalUser());
+		filterNodeType = new List<int>();
+		path = new List<Node>();
+        allMaps = new List<GeneralMap>();
+
 	}
 
 	/**
+     *
 	 * Set a new state.
 	 * 
 	 * @param newState
 	 *            the new state the context will be.
 	 */
-	public void setState(StateMouseListener newState) {
-		this.mouseListenerState = newState;
+	public void setState() {
+
 	}
 
 	/**
@@ -54,6 +68,30 @@ public class StateContext {
 	public void switchState(ImageComponent imageComponent, MouseListener normalUserMouseListener,
 			MouseListener adminMouseListener) {
 		mouseListenerState.switchMouseListener(this, imageComponent, normalUserMouseListener, adminMouseListener);
+	}
+
+	public Node getStartNode() {
+		return startNode;
+	}
+
+	public void setStartNode(Node startNode) {
+		this.startNode = startNode;
+	}
+
+
+	public Node getEndNode() {
+		return endNode;
+	}
+
+	public void setEndNode(Node endNode) {
+		this.endNode = endNode;
+	}
+	public List<Node> getPath() {
+		return path;
+	}
+
+	public void setPath(List<Node> path) {
+		this.path = path;
 	}
 
 }

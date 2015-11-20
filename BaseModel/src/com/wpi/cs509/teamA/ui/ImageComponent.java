@@ -30,6 +30,8 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
+import com.wpi.cs509.teamA.ui.StateContext.java;
+
 
 /**
  * An component to show the images. This component has two different states
@@ -68,6 +70,12 @@ public class ImageComponent extends JComponent {
 	private static boolean isAdmin;
 
 	private InputPanel inputPanel;
+
+	public void setStateContext(StateContext stateContext) {
+		this.stateContext = stateContext;
+	}
+
+	private StateContext stateContext;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -127,30 +135,35 @@ public class ImageComponent extends JComponent {
 
 	}
 
-	public void clearPath() {
 
+	public void paintIcons(List<Node> nodes, Graphics2D g2) {
+        for (Node node : nodes) {
+            BufferedImage image = icon.getImage(node);
+            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
+                    image.getHeight(this), this);
+        }
 	}
 
-	public void paintPath() {
+    private void paintNode(Node node, Graphics2D g2) {
+		Location xy = node.getLocation();
+		g.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
+    }
 
-	}
+	private void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
+        Coordinate start = nodeSrc.getLocation();
+        Coordinate end = nodeDest.getLocation();
 
-	public void clearIcon() {
+        g2.setStroke(new BasicStroke(5));
+        g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
+    }
 
-	}
-
-	public void paintIcon(List<Node> nodes) {
-		this.nodesToPaint = nodes;
-		this.repaint();
-	}
-
-	public void paintIconImpl(Graphics2D g2) {
-		for (Node node : nodesToPaint) {
-			BufferedImage image = icon.getImage(node);
-			g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
-					image.getHeight(this), this);
-		}
-	}
+    private void paintPath(List<Node> nodes, Graphics2D g2) {
+        if (null != nodes) {
+            for (int i = 0; i < nodes.size() - 1; ++i) {
+                paintEdge(nodes[i], nodes[i + 1], g2);
+            }
+        }
+    }
 
 	public void clearText() {
 
@@ -169,44 +182,22 @@ public class ImageComponent extends JComponent {
 		if (null == image) {
 			return;
 		}
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+        setForeground(Color.RED);
 
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
-		setForeground(Color.RED);
+        /**
+            Paint path
+         */
+        List<Node> pathNode = this.stateContext.getPath()
+        paintPath(pathNode, g2);
 
-		if (isAdmin == true) {
-			// paint all of the nodes
-			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+        List<Node> iconNodes = this.getStateContext().getIconNodes();
+        paintIcons(iconNodes, g2);
 
-			if (allNodes != null && allNodes.get(1).size() != 0) {
-				int x, y;
-				for (int i = 0; i < allNodes.get(1).size(); i++) {
-					x = allNodes.get(1).get(i).getLocation().getX();
-					y = allNodes.get(1).get(i).getLocation().getY();
-					g.fillOval(x - ovalOffset, y - ovalOffset, 10, 10);
-				}
-			}
 
-			// paint all the edges
-			Set<NodeRelation> allEdges = UIDataBuffer.getAllEdges();
-			if (allEdges.size() != 0) {
-				for (NodeRelation edge : allEdges) {
-					int xstart, ystart, xend, yend;
-					xstart = edge.getFirstNodeCoordinate().getX();
-					ystart = edge.getFirstNodeCoordinate().getY();
-
-					xend = edge.getSecondNodeCoordinate().getX();
-					yend = edge.getSecondNodeCoordinate().getY();
-
-					g2.setStroke(new BasicStroke(5));
-					g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
-
-				}
-			}
-		}
 
 		if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
-
 			// paint the route
 			if (pathNodeList != null && pathNodeList.size() != 0) {
 				for (int i = 0; i < pathNodeList.size() - 1; i++) {
@@ -237,7 +228,6 @@ public class ImageComponent extends JComponent {
 			g2.drawString("Destination", desX, desY - ovalOffset);
 
 		}
-
 		g2 = null;
 
 	}
