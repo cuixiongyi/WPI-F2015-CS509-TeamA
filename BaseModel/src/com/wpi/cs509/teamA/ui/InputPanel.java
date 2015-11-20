@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -124,7 +125,9 @@ public class InputPanel extends JPanel implements ActionListener {
 		comboDesModel = new DefaultComboBoxModel<String>();
 		sourceBox = new JComboBox<String>(comboSourceModel);
 		desBox = new JComboBox<String>(comboDesModel);
+		
 		// Add all nodes from
+		
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 		if (allNodes != null && allNodes.get(1).size() != 0) {
 			for (int i = 0; i < allNodes.get(1).size(); i++) {

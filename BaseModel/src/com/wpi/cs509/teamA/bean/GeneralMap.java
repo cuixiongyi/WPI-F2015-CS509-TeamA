@@ -102,7 +102,6 @@ public class GeneralMap implements AdjacencyMatrix {
 		return adjacencyMatrix;
 	}
 
-
 	/**
 	 * @return the mapId
 	 */

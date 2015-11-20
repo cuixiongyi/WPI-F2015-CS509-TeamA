@@ -25,11 +25,18 @@ public interface NodeDao {
 	public int getNeighborsNum();
 	
 	/**
-	 * Get all the initialized nodes
+	 * Get all the initialized nodes(current map)
 	 * 
 	 * @return A set of initialized node object
 	 */
-	public Set<Node> getAllNodes();
+	public Set<Node> getAllNodesForCurrentMap();
+	
+	/**
+	 * Get all the initialized nodes(for all maps)
+	 * 
+	 * @return A set of initialized node object
+	 */
+	public List<Node> getAllNodes();	
 	
 	/**
 	 * 

@@ -66,7 +66,7 @@ public interface NodeRelationDao {
 	 * 
 	 * @return a set of NodeRelation instance querying from relation table
 	 */
-	public Set<NodeRelation> getAllNodeRelations();
+	public Set<NodeRelation> getAllNodeRelationsForCurrentMap();
 
 	/**
 	 * 
