@@ -1,5 +1,15 @@
 package com.wpi.cs509.teamA.bean;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -31,13 +41,15 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	private InputMatrix adjacencyMatrix;
 
-
+	
     // Refactor
     private String mapImgPath;
 
     private float displayScale;
 
     private List<Node> nodes;
+    
+    private BufferedImage image;
 
 	/**
 	 * Default constructor
@@ -62,6 +74,8 @@ public class GeneralMap implements AdjacencyMatrix {
 				"general map is getting data from database and making a matrix.. this should happen only once.. ");
 		// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
 		// adjacencyMatrix = makeMatrix();
+
+        this.measureScale = 1.0;
 
 	}
 	
@@ -115,15 +129,15 @@ public class GeneralMap implements AdjacencyMatrix {
 	/**
 	 * @return the scale
 	 */
-	public int getScale() {
-		return Scale;
+	public float getScale() {
+		return measureScale;
 	}
 
 	/**
 	 * @param scale the scale to set
 	 */
 	public void setScale(int scale) {
-		Scale = scale;
+		measureScale = scale;
 	}
 
 
@@ -137,9 +151,6 @@ public class GeneralMap implements AdjacencyMatrix {
         this.mapImgPath = mapImgPath;
         try {
             image = ImageIO.read(new FileInputStream(mapImgPath));
-            this.setImgWidth(image.getWidth(this));
-            this.setImgHeight(image.getHeight(this));
-            this.repaint();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -147,7 +158,8 @@ public class GeneralMap implements AdjacencyMatrix {
         }
     }
 
-    public float getDisplayScale() {
+
+	public float getDisplayScale() {
         return displayScale;
     }
 

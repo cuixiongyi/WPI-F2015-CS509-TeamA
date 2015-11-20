@@ -64,12 +64,12 @@ public class ImageComponent extends JComponent {
 
 	private static int adminClicked = 2;
 
-	private InputPanel inputPanel;
 	private final static int ovalOffset = 5;
 
 	private static boolean isAdmin;
 
 	private InputPanel inputPanel;
+
 	// admin will get a different repaint method
 	// private boolean isAdmin;
 
