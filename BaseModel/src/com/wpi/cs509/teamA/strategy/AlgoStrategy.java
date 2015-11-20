@@ -1,7 +1,6 @@
 package com.wpi.cs509.teamA.strategy;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
@@ -22,6 +21,6 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  */
 public interface AlgoStrategy {
 	
-	List<Integer> getRoute(Node startNode, Node endNode, Graph context);
+	Stack<Node> getRoute(Node startNode, Node endNode, Graph context);
 
 }

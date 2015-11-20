@@ -1,89 +1,70 @@
 package com.wpi.cs509.teamA.strategy.impl;
+import com.wpi.cs509.teamA.bean.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Vertex implements Comparable<Vertex> {
-	private int id;
-	private double dist = Double.MAX_VALUE; // MAX_VALUE assumed to be infinity
+
+
+
+public class Vertex extends Node implements Comparable<Vertex> {
+	private GeneralMap map;
+	private int dist = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
 	private Vertex previous = null;
-	private Map<Vertex, Double> neighbours = new HashMap<>();
-	private static List<Integer> pathNodeIds = new ArrayList<Integer>();
+	private int hcost;
+	private int gcost;
 
-	public Vertex(int id) {
-		this.id = id;
+	private Map<Vertex, Integer> neighborV = new HashMap<>();
+	public Vertex(){
+		
+	}
+	
+	public Vertex(Node node) {
+		this.id = node.getId();
+		this.location = node.getLocation();
+		this.map=node.getMap();;
 	}
 
-	public Integer getNext() {
-		if (this == this.previous) {
-			//System.out.printf("%s", this.id);
-			return this.id;
-		} else if (this.previous == null) {
-			System.out.printf("%s(unreached)", this.id);
-			return null;
-		} else {
-			Integer tmp = this.previous.getNext();
-			if (null != tmp)
-			{
-				pathNodeIds.add(tmp);
-			}
-			
-			return this.id;
-		}
+	public GeneralMap getMap() {
+		return map;
 	}
 
-	/*
-	public void printPath() {
-		if (this == this.previous) {
-			System.out.printf("%s", this.id);
-		} else if (this.previous == null) {
-			System.out.printf("%s(unreached)", this.id);
-		} else {
-			this.previous.printPath();
-			System.out.printf(" -> %s(%d)", this.id, this.dist);
-		}
-	}*/
+
+	public void setMap(GeneralMap map) {
+		this.map = map;
+	}
+	
+	public int getGcost() {
+		return gcost;
+	}
+
+	public void setGcost(int gcost) {
+		this.gcost = gcost;
+	}
+	/**
+	 * @return the hcost
+	 */
+	public int getHcost() {
+		return hcost;
+	}
+
+	/**
+	 * @param hcost the hcost to set
+	 */
+	public void setHcost(int hcost) {
+		this.hcost = hcost;
+	}
+
+
 
 	public int compareTo(Vertex other) {
-		return Double.compare(dist, other.dist);
-	}
-	
-	/**
-	 * @return the pathNodeIds
-	 */
-	public List<Integer> getPathNodeIds() {
-		return pathNodeIds;
-	}
-	
-	/**
-	 * @param pathNodeIds
-	 *            the pathNodeIds to set
-	 */
-	public void clearPathNodeIds() {
-		pathNodeIds = new ArrayList<Integer>();
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
+		return Integer.compare(dist, other.dist);
 	}
 
 	/**
 	 * @return the dist
 	 */
-	public double getDist() {
+	public int getDist() {
 		return dist;
 	}
 
@@ -91,7 +72,7 @@ public class Vertex implements Comparable<Vertex> {
 	 * @param dist
 	 *            the dist to set
 	 */
-	public void setDist(double dist) {
+	public void setDist(int dist) {
 		this.dist = dist;
 	}
 
@@ -110,19 +91,20 @@ public class Vertex implements Comparable<Vertex> {
 		this.previous = previous;
 	}
 
+
 	/**
-	 * @return the neighbours
+	 * @return the neighbors
 	 */
-	public Map<Vertex, Double> getNeighbours() {
-		return neighbours;
+	public Map<Vertex, Integer> getNeighborV() {
+		return this.neighborV;
 	}
 
 	/**
 	 * @param neighbours
-	 *            the neighbours to set
+	 *            the neighbors to set
 	 */
-	public void setNeighbours(Map<Vertex, Double> neighbours) {
-		this.neighbours = neighbours;
+	public void setNeighborV(Map<Vertex, Integer> neighbours) {
+		this.neighborV = neighbours;
 	}
 
 }
