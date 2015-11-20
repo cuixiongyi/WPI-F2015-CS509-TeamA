@@ -17,6 +17,7 @@ import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -111,9 +112,9 @@ public class AlgoController {
 
 			// assemble 2 nodes just for test.. definitely should not use id to
 			// search..
-			int startNodeId = new NodeDaoImpl().getNodeIdFromName(startNode);
+			int startNodeId = Database.getNodeIdFromName(startNode);
 			fromNode.setId(startNodeId);
-			int endNodeId = new NodeDaoImpl().getNodeIdFromName(endNode);
+			int endNodeId = Database.getNodeIdFromName(endNode);
 			toNode.setId(endNodeId);
 
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());

@@ -36,8 +36,7 @@ public interface NodeDao {
 	 * 
 	 * @return A set of initialized node object
 	 */
-//	public Set<Node> getAllNodes();
-	
+	public List<Node> getAllNodes();	
 	
 	/**
 	 * 

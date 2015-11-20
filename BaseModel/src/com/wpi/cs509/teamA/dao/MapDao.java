@@ -13,7 +13,7 @@ public interface MapDao {
 	 * @return a set of maps
 	 * 
 	 */
-	public Set<GeneralMap> getAllMaps();	
+	public List<GeneralMap> getAllMaps();	
 	
 	/**
 	 * get all maps ids in the database
@@ -21,6 +21,6 @@ public interface MapDao {
 	 * @return a set of map ids
 	 * 
 	 */
-	public List<GeneralMap> getAllMapIds();
+	public List<Integer> getAllMapIds();
 	
 }

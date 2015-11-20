@@ -66,7 +66,7 @@ public class NodeDaoImpl implements NodeDao {
 		return 0;
 	}
 
-	public int getNodeIdFromName(String node_name){
+	public int getNodeIdFromName(String node_name) {
 		ResultSet resultSet = null;
 		try {
 			String selectAllNodes = "SELECT id FROM RouteFinder.node where map_id=? and name=?;";
@@ -74,7 +74,7 @@ public class NodeDaoImpl implements NodeDao {
 			// TODO: potential danger..
 			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
 			pstmt.setString(2, node_name);
-			
+
 			resultSet = pstmt.executeQuery();
 			if (resultSet.next()) {
 				return resultSet.getInt("id");
@@ -90,6 +90,7 @@ public class NodeDaoImpl implements NodeDao {
 
 		return -1;
 	}
+
 	@Override
 	public Set<Node> getAllNodesForCurrentMap() {
 		// TODO Auto-generated method stub
@@ -127,7 +128,7 @@ public class NodeDaoImpl implements NodeDao {
 
 		return null;
 	}
-	
+
 	@Override
 	public Map<Integer, Double> getNodeNeighbor(int nodeId) {
 		// TODO Auto-generated method stub
@@ -246,6 +247,41 @@ public class NodeDaoImpl implements NodeDao {
 		}
 
 		return res;
+	}
+
+	@Override
+	public List<Node> getAllNodes() {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		List<Node> res = new ArrayList<Node>();
+		try {
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node;";
+			pstmt = conn.prepareStatement(selectAllNodes);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				Node node = new Node();
+				node.setId(resultSet.getInt("id"));
+				node.setName(resultSet.getString("name"));
+				Coordinate location = new Coordinate();
+				location.setX(resultSet.getInt("x"));
+				location.setY(resultSet.getInt("y"));
+				node.setLocation(location);
+				node.setMapId(resultSet.getInt("map_id"));
+				node.setNodeType(NodeType.valueOf(resultSet.getString("classification")));
+				res.add(node);
+			}
+
+			return res;
+
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+
+		return null;
 	}
 
 }

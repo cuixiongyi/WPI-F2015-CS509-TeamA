@@ -10,6 +10,7 @@ import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
@@ -109,7 +110,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 
 			// get the return value, which is all the node relations exists in
 			// the DB..
-			return this.getAllNodeRelations();
+			return this.getAllNodeRelationsForCurrentMap();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -229,7 +230,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	}
 
 	@Override
-	public Set<NodeRelation> getAllNodeRelations() {
+	public Set<NodeRelation> getAllNodeRelationsForCurrentMap() {
 
 		Set<NodeRelation> res = new HashSet<NodeRelation>();
 		// get all the edges from db
@@ -242,16 +243,14 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
 
-				Coordinate fromNodeCoordinate = new NodeDaoImpl()
-						.getNodeCoordinateFromId(resultSet.getInt("node_from"));
-				Coordinate toNodeCoordinate = new NodeDaoImpl().getNodeCoordinateFromId(resultSet.getInt("node_to"));
+				Coordinate fromNodeCoordinate = Database.getNodeCoordinateFromId(resultSet.getInt("node_from"));
+				Coordinate toNodeCoordinate = Database.getNodeCoordinateFromId(resultSet.getInt("node_to"));
 
 				NodeRelation nr = new NodeRelation();
 				nr.setFirstNodeCoordinate(fromNodeCoordinate);
 				nr.setSecondNodeCoordinate(toNodeCoordinate);
 				res.add(nr);
 			}
-
 			return res;
 
 		} catch (SQLException e) {

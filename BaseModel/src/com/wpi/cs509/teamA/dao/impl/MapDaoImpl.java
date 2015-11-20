@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,10 +31,10 @@ public class MapDaoImpl implements MapDao {
 		}
 	}
 
-	public Set<GeneralMap> getAllMaps() {
+	public List<GeneralMap> getAllMaps() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
-		Set<GeneralMap> res = new HashSet<GeneralMap>();
+		List<GeneralMap> res = new ArrayList<GeneralMap>();
 		try {
 			String selectAllMaps = "SELECT id, name, image_name,scale FROM RouteFinder.map;";
 			pstmt = conn.prepareStatement(selectAllMaps);
@@ -42,11 +43,10 @@ public class MapDaoImpl implements MapDao {
 				GeneralMap maps = new GeneralMap();
 				maps.setMapId(resultSet.getString("id"));
 				maps.setMapName(resultSet.getString("name"));
-				
+				//maps.setMapImgPath(resultSet.getString("image_name"));
+				maps.setDisplayScale(resultSet.getFloat("scale"));
 				res.add(maps);
-
 			}
-
 			return res;
 
 		} catch (SQLException se) {
@@ -56,11 +56,29 @@ public class MapDaoImpl implements MapDao {
 			JdbcConnect.resultClose(resultSet, pstmt);
 			JdbcConnect.connClose();
 		}
-
 		return null;
 	}
 
-	public List<GeneralMap> getAllMapIds() {
+	public List<Integer> getAllMapIds() {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		List<Integer> res = new ArrayList<Integer>();
+		try {
+			String selectAllMaps = "SELECT distinct id FROM RouteFinder.map;";
+			pstmt = conn.prepareStatement(selectAllMaps);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				res.add(resultSet.getInt("id"));
+			}
+			return res;
 
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+		return null;
 	}
 }

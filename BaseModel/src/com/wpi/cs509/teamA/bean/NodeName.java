@@ -12,18 +12,47 @@ public class NodeName {
 	/** Main information of the node*/
 	private Node nodeInfo;
 	
-	/***/
+	/** Name for search supplement*/
 	private String nodeName;
 	
+	/**
+	 * 
+	 * @param info
+	 *            the Node with all information
+	 * @param name
+	 *            the name of the node just for search
+	 */
+	public NodeName(Node info, String name){
+		this.nodeInfo = info;
+		this.nodeName = name;
+	}
+	
+	/**
+	 * @param node name just for search supplement
+	 *            the node name to set
+	 */
 	public void setNodeName(String nodeName){
 		this.nodeName = nodeName;
 	}
+	
+	/**
+	 * @param Node with all information
+	 *            the Node with all information to set
+	 */
 	public void setNode(Node node){
 		this.nodeInfo = node;
 	}
+	
+	/**
+	 * @return the node name
+	 */
 	public String getNodeName(){
 		return nodeName;
 	}
+	
+	/**
+	 * @return the Node with all information
+	 */
 	public Node getNode(){
 		return nodeInfo;
 	}
