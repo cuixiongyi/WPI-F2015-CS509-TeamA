@@ -40,7 +40,6 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private JButton okButton;
 	private JButton cancelButton;
 	private ImageComponent imgPanel;
-	private UserScreen userScreen;
 	private InputPanel inputPanel;
 
 	private final static String OK = "OK";
@@ -94,30 +93,8 @@ public class AdminDialog extends JDialog implements ActionListener {
         contentPanel.setBorder(new LineBorder(Color.GRAY));
 		
 		
-//		setBounds(200, 200, 320, 180);
-//		getContentPane().setLayout(new BorderLayout());
-//		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		getContentPane().add(contentPanel, BorderLayout.CENTER);
-//		contentPanel.setLayout(null);
-//
-//		// Password block
-//		JLabel lblPassword = new JLabel("Password:");
-//		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-//		lblPassword.setFont(new Font("Arial", Font.PLAIN, 15));
-//		lblPassword.setBounds(6, 50, 121, 32);
-//		contentPanel.add(lblPassword);
-//
-//		passwordField = new JPasswordField(10);
-//		passwordField.setBounds(135, 52, 126, 28);
-//		passwordField.setColumns(10);
-//		passwordField.setBackground(new Color(180, 180, 180));
-//		contentPanel.add(passwordField);
-//
 //		// OK and CANCEL button block
 		JPanel buttonPane = new JPanel();
-//		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-//		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-//
 		okButton = new JButton(OK);
 		okButton.setActionCommand(OK);
 		okButton.addActionListener(this);

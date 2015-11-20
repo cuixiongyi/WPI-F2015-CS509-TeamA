@@ -1,7 +1,10 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.event.MouseInputListener;
 
 /**
  * The normal user mouse listener implementation.
@@ -23,6 +26,7 @@ public class NormalUserMouseListener implements MouseListener {
 	 * The image component that the listener will be added to
 	 */
 	private ImageComponent imagePanel;
+	
 
 	/**
 	 * Default constructor
@@ -47,7 +51,7 @@ public class NormalUserMouseListener implements MouseListener {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 		imagePanel.setxPos(e.getX());
 		imagePanel.setyPos(e.getY());
-		System.out.println(e.getX()+","+e.getY()+"what the hell");
+		System.out.println(e.getX()+","+e.getY()+"clickpos");
 		imagePanel.repaint();
 		}
 
@@ -69,16 +73,20 @@ public class NormalUserMouseListener implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getButton() == MouseEvent.BUTTON1) {
 			imagePanel.setPressxPos(e.getX());
 			imagePanel.setPressyPos(e.getY());
-		}
+			imagePanel.setImageStartXpos(imagePanel.getImageXpos());
+			imagePanel.setImageStartYpos(imagePanel.getImageYpos());
+		
 
 	}
+	
+	
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
 
 	}
 	
@@ -112,5 +120,8 @@ public class NormalUserMouseListener implements MouseListener {
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
+
+	
+
 
 }

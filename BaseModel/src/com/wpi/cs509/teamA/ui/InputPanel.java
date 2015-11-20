@@ -40,6 +40,7 @@ public class InputPanel extends JPanel implements ActionListener {
 	private JTextField endPoint;
 	private JButton btnSearch;
 	private JButton adminLogin;
+	private JButton signUp;
 	private JLabel lblFrom;
 	private JLabel lblTo;
 	private JButton btnNeighborManage;

@@ -59,8 +59,13 @@ public class ImageComponent extends JComponent {
 	private int yPos;
 	private int imageXpos=0;
 	private int imageYpos=0;
+	private int imageStartXpos=0;
+	private int imageStartYpos=0;
 	private int pressxPos;
 	private int pressyPos;
+//	private int dragxPos;
+//	private int dragyPos;
+	
 
 	private List<Node> pathNodeList;
 
@@ -103,15 +108,13 @@ public class ImageComponent extends JComponent {
 		// TODO: Move this part to input panel..
 		// we need to add the event listener before the state pattern begins
 		this.addMouseListener(normalUserMouseListener);
-		
-		
 		this.addMouseMotionListener(new MouseMotionListener() {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				// TODO Auto-generated method stub
-				ImageComponent.this.setImageXpos(e.getX()-ImageComponent.this.pressxPos);
-				ImageComponent.this.setImageYpos(e.getY()-ImageComponent.this.pressyPos);
+				ImageComponent.this.setImageXpos(ImageComponent.this.imageStartXpos+  e.getX()-ImageComponent.this.pressxPos);
+				ImageComponent.this.setImageYpos(ImageComponent.this.imageStartYpos+  e.getY()-ImageComponent.this.pressyPos);
 				ImageComponent.this.repaint();
 			}
 
@@ -400,11 +403,23 @@ public class ImageComponent extends JComponent {
 		this.pressyPos = pressyPos;
 	}
 	
-//	public void drawName(int x, int y)
-//	{
-//		this.xPos=x;
-//		this.yPos=y;
-//	}
+	
+
+	public int getImageStartXpos() {
+		return imageStartXpos;
+	}
+
+	public void setImageStartXpos(int imageStartXpos) {
+		this.imageStartXpos = imageStartXpos;
+	}
+
+	public int getImageStartYpos() {
+		return imageStartYpos;
+	}
+
+	public void setImageStartYpos(int imageStartYpos) {
+		this.imageStartYpos = imageStartYpos;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -417,8 +432,6 @@ public class ImageComponent extends JComponent {
 		}
 
 		Graphics2D g2 = (Graphics2D) g;
-		System.out.println(imageXpos+","+imageYpos+"hehe");
-		System.out.println(xPos+","+yPos+"haha");
 		
 		g2.drawImage(image, imageXpos, imageYpos, image.getWidth(this), image.getHeight(this), this);
 		setForeground(Color.RED);
@@ -469,7 +482,7 @@ public class ImageComponent extends JComponent {
 					yend = pathNodeList.get(i + 1).getLocation().getY();
 
 					g2.setStroke(new BasicStroke(5));
-	                g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
+	                g2.draw(new Line2D.Float(xstart+imageXpos, ystart+imageYpos, xend+imageXpos, yend+imageYpos));
 					// System.out.println("draw line.." + xstart + " " + ystart
 					// + "
 					// " + xend + " " + yend);
