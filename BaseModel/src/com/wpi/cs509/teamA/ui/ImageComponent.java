@@ -48,6 +48,8 @@ public class ImageComponent extends JComponent {
 	private int imgHeight;
 	private StateContext stateContext;
 	private final static String LOGIN = "Login";
+	private NodeIcon icon = new NodeIcon();
+	private List<Node> nodesToPaint;
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
@@ -61,13 +63,12 @@ public class ImageComponent extends JComponent {
 
 	private static int adminClicked = 2;
 
-	private InputPanel inputPanel;
 	private final static int ovalOffset = 5;
 
 	private static boolean isAdmin;
 
+	private InputPanel inputPanel;
 
-    private InputPanel inputPanel;
 	// admin will get a different repaint method
 	// private boolean isAdmin;
 
@@ -97,10 +98,6 @@ public class ImageComponent extends JComponent {
 
 		});
 
-
-
-
-
 	}
 
 	/**
@@ -116,46 +113,52 @@ public class ImageComponent extends JComponent {
 
 	}
 
-    /**
-     * Changes the currently displayed map
-     *
-     * @param newMap The map to be displayed
-     *
-     */
+	/**
+	 * Changes the currently displayed map
+	 *
+	 * @param newMap
+	 *            The map to be displayed
+	 *
+	 */
 	private void changeMap(GeneralMap newMap) {
-        // @TODO: finish the refactor
+		// @TODO: finish the refactor
 
-        this.repaint();
+		this.repaint();
 
 	}
 
+	public void clearPath() {
 
-    public void clearPath() {
+	}
 
-    }
+	public void paintPath() {
 
-    public void paintPath() {
+	}
 
+	public void clearIcon() {
 
-    }
+	}
 
-    public void clearIcon() {
+	public void paintIcon(List<Node> nodes) {
+		this.nodesToPaint = nodes;
+		this.repaint();
+	}
 
-    }
+	public void paintIconImpl(Graphics2D g2) {
+		for (Node node : nodesToPaint) {
+			BufferedImage image = icon.getImage(node);
+			g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
+					image.getHeight(this), this);
+		}
+	}
 
-    public void paintIcon() {
+	public void clearText() {
 
-    }
+	}
 
-    public void clearText() {
+	public void paintText() {
 
-    }
-
-    public void paintText() {
-
-
-    }
-
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -196,7 +199,7 @@ public class ImageComponent extends JComponent {
 					yend = edge.getSecondNodeCoordinate().getY();
 
 					g2.setStroke(new BasicStroke(5));
-	                g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
+					g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
 
 				}
 			}
@@ -215,136 +218,134 @@ public class ImageComponent extends JComponent {
 					yend = pathNodeList.get(i + 1).getLocation().getY();
 
 					g2.setStroke(new BasicStroke(5));
-	                g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
+					g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
 					// System.out.println("draw line.." + xstart + " " + ystart
 					// + "
 					// " + xend + " " + yend);
 				}
 			}
-			int sourceX=pathNodeList.get(0).getLocation().getX();
-			int sourceY=pathNodeList.get(0).getLocation().getY();
-			
-			int desX=pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
-			int desY=pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
-			g2.drawOval(sourceX-ovalOffset, sourceY-ovalOffset, 10, 10);
-			g2.drawOval(desX-ovalOffset, desY-ovalOffset, 10, 10);
-			Font font = g.getFont().deriveFont( 20.0f );
-		    g.setFont( font );
-			g2.drawString("Source", sourceX, sourceY-ovalOffset);
-			g2.drawString("Destination", desX, desY-ovalOffset);
-			
-			
+			int sourceX = pathNodeList.get(0).getLocation().getX();
+			int sourceY = pathNodeList.get(0).getLocation().getY();
+
+			int desX = pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
+			int desY = pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
+			g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
+			g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
+			Font font = g.getFont().deriveFont(20.0f);
+			g.setFont(font);
+			g2.drawString("Source", sourceX, sourceY - ovalOffset);
+			g2.drawString("Destination", desX, desY - ovalOffset);
+
 		}
 
 		g2 = null;
 
 	}
 
-    public void setInputPanel(InputPanel inputPanel) {
-        this.inputPanel = inputPanel;
-    }
+	public void setInputPanel(InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
+	}
 
+	/**
+	 * @return the inputPanel
+	 */
+	public InputPanel getInputPanel() {
+		return inputPanel;
+	}
 
-    /**
-     * @return the inputPanel
-     */
-    public InputPanel getInputPanel() {
-        return inputPanel;
-    }
+	/**
+	 * @return the image
+	 */
+	public Image getImage() {
+		return image;
+	}
 
-    /**
-     * @return the image
-     */
-    public Image getImage() {
-        return image;
-    }
+	/**
+	 * @return the imgWidth
+	 */
+	public int getImgWidth() {
+		return imgWidth;
+	}
 
-    /**
-     * @return the imgWidth
-     */
-    public int getImgWidth() {
-        return imgWidth;
-    }
+	/**
+	 * @return the imgHeight
+	 */
+	public int getImgHeight() {
+		return imgHeight;
+	}
 
-    /**
-     * @return the imgHeight
-     */
-    public int getImgHeight() {
-        return imgHeight;
-    }
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
-    /**
-     * @param image
-     *            the image to set
-     */
-    public void setImage(Image image) {
-        this.image = image;
-    }
+	/**
+	 * @param imgWidth
+	 *            the imgWidth to set
+	 */
+	public void setImgWidth(int imgWidth) {
+		this.imgWidth = imgWidth;
+	}
 
-    /**
-     * @param imgWidth
-     *            the imgWidth to set
-     */
-    public void setImgWidth(int imgWidth) {
-        this.imgWidth = imgWidth;
-    }
+	/**
+	 * @param imgHeight
+	 *            the imgHeight to set
+	 */
+	public void setImgHeight(int imgHeight) {
+		this.imgHeight = imgHeight;
+	}
 
-    /**
-     * @param imgHeight
-     *            the imgHeight to set
-     */
-    public void setImgHeight(int imgHeight) {
-        this.imgHeight = imgHeight;
-    }
+	/**
+	 * @return the xPos
+	 */
+	public int getxPos() {
+		return xPos;
+	}
 
-    /**
-     * @return the xPos
-     */
-    public int getxPos() {
-        return xPos;
-    }
+	/**
+	 * @return the yPos
+	 */
+	public int getyPos() {
+		return yPos;
+	}
 
-    /**
-     * @return the yPos
-     */
-    public int getyPos() {
-        return yPos;
-    }
+	/**
+	 * @param xPos
+	 *            the xPos to set
+	 */
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
 
-    /**
-     * @param xPos
-     *            the xPos to set
-     */
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
+	/**
+	 * @param yPos
+	 *            the yPos to set
+	 */
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
+	}
 
-    /**
-     * @param yPos
-     *            the yPos to set
-     */
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
-    }
+	public NormalUserMouseListener getNormalUserMouseListener() {
+		return (NormalUserMouseListener) this.normalUserMouseListener;
+	}
 
-    public NormalUserMouseListener getNormalUserMouseListener() {
-        return (NormalUserMouseListener) this.normalUserMouseListener;
-    }
+	public AdminMouseListener getAdminMouseListener() {
+		return (AdminMouseListener) this.adminMouseListener;
+	}
 
-    public AdminMouseListener getAdminMouseListener() {
-        return (AdminMouseListener) this.adminMouseListener;
-    }
+	public StateContext getStateContext() {
+		return this.stateContext;
+	}
 
-    public StateContext getStateContext() {
-        return this.stateContext;
-    }
+	public void incrementAdminClicked() {
+		ImageComponent.adminClicked++;
+	}
 
-    public void incrementAdminClicked() {
-        ImageComponent.adminClicked++;
-    }
-
-    public static void setIsAdmin(boolean isAdmin) {
-        ImageComponent.isAdmin = isAdmin;
-    }
+	public static void setIsAdmin(boolean isAdmin) {
+		ImageComponent.isAdmin = isAdmin;
+	}
 
 }
