@@ -38,12 +38,25 @@ public class StateContext {
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
-		filterNodeType = new List<int>();
-		path = new List<Node>();
-        allMaps = new List<GeneralMap>();
+        this.filterNodeType = new List<int>();
+        this.path = new List<Node>();
+        this.allMaps = new List<GeneralMap>();
 
 	}
 
+	/**
+	 * Changes the currently displayed map
+	 *
+	 * @param newMap
+	 *            The map to be displayed
+	 *
+	 */
+	private void setCurrentMap(GeneralMap newMap) {
+        this.currentMap = newMap;
+
+        // TODO Do some clean up
+        
+	}
 	/**
      *
 	 * Set a new state.

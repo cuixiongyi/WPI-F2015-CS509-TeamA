@@ -75,7 +75,6 @@ public class ImageComponent extends JComponent {
 		this.stateContext = stateContext;
 	}
 
-	private StateContext stateContext;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -91,7 +90,7 @@ public class ImageComponent extends JComponent {
 	 */
 	public ImageComponent() {
 		ImageComponent.isAdmin = false;
-		this.inputPanel = inputPanel;
+
 		// initialize the mouse listener state
 		stateContext = new StateContext();
 
@@ -108,6 +107,7 @@ public class ImageComponent extends JComponent {
 
 	}
 
+
 	/**
 	 * 
 	 * Select the right image and paint it on the image component
@@ -115,25 +115,15 @@ public class ImageComponent extends JComponent {
 	 * @param mapName
 	 * @param imageComponent
 	 */
+/*
 	private void selectImage(String mapName, ImageComponent imageComponent) {
 		imageComponent.setImagePath(System.getProperty("user.dir") + "/src/" + mapName + ".jpg");
 		imageComponent.repaint();
 
 	}
 
-	/**
-	 * Changes the currently displayed map
-	 *
-	 * @param newMap
-	 *            The map to be displayed
-	 *
-	 */
-	private void changeMap(GeneralMap newMap) {
-		// @TODO: finish the refactor
+	*/
 
-		this.repaint();
-
-	}
 
 
 	public void paintIcons(List<Node> nodes, Graphics2D g2) {
