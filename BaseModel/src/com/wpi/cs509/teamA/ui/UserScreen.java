@@ -8,13 +8,14 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.List;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-
+import com.wpi.cs509.teamA.bean.GeneralMap;
 //import com.sun.prism.paint.Color;
 
 import javax.swing.BoxLayout;
@@ -132,15 +133,7 @@ public class UserScreen extends JFrame {
 		imgComponent = new ImageComponent();
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
-		// display the image. Note that "/" only works on UNIX
-		// TODO: default map? change the way to do this...
-		List<GeneralMap> maps = database.getMaps();
-		stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",
-							)
-		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
-		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
-		imgComponent.setVisible(true);
-
+		
 		JScrollPane imgScrollPanel = new JScrollPane();
 		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
 		// contentPane.add(imgScrollPanel, gbcScrollPane);
@@ -156,6 +149,21 @@ public class UserScreen extends JFrame {
 		setVisible(true);
 		setResizable(true);
 
+		// display the image. Note that "/" only works on UNIX
+		// TODO: default map? change the way to do this...
+		List<GeneralMap> maps ;//= Database.getAllMapFromDatabase();
+		for (int ii = 0; ii < maps.size(); ++ii)
+		{
+			stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",
+					maps[ii]);
+		}
+		
+	/*	
+		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
+		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
+		imgComponent.setVisible(true);
+*/
+		
 		imgComponent.setInputPanel(this.inputPanel);
         inputPanel.setImageComponent(this.imgComponent);
 
