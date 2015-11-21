@@ -33,30 +33,20 @@ import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.ImageComponent;
 
 /**
- * An component to show the images. This component has two different states
- * based on whether the user logged in or not. The state of this component will
- * change in the run time. As a admin user, a person would have more mouse
- * operation.
+ * this class extend the ImageComponent class
+ * It is used to paint whatever it need to paint
+ * when login as admin.
  * 
  * @author CS 509-Team A
  *
  */
 public class ImageComponentAdmin extends ImageComponent {
 
-    private MouseListener adminMouseListener;
 
     /**
-	 * Constructor for image component The constructor will also add all the
-	 * Listeners to the inputPanel it got
-	 * 
-	 * @param inputPanel
-	 *            an instance of inputPanel will add listeners to the buttons in
-	 *            the inputPanel. inputPanel must be final since it will be used
-	 *            in the inner class
+	 * Default Constructor Now
 	 */
 	public ImageComponentAdmin() {
-
-        adminMouseListener = new AdminMouseListener(this);
 
     }
 

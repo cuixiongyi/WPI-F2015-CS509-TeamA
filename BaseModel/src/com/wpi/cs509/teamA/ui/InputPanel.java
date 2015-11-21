@@ -128,7 +128,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		desBox = new JComboBox<String>(comboDesModel);
 		
 		// Add all nodes from
-		
+		//TODO delete all of this and replace with new
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 		if (allNodes != null && allNodes.get(1).size() != 0) {
 			for (int i = 0; i < allNodes.get(1).size(); i++) {
@@ -198,36 +198,34 @@ public class InputPanel extends JPanel implements ActionListener {
 	    // TODO: Make the map related things into a enum class..
 		this.getComboBoxMap().addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
+                    int currentMapID = -1;
 						if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
 								selectImage("Final_Campus_Map", ImageComponent.this);
-								UIDataBuffer.setCurrentMapId(1);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 1;
 							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
 								selectImage("Final_AK_Ground_Floor", ImageComponent.this);
-							UIDataBuffer.setCurrentMapId(2);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 2;
 							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
 								selectImage("Final_AK_First_Floor", ImageComponent.this);
-								UIDataBuffer.setCurrentMapId(3);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 3;
 							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
 								selectImage("Final_AK_Second_Floor", ImageComponent.this);
-								UIDataBuffer.setCurrentMapId(4);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 4;
 							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
 								selectImage("Final_AK_Third_Floor", ImageComponent.this);
-								UIDataBuffer.setCurrentMapId(5);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 5;
 							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
 								selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
-								UIDataBuffer.setCurrentMapId(6);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 6;
 							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
 								selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
-								UIDataBuffer.setCurrentMapId(7);
-								inputPanel.getBtnSynchronize().doClick();
+                                currentMapID = 7;
 							}
-					}
+                            UIDataBuffer.setCurrentMapId(currentMapID);
+                            stateContext.setCurrentMap(currentMapID);
+                            inputPanel.getBtnSynchronize().doClick();
+
+                }
 
 			});
 
@@ -260,6 +258,7 @@ public class InputPanel extends JPanel implements ActionListener {
         }
 	}
 
+    //TODO What the F**k is this?
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == btnSynchronize) {
 			comboSourceModel.removeAllElements();
