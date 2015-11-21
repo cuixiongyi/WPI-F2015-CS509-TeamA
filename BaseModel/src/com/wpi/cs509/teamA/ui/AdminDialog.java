@@ -37,6 +37,16 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private UserScreen userScreen;
 	private InputPanel inputPanel;
 
+    public StateContext getStateContext() {
+        return stateContext;
+    }
+
+    public void setStateContext(StateContext stateContext) {
+        this.stateContext = stateContext;
+    }
+
+    private StateContext stateContext;
+
 	private final static String OK = "OK";
 	private final static String CANCEL = "Cancel";
 	private final static String LOG = "Login";
@@ -56,6 +66,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	public AdminDialog(ImageComponent imageComponent, InputPanel inputPanel) {
 		this.imgPanel = imageComponent;
 		this.inputPanel = inputPanel;
+        this.stateContext = null;
 		setTitle(LOG);
 		setBounds(200, 200, 320, 180);
 		getContentPane().setLayout(new BorderLayout());
@@ -102,8 +113,10 @@ public class AdminDialog extends JDialog implements ActionListener {
 			char[] input = passwordField.getPassword();
 			if (isPasswordCorrect(input)) {
 				AdminDialog.this.setVisible(false);
-				imgPanel.getStateContext().switchState(imgPanel, imgPanel.getNormalUserMouseListener(),
-						imgPanel.getAdminMouseListener());
+				stateContext.switchToAdminUser();
+
+                stateContext.switchToAdminUser();
+
 				imgPanel.incrementAdminClicked();
 				inputPanel.getBtnNeighborManage().setVisible(true);
 				inputPanel.getAdminLogin().setText(LOGOUT);

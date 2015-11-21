@@ -175,38 +175,14 @@ public class InputPanel extends JPanel implements ActionListener {
         /**
          * Add listener to the admin login button
          */
+        /*
         this.getAdminLogin().addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
 
-                // TODO: we need a pop up window here to verify the admin role.
-                // If it is the admin, give it the admin mouse click event. If
-                // not, give it normal user
-
-                if (adminClicked % 2 == 0) {
-                    AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
-                    adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-                    adminDialog.setVisible(isFocusable());
-					stateContext.switchToAdminUser();
-
-
-				} else {
-
-                    JOptionPane.showMessageDialog(null, "You have logged out");
-                    stateContext.switchToNormalUser();
-                    InputPanel.this.getBtnNeighborManage().setVisible(false);
-                    InputPanel.this.getAdminLogin().setText(LOGIN);
-                    InputPanel.this.getBtnSynchronize().setVisible(false);
-                    isAdmin = false;
-                    adminClicked++;
-                    imageComponent.repaint();
-                }
-            }
 
         });
-
+*/
 	    // TODO: Make the map related things into a enum class..
 		this.getComboBoxMap().addItemListener(new ItemListener() {
 				@Override
@@ -272,7 +248,9 @@ public class InputPanel extends JPanel implements ActionListener {
         });
 
         */
-	}
+        this.getAdminLogin().addActionListener(this);
+
+    }
 
 	/*
     //TODO What the F**k is this?
@@ -294,6 +272,37 @@ public class InputPanel extends JPanel implements ActionListener {
 	*/
 
 
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+
+        // TODO: we need a pop up window here to verify the admin role.
+        // If it is the admin, give it the admin mouse click event. If
+        // not, give it normal user
+        if(e.getSource()==getAdminLogin())
+        {
+            if (adminClicked % 2 == 0) {
+                AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
+                adminDialog.setStateContext(stateContext);
+                adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+                adminDialog.setVisible(isFocusable());
+                //stateContext.switchToAdminUser();
+
+
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "You have logged out");
+                stateContext.switchToNormalUser();
+                InputPanel.this.getBtnNeighborManage().setVisible(false);
+                InputPanel.this.getAdminLogin().setText(LOGIN);
+                InputPanel.this.getBtnSynchronize().setVisible(false);
+                isAdmin = false;
+                adminClicked++;
+                imageComponent.repaint();
+            }
+        }
+
+    }
 
     public void setImageComponent(ImageComponent imageComponent2)
 	{
