@@ -1,6 +1,11 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.bean.Node;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -28,7 +33,7 @@ public class StateContext {
 	/** if filterNodeType[i] == 1 then display that type of node
 	 * 	filterNodeType[i] == 0 don't display
 	 */
-	private List<int> filterNodeType;
+	private List<Integer> filterNodeType;
 
     private List<GeneralMap> allMaps;
     private GeneralMap currentMap;
@@ -38,9 +43,9 @@ public class StateContext {
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
-        this.filterNodeType = new List<int>();
-        this.path = new List<Node>();
-        this.allMaps = new List<GeneralMap>();
+        this.filterNodeType = new ArrayList<Integer>();
+        this.path = new ArrayList<Node>();
+        this.allMaps = new ArrayList<GeneralMap>();
 
 	}
 

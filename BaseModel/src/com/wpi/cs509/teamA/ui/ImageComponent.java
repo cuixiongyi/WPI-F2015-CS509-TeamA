@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -135,8 +136,8 @@ public class ImageComponent extends JComponent {
 	}
 
     private void paintNode(Node node, Graphics2D g2) {
-		Location xy = node.getLocation();
-		g.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
+		Coordinate xy = node.getLocation();
+		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
     }
 
 	private void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
@@ -150,7 +151,7 @@ public class ImageComponent extends JComponent {
     private void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {
             for (int i = 0; i < nodes.size() - 1; ++i) {
-                paintEdge(nodes[i], nodes[i + 1], g2);
+                paintEdge(nodes.get(i), nodes.get(i + 1), g2);
             }
         }
     }
@@ -179,7 +180,7 @@ public class ImageComponent extends JComponent {
         /**
             Paint path
          */
-        List<Node> pathNode = this.stateContext.getPath()
+        List<Node> pathNode = this.stateContext.getPath();
         paintPath(pathNode, g2);
 
         List<Node> iconNodes = this.getStateContext().getIconNodes();
