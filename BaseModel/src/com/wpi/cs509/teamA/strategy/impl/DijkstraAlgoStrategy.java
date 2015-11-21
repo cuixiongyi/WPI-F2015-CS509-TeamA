@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 import java.util.TreeSet;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 
@@ -22,10 +23,10 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int endNodeId;
 
 	@Override
-	public Stack<Node> getRoute(Node startNode, Node endNode, Graph context) {
+	public Stack<Node> getRoute(Node startNode, Node endNode, Edge[] edges) {
 		this.startNodeId = startNode.getId();
 		this.endNodeId = endNode.getId();
-
+		Graph context = new Graph (edges);
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
