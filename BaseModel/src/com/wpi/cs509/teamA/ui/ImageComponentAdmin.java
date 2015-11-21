@@ -53,17 +53,18 @@ public class ImageComponentAdmin extends ImageComponent {
 
     private void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
         for (int i = 0; i < nodes.size()-1; ++i) {
-            paintNode(nodes[i], g2);
-            paintEdge(nodes[i], nodes[i+1], g2);
+            paintNode(nodes.get(i), g2);
+            paintEdge(nodes.get(i), nodes.get(i+1), g2);
         }
-        paintNode(nodes[nodes.size()-1], g2);
+        paintNode(nodes.get(nodes.size()-1), g2);
     }
+    /*
         @Override
         public void paintComponent(Graphics g) {
 
             /** call the super class paint first */
             //super.paintComponent(g);
-
+/*
             if (null == image) {
                 return;
             }
@@ -75,10 +76,10 @@ public class ImageComponentAdmin extends ImageComponent {
             g2 = null;
 
         }
+*/
 
 
-
-});
+};
 
 
 

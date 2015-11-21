@@ -241,7 +241,7 @@ public class InputPanel extends JPanel implements ActionListener {
                 }
 
 			});
-
+/*
         // Click the SEARCH button..
         this.btnSearch.addActionListener(new ActionListener() {
             @Override
@@ -269,7 +269,9 @@ public class InputPanel extends JPanel implements ActionListener {
                 // we need to give all the information to the repaint metho
                 imageComponent.repaint();
             }
-        }
+        });
+
+        */
 	}
 
 	/*

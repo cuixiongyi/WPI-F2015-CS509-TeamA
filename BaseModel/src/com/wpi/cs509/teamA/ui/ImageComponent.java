@@ -102,7 +102,7 @@ public class ImageComponent extends JComponent {
 	}
 
 
-	public void paintIcons(List<Node> nodes, Graphics2D g2) {
+    protected void paintIcons(List<Node> nodes, Graphics2D g2) {
         for (Node node : nodes) {
             BufferedImage image = icon.getImage(node);
             g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
@@ -110,12 +110,12 @@ public class ImageComponent extends JComponent {
         }
 	}
 
-    private void paintNode(Node node, Graphics2D g2) {
+    protected void paintNode(Node node, Graphics2D g2) {
 		Coordinate xy = node.getLocation();
 		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
     }
 
-	private void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
+    protected void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
         Coordinate start = nodeSrc.getLocation();
         Coordinate end = nodeDest.getLocation();
 
@@ -123,7 +123,7 @@ public class ImageComponent extends JComponent {
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
-    private void paintPath(List<Node> nodes, Graphics2D g2) {
+    protected void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {
             for (int i = 0; i < nodes.size() - 1; ++i) {
                 paintEdge(nodes.get(i), nodes.get(i + 1), g2);
