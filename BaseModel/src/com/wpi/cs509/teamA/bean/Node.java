@@ -228,8 +228,7 @@ public class Node {
 		this.nodeType = nodeType;
 	}
 
-
-	public int DistanceTo(Node a){
+/*	public int DistanceTo(Node a){
 		return this.getMap().getScale()*(int) Math.sqrt(Math.pow(a.getLocation().getX()-this.getLocation().getX(),2)+Math.pow(a.getLocation().getY()-this.getLocation().getY(),2));
-	}
+	}*/
 }	

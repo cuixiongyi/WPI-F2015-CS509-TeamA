@@ -17,6 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 //import com.sun.prism.paint.Color;
+import com.wpi.cs509.teamA.util.Database;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -151,7 +152,7 @@ public class UserScreen extends JFrame {
 
 		// display the image. Note that "/" only works on UNIX
 		// TODO: default map? change the way to do this...
-		List<GeneralMap> maps = null ;//= Database.getAllMapFromDatabase();
+		List<GeneralMap> maps = Database.getAllMapFromDatabase() ;//= Database.getAllMapFromDatabase();
 		for (int ii = 0; ii < maps.size(); ++ii)
 		{
 			stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",

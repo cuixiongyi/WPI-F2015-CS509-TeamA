@@ -41,7 +41,7 @@ public class MapDaoImpl implements MapDao {
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
 				GeneralMap maps = new GeneralMap();
-				maps.setMapId(resultSet.getString("id"));
+				maps.setMapId(resultSet.getInt("id"));
 				maps.setMapName(resultSet.getString("name"));
 				//maps.setMapImgPath(resultSet.getString("image_name"));
 				maps.setDisplayScale(resultSet.getFloat("scale"));

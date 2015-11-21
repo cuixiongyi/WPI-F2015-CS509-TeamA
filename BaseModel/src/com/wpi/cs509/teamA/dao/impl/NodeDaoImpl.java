@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
@@ -96,6 +98,7 @@ public class NodeDaoImpl implements NodeDao {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		Set<Node> res = new HashSet<Node>();
+		
 		try {
 			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node where map_id=?;";
 			pstmt = conn.prepareStatement(selectAllNodes);
@@ -110,10 +113,9 @@ public class NodeDaoImpl implements NodeDao {
 				location.setX(resultSet.getInt("x"));
 				location.setY(resultSet.getInt("y"));
 				node.setLocation(location);
-				node.setMapId(resultSet.getInt("map_id"));
+				node.setMap(Database.getMapEntityFromMapId(resultSet.getInt("map_id")));
 				node.setNodeType(NodeType.valueOf(resultSet.getString("classification")));
 				res.add(node);
-
 			}
 
 			return res;
@@ -147,7 +149,7 @@ public class NodeDaoImpl implements NodeDao {
 			pstmt.setString(1, node.getName());
 			pstmt.setInt(2, node.getLocation().getX());
 			pstmt.setInt(3, node.getLocation().getY());
-			pstmt.setInt(4, node.getMapId());
+			pstmt.setInt(4, node.getMap().getMapId());
 			// get the node type from the node and then transhform it to string
 			// to store it in the db
 			pstmt.setString(5, node.getNodeType().toString());
@@ -221,7 +223,7 @@ public class NodeDaoImpl implements NodeDao {
 				c.setX(resultSet.getInt("x"));
 				c.setY(resultSet.getInt("y"));
 				node.setLocation(c);
-				node.setMapId(resultSet.getInt("map_id"));
+				node.setMap(Database.getMapEntityFromMapId(resultSet.getInt("map_id")));
 				node.setNodeType(NodeType.valueOf(resultSet.getString("classification").toUpperCase()));
 				return node;
 			}
@@ -266,7 +268,7 @@ public class NodeDaoImpl implements NodeDao {
 				location.setX(resultSet.getInt("x"));
 				location.setY(resultSet.getInt("y"));
 				node.setLocation(location);
-				node.setMapId(resultSet.getInt("map_id"));
+				node.setMap(Database.getMapEntityFromMapId(resultSet.getInt("map_id")));
 				node.setNodeType(NodeType.valueOf(resultSet.getString("classification")));
 				res.add(node);
 			}

@@ -62,7 +62,7 @@ public class GeneralAlgorithm {
 		Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
 
 		// different strategy will use different algorithm..
-		List<Integer> nodeIds = algoStrategy.getRoute(startNode, endNode, context);
+		List<Node> nodeIds = algoStrategy.getRoute(startNode, endNode, context);
 
 		// TODO: Query node objects from node Id's and add all node objects to
 		// result

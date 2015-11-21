@@ -27,7 +27,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	/**
 	 * the map id
 	 */
-	private String mapId;
+	private int mapId;
 	/**
 	 * Map name
 	 */
@@ -58,7 +58,7 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	}
 	////for algo testing
-	public GeneralMap(String id, int measureScale) {
+	public GeneralMap(int id, int measureScale) {
 		this.mapId=id;
 		this.measureScale=measureScale;
 	}
@@ -80,7 +80,7 @@ public class GeneralMap implements AdjacencyMatrix {
 		// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
 		// adjacencyMatrix = makeMatrix();
 
-        this.measureScale = 1.0;
+        this.measureScale = 1.0f;
 
 	}
 	
@@ -105,14 +105,14 @@ public class GeneralMap implements AdjacencyMatrix {
 	/**
 	 * @return the mapId
 	 */
-	public String getMapId() {
+	public int getMapId() {
 		return mapId;
 	}
 
 	/**
 	 * @param mapId the mapId to set
 	 */
-	public void setMapId(String mapId) {
+	public void setMapId(int mapId) {
 		this.mapId = mapId;
 	}
 
@@ -142,11 +142,6 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	public void setScale(int scale) {
 		measureScale = scale;
-	}
-
-	public void addMap(String mapImgPath, GeneralMap map) {
-		this = map;
-        setMapImgPath(mapImgPath);
 	}
 
     public String getMapImgPath() {

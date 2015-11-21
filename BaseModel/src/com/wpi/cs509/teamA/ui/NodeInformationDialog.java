@@ -160,7 +160,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				coordinate.setX(xPos);
 				coordinate.setY(yPos);
 				node.setLocation(coordinate);
-				node.setMapId(Integer.parseInt(mapidTextField.getText()));
+				node.getMap().setMapId(Integer.parseInt(mapidTextField.getText()));
 				node.setName(nameTextField.getText());
 				node.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
 
