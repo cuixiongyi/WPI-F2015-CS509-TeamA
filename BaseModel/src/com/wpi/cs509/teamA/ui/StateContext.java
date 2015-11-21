@@ -32,10 +32,31 @@ public class StateContext {
 	 */
 	private StateMouseListener mouseListenerState;
 
-    ImageComponent imageComponent;
-    ImageComponentAdmin imageComponentAdmin;
+    public ImageComponent getImageComponent() {
+        return imageComponent;
+    }
 
-	private Node startNode;
+    /**
+     * Set imageComponent at the same time init
+     * normal and admin MouseListener
+     * @param imageComponent
+     */
+    public void setImageComponent(ImageComponent imageComponent) {
+        this.imageComponent = imageComponent;
+        normalUserMouseListener = new NormalUserMouseListener(imageComponent);
+        adminMouseListener = new AdminMouseListener(imageComponent);
+
+        // TODO: Move this part to input panel..
+        // we need to add the event listener before the state pattern begins
+        imageComponent.addMouseListener(normalUserMouseListener);
+    }
+
+    private ImageComponent imageComponent;
+    private ImageComponentAdmin imageComponentAdmin;
+    private MouseListener normalUserMouseListener;
+    private MouseListener adminMouseListener;
+
+    private Node startNode;
 	private Node endNode;
 	private List<Node> path;
 
@@ -73,8 +94,6 @@ public class StateContext {
         return adminMouseListener;
     }
 
-    MouseListener normalUserMouseListener;
-    MouseListener adminMouseListener;
 
 	/**
 	 * Constructor. Initialize a default state.
@@ -140,6 +159,7 @@ public class StateContext {
         }catch(Exception E){
             E.printStackTrace();
         }
+        mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
 
 
 
@@ -152,6 +172,7 @@ public class StateContext {
         }catch(Exception E){
             E.printStackTrace();
         }
+        mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
 
 
 
