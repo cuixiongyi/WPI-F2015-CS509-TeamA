@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.strategy.impl;
+/*package com.wpi.cs509.teamA.strategy.impl;
 import com.wpi.cs509.teamA.bean.*;
 
 import java.util.HashMap;
@@ -8,12 +8,12 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 import java.util.TreeSet;
 
-/**
+*//**
  * A* strategy
  * 
  * @author CS 509-Team A
  *
- */
+ *//*
 public class AstarAlgoStrategy{
 	private int startNodeId;
 	private int endNodeId;
@@ -75,7 +75,7 @@ public class AstarAlgoStrategy{
 //		return (int) Math.sqrt(Math.pow(a.getCoordinate().getX()-b.getCoordinate().getX(),2)+Math.pow(a.getCoordinate().getY()-b.getCoordinate().getY(),2));
 //	}
 
-	/** Implementation using a binary heap. */
+	*//** Implementation using a binary heap. *//*
 	private void astar(final PriorityQueue<Vertex> q) {
 		Vertex u, v;
 		//System.out.println(q.size());
@@ -123,3 +123,4 @@ public class AstarAlgoStrategy{
 	}
 }
 
+*/

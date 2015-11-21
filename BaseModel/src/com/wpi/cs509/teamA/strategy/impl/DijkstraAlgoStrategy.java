@@ -1,13 +1,9 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.NavigableSet;
 import java.util.PriorityQueue;
 import java.util.Stack;
-import java.util.TreeSet;
-
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
@@ -43,7 +39,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		// set-up vertices
 		for (Vertex v : graph.values()) {
 			v.setPrevious((v == source) ? source : null);
-			v.setDist((v == source) ? 0 : Integer.MAX_VALUE);
+			v.setDist((v == source) ? 0 : Double.MAX_VALUE);
 			q.add(v);
 			//System.out.println("+++"+v.id);
 			//System.out.println(q.size());
@@ -74,15 +70,15 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 			//System.out.println(u.getDist());
 			//System.out.println(u.getNeighborV().size());
 			//System.out.println(this.endNodeId)
-			if (u.getDist() == Integer.MAX_VALUE)
+			if (u.getDist() == Double.MAX_VALUE)
 				break; // we can ignore u (and any other remaining vertices)
 						// since they are unreachable
 
 			// look at distances to each neighbor
-			for (Map.Entry<Vertex, Integer> a : u.getNeighborV().entrySet()) {
+			for (Map.Entry<Vertex, Double> a : u.getNeighborV().entrySet()) {
 				v = a.getKey(); // the neighbor in this iteration
 
-				int alternateDist = u.getDist() + a.getValue();
+				double alternateDist = u.getDist() + a.getValue();
 				if (alternateDist < v.getDist()) { // shorter path to neighbor
 													// found
 					//System.out.println("+++++");
