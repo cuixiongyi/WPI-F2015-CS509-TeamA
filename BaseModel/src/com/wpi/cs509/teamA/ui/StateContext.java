@@ -24,35 +24,34 @@ import com.wpi.cs509.teamA.bean.Node;
 // TODO: make this class singleton
 public class StateContext {
 
-
-
 	private Node startNode;
 	private Node endNode;
 	private List<Node> path;
 
-	/** if filterNodeType[i] == 1 then display that type of node
-	 * 	filterNodeType[i] == 0 don't display
+	/**
+	 * if filterNodeType[i] == 1 then display that type of node
+	 * filterNodeType[i] == 0 don't display
 	 */
 	private List<Integer> filterNodeType;
+	private List<Node> iconNodes;
+	//private List<GeneralMap> allMaps;
+	private GeneralMap currentMap;
 
-    private List<GeneralMap> allMaps;
-    private GeneralMap currentMap;
-
-
-    /**
+	/**
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
-        this.filterNodeType = new ArrayList<Integer>();
-        this.path = new ArrayList<Node>();
-        this.allMaps = new ArrayList<GeneralMap>();
+		this.filterNodeType = new ArrayList<Integer>();
+		this.path = new ArrayList<Node>();
+		//this.allMaps = new ArrayList<GeneralMap>();
+		this.iconNodes = new ArrayList<Node>();
 
 	}
 
-    public void addMap(String imgPathName, GeneralMap map) {
-        map.setMapImgPath(imgPathName);
-        allMaps.add(map);
-    }
+	public void addMap(String imgPathName, GeneralMap map) {
+		map.setMapImgPath(imgPathName);
+		allMaps.add(map);
+	}
 
 	/**
 	 * Changes the currently displayed map
@@ -61,14 +60,15 @@ public class StateContext {
 	 *            The map to be displayed
 	 *
 	 */
-	private void setCurrentMap(GeneralMap newMap) {
-        this.currentMap = newMap;
+	public void setCurrentMap(int mapID) {
+		this.currentMap = this.allMaps.get(mapID);
 
-        // TODO Do some clean up
+		// TODO Do some clean up
 
 	}
+
 	/**
-     *
+	 *
 	 * Set a new state.
 	 * 
 	 * @param newState
@@ -76,6 +76,10 @@ public class StateContext {
 	 */
 	public void setState() {
 
+	}
+
+	public List<Node> getIconNodes() {
+		return iconNodes;
 	}
 
 	/**
@@ -101,7 +105,6 @@ public class StateContext {
 		this.startNode = startNode;
 	}
 
-
 	public Node getEndNode() {
 		return endNode;
 	}
@@ -109,6 +112,7 @@ public class StateContext {
 	public void setEndNode(Node endNode) {
 		this.endNode = endNode;
 	}
+
 	public List<Node> getPath() {
 		return path;
 	}

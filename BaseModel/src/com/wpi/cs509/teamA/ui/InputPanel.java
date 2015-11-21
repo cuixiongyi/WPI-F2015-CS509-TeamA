@@ -1,9 +1,12 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
+import java.awt.Dialog.ModalityType;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -57,6 +61,9 @@ public class InputPanel extends JPanel implements ActionListener {
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
     private ImageComponent imageComponent;
+    boolean isAdmin;
+    
+    private int adminClicked;
 
 	public void setStateContext(StateContext stateContext) {
 		this.stateContext = stateContext;
@@ -162,10 +169,13 @@ public class InputPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 
+		
+		adminClicked = 0;
+		
         /**
          * Add listener to the admin login button
          */
-        inputPanel.getAdminLogin().addActionListener(new ActionListener() {
+        this.getAdminLogin().addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -176,20 +186,20 @@ public class InputPanel extends JPanel implements ActionListener {
                 // not, give it normal user
 
                 if (adminClicked % 2 == 0) {
-                    AdminDialog adminDialog = new AdminDialog(ImageComponent.this, inputPanel);
+                    AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
                     adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
                     adminDialog.setVisible(isFocusable());
 
                 } else {
 
                     JOptionPane.showMessageDialog(null, "You have logged out");
-                    stateContext.switchState(ImageComponent.this, normalUserMouseListener, adminMouseListener);
-                    inputPanel.getBtnNeighborManage().setVisible(false);
-                    inputPanel.getAdminLogin().setText(LOGIN);
-                    inputPanel.getBtnSynchronize().setVisible(false);
+                    //stateContext.switchState(imageComponent, normalUserMouseListener, adminMouseListener);
+                    InputPanel.this.getBtnNeighborManage().setVisible(false);
+                    InputPanel.this.getAdminLogin().setText(LOGIN);
+                    InputPanel.this.getBtnSynchronize().setVisible(false);
                     isAdmin = false;
                     adminClicked++;
-                    ImageComponent.this.repaint();
+                    imageComponent.repaint();
                 }
             }
 
@@ -197,33 +207,34 @@ public class InputPanel extends JPanel implements ActionListener {
 
 	    // TODO: Make the map related things into a enum class..
 		this.getComboBoxMap().addItemListener(new ItemListener() {
+				@Override
 				public void itemStateChanged(ItemEvent e) {
                     int currentMapID = -1;
-						if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
-								selectImage("Final_Campus_Map", ImageComponent.this);
+						if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
+								//selectImage("Final_Campus_Map", imageComponent);
                                 currentMapID = 1;
-							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
-								selectImage("Final_AK_Ground_Floor", ImageComponent.this);
+							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-G")) {
+								//selectImage("Final_AK_Ground_Floor", imageComponent);
                                 currentMapID = 2;
-							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
-								selectImage("Final_AK_First_Floor", ImageComponent.this);
+							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-1")) {
+								//selectImage("Final_AK_First_Floor", imageComponent);
                                 currentMapID = 3;
-							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
-								selectImage("Final_AK_Second_Floor", ImageComponent.this);
+							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-2")) {
+								//selectImage("Final_AK_Second_Floor", imageComponent);
                                 currentMapID = 4;
-							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-								selectImage("Final_AK_Third_Floor", ImageComponent.this);
+							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-3")) {
+								//selectImage("Final_AK_Third_Floor", imageComponent);
                                 currentMapID = 5;
-							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-								selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
+							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-1")) {
+								//selectImage("Final_Project_Center_First_Floor", imageComponent);
                                 currentMapID = 6;
-							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-								selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
+							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-2")) {
+								//selectImage("Final_Project_Center_Second_Floor", imageComponent);
                                 currentMapID = 7;
 							}
                             UIDataBuffer.setCurrentMapId(currentMapID);
                             stateContext.setCurrentMap(currentMapID);
-                            inputPanel.getBtnSynchronize().doClick();
+                            this.getBtnSynchronize().doClick();
 
                 }
 

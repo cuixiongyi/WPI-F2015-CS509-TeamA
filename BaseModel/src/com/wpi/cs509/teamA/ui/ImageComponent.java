@@ -103,9 +103,6 @@ public class ImageComponent extends JComponent {
 
         //setImageComponent(this);
 
-
-		});
-
 	}
 
 
@@ -186,7 +183,7 @@ public class ImageComponent extends JComponent {
         List<Node> iconNodes = this.getStateContext().getIconNodes();
         paintIcons(iconNodes, g2);
 
-
+/*
 
 		if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
 			// paint the route
@@ -211,14 +208,19 @@ public class ImageComponent extends JComponent {
 
 			int desX = pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
 			int desY = pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
+			
+			
+			
 			g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
 			g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
 			Font font = g.getFont().deriveFont(20.0f);
 			g.setFont(font);
 			g2.drawString("Source", sourceX, sourceY - ovalOffset);
 			g2.drawString("Destination", desX, desY - ovalOffset);
-
+			
 		}
+*/
+		
 		g2 = null;
 
 	}
@@ -312,11 +314,11 @@ public class ImageComponent extends JComponent {
 	public NormalUserMouseListener getNormalUserMouseListener() {
 		return (NormalUserMouseListener) this.normalUserMouseListener;
 	}
-
+/*
 	public AdminMouseListener getAdminMouseListener() {
 		return (AdminMouseListener) this.adminMouseListener;
 	}
-
+*/
 	public StateContext getStateContext() {
 		return this.stateContext;
 	}
