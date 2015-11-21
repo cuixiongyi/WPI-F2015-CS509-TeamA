@@ -48,8 +48,16 @@ public class GeneralMap implements AdjacencyMatrix {
     private float displayScale;
 
     private List<Node> nodes;
-    
-    private BufferedImage image;
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+	private BufferedImage image;
 
 	/**
 	 * Default constructor

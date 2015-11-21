@@ -189,11 +189,13 @@ public class InputPanel extends JPanel implements ActionListener {
                     AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
                     adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
                     adminDialog.setVisible(isFocusable());
+					stateContext.switchToAdminUser();
 
-                } else {
+
+				} else {
 
                     JOptionPane.showMessageDialog(null, "You have logged out");
-                    //stateContext.switchState(imageComponent, normalUserMouseListener, adminMouseListener);
+                    stateContext.switchToNormalUser();
                     InputPanel.this.getBtnNeighborManage().setVisible(false);
                     InputPanel.this.getAdminLogin().setText(LOGIN);
                     InputPanel.this.getBtnSynchronize().setVisible(false);
@@ -234,14 +236,14 @@ public class InputPanel extends JPanel implements ActionListener {
 							}
                             UIDataBuffer.setCurrentMapId(currentMapID);
                             stateContext.setCurrentMap(currentMapID);
-                            this.getBtnSynchronize().doClick();
+							InputPanel.this.getBtnSynchronize().doClick();
 
                 }
 
 			});
 
         // Click the SEARCH button..
-        this.btnSearch().addActionListener(new ActionListener() {
+        this.btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent arg0){
 
@@ -255,20 +257,22 @@ public class InputPanel extends JPanel implements ActionListener {
                 AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
                         inputPanel.getDesPoint());
 
-                // get the result of the search..
-                result = null;
-                result = algoController.getRoute();
+
 
                 // get a list of a map, so that we can draw line on that map..
                 pathNodeList = null;
                 pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
-                stateContext.setPath(pathNodeList);
+
+				// get the result of the search..
+				List<Node> path = algoController.getRoute();
+				stateContext.setPath(path);
                 // we need to give all the information to the repaint metho
                 imageComponent.repaint();
             }
         }
 	}
 
+	/*
     //TODO What the F**k is this?
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == btnSynchronize) {
@@ -285,6 +289,7 @@ public class InputPanel extends JPanel implements ActionListener {
 			}
 		}
 	}
+	*/
 
 
 

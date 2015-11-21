@@ -18,8 +18,8 @@ public class StateNormalUser implements StateMouseListener {
 	public void switchMouseListener(StateContext stateContext, ImageComponent imageComponent,
 			MouseListener normalUserMouseListener, MouseListener adminMouseListener) {
 		// TODO Auto-generated method stub
-		imageComponent.removeMouseListener(normalUserMouseListener);
-		imageComponent.addMouseListener(adminMouseListener);
+		imageComponent.removeMouseListener(stateContext.getNormalUserMouseListener());
+		imageComponent.addMouseListener(stateContext.getAdminMouseListener());
 		stateContext.setState(new StateAdminUser());
 	}
 

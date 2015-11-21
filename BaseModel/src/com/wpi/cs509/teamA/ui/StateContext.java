@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.ui.ImageComponent;
+import com.wpi.cs509.teamA.ui.ImageComponentAdmin;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -24,6 +27,14 @@ import com.wpi.cs509.teamA.bean.Node;
 // TODO: make this class singleton
 public class StateContext {
 
+	/**
+	 * The state of the context.
+	 */
+	private StateMouseListener mouseListenerState;
+
+    ImageComponent imageComponent;
+    ImageComponentAdmin imageComponentAdmin;
+
 	private Node startNode;
 	private Node endNode;
 	private List<Node> path;
@@ -34,34 +45,61 @@ public class StateContext {
 	 */
 	private List<Integer> filterNodeType;
 	private List<Node> iconNodes;
-	//private List<GeneralMap> allMaps;
+
+    public GeneralMap getCurrentMap() {
+        return currentMap;
+    }
+
+    public void setCurrentMap(GeneralMap currentMap) {
+        this.currentMap = currentMap;
+    }
+
+    //private List<GeneralMap> allMaps;
 	private GeneralMap currentMap;
+
+    public void setNormalUserMouseListener(MouseListener normalUserMouseListener) {
+        this.normalUserMouseListener = normalUserMouseListener;
+    }
+
+    public void setAdminMouseListener(MouseListener adminMouseListener) {
+        this.adminMouseListener = adminMouseListener;
+    }
+
+    public MouseListener getNormalUserMouseListener() {
+        return normalUserMouseListener;
+    }
+
+    public MouseListener getAdminMouseListener() {
+        return adminMouseListener;
+    }
+
+    MouseListener normalUserMouseListener;
+    MouseListener adminMouseListener;
 
 	/**
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
+        normalUserMouseListener = null;
+        adminMouseListener = null;
+
 		this.filterNodeType = new ArrayList<Integer>();
 		this.path = new ArrayList<Node>();
 		//this.allMaps = new ArrayList<GeneralMap>();
 		this.iconNodes = new ArrayList<Node>();
 
-	}
 
-	public void addMap(String imgPathName, GeneralMap map) {
-		map.setMapImgPath(imgPathName);
-		allMaps.add(map);
 	}
 
 	/**
 	 * Changes the currently displayed map
 	 *
-	 * @param newMap
+	 * @param mapID
 	 *            The map to be displayed
 	 *
 	 */
 	public void setCurrentMap(int mapID) {
-		this.currentMap = this.allMaps.get(mapID);
+		this.currentMap = Database.getMapEntityFromMapId(mapID);
 
 		// TODO Do some clean up
 
@@ -70,9 +108,7 @@ public class StateContext {
 	/**
 	 *
 	 * Set a new state.
-	 * 
-	 * @param newState
-	 *            the new state the context will be.
+	 * the new state the context will be.
 	 */
 	public void setState() {
 
@@ -97,7 +133,41 @@ public class StateContext {
 		mouseListenerState.switchMouseListener(this, imageComponent, normalUserMouseListener, adminMouseListener);
 	}
 
-	public Node getStartNode() {
+	public void switchToAdminUser() {
+        try{
+            if (null == adminMouseListener)
+                throw new Exception("Uninitlized admin user mouse listener");
+        }catch(Exception E){
+            E.printStackTrace();
+        }
+
+
+
+    }
+
+    public void switchToNormalUser() {
+        try{
+            if (null == normalUserMouseListener)
+                throw new Exception("Uninitlized normal user mouse listener");
+        }catch(Exception E){
+            E.printStackTrace();
+        }
+
+
+
+    }
+
+    /**
+     * Set a new state.
+     *
+     * @param newState
+     *            the new state the context will be.
+     */
+    public void setState(StateMouseListener newState) {
+        this.mouseListenerState = newState;
+    }
+
+    public Node getStartNode() {
 		return startNode;
 	}
 

@@ -84,7 +84,7 @@ public class ImageComponent extends JComponent {
 	 * Constructor for image component The constructor will also add all the
 	 * Listeners to the inputPanel it got
 	 * 
-	 * @param inputPanel
+	 * /@param inputPanel
 	 *            an instance of inputPanel will add listeners to the buttons in
 	 *            the inputPanel. inputPanel must be final since it will be used
 	 *            in the inner class
@@ -93,7 +93,7 @@ public class ImageComponent extends JComponent {
 		ImageComponent.isAdmin = false;
 
 		// initialize the mouse listener state
-		stateContext = new StateContext();
+		stateContext = null;
 
 		normalUserMouseListener = new NormalUserMouseListener(this);
 
@@ -104,24 +104,6 @@ public class ImageComponent extends JComponent {
         //setImageComponent(this);
 
 	}
-
-
-	/**
-	 * 
-	 * Select the right image and paint it on the image component
-	 * 
-	 * @param mapName
-	 * @param imageComponent
-	 */
-/*
-	private void selectImage(String mapName, ImageComponent imageComponent) {
-		imageComponent.setImagePath(System.getProperty("user.dir") + "/src/" + mapName + ".jpg");
-		imageComponent.repaint();
-
-	}
-
-	*/
-
 
 
 	public void paintIcons(List<Node> nodes, Graphics2D g2) {
@@ -161,15 +143,33 @@ public class ImageComponent extends JComponent {
 
 	}
 
+    private void testBeforePaint()
+    {
+        try {
+            if (null == stateContext)
+            {
+                throw new Exception("null stateContext in ImageComponent");
+            }
+            if (null == stateContext.getCurrentMap().getImage()) {
+                throw new Exception("null image in ImageComponent");
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 	@Override
 	public void paintComponent(Graphics g) {
+
+        /// test for null stateContext and null image
+        testBeforePaint();
 
 		// if isInitilized
 		// no need to paint the image again
 
-		if (null == image) {
-			return;
-		}
+
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
         setForeground(Color.RED);

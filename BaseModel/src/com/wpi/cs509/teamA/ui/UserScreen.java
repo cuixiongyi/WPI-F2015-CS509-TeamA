@@ -152,13 +152,15 @@ public class UserScreen extends JFrame {
 
 		// display the image. Note that "/" only works on UNIX
 		// TODO: default map? change the way to do this...
+		// TODO load map image with different names
 		List<GeneralMap> maps = Database.getAllMapFromDatabase() ;//= Database.getAllMapFromDatabase();
+		/*
 		for (int ii = 0; ii < maps.size(); ++ii)
 		{
 			stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",
 					maps.get(ii));
 		}
-		
+		*/
 	/*	
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
@@ -171,6 +173,7 @@ public class UserScreen extends JFrame {
         stateContext = new StateContext();
         imgComponent.setStateContext(stateContext);
         inputPanel.setStateContext(stateContext);
+        stateContext.setAdminMouseListener(addMouseListener);
 	}
 
 	public JButton getBtnNeighborManage() {
