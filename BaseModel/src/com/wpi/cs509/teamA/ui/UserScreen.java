@@ -151,7 +151,7 @@ public class UserScreen extends JFrame {
 
 		// display the image. Note that "/" only works on UNIX
 		// TODO: default map? change the way to do this...
-		List<GeneralMap> maps ;//= Database.getAllMapFromDatabase();
+		List<GeneralMap> maps = null ;//= Database.getAllMapFromDatabase();
 		for (int ii = 0; ii < maps.size(); ++ii)
 		{
 			stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",

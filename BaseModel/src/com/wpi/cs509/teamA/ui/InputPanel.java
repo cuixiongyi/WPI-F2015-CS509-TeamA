@@ -195,42 +195,69 @@ public class InputPanel extends JPanel implements ActionListener {
 
         });
 
-	// TODO: Make the map related things into a enum class..
-				inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
-						public void itemStateChanged(ItemEvent e) {
-								if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
-										selectImage("Final_Campus_Map", ImageComponent.this);
-										UIDataBuffer.setCurrentMapId(1);
-										inputPanel.getBtnSynchronize().doClick();
-									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
-										selectImage("Final_AK_Ground_Floor", ImageComponent.this);
-									UIDataBuffer.setCurrentMapId(2);
-										inputPanel.getBtnSynchronize().doClick();
-									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
-										selectImage("Final_AK_First_Floor", ImageComponent.this);
-										UIDataBuffer.setCurrentMapId(3);
-										inputPanel.getBtnSynchronize().doClick();
-									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
-										selectImage("Final_AK_Second_Floor", ImageComponent.this);
-										UIDataBuffer.setCurrentMapId(4);
-										inputPanel.getBtnSynchronize().doClick();
-									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-										selectImage("Final_AK_Third_Floor", ImageComponent.this);
-										UIDataBuffer.setCurrentMapId(5);
-										inputPanel.getBtnSynchronize().doClick();
-									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-										selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
-										UIDataBuffer.setCurrentMapId(6);
-										inputPanel.getBtnSynchronize().doClick();
-									} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-										selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
-										UIDataBuffer.setCurrentMapId(7);
-										inputPanel.getBtnSynchronize().doClick();
-									}
+	    // TODO: Make the map related things into a enum class..
+		this.getComboBoxMap().addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+						if (inputPanel.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
+								selectImage("Final_Campus_Map", ImageComponent.this);
+								UIDataBuffer.setCurrentMapId(1);
+								inputPanel.getBtnSynchronize().doClick();
+							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-G")) {
+								selectImage("Final_AK_Ground_Floor", ImageComponent.this);
+							UIDataBuffer.setCurrentMapId(2);
+								inputPanel.getBtnSynchronize().doClick();
+							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-1")) {
+								selectImage("Final_AK_First_Floor", ImageComponent.this);
+								UIDataBuffer.setCurrentMapId(3);
+								inputPanel.getBtnSynchronize().doClick();
+							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-2")) {
+								selectImage("Final_AK_Second_Floor", ImageComponent.this);
+								UIDataBuffer.setCurrentMapId(4);
+								inputPanel.getBtnSynchronize().doClick();
+							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("AK-3")) {
+								selectImage("Final_AK_Third_Floor", ImageComponent.this);
+								UIDataBuffer.setCurrentMapId(5);
+								inputPanel.getBtnSynchronize().doClick();
+							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-1")) {
+								selectImage("Final_Project_Center_First_Floor", ImageComponent.this);
+								UIDataBuffer.setCurrentMapId(6);
+								inputPanel.getBtnSynchronize().doClick();
+							} else if (inputPanel.getComboBoxMap().getSelectedItem().equals("PC-2")) {
+								selectImage("Final_Project_Center_Second_Floor", ImageComponent.this);
+								UIDataBuffer.setCurrentMapId(7);
+								inputPanel.getBtnSynchronize().doClick();
 							}
+					}
 
-					});
+			});
 
+        // Click the SEARCH button..
+        this.btnSearch().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent arg0){
+
+                // TODO: need to check if the input is valid!!
+
+                // TODO: make the AlgoController singleton and use setter and
+                // getter to operate the instance..
+
+                // We will go to the backend here.. For now, all the resources
+                // should be ready!
+                AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
+                        inputPanel.getDesPoint());
+
+                // get the result of the search..
+                result = null;
+                result = algoController.getRoute();
+
+                // get a list of a map, so that we can draw line on that map..
+                pathNodeList = null;
+                pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
+                stateContext.setPath(pathNodeList);
+                // we need to give all the information to the repaint metho
+                imageComponent.repaint();
+            }
+        }
 	}
 
 	public void actionPerformed(ActionEvent ae) {
@@ -249,32 +276,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		}
 	}
 
-    // Click the SEARCH button..
-    this.btnSearch().addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
 
-            // TODO: need to check if the input is valid!!
-
-            // TODO: make the AlgoController singleton and use setter and
-            // getter to operate the instance..
-
-            // We will go to the backend here.. For now, all the resources
-            // should be ready!
-            AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
-                    inputPanel.getDesPoint());
-
-            // get the result of the search..
-            result = null;
-            result = algoController.getRoute();
-
-            // get a list of a map, so that we can draw line on that map..
-            pathNodeList = null;
-            pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
-            stateContext.setPath(pathNodeList);
-            // we need to give all the information to the repaint metho
-            imageComponent.repaint();
-        }
 
     public void setImageComponent(ImageComponent imageComponent2)
 	{
@@ -357,4 +359,4 @@ public class InputPanel extends JPanel implements ActionListener {
 	}
 
 
-}
+};
