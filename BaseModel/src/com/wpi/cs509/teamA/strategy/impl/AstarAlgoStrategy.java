@@ -19,10 +19,10 @@ public class AstarAlgoStrategy{
 	private int endNodeId;
 
 
-	public Stack<Node> getRoute(Node startNode, Node endNode, Graph context) {
+	public Stack<Node> getRoute(Node startNode, Node endNode, Edge[] edges) {
 		this.startNodeId = startNode.getId();
 		this.endNodeId = endNode.getId();
-
+		Graph context = new Graph (edges); 
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
@@ -32,7 +32,7 @@ public class AstarAlgoStrategy{
 		Vertex source= new Vertex(); 
 		source=	context.getGraph().get(startNodeId);  //point to the same object
 		Vertex destination =new Vertex();
-		destination = context.getGraph().get(endNodeId);
+		destination = context.getGraph().get(startNodeId);;
 		
 		//NavigableSet<Vertex> q = new TreeSet<>();
 		PriorityQueue<Vertex> q = new PriorityQueue<Vertex>();
