@@ -14,7 +14,6 @@ import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.Database;
@@ -73,7 +72,7 @@ public class AlgoController {
 	 * @return a map data structure that the key is the map id and the value is
 	 *         a list of nodes that represents the path on that map
 	 */
-	public Map<Integer, List<Node>> getRoute() {
+/*	public Map<Integer, List<Node>> getRoute() {
 
 		// we support searching node now only..
 
@@ -128,7 +127,7 @@ public class AlgoController {
 			return result;
 		}
 
-	}
+	}*/
 
 	/**
 	 * Gets the node that corresponding to a given location name

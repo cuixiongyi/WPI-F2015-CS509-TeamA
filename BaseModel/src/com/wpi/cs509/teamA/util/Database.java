@@ -3,8 +3,10 @@ package com.wpi.cs509.teamA.util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
@@ -15,8 +17,10 @@ import com.wpi.cs509.teamA.dao.impl.MapDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 
 public class Database {
-	private static List<Node> allNodesData;
-	private static List<GeneralMap> allMapData;
+	private static Map<Integer,Node> allNodesDataHM;
+	private static Map<Integer,GeneralMap> allMapDataHM;
+	private static List<Node> allNodesDataHL;
+	private static List<GeneralMap> allMapDataHL;
 	
 //	private List<Edge> allEdgeData;
 	
@@ -25,31 +29,34 @@ public class Database {
 	}
 	
 	public static void InitFromDatabase(){
-		// get all nodes from database
-		NodeDao nd = new NodeDaoImpl();
-		allNodesData = nd.getAllNodes();
 		
 		// get all maps from database
 		MapDao md = new MapDaoImpl();
-		allMapData = md.getAllMaps();
+		allMapDataHL = md.getAllMaps();
+		allMapDataHM = new HashMap<Integer,GeneralMap>();
+		Iterator<GeneralMap> iterMap = allMapDataHL.iterator();
+		while (iterMap.hasNext()) {
+			GeneralMap tempMap = iterMap.next();
+			allMapDataHM.put(tempMap.getMapId(), tempMap);
+		}
 		
-	}
-	
-	public static List<Node> getAllNodeFromDatabase(){
-		return allNodesData;
-	}
-	
-	public static List<GeneralMap> getAllMapFromDatabase(){
-		return allMapData;
-	}
-	public static Node getNodeFromId(int nodeId) {
-		Iterator<Node> iter = allNodesData.iterator();
+		// get all nodes from database
+		NodeDao nd = new NodeDaoImpl();
+		allNodesDataHL = nd.getAllNodes();
+		allNodesDataHM = new HashMap<Integer,Node>();
+		Iterator<Node> iter = allNodesDataHL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
-			if(tempNode.getId() == nodeId)
-				return tempNode;
+			allNodesDataHM.put(tempNode.getId(), tempNode);
 		}
-		return null;
+	}
+	
+	public static List<Node> getAllNodeListFromDatabase(){
+		return allNodesDataHL;
+	}
+
+	public static Node getNodeFromId(int nodeId) {
+		return allNodesDataHM.get(nodeId);
 	}
 	
 	public static List<Node> getNodeFromIds(List<Integer> nodeIds){
@@ -64,17 +71,17 @@ public class Database {
 	
 	public static List<Node> getAllNodesForCurrentMap(int currentMapId) {
 		List<Node> res =  new ArrayList<Node>();
-		Iterator<Node> iter = allNodesData.iterator();
+		Iterator<Node> iter = allNodesDataHL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
-			if(tempNode.getMapId() == currentMapId)
+			if(tempNode.getMap().getMapId() == currentMapId)
 				res.add(tempNode);
 		}
 		return res;
 	}
 	
 	public static int getNodeIdFromName(String node_name){
-		Iterator<Node> iter = allNodesData.iterator();
+		Iterator<Node> iter = allNodesDataHL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			if(tempNode.getName().equals(node_name))
@@ -84,7 +91,7 @@ public class Database {
 	}
 	
 	public static Coordinate getNodeCoordinateFromId(int nodeId) {
-		Iterator<Node> iter = allNodesData.iterator();
+		Iterator<Node> iter = allNodesDataHL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			if(tempNode.getId() == nodeId){
@@ -93,4 +100,15 @@ public class Database {
 		}
 		return null;
 	}
+	
+	
+	/**Deal with Maps*/
+	
+	public static List<GeneralMap> getAllMapFromDatabase(){
+		return allMapDataHL;
+	}
+	public static GeneralMap getMapEntityFromMapId(int map_id){
+		return allMapDataHM.get(map_id);
+	}
+	
 }

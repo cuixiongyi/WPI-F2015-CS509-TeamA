@@ -2,16 +2,19 @@ package com.wpi.cs509.teamA.bean;
 
 public class Edge {
 	private Node node1, node2;
-	private int dist; // distance between the two nodes
+	private double dist; // distance between the two nodes
 
-	public Edge(Node node1, Node node2) {
+	public Edge(){
+		
+	}
+/*	public Edge(Node node1, Node node2) {
 		this.node1 = node1;
 		this.node2 = node2;
 		this.dist = node1.DistanceTo(node2);
-	}
+	}*/
 	
 	//for then two nodes are from different maps
-	public Edge(Node node1, Node node2, int dist) {
+	public Edge(Node node1, Node node2, double dist) {
 		this.node1 = node1;
 		this.node2 = node2;
 		this.dist = dist;
@@ -48,7 +51,7 @@ public class Edge {
 	/**
 	 * @return the dist
 	 */
-	public int getDist() {
+	public double getDist() {
 		return dist;
 	}
 
@@ -56,7 +59,7 @@ public class Edge {
 	 * @param dist
 	 *            the dist to set
 	 */
-	public void setDist(int dist) {
+	public void setDist(double dist) {
 		this.dist = dist;
 	}
 	

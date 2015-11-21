@@ -32,20 +32,20 @@ public class SearchSupply {
 		Iterator<GeneralMap> iter_map = Database.getAllMapFromDatabase().iterator();
 		while (iter_map.hasNext()) {
 			GeneralMap tempMap = iter_map.next();
-			int map_id = Integer.parseInt(tempMap.getMapId());
+			int map_id = tempMap.getMapId();
 			String map_name = tempMap.getMapName();
 		//	System.out.println("map_id :"+ map_id +"   map_name"+map_name);
 			allMaps.put(map_id, map_name);
 		}
 
 		// get nodes and transfer
-		Iterator<Node> iter = Database.getAllNodeFromDatabase().iterator();
+		Iterator<Node> iter = Database.getAllNodeListFromDatabase().iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			String node_name = tempNode.getName();
 			if(node_name.equals("Location"))
 				continue;
-			String map_name = allMaps.get(tempNode.getMapId());
+			String map_name = allMaps.get(tempNode.getMap().getMapId());
 		//	System.out.println("node_name :" + node_name+ "   map_name:"+map_name);
 		//	allNodesWithName.put(node_name + " " + map_name, tempNode);
 			allNodesWithName.put(map_name + " " + node_name, tempNode);

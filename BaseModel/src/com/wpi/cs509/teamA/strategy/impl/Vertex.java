@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class Vertex extends Node implements Comparable<Vertex> {
 	private GeneralMap map;
-	private int dist = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
+	private double dist = Double.MAX_VALUE; // MAX_VALUE assumed to be infinity
 	private Vertex previous = null;
 	private int hcost;
 	private int gcost;
 
-	private Map<Vertex, Integer> neighborV = new HashMap<>();
+	private Map<Vertex, Double> neighborV = new HashMap<>();
 	public Vertex(){
 		
 	}
@@ -58,13 +58,13 @@ public class Vertex extends Node implements Comparable<Vertex> {
 
 
 	public int compareTo(Vertex other) {
-		return Integer.compare(dist, other.dist);
+		return Double.compare(dist, other.dist);
 	}
 
 	/**
 	 * @return the dist
 	 */
-	public int getDist() {
+	public double getDist() {
 		return dist;
 	}
 
@@ -72,7 +72,7 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	 * @param dist
 	 *            the dist to set
 	 */
-	public void setDist(int dist) {
+	public void setDist(double dist) {
 		this.dist = dist;
 	}
 
@@ -95,7 +95,7 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	/**
 	 * @return the neighbors
 	 */
-	public Map<Vertex, Integer> getNeighborV() {
+	public Map<Vertex, Double> getNeighborV() {
 		return this.neighborV;
 	}
 
@@ -103,7 +103,7 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	 * @param neighbours
 	 *            the neighbors to set
 	 */
-	public void setNeighborV(Map<Vertex, Integer> neighbours) {
+	public void setNeighborV(Map<Vertex, Double> neighbours) {
 		this.neighborV = neighbours;
 	}
 

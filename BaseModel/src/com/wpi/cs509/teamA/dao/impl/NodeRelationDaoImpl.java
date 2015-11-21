@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;
@@ -208,13 +209,11 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			pstmt = conn.prepareStatement(getAllEdges);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
-
 				Edge edge = new Edge();
-				edge.setId1(resultSet.getInt("node_from"));
-				edge.setId2(resultSet.getInt("node_to"));
+				edge.setNode1(Database.getNodeFromId(resultSet.getInt("node_from")));
+				edge.setNode2(Database.getNodeFromId(resultSet.getInt("node_to")));
 				edge.setDist(resultSet.getDouble("distance"));
 				res.add(edge);
-
 			}
 
 			return res;
