@@ -9,7 +9,6 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.ui.ImageComponent;
-import jdk.nashorn.internal.runtime.ECMAException;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -163,6 +162,7 @@ public class StateContext {
 	}
 
 	public List<Node> getIconNodes() {
+		iconNodes = currentMap.getNodes();
 		return iconNodes;
 	}
 

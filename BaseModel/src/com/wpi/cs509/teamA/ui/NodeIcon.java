@@ -1,42 +1,36 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.NodeType;
 
 public class NodeIcon {
 	private Node node;
-	private BufferedImage image;
-	private String iconFileName = "/BaseModel/src/com/wpi/cs509/teamA/ui/icon_test1.png";
+	private BufferedImage redIcon;
+	private BufferedImage blueIcon;
+	private String redIconFilePath;
+	private String blueIconFilePath;
+	private String redIconName = "Red_Icon.png";
+	private String blueIconName = "Blue_Icon.png";
 
 	public NodeIcon() {
 		CreateImages();
 	}
 
 	void CreateImages() {
+		this.redIconFilePath = System.getProperty("user.dir") + "/src/" + this.redIconName;
+		this.blueIconFilePath = System.getProperty("user.dir") + "/src/" + this.blueIconName;
 		try {
-			setImage(ImageIO.read(new File(getIconFileName())));
+			setRedIcon(ImageIO.read(new FileInputStream(this.redIconFilePath)));
+			setBlueIcon(ImageIO.read(new FileInputStream(this.blueIconFilePath)));
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * @return the iconFile
-	 */
-	public String getIconFileName() {
-		return iconFileName;
-	}
-
-	/**
-	 * @param iconFile
-	 *            the iconFile to set
-	 */
-	public void setIconFileName(String iconFile) {
-		this.iconFileName = iconFile;
 	}
 
 	/**
@@ -55,18 +49,36 @@ public class NodeIcon {
 	}
 
 	/**
+	 * @todo Fix this function to support multiple images for different node types
 	 * @return the image
 	 */
 	public BufferedImage getImage(Node node) {
-		return image;
+		NodeType type = node.getNodeType();
+		switch (type) {
+		case CLASSROOM: {
+			return this.redIcon;
+		}
+		default: {
+			return this.blueIcon;
+		}
+		}
+
 	}
 
 	/**
 	 * @param image
 	 *            the image to set
 	 */
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setRedIcon(BufferedImage image) {
+		this.redIcon = image;
 	}
 
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setBlueIcon(BufferedImage image) {
+		this.blueIcon = image;
+	}
+	
 }

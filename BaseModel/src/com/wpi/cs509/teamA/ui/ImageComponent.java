@@ -116,8 +116,7 @@ public class ImageComponent extends JComponent {
     private void paintIcons(List<Node> nodes, Graphics2D g2) {
         for (Node node : nodes) {
             BufferedImage image = icon.getImage(node);
-            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
-                    image.getHeight(this), this);
+            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(), image.getHeight(), this);
         }
 	}
 
