@@ -9,19 +9,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.MapDao;
 import com.wpi.cs509.teamA.dao.NodeDao;
+import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.MapDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 
 public class Database {
 	private static Map<Integer,Node> allNodesDataHM;
 	private static Map<Integer,GeneralMap> allMapDataHM;
 	private static List<Node> allNodesDataHL;
 	private static List<GeneralMap> allMapDataHL;
-	
+	private static List<Edge> allEdgesHL;
+	private static HashMap<Integer, List<Edge>> allEdgesDataHM;
 //	private List<Edge> allEdgeData;
 	
 	public Database(){
@@ -49,6 +53,17 @@ public class Database {
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			allNodesDataHM.put(tempNode.getId(), tempNode);
+		}
+		
+		// get all edges from database
+		NodeRelationDao nrd = new NodeRelationDaoImpl();
+		allEdgesHL = nrd.getAllEdges();
+		allEdgesDataHM = new HashMap<Integer,List<Edge>>();
+		Iterator<Integer> mapIds = allMapDataHM.keySet().iterator();
+		while(mapIds.hasNext()){
+			int temp_map_id = mapIds.next();
+			allEdgesDataHM.put(temp_map_id, nrd.getAllNodeRelationsForCurrentMap(temp_map_id));
+			
 		}
 	}
 	
@@ -92,16 +107,18 @@ public class Database {
 	}
 	
 	public static Coordinate getNodeCoordinateFromId(int nodeId) {
+		return allNodesDataHM.get(nodeId).getLocation();
+	}
+	
+	public static Node getNodeFromName(String node_name){
 		Iterator<Node> iter = allNodesDataHL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
-			if(tempNode.getId() == nodeId){
-				return tempNode.getLocation();
-			}
+			if(tempNode.getName().equals(node_name))
+				return tempNode;
 		}
 		return null;
 	}
-	
 	
 	/**Deal with Maps*/
 	
@@ -111,5 +128,15 @@ public class Database {
 	public static GeneralMap getMapEntityFromMapId(int map_id){
 		return allMapDataHM.get(map_id);
 	}
+	
+	/**Deal with Edges*/
+	public static List<Edge>getAllEdges(){
+		return allEdgesHL;
+	}
+	
+	public static List<Edge>getAllEdgesForCurrentMap(int map_id){
+		return allEdgesDataHM.get(map_id);
+	}
+	
 	
 }

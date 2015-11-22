@@ -84,11 +84,12 @@ public class SearchSupply {
 
 	public static void main(String[] args) {
 		Database.InitFromDatabase();
+		System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
 		SearchSupply ss = new SearchSupply();
 		Map<String,Node> getSS = ss.getSearchSupply("PC");
 		for (String key : getSS.keySet()) {  
-		    System.out.println("Key = " + key);  
+		//    System.out.println("Key = " + key);  
 		}  
 	}
 }
