@@ -191,6 +191,15 @@ public class ImageComponent extends JComponent {
 			}
 
 		});
+		
+		inputPanel.getSignUp().addActionListener(new ActionListener()  {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SignupDialog signUpDialog =new SignupDialog(ImageComponent.this, inputPanel);
+				signUpDialog.setVisible(true);
+			}
+		}
+				);
 
 		// TODO: Make the map related things into a enum class..
 		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {

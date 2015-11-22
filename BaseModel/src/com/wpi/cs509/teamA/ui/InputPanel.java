@@ -64,6 +64,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.endPoint = new JTextField();
 		this.btnSearch = new JButton(SEARCH);
 		this.adminLogin = new JButton(LOGIN);
+		
 		this.btnNeighborManage = new JButton("Edges");
 		btnNeighborManage.setSize(75, 30);
 		btnNeighborManage.setLocation(80, 380);
@@ -76,12 +77,18 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.add(btnSearch);
 		this.add(adminLogin);
 		this.add(btnNeighborManage);
+		
+		this.signUp=new JButton("SignUp");
+		this.add(signUp);
+		signUp.addActionListener(this);
+		this.signUp.setBounds(80, 0, 75, 30);
 
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
 		//this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		//this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
+		
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
 		
 //		this.getStartPoint().setBounds(80, 150, 150, 38);
@@ -155,6 +162,8 @@ public class InputPanel extends JPanel implements ActionListener {
 
 	}
 
+	
+	
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == btnSynchronize) {
 			comboSourceModel.removeAllElements();
@@ -245,5 +254,18 @@ public class InputPanel extends JPanel implements ActionListener {
 	public JButton getBtnNeighborManage() {
 		return btnNeighborManage;
 	}
+
+
+
+	public JButton getSignUp() {
+		return signUp;
+	}
+
+
+
+	public void setSignUp(JButton signUp) {
+		this.signUp = signUp;
+	}
+	
 
 }
