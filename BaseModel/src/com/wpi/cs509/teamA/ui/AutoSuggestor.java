@@ -109,6 +109,22 @@ class AutoSuggestor {
 //
 		
 //		setDictionary(words);
+		 ArrayList<String> words = new ArrayList<>();
+         words.add("hello");
+         words.add("heritage");
+         words.add("happiness");
+         words.add("goodbye");
+         words.add("cruel");
+         words.add("car");
+         words.add("war");
+         words.add("will");
+         words.add("world");
+         words.add("wall");
+
+
+         setDictionary(words);
+         //addToDictionary("bye");//adds a single word
+
 		
 
 		return checkWord(typedWord);// now call to check for
@@ -276,7 +292,7 @@ class AutoSuggestor {
 		int windowX = 0;
 		int windowY = 0;
 		System.out.println(textField.getX());
-		System.out.println(container.getHeight());
+	//	System.out.println(container.getHeight());
 		
 		windowX = container.getX()+textField.getX() + 10;
 		if (suggestionsPanel.getHeight() > autoSuggestionPopUpWindow.getMinimumSize().height) {
@@ -328,31 +344,29 @@ class AutoSuggestor {
 		if (typedWord.isEmpty()) {
 			return false;
 		}
-		// System.out.println("Typed word: " + typedWord);
-		SearchSupply dictionary = new SearchSupply();
-		
-		Set<String> stringSet = dictionary.getSearchSupply(typedWord).keySet();
-		Iterator<String> iter = stringSet.iterator();
+		 System.out.println("Typed word: " + typedWord);
+//		SearchSupply dictionary = new SearchSupply();
+//		
+//		Set<String> stringSet = dictionary.getSearchSupply(typedWord).keySet();
+//		Iterator<String> iter = stringSet.iterator();
 		
 		boolean suggestionAdded = false;
-		while(iter.hasNext()){
+	//	while(iter.hasNext()){
 			
-//		for (String word : dictionary) {// get words in the dictionary which we
-//										// added
-//			boolean fullymatches = true;
-//			for (int i = 0; i < typedWord.length(); i++) {// each string in the
-//															// word
-//				if (!typedWord.toLowerCase().startsWith(String.valueOf(word.toLowerCase().charAt(i)), i)) {// check
-//																											// for
-//																											// match
-//					fullymatches = false;
-//					break;
-//				}
-//			}
-			
-				addWordToSuggestions(iter.next());
-				suggestionAdded = true;
-			}
+		   for (String word : dictionary) {//get words in the dictionary which we added
+	            boolean fullymatches = true;
+	            for (int i = 0; i < typedWord.length(); i++) {//each string in the word
+	                if (!typedWord.toLowerCase().startsWith(String.valueOf(word.toLowerCase().charAt(i)), i)) {//check for match
+	                    fullymatches = false;
+	                    break;
+	                }
+	            }
+	            if (fullymatches) {
+	                addWordToSuggestions(word);
+	                suggestionAdded = true;
+	            }
+	        }
+		
 		
 		return suggestionAdded;
 	}
@@ -432,3 +446,4 @@ class SuggestionLabel extends JLabel {
 		textField.setText(tmp);
 	}
 }
+

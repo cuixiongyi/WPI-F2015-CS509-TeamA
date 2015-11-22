@@ -252,7 +252,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		txtFrom = new JTextField();
 		txtFrom.setBounds(80, 150, 150, 27);
-		txtFrom.
 		add(txtFrom);
 		txtFrom.addFocusListener(this);
 		txtFrom.setColumns(10);
@@ -262,21 +261,23 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		txtTo.addFocusListener(this);
 		add(txtTo);
 		txtTo.setColumns(10);
-
+		InputPanel tmp = this;
+		AutoSuggestor autoSuggestor = new AutoSuggestor(txtTo, userScreen, null,
+				Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
 	}
 
 	public void focusLost(FocusEvent e) {
 
 		if (((JTextField) e.getSource()).getText().trim().equals(""))
 			((JTextField) e.getSource()).setText(SEARCHWORD);
+		System.out.println("hehe");
 
 	}
 
 	public void focusGained(FocusEvent e) {
 		if (((JTextField) e.getSource()).getText().trim().equals(SEARCHWORD))
 			((JTextField) e.getSource()).setText("");
-		AutoSuggestor autoSuggestor = new AutoSuggestor(((JTextField) e.getSource()), userScreen, null,
-				Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+	//	if()
 
 	}
 
