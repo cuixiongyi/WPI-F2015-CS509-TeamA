@@ -215,6 +215,7 @@ public class InputPanel extends JPanel implements ActionListener {
                             UIDataBuffer.setCurrentMapId(currentMapID);
                             stateContext.setCurrentMap(currentMapID);
 							InputPanel.this.getBtnSynchronize().doClick();
+							imageComponent.repaint();
 
                 }
 

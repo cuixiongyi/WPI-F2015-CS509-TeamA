@@ -118,7 +118,6 @@ public class StateContext {
 
 		this.setState(new StateNormalUser());
 		this.setCurrentMap(1);
-        Image tmp = this.getCurrentMap().getImage();
 
 
 	}
