@@ -112,17 +112,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 			// Check password
 			char[] input = passwordField.getPassword();
 			if (isPasswordCorrect(input)) {
-				AdminDialog.this.setVisible(false);
-				stateContext.switchToAdminUser();
-
-                //stateContext.switchToAdminUser();
-
-				inputPanel.incrementAdminClicked();
-				inputPanel.getBtnNeighborManage().setVisible(true);
-				inputPanel.getAdminLogin().setText(LOGOUT);
-				inputPanel.getBtnSynchronize().setVisible(true);
-				ImageComponent.setIsAdmin(true);
-				imgPanel.repaint();			
+				successfulLogin();
 			} else {
 				JOptionPane.showMessageDialog(null, "Invalid password. Try again.", "Error Message",
 						JOptionPane.ERROR_MESSAGE);
@@ -133,6 +123,16 @@ public class AdminDialog extends JDialog implements ActionListener {
 			Arrays.fill(input, '0');
 
 		}
+	}
+
+	public void successfulLogin() {
+		AdminDialog.this.setVisible(false);
+		inputPanel.incrementAdminClicked();
+		inputPanel.getBtnNeighborManage().setVisible(true);
+		inputPanel.getAdminLogin().setText(LOGOUT);
+		inputPanel.getBtnSynchronize().setVisible(true);
+		stateContext.setAdminUser();
+		imgPanel.repaint();
 	}
 
 	/**

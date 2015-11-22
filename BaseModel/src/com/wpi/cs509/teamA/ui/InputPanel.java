@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.xml.crypto.Data;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
@@ -61,7 +62,6 @@ public class InputPanel extends JPanel implements ActionListener {
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
     private ImageComponent imageComponent;
-    boolean isAdmin;
 
     private int adminClicked;
 
@@ -256,6 +256,9 @@ public class InputPanel extends JPanel implements ActionListener {
     }
 
     public void clickSync() {
+        Database.InitFromDatabase();
+        imageComponent.repaint();
+       /*
         comboSourceModel.removeAllElements();
         comboDesModel.removeAllElements();
         Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
@@ -267,6 +270,7 @@ public class InputPanel extends JPanel implements ActionListener {
                 comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
             }
         }
+        */
     }
 
     public void clickLogin()
@@ -277,19 +281,19 @@ public class InputPanel extends JPanel implements ActionListener {
             adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
             adminDialog.setVisible(isFocusable());
             //stateContext.switchToAdminUser();
+            stateContext.setNormalUser();
             imageComponent.repaint();
-
 
         } else {
 
             JOptionPane.showMessageDialog(null, "You have logged out");
-            stateContext.switchToNormalUser();
+            Database.InitFromDatabase();
             InputPanel.this.getBtnNeighborManage().setVisible(false);
             InputPanel.this.getAdminLogin().setText(LOGIN);
             InputPanel.this.getBtnSynchronize().setVisible(false);
-            isAdmin = false;
             adminClicked++;
             imageComponent.repaint();
+
         }
     }
 

@@ -9,7 +9,6 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.ui.ImageComponent;
-import com.wpi.cs509.teamA.ui.ImageComponentAdmin;
 import jdk.nashorn.internal.runtime.ECMAException;
 
 /**
@@ -54,13 +53,27 @@ public class StateContext {
     }
 
     private ImageComponent imageComponent;
-    private ImageComponentAdmin imageComponentAdmin;
     private MouseListener normalUserMouseListener;
     private MouseListener adminMouseListener;
 
     private Node startNode;
 	private Node endNode;
 	private List<Node> path;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setNormalUser() {
+        isAdmin = false;
+        this.switchToNormalUser();
+    }
+    public void setAdminUser() {
+        isAdmin = true;
+        this.switchToAdminUser();
+    }
+
+    private boolean isAdmin;
 
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
