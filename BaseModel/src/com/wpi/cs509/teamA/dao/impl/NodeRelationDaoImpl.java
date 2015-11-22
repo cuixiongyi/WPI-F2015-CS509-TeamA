@@ -39,7 +39,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	public int getNodeRelationNum() {
 		// TODO Auto-generated method stub
 		try {
-			String getNodeNum = "select count(*) from RouteFinder.relations";
+			String getNodeNum = "select count(*) from routefinder.relations";
 			pstmt = conn.prepareStatement(getNodeNum);
 			rs = pstmt.executeQuery();
 			// if there is a result..
@@ -93,7 +93,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 								* (secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
 								+ (secondNodeCoordinate.getY() - firstNodeCoordinate.getY())
 										* (secondNodeCoordinate.getY() - firstNodeCoordinate.getY()));
-						String insertEdgeToDB = "INSERT INTO RouteFinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)";
+						String insertEdgeToDB = "INSERT INTO routefinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)";
 						pstmt = conn.prepareStatement(insertEdgeToDB);
 						pstmt.setInt(1, fromId);
 						pstmt.setInt(2, endId);
@@ -146,7 +146,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 		ResultSet resultSet = null;
 
 		try {
-			String checkEdgeInDB = "select id from RouteFinder.relations where node_from=? and node_to=?";
+			String checkEdgeInDB = "select id from routefinder.relations where node_from=? and node_to=?";
 			pstmt = conn.prepareStatement(checkEdgeInDB);
 			pstmt.setInt(1, id1);
 			pstmt.setInt(2, id2);
@@ -174,7 +174,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 		int y = coordinate.getY();
 		try {
 
-			String checkNodesInDB = "select id from RouteFinder.node where x=? and y=?";
+			String checkNodesInDB = "select id from routefinder.node where x=? and y=?";
 			pstmt = conn.prepareStatement(checkNodesInDB);
 			pstmt.setInt(1, x);
 			pstmt.setInt(2, y);
@@ -207,7 +207,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 		ResultSet resultSet = null;
 
 		try {
-			String getAllEdges = "SELECT node_from, node_to, distance FROM RouteFinder.relations";
+			String getAllEdges = "SELECT node_from, node_to, distance FROM routefinder.relations";
 			resultSet = null;
 			pstmt = conn.prepareStatement(getAllEdges);
 			resultSet = pstmt.executeQuery();

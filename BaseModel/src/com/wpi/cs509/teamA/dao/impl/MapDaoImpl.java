@@ -36,7 +36,7 @@ public class MapDaoImpl implements MapDao {
 		ResultSet resultSet = null;
 		List<GeneralMap> res = new ArrayList<GeneralMap>();
 		try {
-			String selectAllMaps = "SELECT id, name, image_name,scale FROM RouteFinder.map;";
+			String selectAllMaps = "SELECT id, name, image_name,scale FROM routefinder.map;";
 			pstmt = conn.prepareStatement(selectAllMaps);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
@@ -64,7 +64,7 @@ public class MapDaoImpl implements MapDao {
 		ResultSet resultSet = null;
 		List<Integer> res = new ArrayList<Integer>();
 		try {
-			String selectAllMaps = "SELECT distinct id FROM RouteFinder.map;";
+			String selectAllMaps = "SELECT distinct id FROM routefinder.map;";
 			pstmt = conn.prepareStatement(selectAllMaps);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {

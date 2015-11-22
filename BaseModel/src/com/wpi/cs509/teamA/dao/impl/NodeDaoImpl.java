@@ -41,7 +41,7 @@ public class NodeDaoImpl implements NodeDao {
 		// TODO Auto-generated method stub
 
 		try {
-			String getNodeNum = "select count(*) from RouteFinder.node";
+			String getNodeNum = "select count(*) from routefinder.node";
 			pstmt = conn.prepareStatement(getNodeNum);
 			rs = pstmt.executeQuery();
 			// if there is a result..
@@ -71,7 +71,7 @@ public class NodeDaoImpl implements NodeDao {
 	public int getNodeIdFromName(String node_name) {
 		ResultSet resultSet = null;
 		try {
-			String selectAllNodes = "SELECT id FROM RouteFinder.node where map_id=? and name=?;";
+			String selectAllNodes = "SELECT id FROM routefinder.node where map_id=? and name=?;";
 			pstmt = conn.prepareStatement(selectAllNodes);
 			// TODO: potential danger..
 			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
@@ -100,7 +100,7 @@ public class NodeDaoImpl implements NodeDao {
 		Set<Node> res = new HashSet<Node>();
 		
 		try {
-			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node where map_id=?;";
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM routefinder.node where map_id=?;";
 			pstmt = conn.prepareStatement(selectAllNodes);
 			// TODO: potential danger..
 			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
@@ -144,7 +144,7 @@ public class NodeDaoImpl implements NodeDao {
 		// TODO: Check if the node exists.. the same coordinate should be
 		// considered the same node..F
 		try {
-			String insertNodeToDB = "INSERT INTO RouteFinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
+			String insertNodeToDB = "INSERT INTO routefinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(insertNodeToDB);
 			pstmt.setString(1, node.getName());
 			pstmt.setInt(2, node.getLocation().getX());
@@ -257,7 +257,7 @@ public class NodeDaoImpl implements NodeDao {
 		ResultSet resultSet = null;
 		List<Node> res = new ArrayList<Node>();
 		try {
-			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node;";
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM routefinder.node;";
 			pstmt = conn.prepareStatement(selectAllNodes);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
