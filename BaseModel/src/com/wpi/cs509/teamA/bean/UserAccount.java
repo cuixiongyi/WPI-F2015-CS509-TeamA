@@ -1,5 +1,7 @@
 package com.wpi.cs509.teamA.bean;
 
+import java.util.HashMap;
+
 /**
  * this class represents all the users, if this user is an admin
  * 
@@ -18,6 +20,7 @@ public class UserAccount {
 	 * if this account is an admin
 	 */
 	private boolean isAdmin;
+	
 
 	/** default constructor */
 	public UserAccount() {

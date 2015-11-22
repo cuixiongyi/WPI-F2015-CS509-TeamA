@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import com.wpi.cs509.teamA.ui.SignupDialog.adminName;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -46,6 +49,10 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private final static String CANCEL = "Cancel";
 	private final static String LOG = "Login";
 	private final static String LOGOUT = "Log out";
+	
+	private enum adminName{
+		cui,zhaojun,nick,xiongkuang,yizhou,jie,stella
+	}
 
 	// private JFrame controllingFrame;
 	/**
@@ -159,6 +166,20 @@ public class AdminDialog extends JDialog implements ActionListener {
 		else 
 			return false;
 
+	}
+	
+	public boolean isAdmin(String username)
+	{
+		for(adminName admin : adminName.values())
+		{
+			if(username.equals(admin.toString()))
+			{
+				System.out.println("admin"+admin);
+				return true;
+				
+			}
+		}
+		return false;
 	}
 	
 	public String getUsername() {
