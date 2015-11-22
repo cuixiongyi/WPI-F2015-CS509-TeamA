@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,13 +69,6 @@ public class StateContext {
 	private List<Integer> filterNodeType;
 	private List<Node> iconNodes;
 
-    public GeneralMap getCurrentMap() {
-        return currentMap;
-    }
-
-    public void setCurrentMap(GeneralMap currentMap) {
-        this.currentMap = currentMap;
-    }
 
     //private List<GeneralMap> allMaps;
 	private GeneralMap currentMap;
@@ -124,6 +118,9 @@ public class StateContext {
 
 		this.setState(new StateNormalUser());
 		this.setCurrentMap(1);
+        this.getCurrentMap().setMapImgPath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
+        Image tmp = this.getCurrentMap().getImage();
+
 
 	}
 
@@ -140,6 +137,10 @@ public class StateContext {
 		// TODO Do some clean up
 
 	}
+	public GeneralMap getCurrentMap() {
+		return currentMap;
+	}
+
 
 	/**
 	 *
@@ -185,7 +186,7 @@ public class StateContext {
 		}
 
 		mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
-
+		System.out.print("Switch to Admin ");
 
 
     }
@@ -199,6 +200,7 @@ public class StateContext {
         }
         mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
 
+		System.out.print("Switch to Normal user ");
 
 
     }

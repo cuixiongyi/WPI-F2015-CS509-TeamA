@@ -151,6 +151,9 @@ public class ImageComponent extends JComponent {
                 return false;
                 //throw new Exception("null image in ImageComponent");
             }
+			if (null == this.image) {
+				return false;
+			}
         }
         catch (Exception e)
         {
@@ -163,6 +166,7 @@ public class ImageComponent extends JComponent {
 	public void paintComponent(Graphics g) {
 
         /// test for null stateContext and null image
+		this.image = stateContext.getCurrentMap().getImage();
         if ( ! testBeforePaint())
             return;
 
@@ -235,51 +239,6 @@ public class ImageComponent extends JComponent {
 	 */
 	public InputPanel getInputPanel() {
 		return inputPanel;
-	}
-
-	/**
-	 * @return the image
-	 */
-	public Image getImage() {
-		return image;
-	}
-
-	/**
-	 * @return the imgWidth
-	 */
-	public int getImgWidth() {
-		return imgWidth;
-	}
-
-	/**
-	 * @return the imgHeight
-	 */
-	public int getImgHeight() {
-		return imgHeight;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	/**
-	 * @param imgWidth
-	 *            the imgWidth to set
-	 */
-	public void setImgWidth(int imgWidth) {
-		this.imgWidth = imgWidth;
-	}
-
-	/**
-	 * @param imgHeight
-	 *            the imgHeight to set
-	 */
-	public void setImgHeight(int imgHeight) {
-		this.imgHeight = imgHeight;
 	}
 
 	/**

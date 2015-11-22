@@ -140,7 +140,6 @@ public class UserScreen extends JFrame {
 		JScrollPane imgScrollPanel = new JScrollPane();
 		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
 		// contentPane.add(imgScrollPanel, gbcScrollPane);
-		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// // for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -177,6 +176,8 @@ public class UserScreen extends JFrame {
         imgComponent.setStateContext(stateContext);
         inputPanel.setStateContext(stateContext);
         stateContext.setImageComponent(imgComponent);
+		imgScrollPanel.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
+
 	}
 
 	public JButton getBtnNeighborManage() {
