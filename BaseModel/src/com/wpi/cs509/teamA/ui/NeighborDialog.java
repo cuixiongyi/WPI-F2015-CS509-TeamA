@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
@@ -23,6 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 /**
@@ -35,7 +38,7 @@ import com.wpi.cs509.teamA.util.UIDataBuffer;
 @SuppressWarnings("serial")
 public class NeighborDialog extends JDialog implements ActionListener, FocusListener {
 
-	private final static int nodeRange = 5;
+	private final static int nodeRange = 10;
 
 	private JButton saveButton;
 	private JButton cancelButton;
@@ -52,6 +55,11 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 	private final static String CANCEL = "Cancel";
 	private final static String NEIGHBOR = "Neighbor Pairs";
 
+	public void setStateContext(StateContext stateContext) {
+		this.stateContext = stateContext;
+	}
+
+	private StateContext stateContext;
 	/**
 	 * Create the dialog.
 	 */
@@ -109,22 +117,16 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
 
-		boolean sameNode = false;
-		for (int i = 0; i < allNodes.get(1).size(); i++) {
-			if (Math.abs(xPos - allNodes.get(1).get(i).getLocation().getX()) < nodeRange
-					&& Math.abs(yPos - allNodes.get(1).get(i).getLocation().getY()) < nodeRange) {
-				sameNode = true;
-				xPos = allNodes.get(1).get(i).getLocation().getX();
-				yPos = allNodes.get(1).get(i).getLocation().getY();
-			}
-		}
-		if (sameNode) {
+		Node tmp = Database.getNodeFromCoordinate(new Coordinate(xPos, yPos), stateContext.getCurrentMap().getMapId());
+		if (null != tmp) {
+			xPos = tmp.getLocation().getX();
+			yPos = tmp.getLocation().getY();
 			this.getCoordinateTextField.setText(String.valueOf(xPos) + " , " + String.valueOf(yPos));
 		}
 
 	}
 
-	private NodeRelation getEdgeToSave(JTextField tf1, JTextField tf2) {
+	private Edge getEdgeToSave(JTextField tf1, JTextField tf2) {
 
 		if (tf1 == null || tf2 == null) {
 			return null;
@@ -137,10 +139,11 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 		endCorrdinate = this.getCoordinate(tf2);
 
 		if ((startCorrdinate != null) && (endCorrdinate != null)) {
-			NodeRelation nodeRelation = new NodeRelation();
-			nodeRelation.setFirstNodeCoordinate(startCorrdinate);
-			nodeRelation.setSecondNodeCoordinate(endCorrdinate);
-			return nodeRelation;
+			Edge edge = new Edge();
+			/// TODO this is a hack
+			//nodeRelation.setFirstNodeCoordinate(startCorrdinate);
+			//nodeRelation.setSecondNodeCoordinate(endCorrdinate);
+			return edge;
 		}
 
 		return null;
@@ -171,9 +174,9 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 
 			this.setVisible(false);
 
-			Set<NodeRelation> edgesToSave = new HashSet<NodeRelation>();
+			Set<Edge> edgesToSave = new HashSet<Edge>();
 			for (int i = 0; i < 10; i++) {
-				NodeRelation edge = this.getEdgeToSave(textFieldNodePair[2 * i], textFieldNodePair[2 * i + 1]);
+				Edge edge = this.getEdgeToSave(textFieldNodePair[2 * i], textFieldNodePair[2 * i + 1]);
 				if (edge != null) {
 					edgesToSave.add(edge);
 				}

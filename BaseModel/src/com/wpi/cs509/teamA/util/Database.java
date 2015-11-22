@@ -27,8 +27,11 @@ public class Database {
 	private static List<Edge> allEdgesHL;
 	private static HashMap<Integer, List<Edge>> allEdgesDataHM;
 //	private List<Edge> allEdgeData;
-	
-	public Database(){
+
+
+    static int nodeRange = 10;
+
+    public Database(){
 		
 	}
 	
@@ -105,7 +108,25 @@ public class Database {
 		}
 		return -1;
 	}
-	
+
+    public static Node getNodeFromCoordinate(Coordinate coor, int mapID) {
+        List<Node> nodes = getAllNodesForCurrentMap(mapID);
+        if (null == nodes)
+            return null;
+        int x = coor.getX();
+        int y = coor.getY();
+        boolean foundNode = false;
+        for (int i = 0; i < nodes.size(); i++) {
+            Node node = nodes.get(i);
+            if (Math.abs(x - node.getLocation().getX()) < nodeRange
+                    && Math.abs(y - node.getLocation().getY()) < nodeRange) {
+                foundNode = true;
+                return node;
+            }
+        }
+        return (Node)null;
+    }
+
 	public static Coordinate getNodeCoordinateFromId(int nodeId) {
 		return allNodesDataHM.get(nodeId).getLocation();
 	}

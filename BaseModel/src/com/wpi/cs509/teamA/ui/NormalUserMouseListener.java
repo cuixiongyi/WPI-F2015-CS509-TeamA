@@ -9,20 +9,8 @@ import java.awt.event.MouseListener;
  * @author CS 509-Team A
  *
  */
-public class NormalUserMouseListener implements MouseListener {
+public class NormalUserMouseListener extends MouseListenerwithContext {
 
-	/**
-	 * The x position that the user clicked
-	 */
-	private int xPos;
-	/**
-	 * The y position that the user clicked
-	 */
-	private int yPos;
-	/**
-	 * The image component that the listener will be added to
-	 */
-	private ImageComponent imagePanel;
 
 	/**
 	 * Default constructor
@@ -30,6 +18,7 @@ public class NormalUserMouseListener implements MouseListener {
 	public NormalUserMouseListener() {
 
 	}
+
 
 	/**
 	 * Constructor.
@@ -70,36 +59,6 @@ public class NormalUserMouseListener implements MouseListener {
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-	}
-
-	/**
-	 * @return the xPos
-	 */
-	public int getxPos() {
-		return xPos;
-	}
-
-	/**
-	 * @return the yPos
-	 */
-	public int getyPos() {
-		return yPos;
-	}
-
-	/**
-	 * @param xPos
-	 *            the xPos to set
-	 */
-	public void setxPos(int xPos) {
-		this.xPos = xPos;
-	}
-
-	/**
-	 * @param yPos
-	 *            the yPos to set
-	 */
-	public void setyPos(int yPos) {
-		this.yPos = yPos;
 	}
 
 }

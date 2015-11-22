@@ -47,14 +47,16 @@ public class StateContext {
         normalUserMouseListener = new NormalUserMouseListener(imageComponent);
         adminMouseListener = new AdminMouseListener(imageComponent);
 
+		normalUserMouseListener.setStateContext(this);
+		adminMouseListener.setStateContext(this);
         // TODO we need to add the event listener before the state pattern begins
         imageComponent.addMouseListener(normalUserMouseListener);
         this.switchToNormalUser();
     }
 
     private ImageComponent imageComponent;
-    private MouseListener normalUserMouseListener;
-    private MouseListener adminMouseListener;
+    private MouseListenerwithContext normalUserMouseListener;
+    private MouseListenerwithContext adminMouseListener;
 
     private Node startNode;
 	private Node endNode;
@@ -86,11 +88,11 @@ public class StateContext {
     //private List<GeneralMap> allMaps;
 	private GeneralMap currentMap;
 
-    public void setNormalUserMouseListener(MouseListener normalUserMouseListener) {
+    public void setNormalUserMouseListener(MouseListenerwithContext normalUserMouseListener) {
         this.normalUserMouseListener = normalUserMouseListener;
     }
 
-    public void setAdminMouseListener(MouseListener adminMouseListener) {
+    public void setAdminMouseListener(MouseListenerwithContext adminMouseListener) {
         this.adminMouseListener = adminMouseListener;
     }
 
