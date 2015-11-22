@@ -283,9 +283,6 @@ public class ImageComponent extends JComponent {
 		return this.stateContext;
 	}
 
-	public void incrementAdminClicked() {
-		ImageComponent.adminClicked++;
-	}
 
 	public static void  setIsAdmin(boolean isAdmin) {
 		ImageComponent.isAdmin = isAdmin;
