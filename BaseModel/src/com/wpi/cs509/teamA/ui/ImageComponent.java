@@ -139,28 +139,33 @@ public class ImageComponent extends JComponent {
 
 	}
 
-    private void testBeforePaint()
+    private boolean testBeforePaint()
     {
         try {
             if (null == stateContext)
             {
-                throw new Exception("null stateContext in ImageComponent");
+                return false;
+                //throw new Exception("null stateContext in ImageComponent");
             }
             if (null == stateContext.getCurrentMap().getImage()) {
-                throw new Exception("null image in ImageComponent");
+                return false;
+                //throw new Exception("null image in ImageComponent");
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return true;
     }
 
 	@Override
 	public void paintComponent(Graphics g) {
 
         /// test for null stateContext and null image
-        testBeforePaint();
+        if ( ! testBeforePaint())
+            return;
+
 
 		// if isInitilized
 		// no need to paint the image again
