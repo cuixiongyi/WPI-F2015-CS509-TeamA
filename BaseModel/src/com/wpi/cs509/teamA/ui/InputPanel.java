@@ -5,6 +5,8 @@ import java.awt.Dialog.ModalityType;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
@@ -15,6 +17,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.text.JTextComponent;
 import javax.xml.crypto.Data;
 
 import com.wpi.cs509.teamA.bean.Node;
@@ -42,7 +46,7 @@ import com.wpi.cs509.teamA.ui.ImageComponent;
  *
  */
 @SuppressWarnings("serial")
-public class InputPanel extends JPanel implements ActionListener {
+public class InputPanel extends JPanel implements ActionListener, FocusListener {
 
 	private JTextField startPoint;
 	private JTextField endPoint;
@@ -55,21 +59,25 @@ public class InputPanel extends JPanel implements ActionListener {
 	private JComboBox<String> comboBoxMap;
 	private DefaultComboBoxModel<String> comboSourceModel;
 	private DefaultComboBoxModel<String> comboDesModel;
-	private JComboBox<String> sourceBox;
-	private JComboBox<String> desBox;
 	private final static String SEARCH = "Search";
 	private final static String LOGIN = "Login";
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
-    private ImageComponent imageComponent;
+	private static final String SEARCHWORD = "Search WPI Maps";
+	private static final String BUTTONWORD = "Search";
+	private ImageComponent imageComponent;
+	private UserScreen userScreen;
 
-    private int adminClicked;
+	private int adminClicked;
 
 	public void setStateContext(StateContext stateContext) {
 		this.stateContext = stateContext;
 	}
 
 	private StateContext stateContext;
+	private JTextField txtFrom;
+	private JTextField txtTo;
+
 	/**
 	 * Constructor. Initialize all the input panel.
 	 */
@@ -86,7 +94,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.btnNeighborManage.setVisible(false);
 
 		this.setLayout(null);
-//		this.add(startPoint);
+		// this.add(startPoint);
 		this.add(endPoint);
 		this.add(btnSearch);
 		this.add(adminLogin);
@@ -94,13 +102,13 @@ public class InputPanel extends JPanel implements ActionListener {
 
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
-		//this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-		//this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
+		// this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
+		// this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
-		
-//		this.getStartPoint().setBounds(80, 150, 150, 38);
-//		 this.setBounds(0, 0, 1178, 516);
+
+		// this.getStartPoint().setBounds(80, 150, 150, 38);
+		// this.setBounds(0, 0, 1178, 516);
 
 		lblFrom = new JLabel(FROM);
 		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -128,19 +136,17 @@ public class InputPanel extends JPanel implements ActionListener {
 		lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblMap.setBounds(15, 60, 61, 21);
 		add(lblMap);
-		
+
 		comboSourceModel = new DefaultComboBoxModel<String>();
 		comboDesModel = new DefaultComboBoxModel<String>();
-		sourceBox = new JComboBox<String>(comboSourceModel);
-		desBox = new JComboBox<String>(comboDesModel);
-		
+
 		// Add all nodes from
-		//TODO delete all of this and replace with new
-		List<Node>  allNodes = Database.getAllNodeListFromDatabase();
+		// TODO delete all of this and replace with new
+		List<Node> allNodes = Database.getAllNodeListFromDatabase();
 		if (allNodes != null && allNodes.size() != 0) {
 			for (int i = 0; i < allNodes.size(); i++) {
 				Node tmp = allNodes.get(i);
-                String name = tmp.getName().toString();
+				String name = tmp.getName().toString();
 				if (name.equals("Location"))
 					continue;
 				comboSourceModel.addElement(name);
@@ -148,18 +154,12 @@ public class InputPanel extends JPanel implements ActionListener {
 			}
 		}
 
-		sourceBox.setBounds(80, 150, 150, 38);
-		desBox.setBounds(80, 225, 150, 38);
-		this.add(sourceBox);
-		this.add(desBox);
-
-		
 		btnSynchronize = new JButton("Sync");
 		btnSynchronize.addActionListener(this);
 		btnSynchronize.setVisible(false);
 		btnSynchronize.setBounds(155, 380, 75, 30);
-		add(btnSynchronize);		
-		
+		add(btnSynchronize);
+
 		BufferedImage myPicture;
 		try {
 			myPicture = ImageIO.read(new File(System.getProperty("user.dir") + "/src/logo_iteration1.png"));
@@ -171,158 +171,179 @@ public class InputPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 
-		
 		adminClicked = 0;
-        /**
-         * Add listener to the admin login button
-         */
-        /*
-        this.getAdminLogin().addActionListener(new ActionListener() {
-
-            @Override
-
-
-        });
-*/
-	    // TODO: Make the map related things into a enum class..
+		/**
+		 * Add listener to the admin login button
+		 */
+		/*
+		 * this.getAdminLogin().addActionListener(new ActionListener() {
+		 * 
+		 * @Override
+		 * 
+		 * 
+		 * });
+		 */
+		// TODO: Make the map related things into a enum class..
 		this.getComboBoxMap().addItemListener(new ItemListener() {
-				@Override
-				public void itemStateChanged(ItemEvent e) {
-                    int currentMapID = -1;
-						if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
-								//selectImage("Final_Campus_Map", imageComponent);
-                                currentMapID = 1;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-G")) {
-								//selectImage("Final_AK_Ground_Floor", imageComponent);
-                                currentMapID = 2;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-1")) {
-								//selectImage("Final_AK_First_Floor", imageComponent);
-                                currentMapID = 3;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-2")) {
-								//selectImage("Final_AK_Second_Floor", imageComponent);
-                                currentMapID = 4;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-								//selectImage("Final_AK_Third_Floor", imageComponent);
-                                currentMapID = 5;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-								//selectImage("Final_Project_Center_First_Floor", imageComponent);
-                                currentMapID = 6;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-								//selectImage("Final_Project_Center_Second_Floor", imageComponent);
-                                currentMapID = 7;
-							}
-                            UIDataBuffer.setCurrentMapId(currentMapID);
-                            stateContext.setCurrentMap(currentMapID);
-							InputPanel.this.getBtnSynchronize().doClick();
-							imageComponent.repaint();
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				int currentMapID = -1;
+				if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
+					// selectImage("Final_Campus_Map", imageComponent);
+					currentMapID = 1;
+				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-G")) {
+					// selectImage("Final_AK_Ground_Floor", imageComponent);
+					currentMapID = 2;
+				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-1")) {
+					// selectImage("Final_AK_First_Floor", imageComponent);
+					currentMapID = 3;
+				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-2")) {
+					// selectImage("Final_AK_Second_Floor", imageComponent);
+					currentMapID = 4;
+				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-3")) {
+					// selectImage("Final_AK_Third_Floor", imageComponent);
+					currentMapID = 5;
+				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-1")) {
+					// selectImage("Final_Project_Center_First_Floor",
+					// imageComponent);
+					currentMapID = 6;
+				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-2")) {
+					// selectImage("Final_Project_Center_Second_Floor",
+					// imageComponent);
+					currentMapID = 7;
+				}
+				UIDataBuffer.setCurrentMapId(currentMapID);
+				stateContext.setCurrentMap(currentMapID);
+				InputPanel.this.getBtnSynchronize().doClick();
+				imageComponent.repaint();
 
-                }
+			}
 
-			});
-/*
-        // Click the SEARCH button..
-        this.btnSearch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent arg0){
+		});
+		/*
+		 * // Click the SEARCH button.. this.btnSearch.addActionListener(new
+		 * ActionListener() {
+		 * 
+		 * @Override public void actionPerformed (ActionEvent arg0){
+		 * 
+		 * // TODO: need to check if the input is valid!!
+		 * 
+		 * // TODO: make the AlgoController singleton and use setter and //
+		 * getter to operate the instance..
+		 * 
+		 * // We will go to the backend here.. For now, all the resources //
+		 * should be ready! AlgoController algoController = new
+		 * AlgoController(inputPanel.getSourcePoint(),
+		 * inputPanel.getDesPoint());
+		 * 
+		 * 
+		 * 
+		 * // get a list of a map, so that we can draw line on that map..
+		 * pathNodeList = null; pathNodeList =
+		 * result.get(UIDataBuffer.getCurrentMapId());
+		 * 
+		 * // get the result of the search.. List<Node> path =
+		 * algoController.getRoute(); stateContext.setPath(path); // we need to
+		 * give all the information to the repaint metho
+		 * imageComponent.repaint(); } });
+		 * 
+		 */
+		this.getAdminLogin().addActionListener(this);
 
-                // TODO: need to check if the input is valid!!
+		txtFrom = new JTextField();
+		txtFrom.setBounds(80, 150, 150, 27);
+		txtFrom.
+		add(txtFrom);
+		txtFrom.addFocusListener(this);
+		txtFrom.setColumns(10);
 
-                // TODO: make the AlgoController singleton and use setter and
-                // getter to operate the instance..
+		txtTo = new JTextField();
+		txtTo.setBounds(80, 225, 150, 27);
+		txtTo.addFocusListener(this);
+		add(txtTo);
+		txtTo.setColumns(10);
 
-                // We will go to the backend here.. For now, all the resources
-                // should be ready!
-                AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
-                        inputPanel.getDesPoint());
+	}
 
+	public void focusLost(FocusEvent e) {
 
+		if (((JTextField) e.getSource()).getText().trim().equals(""))
+			((JTextField) e.getSource()).setText(SEARCHWORD);
 
-                // get a list of a map, so that we can draw line on that map..
-                pathNodeList = null;
-                pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
+	}
 
-				// get the result of the search..
-				List<Node> path = algoController.getRoute();
-				stateContext.setPath(path);
-                // we need to give all the information to the repaint metho
-                imageComponent.repaint();
-            }
-        });
+	public void focusGained(FocusEvent e) {
+		if (((JTextField) e.getSource()).getText().trim().equals(SEARCHWORD))
+			((JTextField) e.getSource()).setText("");
+		AutoSuggestor autoSuggestor = new AutoSuggestor(((JTextField) e.getSource()), userScreen, null,
+				Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
 
-        */
-        this.getAdminLogin().addActionListener(this);
+	}
 
+	public void clickSync() {
+		Database.InitFromDatabase();
+		imageComponent.repaint();
+		/*
+		 * comboSourceModel.removeAllElements();
+		 * comboDesModel.removeAllElements(); Map<Integer, List<Node>> allNodes
+		 * = UIDataBuffer.getAllNodes(); if (allNodes != null &&
+		 * allNodes.get(1).size() != 0) { for (int i = 0; i <
+		 * allNodes.get(1).size(); i++) { if
+		 * (allNodes.get(1).get(i).getName().toString().equals("Location"))
+		 * continue;
+		 * comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString
+		 * ());
+		 * comboDesModel.addElement(allNodes.get(1).get(i).getName().toString())
+		 * ; } }
+		 */
+	}
 
-    }
+	public void clickLogin() {
+		if (adminClicked % 2 == 0) {
+			AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
+			adminDialog.setStateContext(stateContext);
+			adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+			adminDialog.setVisible(isFocusable());
+			// stateContext.switchToAdminUser();
+			stateContext.setNormalUser();
+			imageComponent.repaint();
 
-    public void clickSync() {
-        Database.InitFromDatabase();
-        imageComponent.repaint();
-       /*
-        comboSourceModel.removeAllElements();
-        comboDesModel.removeAllElements();
-        Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-        if (allNodes != null && allNodes.get(1).size() != 0) {
-            for (int i = 0; i < allNodes.get(1).size(); i++) {
-                if (allNodes.get(1).get(i).getName().toString().equals("Location"))
-                    continue;
-                comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-                comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
-            }
-        }
-        */
-    }
+		} else {
 
-    public void clickLogin()
-    {
-        if (adminClicked % 2 == 0) {
-            AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
-            adminDialog.setStateContext(stateContext);
-            adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-            adminDialog.setVisible(isFocusable());
-            //stateContext.switchToAdminUser();
-            stateContext.setNormalUser();
-            imageComponent.repaint();
+			JOptionPane.showMessageDialog(null, "You have logged out");
+			Database.InitFromDatabase();
+			InputPanel.this.getBtnNeighborManage().setVisible(false);
+			InputPanel.this.getAdminLogin().setText(LOGIN);
+			InputPanel.this.getBtnSynchronize().setVisible(false);
+			this.incrementAdminClicked();
+			imageComponent.repaint();
 
-        } else {
+		}
+	}
 
-            JOptionPane.showMessageDialog(null, "You have logged out");
-            Database.InitFromDatabase();
-            InputPanel.this.getBtnNeighborManage().setVisible(false);
-            InputPanel.this.getAdminLogin().setText(LOGIN);
-            InputPanel.this.getBtnSynchronize().setVisible(false);
-            this.incrementAdminClicked();
-            imageComponent.repaint();
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 
-        }
-    }
+		// TODO: we need a pop up window here to verify the admin role.
+		// If it is the admin, give it the admin mouse click event. If
+		// not, give it normal user
+		if (e.getSource() == getAdminLogin()) {
+			clickLogin();
+		}
+		if (e.getSource() == btnSynchronize) {
+			clickSync();
+		}
+	}
 
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+	public void incrementAdminClicked() {
+		this.adminClicked++;
+	}
 
-        // TODO: we need a pop up window here to verify the admin role.
-        // If it is the admin, give it the admin mouse click event. If
-        // not, give it normal user
-        if(e.getSource()==getAdminLogin())
-        {
-            clickLogin();
-        }
-        if (e.getSource() == btnSynchronize) {
-            clickSync();
-        }
-    }
+	public void setImageComponent(ImageComponent imageComponent2) {
+		this.imageComponent = imageComponent2;
 
+	}
 
-    public void incrementAdminClicked() {
-        this.adminClicked++;
-    }
-
-
-    public void setImageComponent(ImageComponent imageComponent2)
-	{
-        this.imageComponent = imageComponent2;
-       
-    }
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
 	}
@@ -332,25 +353,11 @@ public class InputPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @return the startPoint
-	 */
-	public String getSourcePoint() {
-		return sourceBox.getSelectedItem().toString();
-	}
-
-	/**
 	 * @param startPoint
 	 *            the startPoint to set
 	 */
 	public void setStartPoint(JTextField startPoint) {
 		this.startPoint = startPoint;
-	}
-
-	/**
-	 * @return the endPoint
-	 */
-	public String getDesPoint() {
-		return desBox.getSelectedItem().toString();
 	}
 
 	/**
@@ -398,5 +405,8 @@ public class InputPanel extends JPanel implements ActionListener {
 		return btnNeighborManage;
 	}
 
-
+	public void setUserScreen(UserScreen userScreen2) {
+		// TODO Auto-generated method stub
+		this.userScreen = userScreen2;
+	}
 };

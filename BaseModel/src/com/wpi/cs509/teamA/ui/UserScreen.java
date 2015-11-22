@@ -162,6 +162,7 @@ public class UserScreen extends JFrame {
 		
 		imgComponent.setInputPanel(this.inputPanel);
         inputPanel.setImageComponent(this.imgComponent);
+        
 
         stateContext = new StateContext();
 
@@ -170,10 +171,16 @@ public class UserScreen extends JFrame {
         stateContext.setImageComponent(imgComponent);
         imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
+        inputPanel.setUserScreen(this);
 	}
 
 	public JButton getBtnNeighborManage() {
 		return this.btnNeighborManage;
+	}
+	
+
+	public static UserScreen getUserScreen() {
+		return userScreen;
 	}
 
 	public static UserScreen launchUserScreen() {
@@ -183,6 +190,8 @@ public class UserScreen extends JFrame {
 
 		return userScreen;
 	}
+	
+	
 
 	/**
 	 * The entrance of the program
