@@ -39,7 +39,7 @@ public class SignupDialog extends JDialog implements ActionListener  {
 	private ImageComponent imgPanel;
 	private InputPanel inputPanel;
 	
-	private enum adminName{
+	public enum adminName{
 		cui,zhaojun,nick,xiongkuang,yizhou,jie,stella
 	}
 	

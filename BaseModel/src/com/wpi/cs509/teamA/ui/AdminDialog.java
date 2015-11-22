@@ -12,8 +12,6 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.wpi.cs509.teamA.ui.SignupDialog.adminName;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
