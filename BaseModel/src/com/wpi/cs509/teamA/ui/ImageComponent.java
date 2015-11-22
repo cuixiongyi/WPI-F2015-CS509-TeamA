@@ -30,6 +30,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -119,6 +120,8 @@ public class ImageComponent extends JComponent {
 	}
 
     private void paintNode(Node node, Graphics2D g2) {
+        if (null == node)
+            return;
 		Coordinate xy = node.getLocation();
 		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
     }
@@ -126,6 +129,8 @@ public class ImageComponent extends JComponent {
     private void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
         Coordinate start = nodeSrc.getLocation();
         Coordinate end = nodeDest.getLocation();
+        if (null == nodeSrc || null == nodeDest)
+            return;
 
         g2.setStroke(new BasicStroke(5));
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
@@ -170,6 +175,31 @@ public class ImageComponent extends JComponent {
         return true;
     }
 
+    private void paintNormalUser(Graphics2D g2) {
+        /**
+         Paint path
+         */
+        List<Node> pathNode = this.stateContext.getPath();
+        paintPath(pathNode, g2);
+        List<Node> iconNodes = this.getStateContext().getIconNodes();
+        paintIcons(iconNodes, g2);
+
+
+        /*
+        g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
+        g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
+        Font font = g.getFont().deriveFont(20.0f);
+        g.setFont(font);
+        g2.drawString("Source", sourceX, sourceY - ovalOffset);
+        g2.drawString("Destination", desX, desY - ovalOffset);
+*/
+    }
+
+    private void paintAdmin(Graphics2D g2) {
+
+    }
+
+
 	@Override
 	public void paintComponent(Graphics g) {
 
@@ -177,7 +207,6 @@ public class ImageComponent extends JComponent {
 		this.image = stateContext.getCurrentMap().getImage();
         if ( ! testBeforePaint())
             return;
-
 
 		// if isInitilized
 		// no need to paint the image again
@@ -187,14 +216,19 @@ public class ImageComponent extends JComponent {
         g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
         setForeground(Color.RED);
 
-        /**
-            Paint path
-         */
-        List<Node> pathNode = this.stateContext.getPath();
-        paintPath(pathNode, g2);
+        if (stateContext.isAdmin()) {
+            paintAdmin(g2);
 
-        List<Node> iconNodes = this.getStateContext().getIconNodes();
-        paintIcons(iconNodes, g2);
+
+        }
+        else {
+            paintNormalUser(g2);
+
+            /// CXY test
+            List<Node> nodes = stateContext.getCurrentMap().getNodes();
+            paintPath(nodes, g2);
+        }
+
 
 /*
 
@@ -224,12 +258,7 @@ public class ImageComponent extends JComponent {
 			
 			
 			
-			g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
-			g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
-			Font font = g.getFont().deriveFont(20.0f);
-			g.setFont(font);
-			g2.drawString("Source", sourceX, sourceY - ovalOffset);
-			g2.drawString("Destination", desX, desY - ovalOffset);
+
 			
 		}
 */

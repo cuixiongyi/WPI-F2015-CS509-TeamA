@@ -291,7 +291,7 @@ public class InputPanel extends JPanel implements ActionListener {
             InputPanel.this.getBtnNeighborManage().setVisible(false);
             InputPanel.this.getAdminLogin().setText(LOGIN);
             InputPanel.this.getBtnSynchronize().setVisible(false);
-            adminClicked++;
+            this.incrementAdminClicked();
             imageComponent.repaint();
 
         }
