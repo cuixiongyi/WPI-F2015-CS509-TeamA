@@ -115,7 +115,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 				AdminDialog.this.setVisible(false);
 				stateContext.switchToAdminUser();
 
-                stateContext.switchToAdminUser();
+                //stateContext.switchToAdminUser();
 
 				imgPanel.incrementAdminClicked();
 				inputPanel.getBtnNeighborManage().setVisible(true);

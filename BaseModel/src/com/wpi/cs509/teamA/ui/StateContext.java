@@ -9,6 +9,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.ui.ImageComponent;
 import com.wpi.cs509.teamA.ui.ImageComponentAdmin;
+import jdk.nashorn.internal.runtime.ECMAException;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -87,10 +88,24 @@ public class StateContext {
     }
 
     public MouseListener getNormalUserMouseListener() {
+		try {
+			if (null == normalUserMouseListener)
+				throw new Exception("null normalUserMouseListener");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
         return normalUserMouseListener;
     }
 
     public MouseListener getAdminMouseListener() {
+		try {
+			if (null == adminMouseListener)
+				throw new Exception("null adminMouseListener");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
         return adminMouseListener;
     }
 
@@ -107,6 +122,8 @@ public class StateContext {
 		//this.allMaps = new ArrayList<GeneralMap>();
 		this.iconNodes = new ArrayList<Node>();
 
+		this.setState(new StateNormalUser());
+		this.setCurrentMap(1);
 
 	}
 
@@ -159,7 +176,15 @@ public class StateContext {
         }catch(Exception E){
             E.printStackTrace();
         }
-        mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
+
+		try{
+			if (null == mouseListenerState)
+				throw new Exception("Uninitlized state");
+		}catch(Exception E){
+			E.printStackTrace();
+		}
+
+		mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
 
 
 
