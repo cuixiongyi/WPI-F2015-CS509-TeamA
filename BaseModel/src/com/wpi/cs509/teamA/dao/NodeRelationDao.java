@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Edge;
@@ -33,7 +34,7 @@ public interface NodeRelationDao {
 	 * @param nodeRelation
 	 * @return
 	 */
-	public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation);
+	public List<Edge> insertMultipleEdges(Set<Edge> nodeRelation);
 
 	/**
 	 * 
@@ -67,7 +68,7 @@ public interface NodeRelationDao {
 	 * 
 	 * @return a set of NodeRelation instance querying from relation table
 	 */
-	public Set<NodeRelation> getAllNodeRelationsForCurrentMap();
+	public List<Edge> getAllNodeRelationsForCurrentMap(int map_id);
 
 	/**
 	 * 
@@ -76,6 +77,6 @@ public interface NodeRelationDao {
 	 * 
 	 * @return A set of Edge instances
 	 */
-	public Set<Edge> getAllEdges();
+	public List<Edge> getAllEdges();
 
 }
