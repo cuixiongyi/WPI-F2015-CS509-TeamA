@@ -196,7 +196,9 @@ public class StateContext {
 			E.printStackTrace();
 		}
 
-		mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
+        imageComponent.removeMouseListener(this.getNormalUserMouseListener());
+        imageComponent.addMouseListener(this.getAdminMouseListener());
+        this.setState(new StateAdminUser());
 		System.out.print("Switch to Admin ");
 
 
@@ -209,8 +211,9 @@ public class StateContext {
         }catch(Exception E){
             E.printStackTrace();
         }
-        mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
-
+        imageComponent.removeMouseListener(this.getAdminMouseListener());
+        imageComponent.addMouseListener(this.getNormalUserMouseListener());
+        this.setState(new StateNormalUser());
 		System.out.print("Switch to Normal user ");
 
 

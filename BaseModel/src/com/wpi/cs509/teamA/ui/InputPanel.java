@@ -281,7 +281,6 @@ public class InputPanel extends JPanel implements ActionListener {
             adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
             adminDialog.setVisible(isFocusable());
             //stateContext.switchToAdminUser();
-            stateContext.setNormalUser();
             imageComponent.repaint();
 
         } else {
@@ -292,6 +291,7 @@ public class InputPanel extends JPanel implements ActionListener {
             InputPanel.this.getAdminLogin().setText(LOGIN);
             InputPanel.this.getBtnSynchronize().setVisible(false);
             this.incrementAdminClicked();
+            stateContext.setNormalUser();
             imageComponent.repaint();
 
         }

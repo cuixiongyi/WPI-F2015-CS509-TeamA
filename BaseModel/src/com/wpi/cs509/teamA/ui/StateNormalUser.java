@@ -20,7 +20,7 @@ public class StateNormalUser implements StateMouseListener {
 		// TODO Auto-generated method stub
 		imageComponent.removeMouseListener(stateContext.getNormalUserMouseListener());
 		imageComponent.addMouseListener(stateContext.getAdminMouseListener());
-		stateContext.setState(new StateAdminUser());
+		stateContext.setState(new StateNormalUser());
 	}
 
 }
