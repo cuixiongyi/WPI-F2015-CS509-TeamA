@@ -136,13 +136,15 @@ public class InputPanel extends JPanel implements ActionListener {
 		
 		// Add all nodes from
 		//TODO delete all of this and replace with new
-		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-		if (allNodes != null && allNodes.get(1).size() != 0) {
-			for (int i = 0; i < allNodes.get(1).size(); i++) {
-				if (allNodes.get(1).get(i).getName().toString().equals("Location"))
+		List<Node>  allNodes = Database.getAllNodeListFromDatabase();
+		if (allNodes != null && allNodes.size() != 0) {
+			for (int i = 0; i < allNodes.size(); i++) {
+				Node tmp = allNodes.get(i);
+                String name = tmp.getName().toString();
+				if (name.equals("Location"))
 					continue;
-				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboSourceModel.addElement(name);
+				comboDesModel.addElement(name);
 			}
 		}
 

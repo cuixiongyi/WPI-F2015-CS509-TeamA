@@ -37,6 +37,7 @@ public class UserScreen extends JFrame {
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
 
+
 	private StateContext stateContext;
 
 	/**
@@ -198,7 +199,9 @@ public class UserScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 
-		// singleton
+        new SystemFacade();
+
+        // singleton
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
@@ -206,7 +209,6 @@ public class UserScreen extends JFrame {
 			}
 		});
 
-		new SystemFacade();
 	}
 
 }
