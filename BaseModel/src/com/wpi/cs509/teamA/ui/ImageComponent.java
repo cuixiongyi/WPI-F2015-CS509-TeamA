@@ -287,7 +287,7 @@ public class ImageComponent extends JComponent {
 		ImageComponent.adminClicked++;
 	}
 
-	public static void setIsAdmin(boolean isAdmin) {
+	public static void  setIsAdmin(boolean isAdmin) {
 		ImageComponent.isAdmin = isAdmin;
 	}
 

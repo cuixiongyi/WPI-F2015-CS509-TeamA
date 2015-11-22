@@ -118,7 +118,6 @@ public class StateContext {
 
 		this.setState(new StateNormalUser());
 		this.setCurrentMap(1);
-        this.getCurrentMap().setMapImgPath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
         Image tmp = this.getCurrentMap().getImage();
 
 

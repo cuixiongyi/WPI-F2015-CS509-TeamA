@@ -37,6 +37,7 @@ public class Database {
 		Iterator<GeneralMap> iterMap = allMapDataHL.iterator();
 		while (iterMap.hasNext()) {
 			GeneralMap tempMap = iterMap.next();
+            tempMap.readImage();
 			allMapDataHM.put(tempMap.getMapId(), tempMap);
 		}
 		

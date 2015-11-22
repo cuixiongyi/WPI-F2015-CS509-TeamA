@@ -43,7 +43,7 @@ public class MapDaoImpl implements MapDao {
 				GeneralMap maps = new GeneralMap();
 				maps.setMapId(resultSet.getInt("id"));
 				maps.setMapName(resultSet.getString("name"));
-				//maps.setMapImgPath(resultSet.getString("image_name"));
+				maps.setImageName(resultSet.getString("image_name"));
 				maps.setDisplayScale(resultSet.getFloat("scale"));
 				res.add(maps);
 			}
