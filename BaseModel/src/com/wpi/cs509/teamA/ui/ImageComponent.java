@@ -26,6 +26,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
@@ -225,7 +227,8 @@ public class ImageComponent extends JComponent {
             paintNormalUser(g2);
 
             /// CXY test
-            List<Node> nodes = stateContext.getCurrentMap().getNodes();
+            GeneralMap tmp = stateContext.getCurrentMap();
+            List<Node> nodes = tmp.getNodes();
             paintPath(nodes, g2);
         }
 

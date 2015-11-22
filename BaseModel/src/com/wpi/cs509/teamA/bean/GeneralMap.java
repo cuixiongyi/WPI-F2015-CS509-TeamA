@@ -11,6 +11,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -186,7 +187,7 @@ public class GeneralMap implements AdjacencyMatrix {
     }
 
     public List<Node> getNodes() {
-        return nodes;
+        return Database.getAllNodesForCurrentMap(this.getMapId());
     }
 
     public void setNodes(List<Node> nodes) {

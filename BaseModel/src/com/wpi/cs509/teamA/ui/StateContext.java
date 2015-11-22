@@ -47,9 +47,9 @@ public class StateContext {
         normalUserMouseListener = new NormalUserMouseListener(imageComponent);
         adminMouseListener = new AdminMouseListener(imageComponent);
 
-        // TODO: Move this part to input panel..
-        // we need to add the event listener before the state pattern begins
+        // TODO we need to add the event listener before the state pattern begins
         imageComponent.addMouseListener(normalUserMouseListener);
+        this.switchToNormalUser();
     }
 
     private ImageComponent imageComponent;
@@ -199,7 +199,7 @@ public class StateContext {
         imageComponent.removeMouseListener(this.getNormalUserMouseListener());
         imageComponent.addMouseListener(this.getAdminMouseListener());
         this.setState(new StateAdminUser());
-		System.out.print("Switch to Admin ");
+		System.out.println("Switch to Admin ");
 
 
     }
@@ -214,7 +214,7 @@ public class StateContext {
         imageComponent.removeMouseListener(this.getAdminMouseListener());
         imageComponent.addMouseListener(this.getNormalUserMouseListener());
         this.setState(new StateNormalUser());
-		System.out.print("Switch to Normal user ");
+		System.out.println("Switch to Normal user ");
 
 
     }
