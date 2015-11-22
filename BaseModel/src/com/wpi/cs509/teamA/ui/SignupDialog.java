@@ -149,6 +149,8 @@ public class SignupDialog extends JDialog implements ActionListener  {
 //				inputPanel.getBtnSynchronize().setVisible(true);
 //				ImageComponent.setIsAdmin(true);
 				saveAccount(getUsername(),getPassword(passwordField),getEmail(),isAdmin);
+				JOptionPane.showMessageDialog(null, "Congratulations, you can log in now.", "Sign up succefful.",
+						JOptionPane.INFORMATION_MESSAGE);
 				imgPanel.repaint();			
 				dispose();
 			} else {
