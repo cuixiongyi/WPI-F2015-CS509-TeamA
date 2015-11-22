@@ -27,7 +27,10 @@ public class SystemFacade implements Runnable {
 		t = new Thread(this, "initialize data thread");
 		t.start();
 		try {
-			Thread.sleep(50000);
+            /// TODO CXY : this is a hack, to get database ready before UserScreen start
+            t.join();
+
+            //Thread.sleep(50000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

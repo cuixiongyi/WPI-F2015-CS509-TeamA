@@ -37,6 +37,7 @@ public class UserScreen extends JFrame {
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
 
+
 	private StateContext stateContext;
 
 	/**
@@ -139,7 +140,6 @@ public class UserScreen extends JFrame {
 		JScrollPane imgScrollPanel = new JScrollPane();
 		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
 		// contentPane.add(imgScrollPanel, gbcScrollPane);
-		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// // for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -151,17 +151,9 @@ public class UserScreen extends JFrame {
 		setVisible(true);
 		setResizable(true);
 
-		// display the image. Note that "/" only works on UNIX
 		// TODO: default map? change the way to do this...
 		// TODO load map image with different names
-		List<GeneralMap> maps = Database.getAllMapFromDatabase() ;//= Database.getAllMapFromDatabase();
-		/*
-		for (int ii = 0; ii < maps.size(); ++ii)
-		{
-			stateContext.addMap(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg",
-					maps.get(ii));
-		}
-		*/
+
 	/*	
 		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
@@ -172,10 +164,12 @@ public class UserScreen extends JFrame {
         inputPanel.setImageComponent(this.imgComponent);
 
         stateContext = new StateContext();
-        stateContext.setCurrentMap(1);
+
         imgComponent.setStateContext(stateContext);
         inputPanel.setStateContext(stateContext);
         stateContext.setImageComponent(imgComponent);
+        imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
+        imgComponent.setVisible(true);
 	}
 
 	public JButton getBtnNeighborManage() {
@@ -198,7 +192,9 @@ public class UserScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 
-		// singleton
+        new SystemFacade();
+
+        // singleton
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
@@ -206,7 +202,6 @@ public class UserScreen extends JFrame {
 			}
 		});
 
-		new SystemFacade();
 	}
 
 }

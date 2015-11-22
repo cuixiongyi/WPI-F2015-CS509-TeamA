@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.ui.ImageComponent;
-import com.wpi.cs509.teamA.ui.ImageComponentAdmin;
+import jdk.nashorn.internal.runtime.ECMAException;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -46,19 +47,33 @@ public class StateContext {
         normalUserMouseListener = new NormalUserMouseListener(imageComponent);
         adminMouseListener = new AdminMouseListener(imageComponent);
 
-        // TODO: Move this part to input panel..
-        // we need to add the event listener before the state pattern begins
+        // TODO we need to add the event listener before the state pattern begins
         imageComponent.addMouseListener(normalUserMouseListener);
+        this.switchToNormalUser();
     }
 
     private ImageComponent imageComponent;
-    private ImageComponentAdmin imageComponentAdmin;
     private MouseListener normalUserMouseListener;
     private MouseListener adminMouseListener;
 
     private Node startNode;
 	private Node endNode;
 	private List<Node> path;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setNormalUser() {
+        isAdmin = false;
+        this.switchToNormalUser();
+    }
+    public void setAdminUser() {
+        isAdmin = true;
+        this.switchToAdminUser();
+    }
+
+    private boolean isAdmin;
 
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
@@ -67,13 +82,6 @@ public class StateContext {
 	private List<Integer> filterNodeType;
 	private List<Node> iconNodes;
 
-    public GeneralMap getCurrentMap() {
-        return currentMap;
-    }
-
-    public void setCurrentMap(GeneralMap currentMap) {
-        this.currentMap = currentMap;
-    }
 
     //private List<GeneralMap> allMaps;
 	private GeneralMap currentMap;
@@ -87,10 +95,24 @@ public class StateContext {
     }
 
     public MouseListener getNormalUserMouseListener() {
+		try {
+			if (null == normalUserMouseListener)
+				throw new Exception("null normalUserMouseListener");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
         return normalUserMouseListener;
     }
 
     public MouseListener getAdminMouseListener() {
+		try {
+			if (null == adminMouseListener)
+				throw new Exception("null adminMouseListener");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
         return adminMouseListener;
     }
 
@@ -106,6 +128,9 @@ public class StateContext {
 		this.path = new ArrayList<Node>();
 		//this.allMaps = new ArrayList<GeneralMap>();
 		this.iconNodes = new ArrayList<Node>();
+
+		this.setState(new StateNormalUser());
+		this.setCurrentMap(1);
 
 
 	}
@@ -123,6 +148,10 @@ public class StateContext {
 		// TODO Do some clean up
 
 	}
+	public GeneralMap getCurrentMap() {
+		return currentMap;
+	}
+
 
 	/**
 	 *
@@ -159,8 +188,18 @@ public class StateContext {
         }catch(Exception E){
             E.printStackTrace();
         }
-        mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
 
+		try{
+			if (null == mouseListenerState)
+				throw new Exception("Uninitlized state");
+		}catch(Exception E){
+			E.printStackTrace();
+		}
+
+        imageComponent.removeMouseListener(this.getNormalUserMouseListener());
+        imageComponent.addMouseListener(this.getAdminMouseListener());
+        this.setState(new StateAdminUser());
+		System.out.println("Switch to Admin ");
 
 
     }
@@ -172,8 +211,10 @@ public class StateContext {
         }catch(Exception E){
             E.printStackTrace();
         }
-        mouseListenerState.switchMouseListener(this, getImageComponent(), getNormalUserMouseListener(), getAdminMouseListener());
-
+        imageComponent.removeMouseListener(this.getAdminMouseListener());
+        imageComponent.addMouseListener(this.getNormalUserMouseListener());
+        this.setState(new StateNormalUser());
+		System.out.println("Switch to Normal user ");
 
 
     }

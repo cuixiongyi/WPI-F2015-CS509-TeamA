@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.xml.crypto.Data;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
@@ -61,8 +62,7 @@ public class InputPanel extends JPanel implements ActionListener {
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
     private ImageComponent imageComponent;
-    boolean isAdmin;
-    
+
     private int adminClicked;
 
 	public void setStateContext(StateContext stateContext) {
@@ -136,13 +136,15 @@ public class InputPanel extends JPanel implements ActionListener {
 		
 		// Add all nodes from
 		//TODO delete all of this and replace with new
-		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-		if (allNodes != null && allNodes.get(1).size() != 0) {
-			for (int i = 0; i < allNodes.get(1).size(); i++) {
-				if (allNodes.get(1).get(i).getName().toString().equals("Location"))
+		List<Node>  allNodes = Database.getAllNodeListFromDatabase();
+		if (allNodes != null && allNodes.size() != 0) {
+			for (int i = 0; i < allNodes.size(); i++) {
+				Node tmp = allNodes.get(i);
+                String name = tmp.getName().toString();
+				if (name.equals("Location"))
 					continue;
-				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboSourceModel.addElement(name);
+				comboDesModel.addElement(name);
 			}
 		}
 
@@ -171,7 +173,6 @@ public class InputPanel extends JPanel implements ActionListener {
 
 		
 		adminClicked = 0;
-		
         /**
          * Add listener to the admin login button
          */
@@ -213,6 +214,7 @@ public class InputPanel extends JPanel implements ActionListener {
                             UIDataBuffer.setCurrentMapId(currentMapID);
                             stateContext.setCurrentMap(currentMapID);
 							InputPanel.this.getBtnSynchronize().doClick();
+							imageComponent.repaint();
 
                 }
 
@@ -250,27 +252,50 @@ public class InputPanel extends JPanel implements ActionListener {
         */
         this.getAdminLogin().addActionListener(this);
 
+
     }
 
-	/*
-    //TODO What the F**k is this?
-	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == btnSynchronize) {
-			comboSourceModel.removeAllElements();
-			comboDesModel.removeAllElements();
-			Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-			if (allNodes != null && allNodes.get(1).size() != 0) {
-				for (int i = 0; i < allNodes.get(1).size(); i++) {
-					if (allNodes.get(1).get(i).getName().toString().equals("Location"))
-						continue;
-					comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-					comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
-				}
-			}
-		}
-	}
-	*/
+    public void clickSync() {
+        Database.InitFromDatabase();
+        imageComponent.repaint();
+       /*
+        comboSourceModel.removeAllElements();
+        comboDesModel.removeAllElements();
+        Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+        if (allNodes != null && allNodes.get(1).size() != 0) {
+            for (int i = 0; i < allNodes.get(1).size(); i++) {
+                if (allNodes.get(1).get(i).getName().toString().equals("Location"))
+                    continue;
+                comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+                comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+            }
+        }
+        */
+    }
 
+    public void clickLogin()
+    {
+        if (adminClicked % 2 == 0) {
+            AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
+            adminDialog.setStateContext(stateContext);
+            adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+            adminDialog.setVisible(isFocusable());
+            //stateContext.switchToAdminUser();
+            imageComponent.repaint();
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "You have logged out");
+            Database.InitFromDatabase();
+            InputPanel.this.getBtnNeighborManage().setVisible(false);
+            InputPanel.this.getAdminLogin().setText(LOGIN);
+            InputPanel.this.getBtnSynchronize().setVisible(false);
+            this.incrementAdminClicked();
+            stateContext.setNormalUser();
+            imageComponent.repaint();
+
+        }
+    }
 
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
@@ -280,29 +305,18 @@ public class InputPanel extends JPanel implements ActionListener {
         // not, give it normal user
         if(e.getSource()==getAdminLogin())
         {
-            if (adminClicked % 2 == 0) {
-                AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
-                adminDialog.setStateContext(stateContext);
-                adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-                adminDialog.setVisible(isFocusable());
-                //stateContext.switchToAdminUser();
-
-
-
-            } else {
-
-                JOptionPane.showMessageDialog(null, "You have logged out");
-                stateContext.switchToNormalUser();
-                InputPanel.this.getBtnNeighborManage().setVisible(false);
-                InputPanel.this.getAdminLogin().setText(LOGIN);
-                InputPanel.this.getBtnSynchronize().setVisible(false);
-                isAdmin = false;
-                adminClicked++;
-                imageComponent.repaint();
-            }
+            clickLogin();
         }
-
+        if (e.getSource() == btnSynchronize) {
+            clickSync();
+        }
     }
+
+
+    public void incrementAdminClicked() {
+        this.adminClicked++;
+    }
+
 
     public void setImageComponent(ImageComponent imageComponent2)
 	{

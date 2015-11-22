@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
@@ -160,7 +161,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				coordinate.setX(xPos);
 				coordinate.setY(yPos);
 				node.setLocation(coordinate);
-				node.getMap().setMapId(Integer.parseInt(mapidTextField.getText()));
+				node.setMap(Database.getMapEntityFromMapId(Integer.parseInt(mapidTextField.getText())));
 				node.setName(nameTextField.getText());
 				node.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
 

@@ -12,12 +12,15 @@ import java.util.Set;
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.MapDao;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
+import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.MapDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 
 public class Database {
 	private static Map<Integer,Node> allNodesDataHM;
@@ -26,7 +29,8 @@ public class Database {
 	private static List<GeneralMap> allMapDataHL;
 	private static List<Edge> allEdgesHL;
 	private static HashMap<Integer, List<Edge>> allEdgesDataHM;
-//	private List<Edge> allEdgeData;
+	private static List<UserAccount> allUsersDataHL;
+	
 	
 	public Database(){
 		
@@ -41,6 +45,7 @@ public class Database {
 		Iterator<GeneralMap> iterMap = allMapDataHL.iterator();
 		while (iterMap.hasNext()) {
 			GeneralMap tempMap = iterMap.next();
+            tempMap.readImage();
 			allMapDataHM.put(tempMap.getMapId(), tempMap);
 		}
 		
@@ -64,7 +69,13 @@ public class Database {
 			allEdgesDataHM.put(temp_map_id, nrd.getAllNodeRelationsForCurrentMap(temp_map_id));
 			
 		}
+		
+		// get all user accounts from database
+		UserAccountDao uad = new UserAccountDaoImpl();
+		allUsersDataHL = uad.getAllUserAccounts();
 	}
+		
+	/**Deal with Nodes*/
 	
 	public static List<Node> getAllNodeListFromDatabase(){
 		return allNodesDataHL;
@@ -137,5 +148,29 @@ public class Database {
 		return allEdgesDataHM.get(map_id);
 	}
 	
+	/**Deal with User Account*/
+	public static List<UserAccount> getAllUserAccount(){
+		return allUsersDataHL;
+	}
+	
+	public static boolean checkUsernameInDatabase(String username){
+		Iterator<UserAccount> usernames = allUsersDataHL.iterator();
+		while(usernames.hasNext()){
+			if(usernames.next().getUsername().equals(username))
+				return true;
+		}
+		return false;
+	}
+	
+	public static boolean checkPassword(String username, String password){
+		Iterator<UserAccount> usernames = allUsersDataHL.iterator();
+		while(usernames.hasNext()){
+			UserAccount ua = usernames.next();
+			if(ua.getUsername().equals(username)){
+				
+			}
+		}
+		return false;
+	}
 	
 }

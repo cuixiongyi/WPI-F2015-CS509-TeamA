@@ -26,10 +26,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -102,7 +105,15 @@ public class ImageComponent extends JComponent {
 	}
 
 
-    protected void paintIcons(List<Node> nodes, Graphics2D g2) {
+    private void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
+        for (int i = 0; i < nodes.size()-1; ++i) {
+            paintNode(nodes.get(i), g2);
+            paintEdge(nodes.get(i), nodes.get(i+1), g2);
+        }
+        paintNode(nodes.get(nodes.size()-1), g2);
+    }
+
+    private void paintIcons(List<Node> nodes, Graphics2D g2) {
         for (Node node : nodes) {
             BufferedImage image = icon.getImage(node);
             g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
@@ -110,20 +121,24 @@ public class ImageComponent extends JComponent {
         }
 	}
 
-    protected void paintNode(Node node, Graphics2D g2) {
+    private void paintNode(Node node, Graphics2D g2) {
+        if (null == node)
+            return;
 		Coordinate xy = node.getLocation();
 		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
     }
 
-    protected void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
+    private void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
         Coordinate start = nodeSrc.getLocation();
         Coordinate end = nodeDest.getLocation();
+        if (null == nodeSrc || null == nodeDest)
+            return;
 
         g2.setStroke(new BasicStroke(5));
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
-    protected void paintPath(List<Node> nodes, Graphics2D g2) {
+    private void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {
             for (int i = 0; i < nodes.size() - 1; ++i) {
                 paintEdge(nodes.get(i), nodes.get(i + 1), g2);
@@ -151,6 +166,9 @@ public class ImageComponent extends JComponent {
                 return false;
                 //throw new Exception("null image in ImageComponent");
             }
+			if (null == this.image) {
+				return false;
+			}
         }
         catch (Exception e)
         {
@@ -159,13 +177,38 @@ public class ImageComponent extends JComponent {
         return true;
     }
 
+    private void paintNormalUser(Graphics2D g2) {
+        /**
+         Paint path
+         */
+        List<Node> pathNode = this.stateContext.getPath();
+        paintPath(pathNode, g2);
+        List<Node> iconNodes = this.getStateContext().getIconNodes();
+        paintIcons(iconNodes, g2);
+
+
+        /*
+        g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
+        g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
+        Font font = g.getFont().deriveFont(20.0f);
+        g.setFont(font);
+        g2.drawString("Source", sourceX, sourceY - ovalOffset);
+        g2.drawString("Destination", desX, desY - ovalOffset);
+*/
+    }
+
+    private void paintAdmin(Graphics2D g2) {
+
+    }
+
+
 	@Override
 	public void paintComponent(Graphics g) {
 
         /// test for null stateContext and null image
+		this.image = stateContext.getCurrentMap().getImage();
         if ( ! testBeforePaint())
             return;
-
 
 		// if isInitilized
 		// no need to paint the image again
@@ -175,14 +218,20 @@ public class ImageComponent extends JComponent {
         g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
         setForeground(Color.RED);
 
-        /**
-            Paint path
-         */
-        List<Node> pathNode = this.stateContext.getPath();
-        paintPath(pathNode, g2);
+        if (stateContext.isAdmin()) {
+            paintAdmin(g2);
 
-        List<Node> iconNodes = this.getStateContext().getIconNodes();
-        paintIcons(iconNodes, g2);
+
+        }
+        else {
+            paintNormalUser(g2);
+
+            /// CXY test
+            GeneralMap tmp = stateContext.getCurrentMap();
+            List<Node> nodes = tmp.getNodes();
+            paintPath(nodes, g2);
+        }
+
 
 /*
 
@@ -212,12 +261,7 @@ public class ImageComponent extends JComponent {
 			
 			
 			
-			g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
-			g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
-			Font font = g.getFont().deriveFont(20.0f);
-			g.setFont(font);
-			g2.drawString("Source", sourceX, sourceY - ovalOffset);
-			g2.drawString("Destination", desX, desY - ovalOffset);
+
 			
 		}
 */
@@ -235,51 +279,6 @@ public class ImageComponent extends JComponent {
 	 */
 	public InputPanel getInputPanel() {
 		return inputPanel;
-	}
-
-	/**
-	 * @return the image
-	 */
-	public Image getImage() {
-		return image;
-	}
-
-	/**
-	 * @return the imgWidth
-	 */
-	public int getImgWidth() {
-		return imgWidth;
-	}
-
-	/**
-	 * @return the imgHeight
-	 */
-	public int getImgHeight() {
-		return imgHeight;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	/**
-	 * @param imgWidth
-	 *            the imgWidth to set
-	 */
-	public void setImgWidth(int imgWidth) {
-		this.imgWidth = imgWidth;
-	}
-
-	/**
-	 * @param imgHeight
-	 *            the imgHeight to set
-	 */
-	public void setImgHeight(int imgHeight) {
-		this.imgHeight = imgHeight;
 	}
 
 	/**
@@ -324,12 +323,5 @@ public class ImageComponent extends JComponent {
 		return this.stateContext;
 	}
 
-	public void incrementAdminClicked() {
-		ImageComponent.adminClicked++;
-	}
-
-	public static void setIsAdmin(boolean isAdmin) {
-		ImageComponent.isAdmin = isAdmin;
-	}
 
 }

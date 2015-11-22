@@ -11,6 +11,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -32,6 +33,16 @@ public class GeneralMap implements AdjacencyMatrix {
 	 * Map name
 	 */
 	private String mapName;
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    private String imageName;
 	/**
 	 * the map scale
 	 */
@@ -49,14 +60,6 @@ public class GeneralMap implements AdjacencyMatrix {
 
     private List<Node> nodes;
 
-	public BufferedImage getImage() {
-		return image;
-	}
-
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
-
 	private BufferedImage image;
 
 	/**
@@ -69,6 +72,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	public GeneralMap(int id, int measureScale) {
 		this.mapId=id;
 		this.measureScale=measureScale;
+		this.imageName = "";
 	}
 
 	/**
@@ -156,9 +160,10 @@ public class GeneralMap implements AdjacencyMatrix {
         return mapImgPath;
     }
 
-    public void setMapImgPath(String mapImgPath) {
+    public void readImage() {
 
-        this.mapImgPath = mapImgPath;
+        // display the image. Note that "/" only works on UNIX
+        this.mapImgPath = System.getProperty("user.dir") + "/src/" + this.imageName;
         try {
             image = ImageIO.read(new FileInputStream(mapImgPath));
         } catch (FileNotFoundException e) {
@@ -169,6 +174,10 @@ public class GeneralMap implements AdjacencyMatrix {
     }
 
 
+	public BufferedImage getImage() {
+		return image;
+	}
+
 	public float getDisplayScale() {
         return displayScale;
     }
@@ -178,7 +187,7 @@ public class GeneralMap implements AdjacencyMatrix {
     }
 
     public List<Node> getNodes() {
-        return nodes;
+        return Database.getAllNodesForCurrentMap(this.getMapId());
     }
 
     public void setNodes(List<Node> nodes) {

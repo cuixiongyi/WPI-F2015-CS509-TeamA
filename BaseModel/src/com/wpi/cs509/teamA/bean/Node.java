@@ -1,4 +1,6 @@
 package com.wpi.cs509.teamA.bean;
+import com.wpi.cs509.teamA.dao.NodeDao;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -73,10 +75,6 @@ public class Node {
 	 *            coordinate x
 	 * @param y
 	 *            coordinate y
-	 * @param mapId
-	 *            the map where the node is on
-	 * @param neighbors
-	 *            the neighbors this node has
 	 * @param nodeType
 	 *            the type of the node, an enum class
 	 */
@@ -94,6 +92,8 @@ public class Node {
 	 * add an new node on the map and set it's attributes
 	 */
 	public void saveNode() {
+		NodeDao nd = new NodeDaoImpl();
+		nd.saveNode(this);
 //		Node node = new Node();
 //		node.setNeighbors(new HashSet<Integer>());
 //		node.setId(1);
