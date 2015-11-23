@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.ui.MouseListenerwithContext;
+import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 import java.awt.event.ActionEvent;
@@ -61,8 +63,15 @@ public class AdminMouseListener extends MouseListenerwithContext {
 		xPos = e.getX();
 		yPos = e.getY();
 		// TODO Auto-generated method stub
+		// TODO this is a hack
 		if (e.getButton() == MouseEvent.BUTTON1 && neighborDialog != null && neighborDialog.isVisible()) {
 			neighborDialog.setFieldTitle(xPos, yPos);
+			Node node = Database.getNodeFromCoordinate(new Coordinate(xPos, yPos), stateContext.getCurrentMap().getMapId());
+			if (null == node)
+			{
+				return;
+			}
+
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			//
 		} else if (e.getButton() == MouseEvent.BUTTON3) {
