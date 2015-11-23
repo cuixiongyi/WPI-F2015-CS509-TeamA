@@ -299,7 +299,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 			}
 
 		}
-	}
+	
 
 
 	    // TODO: Make the map related things into a enum class..
