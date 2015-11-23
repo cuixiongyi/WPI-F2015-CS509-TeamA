@@ -9,9 +9,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.AbstractAction;
@@ -41,6 +43,7 @@ class AutoSuggestor {
 	private int currentIndexOfSpace, tW, tH;
 	private double windowLocationX;
 	private double windowLocationY;
+	private InputPanel inputPanel;
 	private DocumentListener documentListener = new DocumentListener() {
 		@Override
 		public void insertUpdate(DocumentEvent de) {
@@ -59,7 +62,7 @@ class AutoSuggestor {
 	};
 	private final Color suggestionsTextColor;
 	private final Color suggestionFocusedColor;
-	private final Dimension preferredSize = new Dimension(300, 23);
+	private final Dimension preferredSize = new Dimension(1000, 23);
 	private final Font labelFont = new Font("SimSun", Font.PLAIN, 23);
 
 	public AutoSuggestor(JTextField textField, JFrame container, ArrayList<String> words, Color popUpBackground,
@@ -73,7 +76,7 @@ class AutoSuggestor {
 
 		this.textField.getDocument().addDocumentListener(documentListener);
 
-		setDictionary(words);
+		// setDictionary(words);
 
 		typedWord = "";
 		currentIndexOfSpace = 0;
@@ -82,8 +85,7 @@ class AutoSuggestor {
 
 		autoSuggestionPopUpWindow = new JWindow(container);
 
-	
-//		System.out.println(UserScreen.getUserScreen());
+		// System.out.println(UserScreen.getUserScreen());
 		autoSuggestionPopUpWindow.setOpacity(opacity);
 
 		suggestionsPanel = new JPanel();
@@ -95,37 +97,34 @@ class AutoSuggestor {
 
 	boolean wordTyped(String typedWord) {
 
-//		// create list for dictionary this in your case
-//		ArrayList<String> words = new ArrayList<>();
-//		Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-//		if (allNodes != null && allNodes.get(1).size() != 0) {
-//			for (int i = 0; i < allNodes.get(1).size(); i++) {
-//				if (allNodes.get(1).get(i).getName().toString().equals("Location"))
-//					continue;
-//				words.add(allNodes.get(1).get(i).getName().toString());
-//				words.add(allNodes.get(1).get(i).getName().toString());
-//			}
-//		}
-//
-		
-//		setDictionary(words);
-		 ArrayList<String> words = new ArrayList<>();
-         words.add("hello");
-         words.add("heritage");
-         words.add("happiness");
-         words.add("goodbye");
-         words.add("cruel");
-         words.add("car");
-         words.add("war");
-         words.add("will");
-         words.add("world");
-         words.add("wall");
+		// // create list for dictionary this in your case
+		// ArrayList<String> words = new ArrayList<>();
+		// Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
+		// if (allNodes != null && allNodes.get(1).size() != 0) {
+		// for (int i = 0; i < allNodes.get(1).size(); i++) {
+		// if (allNodes.get(1).get(i).getName().toString().equals("Location"))
+		// continue;
+		// words.add(allNodes.get(1).get(i).getName().toString());
+		// words.add(allNodes.get(1).get(i).getName().toString());
+		// }
+		// }
+		//
 
+		// setDictionary(words);
+		ArrayList<String> words = new ArrayList<>();
+		words.add("hello");
+		words.add("heritage");
+		words.add("happiness");
+		words.add("goodbye");
+		words.add("cruel");
+		words.add("car");
+		words.add("war");
+		words.add("will");
+		words.add("world");
+		words.add("wall");
 
-         setDictionary(words);
-         //addToDictionary("bye");//adds a single word
-
-		
+		// setDictionary(words);
+		// addToDictionary("bye");//adds a single word
 
 		return checkWord(typedWord);// now call to check for
 									// any matches against
@@ -211,8 +210,8 @@ class AutoSuggestor {
 	}
 
 	private void setFocusToTextField() {
-		// container.toFront();
-		// container.requestFocusInWindow();
+		container.toFront();
+		container.requestFocusInWindow();
 		textField.requestFocusInWindow();
 	}
 
@@ -249,9 +248,9 @@ class AutoSuggestor {
 		}
 	}
 
-	protected void addWordToSuggestions(String word) {
+	protected void addWordToSuggestions(String word, Node nodeInformation) {
 		SuggestionLabel suggestionLabel = new SuggestionLabel(word, suggestionFocusedColor, suggestionsTextColor, this,
-				preferredSize, labelFont);
+				preferredSize, labelFont, nodeInformation);
 
 		calculatePopUpWindowSize(suggestionLabel);
 
@@ -291,10 +290,10 @@ class AutoSuggestor {
 
 		int windowX = 0;
 		int windowY = 0;
-		System.out.println(textField.getX());
-	//	System.out.println(container.getHeight());
-		
-		windowX = container.getX()+textField.getX() + 10;
+		// System.out.println(textField.getX());
+		// System.out.println(container.getHeight());
+
+		windowX = textField.getX() + inputPanel.getX() + 10;
 		if (suggestionsPanel.getHeight() > autoSuggestionPopUpWindow.getMinimumSize().height) {
 			windowY = container.getY() + textField.getY() + textField.getHeight()
 					+ autoSuggestionPopUpWindow.getMinimumSize().height + 10;
@@ -311,25 +310,21 @@ class AutoSuggestor {
 		autoSuggestionPopUpWindow.repaint();
 
 	}
-	
-	
-	
 
-	public void setDictionary(ArrayList<String> words) {
-		dictionary.clear();
-		if (words == null) {
-			return;// so we can call constructor with null value for dictionary
-					// without exception thrown
-		}
-		for (String word : words) {
-			dictionary.add(word);
-		}
-	}
+	// public void setDictionary(ArrayList<String> words) {
+	// dictionary.clear();
+	// if (words == null) {
+	// return;// so we can call constructor with null value for dictionary
+	// // without exception thrown
+	// }
+	// for (String word : words) {
+	// dictionary.add(word);
+	// }
+	// }
 
 	public JWindow getAutoSuggestionPopUpWindow() {
 		return autoSuggestionPopUpWindow;
 	}
-
 
 	public JTextField getTextField() {
 		return textField;
@@ -344,32 +339,27 @@ class AutoSuggestor {
 		if (typedWord.isEmpty()) {
 			return false;
 		}
-		 System.out.println("Typed word: " + typedWord);
-//		SearchSupply dictionary = new SearchSupply();
-//		
-//		Set<String> stringSet = dictionary.getSearchSupply(typedWord).keySet();
-//		Iterator<String> iter = stringSet.iterator();
+		// System.out.println("Typed word: " + typedWord);
+		SearchSupply dictionary = new SearchSupply();
+		Map<String, Node> nodeMap = dictionary.getSearchSupply(typedWord);
+		Set<Entry<String, Node>> stringSet = nodeMap.entrySet();
+		Iterator<Entry<String, Node>> iter = stringSet.iterator();
 		
 		boolean suggestionAdded = false;
-	//	while(iter.hasNext()){
-			
-		   for (String word : dictionary) {//get words in the dictionary which we added
-	            boolean fullymatches = true;
-	            for (int i = 0; i < typedWord.length(); i++) {//each string in the word
-	                if (!typedWord.toLowerCase().startsWith(String.valueOf(word.toLowerCase().charAt(i)), i)) {//check for match
-	                    fullymatches = false;
-	                    break;
-	                }
-	            }
-	            if (fullymatches) {
-	                addWordToSuggestions(word);
-	                suggestionAdded = true;
-	            }
-	        }
-		
-		
+		while (iter.hasNext()) {
+			Entry<String, Node> nodeInfo = iter.next();
+			addWordToSuggestions(nodeInfo.getKey(),nodeInfo.getValue());
+			suggestionAdded = true;
+
+		}
+
 		return suggestionAdded;
 	}
+
+	public void setInputPanel(InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
+	}
+
 }
 
 class SuggestionLabel extends JLabel {
@@ -381,9 +371,10 @@ class SuggestionLabel extends JLabel {
 	private Color suggestionsTextColor, suggestionBorderColor;
 	private Dimension preferredSize;
 	private Font font;
+	private Node nodeInformation;
 
 	public SuggestionLabel(String string, final Color borderColor, Color suggestionsTextColor,
-			AutoSuggestor autoSuggestor, Dimension preferredSize, Font font) {
+			AutoSuggestor autoSuggestor, Dimension preferredSize, Font font, Node node) {
 		super(string);
 		this.font = font;
 		this.suggestionsTextColor = suggestionsTextColor;
@@ -392,6 +383,7 @@ class SuggestionLabel extends JLabel {
 		this.suggestionBorderColor = borderColor;
 		this.autoSuggestionsPopUpWindow = autoSuggestor.getAutoSuggestionPopUpWindow();
 		this.preferredSize = preferredSize;
+		this.nodeInformation = node;
 
 		initComponent();
 	}
@@ -446,4 +438,3 @@ class SuggestionLabel extends JLabel {
 		textField.setText(tmp);
 	}
 }
-

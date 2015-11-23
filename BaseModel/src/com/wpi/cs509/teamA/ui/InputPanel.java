@@ -67,6 +67,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	private static final String BUTTONWORD = "Search";
 	private ImageComponent imageComponent;
 	private UserScreen userScreen;
+	private AutoSuggestor autoSuggestorFrom;
+	private AutoSuggestor autoSuggestorTo;
 
 	private int adminClicked;
 
@@ -252,6 +254,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		txtFrom = new JTextField();
 		txtFrom.setBounds(80, 150, 150, 27);
+		txtFrom.setText(SEARCHWORD);
 		add(txtFrom);
 		txtFrom.addFocusListener(this);
 		txtFrom.setColumns(10);
@@ -259,26 +262,43 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		txtTo = new JTextField();
 		txtTo.setBounds(80, 225, 150, 27);
 		txtTo.addFocusListener(this);
+		txtTo.setText(SEARCHWORD);
 		add(txtTo);
 		txtTo.setColumns(10);
 		InputPanel tmp = this;
-		AutoSuggestor autoSuggestor = new AutoSuggestor(txtTo, userScreen, null,
-				Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+//		AutoSuggestor 
+//		AutoSuggestor autoSuggestorFrom = new AutoSuggestor(txtTo, userScreen, null,
+//				Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
 	}
 
 	public void focusLost(FocusEvent e) {
 
 		if (((JTextField) e.getSource()).getText().trim().equals(""))
 			((JTextField) e.getSource()).setText(SEARCHWORD);
-		System.out.println("hehe");
+
 
 	}
 
 	public void focusGained(FocusEvent e) {
-		if (((JTextField) e.getSource()).getText().trim().equals(SEARCHWORD))
-			((JTextField) e.getSource()).setText("");
-	//	if()
+		if (e.getSource() == txtFrom) {
+			if (txtFrom.getText().trim().equals(SEARCHWORD))
+				txtFrom.setText("");
+			if(autoSuggestorFrom==null){
+				autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null,
+						Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+				autoSuggestorFrom.setInputPanel(this);
+			}
+		}
+		if (e.getSource() == txtTo) {
+			if (txtTo.getText().trim().equals(SEARCHWORD))
+				txtTo.setText("");
+			if(autoSuggestorTo==null){
+				autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null,
+						Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+				autoSuggestorTo.setInputPanel(this);
+			}
 
+		}
 	}
 
 	public void clickSync() {
@@ -410,4 +430,4 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// TODO Auto-generated method stub
 		this.userScreen = userScreen2;
 	}
-};
+}
