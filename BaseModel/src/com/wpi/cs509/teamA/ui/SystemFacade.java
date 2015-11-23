@@ -44,7 +44,6 @@ public class SystemFacade implements Runnable {
 		// TODO Auto-generated method stub
 		// load all data from the database
 		Database.InitFromDatabase();
-		
 		// initialize the relationship map
 		DupEntranceMap.initDupEntranceMap();
 		// initialize all the matrix for the map

@@ -1,5 +1,7 @@
 package com.wpi.cs509.teamA.bean;
 
+import java.util.HashMap;
+
 /**
  * this class represents all the users, if this user is an admin
  * 
@@ -14,15 +16,22 @@ public class UserAccount {
 	private String username;
 	/** pass word of the account */
 	private String password;
+	/** email of the user*/
+	private String email;
 	/**
 	 * if this account is an admin
 	 */
-	private boolean isAdmin;
+	private int isAdmin;
 
+	private HashMap<String, Integer> history;
+	
+	
 	/** default constructor */
 	public UserAccount() {
 
 	}
+
+	
 
 	/**
 	 * constructor with information
@@ -74,7 +83,7 @@ public class UserAccount {
 	/**
 	 * @return the isAdmin
 	 */
-	public boolean isAdmin() {
+	public int isAdmin() {
 		return isAdmin;
 	}
 
@@ -82,8 +91,23 @@ public class UserAccount {
 	 * @param isAdmin
 	 *            the isAdmin to set
 	 */
-	public void setAdmin(boolean isAdmin) {
+	public void setAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
+	public HashMap<String, Integer> getHistory() {
+		return history;
+	}
 
+	public void setHistory(HashMap<String, Integer> history) {
+		this.history = history;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

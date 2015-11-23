@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.ui.MouseListenerwithContext;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 import java.awt.event.ActionEvent;
@@ -21,23 +22,8 @@ import java.awt.event.MouseListener;
  * @author CS 509-Team A
  *
  */
-public class AdminMouseListener implements MouseListener {
+public class AdminMouseListener extends MouseListenerwithContext {
 
-	/**
-	 * The x position that the user clicked
-	 */
-	private int xPos;
-	/**
-	 * The y position that the user clicked
-	 */
-	private int yPos;
-	/**
-	 * The image component that the listener will be added to
-	 */
-	private ImageComponent imagePanel;
-	/**
-	 * Component for entering edge
-	 */
 	private NeighborDialog neighborDialog;
 
 	private JButton btnNeighborManage;
@@ -61,6 +47,7 @@ public class AdminMouseListener implements MouseListener {
 		this.btnNeighborManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				neighborDialog = new NeighborDialog(imagePanel);
+                neighborDialog.setStateContext(stateContext);
 				neighborDialog.setVisible(true);
 				neighborDialog.setAlwaysOnTop(true);
 
@@ -108,36 +95,6 @@ public class AdminMouseListener implements MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
-	}
-
-	/**
-	 * @return the xPos
-	 */
-	public int getxPos() {
-		return xPos;
-	}
-
-	/**
-	 * @return the yPos
-	 */
-	public int getyPos() {
-		return yPos;
-	}
-
-	/**
-	 * @param xPos
-	 *            the xPos to set
-	 */
-	public void setxPos(int xPos) {
-		this.xPos = xPos;
-	}
-
-	/**
-	 * @param yPos
-	 *            the yPos to set
-	 */
-	public void setyPos(int yPos) {
-		this.yPos = yPos;
 	}
 
 }
