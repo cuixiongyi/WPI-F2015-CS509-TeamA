@@ -37,11 +37,13 @@ public class UserAccountDaoImpl implements UserAccountDao {
 	
 	@Override
 	public List<UserAccount> getAllUserAccounts() {
+					/*
+		TODO this is a hack
 		ResultSet resultSet = null;
 		List<UserAccount> res = new ArrayList<UserAccount>();
 		
 		try {
-			String selectAllUsers = "SELECT id, username,password, isAdmin,email FROM RouteFinder.user_account;";
+			String selectAllUsers = "SELECT id, username,password, isAdmin,email FROM routefinder.user_account;";
 			pstmt = conn.prepareStatement(selectAllUsers);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
@@ -55,7 +57,6 @@ public class UserAccountDaoImpl implements UserAccountDao {
 				userinfo.setHistory(this.getAllHistoryForUser(userinfo.getId()));
 				res.add(userinfo);
 			}
-
 			return res;
 
 		} catch (SQLException se) {
@@ -65,17 +66,19 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			JdbcConnect.resultClose(resultSet, pstmt);
 			JdbcConnect.connClose();
 		}
-		return null;
-	}
+		*/
+			return null;
+
+		}
 
 	@Override
 	public HashMap<String, Integer> getAllHistoryForUser(int user_id) {
 		// TODO Auto-generated method stub
-		
+
 		ResultSet resultSet = null;
 		Map<String,Integer> res = new HashMap<String,Integer>();
 		try {
-			String selectAllUsers = "SELECT historystring,count FROM RouteFinder.history where userid=?;";
+			String selectAllUsers = "SELECT historystring,count FROM routefinder.history where userid=?;";
 			pstmt = conn.prepareStatement(selectAllUsers);
 			pstmt.setInt(1, user_id);
 			resultSet = pstmt.executeQuery();
@@ -94,7 +97,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 	@Override
 	public void addAccountToDatabase(UserAccount add_user) {
 		try {
-			String insertNodeToDB = "INSERT INTO RouteFinder.user_account (username,password, isAdmin,email)  VALUES (?, ?, ?, ?)";
+			String insertNodeToDB = "INSERT INTO routefinder.user_account (username,password, isAdmin,email)  VALUES (?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(insertNodeToDB);
 			pstmt.setString(1, add_user.getUsername());
 			pstmt.setString(2, add_user.getPassword());

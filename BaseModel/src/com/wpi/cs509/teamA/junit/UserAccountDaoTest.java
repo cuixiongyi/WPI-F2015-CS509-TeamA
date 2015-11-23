@@ -1,8 +1,8 @@
 package com.wpi.cs509.teamA.junit;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
@@ -10,7 +10,7 @@ import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 
 public class UserAccountDaoTest {
 
-	@Test
+	//@Test
 	public void test() {
 		UserAccount ua = new UserAccount();
 		ua.setUsername("yizhouyan");
