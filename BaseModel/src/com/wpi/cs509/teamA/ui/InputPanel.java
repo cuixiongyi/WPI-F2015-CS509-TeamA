@@ -48,6 +48,7 @@ public class InputPanel extends JPanel implements ActionListener {
 	private JTextField endPoint;
 	private JButton btnSearch;
 	private JButton adminLogin;
+	private JButton signUp;
 	private JLabel lblFrom;
 	private JLabel lblTo;
 	private JButton btnNeighborManage;
@@ -98,6 +99,12 @@ public class InputPanel extends JPanel implements ActionListener {
 		//this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getBtnSearch().setBounds(80, 300, 150, 38);
+		
+		this.signUp=new JButton("SignUp");
+		this.add(signUp);
+		this.signUp.addActionListener(this);
+		this.signUp.setBounds(80, 0, 75, 30);
+		
 		
 //		this.getStartPoint().setBounds(80, 150, 150, 38);
 //		 this.setBounds(0, 0, 1178, 516);
@@ -296,6 +303,12 @@ public class InputPanel extends JPanel implements ActionListener {
 
         }
     }
+    
+    public void clickSignup()
+    {
+    	SignupDialog signUpDialog =new SignupDialog(imageComponent, InputPanel.this);
+		signUpDialog.setVisible(true);
+    }
 
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
@@ -309,6 +322,10 @@ public class InputPanel extends JPanel implements ActionListener {
         }
         if (e.getSource() == btnSynchronize) {
             clickSync();
+        }
+        if(e.getSource()==signUp)
+        {
+        	clickSignup();
         }
     }
 
@@ -398,5 +415,15 @@ public class InputPanel extends JPanel implements ActionListener {
 		return btnNeighborManage;
 	}
 
+	
+	public JButton getSignUp() {
+		return signUp;
+	}
+
+
+
+	public void setSignUp(JButton signUp) {
+		this.signUp = signUp;
+	}
 
 };
