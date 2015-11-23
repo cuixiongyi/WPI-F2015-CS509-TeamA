@@ -21,7 +21,7 @@ public class UserAccount {
 	/**
 	 * if this account is an admin
 	 */
-	private boolean isAdmin;
+	private int isAdmin;
 
 	private HashMap<String, Integer> history;
 	
@@ -30,6 +30,8 @@ public class UserAccount {
 	public UserAccount() {
 
 	}
+
+	
 
 	/**
 	 * constructor with information
@@ -81,7 +83,7 @@ public class UserAccount {
 	/**
 	 * @return the isAdmin
 	 */
-	public boolean isAdmin() {
+	public int isAdmin() {
 		return isAdmin;
 	}
 
@@ -89,7 +91,7 @@ public class UserAccount {
 	 * @param isAdmin
 	 *            the isAdmin to set
 	 */
-	public void setAdmin(boolean isAdmin) {
+	public void setAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	
@@ -101,5 +103,11 @@ public class UserAccount {
 		this.history = history;
 	}
 
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
