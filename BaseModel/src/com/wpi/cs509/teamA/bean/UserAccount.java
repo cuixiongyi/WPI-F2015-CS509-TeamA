@@ -21,7 +21,7 @@ public class UserAccount {
 	/**
 	 * if this account is an admin
 	 */
-	private int isAdmin;
+	private boolean isAdmin;
 
 	private HashMap<String, Integer> history;
 	
@@ -83,7 +83,7 @@ public class UserAccount {
 	/**
 	 * @return the isAdmin
 	 */
-	public int isAdmin() {
+	public boolean isAdmin() {
 		return isAdmin;
 	}
 
@@ -91,7 +91,7 @@ public class UserAccount {
 	 * @param isAdmin
 	 *            the isAdmin to set
 	 */
-	public void setAdmin(int isAdmin) {
+	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	

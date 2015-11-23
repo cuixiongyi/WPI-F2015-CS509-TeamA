@@ -15,7 +15,7 @@ public class UserAccountDaoTest {
 		UserAccount ua = new UserAccount();
 		ua.setUsername("yizhouyan");
 		ua.setPassword("hammer");
-		ua.setAdmin(1);
+		ua.setAdmin(true);
 		ua.setEmail("yyan2@wpi.edu");
 		UserAccountDao uad = new UserAccountDaoImpl();
 		uad.addAccountToDatabase(ua);

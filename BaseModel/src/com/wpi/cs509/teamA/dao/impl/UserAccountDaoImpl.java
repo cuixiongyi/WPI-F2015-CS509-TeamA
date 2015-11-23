@@ -101,7 +101,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			pstmt = conn.prepareStatement(insertNodeToDB);
 			pstmt.setString(1, add_user.getUsername());
 			pstmt.setString(2, add_user.getPassword());
-			pstmt.setInt(3, add_user.isAdmin());
+			pstmt.setInt(3, add_user.isAdmin() ? 1 : 0);
 			pstmt.setString(4, add_user.getEmail());
 			pstmt.executeUpdate();
 			conn.commit();
