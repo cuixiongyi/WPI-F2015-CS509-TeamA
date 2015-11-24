@@ -166,6 +166,7 @@ public class UserScreen extends JFrame {
 
         stateContext = new StateContext();
 
+
         imgComponent.setStateContext(stateContext);
         inputPanel.setStateContext(stateContext);
         stateContext.setImageComponent(imgComponent);

@@ -1,9 +1,17 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.event.MouseEvent;
+
 /**
  * Created by xiongyi on 11/23/15.
  */
 public class MouseActionSelectNode extends MouseActionState {
+
+
+    public MouseActionSelectNode(StateContext pStateContext) {
+        super(pStateContext);
+
+    }
 
     @Override
     public boolean cleanup() {
@@ -11,7 +19,7 @@ public class MouseActionSelectNode extends MouseActionState {
     }
 
     @Override
-    public boolean execute(int x, int y) {
+    public boolean execute(MouseEvent e, int x, int y) {
         return false;
     }
 }

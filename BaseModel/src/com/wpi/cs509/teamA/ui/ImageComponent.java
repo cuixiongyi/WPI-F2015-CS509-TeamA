@@ -50,8 +50,6 @@ import com.wpi.cs509.teamA.ui.StateContext;
 public class ImageComponent extends JComponent {
 
 	private Image image;
-	private int imgWidth;
-	private int imgHeight;
 	private StateContext stateContext;
 	private final static String LOGIN = "Login";
 	private NodeIcon icon = new NodeIcon();
@@ -59,26 +57,16 @@ public class ImageComponent extends JComponent {
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
-	private MouseListener normalUserMouseListener;
-	private int xPos;
-	private int yPos;
 
 	private List<Node> prevPaintedNodes;
 
 	private Map<Integer, List<Node>> result;
 
-	private static int adminClicked = 2;
-
 	private final static int ovalOffset = 5;
-
-	private static boolean isAdmin;
 
 	private InputPanel inputPanel;
 
-	public void setStateContext(StateContext stateContext) {
-		this.stateContext = stateContext;
-	}
-
+	private ImageMouseListener mouseListener;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -93,14 +81,13 @@ public class ImageComponent extends JComponent {
 	 *            in the inner class
 	 */
 	public ImageComponent() {
-		ImageComponent.isAdmin = false;
 
 		// initialize the mouse listener state
 		stateContext = null;
 
+		mouseListener = new ImageMouseListener();
+		this.addMouseListener(mouseListener);
 
-
-        //setImageComponent(this);
 
 	}
 
@@ -270,7 +257,11 @@ public class ImageComponent extends JComponent {
 
 	}
 
-	public void setInputPanel(InputPanel inputPanel) {
+    public void setStateContext(StateContext stateContext) {
+        this.stateContext = stateContext;
+    }
+
+    public void setInputPanel(InputPanel inputPanel) {
 		this.inputPanel = inputPanel;
 	}
 
@@ -281,44 +272,6 @@ public class ImageComponent extends JComponent {
 		return inputPanel;
 	}
 
-	/**
-	 * @return the xPos
-	 */
-	public int getxPos() {
-		return xPos;
-	}
-
-	/**
-	 * @return the yPos
-	 */
-	public int getyPos() {
-		return yPos;
-	}
-
-	/**
-	 * @param xPos
-	 *            the xPos to set
-	 */
-	public void setxPos(int xPos) {
-		this.xPos = xPos;
-	}
-
-	/**
-	 * @param yPos
-	 *            the yPos to set
-	 */
-	public void setyPos(int yPos) {
-		this.yPos = yPos;
-	}
-
-	public NormalUserMouseListener getNormalUserMouseListener() {
-		return (NormalUserMouseListener) this.normalUserMouseListener;
-	}
-/*
-	public AdminMouseListener getAdminMouseListener() {
-		return (AdminMouseListener) this.adminMouseListener;
-	}
-*/
 	public StateContext getStateContext() {
 		return this.stateContext;
 	}
