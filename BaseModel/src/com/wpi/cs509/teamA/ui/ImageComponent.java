@@ -213,6 +213,7 @@ public class ImageComponent extends JComponent {
         else {
             paintNormalUser(g2);
 
+            
             /// CXY test
             GeneralMap tmp = stateContext.getCurrentMap();
             List<Node> nodes = tmp.getNodes();

@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.ui;
 
 import javafx.scene.input.MouseButton;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
@@ -33,5 +34,10 @@ public class MouseActionAdminUser extends MouseActionState {
         }
 
         return false;
+    }
+
+    @Override
+    public void paintOnImage(Graphics2D g2) {
+
     }
 }

@@ -40,9 +40,15 @@ public class MouseActionEditNode extends MouseActionState {
             NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext.getImageComponent(), e.getX(), e.getY());
             nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
             nodeInfo.setVisible(nodeInfo.isFocusable());
-
+            nodesToPaint.add(node);
         }
 
         return true;
+    }
+
+    @Override
+    public void paintOnImage(Graphics2D g2) {
+        // TODO this is a hack, need to paint newly added node here
+        nodesToPaint;
     }
 }

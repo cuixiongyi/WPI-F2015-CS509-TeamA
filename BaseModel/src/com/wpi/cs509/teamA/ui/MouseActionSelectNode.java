@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
@@ -21,5 +22,10 @@ public class MouseActionSelectNode extends MouseActionState {
     @Override
     public boolean execute(MouseEvent e) {
         return false;
+    }
+
+    @Override
+    public void paintOnImage(Graphics2D g2) {
+
     }
 }
