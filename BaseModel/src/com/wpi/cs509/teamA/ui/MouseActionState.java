@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
  */
 public abstract class MouseActionState {
 
-
     protected StateContext stateContext;
 
     protected int xPos;
@@ -24,7 +23,7 @@ public abstract class MouseActionState {
         this.imageComponent = pStateContext.getImageComponent();
     };
 
-    abstract public boolean execute(MouseEvent e, int x, int y) ;
+    abstract public boolean execute(MouseEvent e) ;
 
     abstract public boolean cleanup();
 

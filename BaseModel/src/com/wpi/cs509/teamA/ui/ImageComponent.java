@@ -258,7 +258,9 @@ public class ImageComponent extends JComponent {
 	}
 
     public void setStateContext(StateContext stateContext) {
+
         this.stateContext = stateContext;
+        this.mouseListener.setStateContext(stateContext);
     }
 
     public void setInputPanel(InputPanel inputPanel) {

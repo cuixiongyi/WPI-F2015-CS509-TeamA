@@ -19,7 +19,7 @@ public class MouseActionSelectNode extends MouseActionState {
     }
 
     @Override
-    public boolean execute(MouseEvent e, int x, int y) {
+    public boolean execute(MouseEvent e) {
         return false;
     }
 }

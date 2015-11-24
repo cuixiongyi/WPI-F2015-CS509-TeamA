@@ -39,7 +39,7 @@ public class MouseActionEditEdge  extends MouseActionState {
     }
 
     @Override
-    public boolean execute(MouseEvent e, int x, int y) {
+    public boolean execute(MouseEvent e) {
 
         // we have to minus 5 to correct deviation
         xPos = e.getX();

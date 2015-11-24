@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,9 @@ public class StateContext {
 		this.myState = newState;
 	}
 
+    public boolean execute(MouseEvent e) {
+        return myState.execute(e);
+    }
 
 
 
