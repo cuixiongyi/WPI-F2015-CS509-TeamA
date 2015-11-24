@@ -146,6 +146,8 @@ public class AdminDialog extends JDialog implements ActionListener {
 		inputPanel.getBtnNeighborManage().setVisible(true);
 		inputPanel.getAdminLogin().setText(LOGOUT);
 		inputPanel.getBtnSynchronize().setVisible(true);
+		inputPanel.getBtnMngEdge().setVisible(true);
+		inputPanel.getBtnMngNode().setVisible(true);	
 		stateContext.switchToState(new MouseActionAdminUser(stateContext));
 		imgPanel.repaint();
 	}

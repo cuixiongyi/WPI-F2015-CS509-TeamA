@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.xml.crypto.Data;
@@ -71,6 +72,8 @@ public class InputPanel extends JPanel implements ActionListener {
 	}
 
 	private StateContext stateContext;
+	private JToggleButton btnMngNode;
+	private JToggleButton btnMngEdge;
 	/**
 	 * Constructor. Initialize all the input panel.
 	 */
@@ -165,7 +168,20 @@ public class InputPanel extends JPanel implements ActionListener {
 		btnSynchronize.addActionListener(this);
 		btnSynchronize.setVisible(false);
 		btnSynchronize.setBounds(155, 380, 75, 30);
-		add(btnSynchronize);		
+		add(btnSynchronize);	
+		
+		btnMngNode = new JToggleButton("Mangage Node");
+		btnMngNode.addActionListener(this);
+		btnMngNode.setVisible(false);
+		btnMngNode.setBounds(80, 420, 75, 30);
+	//	btnMngNode.
+		add(btnMngNode);
+		
+		btnMngEdge = new JToggleButton("Manage Edge");
+		btnMngEdge.addActionListener(this);
+		btnMngEdge.setVisible(false);
+		btnMngEdge.setBounds(155, 420, 75, 30);
+		add(btnMngEdge);
 		
 		BufferedImage myPicture;
 		try {
@@ -300,7 +316,6 @@ public class InputPanel extends JPanel implements ActionListener {
             this.incrementAdminClicked();
             stateContext.switchToState(new MouseActionSelectNode(stateContext));
             imageComponent.repaint();
-
         }
     }
     
@@ -310,6 +325,8 @@ public class InputPanel extends JPanel implements ActionListener {
 		signUpDialog.setVisible(true);
     }
 
+    
+    
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
 
@@ -327,10 +344,34 @@ public class InputPanel extends JPanel implements ActionListener {
         {
         	clickSignup();
         }
+        if(e.getSource()==btnMngNode){
+        	clickMngNode();
+        }
+        if(e.getSource()==btnMngEdge){
+        	clickMngEdge();
+        }
+        
+        
     }
 
 
-    public void incrementAdminClicked() {
+    private void clickMngEdge() {
+		// TODO Auto-generated method stub
+    	stateContext.switchToState(new MouseActionEditEdge(stateContext));
+//    	if(btnMngNode.isSelected()
+//    	btnMngNode.doClick();
+
+    	btnMngNode.setSelected(false);
+    	}
+
+	private void clickMngNode() {
+		// TODO Auto-generated method stub
+		stateContext.switchToState(new MouseActionEditNode(stateContext));
+		btnMngEdge.setSelected(false);
+		
+	}
+
+	public void incrementAdminClicked() {
         this.adminClicked++;
     }
 
@@ -425,5 +466,16 @@ public class InputPanel extends JPanel implements ActionListener {
 	public void setSignUp(JButton signUp) {
 		this.signUp = signUp;
 	}
+
+	public JToggleButton getBtnMngNode() {
+		return btnMngNode;
+	}
+
+	public JToggleButton getBtnMngEdge() {
+		return btnMngEdge;
+	}
+	
+	
+	
 
 };
