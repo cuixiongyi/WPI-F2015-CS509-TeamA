@@ -39,6 +39,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmAdd;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
+	private StateContext stateContext;
 
 	private final static String ADD = "Add Node";
 	private final static String DELETE = "Delete Node";
@@ -48,7 +49,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition) {
+	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, StateContext pStateContext) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
@@ -67,30 +68,16 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 		add(mntmEdit);
 		mntmEdit.addActionListener(this);
 
+
+		this.stateContext = pStateContext;
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mntmAdd) {
-			boolean tooClose = false;
+				stateContext.switchToState(new MouseActionAddNode(stateContext));
 
-			Map<Integer, List<Node>> allNodesNow = UIDataBuffer.getAllNodes();
-			List<Node> temp = allNodesNow.get(1);
-			for (int i = 0; i < temp.size(); i++) {
-				if (Math.abs(xPos - temp.get(i).getLocation().getX()) < closeRange
-						&& Math.abs(yPos - temp.get(i).getLocation().getY()) < closeRange) {
-					tooClose = true;
-				}
-			}
-			if (tooClose) {
-				JOptionPane.showMessageDialog(null, "Too close from another node.");
-			} else {
-				// Create a NodeInformationDialog
-				NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel, xPos, yPos);
-				nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
-				nodeInfo.setVisible(nodeInfo.isFocusable());
-
-			}
 		} else if (e.getSource() == mntmDelete) {
 			// TODO: Show a dialog to ask the user if they really want to delete
 			// TODO: Database
