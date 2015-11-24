@@ -265,10 +265,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		txtTo.setText(SEARCHWORD);
 		add(txtTo);
 		txtTo.setColumns(10);
-		InputPanel tmp = this;
-//		AutoSuggestor 
-//		AutoSuggestor autoSuggestorFrom = new AutoSuggestor(txtTo, userScreen, null,
-//				Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+		// InputPanel tmp = this;
+		// AutoSuggestor
+		// AutoSuggestor autoSuggestorFrom = new AutoSuggestor(txtTo,
+		// userScreen, null,
+		// Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
 	}
 
 	public void focusLost(FocusEvent e) {
@@ -276,171 +277,94 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		if (((JTextField) e.getSource()).getText().trim().equals(""))
 			((JTextField) e.getSource()).setText(SEARCHWORD);
 
-
 	}
 
 	public void focusGained(FocusEvent e) {
 		if (e.getSource() == txtFrom) {
 			if (txtFrom.getText().trim().equals(SEARCHWORD))
 				txtFrom.setText("");
-			if(autoSuggestorFrom==null){
-				autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null,
-						Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+			if (autoSuggestorFrom == null) {
+				autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null, Color.WHITE.brighter(), Color.BLACK,
+						Color.RED, 0.75f, 0.0, 0.0);
 				autoSuggestorFrom.setInputPanel(this);
 			}
 		}
 		if (e.getSource() == txtTo) {
 			if (txtTo.getText().trim().equals(SEARCHWORD))
 				txtTo.setText("");
-			if(autoSuggestorTo==null){
-				autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null,
-						Color.WHITE.brighter(), Color.BLACK, Color.RED, 0.75f, 0.0, 0.0);
+			if (autoSuggestorTo == null) {
+				autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null, Color.WHITE.brighter(), Color.BLACK,
+						Color.RED, 0.75f, 0.0, 0.0);
 				autoSuggestorTo.setInputPanel(this);
 			}
 
 		}
-	
 
+	}
 
-	    // TODO: Make the map related things into a enum class..
-		this.getComboBoxMap().addItemListener(new ItemListener() {
-				@Override
-				public void itemStateChanged(ItemEvent e) {
-                    int currentMapID = -1;
-						if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
-								//selectImage("Final_Campus_Map", imageComponent);
-                                currentMapID = 1;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-G")) {
-								//selectImage("Final_AK_Ground_Floor", imageComponent);
-                                currentMapID = 2;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-1")) {
-								//selectImage("Final_AK_First_Floor", imageComponent);
-                                currentMapID = 3;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-2")) {
-								//selectImage("Final_AK_Second_Floor", imageComponent);
-                                currentMapID = 4;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-3")) {
-								//selectImage("Final_AK_Third_Floor", imageComponent);
-                                currentMapID = 5;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-1")) {
-								//selectImage("Final_Project_Center_First_Floor", imageComponent);
-                                currentMapID = 6;
-							} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("PC-2")) {
-								//selectImage("Final_Project_Center_Second_Floor", imageComponent);
-                                currentMapID = 7;
-							}
-                            UIDataBuffer.setCurrentMapId(currentMapID);
-                            stateContext.setCurrentMap(currentMapID);
-							InputPanel.this.getBtnSynchronize().doClick();
-							imageComponent.repaint();
+	public void clickSync() {
+		Database.InitFromDatabase();
+		imageComponent.repaint();
+		/*
+		 * comboSourceModel.removeAllElements();
+		 * comboDesModel.removeAllElements(); Map<Integer, List<Node>> allNodes
+		 * = UIDataBuffer.getAllNodes(); if (allNodes != null &&
+		 * allNodes.get(1).size() != 0) { for (int i = 0; i <
+		 * allNodes.get(1).size(); i++) { if
+		 * (allNodes.get(1).get(i).getName().toString().equals("Location"))
+		 * continue;
+		 * comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString
+		 * ());
+		 * comboDesModel.addElement(allNodes.get(1).get(i).getName().toString())
+		 * ; } }
+		 */
+	}
 
-                }
+	public void clickLogin() {
+		if (adminClicked % 2 == 0) {
+			AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
+			adminDialog.setStateContext(stateContext);
+			adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+			adminDialog.setVisible(isFocusable());
+			// stateContext.switchToAdminUser();
+			imageComponent.repaint();
 
-			});
-/*
-        // Click the SEARCH button..
-        this.btnSearch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent arg0){
+		} else {
 
-                // TODO: need to check if the input is valid!!
+			JOptionPane.showMessageDialog(null, "You have logged out");
+			Database.InitFromDatabase();
+			InputPanel.this.getBtnNeighborManage().setVisible(false);
+			InputPanel.this.getAdminLogin().setText(LOGIN);
+			InputPanel.this.getBtnSynchronize().setVisible(false);
+			this.incrementAdminClicked();
+			stateContext.setNormalUser();
+			imageComponent.repaint();
 
-                // TODO: make the AlgoController singleton and use setter and
-                // getter to operate the instance..
+		}
+	}
 
-                // We will go to the backend here.. For now, all the resources
-                // should be ready!
-                AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
-                        inputPanel.getDesPoint());
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 
+		// TODO: we need a pop up window here to verify the admin role.
+		// If it is the admin, give it the admin mouse click event. If
+		// not, give it normal user
+		if (e.getSource() == getAdminLogin()) {
+			clickLogin();
+		}
+		if (e.getSource() == btnSynchronize) {
+			clickSync();
+		}
+	}
 
+	public void incrementAdminClicked() {
+		this.adminClicked++;
+	}
 
-                // get a list of a map, so that we can draw line on that map..
-                pathNodeList = null;
-                pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
+	public void setImageComponent(ImageComponent imageComponent2) {
+		this.imageComponent = imageComponent2;
 
-				// get the result of the search..
-				List<Node> path = algoController.getRoute();
-				stateContext.setPath(path);
-                // we need to give all the information to the repaint metho
-                imageComponent.repaint();
-            }
-        });
-
-        */
-        this.getAdminLogin().addActionListener(this);
-
-
-    }
-
-    public void clickSync() {
-        Database.InitFromDatabase();
-        imageComponent.repaint();
-       /*
-        comboSourceModel.removeAllElements();
-        comboDesModel.removeAllElements();
-        Map<Integer, List<Node>> allNodes = UIDataBuffer.getAllNodes();
-        if (allNodes != null && allNodes.get(1).size() != 0) {
-            for (int i = 0; i < allNodes.get(1).size(); i++) {
-                if (allNodes.get(1).get(i).getName().toString().equals("Location"))
-                    continue;
-                comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-                comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
-            }
-        }
-        */
-    }
-
-    public void clickLogin()
-    {
-        if (adminClicked % 2 == 0) {
-            AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
-            adminDialog.setStateContext(stateContext);
-            adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-            adminDialog.setVisible(isFocusable());
-            //stateContext.switchToAdminUser();
-            imageComponent.repaint();
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, "You have logged out");
-            Database.InitFromDatabase();
-            InputPanel.this.getBtnNeighborManage().setVisible(false);
-            InputPanel.this.getAdminLogin().setText(LOGIN);
-            InputPanel.this.getBtnSynchronize().setVisible(false);
-            this.incrementAdminClicked();
-            stateContext.setNormalUser();
-            imageComponent.repaint();
-
-        }
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-
-        // TODO: we need a pop up window here to verify the admin role.
-        // If it is the admin, give it the admin mouse click event. If
-        // not, give it normal user
-        if(e.getSource()==getAdminLogin())
-        {
-            clickLogin();
-        }
-        if (e.getSource() == btnSynchronize) {
-            clickSync();
-        }
-    }
-
-
-    public void incrementAdminClicked() {
-        this.adminClicked++;
-    }
-
-
-    public void setImageComponent(ImageComponent imageComponent2)
-	{
-        this.imageComponent = imageComponent2;
-       
-    }
+	}
 
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
