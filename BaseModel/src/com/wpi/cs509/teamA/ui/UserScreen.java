@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -165,13 +166,15 @@ public class UserScreen extends JFrame {
         inputPanel.setImageComponent(this.imgComponent);
 
         stateContext = new StateContext();
-
+       
 
         imgComponent.setStateContext(stateContext);
+        PaintHelper.setStateContext(stateContext);
         inputPanel.setStateContext(stateContext);
         stateContext.setImageComponent(imgComponent);
         imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
+        
 	}
 
 	public JButton getBtnNeighborManage() {
