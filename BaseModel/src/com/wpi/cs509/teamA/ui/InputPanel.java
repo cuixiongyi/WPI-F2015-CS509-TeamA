@@ -285,7 +285,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 				txtFrom.setText("");
 			if (autoSuggestorFrom == null) {
 				autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null, Color.WHITE.brighter(), Color.BLACK,
-						Color.RED, 0.75f, 0.0, 0.0);
+						Color.GRAY, 0.75f, 0.0, 0.0);
 				autoSuggestorFrom.setInputPanel(this);
 			}
 		}
@@ -294,7 +294,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 				txtTo.setText("");
 			if (autoSuggestorTo == null) {
 				autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null, Color.WHITE.brighter(), Color.BLACK,
-						Color.RED, 0.75f, 0.0, 0.0);
+						Color.GRAY, 0.75f, 0.0, 0.0);
 				autoSuggestorTo.setInputPanel(this);
 			}
 
