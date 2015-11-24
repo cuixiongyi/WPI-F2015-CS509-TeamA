@@ -58,9 +58,6 @@ public class MouseActionEditEdge  extends MouseActionState {
             //
         } else if (e.getButton() == MouseEvent.BUTTON3) {
 
-            NodeManageMenu nodeManageMenu = new NodeManageMenu(imageComponent, xPos, yPos);
-            nodeManageMenu.show(e.getComponent(), xPos, yPos);
-
         }
 
         return false;

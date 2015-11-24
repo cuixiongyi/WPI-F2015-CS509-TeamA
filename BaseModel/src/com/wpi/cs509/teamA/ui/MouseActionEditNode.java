@@ -14,10 +14,10 @@ import java.util.Map;
 /**
  * Created by xiongyi on 11/23/15.
  */
-public class MouseActionAddNode extends MouseActionState {
+public class MouseActionEditNode extends MouseActionState {
 
 
-    public MouseActionAddNode(StateContext pStateContext) {
+    public MouseActionEditNode(StateContext pStateContext) {
         super(pStateContext);
 
     }

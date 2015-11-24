@@ -1,28 +1,11 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.border.EmptyBorder;
 
-import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.util.UIDataBuffer;
-
-import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Map;
 
-import javax.swing.JTextField;
-import java.awt.Dialog.ModalityType;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 /**
  * This is the class that administrators uses to add nodes to database
@@ -76,7 +59,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mntmAdd) {
-				stateContext.switchToState(new MouseActionAddNode(stateContext));
+				stateContext.switchToState(new MouseActionEditNode(stateContext));
 
 		} else if (e.getSource() == mntmDelete) {
 			// TODO: Show a dialog to ask the user if they really want to delete
