@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.ui;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 import javax.swing.*;
@@ -49,6 +50,7 @@ public class MouseActionEditNode extends MouseActionState {
     @Override
     public void paintOnImage(Graphics2D g2) {
         // TODO this is a hack, need to paint newly added node here
-        nodesToPaint;
+        PaintHelper.paintNodes(nodesToPaint, g2);
+        ;
     }
 }

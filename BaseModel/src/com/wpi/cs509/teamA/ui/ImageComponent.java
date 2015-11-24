@@ -150,29 +150,6 @@ public class ImageComponent extends JComponent {
         return true;
     }
 
-    private void paintNormalUser(Graphics2D g2) {
-        /**
-         Paint path
-         */
-        List<Node> pathNode = this.stateContext.getPath();
-        PaintHelper.paintPath(pathNode, g2);
-        List<Node> iconNodes = this.getStateContext().getIconNodes();
-//        PaintHelper.paintIcons(iconNodes, g2);
-
-
-        /*
-        g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
-        g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
-        Font font = g.getFont().deriveFont(20.0f);
-        g.setFont(font);
-        g2.drawString("Source", sourceX, sourceY - ovalOffset);
-        g2.drawString("Destination", desX, desY - ovalOffset);
-*/
-    }
-
-    private void paintAdmin(Graphics2D g2) {
-
-    }
 
 
 	@Override
@@ -191,14 +168,8 @@ public class ImageComponent extends JComponent {
         g2.drawImage(image, imageXpos, imageYpos, image.getWidth(this), image.getHeight(this), this);
         setForeground(Color.RED);
 
-        if (stateContext.isAdmin()) {
-            paintAdmin(g2);
-
-
-        }
-        else {
-            paintNormalUser(g2);
-
+		{
+			stateContext.paintOnImage(g2);
 
             /// CXY test
             GeneralMap tmp = stateContext.getCurrentMap();

@@ -6,6 +6,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -32,14 +33,34 @@ public class PaintHelper {
 //        }
 //	}
 
+
+    public static void paintNodes(List<Node> nodes, Graphics2D g2) {
+        if (null == nodes)
+            return;
+        for (Node node : nodes) {
+            paintNode(node, g2);
+        }
+
+    }
+
    public static void paintNode(Node node, Graphics2D g2) {
         if (null == node)
             return;
-		Coordinate xy = node.getLocation();
+		Coordinate xy = transferCoor(node.getLocation());
 		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
     }
 
-   public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
+    public static void paintEdges(List<Edge> edges, Graphics2D g2) {
+        for (Edge edge : edges) {
+            paintEdge(edge.getNode1(), edge.getNode2(), g2);
+        }
+    }
+
+    public static void paintEdge(Edge edge, Graphics2D g2) {
+        paintEdge(edge.getNode1(), edge.getNode2(), g2);
+    }
+
+    public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
         Coordinate start = transferCoor(nodeSrc.getLocation());
         Coordinate end = transferCoor(nodeDest.getLocation());
         if (null == nodeSrc || null == nodeDest)

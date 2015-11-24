@@ -9,6 +9,7 @@ import java.util.List;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.ui.ImageComponent;
 import jdk.nashorn.internal.runtime.ECMAException;
@@ -95,7 +96,7 @@ public class StateContext {
         return myState.execute(e);
     }
 
-
+	public void paintOnImage(Graphics2D g2) {myState.paintOnImage(g2);}
 
 	/**
 		setter and getter

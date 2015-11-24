@@ -4,6 +4,7 @@ import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,6 +81,6 @@ public class MouseActionEditEdge  extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
 
         //TODO draw newly added edge
-        edgeToPaint;
+        PaintHelper.paintEdges(edgeToPaint, g2);
     }
 }
