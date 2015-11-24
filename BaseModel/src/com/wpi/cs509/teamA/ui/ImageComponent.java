@@ -67,6 +67,13 @@ public class ImageComponent extends JComponent {
 	private InputPanel inputPanel;
 
 	private ImageMouseListener mouseListener;
+	
+	private int imageXpos=0;
+	private int imageYpos=0;
+	private int imageStartXpos=0;
+	private int imageStartYpos=0;
+	private int pressxPos;
+	private int pressyPos;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -202,7 +209,7 @@ public class ImageComponent extends JComponent {
 
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+        g2.drawImage(image, imageXpos, imageYpos, image.getWidth(this), image.getHeight(this), this);
         setForeground(Color.RED);
 
         if (stateContext.isAdmin()) {
@@ -277,6 +284,68 @@ public class ImageComponent extends JComponent {
 	public StateContext getStateContext() {
 		return this.stateContext;
 	}
+
+
+	public int getImageXpos() {
+		return imageXpos;
+	}
+
+
+	public void setImageXpos(int imageXpos) {
+		this.imageXpos = imageXpos;
+	}
+
+
+	public int getImageYpos() {
+		return imageYpos;
+	}
+
+
+	public void setImageYpos(int imageYpos) {
+		this.imageYpos = imageYpos;
+	}
+
+
+	public int getImageStartXpos() {
+		return imageStartXpos;
+	}
+
+
+	public void setImageStartXpos(int imageStartXpos) {
+		this.imageStartXpos = imageStartXpos;
+	}
+
+
+	public int getImageStartYpos() {
+		return imageStartYpos;
+	}
+
+
+	public void setImageStartYpos(int imageStartYpos) {
+		this.imageStartYpos = imageStartYpos;
+	}
+
+
+	public int getPressxPos() {
+		return pressxPos;
+	}
+
+
+	public void setPressxPos(int pressxPos) {
+		this.pressxPos = pressxPos;
+	}
+
+
+	public int getPressyPos() {
+		return pressyPos;
+	}
+
+
+	public void setPressyPos(int pressyPos) {
+		this.pressyPos = pressyPos;
+	}
+	
+	
 
 
 }
