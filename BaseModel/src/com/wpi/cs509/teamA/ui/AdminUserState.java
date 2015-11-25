@@ -23,7 +23,7 @@ public class AdminUserState extends UserState implements ActionListener {
 		super(pStateContext);
 		numNodeBtn = 0;
 		numEdgeBtn = 0;
-		
+
 		btnMngNode = new JToggleButton("Mangage Node");
 		btnMngNode.addActionListener(this);
 		// btnMngNode.setVisible(true);
@@ -74,7 +74,7 @@ public class AdminUserState extends UserState implements ActionListener {
 
 	private void clickMngEdge() {
 		// TODO Auto-generated method stub
-		if (numEdgeBtn%2==1) {
+		if (numEdgeBtn % 2 == 1) {
 			btnMngEdge.setSelected(false);
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
 			numEdgeBtn++;
@@ -87,8 +87,8 @@ public class AdminUserState extends UserState implements ActionListener {
 
 	private void clickMngNode() {
 		// TODO Auto-generated method stub
-		if(numNodeBtn%2==1) {
-		//	System.out.println(stateContext.getMyState().getClass());
+		if (numNodeBtn % 2 == 1) {
+			// System.out.println(stateContext.getMyState().getClass());
 			btnMngNode.setSelected(false);
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
 			numNodeBtn++;
@@ -122,7 +122,6 @@ public class AdminUserState extends UserState implements ActionListener {
 			inputPanel.repaint();
 			return true;
 		}
-
 		return false;
 	}
 
