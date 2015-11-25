@@ -34,17 +34,18 @@ public class StateContext {
 	 * The current state
 	 */
 	private MouseActionState myState;
+	private UserState myUserState;
 
 	private UserAccount myAccout;
 
-    public ImageComponent getImageComponent() {
-        return imageComponent;
-    }
+	public ImageComponent getImageComponent() {
+		return imageComponent;
+	}
 
+	private ImageComponent imageComponent;
+	private InputPanel inputPanel;
 
-    private ImageComponent imageComponent;
-
-    private Node startNode;
+	private Node startNode;
 	private Node endNode;
 	private List<Node> path;
 
@@ -55,8 +56,7 @@ public class StateContext {
 	private List<Integer> filterNodeType;
 	private List<Node> iconNodes;
 
-
-    //private List<GeneralMap> allMaps;
+	// private List<GeneralMap> allMaps;
 	private GeneralMap currentMap;
 
 	/**
@@ -66,15 +66,16 @@ public class StateContext {
 
 		this.filterNodeType = new ArrayList<Integer>();
 		this.path = new ArrayList<Node>();
-		//this.allMaps = new ArrayList<GeneralMap>();
+		// this.allMaps = new ArrayList<GeneralMap>();
 		this.iconNodes = new ArrayList<Node>();
 
 		myState = new MouseActionSelectNode(this);
+		myUserState = new NormalUserState(this);
 		myAccout = new UserAccount();
 
 		this.switchToState(new MouseActionSelectNode(this));
+		this.switchUserState(new NormalUserState(this));
 		this.setCurrentMap(1);
-
 
 	}
 
@@ -85,22 +86,31 @@ public class StateContext {
 	 *            the new state the context will be.
 	 */
 	public void switchToState(MouseActionState newState) {
-        if (null != myState) {
-            myState.cleanup();
-        }
+		if (null != myState) {
+			myState.cleanup();
+		}
 		this.myState = newState;
 	}
 
-    public boolean execute(MouseEvent e) {
-        return myState.execute(e);
-    }
+	public void switchUserState(UserState newState) {
+		if (null != myUserState) {
+			myUserState.cleanup();
+		}
+		this.myUserState = newState;
+	}
 
-
+	public boolean execute(MouseEvent e) {
+		return myState.execute(e);		
+	}
+	
+	public boolean executeUser(MouseEvent e) {
+		return myUserState.execute(e);
+	}
+	
 
 	/**
-		setter and getter
+	 * setter and getter
 	 */
-
 
 	/**
 	 * Changes the currently displayed map
@@ -115,6 +125,7 @@ public class StateContext {
 		// TODO Do some clean up
 
 	}
+
 	public GeneralMap getCurrentMap() {
 		return currentMap;
 	}
@@ -123,7 +134,7 @@ public class StateContext {
 		return iconNodes;
 	}
 
-    public Node getStartNode() {
+	public Node getStartNode() {
 		return startNode;
 	}
 
@@ -147,10 +158,9 @@ public class StateContext {
 		this.path = path;
 	}
 
-
 	/**
-	 * Set imageComponent at the same time init
-	 * normal and admin MouseListener
+	 * Set imageComponent at the same time init normal and admin MouseListener
+	 * 
 	 * @param imageComponent
 	 */
 	public void setImageComponent(ImageComponent imageComponent) {
@@ -161,5 +171,22 @@ public class StateContext {
 		return myAccout.isAdmin();
 	}
 
+	public void setInputPanel(InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
+	}
+
+	public InputPanel getInputPanel() {
+		return inputPanel;
+	}
+
+	public MouseActionState getMyState() {
+		return myState;
+	}
+
+	public UserState getMyUserState() {
+		return myUserState;
+	}
+	
+	
 
 }

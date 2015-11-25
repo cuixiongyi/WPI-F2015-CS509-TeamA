@@ -15,7 +15,7 @@ public abstract class MouseActionState {
     protected int yPos;
 
     protected ImageComponent imageComponent;
-            ;
+            
     public MouseActionState(StateContext pStateContext) {
         this.stateContext = pStateContext;
         this.xPos = -1;

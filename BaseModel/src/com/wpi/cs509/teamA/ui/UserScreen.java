@@ -170,6 +170,7 @@ public class UserScreen extends JFrame {
         imgComponent.setStateContext(stateContext);
         inputPanel.setStateContext(stateContext);
         stateContext.setImageComponent(imgComponent);
+        stateContext.setInputPanel(inputPanel);
         imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
 	}
