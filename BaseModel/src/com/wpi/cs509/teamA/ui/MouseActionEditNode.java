@@ -4,7 +4,6 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.PaintHelper;
-import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,34 +15,36 @@ import java.util.Map;
  * Created by xiongyi on 11/23/15.
  */
 public class MouseActionEditNode extends MouseActionState {
-
-
-    public MouseActionEditNode(StateContext pStateContext) {
+//	private JToggleButton btnMngNode; 	
+	
+	public MouseActionEditNode(StateContext pStateContext) {
         super(pStateContext);
-
     }
 
-    @Override
-    public boolean cleanup() {
+	@Override
+	public boolean cleanup() {
 
-        return false;
-    }
+		return false;
+	}
+
 
     @Override
     public boolean execute(MouseEvent e) {
 
-        Node node = Database.getNodeFromCoordinate(new Coordinate(e.getX(), e.getY()), stateContext.getCurrentMap().getMapId());
+	    if (e.getButton() == MouseEvent.BUTTON1) {
 
-        if (null != node) {
-            JOptionPane.showMessageDialog(null, "Too close from another node.");
-        } else {
-            // Create a NodeInformationDialog
-            NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext.getImageComponent(), e.getX(), e.getY());
-            nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-            nodeInfo.setVisible(nodeInfo.isFocusable());
-            nodesToPaint.add(node);
+            Node node = Database.getNodeFromCoordinate(new Coordinate(e.getX(), e.getY()), stateContext.getCurrentMap().getMapId());
+
+            if (null != node) {
+                JOptionPane.showMessageDialog(null, "Too close from another node.");
+            } else {
+                // Create a NodeInformationDialog
+                NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext.getImageComponent(), e.getX(), e.getY());
+                nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                nodeInfo.setVisible(nodeInfo.isFocusable());
+                nodesToPaint.add(node);
+            }
         }
-
         return true;
     }
 

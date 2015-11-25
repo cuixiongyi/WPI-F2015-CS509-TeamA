@@ -20,7 +20,9 @@ public class ImageMouseListener implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
         stateContext.execute(e);
+
     }
 
 

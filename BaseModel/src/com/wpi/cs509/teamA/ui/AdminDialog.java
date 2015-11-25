@@ -57,13 +57,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private final static String LOG = "Login";
 	private final static String LOGOUT = "Log out";
 
-	// private JFrame controllingFrame;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
 
-	}
 
 	/**
 	 * Create the dialog.
@@ -143,10 +137,13 @@ public class AdminDialog extends JDialog implements ActionListener {
 	public void successfulLogin() {
 		AdminDialog.this.setVisible(false);
 		inputPanel.incrementAdminClicked();
-		inputPanel.getBtnNeighborManage().setVisible(true);
+	//	inputPanel.getBtnNeighborManage().setVisible(true);
 		inputPanel.getAdminLogin().setText(LOGOUT);
-		inputPanel.getBtnSynchronize().setVisible(true);
+//		inputPanel.getBtnSynchronize().setVisible(true);
+//		inputPanel.getBtnMngEdge().setVisible(true);
+//		inputPanel.getBtnMngNode().setVisible(true);	
 		stateContext.switchToState(new MouseActionAdminUser(stateContext));
+		stateContext.switchUserState(new AdminUserState(stateContext));
 		imgPanel.repaint();
 	}
 

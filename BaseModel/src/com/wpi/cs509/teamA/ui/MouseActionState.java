@@ -20,10 +20,7 @@ public abstract class MouseActionState {
 
     protected ImageComponent imageComponent;
 
-
-
     protected List<Node> nodesToPaint;
-
 
     public MouseActionState(StateContext pStateContext) {
         this.stateContext = pStateContext;
