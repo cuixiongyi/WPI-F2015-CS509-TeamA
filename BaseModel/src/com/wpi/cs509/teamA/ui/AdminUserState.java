@@ -1,12 +1,10 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 import com.wpi.cs509.teamA.util.Database;
@@ -16,6 +14,7 @@ public class AdminUserState extends UserState implements ActionListener {
 	private JButton btnSynchronize;
 	private JToggleButton btnMngNode;
 	private JToggleButton btnMngEdge;
+
 	private static int numNodeBtn;
 	private static int numEdgeBtn;
 
@@ -45,7 +44,6 @@ public class AdminUserState extends UserState implements ActionListener {
 
 		inputPanel.repaint();
 
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -56,7 +54,7 @@ public class AdminUserState extends UserState implements ActionListener {
 
 	public void clickSync() {
 		Database.InitFromDatabase();
-		this.imageCompontent.repaint();
+		this.imageComponent.repaint();
 		/*
 		 * comboSourceModel.removeAllElements();
 		 * comboDesModel.removeAllElements(); Map<Integer, List<Node>> allNodes
@@ -73,34 +71,33 @@ public class AdminUserState extends UserState implements ActionListener {
 	}
 
 	private void clickMngEdge() {
-		// TODO Auto-generated method stub
-		if (numEdgeBtn % 2 == 1) {
+
+        if (numEdgeBtn % 2 == 1) {
 			btnMngEdge.setSelected(false);
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
-			numEdgeBtn++;
 		} else {
 			stateContext.switchToState(new MouseActionEditEdge(stateContext));
 			btnMngNode.setSelected(false);
-			numEdgeBtn++;
 		}
-	}
+        numEdgeBtn++;
+
+    }
 
 	private void clickMngNode() {
-		// TODO Auto-generated method stub
-		if (numNodeBtn % 2 == 1) {
+
+        if (numNodeBtn % 2 == 1) {
 			// System.out.println(stateContext.getMyState().getClass());
 			btnMngNode.setSelected(false);
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
-			numNodeBtn++;
 		} else {
 			stateContext.switchToState(new MouseActionEditNode(stateContext));
 			btnMngEdge.setSelected(false);
-			numNodeBtn++;
 		}
-	}
+        numNodeBtn++;
+
+    }
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 		if (e.getSource() == btnMngNode) {
 			clickMngNode();
@@ -113,7 +110,7 @@ public class AdminUserState extends UserState implements ActionListener {
 
 	@Override
 	public boolean execute(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		if (e.getButton() == MouseEvent.BUTTON3) {
 			System.out.println("hhe");
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));

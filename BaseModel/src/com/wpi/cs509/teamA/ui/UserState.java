@@ -4,13 +4,13 @@ import java.awt.event.MouseEvent;
 
 public abstract class UserState {
 	 protected InputPanel inputPanel;
-	 protected ImageComponent imageCompontent;
+	 protected ImageComponent imageComponent;
 	 protected StateContext stateContext;
 	 
 	 public UserState(StateContext pStateContext) {
 	        this.stateContext = pStateContext;
 	        this.inputPanel = pStateContext.getInputPanel();
-	        this.imageCompontent = pStateContext.getImageComponent();
+	        this.imageComponent = pStateContext.getImageComponent();
 	    };
 	
 	

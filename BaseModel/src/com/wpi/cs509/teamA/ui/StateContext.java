@@ -100,12 +100,10 @@ public class StateContext {
 	}
 
 	public boolean execute(MouseEvent e) {
+		myUserState.execute(e);
 		return myState.execute(e);		
 	}
-	
-	public boolean executeUser(MouseEvent e) {
-		return myUserState.execute(e);
-	}
+
 	
 
 	/**
