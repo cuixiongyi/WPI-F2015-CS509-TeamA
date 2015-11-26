@@ -157,9 +157,11 @@ public class SignupDialog extends JDialog implements ActionListener  {
 				JOptionPane.showMessageDialog(null, "Password not the same. Try again.", "Error Message",
 						JOptionPane.ERROR_MESSAGE);
 				passwordField.selectAll();
-				userName.setText("");
-                passwordField.setText("");
-				
+				passwordField.setText("");
+				passwordField2.setText("");
+
+				//userName.setText("");
+
 			}
 			// Zero out the possible password, for security.
 
@@ -193,7 +195,7 @@ public class SignupDialog extends JDialog implements ActionListener  {
 		{
 			if(username.equals(admin.toString()))
 			{
-				System.out.println("admin"+admin);
+				System.out.println("admin "+admin);
 				return true;
 				
 			}

@@ -131,6 +131,10 @@ public class AdminDialog extends JDialog implements ActionListener {
 				successfulLogin();			
 				dispose();
 				}
+			else {
+                //TODO add a warning box for wrong password
+
+            }
 		}
 	}
 
