@@ -39,9 +39,6 @@ public class StateContext {
 
 	private UserAccount myAccout;
 
-	public ImageComponent getImageComponent() {
-		return imageComponent;
-	}
 
 	private ImageComponent imageComponent;
 	private InputPanel inputPanel;
@@ -107,7 +104,8 @@ public class StateContext {
 	}
 
     public void paintOnImage(Graphics2D g2) {
-        myState.paintOnImage(g2);
+
+		myState.paintOnImage(g2);
     }
 
 
@@ -161,12 +159,6 @@ public class StateContext {
 		this.path = path;
 	}
 
-
-	/**
-	 * Set imageComponent at the same time init normal and admin MouseListener
-	 * 
-	 * @param imageComponent
-	 */
 	public void setImageComponent(ImageComponent imageComponent) {
 		this.imageComponent = imageComponent;
 	}
@@ -190,7 +182,11 @@ public class StateContext {
 	public UserState getMyUserState() {
 		return myUserState;
 	}
-	
-	
+
+    public ImageComponent getImageComponent() {
+        return imageComponent;
+    }
+
+
 
 }
