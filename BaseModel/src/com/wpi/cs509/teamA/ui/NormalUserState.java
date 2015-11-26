@@ -6,6 +6,7 @@ public class NormalUserState extends UserState {
 
 	public NormalUserState(StateContext pStateContext) {
 		super(pStateContext);
+	
 	}
 
 

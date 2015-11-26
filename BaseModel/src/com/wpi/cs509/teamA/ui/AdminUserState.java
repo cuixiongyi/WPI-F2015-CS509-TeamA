@@ -49,6 +49,9 @@ public class AdminUserState extends UserState implements ActionListener {
 	@Override
 	public boolean cleanup() {
 		// TODO Auto-generated method stub
+		this.btnMngEdge.setVisible(false);
+		this.btnMngNode.setVisible(false);
+		this.btnSynchronize.setVisible(false);
 		return false;
 	}
 
@@ -117,6 +120,14 @@ public class AdminUserState extends UserState implements ActionListener {
 			btnMngNode.setSelected(false);
 			btnMngEdge.setSelected(false);
 			inputPanel.repaint();
+			if(numNodeBtn%2==1){
+				numNodeBtn++;
+			}
+			if(numEdgeBtn%2==1){
+				numEdgeBtn++;
+			}
+			
+			
 			return true;
 		}
 		return false;
