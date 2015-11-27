@@ -175,12 +175,9 @@ public class UserScreen extends JFrame {
         stateContext.setInputPanel(inputPanel);
         imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
-        
+		imgComponent.repaint();
 	}
 
-	public JButton getBtnNeighborManage() {
-		return this.btnNeighborManage;
-	}
 
 	public static UserScreen launchUserScreen() {
 		if (userScreen == null) {
@@ -209,5 +206,13 @@ public class UserScreen extends JFrame {
 		});
 
 	}
+
+    /**
+     * Legacy code
+     */
+	public JButton getBtnNeighborManage() {
+		return this.btnNeighborManage;
+	}
+
 
 }

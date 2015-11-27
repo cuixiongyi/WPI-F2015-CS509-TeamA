@@ -2,17 +2,13 @@ package com.wpi.cs509.teamA.ui;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.ui.ImageComponent;
-import jdk.nashorn.internal.runtime.ECMAException;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -37,7 +33,7 @@ public class StateContext {
 	private MouseActionState myState;
 	private UserState myUserState;
 
-	private UserAccount myAccout;
+	private UserAccount myAccount;
 
 
 	private ImageComponent imageComponent;
@@ -69,7 +65,7 @@ public class StateContext {
 
 		myState = new MouseActionSelectNode(this);
 		myUserState = new NormalUserState(this);
-		myAccout = new UserAccount();
+		myAccount = new UserAccount();
 
 		this.switchToState(new MouseActionSelectNode(this));
 		this.switchUserState(new NormalUserState(this));
@@ -164,7 +160,7 @@ public class StateContext {
 	}
 
 	public boolean isAdmin() {
-		return myAccout.isAdmin();
+		return myAccount.isAdmin();
 	}
 
 	public void setInputPanel(InputPanel inputPanel) {

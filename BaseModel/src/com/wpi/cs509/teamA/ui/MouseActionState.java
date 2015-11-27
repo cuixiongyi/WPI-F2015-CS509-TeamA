@@ -20,14 +20,13 @@ public abstract class MouseActionState {
 
     protected ImageComponent imageComponent;
 
-    protected List<Node> nodesToPaint;
 
     public MouseActionState(StateContext pStateContext) {
         this.stateContext = pStateContext;
         this.xPos = -1;
         this.yPos = -1;
         this.imageComponent = pStateContext.getImageComponent();
-        this.nodesToPaint = null;
+
     };
 
     abstract public void paintOnImage(Graphics2D g2);
@@ -36,11 +35,4 @@ public abstract class MouseActionState {
 
     abstract public boolean cleanup();
 
-    public List<Node> getNodesToPaint() {
-        return nodesToPaint;
-    }
-
-    public void setNodesToPaint(List<Node> nodesToPaint) {
-        this.nodesToPaint = nodesToPaint;
-    }
 }

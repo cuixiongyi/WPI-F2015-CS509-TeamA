@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by xiongyi on 11/23/15.
@@ -24,8 +25,12 @@ public class MouseActionEditEdge  extends MouseActionState {
 
     private java.util.List<Edge> edgeToPaint;
 
+    private List<Node> nodesToPaint;
+
     public MouseActionEditEdge(StateContext pStateContext) {
         super(pStateContext);
+
+        nodesToPaint = new ArrayList<>();
 
         this.btnNeighborManage = imageComponent.getInputPanel().getBtnNeighborManage();
         this.btnNeighborManage.addActionListener(new ActionListener() {
@@ -41,6 +46,7 @@ public class MouseActionEditEdge  extends MouseActionState {
 
     @Override
     public boolean cleanup() {
+
         return false;
     }
 

@@ -51,12 +51,16 @@ public class PaintHelper {
     }
 
     public static void paintEdges(List<Edge> edges, Graphics2D g2) {
+        if (null == edges )
+            return;
         for (Edge edge : edges) {
             paintEdge(edge.getNode1(), edge.getNode2(), g2);
         }
     }
 
     public static void paintEdge(Edge edge, Graphics2D g2) {
+        if (null == edge )
+            return;
         paintEdge(edge.getNode1(), edge.getNode2(), g2);
     }
 

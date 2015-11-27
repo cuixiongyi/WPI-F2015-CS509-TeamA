@@ -40,6 +40,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private JTextField mapidTextField;
 	private int xPos;
 	private int yPos;
+
+    private StateContext stateContext;
 	private ImageComponent imagePanel;
 
 	private final static String COORDINATE = "Node Coordinate";
@@ -53,10 +55,11 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeInformationDialog(ImageComponent imageComponent, int xPosition, int yPosition) {
+	public NodeInformationDialog(StateContext pStateContext, int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
-		imagePanel = imageComponent;
+        this.stateContext = pStateContext;
+		imagePanel = stateContext.getImageComponent();
 		setBounds(100, 100, 420, 250);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,7 +111,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		mapidTextField = new JTextField();
 		mapidTextField.setBounds(192, 144, 96, 27);
-		mapidTextField.setText(String.valueOf(UIDataBuffer.getCurrentMapId()));
+		mapidTextField.setText(String.valueOf(stateContext.getCurrentMap().getMapId()));
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
 
@@ -157,17 +160,16 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 			} else {
 				// Save node information
 				Node node = new Node();
-				Coordinate coordinate = new Coordinate();
-				coordinate.setX(xPos);
-				coordinate.setY(yPos);
+				Coordinate coordinate = new Coordinate(this.xPos, this.yPos);
 				node.setLocation(coordinate);
-				node.setMap(Database.getMapEntityFromMapId(Integer.parseInt(mapidTextField.getText())));
+				node.setMap(this.stateContext.getCurrentMap());
 				node.setName(nameTextField.getText());
 				node.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
 
 				// call database save function..
 				// TODO: Maybe we can use mutlti-thread here..
 				node.saveNode();
+                Database.InitFromDatabase();
 
 				// show what we have saved..
 				imagePanel.repaint();
@@ -176,4 +178,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		}
 
 	}
+
+    public StateContext getStateContext() {
+        return stateContext;
+    }
 }
