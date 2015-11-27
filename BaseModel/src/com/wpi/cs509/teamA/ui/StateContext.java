@@ -96,7 +96,9 @@ public class StateContext {
 
 	public boolean execute(MouseEvent e) {
 		myUserState.execute(e);
-		return myState.execute(e);		
+		boolean ret =  myState.execute(e);
+		getImageComponent().repaint();
+		return ret;
 	}
 
     public void paintOnImage(Graphics2D g2) {

@@ -23,9 +23,11 @@ public class MouseActionEditEdge  extends MouseActionState {
 
     private JButton btnNeighborManage;
 
-    private java.util.List<Edge> edgeToPaint;
+    private java.util.List<Edge> edgeToAdd;
 
     private List<Node> nodesToPaint;
+
+    private boolean hasFirstNode;
 
     public MouseActionEditEdge(StateContext pStateContext) {
         super(pStateContext);
@@ -39,6 +41,7 @@ public class MouseActionEditEdge  extends MouseActionState {
                 neighborDialog.setStateContext(stateContext);
                 neighborDialog.setVisible(true);
                 neighborDialog.setAlwaysOnTop(true);
+                hasFirstNode = false;
             }
         });
 
@@ -65,14 +68,17 @@ public class MouseActionEditEdge  extends MouseActionState {
             {
                 return false;
             }
-            if (0 == nodesToPaint.size()) {
+            if (false == hasFirstNode) {
                 nodesToPaint.add(node);
+                hasFirstNode = true;
 
             }
-            else if (1 == nodesToPaint.size()) {
+            else {
                 // TODO this is a hack, distance is set to -1 as default
-                edgeToPaint.add(new Edge(nodesToPaint.get(0), node ));
+                edgeToAdd.add(new Edge(nodesToPaint.get(0), node ));
                 nodesToPaint.clear();
+                hasFirstNode = false;
+
             }
         } else if (e.getButton() == MouseEvent.BUTTON1) {
             //
@@ -87,6 +93,6 @@ public class MouseActionEditEdge  extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
 
         //TODO draw newly added edge
-        PaintHelper.paintEdges(edgeToPaint, g2);
+        PaintHelper.paintEdges(edgeToAdd, g2);
     }
 }
