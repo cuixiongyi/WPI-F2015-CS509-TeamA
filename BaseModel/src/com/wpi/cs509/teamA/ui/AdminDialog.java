@@ -133,7 +133,12 @@ public class AdminDialog extends JDialog implements ActionListener {
 				}
 			else {
                 //TODO add a warning box for wrong password
-
+				JOptionPane.showMessageDialog(null, "Username or password error.", "Error Message",
+						JOptionPane.ERROR_MESSAGE);
+				passwordField.selectAll();
+				passwordField.setText("");
+				userName.setText("");
+				
             }
 		}
 	}

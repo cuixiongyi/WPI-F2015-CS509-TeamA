@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dialog.ModalityType;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -280,6 +281,7 @@ public class InputPanel extends JPanel implements ActionListener {
 
 	public void clickSignup() {
 		SignupDialog signUpDialog = new SignupDialog(imageComponent, InputPanel.this);
+		signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		signUpDialog.setVisible(true);
 	}
 
