@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -19,7 +20,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int endNodeId;
 
 	@Override
-	public Stack<Node> getRoute(Node startNode, Node endNode, Edge[] edges) {
+	public Stack<Node> getRoute(Node startNode, Node endNode, List<Edge> edges) {
 		this.startNodeId = startNode.getId();
 		this.endNodeId = endNode.getId();
 		Graph context = new Graph (edges);

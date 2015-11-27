@@ -7,7 +7,7 @@ import java.util.Stack;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
-import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
+//import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 
@@ -109,7 +109,7 @@ public class AlgoTest {
 	
 		//AstarAlgoStrategy d= new AstarAlgoStrategy();
 		Stack<Node> route= new Stack<Node>();
-		route=d.getRoute(node8, node15, edges);
+		route=d.getRoute(node5, node15, edges);
 		System.out.print("Route: ");
 		while (!route.isEmpty())
 		{

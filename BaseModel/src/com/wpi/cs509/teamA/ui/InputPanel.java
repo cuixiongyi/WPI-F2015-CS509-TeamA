@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -29,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.xml.crypto.Data;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
@@ -153,8 +155,8 @@ public class InputPanel extends JPanel implements ActionListener {
 				String name = tmp.getName().toString();
 				if (name.equals("Location"))
 					continue;
-				comboSourceModel.addElement(name);
-				comboDesModel.addElement(name);
+				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
 			}
 		}
 
@@ -162,6 +164,13 @@ public class InputPanel extends JPanel implements ActionListener {
 		desBox.setBounds(80, 225, 150, 38);
 		this.add(sourceBox);
 		this.add(desBox);
+
+
+		btnSynchronize = new JButton("Sync");
+		btnSynchronize.addActionListener(this);
+		btnSynchronize.setVisible(false);
+		btnSynchronize.setBounds(155, 380, 75, 30);
+		add(btnSynchronize);
 
 		BufferedImage myPicture;
 		try {
@@ -173,6 +182,7 @@ public class InputPanel extends JPanel implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 
 		adminClicked = 0;
 		/**
@@ -223,37 +233,38 @@ public class InputPanel extends JPanel implements ActionListener {
 			}
 
 		});
-		/*
-		 * // Click the SEARCH button.. this.btnSearch.addActionListener(new
-		 * ActionListener() {
-		 * 
-		 * @Override public void actionPerformed (ActionEvent arg0){
-		 * 
-		 * // TODO: need to check if the input is valid!!
-		 * 
-		 * // TODO: make the AlgoController singleton and use setter and //
-		 * getter to operate the instance..
-		 * 
-		 * // We will go to the backend here.. For now, all the resources //
-		 * should be ready! AlgoController algoController = new
-		 * AlgoController(inputPanel.getSourcePoint(),
-		 * inputPanel.getDesPoint());
-		 * 
-		 * 
-		 * 
-		 * // get a list of a map, so that we can draw line on that map..
-		 * pathNodeList = null; pathNodeList =
-		 * result.get(UIDataBuffer.getCurrentMapId());
-		 * 
-		 * // get the result of the search.. List<Node> path =
-		 * algoController.getRoute(); stateContext.setPath(path); // we need to
-		 * give all the information to the repaint metho
-		 * imageComponent.repaint(); } });
-		 * 
-		 */
-		this.getAdminLogin().addActionListener(this);
-
 	}
+
+
+		  // Click the SEARCH button.. this.btnSearch.addActionListener(new
+		  ActionListener() {
+
+		  @Override public void actionPerformed (ActionEvent arg0){
+
+		  // TODO: need to check if the input is valid!!
+
+		  // TODO: make the AlgoController singleton and use setter and //
+		 getter to operate the instance..
+
+		  // We will go to the backend here.. For now, all the resources //
+		  should be ready! AlgoController algoController = new
+		  AlgoController(inputPanel.getSourcePoint(),
+		  inputPanel.getDesPoint());
+
+
+
+		  // get a list of a map, so that we can draw line on that map..
+		  pathNodeList = null; pathNodeList =
+		  result.get(UIDataBuffer.getCurrentMapId());
+
+		  // get the result of the search.. List<Node> path =
+		  algoController.getRoute(); stateContext.setPath(path); // we need to
+		  give all the information to the repaint metho
+		  imageComponent.repaint(); } });
+
+
+		this.getAdminLogin().addActionListener(this);
+                // TODO: need to check if the input is valid!!
 
 	public void clickLogin() {
 		if (adminClicked % 2 == 0) {
@@ -278,6 +289,7 @@ public class InputPanel extends JPanel implements ActionListener {
 			imageComponent.repaint();
 		}
 	}
+	*/
 
 	public void clickSignup() {
 		SignupDialog signUpDialog = new SignupDialog(imageComponent, InputPanel.this);
@@ -311,6 +323,13 @@ public class InputPanel extends JPanel implements ActionListener {
 
 	}
 
+    }
+
+    public void setImageComponent(ImageComponent imageComponent2)
+	{
+        this.imageComponent = imageComponent2;
+       
+    }
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
 	}
