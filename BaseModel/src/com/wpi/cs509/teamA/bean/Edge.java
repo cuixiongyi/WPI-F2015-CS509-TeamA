@@ -7,11 +7,11 @@ public class Edge {
 	public Edge(){
 		
 	}
-/*	public Edge(Node node1, Node node2) {
+	public Edge(Node node1, Node node2) {
 		this.node1 = node1;
 		this.node2 = node2;
 		this.dist = node1.DistanceTo(node2);
-	}*/
+	}
 	
 	//for then two nodes are from different maps
 	public Edge(Node node1, Node node2, double dist) {

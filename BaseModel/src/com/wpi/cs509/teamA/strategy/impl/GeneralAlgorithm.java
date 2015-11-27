@@ -59,7 +59,7 @@ public class GeneralAlgorithm {
 	 * @param context
 	 * @return
 	 */
-	public Stack<Node> findPath(Node startNode, Node endNode, Edge[] edges) {
+	public Stack<Node> findPath(Node startNode, Node endNode, List<Edge> edges) {
 
 		Stack<Node> result = new Stack<Node>();
 

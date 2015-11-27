@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -26,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
@@ -217,7 +219,7 @@ public class InputPanel extends JPanel implements ActionListener {
                 }
 
 			});
-/*
+
         // Click the SEARCH button..
         this.btnSearch.addActionListener(new ActionListener() {
             @Override
@@ -230,24 +232,23 @@ public class InputPanel extends JPanel implements ActionListener {
 
                 // We will go to the backend here.. For now, all the resources
                 // should be ready!
-                AlgoController algoController = new AlgoController(inputPanel.getSourcePoint(),
-                        inputPanel.getDesPoint());
+                AlgoController algoController = new AlgoController(InputPanel.this.getSourcePoint(),
+                        InputPanel.this.getDesPoint());
 
 
 
                 // get a list of a map, so that we can draw line on that map..
-                pathNodeList = null;
-                pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
+                //pathNodeList = null;
+                //pathNodeList = result.get(UIDataBuffer.getCurrentMapId());
 
 				// get the result of the search..
-				List<Node> path = algoController.getRoute();
+				Stack<Node> path = algoController.getRoute();
 				stateContext.setPath(path);
                 // we need to give all the information to the repaint metho
                 imageComponent.repaint();
             }
         });
 
-        */
         this.getAdminLogin().addActionListener(this);
 
     }
