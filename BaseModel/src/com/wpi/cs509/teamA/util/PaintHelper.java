@@ -81,13 +81,22 @@ public class PaintHelper {
             }
         }
     }
-   
-   public static Coordinate transferCoor(Coordinate origin)
+
+    public static Coordinate backTransferCoor(Coordinate origin) {
+        Coordinate result=new Coordinate();
+        float scale=stateContext.getCurrentMap().getDisplayScale();
+        result.setX(origin.getX()+stateContext.getImageComponent().getImageXpos());
+        result.setY(origin.getY()+stateContext.getImageComponent().getImageYpos());
+
+        return result;
+    }
+
+    public static Coordinate transferCoor(Coordinate origin)
    {
 	   Coordinate result=new Coordinate();
 	   float scale=stateContext.getCurrentMap().getDisplayScale();
-	   result.setX(origin.getX()+stateContext.getImageComponent().getImageXpos());
-	   result.setY(origin.getY()+stateContext.getImageComponent().getImageYpos());
+	   result.setX(Math.round((origin.getX()+stateContext.getImageComponent().getImageXpos())*scale));
+	   result.setY(Math.round((origin.getY()+stateContext.getImageComponent().getImageYpos())*scale));
 	
 	   return result;
 	   
