@@ -18,15 +18,20 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.xml.crypto.Data;
 
 import com.wpi.cs509.teamA.bean.Node;
@@ -67,8 +72,11 @@ public class InputPanel extends JPanel implements ActionListener {
 	private final static String TO = "To: ";
 	private final static String FROM = "From: ";
 	private ImageComponent imageComponent;
+	private DefaultListModel<String> mapListModel=new DefaultListModel<>() ;
+	private JList<String> mapList;
+	private JLabel picLabel;
 
-	private int adminClicked;
+	private int adminClicked=0;
 
 	public void setStateContext(StateContext stateContext) {
 		this.stateContext = stateContext;
@@ -99,12 +107,16 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.add(adminLogin);
 		this.add(btnNeighborManage);
 
+		this.getAdminLogin().setBounds(150, 0, 75, 30);
 		this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
+		this.getAdminLogin().addActionListener(this);
+
 		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
+		this.getBtnSearch().setBounds(80, 300, 150, 38);
+		this.getBtnSearch().addActionListener(this);
+
 		// this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
 		// this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-		this.getAdminLogin().setBounds(150, 0, 75, 30);
-		this.getBtnSearch().setBounds(80, 300, 150, 38);
 
 		this.signUp = new JButton("SignUp");
 		this.add(signUp);
@@ -155,8 +167,8 @@ public class InputPanel extends JPanel implements ActionListener {
 				String name = tmp.getName().toString();
 				if (name.equals("Location"))
 					continue;
-				comboSourceModel.addElement(allNodes.get(1).get(i).getName().toString());
-				comboDesModel.addElement(allNodes.get(1).get(i).getName().toString());
+				comboSourceModel.addElement(name);
+				comboDesModel.addElement(name);
 			}
 		}
 
@@ -172,30 +184,59 @@ public class InputPanel extends JPanel implements ActionListener {
 		btnSynchronize.setBounds(155, 380, 75, 30);
 		add(btnSynchronize);
 
-		BufferedImage myPicture;
+		BufferedImage logo;
 		try {
-			myPicture = ImageIO.read(new File(System.getProperty("user.dir") + "/src/logo_iteration1.png"));
-			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+			logo = ImageIO.read(new File(System.getProperty("user.dir") + "/src/logo_iteration1.png"));
+			picLabel = new JLabel(new ImageIcon(logo));
 			picLabel.setBounds(50, 480, 200, 200);
 			add(picLabel);
+			picLabel.setOpaque(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		//result list
+		mapListModel.addElement("Campus Map");
+		mapListModel.addElement("AK-G");
+		mapListModel.addElement("AK-1");
+		mapListModel.addElement("AK-2");
+		mapList = new JList<>(mapListModel);
+//        add(mapList);
+//        mapList.setBounds(50, 480, 200, 200);
+		mapList.setVisible(false);
+		JScrollPane mapListScroll = new JScrollPane(mapList);
+		mapListScroll.setBounds(50, 480, 200, 200);
+		add(mapListScroll);
 
-		adminClicked = 0;
-		/**
-		 * Add listener to the admin login button
-		 */
-		/*
-		 * this.getAdminLogin().addActionListener(new ActionListener() {
-		 * 
-		 * @Override
-		 * 
-		 * 
-		 * });
-		 */
+
+		mapList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					int currentMapID = -1;
+					if (InputPanel.this.getMapList().getSelectedValue().equals("Campus Map")) {
+						currentMapID = 1;
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-G")) {
+						currentMapID = 2;
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-1")) {
+						currentMapID = 3;
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-2")) {
+						currentMapID = 4;
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-3")) {
+						currentMapID = 5;
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("PC-1")) {
+						currentMapID = 6;
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("PC-2")) {
+						currentMapID = 7;
+					}
+
+					stateContext.setCurrentMap(currentMapID);
+					imageComponent.repaint();
+				}
+			}
+		});
+
+
 		// TODO: Make the map related things into a enum class..
 		this.getComboBoxMap().addItemListener(new ItemListener() {
 			@Override
@@ -231,40 +272,11 @@ public class InputPanel extends JPanel implements ActionListener {
 				imageComponent.repaint();
 
 			}
-
 		});
 	}
 
 
-		  // Click the SEARCH button.. this.btnSearch.addActionListener(new
-		  ActionListener() {
-
-		  @Override public void actionPerformed (ActionEvent arg0){
-
-		  // TODO: need to check if the input is valid!!
-
-		  // TODO: make the AlgoController singleton and use setter and //
-		 getter to operate the instance..
-
-		  // We will go to the backend here.. For now, all the resources //
-		  should be ready! AlgoController algoController = new
-		  AlgoController(inputPanel.getSourcePoint(),
-		  inputPanel.getDesPoint());
-
-
-
-		  // get a list of a map, so that we can draw line on that map..
-		  pathNodeList = null; pathNodeList =
-		  result.get(UIDataBuffer.getCurrentMapId());
-
-		  // get the result of the search.. List<Node> path =
-		  algoController.getRoute(); stateContext.setPath(path); // we need to
-		  give all the information to the repaint metho
-		  imageComponent.repaint(); } });
-
-
-		this.getAdminLogin().addActionListener(this);
-                // TODO: need to check if the input is valid!!
+	
 
 	public void clickLogin() {
 		if (adminClicked % 2 == 0) {
@@ -289,12 +301,22 @@ public class InputPanel extends JPanel implements ActionListener {
 			imageComponent.repaint();
 		}
 	}
-	*/
 
 	public void clickSignup() {
 		SignupDialog signUpDialog = new SignupDialog(imageComponent, InputPanel.this);
 		signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		signUpDialog.setVisible(true);
+	}
+	
+	public void clickSearch(){
+		this.picLabel.setVisible(false);
+		this.getMapList().setVisible(true);
+		AlgoController algoController = new AlgoController(InputPanel.this.getSourcePoint(),
+				InputPanel.this.getDesPoint());
+
+		Stack<Node> path = algoController.getRoute();
+		stateContext.setPath(path);
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -308,6 +330,12 @@ public class InputPanel extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == signUp) {
 			clickSignup();
+		}
+		if(e.getSource()==getBtnSearch())
+		{
+
+			clickSearch();
+
 		}
 	
 
@@ -323,13 +351,6 @@ public class InputPanel extends JPanel implements ActionListener {
 
 	}
 
-    }
-
-    public void setImageComponent(ImageComponent imageComponent2)
-	{
-        this.imageComponent = imageComponent2;
-       
-    }
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
 	}
@@ -413,6 +434,26 @@ public class InputPanel extends JPanel implements ActionListener {
 		this.signUp = signUp;
 	}
 
+	public DefaultListModel<String> getMapListModel() {
+		return mapListModel;
+	}
+
+	public void setMapListModel(DefaultListModel<String> mapListModel) {
+		this.mapListModel = mapListModel;
+	}
+
+	public JList<String> getMapList() {
+		return mapList;
+	}
+
+	public void setMapList(JList<String> mapList) {
+		this.mapList = mapList;
+	}
+	
+	
+	
+	
+	
 
 
 };

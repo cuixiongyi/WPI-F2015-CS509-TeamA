@@ -78,48 +78,19 @@ public class AlgoController {
 		// we support searching node now only..
 
 		// get the node from database
-		Node fromNode = Database.getNodeFromName(startNode);    /////////////////
-		
-		Node toNode = Database.getNodeFromName(endNode);        ////////////////
-		
-//		// use this two to decide how which maps are involved in searching..
-//		int startMapId = fromNode.getMapId();
-//		int endMapId = toNode.getMapId();
-
-		// get all edges from database..
-//		NodeRelationDao nrd = new NodeRelationDaoImpl();
-//		Edge[] inputEdges = new Edge[nrd.getNodeRelationNum()];
-//		Set<Edge> edges = nrd.getAllEdges();
-//		int temp = 0;
-//		for (Edge edge : edges) {
-//			inputEdges[temp++] = edge;
-//
-//		}
+        Node fromNode = Database.getNodeFromName(startNode);    /////////////////
+        // TODO this is a hack need to get the function working
+        Node toNode = Database.getNodeFromName(endNode);    /////////////////
 
 
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-		// TODO: Make a decision here which strategy we will use..
-		// always use Dijkstra's for now
-		// in the same map..
-//		if (startMapId == endMapId) {
-//
-//			// assemble 2 nodes just for test.. definitely should not use id to
-//			// search..
-//			int startNodeId = Database.getNodeIdFromName(startNode);
-//			fromNode.setId(startNodeId);
-//			int endNodeId = Database.getNodeIdFromName(endNode);
-//			toNode.setId(endNodeId);
-//
-//			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-//			result = generalAlgorithm.findPath(fromNode, toNode, context);
-//			return result;
-//		} else {
-//			// for later use
 
-			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, Database.getAllEdges());
+		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		return result = generalAlgorithm.findPath(fromNode, toNode, Database.getAllEdges());
+
+	}
 
 	/**
 	 * Gets the node that corresponding to a given location name

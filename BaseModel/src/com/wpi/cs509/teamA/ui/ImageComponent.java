@@ -172,9 +172,9 @@ public class ImageComponent extends JComponent {
 			stateContext.paintOnImage(g2);
 
             /// CXY test
-            GeneralMap tmp = stateContext.getCurrentMap();
-            List<Node> nodes = tmp.getNodes();
-            PaintHelper.paintPath(nodes, g2);
+            //GeneralMap tmp = stateContext.getCurrentMap();
+            //List<Node> nodes = tmp.getNodes();
+            //PaintHelper.paintPath(nodes, g2);
         }
 
 
