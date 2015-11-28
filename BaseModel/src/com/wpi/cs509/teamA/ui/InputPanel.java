@@ -336,7 +336,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		multiMapPathLists.add(singleMapPath);
 		
 		//reset and initiate the Jlist
-		mapListModel=new DefaultListModel<>(); 
+//		mapListModel=new DefaultListModel<>(); 
 		for(String name:mapNameList)
 		{
 			mapListModel.addElement(name);

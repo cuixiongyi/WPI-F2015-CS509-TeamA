@@ -32,8 +32,15 @@ public class MouseActionSelectNode extends MouseActionState {
     @Override
     public void paintOnImage(Graphics2D g2) {
 
-        java.util.List<Node> pathNode = this.stateContext.getPath();
-        PaintHelper.paintPath(pathNode, g2);
+    	ArrayList<ArrayList<Node>> multiMapPath = this.stateContext.getMultiMapPathLists();
+    	for (ArrayList<Node> path : multiMapPath) {
+    		if (path.get(0).getMap().getMapId() == stateContext.getCurrentMap().getMapId()) {
+    			PaintHelper.paintPath(path, g2);
+    			break;
+    		}
+    		
+    	}
+        
         java.util.List<Node> iconNodes = stateContext.getIconNodes();
         //PaintHelper.paintIcons(iconNodes, g2);
 
