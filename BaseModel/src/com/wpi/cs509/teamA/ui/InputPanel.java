@@ -319,6 +319,10 @@ public class InputPanel extends JPanel implements ActionListener {
 		
 	}
 
+	/**
+	 * This is Button click event
+	 * @param e
+     */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
@@ -333,9 +337,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		}
 		if(e.getSource()==getBtnSearch())
 		{
-
 			clickSearch();
-
 		}
 	
 

@@ -1,7 +1,6 @@
 package com.wpi.cs509.teamA.util;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -14,10 +13,55 @@ public class PaintHelper {
 	
 	private static StateContext stateContext;
 	private final static int ovalOffset = 5;
-	
+    private static BasicStroke basicNodeStrock = new BasicStroke(2);
+    private static BasicStroke basicLineStrock = new BasicStroke(5);
 
 
-   public static void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
+    /**
+     * currently all paint funcitons have 2 overloads, with or without DrawStyleEnum
+     * In the case that DrawStyleEnum is not provided
+     *      - All functions that draw a list of items (paintNodes, paintEdges)
+     *          Set style to a default style
+     *      - All functions that draw one single item (paintNode, paintEdge)
+     *          use current style to draw
+     */
+
+    public enum DrawStyleEnum {
+        Undifined,
+        BasicNode,
+        BasicEdge,
+        BasicText,
+        NewNode,
+        NewEdge,
+    }
+
+    private static void setStyle(DrawStyleEnum style, Graphics2D g2) {
+        switch (style) {
+            case Undifined:
+            case BasicNode:
+                g2.setStroke(basicNodeStrock);
+                g2.setColor(Color.blue);
+                break;
+            case BasicEdge:
+                g2.setStroke(basicLineStrock);
+                g2.setColor(Color.blue);
+                break;
+            case BasicText:
+
+                break;
+            case NewNode:
+                g2.setStroke(basicNodeStrock);
+                g2.setColor(Color.red);
+                break;
+            case NewEdge:
+                g2.setStroke(basicLineStrock);
+                g2.setColor(Color.red);
+                break;
+
+        }
+    }
+
+    public static void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
         for (int i = 0; i < nodes.size()-1; ++i) {
             paintNode(nodes.get(i), g2);
             paintEdge(nodes.get(i), nodes.get(i+1), g2);
@@ -34,7 +78,8 @@ public class PaintHelper {
 //	}
 
 
-    public static void paintNodes(List<Node> nodes, Graphics2D g2) {
+    public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
+        setStyle(style, g2);
         if (null == nodes)
             return;
         for (Node node : nodes) {
@@ -42,8 +87,21 @@ public class PaintHelper {
         }
 
     }
+    public static void paintNodes(List<Node> nodes, Graphics2D g2) {
+        paintNodes(nodes, g2, DrawStyleEnum.BasicNode);
+    }
 
-   public static void paintNode(Node node, Graphics2D g2) {
+    /**
+     * PaintNode function will paint node with defined style
+     * @param node
+     * @param g2
+     * @param style
+     */
+    public static void paintNode(Node node, Graphics2D g2, DrawStyleEnum style) {
+        setStyle(style, g2);
+        paintNode(node, g2, style);
+    }
+    public static void paintNode(Node node, Graphics2D g2) {
         if (null == node)
             return;
 		Coordinate xy = transferCoor(node.getLocation());
@@ -51,6 +109,10 @@ public class PaintHelper {
     }
 
     public static void paintEdges(List<Edge> edges, Graphics2D g2) {
+        paintEdges(edges, g2, DrawStyleEnum.BasicEdge);
+    }
+    public static void paintEdges(List<Edge> edges, Graphics2D g2, DrawStyleEnum style) {
+        setStyle(style, g2);
         if (null == edges )
             return;
         for (Edge edge : edges) {
@@ -64,6 +126,10 @@ public class PaintHelper {
         paintEdge(edge.getNode1(), edge.getNode2(), g2);
     }
 
+    public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2, DrawStyleEnum style) {
+        setStyle(style, g2);
+        paintEdge(nodeSrc, nodeDest, g2);
+    }
     public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
         Coordinate start = transferCoor(nodeSrc.getLocation());
         Coordinate end = transferCoor(nodeDest.getLocation());
@@ -73,6 +139,7 @@ public class PaintHelper {
         g2.setStroke(new BasicStroke(5));
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
+
 
    public static void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {
