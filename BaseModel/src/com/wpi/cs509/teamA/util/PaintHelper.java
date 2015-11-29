@@ -2,7 +2,6 @@ package com.wpi.cs509.teamA.util;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.wpi.cs509.teamA.bean.Edge;
@@ -12,9 +11,10 @@ import com.wpi.cs509.teamA.ui.StateContext;
 public class PaintHelper {
 	
 	private static StateContext stateContext;
-	private final static int ovalOffset = 10;
+    private final static int ovalOffset = 10;
+    private final static int ovalOffset_SelectedNode = ovalOffset + 5;
     private static BasicStroke basicNodeStrock = new BasicStroke(2);
-    private static BasicStroke basicLineStrock = new BasicStroke(5);
+    private static BasicStroke basicEdgeStrock = new BasicStroke(5);
 
 
     /**
@@ -33,6 +33,7 @@ public class PaintHelper {
         BasicText,
         NewNode,
         NewEdge,
+        SelectedNode,
     }
 
     private static void setStyle(DrawStyleEnum style, Graphics2D g2) {
@@ -43,7 +44,7 @@ public class PaintHelper {
                 g2.setColor(Color.blue);
                 break;
             case BasicEdge:
-                g2.setStroke(basicLineStrock);
+                g2.setStroke(basicEdgeStrock);
                 g2.setColor(Color.blue);
                 break;
             case BasicText:
@@ -54,9 +55,13 @@ public class PaintHelper {
                 g2.setColor(Color.red);
                 break;
             case NewEdge:
-                g2.setStroke(basicLineStrock);
+                g2.setStroke(basicEdgeStrock);
                 g2.setColor(Color.red);
                 break;
+            case SelectedNode:
+                g2.setColor(Color.red);
+                break;
+
 
         }
     }
@@ -98,8 +103,17 @@ public class PaintHelper {
      * @param style
      */
     public static void paintNode(Node node, Graphics2D g2, DrawStyleEnum style) {
+        if (null == node) {
+            return;
+        }
         setStyle(style, g2);
-        paintNode(node, g2, style);
+        Coordinate xy = transferCoor(node.getLocation());
+        int tmp = ovalOffset;
+        if (DrawStyleEnum.SelectedNode == style) {
+            tmp = ovalOffset_SelectedNode;
+        }
+        g2.fillOval(xy.getX() - tmp, xy.getY() - tmp, tmp*2, tmp*2);
+
     }
     public static void paintNode(Node node, Graphics2D g2) {
         if (null == node)

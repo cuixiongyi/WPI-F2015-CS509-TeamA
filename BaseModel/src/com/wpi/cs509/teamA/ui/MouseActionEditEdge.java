@@ -102,9 +102,13 @@ public class MouseActionEditEdge  extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
 
         //TODO draw newly added edge
+
         PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(),
-                g2, PaintHelper.DrawStyleEnum.NewNode);
+                g2, PaintHelper.DrawStyleEnum.BasicNode);
         PaintHelper.paintEdges(stateContext.getCurrentMap().getEdges(),
                 g2, PaintHelper.DrawStyleEnum.BasicEdge);
+        if (null != lastNode) {
+            PaintHelper.paintNode(lastNode, g2, PaintHelper.DrawStyleEnum.SelectedNode);
+        }
     }
 }
