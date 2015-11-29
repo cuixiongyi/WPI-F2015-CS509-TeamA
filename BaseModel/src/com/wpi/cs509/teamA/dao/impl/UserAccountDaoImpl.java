@@ -37,8 +37,6 @@ public class UserAccountDaoImpl implements UserAccountDao {
 	
 	@Override
 	public List<UserAccount> getAllUserAccounts() {
-					/*
-		TODO this is a hack
 		ResultSet resultSet = null;
 		List<UserAccount> res = new ArrayList<UserAccount>();
 		
@@ -51,7 +49,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 				userinfo.setId(resultSet.getInt("id"));
 				userinfo.setUsername(resultSet.getString("username"));
 				userinfo.setPassword(resultSet.getString("password"));
-				userinfo.setAdmin(resultSet.getInt("isAdmin"));
+				userinfo.setAdmin(resultSet.getBoolean("isAdmin"));
 				userinfo.setEmail(resultSet.getString("email"));
 				// add history for this user
 				userinfo.setHistory(this.getAllHistoryForUser(userinfo.getId()));
@@ -66,7 +64,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			JdbcConnect.resultClose(resultSet, pstmt);
 			JdbcConnect.connClose();
 		}
-		*/
+		
 			return null;
 
 		}
