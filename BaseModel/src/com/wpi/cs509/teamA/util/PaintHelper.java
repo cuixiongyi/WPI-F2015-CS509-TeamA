@@ -2,10 +2,12 @@ package com.wpi.cs509.teamA.util;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.ui.NodeIcon;
 import com.wpi.cs509.teamA.ui.StateContext;
 
 public class PaintHelper {
@@ -74,13 +76,13 @@ public class PaintHelper {
         paintNode(nodes.get(nodes.size()-1), g2);
     }
 
-//   public static void paintIcons(List<Node> nodes, Graphics2D g2) {
-//        for (Node node : nodes) {
-//            BufferedImage image = icon.getImage(node);
-//            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(stateContext.getImageComponent()),
-//                    image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
-//        }
-//	}
+   public static void paintIcons(List<Node> nodes, Graphics2D g2) {
+        for (Node node : nodes) {
+            BufferedImage image = NodeIcon.getImage(node);
+            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(stateContext.getImageComponent()),
+                    image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
+        }
+	}
 
 
     public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
