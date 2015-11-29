@@ -33,6 +33,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	 * Map name
 	 */
 	private String mapName;
+	private String mapAbbrName;
 
     public String getImageName() {
         return imageName;
@@ -141,6 +142,16 @@ public class GeneralMap implements AdjacencyMatrix {
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
+	
+	
+
+	public String getMapAbbrName() {
+		return mapAbbrName;
+	}
+
+	public void setMapAbbrName(String mapAbbrName) {
+		this.mapAbbrName = mapAbbrName;
+	}
 
 	/**
 	 * @return the scale
@@ -163,7 +174,7 @@ public class GeneralMap implements AdjacencyMatrix {
     public void readImage() {
 
         // display the image. Note that "	/" only works on UNIX
-        this.mapImgPath = System.getProperty("user.dir") + "/BaseModel/src/" + this.imageName;
+        this.mapImgPath = System.getProperty("user.dir") + "/src/" + this.imageName;
         try {
             image = ImageIO.read(new FileInputStream(mapImgPath));
         } catch (FileNotFoundException e) {

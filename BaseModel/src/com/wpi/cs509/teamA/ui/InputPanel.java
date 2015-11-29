@@ -35,6 +35,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.xml.crypto.Data;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Database;
@@ -139,15 +140,21 @@ public class InputPanel extends JPanel implements ActionListener {
 		lblTo.setBounds(15, 230, 61, 16);
 		add(lblTo);
 
+			
 		comboBoxMap = new JComboBox<String>();
 		comboBoxMap.setBounds(80, 55, 150, 30);
-		comboBoxMap.addItem("Campus Map");
-		comboBoxMap.addItem("AK-G");
-		comboBoxMap.addItem("AK-1");
-		comboBoxMap.addItem("AK-2");
-		comboBoxMap.addItem("AK-3");
-		comboBoxMap.addItem("PC-1");
-		comboBoxMap.addItem("PC-2");
+		List<GeneralMap> allMapList =Database.getAllMapFromDatabase();
+		for(GeneralMap map:allMapList)
+		{
+			comboBoxMap.addItem(map.getMapAbbrName());
+		}
+//		comboBoxMap.addItem("Campus Map");
+//		comboBoxMap.addItem("AK-G");
+//		comboBoxMap.addItem("AK-1");
+//		comboBoxMap.addItem("AK-2");
+//		comboBoxMap.addItem("AK-3");
+//		comboBoxMap.addItem("PC-1");
+//		comboBoxMap.addItem("PC-2");
 		comboBoxMap.setMaximumRowCount(4);
 		add(comboBoxMap);
 
@@ -189,7 +196,7 @@ public class InputPanel extends JPanel implements ActionListener {
 
 		BufferedImage logo;
 		try {
-			logo = ImageIO.read(new File(System.getProperty("user.dir") + "/BaseModel/src/logo_iteration1.png"));
+			logo = ImageIO.read(new File(System.getProperty("user.dir") + "/src/logo_iteration1.png"));
 			picLabel = new JLabel(new ImageIcon(logo));
 			picLabel.setBounds(50, 480, 200, 200);
 			add(picLabel);

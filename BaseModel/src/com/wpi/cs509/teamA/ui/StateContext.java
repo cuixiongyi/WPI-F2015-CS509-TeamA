@@ -126,6 +126,8 @@ public class StateContext {
 	 */
 	public void setCurrentMap(int mapID) {
 		this.currentMap = Database.getMapEntityFromMapId(mapID);
+		if(inputPanel!=null)
+			inputPanel.getComboBoxMap().setSelectedItem(currentMap.getMapAbbrName());
 
 		// TODO Do some clean up
 
