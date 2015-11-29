@@ -83,15 +83,6 @@ public class UserScreen extends JFrame {
 		UIManager.put("PasswordField.background", new Color(180, 180, 180));
 		UIManager.put("List.background", new Color(180, 180, 180));
 		 
-		 
-		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		// if ("Nimbus".equals(info.getName())) {
-		// UIManager.setLookAndFeel(info.getClassName());
-		// break;
-		// }
-		// }
-		//
-
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

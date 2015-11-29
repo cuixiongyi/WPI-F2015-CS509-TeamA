@@ -147,14 +147,8 @@ public class InputPanel extends JPanel implements ActionListener {
 		for(GeneralMap map:allMapList)
 		{
 			comboBoxMap.addItem(map.getMapAbbrName());
+//			System.out.println(map.getMapAbbrName());
 		}
-//		comboBoxMap.addItem("Campus Map");
-//		comboBoxMap.addItem("AK-G");
-//		comboBoxMap.addItem("AK-1");
-//		comboBoxMap.addItem("AK-2");
-//		comboBoxMap.addItem("AK-3");
-//		comboBoxMap.addItem("PC-1");
-//		comboBoxMap.addItem("PC-2");
 		comboBoxMap.setMaximumRowCount(4);
 		add(comboBoxMap);
 
@@ -234,7 +228,7 @@ public class InputPanel extends JPanel implements ActionListener {
 						currentMapID = 7;
 					}
 
-					stateContext.setCurrentMap(currentMapID);
+					stateContext.setCurrentMap(currentMapID,InputPanel.this.getMapList());
 					imageComponent.repaint();
 				}
 			}
@@ -272,7 +266,7 @@ public class InputPanel extends JPanel implements ActionListener {
 					currentMapID = 7;
 				}
 				//UIDataBuffer.setCurrentMapId(currentMapID);
-				stateContext.setCurrentMap(currentMapID);
+				stateContext.setCurrentMap(currentMapID,InputPanel.this.getComboBoxMap());
 				//Database.InitFromDatabase();
 				imageComponent.repaint();
 
