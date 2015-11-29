@@ -186,7 +186,7 @@ public class InputPanel extends JPanel implements ActionListener {
 
 		BufferedImage logo;
 		try {
-			logo = ImageIO.read(new File(System.getProperty("user.dir") + "/src/logo_iteration1.png"));
+			logo = ImageIO.read(new File(System.getProperty("user.dir") + "/BaseModel/src/logo_iteration1.png"));
 			picLabel = new JLabel(new ImageIcon(logo));
 			picLabel.setBounds(50, 480, 200, 200);
 			add(picLabel);

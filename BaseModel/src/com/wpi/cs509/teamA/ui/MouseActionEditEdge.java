@@ -2,6 +2,8 @@ package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.dao.NodeRelationDao;
+import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.PaintHelper;
@@ -48,6 +50,7 @@ public class MouseActionEditEdge  extends MouseActionState {
     @Override
     public boolean cleanup() {
 
+
         return false;
     }
 
@@ -74,8 +77,10 @@ public class MouseActionEditEdge  extends MouseActionState {
             else {
                 // TODO this is a hack, distance is set to -1 as default
                 edgeToAdd.add(new Edge(lastNode, node ));
-                //nodesToPaint.clear();
+                nodesToPaint.add(node);
                 lastNode = null;
+
+
 
             }
         } else if (e.getButton() == MouseEvent.BUTTON1) {
@@ -91,7 +96,7 @@ public class MouseActionEditEdge  extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
 
         //TODO draw newly added edge
-        PaintHelper.paintNodes(nodesToPaint, g2);
-        PaintHelper.paintEdges(edgeToAdd, g2);
+        PaintHelper.paintNodes(nodesToPaint, g2, PaintHelper.DrawStyleEnum.NewNode);
+        PaintHelper.paintEdges(edgeToAdd, g2, PaintHelper.DrawStyleEnum.NewEdge);
     }
 }
