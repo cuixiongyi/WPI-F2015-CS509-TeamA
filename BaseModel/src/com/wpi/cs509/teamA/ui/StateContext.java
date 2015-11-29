@@ -41,6 +41,9 @@ public class StateContext {
 
 	private Node startNode;
 	private Node endNode;
+
+
+    private Node focusNode = null;
 	private List<Node> path;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 
@@ -111,6 +114,16 @@ public class StateContext {
 		myState.paintOnImage(g2);
     }
 
+
+    public void setFocusToNode(Node node ) {
+        if (null == node) {
+            return;
+        }
+        setCurrentMap(node.getMap().getMapId());
+        this.focusNode = node;
+        getImageComponent().repaint();
+
+    }
 
 	/**
 	 * setter and getter
@@ -216,4 +229,12 @@ public class StateContext {
         this.newNode = newNode;
     }
 
+
+    public Node getFocusNode() {
+        return focusNode;
+    }
+
+    public void setFocusNode(Node focusNode) {
+        this.focusNode = focusNode;
+    }
 }
