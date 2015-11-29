@@ -28,6 +28,11 @@ public class UserAccount {
 	
 	/** default constructor */
 	public UserAccount() {
+		this.id = -1;
+		this.username = "Guest User";
+		this.email = "";
+		this.password = "";
+		this.isAdmin = false;
 
 	}
 

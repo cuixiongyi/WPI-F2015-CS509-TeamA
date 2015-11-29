@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,12 +29,14 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -50,8 +54,6 @@ import com.wpi.cs509.teamA.ui.StateContext;
 public class ImageComponent extends JComponent {
 
 	private Image image;
-	private int imgWidth;
-	private int imgHeight;
 	private StateContext stateContext;
 	private final static String LOGIN = "Login";
 	private NodeIcon icon = new NodeIcon();
@@ -59,26 +61,23 @@ public class ImageComponent extends JComponent {
 
 	// TODO: make these to classes singleton. We should avoid to initialize them
 	// here.
-	private MouseListener normalUserMouseListener;
-	private int xPos;
-	private int yPos;
 
 	private List<Node> prevPaintedNodes;
 
 	private Map<Integer, List<Node>> result;
 
-	private static int adminClicked = 2;
-
 	private final static int ovalOffset = 5;
-
-	private static boolean isAdmin;
 
 	private InputPanel inputPanel;
 
-	public void setStateContext(StateContext stateContext) {
-		this.stateContext = stateContext;
-	}
-
+	private ImageMouseListener mouseListener;
+	
+	private int imageXpos=0;
+	private int imageYpos=0;
+	private int imageStartXpos=0;
+	private int imageStartYpos=0;
+	private int pressxPos;
+	private int pressyPos;
 
 	// admin will get a different repaint method
 	// private boolean isAdmin;
@@ -93,58 +92,32 @@ public class ImageComponent extends JComponent {
 	 *            in the inner class
 	 */
 	public ImageComponent() {
-		ImageComponent.isAdmin = false;
 
 		// initialize the mouse listener state
 		stateContext = null;
 
+		mouseListener = new ImageMouseListener();
+		this.addMouseListener(mouseListener);
+		
+		this.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				ImageComponent.this.setImageXpos(ImageComponent.this.imageStartXpos+  e.getX()-ImageComponent.this.pressxPos);
+				ImageComponent.this.setImageYpos(ImageComponent.this.imageStartYpos+  e.getY()-ImageComponent.this.pressyPos);
+				ImageComponent.this.repaint();
+			}
 
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 
-        //setImageComponent(this);
 
 	}
-
-
-    private void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
-        for (int i = 0; i < nodes.size()-1; ++i) {
-            paintNode(nodes.get(i), g2);
-            paintEdge(nodes.get(i), nodes.get(i+1), g2);
-        }
-        paintNode(nodes.get(nodes.size()-1), g2);
-    }
-
-    private void paintIcons(List<Node> nodes, Graphics2D g2) {
-        for (Node node : nodes) {
-            BufferedImage image = icon.getImage(node);
-            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(this),
-                    image.getHeight(this), this);
-        }
-	}
-
-    private void paintNode(Node node, Graphics2D g2) {
-        if (null == node)
-            return;
-		Coordinate xy = node.getLocation();
-		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
-    }
-
-    private void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
-        Coordinate start = nodeSrc.getLocation();
-        Coordinate end = nodeDest.getLocation();
-        if (null == nodeSrc || null == nodeDest)
-            return;
-
-        g2.setStroke(new BasicStroke(5));
-        g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
-    }
-
-    private void paintPath(List<Node> nodes, Graphics2D g2) {
-        if (null != nodes) {
-            for (int i = 0; i < nodes.size() - 1; ++i) {
-                paintEdge(nodes.get(i), nodes.get(i + 1), g2);
-            }
-        }
-    }
 
 	public void clearText() {
 
@@ -177,29 +150,6 @@ public class ImageComponent extends JComponent {
         return true;
     }
 
-    private void paintNormalUser(Graphics2D g2) {
-        /**
-         Paint path
-         */
-        List<Node> pathNode = this.stateContext.getPath();
-        paintPath(pathNode, g2);
-        List<Node> iconNodes = this.getStateContext().getIconNodes();
-        paintIcons(iconNodes, g2);
-
-
-        /*
-        g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
-        g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
-        Font font = g.getFont().deriveFont(20.0f);
-        g.setFont(font);
-        g2.drawString("Source", sourceX, sourceY - ovalOffset);
-        g2.drawString("Destination", desX, desY - ovalOffset);
-*/
-    }
-
-    private void paintAdmin(Graphics2D g2) {
-
-    }
 
 
 	@Override
@@ -215,21 +165,16 @@ public class ImageComponent extends JComponent {
 
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+        g2.drawImage(image, imageXpos, imageYpos, image.getWidth(this), image.getHeight(this), this);
         setForeground(Color.RED);
 
-        if (stateContext.isAdmin()) {
-            paintAdmin(g2);
-
-
-        }
-        else {
-            paintNormalUser(g2);
+		{
+			stateContext.paintOnImage(g2);
 
             /// CXY test
-            GeneralMap tmp = stateContext.getCurrentMap();
-            List<Node> nodes = tmp.getNodes();
-            paintPath(nodes, g2);
+            //GeneralMap tmp = stateContext.getCurrentMap();
+            //List<Node> nodes = tmp.getNodes();
+            //PaintHelper.paintPath(nodes, g2);
         }
 
 
@@ -270,7 +215,13 @@ public class ImageComponent extends JComponent {
 
 	}
 
-	public void setInputPanel(InputPanel inputPanel) {
+    public void setStateContext(StateContext stateContext) {
+
+        this.stateContext = stateContext;
+        this.mouseListener.setStateContext(stateContext);
+    }
+
+    public void setInputPanel(InputPanel inputPanel) {
 		this.inputPanel = inputPanel;
 	}
 
@@ -281,47 +232,71 @@ public class ImageComponent extends JComponent {
 		return inputPanel;
 	}
 
-	/**
-	 * @return the xPos
-	 */
-	public int getxPos() {
-		return xPos;
-	}
-
-	/**
-	 * @return the yPos
-	 */
-	public int getyPos() {
-		return yPos;
-	}
-
-	/**
-	 * @param xPos
-	 *            the xPos to set
-	 */
-	public void setxPos(int xPos) {
-		this.xPos = xPos;
-	}
-
-	/**
-	 * @param yPos
-	 *            the yPos to set
-	 */
-	public void setyPos(int yPos) {
-		this.yPos = yPos;
-	}
-
-	public NormalUserMouseListener getNormalUserMouseListener() {
-		return (NormalUserMouseListener) this.normalUserMouseListener;
-	}
-/*
-	public AdminMouseListener getAdminMouseListener() {
-		return (AdminMouseListener) this.adminMouseListener;
-	}
-*/
 	public StateContext getStateContext() {
 		return this.stateContext;
 	}
+
+
+	public int getImageXpos() {
+		return imageXpos;
+	}
+
+
+	public void setImageXpos(int imageXpos) {
+		this.imageXpos = imageXpos;
+	}
+
+
+	public int getImageYpos() {
+		return imageYpos;
+	}
+
+
+	public void setImageYpos(int imageYpos) {
+		this.imageYpos = imageYpos;
+	}
+
+
+	public int getImageStartXpos() {
+		return imageStartXpos;
+	}
+
+
+	public void setImageStartXpos(int imageStartXpos) {
+		this.imageStartXpos = imageStartXpos;
+	}
+
+
+	public int getImageStartYpos() {
+		return imageStartYpos;
+	}
+
+
+	public void setImageStartYpos(int imageStartYpos) {
+		this.imageStartYpos = imageStartYpos;
+	}
+
+
+	public int getPressxPos() {
+		return pressxPos;
+	}
+
+
+	public void setPressxPos(int pressxPos) {
+		this.pressxPos = pressxPos;
+	}
+
+
+	public int getPressyPos() {
+		return pressyPos;
+	}
+
+
+	public void setPressyPos(int pressyPos) {
+		this.pressyPos = pressyPos;
+	}
+	
+	
 
 
 }

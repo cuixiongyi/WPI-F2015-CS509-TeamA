@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.strategy;
 
+import java.util.List;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Edge;
@@ -20,6 +21,6 @@ import com.wpi.cs509.teamA.bean.Node;
  */
 public interface AlgoStrategy {
 	
-	Stack<Node> getRoute(Node startNode, Node endNode, Edge[] edges);
+	Stack<Node> getRoute(Node startNode, Node endNode, List<Edge> edges);
 
 }

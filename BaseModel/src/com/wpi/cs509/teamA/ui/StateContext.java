@@ -1,15 +1,14 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.ui.ImageComponent;
-import jdk.nashorn.internal.runtime.ECMAException;
 
 /**
  * Instead of using a lot of if and else statements to capture the state of an
@@ -29,53 +28,20 @@ import jdk.nashorn.internal.runtime.ECMAException;
 public class StateContext {
 
 	/**
-	 * The state of the context.
+	 * The current state
 	 */
-	private StateMouseListener mouseListenerState;
+	private MouseActionState myState;
+	private UserState myUserState;
 
-    public ImageComponent getImageComponent() {
-        return imageComponent;
-    }
+	private UserAccount myAccount;
 
-    /**
-     * Set imageComponent at the same time init
-     * normal and admin MouseListener
-     * @param imageComponent
-     */
-    public void setImageComponent(ImageComponent imageComponent) {
-        this.imageComponent = imageComponent;
-        normalUserMouseListener = new NormalUserMouseListener(imageComponent);
-        adminMouseListener = new AdminMouseListener(imageComponent);
 
-		normalUserMouseListener.setStateContext(this);
-		adminMouseListener.setStateContext(this);
-        // TODO we need to add the event listener before the state pattern begins
-        imageComponent.addMouseListener(normalUserMouseListener);
-        this.switchToNormalUser();
-    }
+	private ImageComponent imageComponent;
+	private InputPanel inputPanel;
 
-    private ImageComponent imageComponent;
-    private MouseListenerwithContext normalUserMouseListener;
-    private MouseListenerwithContext adminMouseListener;
-
-    private Node startNode;
+	private Node startNode;
 	private Node endNode;
 	private List<Node> path;
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setNormalUser() {
-        isAdmin = false;
-        this.switchToNormalUser();
-    }
-    public void setAdminUser() {
-        isAdmin = true;
-        this.switchToAdminUser();
-    }
-
-    private boolean isAdmin;
 
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
@@ -85,57 +51,66 @@ public class StateContext {
 	private List<Node> iconNodes;
 
 
-    //private List<GeneralMap> allMaps;
 	private GeneralMap currentMap;
-
-    public void setNormalUserMouseListener(MouseListenerwithContext normalUserMouseListener) {
-        this.normalUserMouseListener = normalUserMouseListener;
-    }
-
-    public void setAdminMouseListener(MouseListenerwithContext adminMouseListener) {
-        this.adminMouseListener = adminMouseListener;
-    }
-
-    public MouseListener getNormalUserMouseListener() {
-		try {
-			if (null == normalUserMouseListener)
-				throw new Exception("null normalUserMouseListener");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-        return normalUserMouseListener;
-    }
-
-    public MouseListener getAdminMouseListener() {
-		try {
-			if (null == adminMouseListener)
-				throw new Exception("null adminMouseListener");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-        return adminMouseListener;
-    }
-
 
 	/**
 	 * Constructor. Initialize a default state.
 	 */
 	public StateContext() {
-        normalUserMouseListener = null;
-        adminMouseListener = null;
 
 		this.filterNodeType = new ArrayList<Integer>();
 		this.path = new ArrayList<Node>();
-		//this.allMaps = new ArrayList<GeneralMap>();
+
 		this.iconNodes = new ArrayList<Node>();
 
-		this.setState(new StateNormalUser());
+		myState = new MouseActionSelectNode(this);
+		myUserState = new NormalUserState(this);
+		myAccount = new UserAccount();
+
+		this.switchToState(new MouseActionSelectNode(this));
+		this.switchUserState(new NormalUserState(this));
 		this.setCurrentMap(1);
 
 
 	}
+
+	/**
+	 * Set a new state.
+	 *
+	 * @param newState
+	 *            the new state the context will be.
+	 */
+	public void switchToState(MouseActionState newState) {
+		if (null != myState) {
+			myState.cleanup();
+		}
+		this.myState = newState;
+	}
+
+	public void switchUserState(UserState newState) {
+		if (null != myUserState) {
+			myUserState.cleanup();
+		}
+		this.myUserState = newState;
+	}
+
+	public boolean execute(MouseEvent e) {
+		myUserState.execute(e);
+		boolean ret =  myState.execute(e);
+		getImageComponent().repaint();
+		return ret;
+	}
+
+    public void paintOnImage(Graphics2D g2) {
+
+		myState.paintOnImage(g2);
+    }
+
+
+	/**
+	 * setter and getter
+	 */
+
 
 	/**
 	 * Changes the currently displayed map
@@ -154,84 +129,11 @@ public class StateContext {
 		return currentMap;
 	}
 
-
-	/**
-	 *
-	 * Set a new state.
-	 * the new state the context will be.
-	 */
-	public void setState() {
-
-	}
-
 	public List<Node> getIconNodes() {
 		return iconNodes;
 	}
 
-	/**
-	 * Method to change the state.
-	 * 
-	 * @param imageComponent
-	 *            the component that we want to add mouse listener on.
-	 * @param normalUserMouseListener
-	 *            the listener for the normal user.
-	 * @param adminMouseListener
-	 *            the listener for the admin user.
-	 */
-	public void switchState(ImageComponent imageComponent, MouseListener normalUserMouseListener,
-			MouseListener adminMouseListener) {
-		mouseListenerState.switchMouseListener(this, imageComponent, normalUserMouseListener, adminMouseListener);
-	}
-
-	public void switchToAdminUser() {
-        try{
-            if (null == adminMouseListener)
-                throw new Exception("Uninitlized admin user mouse listener");
-        }catch(Exception E){
-            E.printStackTrace();
-        }
-
-		try{
-			if (null == mouseListenerState)
-				throw new Exception("Uninitlized state");
-		}catch(Exception E){
-			E.printStackTrace();
-		}
-
-        imageComponent.removeMouseListener(this.getNormalUserMouseListener());
-        imageComponent.addMouseListener(this.getAdminMouseListener());
-        this.setState(new StateAdminUser());
-		System.out.println("Switch to Admin ");
-
-
-    }
-
-    public void switchToNormalUser() {
-        try{
-            if (null == normalUserMouseListener)
-                throw new Exception("Uninitlized normal user mouse listener");
-        }catch(Exception E){
-            E.printStackTrace();
-        }
-        imageComponent.removeMouseListener(this.getAdminMouseListener());
-        imageComponent.addMouseListener(this.getNormalUserMouseListener());
-        this.setState(new StateNormalUser());
-		System.out.println("Switch to Normal user ");
-
-
-    }
-
-    /**
-     * Set a new state.
-     *
-     * @param newState
-     *            the new state the context will be.
-     */
-    public void setState(StateMouseListener newState) {
-        this.mouseListenerState = newState;
-    }
-
-    public Node getStartNode() {
+	public Node getStartNode() {
 		return startNode;
 	}
 
@@ -254,5 +156,35 @@ public class StateContext {
 	public void setPath(List<Node> path) {
 		this.path = path;
 	}
+
+	public void setImageComponent(ImageComponent imageComponent) {
+		this.imageComponent = imageComponent;
+	}
+
+	public boolean isAdmin() {
+		return myAccount.isAdmin();
+	}
+
+	public void setInputPanel(InputPanel inputPanel) {
+		this.inputPanel = inputPanel;
+	}
+
+	public InputPanel getInputPanel() {
+		return inputPanel;
+	}
+
+	public MouseActionState getMyState() {
+		return myState;
+	}
+
+	public UserState getMyUserState() {
+		return myUserState;
+	}
+
+    public ImageComponent getImageComponent() {
+        return imageComponent;
+    }
+
+
 
 }

@@ -10,8 +10,8 @@ public class Graph {
 	private List<Edge> edges;
 
 	/** Builds a graph from a set of edges */
-	public Graph(Edge[] edges) {
-		graph = new HashMap<>(edges.length);
+	public Graph(List<Edge> edges) {
+		graph = new HashMap<>(edges.size());
 
 //		for (Edge e : edges)
 //		{

@@ -57,13 +57,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private final static String LOG = "Login";
 	private final static String LOGOUT = "Log out";
 
-	// private JFrame controllingFrame;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
 
-	}
 
 	/**
 	 * Create the dialog.
@@ -137,16 +131,28 @@ public class AdminDialog extends JDialog implements ActionListener {
 				successfulLogin();			
 				dispose();
 				}
+			else {
+                //TODO add a warning box for wrong password
+				JOptionPane.showMessageDialog(null, "Username or password error.", "Error Message",
+						JOptionPane.ERROR_MESSAGE);
+				passwordField.selectAll();
+				passwordField.setText("");
+				userName.setText("");
+				
+            }
 		}
 	}
 
 	public void successfulLogin() {
 		AdminDialog.this.setVisible(false);
 		inputPanel.incrementAdminClicked();
-		inputPanel.getBtnNeighborManage().setVisible(true);
+	//	inputPanel.getBtnNeighborManage().setVisible(true);
 		inputPanel.getAdminLogin().setText(LOGOUT);
-		inputPanel.getBtnSynchronize().setVisible(true);
-		stateContext.setAdminUser();
+//		inputPanel.getBtnSynchronize().setVisible(true);
+//		inputPanel.getBtnMngEdge().setVisible(true);
+//		inputPanel.getBtnMngNode().setVisible(true);	
+		stateContext.switchToState(new MouseActionAdminUser(stateContext));
+		stateContext.switchUserState(new AdminUserState(stateContext));
 		imgPanel.repaint();
 	}
 

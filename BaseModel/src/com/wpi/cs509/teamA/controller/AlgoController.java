@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
@@ -42,7 +43,7 @@ public class AlgoController {
 	/**
 	 * the result of the path finding
 	 */
-	private Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
+	private Stack<Node> result = new Stack<Node>();
 
 	/**
 	 * default constructor
@@ -72,62 +73,24 @@ public class AlgoController {
 	 * @return a map data structure that the key is the map id and the value is
 	 *         a list of nodes that represents the path on that map
 	 */
-/*	public Map<Integer, List<Node>> getRoute() {
+	public Stack<Node> getRoute() {
 
 		// we support searching node now only..
 
 		// get the node from database
-		Node fromNode = this.getNodeFromName(startNode);    /////////////////
-		
-		Node toNode = this.getNodeFromName(endNode);        ////////////////
-		
-		// use this two to decide how which maps are involved in searching..
-		int startMapId = fromNode.getMapId();
-		int endMapId = toNode.getMapId();
+        Node fromNode = Database.getNodeFromName(startNode);    /////////////////
+        // TODO this is a hack need to get the function working
+        Node toNode = Database.getNodeFromName(endNode);    /////////////////
 
-		// get all edges from database..
-		NodeRelationDao nrd = new NodeRelationDaoImpl();
-		Edge[] inputEdges = new Edge[nrd.getNodeRelationNum()];
-		Set<Edge> edges = nrd.getAllEdges();
-		int temp = 0;
-		for (Edge edge : edges) {
-			inputEdges[temp++] = edge;
-			// System.out.println("edge: " + edge.getId1() + " " +
-			// edge.getId2());
-
-		}
-
-		// TODO: Build Graph of all nodes in scenario in the following format:
-		// (int nodeid1, int nodeid2, int distance)
-		Graph context = new Graph(inputEdges);
 
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-		// TODO: Make a decision here which strategy we will use..
-		// always use Dijkstra's for now
-		// in the same map..
-		if (startMapId == endMapId) {
 
-			// assemble 2 nodes just for test.. definitely should not use id to
-			// search..
-			int startNodeId = Database.getNodeIdFromName(startNode);
-			fromNode.setId(startNodeId);
-			int endNodeId = Database.getNodeIdFromName(endNode);
-			toNode.setId(endNodeId);
+		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		return result = generalAlgorithm.findPath(fromNode, toNode, Database.getAllEdges());
 
-			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, context);
-			return result;
-		} else {
-			// for later use
-
-			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, context);
-			return result;
-		}
-
-	}*/
+	}
 
 	/**
 	 * Gets the node that corresponding to a given location name
