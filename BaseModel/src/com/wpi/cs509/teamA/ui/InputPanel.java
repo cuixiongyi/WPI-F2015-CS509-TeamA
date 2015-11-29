@@ -319,8 +319,9 @@ public class InputPanel extends JPanel implements ActionListener {
 		ArrayList<String> mapNameList=new ArrayList<String>();
 		int tmpMapId=path.peek().getMap().getMapId();
 		mapNameList.add(path.peek().getMap().getMapName());
-		for(Node node: path)
+		while (path.size() > 0)
 		{
+			Node node = path.pop();
 			if(node.getMap().getMapId()==tmpMapId)
 			{
 				singleMapPath.add(node);
