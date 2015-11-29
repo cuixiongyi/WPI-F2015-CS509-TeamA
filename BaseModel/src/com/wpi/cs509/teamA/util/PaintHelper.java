@@ -79,6 +79,9 @@ public class PaintHelper {
    public static void paintIcons(List<Node> nodes, Graphics2D g2) {
         for (Node node : nodes) {
             BufferedImage image = NodeIcon.getImage(node);
+            if (null == image) {
+                continue;
+            }
             g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(stateContext.getImageComponent()),
                     image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
         }
