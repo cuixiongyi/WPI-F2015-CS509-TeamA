@@ -82,7 +82,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 				// insert every edge..
 				Coordinate firstNodeCoordinate = edge.getNode1().getLocation();
 				Coordinate secondNodeCoordinate = edge.getNode2().getLocation();
-				
+
 				int fromId = this.checkNodeInDBByCoordinate(firstNodeCoordinate);
 				int endId = this.checkNodeInDBByCoordinate(secondNodeCoordinate);
 
@@ -241,7 +241,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			String getAllEdges = "SELECT * FROM routefinder.relations t1 inner join routefinder.node t2 where (t1.node_from = t2.id) AND t2.map_id=?;";
 			resultSet = null;
 			pstmt = conn.prepareStatement(getAllEdges);
-			pstmt.setInt(1,map_id);
+			pstmt.setInt(1, map_id);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
 
@@ -267,4 +267,32 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	}
 
+	public boolean deleteEdge(Node n1, Node n2) {
+		int id1 = n1.getId();
+		int id2 = n2.getId();
+		if (checkNodeRelationInDBById(id1, id2)) {
+			try {
+				String deleteEdgeFromDB = "delete from routefinder.relations where (node_from=? and node_to =?) or(node_from=? and node_to=?);";
+				pstmt = conn.prepareStatement(deleteEdgeFromDB);
+				pstmt.setInt(1, id1);
+				pstmt.setInt(2, id2);
+				pstmt.setInt(3, id2);
+				pstmt.setInt(4, id1);
+				pstmt.executeUpdate();
+				conn.commit();
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JdbcConnect.resultClose(rs, pstmt);
+				JdbcConnect.connClose();
+			}
+		}
+		else{
+			System.out.println("The edge doesn't exist");
+			return false;
+		}
+		return false;
+	}
 }
