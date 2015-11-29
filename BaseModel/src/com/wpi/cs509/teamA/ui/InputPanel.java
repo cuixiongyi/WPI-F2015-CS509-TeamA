@@ -11,6 +11,7 @@ import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -74,7 +75,9 @@ public class InputPanel extends JPanel implements ActionListener {
 	private ImageComponent imageComponent;
 	private DefaultListModel<String> mapListModel=new DefaultListModel<>() ;
 	private JList<String> mapList;
+	private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 	private JLabel picLabel;
+	
 
 	private int adminClicked=0;
 
@@ -197,13 +200,7 @@ public class InputPanel extends JPanel implements ActionListener {
 		}
 
 		//result list
-		mapListModel.addElement("Campus Map");
-		mapListModel.addElement("AK-G");
-		mapListModel.addElement("AK-1");
-		mapListModel.addElement("AK-2");
 		mapList = new JList<>(mapListModel);
-//        add(mapList);
-//        mapList.setBounds(50, 480, 200, 200);
 		mapList.setVisible(false);
 		JScrollPane mapListScroll = new JScrollPane(mapList);
 		mapListScroll.setBounds(50, 480, 200, 200);
@@ -216,17 +213,17 @@ public class InputPanel extends JPanel implements ActionListener {
 					int currentMapID = -1;
 					if (InputPanel.this.getMapList().getSelectedValue().equals("Campus Map")) {
 						currentMapID = 1;
-					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-G")) {
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("Atwater Kent  Laboratories- GroundFloor")) {
 						currentMapID = 2;
-					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-1")) {
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("Atwater Kent  Laboratories- First Floor 1st")) {
 						currentMapID = 3;
-					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-2")) {
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("Atwater Kent  Laboratories- Second Floor 2nd")) {
 						currentMapID = 4;
-					} else if (InputPanel.this.getMapList().getSelectedValue().equals("AK-3")) {
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("Atwater Kent  Laboratories- Third Floor 3rd")) {
 						currentMapID = 5;
-					} else if (InputPanel.this.getMapList().getSelectedValue().equals("PC-1")) {
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("Project Center-First Floor 1st")) {
 						currentMapID = 6;
-					} else if (InputPanel.this.getMapList().getSelectedValue().equals("PC-2")) {
+					} else if (InputPanel.this.getMapList().getSelectedValue().equals("Project Center-Second Floor 2nd")) {
 						currentMapID = 7;
 					}
 
@@ -245,6 +242,7 @@ public class InputPanel extends JPanel implements ActionListener {
 				if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("Campus Map")) {
 					// selectImage("Final_Campus_Map", imageComponent);
 					currentMapID = 1;
+					
 				} else if (InputPanel.this.getComboBoxMap().getSelectedItem().equals("AK-G")) {
 					// selectImage("Final_AK_Ground_Floor", imageComponent);
 					currentMapID = 2;
@@ -315,7 +313,38 @@ public class InputPanel extends JPanel implements ActionListener {
 				InputPanel.this.getDesPoint());
 
 		Stack<Node> path = algoController.getRoute();
-		stateContext.setPath(path);
+		
+//		ArrayList<ArrayList<Node>> listOfLists = new ArrayList<ArrayList<Node>>();
+		ArrayList<Node> singleMapPath = new ArrayList<Node>();
+		ArrayList<String> mapNameList=new ArrayList<String>();
+		int tmpMapId=path.peek().getMap().getMapId();
+		mapNameList.add(path.peek().getMap().getMapName());
+		for(Node node: path)
+		{
+			if(node.getMap().getMapId()==tmpMapId)
+			{
+				singleMapPath.add(node);
+			}
+			else {
+				multiMapPathLists.add(singleMapPath);
+				singleMapPath=new ArrayList<Node>();
+				singleMapPath.add(node);
+				tmpMapId=node.getMap().getMapId();
+				mapNameList.add(node.getMap().getMapName());
+			}
+		}
+		multiMapPathLists.add(singleMapPath);
+		
+		//reset and initiate the Jlist
+//		mapListModel=new DefaultListModel<>(); 
+		for(String name:mapNameList)
+		{
+			mapListModel.addElement(name);
+		}
+		stateContext.setPath(multiMapPathLists.get(0));
+		stateContext.setMultiMapPathLists(this.multiMapPathLists);
+		stateContext.setCurrentMap(multiMapPathLists.get(0).get(0).getMap().getMapId());
+		stateContext.getImageComponent().repaint();
 		
 	}
 
@@ -342,6 +371,7 @@ public class InputPanel extends JPanel implements ActionListener {
 	
 
 	}
+	
 
 	
 	public void incrementAdminClicked() {

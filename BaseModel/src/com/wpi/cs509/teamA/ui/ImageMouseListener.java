@@ -28,7 +28,6 @@ public class ImageMouseListener implements MouseInputListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-    	
     	stateContext.getImageComponent().setPressxPos(e.getX());
     	stateContext.getImageComponent().setPressyPos(e.getY());
     	stateContext.getImageComponent().setImageStartXpos(stateContext.getImageComponent().getImageXpos());

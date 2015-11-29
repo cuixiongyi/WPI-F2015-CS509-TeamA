@@ -42,6 +42,7 @@ public class StateContext {
 	private Node startNode;
 	private Node endNode;
 	private List<Node> path;
+	private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 
 
     private boolean addedNewNode = false;
@@ -189,6 +190,15 @@ public class StateContext {
         return imageComponent;
     }
 
+	public ArrayList<ArrayList<Node>> getMultiMapPathLists() {
+		return multiMapPathLists;
+	}
+
+	public void setMultiMapPathLists(ArrayList<ArrayList<Node>> multiMapPathLists) {
+		this.multiMapPathLists = multiMapPathLists;
+	}
+    
+    
 
     public boolean isAddedNewNode() {
         return addedNewNode;
