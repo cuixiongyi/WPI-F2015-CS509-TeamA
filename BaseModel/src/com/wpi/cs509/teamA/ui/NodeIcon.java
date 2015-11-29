@@ -12,18 +12,18 @@ import com.wpi.cs509.teamA.util.NodeType;
 public class NodeIcon {
 	private Node node;
 
-	private BufferedImage redIcon;
-	private BufferedImage blueIcon;
+	private BufferedImage labIcon;
+	private BufferedImage classroomIcon;
 	private BufferedImage restroomIcon;
 	private BufferedImage parkingIcon;
 
-	private String redIconFilePath;
-	private String blueIconFilePath;
+	private String labIconFilePath;
+	private String classroomIconFilePath;
 	private String restroomIconFilePath;
 	private String parkingIconFilePath;
 
-	private String redIconName = "Red_Icon.png";
-	private String blueIconName = "Blue_Icon.png";
+	private String labIconName = "Lab_Icon.png";
+	private String classroomIconName = "Classroom_Icon.png";
 	private String restroomIconName = "Restroom_Icon.png";
 	private String parkingIconName = "Parking_Icon.png";
 
@@ -32,13 +32,13 @@ public class NodeIcon {
 	}
 
 	void CreateImages() {
-		this.redIconFilePath = System.getProperty("user.dir") + "/src/" + this.redIconName;
-		this.blueIconFilePath = System.getProperty("user.dir") + "/src/" + this.blueIconName;
+		this.labIconFilePath = System.getProperty("user.dir") + "/src/" + this.labIconName;
+		this.classroomIconFilePath = System.getProperty("user.dir") + "/src/" + this.classroomIconName;
 		this.restroomIconFilePath = System.getProperty("user.dir") + "/src/" + this.restroomIconName;
 		this.parkingIconFilePath = System.getProperty("user.dir") + "/src/" + this.parkingIconName;
 		try {
-			setRedIcon(ImageIO.read(new FileInputStream(this.redIconFilePath)));
-			setBlueIcon(ImageIO.read(new FileInputStream(this.blueIconFilePath)));
+			setLabIcon(ImageIO.read(new FileInputStream(this.labIconFilePath)));
+			setClassroomIcon(ImageIO.read(new FileInputStream(this.classroomIconFilePath)));
 			setRestroomIcon(ImageIO.read(new FileInputStream(this.restroomIconFilePath)));
 			setParkingIcon(ImageIO.read(new FileInputStream(this.parkingIconFilePath)));
 		} catch (IOException e) {
@@ -70,7 +70,13 @@ public class NodeIcon {
 		NodeType type = node.getNodeType();
 		switch (type) {
 		case CLASSROOM: {
-			return this.redIcon;
+			return this.classroomIcon;
+		}
+		case OFFICE: {
+			return this.classroomIcon;
+		}
+		case MEETINGROOM: {
+			return this.classroomIcon;
 		}
 		case RESTROOM: {
 			return this.restroomIcon;
@@ -78,8 +84,11 @@ public class NodeIcon {
 		case PARKING: {
 			return this.parkingIcon;
 		}
+		case LAB: {
+			return this.labIcon;
+		}
 		default: {
-			return this.blueIcon;
+			return null;
 		}
 		}
 
@@ -89,16 +98,16 @@ public class NodeIcon {
 	 * @param image
 	 *            the image to set
 	 */
-	public void setRedIcon(BufferedImage image) {
-		this.redIcon = image;
+	public void setLabIcon(BufferedImage image) {
+		this.labIcon = image;
 	}
 
 	/**
 	 * @param image
 	 *            the image to set
 	 */
-	public void setBlueIcon(BufferedImage image) {
-		this.blueIcon = image;
+	public void setClassroomIcon(BufferedImage image) {
+		this.classroomIcon = image;
 	}
 
 	/**
