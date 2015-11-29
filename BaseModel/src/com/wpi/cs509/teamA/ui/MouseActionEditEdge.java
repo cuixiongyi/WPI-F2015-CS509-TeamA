@@ -73,7 +73,7 @@ public class MouseActionEditEdge  extends MouseActionState {
             {
                 return false;
             }
-            System.out.println("found node");
+            System.out.println(node.getId());
             if (null == lastNode) {
                 lastNode = node;
                 nodesToPaint.add(node);

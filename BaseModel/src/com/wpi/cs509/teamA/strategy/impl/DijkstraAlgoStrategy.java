@@ -24,7 +24,9 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		this.startNodeId = startNode.getId();
 		this.endNodeId = endNode.getId();
 		Graph context = new Graph (edges);
+		System.out.println("edges size:"+edges.size());
 		HashMap<Integer, Vertex> graph = context.getGraph();
+		System.out.println("graph size:"+graph.size());
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
 			// return 0;
@@ -50,10 +52,11 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		
 		Vertex d= new Vertex();
 		d=destination;
-		//System.out.println(d.getDist());
+		System.out.println(d.getDist());
 		Stack<Node> result= new Stack<Node>();
 		do{
 			result.push(d);
+			//System.out.println("++++"+result.size());
 			d=d.getPrevious();
 		}while(d!=source) ;
 		result.push(source);
