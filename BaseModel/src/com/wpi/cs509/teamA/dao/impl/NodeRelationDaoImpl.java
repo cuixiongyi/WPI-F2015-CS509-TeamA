@@ -267,7 +267,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	}
 
-	public boolean deleteEdge(Node n1, Node n2) {
+	public boolean deleteOrAddEdge(Node n1, Node n2) {
 		int id1 = n1.getId();
 		int id2 = n2.getId();
 		if (checkNodeRelationInDBById(id1, id2)) {

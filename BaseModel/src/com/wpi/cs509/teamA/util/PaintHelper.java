@@ -12,7 +12,7 @@ import com.wpi.cs509.teamA.ui.StateContext;
 public class PaintHelper {
 	
 	private static StateContext stateContext;
-	private final static int ovalOffset = 5;
+	private final static int ovalOffset = 10;
     private static BasicStroke basicNodeStrock = new BasicStroke(2);
     private static BasicStroke basicLineStrock = new BasicStroke(5);
 
@@ -105,7 +105,7 @@ public class PaintHelper {
         if (null == node)
             return;
 		Coordinate xy = transferCoor(node.getLocation());
-		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, 10, 10);
+		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, ovalOffset*2, ovalOffset*2);
     }
 
     public static void paintEdges(List<Edge> edges, Graphics2D g2) {
@@ -152,8 +152,8 @@ public class PaintHelper {
     public static Coordinate backTransferCoor(Coordinate origin) {
         Coordinate result=new Coordinate();
         float scale=stateContext.getCurrentMap().getDisplayScale();
-        result.setX(origin.getX()+stateContext.getImageComponent().getImageXpos());
-        result.setY(origin.getY()+stateContext.getImageComponent().getImageYpos());
+        result.setX(origin.getX()-stateContext.getImageComponent().getImageXpos());
+        result.setY(origin.getY()-stateContext.getImageComponent().getImageYpos());
 
         return result;
     }

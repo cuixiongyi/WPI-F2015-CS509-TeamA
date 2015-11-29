@@ -17,6 +17,8 @@ public class MouseActionSelectNode extends MouseActionState {
     public MouseActionSelectNode(StateContext pStateContext) {
         super(pStateContext);
 
+        if (null != imageComponent)
+            imageComponent.repaint();
     }
 
     @Override
@@ -35,8 +37,9 @@ public class MouseActionSelectNode extends MouseActionState {
         java.util.List<Node> pathNode = this.stateContext.getPath();
         PaintHelper.paintPath(pathNode, g2);
         java.util.List<Node> iconNodes = stateContext.getIconNodes();
-        //PaintHelper.paintIcons(iconNodes, g2);
 
+
+        PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
 
         /*
         g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);

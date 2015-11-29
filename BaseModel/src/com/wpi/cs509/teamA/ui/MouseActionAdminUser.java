@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
+import com.wpi.cs509.teamA.util.PaintHelper;
 import javafx.scene.input.MouseButton;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ public class MouseActionAdminUser extends MouseActionState {
     public MouseActionAdminUser(StateContext pStateContext) {
         super(pStateContext);
 
+        imageComponent.repaint();
     }
 
     @Override
@@ -24,6 +26,9 @@ public class MouseActionAdminUser extends MouseActionState {
 
     @Override
     public boolean execute(MouseEvent e) {
+        /// update coor and coorTrans
+        super.execute(e);
+
         xPos = e.getX();
         yPos = e.getY();
         if (e.getButton() == MouseEvent.BUTTON3 )
@@ -38,6 +43,9 @@ public class MouseActionAdminUser extends MouseActionState {
 
     @Override
     public void paintOnImage(Graphics2D g2) {
-
+        PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(),
+                g2, PaintHelper.DrawStyleEnum.NewNode);
+        PaintHelper.paintEdges(stateContext.getCurrentMap().getEdges(),
+                g2, PaintHelper.DrawStyleEnum.BasicEdge);
     }
 }

@@ -56,7 +56,7 @@ public class GeneralMap implements AdjacencyMatrix {
     // Refactor
     private String mapImgPath;
 
-    private float displayScale;
+    private float displayScale = 1;
 
     private List<Node> nodes;
 
@@ -152,7 +152,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	/**
 	 * @param scale the scale to set
 	 */
-	public void setScale(int scale) {
+	public void setScale(float scale) {
 		measureScale = scale;
 	}
 
@@ -189,6 +189,10 @@ public class GeneralMap implements AdjacencyMatrix {
     public List<Node> getNodes() {
         return Database.getAllNodesForCurrentMap(this.getMapId());
     }
+
+	public List<Edge> getEdges() {
+		return Database.getAllEdgesForCurrentMap(this.getMapId());
+	}
 
     public void setNodes(List<Node> nodes) {
         this.nodes = nodes;

@@ -44,7 +44,7 @@ public class MapDaoImpl implements MapDao {
 				maps.setMapId(resultSet.getInt("id"));
 				maps.setMapName(resultSet.getString("name"));
 				maps.setImageName(resultSet.getString("image_name"));
-				maps.setDisplayScale(resultSet.getFloat("scale"));
+				maps.setScale(resultSet.getFloat("scale"));
 				res.add(maps);
 			}
 			return res;

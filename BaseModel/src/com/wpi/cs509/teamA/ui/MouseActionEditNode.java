@@ -24,11 +24,17 @@ public class MouseActionEditNode extends MouseActionState {
         super(pStateContext);
         nodesToPaint = new ArrayList<>();
 
+        stateContext.setAddedNewNode(false);
+        stateContext.setNewNode(null);
+
+        imageComponent.repaint();
     }
 
 	@Override
 	public boolean cleanup() {
 
+        stateContext.setAddedNewNode(false);
+        stateContext.setNewNode(null);
 		return false;
 	}
 
@@ -38,6 +44,8 @@ public class MouseActionEditNode extends MouseActionState {
 
 	    if (e.getButton() == MouseEvent.BUTTON1) {
 
+            Coordinate coor = new Coordinate(e.getX(), e.getY());
+            Coordinate coorTrans = PaintHelper.backTransferCoor(coor);
             Node node = Database.getNodeFromCoordinate(new Coordinate(e.getX(), e.getY()), stateContext.getCurrentMap().getMapId());
 
             if (null != node) {
@@ -45,7 +53,7 @@ public class MouseActionEditNode extends MouseActionState {
                 JOptionPane.showMessageDialog(null, "Too close from another node.");
             } else {
                 // Create a NodeInformationDialog
-                NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext, e.getX(), e.getY());
+                NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext, coorTrans.getX(), coorTrans.getY());
                 nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 nodeInfo.setVisible(nodeInfo.isFocusable());
 
@@ -58,6 +66,13 @@ public class MouseActionEditNode extends MouseActionState {
     @Override
     public void paintOnImage(Graphics2D g2) {
         // TODO this is a hack, need to paint newly added node here
-        PaintHelper.paintNodes(nodesToPaint, g2);
+        if (stateContext.isAddedNewNode() && null != stateContext.getNewNode()) {
+            nodesToPaint.add(stateContext.getNewNode());
+            stateContext.setAddedNewNode(false);
+            stateContext.setNewNode(null);
+        }
+        PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+        PaintHelper.paintNodes(nodesToPaint, g2, PaintHelper.DrawStyleEnum.NewNode);
+
     }
 }

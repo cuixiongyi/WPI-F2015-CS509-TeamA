@@ -6,11 +6,8 @@ import com.wpi.cs509.teamA.bean.Node;
 
 //import org.junit.Test;
 
-import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
-import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
-import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 
 public class UserAccountDaoTest {
 
@@ -29,7 +26,7 @@ public class UserAccountDaoTest {
 		n1.setId(100);
 		Node n2 = new Node();
 		n2.setId(20);
-		System.out.println(nrd.deleteEdge(n1, n2));
+		System.out.println(nrd.deleteOrAddEdge(n1, n2));
 		}
 
 }

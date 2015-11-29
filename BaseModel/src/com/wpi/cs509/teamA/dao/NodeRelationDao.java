@@ -81,5 +81,5 @@ public interface NodeRelationDao {
 	public List<Edge> getAllEdges();
 
 	
-	public boolean deleteEdge(Node n1, Node n2);
+	public boolean deleteOrAddEdge(Node n1, Node n2);
 }

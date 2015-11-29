@@ -171,6 +171,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				node.saveNode();
                 Database.InitFromDatabase();
 
+                stateContext.setAddedNewNode(true);
+                stateContext.setNewNode(node);
 				// show what we have saved..
 				imagePanel.repaint();
 				this.setVisible(false);

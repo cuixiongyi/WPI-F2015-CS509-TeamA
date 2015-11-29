@@ -1,6 +1,8 @@
 package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -18,6 +20,8 @@ public abstract class MouseActionState {
     protected int xPos;
     protected int yPos;
 
+    protected Coordinate coor = null;
+    protected Coordinate coorTrans = null;
     protected ImageComponent imageComponent;
 
 
@@ -31,7 +35,11 @@ public abstract class MouseActionState {
 
     abstract public void paintOnImage(Graphics2D g2);
 
-    abstract public boolean execute(MouseEvent e) ;
+    public boolean execute(MouseEvent e) {
+        coor = new Coordinate(e.getX(), e.getY());
+        coorTrans = PaintHelper.backTransferCoor(coor);
+        return true;
+    }
 
     abstract public boolean cleanup();
 

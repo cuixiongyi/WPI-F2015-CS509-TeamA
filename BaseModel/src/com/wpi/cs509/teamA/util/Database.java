@@ -31,7 +31,7 @@ public class Database {
 	private static HashMap<Integer, List<Edge>> allEdgesDataHM;
 	private static List<UserAccount> allUsersDataHL;
 	
-	static int nodeRange = 10;
+	static int nodeRange = 20;
 	public Database(){
 		
 	}

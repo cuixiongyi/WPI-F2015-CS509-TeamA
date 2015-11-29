@@ -43,6 +43,10 @@ public class StateContext {
 	private Node endNode;
 	private List<Node> path;
 
+
+    private boolean addedNewNode = false;
+    private Node newNode = null;
+
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
 	 * filterNodeType[i] == 0 don't display
@@ -186,5 +190,20 @@ public class StateContext {
     }
 
 
+    public boolean isAddedNewNode() {
+        return addedNewNode;
+    }
+
+    public void setAddedNewNode(boolean addedNewNode) {
+        this.addedNewNode = addedNewNode;
+    }
+
+    public Node getNewNode() {
+        return newNode;
+    }
+
+    public void setNewNode(Node newNode) {
+        this.newNode = newNode;
+    }
 
 }
