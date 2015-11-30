@@ -6,6 +6,7 @@ import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -63,6 +64,8 @@ public class GeneralMap implements AdjacencyMatrix {
     private List<Node> nodes;
 
 	private BufferedImage image;
+	
+	private List<Edge> BoundaryEdges = new ArrayList<>();
 
 	/**
 	 * Default constructor
@@ -210,4 +213,14 @@ public class GeneralMap implements AdjacencyMatrix {
         this.nodes = nodes;
     }
 
+	public List<Edge> getBoundaryEdges() {
+		return BoundaryEdges;
+	}
+
+	public void setBoundaryEdges(List<Edge> boundryEdges) {
+		BoundaryEdges = boundryEdges;
+	}
+
+
+    
 }

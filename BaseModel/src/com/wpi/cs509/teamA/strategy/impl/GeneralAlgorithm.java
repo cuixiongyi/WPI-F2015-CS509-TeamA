@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
@@ -59,12 +60,12 @@ public class GeneralAlgorithm {
 	 * @param context
 	 * @return
 	 */
-	public Stack<Node> findPath(Node startNode, Node endNode, List<Edge> edges) {
+	public Stack<Node> findPath(allEdges edges) {
 
 		Stack<Node> result = new Stack<Node>();
 
 		// different strategy will use different algorithm..
-		result = algoStrategy.getRoute(startNode, endNode, edges);
+		result = algoStrategy.getRoute(edges);
 
 //		// TODO: Query node objects from node Id's and add all node objects to
 //		// result

@@ -11,8 +11,8 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	private GeneralMap map;
 	private double dist = Double.MAX_VALUE; // MAX_VALUE assumed to be infinity
 	private Vertex previous = null;
-	private int hcost;
-	private int gcost;
+	private double hcost;
+	private double gcost;
 
 	private Map<Vertex, Double> neighborV = new HashMap<>();
 	public Vertex(){
@@ -34,24 +34,24 @@ public class Vertex extends Node implements Comparable<Vertex> {
 		this.map = map;
 	}
 	
-	public int getGcost() {
+	public double getGcost() {
 		return gcost;
 	}
 
-	public void setGcost(int gcost) {
+	public void setGcost(double gcost) {
 		this.gcost = gcost;
 	}
 	/**
 	 * @return the hcost
 	 */
-	public int getHcost() {
+	public double getHcost() {
 		return hcost;
 	}
 
 	/**
 	 * @param hcost the hcost to set
 	 */
-	public void setHcost(int hcost) {
+	public void setHcost(double hcost) {
 		this.hcost = hcost;
 	}
 
