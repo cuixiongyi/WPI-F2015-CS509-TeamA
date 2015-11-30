@@ -36,7 +36,6 @@ import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 
@@ -117,7 +116,9 @@ public class ImageComponent extends JComponent {
 		});
 
 
+
 	}
+
 
 	public void clearText() {
 
@@ -149,6 +150,7 @@ public class ImageComponent extends JComponent {
         }
         return true;
     }
+
 
 
 

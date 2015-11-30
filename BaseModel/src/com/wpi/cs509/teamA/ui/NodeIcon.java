@@ -1,42 +1,51 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.NodeType;
 
 public class NodeIcon {
 	private Node node;
-	private BufferedImage image;
-	private String iconFileName = "/BaseModel/src/com/wpi/cs509/teamA/ui/icon_test1.png";
 
+
+	private static String labIconName = "Lab_Icon.png";
+	private static String classroomIconName = "Classroom_Icon.png";
+	private static String restroomIconName = "Restroom_Icon.png";
+	private static String parkingIconName = "Parking_Icon.png";
+
+
+	private static String labIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + labIconName;;
+	private static String classroomIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + classroomIconName;;
+	private static String restroomIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + restroomIconName;;
+	private static String parkingIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + parkingIconName;;
+
+	private static BufferedImage labIcon;
+	private static BufferedImage classroomIcon;
+	private static BufferedImage restroomIcon;
+	private static BufferedImage parkingIcon;
+
+    static {
+        try {
+            labIcon = ImageIO.read(new FileInputStream(labIconFilePath));
+            classroomIcon = ImageIO.read(new FileInputStream(classroomIconFilePath));
+            restroomIcon = ImageIO.read(new FileInputStream(restroomIconFilePath));
+            parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	public NodeIcon() {
 		CreateImages();
 	}
 
 	void CreateImages() {
-		try {
-			setImage(ImageIO.read(new File(getIconFileName())));
-		} catch (IOException e) {
-		}
-	}
 
-	/**
-	 * @return the iconFile
-	 */
-	public String getIconFileName() {
-		return iconFileName;
-	}
-
-	/**
-	 * @param iconFile
-	 *            the iconFile to set
-	 */
-	public void setIconFileName(String iconFile) {
-		this.iconFileName = iconFile;
 	}
 
 	/**
@@ -55,18 +64,68 @@ public class NodeIcon {
 	}
 
 	/**
+	 * @todo Fix this function to support multiple images for different node
+	 *       types
 	 * @return the image
 	 */
-	public BufferedImage getImage(Node node) {
-		return image;
+	static public BufferedImage getImage(Node node) {
+		NodeType type = node.getNodeType();
+		switch (type) {
+            case CLASSROOM: {
+                return classroomIcon;
+            }
+            case OFFICE: {
+                return classroomIcon;
+            }
+            case MEETINGROOM: {
+                return classroomIcon;
+            }
+            case RESTROOM: {
+                return restroomIcon;
+            }
+            case PARKING: {
+                return parkingIcon;
+            }
+            case LAB: {
+                return labIcon;
+            }
+            default: {
+                return null;
+            }
+		}
+
 	}
 
 	/**
 	 * @param image
 	 *            the image to set
 	 */
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setLabIcon(BufferedImage image) {
+		this.labIcon = image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setClassroomIcon(BufferedImage image) {
+		this.classroomIcon = image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setRestroomIcon(BufferedImage image) {
+		this.restroomIcon = image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setParkingIcon(BufferedImage image) {
+		this.parkingIcon = image;
 	}
 
 }
