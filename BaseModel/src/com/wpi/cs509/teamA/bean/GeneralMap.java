@@ -34,6 +34,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	 * Map name
 	 */
 	private String mapName;
+	private String mapAbbrName;
 
     public String getImageName() {
         return imageName;
@@ -141,6 +142,16 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
+	}
+	
+	
+
+	public String getMapAbbrName() {
+		return mapAbbrName;
+	}
+
+	public void setMapAbbrName(String mapAbbrName) {
+		this.mapAbbrName = mapAbbrName;
 	}
 
 	/**

@@ -40,12 +40,9 @@ public class MouseActionSelectNode extends MouseActionState {
     			PaintHelper.paintPath(path, g2);
     			break;
     		}
-    		
     	}
         
         java.util.List<Node> iconNodes = stateContext.getIconNodes();
-
-
         PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
 
         /*

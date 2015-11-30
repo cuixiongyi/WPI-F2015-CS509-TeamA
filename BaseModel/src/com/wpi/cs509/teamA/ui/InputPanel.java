@@ -34,6 +34,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.text.JTextComponent;
 import javax.xml.crypto.Data;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Database;
@@ -152,13 +153,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         comboBoxMap = new JComboBox<String>();
         comboBoxMap.setBounds(80, 55, 150, 30);
-        comboBoxMap.addItem("Campus Map");
-        comboBoxMap.addItem("AK-G");
-        comboBoxMap.addItem("AK-1");
-        comboBoxMap.addItem("AK-2");
-        comboBoxMap.addItem("AK-3");
-        comboBoxMap.addItem("PC-1");
-        comboBoxMap.addItem("PC-2");
+        List<GeneralMap> allMapList =Database.getAllMapFromDatabase();
+        for(GeneralMap map:allMapList) {
+            comboBoxMap.addItem(map.getMapAbbrName());
+        }
+
         comboBoxMap.setMaximumRowCount(4);
         add(comboBoxMap);
 
@@ -245,7 +244,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
                         currentMapID = 7;
                     }
 
-                    stateContext.setCurrentMap(currentMapID);
+                    stateContext.setCurrentMap(currentMapID,InputPanel.this.getMapList());
                     imageComponent.repaint();
                 }
             }
@@ -283,8 +282,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
                     currentMapID = 7;
                 }
                 //UIDataBuffer.setCurrentMapId(currentMapID);
-                stateContext.setCurrentMap(currentMapID);
-                //Database.InitFromDatabase();
+                stateContext.setCurrentMap(currentMapID,InputPanel.this.getComboBoxMap());
                 imageComponent.repaint();
 
             }
@@ -315,9 +313,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         stateContext.resetNodeFromText();
     }
-
-
-	
 
 	public void clickLogin() {
 		if (adminClicked % 2 == 0) {
@@ -380,7 +375,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		multiMapPathLists.add(singleMapPath);
 		
 		//reset and initiate the Jlist
-//		mapListModel=new DefaultListModel<>(); 
+//		mapListModel.removeAllElements();
+//		mapListModel.clear();
 		for(String name:mapNameList)
 		{
 			mapListModel.addElement(name);
@@ -412,8 +408,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		{
 			clickSearch();
 		}
-	
-
 	}
 	
 
