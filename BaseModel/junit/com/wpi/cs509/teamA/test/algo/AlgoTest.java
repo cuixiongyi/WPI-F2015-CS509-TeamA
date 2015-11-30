@@ -7,6 +7,8 @@ import java.util.Stack;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.controller.allEdges;
+import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
@@ -64,7 +66,7 @@ public class AlgoTest {
 	
 	@Test
 	public void testAlgoStrategy3(){
-		GeneralMap map1=new GeneralMap();
+		GeneralMap map1=new GeneralMap(0,1);
 		Node node1 = new Node(1, 10, 20, map1);
 		Node node2 = new Node(2, 20, 30,map1);
 		Node node3 = new Node(3, 20, 40,map1);
@@ -91,7 +93,7 @@ public class AlgoTest {
 		Edge edge13 = new Edge(node9, node10);
 		Edge edge14= new Edge(node10, node11);
 		
-		GeneralMap map2=new GeneralMap();
+		GeneralMap map2=new GeneralMap(1,1);
 		Node node12 = new Node(12, 10, 20, map2);
 		Node node13 = new Node(13, 20, 30,map2);
 		Node node14 = new Node(14, 20, 40,map2);
@@ -101,15 +103,50 @@ public class AlgoTest {
 		Edge edge17= new Edge(node12, node13);
 		Edge edge18= new Edge(node1, node12,50);
 		
+		GeneralMap map3=new GeneralMap(2,1);
+		Node node16 = new Node(16, 10, 20, map3);
+		Node node17 = new Node(17, 20, 30,map3);
+		Node node18 = new Node(18, 20, 40,map3);
+		Edge edge19 = new Edge(node16, node17);
+		Edge edge20= new Edge(node18, node17);
+		Edge edge21= new Edge(node16, node18);
+		Edge edge22= new Edge(node16, node14,100);
 		
-		Edge[] edges = {edge1, edge2, edge3, edge4, edge5,edge6, edge7, edge8, edge9, edge10,edge11, edge12, edge13, edge14,edge15,edge16
-				,edge17,edge18};
+		
+		List<Edge> edges= new ArrayList<Edge>();
+		List<Edge> mapedges= new ArrayList<Edge>();
+		edges.add(edge1);
+		edges.add(edge2);
+		edges.add(edge3);
+		edges.add(edge4);
+		edges.add(edge5);
+		edges.add(edge6);
+		edges.add(edge7);
+		edges.add(edge8);
+		edges.add(edge9);
+		edges.add(edge10);
+		edges.add(edge11);
+		edges.add(edge12);
+		edges.add(edge13);
+		edges.add(edge14);
+		edges.add(edge15);
+		edges.add(edge16);
+		edges.add(edge17);
+		edges.add(edge18);
+		edges.add(edge19);
+		edges.add(edge20);
+		edges.add(edge21);
+		mapedges.add(edge18);
+		mapedges.add(edge22);
+//		Edge[] edges = {edge1, edge2, edge3, edge4, edge5,edge6, edge7, edge8, edge9, edge10,edge11, edge12, edge13, edge14,edge15,edge16
+//				,edge17,edge18};
 		//Graph context = new Graph (edges); //for running the algorithm
-		DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
+		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
 	
-		//AstarAlgoStrategy d= new AstarAlgoStrategy();
+		AstarAlgoStrategy d= new AstarAlgoStrategy();
 		Stack<Node> route= new Stack<Node>();
-		route=d.getRoute(node5, node15, edges);
+		allEdges edgess= new allEdges(edges, mapedges,node9, node18);
+		route=d.getRoute(edgess);
 		System.out.print("Route: ");
 		while (!route.isEmpty())
 		{

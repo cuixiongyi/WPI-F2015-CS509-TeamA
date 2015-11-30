@@ -1,28 +1,77 @@
-/*package com.wpi.cs509.teamA.strategy.impl;
+package com.wpi.cs509.teamA.strategy.impl;
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.controller.allEdges;
+import com.wpi.cs509.teamA.controller.mapVertex;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableSet;
 import java.util.PriorityQueue;
 import java.util.Stack;
 import java.util.TreeSet;
 
-*//**
- * A* strategy
- * 
- * @author CS 509-Team A
- *
- *//*
+/**
+  A* strategy
+  
+  @author CS 509-Team A
+ 
+ */
 public class AstarAlgoStrategy{
+	private Node startNode;
+	private Node endNode;
 	private int startNodeId;
 	private int endNodeId;
 
 
-	public Stack<Node> getRoute(Node startNode, Node endNode, Edge[] edges) {
+	public Stack<Node> getRoute(allEdges alledges) {
+		this.startNode=alledges.getStartNode();
+		this.endNode=alledges.getEndNode();
+		List<Node> l= new ArrayList<Node>();
+		Stack<Node> result= new Stack<Node>();
+		alledges.init();
+		if(!alledges.isMultipleMap())
+		{	
+			l.add(endNode);
+			Graph context = new Graph (alledges.getEdgesOnMap(startNode.getMap())); 
+			return astarRoute(this.startNode,l, context);
+		}	
+		
+		@SuppressWarnings("unchecked")
+		Stack<mapVertex> s= (Stack<mapVertex>) alledges.getMapsOnPath().clone();
+		mapVertex m= new mapVertex();
+		while(!s.isEmpty()){	
+			Stack<Node> r= new Stack<Node>();
+			m=s.pop();
+			//System.out.println("the number of edges on map is "+alledges.getEdgesOnMap(m).size());
+			Graph context = new Graph (alledges.getEdgesOnMap(m)); 
+			if(m.getMapId()==endNode.getMap().getMapId()){ //this is the last map
+				l.add(endNode);
+			}
+			else{
+				l=alledges.getBoundaryNodes(m, s.peek());
+			}
+			//System.out.println("+++++++++++++");
+			//System.out.println(l.size());
+			
+			r=astarRoute(this.startNode,l, context);
+			l.clear();
+			startNode=alledges.getOtherNode(r.firstElement());
+			System.out.println("last on path is "+r.firstElement().getId());
+			//System.out.println("next start is "+startNode.getId());
+			r.addAll(result);
+			result=r;
+		}
+		return result;
+	}
+	
+	
+	public Stack<Node> astarRoute(Node startNode, List<Node> endNode, Graph context){
+	{
 		this.startNodeId = startNode.getId();
-		this.endNodeId = endNode.getId();
-		Graph context = new Graph (edges); 
+		//this.endNodeId = endNode.getId();
+		
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
@@ -31,10 +80,11 @@ public class AstarAlgoStrategy{
 		//get the vertex of startNode from integer startNodeId;
 		Vertex source= new Vertex(); 
 		source=	context.getGraph().get(startNodeId);  //point to the same object
-		Vertex destination =new Vertex();
-		destination = context.getGraph().get(startNodeId);;
+		Vertex[] destination =new Vertex[endNode.size()];
+		for(int i=0;i<destination.length;i++){
+			destination[i]=context.getGraph().get(endNode.get(i).getId());
+		}
 		
-		//NavigableSet<Vertex> q = new TreeSet<>();
 		PriorityQueue<Vertex> q = new PriorityQueue<Vertex>();
 		
 		// set-up vertices: only info of previous; other info given by graph nature
@@ -43,9 +93,23 @@ public class AstarAlgoStrategy{
 			v.setPrevious((v == source) ? source : null);
 			v.setDist((v == source) ? 0 : Integer.MAX_VALUE);
 			v.setGcost((v == source) ? 0 : Integer.MAX_VALUE);
-			//8System.out.println(((Node)v).DistanceTo(destination));
-			//cannot be calculated on different maps
-			v.setHcost((v==destination)? 0 : v.DistanceTo(destination));
+			boolean flag=true;
+			for(Vertex x: destination){ //if v is one of the destinations
+				if (v==x){
+					v.setHcost(0);
+					flag=false;
+					break;
+				}
+			}
+			if(flag){
+				double i=0;
+				for(Vertex w: destination){
+					i+=w.DistanceTo(v);
+				}
+				v.setHcost(i/destination.length);
+			}
+			
+			//v.setHcost((v==destination)? 0 : v.DistanceTo(destination)));
 			q.add(v);
 			//System.out.println("+++"+v.id);
 			//System.out.println(q.size());
@@ -54,10 +118,9 @@ public class AstarAlgoStrategy{
 
 		//System.out.println(graph.size());
 		//System.out.println(q.size());
-		astar(q);
 		
 		Vertex d= new Vertex();
-		d=destination;
+		d=astar(q, destination);
 		//System.out.println(d.getDist());
 		Stack<Node> result= new Stack<Node>();
 		do{
@@ -67,16 +130,12 @@ public class AstarAlgoStrategy{
 		result.push(source);
 		//return context.getPath(this.endNodeId);
 		return result;
+		}
 	}
 	
-	//this function should be included in the node class
-//	private Integer getDistance(Vertex a, Vertex b){
-//		//System.out.println(a.getCoordinate().getY());
-//		return (int) Math.sqrt(Math.pow(a.getCoordinate().getX()-b.getCoordinate().getX(),2)+Math.pow(a.getCoordinate().getY()-b.getCoordinate().getY(),2));
-//	}
 
-	*//** Implementation using a binary heap. *//*
-	private void astar(final PriorityQueue<Vertex> q) {
+
+	private Vertex astar(final PriorityQueue<Vertex> q, Vertex[] destination) {
 		Vertex u, v;
 		//System.out.println(q.size());
 		//need to add not found exception
@@ -89,25 +148,30 @@ public class AstarAlgoStrategy{
 			//System.out.println(u.getDist()+" "+u.getGcost()+ " "+ u.getHcost());
 			//System.out.println(u.getNeighborV().size());
 			//System.out.println(this.endNodeId);
-			if(u.getId()==this.endNodeId)
-			{	
-				//System.out.println(u.id);
-				//System.out.println(u.getPrevious().id);
-				break;}
+			for(Vertex e: destination){
+				if(u.getId()==e.getId()){
+					return u;
+				}
+			}
+//			if(u.getId()==this.endNodeId)
+//			{	
+//				//System.out.println(u.id);
+//				//System.out.println(u.getPrevious().id);
+//				break;}
 			
 			if (u.getDist() == Integer.MAX_VALUE)
-				break;// we can ignore u (and any other remaining vertices)
+				return null;// we can ignore u (and any other remaining vertices)
 						// since they are unreachable
 
 			// look at distances to each neighbor
 			
-			for (Map.Entry<Vertex, Integer> a :  u.getNeighborV().entrySet()) {
+			for (Map.Entry<Vertex, Double> a :  u.getNeighborV().entrySet()) {
 				v = a.getKey(); // the neighbor in this iteration
 				
 				//if(!q.contains(v))
 					//continue;
-				int alternategCost = u.getGcost() + a.getValue();
-				int alternateDist= alternategCost + a.getKey().getHcost();
+				double alternategCost = u.getGcost() + a.getValue();
+				double alternateDist= alternategCost + a.getKey().getHcost();
 				
 				if (alternateDist < v.getDist()) { // shorter path to neighbor
 													// found
@@ -120,7 +184,6 @@ public class AstarAlgoStrategy{
 				}
 			}
 		}
+		return null;
 	}
 }
-
-*/

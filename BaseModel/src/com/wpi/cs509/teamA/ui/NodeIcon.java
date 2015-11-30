@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.NodeType;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 public class NodeIcon {
 	private Node node;
@@ -19,10 +20,10 @@ public class NodeIcon {
 	private static String parkingIconName = "Parking_Icon.png";
 
 
-	private static String labIconFilePath = System.getProperty("user.dir") + "/src/" + labIconName;;
-	private static String classroomIconFilePath = System.getProperty("user.dir") + "/src/" + classroomIconName;;
-	private static String restroomIconFilePath = System.getProperty("user.dir") + "/src/" + restroomIconName;;
-	private static String parkingIconFilePath = System.getProperty("user.dir") + "/src/" + parkingIconName;;
+	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;;
+	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;;
+	private static String restroomIconFilePath = PaintHelper.getUserDir() + restroomIconName;;
+	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;;
 
 	private static BufferedImage labIcon;
 	private static BufferedImage classroomIcon;

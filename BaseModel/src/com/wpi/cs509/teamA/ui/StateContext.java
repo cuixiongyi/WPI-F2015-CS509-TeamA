@@ -5,6 +5,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.JList;
+
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
@@ -138,8 +141,31 @@ public class StateContext {
 	 *            The map to be displayed
 	 *
 	 */
+	public void setCurrentMap(int mapID, JComboBox<String> comboBox) {
+		this.currentMap = Database.getMapEntityFromMapId(mapID);
+		if(inputPanel!=null)
+			inputPanel.getMapList().setSelectedValue(currentMap.getMapAbbrName(), true);
+
+		// TODO Do some clean up
+
+	}
+	
+	public void setCurrentMap(int mapID,JList<String> jList) {
+		this.currentMap = Database.getMapEntityFromMapId(mapID);
+		if(inputPanel!=null)
+			inputPanel.getComboBoxMap().setSelectedItem(currentMap.getMapAbbrName());
+
+		// TODO Do some clean up
+
+	}
+	
 	public void setCurrentMap(int mapID) {
 		this.currentMap = Database.getMapEntityFromMapId(mapID);
+		if(inputPanel!=null)
+		{
+			inputPanel.getComboBoxMap().setSelectedItem(currentMap.getMapAbbrName());
+			inputPanel.getMapList().setSelectedValue(currentMap.getMapAbbrName(), true);
+		}
 
 		// TODO Do some clean up
 

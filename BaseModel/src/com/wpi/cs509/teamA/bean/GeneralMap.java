@@ -6,6 +6,7 @@ import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 /**
  * This is a class that defines all the map we want. It is also the class that
@@ -33,6 +35,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	 * Map name
 	 */
 	private String mapName;
+	private String mapAbbrName;
 
     public String getImageName() {
         return imageName;
@@ -61,6 +64,8 @@ public class GeneralMap implements AdjacencyMatrix {
     private List<Node> nodes;
 
 	private BufferedImage image;
+	
+	private List<Edge> BoundaryEdges = new ArrayList<>();
 
 	/**
 	 * Default constructor
@@ -141,6 +146,16 @@ public class GeneralMap implements AdjacencyMatrix {
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
+	
+	
+
+	public String getMapAbbrName() {
+		return mapAbbrName;
+	}
+
+	public void setMapAbbrName(String mapAbbrName) {
+		this.mapAbbrName = mapAbbrName;
+	}
 
 	/**
 	 * @return the scale
@@ -163,7 +178,7 @@ public class GeneralMap implements AdjacencyMatrix {
     public void readImage() {
 
         // display the image. Note that "	/" only works on UNIX
-        this.mapImgPath = System.getProperty("user.dir") + "/src/" + this.imageName;
+        this.mapImgPath = PaintHelper.getUserDir() + this.imageName;
         try {
             image = ImageIO.read(new FileInputStream(mapImgPath));
         } catch (FileNotFoundException e) {
@@ -198,4 +213,14 @@ public class GeneralMap implements AdjacencyMatrix {
         this.nodes = nodes;
     }
 
+	public List<Edge> getBoundaryEdges() {
+		return BoundaryEdges;
+	}
+
+	public void setBoundaryEdges(List<Edge> boundryEdges) {
+		BoundaryEdges = boundryEdges;
+	}
+
+
+    
 }

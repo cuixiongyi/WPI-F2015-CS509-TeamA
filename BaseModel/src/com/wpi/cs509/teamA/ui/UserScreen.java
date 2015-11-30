@@ -81,15 +81,6 @@ public class UserScreen extends JFrame {
 		 UIManager.put("text", new Color(255,255,255));
 		 UIManager.put("TextField.background", new Color(180, 180, 180));
 		 
-		 
-		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		// if ("Nimbus".equals(info.getName())) {
-		// UIManager.setLookAndFeel(info.getClassName());
-		// break;
-		// }
-		// }
-		//
-
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

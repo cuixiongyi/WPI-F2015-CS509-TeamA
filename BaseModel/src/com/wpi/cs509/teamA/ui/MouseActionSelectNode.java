@@ -14,6 +14,8 @@ import java.util.*;
 public class MouseActionSelectNode extends MouseActionState {
 
 
+    private java.util.List<Node> nodesToPaintIcon = new ArrayList<Node>();
+
     public MouseActionSelectNode(StateContext pStateContext) {
         super(pStateContext);
 
@@ -28,6 +30,19 @@ public class MouseActionSelectNode extends MouseActionState {
 
     @Override
     public boolean execute(MouseEvent e) {
+        /**
+         * update coor and coorTrans
+         */
+        super.execute(e);
+
+        if (e.getButton() == MouseEvent.BUTTON1) {
+
+            Node node = getNodeFromClick(coorTrans);
+            if (null != node) {
+                nodesToPaintIcon.clear();
+                nodesToPaintIcon.add(node);
+            }
+        }
         return false;
     }
 
@@ -40,12 +55,11 @@ public class MouseActionSelectNode extends MouseActionState {
     			PaintHelper.paintPath(path, g2);
     			break;
     		}
-    		
     	}
-        
+        PaintHelper.paintIcons(nodesToPaintIcon, g2);
+
+
         java.util.List<Node> iconNodes = stateContext.getIconNodes();
-
-
         PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
 
         /*

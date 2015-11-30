@@ -183,8 +183,8 @@ public class NeighborDialog extends JDialog implements ActionListener, FocusList
 			}
 
 			// database..
-			NodeRelationDao nrd = new NodeRelationDaoImpl();
-			nrd.insertMultipleEdges(edgesToSave);
+		//	NodeRelationDao nrd = new NodeRelationDaoImpl();
+		//	nrd.insertMultipleEdges(edgesToSave);
 			imageComponent.repaint();
 
 		}

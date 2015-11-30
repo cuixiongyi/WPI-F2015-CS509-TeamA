@@ -29,6 +29,7 @@ public class Database {
 	private static List<GeneralMap> allMapDataHL;
 	private static List<Edge> allEdgesHL;
 	private static HashMap<Integer, List<Edge>> allEdgesDataHM;
+	private static List<Edge> allMapEdgesHL;
 	private static List<UserAccount> allUsersDataHL;
 	
 	static int nodeRange = 20;
@@ -69,6 +70,10 @@ public class Database {
 			allEdgesDataHM.put(temp_map_id, nrd.getAllNodeRelationsForCurrentMap(temp_map_id));
 			
 		}
+		
+		//get all maprelations from database
+		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
+		allMapEdgesHL = nrd2.getAllMapEdges();
 		
 		// get all user accounts from database
 		UserAccountDao uad = new UserAccountDaoImpl();
@@ -157,9 +162,14 @@ public class Database {
 		return allMapDataHM.get(map_id);
 	}
 	
+	
 	/**Deal with Edges*/
 	public static List<Edge>getAllEdges(){
 		return allEdgesHL;
+	}
+	
+	public static List<Edge>getAllMapEdges(){
+		return allMapEdgesHL;
 	}
 	
 	public static List<Edge>getAllEdgesForCurrentMap(int map_id){
