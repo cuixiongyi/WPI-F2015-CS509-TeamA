@@ -39,7 +39,8 @@ public class StateContext {
 	private ImageComponent imageComponent;
 	private InputPanel inputPanel;
 
-	private Node startNode;
+    private Node nodeFromText = null;
+    private Node startNode;
 	private Node endNode;
 
 
@@ -156,7 +157,8 @@ public class StateContext {
 	}
 
 	public void setStartNode(Node startNode) {
-		this.startNode = startNode;
+        System.out.println("start = " + startNode.getName());
+        this.startNode = startNode;
 	}
 
 	public Node getEndNode() {
@@ -164,7 +166,8 @@ public class StateContext {
 	}
 
 	public void setEndNode(Node endNode) {
-		this.endNode = endNode;
+        System.out.println("end = " + endNode.getName());
+        this.endNode = endNode;
 	}
 
 	public List<Node> getPath() {
@@ -237,4 +240,17 @@ public class StateContext {
     public void setFocusNode(Node focusNode) {
         this.focusNode = focusNode;
     }
+
+
+    public Node getNodeFromText() {
+        return nodeFromText;
+    }
+
+    public void resetNodeFromText() {
+        this.nodeFromText = null;
+    }
+    public void setNodeFromText(Node nodeFromText) {
+        this.nodeFromText = nodeFromText;
+    }
+
 }

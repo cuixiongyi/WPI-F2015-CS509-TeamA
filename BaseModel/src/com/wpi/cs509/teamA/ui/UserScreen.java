@@ -76,12 +76,10 @@ public class UserScreen extends JFrame {
 		}
 
 		UIManager.put("nimbusBase", new Color(50, 50, 50));
-		UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
-		UIManager.put("control", new Color(142, 143, 145));
-		UIManager.put("text", new Color(255,255,255));
-		UIManager.put("TextField.background", new Color(180, 180, 180));
-		UIManager.put("PasswordField.background", new Color(180, 180, 180));
-		UIManager.put("List.background", new Color(180, 180, 180));
+		 UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
+		 UIManager.put("control", new Color(142, 143, 145));
+		 UIManager.put("text", new Color(255,255,255));
+		 UIManager.put("TextField.background", new Color(180, 180, 180));
 		 
 		 
 		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -176,9 +174,18 @@ public class UserScreen extends JFrame {
         stateContext.setInputPanel(inputPanel);
         imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
-		imgComponent.repaint();
+        inputPanel.setUserScreen(this);
+	imgComponent.repaint();
 	}
 
+	public JButton getBtnNeighborManage() {
+		return this.btnNeighborManage;
+	}
+	
+
+	public static UserScreen getUserScreen() {
+		return userScreen;
+	}
 
 	public static UserScreen launchUserScreen() {
 		if (userScreen == null) {
@@ -207,13 +214,5 @@ public class UserScreen extends JFrame {
 		});
 
 	}
-
-    /**
-     * Legacy code
-     */
-	public JButton getBtnNeighborManage() {
-		return this.btnNeighborManage;
-	}
-
 
 }
