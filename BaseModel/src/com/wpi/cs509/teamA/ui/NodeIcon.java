@@ -19,10 +19,10 @@ public class NodeIcon {
 	private static String parkingIconName = "Parking_Icon.png";
 
 
-	private static String labIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + labIconName;;
-	private static String classroomIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + classroomIconName;;
-	private static String restroomIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + restroomIconName;;
-	private static String parkingIconFilePath = System.getProperty("user.dir") + "/BaseModel/src/" + parkingIconName;;
+	private static String labIconFilePath = System.getProperty("user.dir") + "/src/" + labIconName;;
+	private static String classroomIconFilePath = System.getProperty("user.dir") + "/src/" + classroomIconName;;
+	private static String restroomIconFilePath = System.getProperty("user.dir") + "/src/" + restroomIconName;;
+	private static String parkingIconFilePath = System.getProperty("user.dir") + "/src/" + parkingIconName;;
 
 	private static BufferedImage labIcon;
 	private static BufferedImage classroomIcon;

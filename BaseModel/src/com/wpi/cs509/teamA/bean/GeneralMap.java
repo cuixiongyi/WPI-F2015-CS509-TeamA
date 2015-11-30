@@ -163,7 +163,7 @@ public class GeneralMap implements AdjacencyMatrix {
     public void readImage() {
 
         // display the image. Note that "	/" only works on UNIX
-        this.mapImgPath = System.getProperty("user.dir") + "/BaseModel/src/" + this.imageName;
+        this.mapImgPath = System.getProperty("user.dir") + "/src/" + this.imageName;
         try {
             image = ImageIO.read(new FileInputStream(mapImgPath));
         } catch (FileNotFoundException e) {
