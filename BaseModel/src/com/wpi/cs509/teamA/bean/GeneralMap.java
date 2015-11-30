@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 /**
  * This is a class that defines all the map we want. It is also the class that
@@ -163,7 +164,7 @@ public class GeneralMap implements AdjacencyMatrix {
     public void readImage() {
 
         // display the image. Note that "	/" only works on UNIX
-        this.mapImgPath = System.getProperty("user.dir") + "/BaseModel/src/" + this.imageName;
+        this.mapImgPath = PaintHelper.getUserDir() + this.imageName;
         try {
             image = ImageIO.read(new FileInputStream(mapImgPath));
         } catch (FileNotFoundException e) {

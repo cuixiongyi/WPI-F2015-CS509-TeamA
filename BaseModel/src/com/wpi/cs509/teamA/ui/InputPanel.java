@@ -37,6 +37,7 @@ import javax.xml.crypto.Data;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 import com.wpi.cs509.teamA.ui.StateContext;
 import com.wpi.cs509.teamA.ui.ImageComponent;
@@ -206,7 +207,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         BufferedImage logo;
         try {
-            logo = ImageIO.read(new File(System.getProperty("user.dir") + "/BaseModel/src/logo_iteration1.png"));
+            logo = ImageIO.read(new File(PaintHelper.getUserDir()+ "logo_iteration1.png"));
             picLabel = new JLabel(new ImageIcon(logo));
             picLabel.setBounds(50, 480, 200, 200);
             add(picLabel);
