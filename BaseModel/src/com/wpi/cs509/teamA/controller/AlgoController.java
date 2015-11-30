@@ -14,6 +14,8 @@ import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
@@ -87,7 +89,8 @@ public class AlgoController {
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
 
-		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		//generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 		return result = generalAlgorithm.findPath(edges);
 
 	}
