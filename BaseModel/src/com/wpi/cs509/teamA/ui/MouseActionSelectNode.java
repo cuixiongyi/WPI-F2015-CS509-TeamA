@@ -39,6 +39,7 @@ public class MouseActionSelectNode extends MouseActionState {
 
             Node node = getNodeFromClick(coorTrans);
             if (null != node) {
+                nodesToPaintIcon.clear();
                 nodesToPaintIcon.add(node);
             }
         }
