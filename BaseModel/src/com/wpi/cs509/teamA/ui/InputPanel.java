@@ -314,6 +314,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         stateContext.resetNodeFromText();
     }
 
+
+	
+
 	public void clickLogin() {
 		if (adminClicked % 2 == 0) {
 			AdminDialog adminDialog = new AdminDialog(imageComponent, InputPanel.this);
@@ -378,8 +381,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		multiMapPathLists.add(singleMapPath);
 		
 		//reset and initiate the Jlist
-//		mapListModel.removeAllElements();
-//		mapListModel.clear();
+//		mapListModel=new DefaultListModel<>(); 
 		for(String name:mapNameList)
 		{
 			mapListModel.addElement(name);
@@ -411,6 +413,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		{
 			clickSearch();
 		}
+	
+
 	}
 	
 
