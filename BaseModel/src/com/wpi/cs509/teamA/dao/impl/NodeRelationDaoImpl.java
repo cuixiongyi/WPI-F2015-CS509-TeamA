@@ -67,67 +67,59 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	}
 
 	@Override
-	public List<Edge> insertMultipleEdges(Set<Edge> nodeRelation) {
-		// TODO Auto-generated method stub
-		if (nodeRelation == null) {
-			System.out.println(
-					"public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation) ... set of node relations cannot be null..");
+	/*
+	 * public List<Edge> insertMultipleEdges(Set<Edge> nodeRelation) { // TODO
+	 * Auto-generated method stub if (nodeRelation == null) {
+	 * System.out.println(
+	 * "public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation) ... set of node relations cannot be null.."
+	 * );
+	 * 
+	 * return null; }
+	 * 
+	 * try { for (Edge edge : nodeRelation) {
+	 * 
+	 * // insert every edge.. Coordinate firstNodeCoordinate =
+	 * edge.getNode1().getLocation(); Coordinate secondNodeCoordinate =
+	 * edge.getNode2().getLocation();
+	 * 
+	 * int fromId = this.checkNodeInDBByCoordinate(firstNodeCoordinate); int
+	 * endId = this.checkNodeInDBByCoordinate(secondNodeCoordinate);
+	 * 
+	 * if ((fromId > 0) && (endId > 0)) { if
+	 * (!this.checkNodeRelationInDBById(fromId, endId)) {
+	 * 
+	 * double distance = Math.sqrt((secondNodeCoordinate.getX() -
+	 * firstNodeCoordinate.getX()) (secondNodeCoordinate.getX() -
+	 * firstNodeCoordinate.getX()) + (secondNodeCoordinate.getY() -
+	 * firstNodeCoordinate.getY()) (secondNodeCoordinate.getY() -
+	 * firstNodeCoordinate.getY())); String insertEdgeToDB =
+	 * "INSERT INTO routefinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)"
+	 * ; pstmt = conn.prepareStatement(insertEdgeToDB); pstmt.setInt(1, fromId);
+	 * pstmt.setInt(2, endId); pstmt.setDouble(3, distance);
+	 * pstmt.executeUpdate(); conn.commit();
+	 * 
+	 * } else {
+	 * 
+	 * System.out.println("Edge: " + edge.getNode1().getLocation().getX() + " "
+	 * + edge.getNode1().getLocation().getY() + " " +
+	 * edge.getNode2().getLocation().getX() + " " +
+	 * edge.getNode2().getLocation().getY() + " exists..");
+	 * 
+	 * } }
+	 * 
+	 * }
+	 * 
+	 * // get the return value, which is all the node relations exists in // the
+	 * DB.. return
+	 * this.getAllNodeRelationsForCurrentMap(UIDataBuffer.getCurrentMapId());
+	 * 
+	 * } catch (SQLException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } finally { JdbcConnect.resultClose(rs, pstmt);
+	 * JdbcConnect.connClose(); }
+	 * 
+	 * return null; }
+	 */
 
-			return null;
-		}
-
-		try {
-			for (Edge edge : nodeRelation) {
-
-				// insert every edge..
-				Coordinate firstNodeCoordinate = edge.getNode1().getLocation();
-				Coordinate secondNodeCoordinate = edge.getNode2().getLocation();
-
-				int fromId = this.checkNodeInDBByCoordinate(firstNodeCoordinate);
-				int endId = this.checkNodeInDBByCoordinate(secondNodeCoordinate);
-
-				if ((fromId > 0) && (endId > 0)) {
-					if (!this.checkNodeRelationInDBById(fromId, endId)) {
-
-						double distance = Math.sqrt((secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
-								* (secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
-								+ (secondNodeCoordinate.getY() - firstNodeCoordinate.getY())
-										* (secondNodeCoordinate.getY() - firstNodeCoordinate.getY()));
-						String insertEdgeToDB = "INSERT INTO routefinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)";
-						pstmt = conn.prepareStatement(insertEdgeToDB);
-						pstmt.setInt(1, fromId);
-						pstmt.setInt(2, endId);
-						pstmt.setDouble(3, distance);
-						pstmt.executeUpdate();
-						conn.commit();
-
-					} else {
-
-						System.out.println("Edge: " + edge.getNode1().getLocation().getX() + " "
-								+ edge.getNode1().getLocation().getY() + " " + edge.getNode2().getLocation().getX()
-								+ " " + edge.getNode2().getLocation().getY() + " exists..");
-
-					}
-				}
-
-			}
-
-			// get the return value, which is all the node relations exists in
-			// the DB..
-			return this.getAllNodeRelationsForCurrentMap(UIDataBuffer.getCurrentMapId());
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JdbcConnect.resultClose(rs, pstmt);
-			JdbcConnect.connClose();
-		}
-
-		return null;
-	}
-
-	@Override
 	public boolean checkNodeRelationInDBById(int id1, int id2) {
 
 		//
@@ -167,38 +159,57 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	}
 
 	@Override
-	public int checkNodeInDBByCoordinate(Coordinate coordinate) {
-
-		ResultSet resultSet = null;
-		int x = coordinate.getX();
-		int y = coordinate.getY();
-		try {
-
-			String checkNodesInDB = "select id from routefinder.node where x=? and y=?";
-			pstmt = conn.prepareStatement(checkNodesInDB);
-			pstmt.setInt(1, x);
-			pstmt.setInt(2, y);
-			resultSet = pstmt.executeQuery();
-			if (resultSet.next()) {
-				return resultSet.getInt("id");
-			} else {
-				System.out.println("Cannot find node " + x + ", " + y);
-				return -1;
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-			return -1;
-		} finally {
-			JdbcConnect.resultClose(resultSet, pstmt);
-		}
-	}
-
-	@Override
+	/*
+	 * public int checkNodeInDBByCoordinate(Coordinate coordinate) {
+	 * 
+	 * ResultSet resultSet = null; int x = coordinate.getX(); int y =
+	 * coordinate.getY(); try {
+	 * 
+	 * String checkNodesInDB =
+	 * "select id from routefinder.node where x=? and y=?"; pstmt =
+	 * conn.prepareStatement(checkNodesInDB); pstmt.setInt(1, x);
+	 * pstmt.setInt(2, y); resultSet = pstmt.executeQuery(); if
+	 * (resultSet.next()) { return resultSet.getInt("id"); } else {
+	 * System.out.println("Cannot find node " + x + ", " + y); return -1; } }
+	 * catch (SQLException se) { se.printStackTrace(); return -1; } finally {
+	 * JdbcConnect.resultClose(resultSet, pstmt); } }
+	 */
 	public int checkNodeRelationInDBByNodeRelation(NodeRelation[] nodeRelation) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public List<Edge> getAllMapEdges() {
+		// TODO Auto-generated method stub
+
+		List<Edge> res = new ArrayList<Edge>();
+		ResultSet resultSet = null;
+
+		try {
+			String getAllEdges = "SELECT node_from, node_to, distance FROM routefinder.maprelations";
+			resultSet = null;
+			pstmt = conn.prepareStatement(getAllEdges);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				Edge edge = new Edge();
+				edge.setNode1(Database.getNodeFromId(resultSet.getInt("node_from")));
+				edge.setNode2(Database.getNodeFromId(resultSet.getInt("node_to")));
+				edge.setDist(resultSet.getDouble("distance"));
+				res.add(edge);
+			}
+			return res;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+		}
+
+		return null;
+	}
+	
 	@Override
 	public List<Edge> getAllEdges() {
 		// TODO Auto-generated method stub
@@ -288,47 +299,55 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 				JdbcConnect.resultClose(rs, pstmt);
 				JdbcConnect.connClose();
 			}
-		}
-		else{
+		} else {
 			System.out.println("The edge doesn't exist.... inserting....");
-			// insert every edge..
-			Coordinate firstNodeCoordinate = n1.getLocation();
-			Coordinate secondNodeCoordinate = n2.getLocation();
-
-			int fromId = this.checkNodeInDBByCoordinate(firstNodeCoordinate);
-			int endId = this.checkNodeInDBByCoordinate(secondNodeCoordinate);
-
-			if ((fromId > 0) && (endId > 0)) {
-				if (!this.checkNodeRelationInDBById(fromId, endId)) {
-
-					double distance = Math.sqrt((secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
-							* (secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
-							+ (secondNodeCoordinate.getY() - firstNodeCoordinate.getY())
-									* (secondNodeCoordinate.getY() - firstNodeCoordinate.getY()));
-					try{
+			if (n1.getMap().getMapId() == n2.getMap().getMapId()) {
+				// insert edge in the same map
+				Coordinate firstNodeCoordinate = n1.getLocation();
+				Coordinate secondNodeCoordinate = n2.getLocation();
+				double distance = Math.sqrt((secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
+						* (secondNodeCoordinate.getX() - firstNodeCoordinate.getX())
+						+ (secondNodeCoordinate.getY() - firstNodeCoordinate.getY())
+								* (secondNodeCoordinate.getY() - firstNodeCoordinate.getY()));
+				try {
 					String insertEdgeToDB = "INSERT INTO routefinder.relations (node_from, node_to, distance) VALUES (?, ?, ?)";
 					pstmt = conn.prepareStatement(insertEdgeToDB);
-					pstmt.setInt(1, fromId);
-					pstmt.setInt(2, endId);
+					pstmt.setInt(1, id1);
+					pstmt.setInt(2, id2);
 					pstmt.setDouble(3, distance);
 					pstmt.executeUpdate();
 					conn.commit();
-					}catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} finally {
-						JdbcConnect.resultClose(rs, pstmt);
-						JdbcConnect.connClose();
-					}
-
-				} else {
-					System.out.println("Edge: " + n1.getLocation().getX() + " "
-							+ n1.getLocation().getY() + " " + n2.getLocation().getX()
-							+ " " + n2.getLocation().getY() + " exists..");
-
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					JdbcConnect.resultClose(rs, pstmt);
+					JdbcConnect.connClose();
 				}
 			}
-			return false;
+			else{
+				//insert edge for map relations(among different maps)
+				double distance = 0;
+				if((n1.getMap().getMapId()==1)||(n1.getMap().getMapId()==1))
+					distance = 0;
+				else
+					distance = 10;
+				try {
+					String insertEdgeToDB = "INSERT INTO routefinder.maprelations (node_from, node_to, distance) VALUES (?, ?, ?)";
+					pstmt = conn.prepareStatement(insertEdgeToDB);
+					pstmt.setInt(1, id1);
+					pstmt.setInt(2, id2);
+					pstmt.setDouble(3, distance);
+					pstmt.executeUpdate();
+					conn.commit();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					JdbcConnect.resultClose(rs, pstmt);
+					JdbcConnect.connClose();
+				}
+			}
 		}
 		return false;
 	}

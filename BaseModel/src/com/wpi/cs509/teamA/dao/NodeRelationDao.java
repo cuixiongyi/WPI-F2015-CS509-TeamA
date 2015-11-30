@@ -35,7 +35,7 @@ public interface NodeRelationDao {
 	 * @param nodeRelation
 	 * @return
 	 */
-	public List<Edge> insertMultipleEdges(Set<Edge> nodeRelation);
+//	public List<Edge> insertMultipleEdges(Set<Edge> nodeRelation);
 
 	/**
 	 * 
@@ -50,7 +50,7 @@ public interface NodeRelationDao {
 	 * @param coordinate
 	 * @return
 	 */
-	public int checkNodeInDBByCoordinate(Coordinate coordinate);
+//	public int checkNodeInDBByCoordinate(Coordinate coordinate);
 
 	/**
 	 * Check if an relation has already exists in DB
@@ -80,6 +80,13 @@ public interface NodeRelationDao {
 	 */
 	public List<Edge> getAllEdges();
 
-	
+	/**
+	 * 
+	 * This method is for algorithm, the Edge structure is different from node
+	 * relation.
+	 * 
+	 * @return A set of Edge instances
+	 */
+	public List<Edge> getAllMapEdges();
 	public boolean deleteOrAddEdge(Node n1, Node n2);
 }
