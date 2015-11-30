@@ -66,22 +66,21 @@ class AutoSuggestor {
 	private final Dimension preferredSize = new Dimension(1000, 23);
 	private final Font labelFont = new Font("SimSun", Font.PLAIN, 23);
 	private int lastFocusableIndex = 0;
-    /**
-     * this is a hack
-     * To differetia different to set StartNode or EndNode
-     */
-    public enum SetNodeOption {
-        Undefined,
-        setStartNode,
-        setEndNode,
-    }
 
+	/**
+	 * this is a hack To differetia different to set StartNode or EndNode
+	 */
+	public enum SetNodeOption {
+		Undefined, setStartNode, setEndNode,
+	}
 
-    private SetNodeOption setNodeOption = SetNodeOption.Undefined;
+	private SetNodeOption setNodeOption = SetNodeOption.Undefined;
 
-    private StateContext stateContext = null;
+	private StateContext stateContext = null;
+
 	public AutoSuggestor(JTextField textField, JFrame container, ArrayList<String> words, Color popUpBackground,
-			Color textColor, Color suggestionFocusedColor, float opacity, double locationX, double locationY, StateContext pstateContext, SetNodeOption pSetNodeOption) {
+			Color textColor, Color suggestionFocusedColor, float opacity, double locationX, double locationY,
+			StateContext pstateContext, SetNodeOption pSetNodeOption) {
 		this.textField = textField;
 		this.suggestionsTextColor = textColor;
 		this.container = container;
@@ -109,14 +108,31 @@ class AutoSuggestor {
 
 		addKeyBindingToRequestFocusInPopUpWindow();
 
-        stateContext = pstateContext;
-        setNodeOption = pSetNodeOption;
+		stateContext = pstateContext;
+		setNodeOption = pSetNodeOption;
 	}
 
 	private void addKeyBindingToRequestFocusInPopUpWindow() {
+		textField.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true),
+				"ESC released");
 		textField.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true),
 				"Down released");
-		textField.getActionMap().put("Down released", new AbstractAction() {
+		suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+				.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "Down released");
+		suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+				.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "Up released");
+		suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+				.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "ESC released");
+		textField.getActionMap().put("ESC released", escAction());
+		suggestionsPanel.getActionMap().put("Up released", upAction());
+		textField.getActionMap().put("Down released", txtDownAction());
+		suggestionsPanel.getActionMap().put("Down released", downAction());
+		suggestionsPanel.getActionMap().put("ESC released", escAction());
+
+	}
+
+	private Action txtDownAction() {
+		return new AbstractAction() {
 			/**
 			 * 
 			 */
@@ -137,13 +153,21 @@ class AutoSuggestor {
 					}
 				}
 			}
-		});
-		suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-				.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "Down released");
-		suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-				.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "Up released");
-		suggestionsPanel.getActionMap().put("Up released", upAction());
-		suggestionsPanel.getActionMap().put("Down released", downAction());
+		};
+	}
+
+	private Action escAction() {
+		// TODO Auto-generated method stub
+		return new AbstractAction() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				AutoSuggestor.this.getAutoSuggestionPopUpWindow().setVisible(false);
+			}
+
+		};
+
 	}
 
 	private void setFocusToTextField() {
@@ -185,27 +209,28 @@ class AutoSuggestor {
 		}
 	}
 
-	private Action upAction(){
-		return new AbstractAction(){
+	private Action upAction() {
+		return new AbstractAction() {
 
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-	//		int lastFocusableIndex = 0;
+			// int lastFocusableIndex = 0;
 			int current;
+
 			@Override
 			public void actionPerformed(ActionEvent ae) {// allows scrolling of
 															// labels in pop
 															// window
 				ArrayList<SuggestionLabel> sls = getAddedSuggestionLabels();
 				int max = sls.size();
-				System.out.println("up"+lastFocusableIndex);
+				System.out.println("up" + lastFocusableIndex);
 				if (max > 1) {// more than 1 suggestion
-					for (int i = lastFocusableIndex; i >=0; i--) {
+					for (int i = lastFocusableIndex; i >= 0; i--) {
 						SuggestionLabel sl = sls.get(i);
 						if (sl.isFocused()) {
-							
+
 							if (lastFocusableIndex == 0) {
 								sl.setFocused(false);
 								autoSuggestionPopUpWindow.setVisible(false);
@@ -250,7 +275,7 @@ class AutoSuggestor {
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-		//	int lastFocusableIndex = 0;
+			// int lastFocusableIndex = 0;
 
 			@Override
 			public void actionPerformed(ActionEvent ae) {// allows scrolling of
@@ -416,18 +441,17 @@ class AutoSuggestor {
 		this.inputPanel = inputPanel;
 	}
 
+	public StateContext getStateContext() {
+		return stateContext;
+	}
 
-    public StateContext getStateContext() {
-        return stateContext;
-    }
+	public SetNodeOption getSetNodeOption() {
+		return setNodeOption;
+	}
 
-    public SetNodeOption getSetNodeOption() {
-        return setNodeOption;
-    }
-
-    private void setSetNodeOption(SetNodeOption setNodeOption) {
-        this.setNodeOption = setNodeOption;
-    }
+	private void setSetNodeOption(SetNodeOption setNodeOption) {
+		this.setNodeOption = setNodeOption;
+	}
 
 }
 
@@ -510,20 +534,16 @@ class SuggestionLabel extends JLabel {
 	private void replaceWithSuggestedText() {
 		String suggestedWord = getText();
 		String text = textField.getText();
-        if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
-            autoSuggestor.getStateContext().setStartNode(nodeInformation);
-        }
-        else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-            autoSuggestor.getStateContext().setEndNode(nodeInformation);
-        }
+		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
+			autoSuggestor.getStateContext().setStartNode(nodeInformation);
+		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
+			autoSuggestor.getStateContext().setEndNode(nodeInformation);
+		}
 
-        String typedWord = autoSuggestor.getCurrentlyTypedWord();
+		String typedWord = autoSuggestor.getCurrentlyTypedWord();
 		String t = text.substring(0, text.lastIndexOf(typedWord));
 		String tmp = t + text.substring(text.lastIndexOf(typedWord)).replace(typedWord, suggestedWord);
 		textField.setText(tmp);
 	}
-
-
-
 
 }
