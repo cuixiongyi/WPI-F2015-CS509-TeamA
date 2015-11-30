@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
@@ -22,8 +23,8 @@ public abstract class MouseActionState {
 
     protected Coordinate coor = null;
     protected Coordinate coorTrans = null;
-    protected ImageComponent imageComponent;
-
+    protected ImageComponent imageComponent = null;
+    protected Node nodeLastClicked = null;
 
     public MouseActionState(StateContext pStateContext) {
         this.stateContext = pStateContext;
@@ -41,6 +42,9 @@ public abstract class MouseActionState {
         return true;
     }
 
+    public Node getNodeFromClick(Coordinate coor) {
+        return Database.getNodeFromCoordinate(coor, stateContext.getCurrentMap().getMapId());
+    }
     abstract public boolean cleanup();
 
 }

@@ -41,12 +41,14 @@ public class MouseActionEditNode extends MouseActionState {
 
     @Override
     public boolean execute(MouseEvent e) {
+        /**
+         * update coor and coorTrans
+         */
+        super.execute(e);
 
 	    if (e.getButton() == MouseEvent.BUTTON1) {
 
-            Coordinate coor = new Coordinate(e.getX(), e.getY());
-            Coordinate coorTrans = PaintHelper.backTransferCoor(coor);
-            Node node = Database.getNodeFromCoordinate(new Coordinate(e.getX(), e.getY()), stateContext.getCurrentMap().getMapId());
+            Node node = getNodeFromClick(coorTrans);
 
             if (null != node) {
                 /// TODO add edit node action

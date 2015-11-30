@@ -29,7 +29,7 @@ public class PaintHelper {
      */
 
     public enum DrawStyleEnum {
-        Undifined,
+        Undefined,
         BasicNode,
         BasicEdge,
         BasicText,
@@ -40,7 +40,7 @@ public class PaintHelper {
 
     private static void setStyle(DrawStyleEnum style, Graphics2D g2) {
         switch (style) {
-            case Undifined:
+            case Undefined:
             case BasicNode:
                 g2.setStroke(basicNodeStrock);
                 g2.setColor(Color.blue);
@@ -82,7 +82,8 @@ public class PaintHelper {
             if (null == image) {
                 continue;
             }
-            g2.drawImage(image, node.getLocation().getX(), node.getLocation().getY(), image.getWidth(stateContext.getImageComponent()),
+            Coordinate coorTrans = transferCoor(node.getLocation());
+            g2.drawImage(image, coorTrans.getX(), coorTrans.getY(), image.getWidth(stateContext.getImageComponent()),
                     image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
         }
 	}
