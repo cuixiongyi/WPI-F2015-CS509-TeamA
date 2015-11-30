@@ -347,6 +347,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	public void clickSearch(){
 		this.picLabel.setVisible(false);
 		this.getMapList().setVisible(true);
+        multiMapPathLists = new ArrayList<ArrayList<Node>>();
+        mapList.removeAll();
+
 		AlgoController algoController = new AlgoController(InputPanel.this.stateContext.getStartNode().getName(),
                 InputPanel.this.stateContext.getEndNode().getName());
 
