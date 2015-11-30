@@ -6,7 +6,7 @@ import java.util.Stack;
 public class AlgoTest {
 
 	public static void main(String args[]){
-		/*GeneralMap map1=new GeneralMap("a",1);
+		GeneralMap map1=new GeneralMap("a",1);
 		Node node1 = new Node(1, 10, 20, map1);
 		Node node2 = new Node(2, 20, 30,map1);
 		Node node3 = new Node(3, 20, 40,map1);
@@ -60,7 +60,7 @@ public class AlgoTest {
 		while (!route.isEmpty())
 		{
 			System.out.print(route.pop().getId() + " -> ");
-		}*/
+		}
 	}
 	
 }

@@ -10,8 +10,8 @@ public class Edge {
 	public Edge(Node node1, Node node2) {
 		this.node1 = node1;
 		this.node2 = node2;
-        //this.dist = node1.DistanceTo(node2);
-        this.dist = -1;
+        this.dist = node1.DistanceTo(node2);
+        //this.dist = -1;
 	}
 	//for then two nodes are from different maps
 	public Edge(Node node1, Node node2, double dist) {
@@ -64,8 +64,8 @@ public class Edge {
 	}
 	
 	public Node getTheOtherNode(Node n){
-		if (n.id==this.node1.id) return this.node1;
-		return this.node2;
+		if (n.id==this.node1.id) return this.node2;
+		return this.node1;
 	}
 
 }

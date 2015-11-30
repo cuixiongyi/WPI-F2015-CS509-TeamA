@@ -82,13 +82,13 @@ public class AlgoController {
         // TODO this is a hack need to get the function working
         Node toNode = Database.getNodeFromName(endNode);    /////////////////
 
-
+        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),fromNode, toNode);
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
 
 		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-		return result = generalAlgorithm.findPath(fromNode, toNode, Database.getAllEdges());
+		return result = generalAlgorithm.findPath(edges);
 
 	}
 
