@@ -338,7 +338,8 @@ public class InputPanel extends JPanel implements ActionListener {
 		multiMapPathLists.add(singleMapPath);
 		
 		//reset and initiate the Jlist
-//		mapListModel=new DefaultListModel<>(); 
+//		mapListModel.removeAllElements();
+//		mapListModel.clear();
 		for(String name:mapNameList)
 		{
 			mapListModel.addElement(name);
@@ -370,8 +371,6 @@ public class InputPanel extends JPanel implements ActionListener {
 		{
 			clickSearch();
 		}
-	
-
 	}
 	
 
