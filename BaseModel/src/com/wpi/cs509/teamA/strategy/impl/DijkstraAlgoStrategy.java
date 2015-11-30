@@ -7,6 +7,7 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 
 /**
@@ -20,13 +21,11 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int endNodeId;
 
 	@Override
-	public Stack<Node> getRoute(Node startNode, Node endNode, List<Edge> edges) {
-		this.startNodeId = startNode.getId();
-		this.endNodeId = endNode.getId();
-		Graph context = new Graph (edges);
-		System.out.println("edges size:"+edges.size());
+	public Stack<Node> getRoute(allEdges alledges) {
+		this.startNodeId = alledges.getStartNode().getId();
+		this.endNodeId = alledges.getEndNode().getId();
+		Graph context = new Graph (alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
-		System.out.println("graph size:"+graph.size());
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
 			// return 0;
@@ -52,11 +51,10 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		
 		Vertex d= new Vertex();
 		d=destination;
-		System.out.println(d.getDist());
+		//System.out.println(d.getDist());
 		Stack<Node> result= new Stack<Node>();
 		do{
 			result.push(d);
-			//System.out.println("++++"+result.size());
 			d=d.getPrevious();
 		}while(d!=source) ;
 		result.push(source);
