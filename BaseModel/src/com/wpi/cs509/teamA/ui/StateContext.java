@@ -170,6 +170,14 @@ public class StateContext {
 		// TODO Do some clean up
 
 	}
+
+    public void repaint() {
+        if (null == imageComponent) {
+            return;
+        }
+        imageComponent.repaint();
+        return;
+    }
 	public GeneralMap getCurrentMap() {
 		return currentMap;
 	}
@@ -182,19 +190,32 @@ public class StateContext {
 		return startNode;
 	}
 
-	public void setStartNode(Node startNode) {
-        System.out.println("start = " + startNode.getName());
-        this.startNode = startNode;
+	public void setStartNode(Node pStartNode) {
+        if (null == pStartNode)
+            return;
+        System.out.println("start = " + pStartNode.getName());
+        if (pStartNode == this.startNode) {
+            return;
+        }
+        this.multiMapPathLists.clear();
+        this.startNode = pStartNode;
 	}
 
 	public Node getEndNode() {
 		return endNode;
 	}
 
-	public void setEndNode(Node endNode) {
-        System.out.println("end = " + endNode.getName());
-        this.endNode = endNode;
-	}
+	public void setEndNode(Node pEndNode) {
+        if (null == pEndNode)
+            return;
+        System.out.println("end = " + pEndNode.getName());
+        if (pEndNode == this.endNode) {
+            return;
+        }
+        this.multiMapPathLists.clear();
+        this.endNode = pEndNode;
+
+    }
 
 	public List<Node> getPath() {
 		return path;

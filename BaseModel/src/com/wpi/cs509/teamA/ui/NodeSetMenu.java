@@ -62,7 +62,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 			this.stateContext.setEndNode(node);
 			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		}
-		
+		stateContext.repaint();
 	}
 
 	public void setNode(Node node, JTextField txt) {
