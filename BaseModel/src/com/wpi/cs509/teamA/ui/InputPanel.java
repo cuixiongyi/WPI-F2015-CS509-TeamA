@@ -116,7 +116,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         this.add(adminLogin);
         this.add(btnNeighborManage);
 
-        this.getAdminLogin().setBounds(150, 0, 70, 30);
+        this.getAdminLogin().setBounds(150, 0, 75, 30);
         this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
         this.getAdminLogin().addActionListener(this);
 
@@ -133,7 +133,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         this.signUp = new JButton("SignUp");
         this.add(signUp);
         this.signUp.addActionListener(this);
-        this.signUp.setBounds(80, 0, 70, 30);
+        this.signUp.setBounds(80, 0, 75, 30);
 
         // this.getStartPoint().setBounds(80, 150, 150, 38);
         // this.setBounds(0, 0, 1178, 516);
@@ -181,11 +181,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 
 
-//        btnSynchronize = new JButton("Sync");
-//        btnSynchronize.addActionListener(this);
-//        btnSynchronize.setVisible(false);
-//        btnSynchronize.setBounds(155, 380, 75, 30);
-//        add(btnSynchronize);
+        btnSynchronize = new JButton("Sync");
+        btnSynchronize.addActionListener(this);
+        btnSynchronize.setVisible(false);
+        btnSynchronize.setBounds(155, 380, 75, 30);
+        add(btnSynchronize);
 
         BufferedImage logo;
         try {
@@ -338,7 +338,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 			this.incrementAdminClicked();
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
 			stateContext.switchUserState(new NormalUserState(stateContext));
-            stateContext.cleanUpRoute();
 			this.repaint();
 			imageComponent.repaint();
 		}
