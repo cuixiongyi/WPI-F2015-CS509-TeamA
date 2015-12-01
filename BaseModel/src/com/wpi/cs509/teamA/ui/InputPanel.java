@@ -151,7 +151,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             comboBoxMap.addItem(map.getMapAbbrName());
         }
 
-        comboBoxMap.setMaximumRowCount(4);
+        comboBoxMap.setMaximumRowCount(2);
+        comboBoxMap.addFocusListener(this);
+        comboBoxMap.requestFocus();
         add(comboBoxMap);
 
         JLabel lblMap = new JLabel("Map: ");
@@ -270,28 +272,36 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     }
 
     public void focusLost(FocusEvent e) {
-        if (((JTextField) e.getSource()).getText().trim().equals(""))
-            ((JTextField) e.getSource()).setText(SEARCHWORD);
+        if (e.getSource() == txtFrom || e.getSource() == txtTo) {
+            if (((JTextField) e.getSource()).getText().trim().equals("")) {
+
+                ((JTextField) e.getSource()).setText(SEARCHWORD);
+            }
+
+        }else if(e.getSource()==comboBoxMap){
+            this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
+            this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
+
+        }
     }
 
     private void processTextField(JTextField txt) {
-        if (txt.getText().trim().equals(SEARCHWORD))
+        if (txt.getText().trim().equals(SEARCHWORD)) {
             txt.setText("");
+
+        }
     }
     public void focusGained(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {
-            stateContext.resetNodeFromText();
             processTextField((JTextField)e.getSource());
-            Node node = stateContext.getNodeFromText();
-            if (e.getSource() == txtFrom && null != node) {
-                stateContext.setStartNode(node);
-            }
-            else if (e.getSource() == txtTo && null != node) {
-                stateContext.setEndNode(node);
-            }
+
+
+        }else if(e.getSource()==comboBoxMap){
+            this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
+            this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
+
         }
 
-        stateContext.resetNodeFromText();
     }
 
 
