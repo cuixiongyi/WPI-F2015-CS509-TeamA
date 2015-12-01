@@ -309,12 +309,37 @@ public class NodeDaoImpl implements NodeDao {
 
 	@Override
 	public boolean deleteNode(Node node_del) {
-		// delete relations using this node
 		
-		//delete maprelations using this node
-		
-		//delete this node
-		
+		try {
+			// delete maprelations using this node
+			String deleteMRFromDB = "delete from maprelations where node_from=? or node_to=?";
+			pstmt = conn.prepareStatement(deleteMRFromDB);
+			pstmt.setInt(1, node_del.getId());
+			pstmt.setInt(2, node_del.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			
+			//delete relations using this node
+			String deleteRelationsFromDB = "delete from relations where node_from=? or node_to=?";
+			pstmt = conn.prepareStatement(deleteRelationsFromDB);
+			pstmt.setInt(1, node_del.getId());
+			pstmt.setInt(2, node_del.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			
+			//delete this node
+			String deleteNodeFromDB = "delete from node where id=?";
+			pstmt = conn.prepareStatement(deleteNodeFromDB);
+			pstmt.setInt(1, node_del.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}	
 		return false;
 	}
 
