@@ -21,7 +21,11 @@ public class MouseActionSelectNode extends MouseActionState {
 
         if (null != imageComponent)
             imageComponent.repaint();
+        if (null != inputPanel) {
+            inputPanel.repaint();
+            }
     }
+
 
     @Override
     public boolean cleanup() {
@@ -35,6 +39,16 @@ public class MouseActionSelectNode extends MouseActionState {
          */
         super.execute(e);
 
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            Node node = getNodeFromClick(coorTrans);
+            if (null != node) {
+                /// TODO add edit node action
+                NodeSetMenu nodeSetMenu = new NodeSetMenu(inputPanel, node, stateContext);
+                nodeSetMenu.show(e.getComponent(), xPos, yPos);
+            }
+
+        }
+
         if (e.getButton() == MouseEvent.BUTTON1) {
 
             Node node = getNodeFromClick(coorTrans);
@@ -43,8 +57,9 @@ public class MouseActionSelectNode extends MouseActionState {
                 nodesToPaintIcon.add(node);
             }
         }
-        return false;
+            return false;
     }
+
 
     @Override
     public void paintOnImage(Graphics2D g2) {

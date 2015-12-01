@@ -55,8 +55,6 @@ import com.wpi.cs509.teamA.ui.ImageComponent;
 @SuppressWarnings("serial")
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
 
-    private JTextField startPoint;
-    private JTextField endPoint;
     private JButton btnSearch;
     private JButton adminLogin;
     private JButton signUp;
@@ -65,15 +63,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JButton btnNeighborManage;
     private JButton btnSynchronize;
     private JComboBox<String> comboBoxMap;
-    private DefaultComboBoxModel<String> comboSourceModel;
-    private DefaultComboBoxModel<String> comboDesModel;
+
 
     private final static String SEARCH = "Search";
     private final static String LOGIN = "Login";
     private final static String TO = "To: ";
     private final static String FROM = "From: ";
     private static final String SEARCHWORD = "Search WPI Maps";
-    private static final String BUTTONWORD = "Search";
     private UserScreen userScreen;
     private AutoSuggestor autoSuggestorFrom;
     private AutoSuggestor autoSuggestorTo;
@@ -102,8 +98,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
      */
     public InputPanel() {
         // // User input block
-        this.startPoint = new JTextField();
-        this.endPoint = new JTextField();
+
         this.btnSearch = new JButton(SEARCH);
         this.adminLogin = new JButton(LOGIN);
         this.btnNeighborManage = new JButton("Edges");
@@ -113,8 +108,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         this.btnNeighborManage.setVisible(false);
 
         this.setLayout(null);
-        // this.add(startPoint);
-        this.add(endPoint);
         this.add(btnSearch);
         this.add(adminLogin);
         this.add(btnNeighborManage);
@@ -179,22 +172,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         add(txtTo);
         txtTo.setColumns(10);
 
-        comboSourceModel = new DefaultComboBoxModel<String>();
-        comboDesModel = new DefaultComboBoxModel<String>();
-
-        // Add all nodes from
-        // TODO delete all of this and replace with new
-        List<Node> allNodes = Database.getAllNodeListFromDatabase();
-        if (allNodes != null && allNodes.size() != 0) {
-            for (int i = 0; i < allNodes.size(); i++) {
-                Node tmp = allNodes.get(i);
-                String name = tmp.getName().toString();
-                if (name.equals("Location"))
-                    continue;
-                comboSourceModel.addElement(name);
-                comboDesModel.addElement(name);
-            }
-        }
 
 
 
@@ -437,22 +414,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	}
 
 	/**
-	 * @param startPoint
-	 *            the startPoint to set
-	 */
-	public void setStartPoint(JTextField startPoint) {
-		this.startPoint = startPoint;
-	}
-
-	/**
-	 * @param endPoint
-	 *            the endPoint to set
-	 */
-	public void setEndPoint(JTextField endPoint) {
-		this.endPoint = endPoint;
-	}
-
-	/**
 	 * @return the btnSearch
 	 */
 	public JButton getBtnSearch() {
@@ -523,9 +484,19 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
                 Color.GRAY, 0.75f, 0.0, 0.0, stateContext, AutoSuggestor.SetNodeOption.setEndNode);
         autoSuggestorTo.setInputPanel(this);
     }
-	
-	
-	
 
+    public AutoSuggestor getAutoSuggestorFrom() {
+        return autoSuggestorFrom;
+    }
+    public AutoSuggestor getAutoSuggestorTo() {
+        return autoSuggestorTo;
+    }
+    public JTextField getToText(){
+        return txtTo;
+    }
+
+    public JTextField getFromText(){
+        return txtFrom;
+    }
 
 };

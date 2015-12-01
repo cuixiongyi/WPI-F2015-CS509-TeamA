@@ -166,7 +166,9 @@ public class UserScreen extends JFrame {
         imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
         inputPanel.setUserScreen(this);
-	imgComponent.repaint();
+		imgComponent.repaint();
+		stateContext.switchToState(new MouseActionSelectNode(stateContext));
+		stateContext.switchUserState(new NormalUserState(stateContext));
 	}
 
 	public JButton getBtnNeighborManage() {

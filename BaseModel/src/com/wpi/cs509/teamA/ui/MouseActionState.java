@@ -25,18 +25,21 @@ public abstract class MouseActionState {
     protected Coordinate coorTrans = null;
     protected ImageComponent imageComponent = null;
     protected Node nodeLastClicked = null;
-
+    protected InputPanel inputPanel = null;
     public MouseActionState(StateContext pStateContext) {
         this.stateContext = pStateContext;
         this.xPos = -1;
         this.yPos = -1;
         this.imageComponent = pStateContext.getImageComponent();
+        this.inputPanel = pStateContext.getInputPanel();
 
     };
 
     abstract public void paintOnImage(Graphics2D g2);
 
     public boolean execute(MouseEvent e) {
+        xPos = e.getX();
+        yPos = e.getY();
         coor = new Coordinate(e.getX(), e.getY());
         coorTrans = PaintHelper.backTransferCoor(coor);
         return true;

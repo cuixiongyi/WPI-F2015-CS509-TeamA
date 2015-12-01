@@ -115,7 +115,6 @@ public class AdminUserState extends UserState implements ActionListener {
 	public boolean execute(MouseEvent e) {
 
 		if (e.getButton() == MouseEvent.BUTTON3) {
-			System.out.println("hhe");
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
 			btnMngNode.setSelected(false);
 			btnMngEdge.setSelected(false);
