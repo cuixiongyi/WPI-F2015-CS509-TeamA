@@ -69,10 +69,14 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private final static String LOGIN = "Login";
     private final static String TO = "To: ";
     private final static String FROM = "From: ";
+
+
     private static final String SEARCHWORD = "Search WPI Maps";
     private UserScreen userScreen;
     private AutoSuggestor autoSuggestorFrom;
     private AutoSuggestor autoSuggestorTo;
+    private boolean lastSetEmptySearchWord = false;
+    private boolean lastSetSearchWord = false;
 
     private ImageComponent imageComponent;
     private DefaultListModel<String> mapListModel = new DefaultListModel<>();
@@ -274,7 +278,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void focusLost(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {
             if (((JTextField) e.getSource()).getText().trim().equals("")) {
-
+                lastSetSearchWord = true;
+                lastSetEmptySearchWord = false;
                 ((JTextField) e.getSource()).setText(SEARCHWORD);
             }
 
@@ -286,9 +291,16 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     }
 
     private void processTextField(JTextField txt) {
-        if (txt.getText().trim().equals(SEARCHWORD)) {
-            txt.setText("");
-
+        if (txt.getText().trim().equals(SEARCHWORD) ) {
+            if (!lastSetSearchWord) {
+                lastSetEmptySearchWord = true;
+                lastSetSearchWord = false;
+                txt.setText("");
+            }
+        }
+        else if (lastSetSearchWord){
+            lastSetSearchWord = false;
+            lastSetEmptySearchWord = false;
         }
     }
     public void focusGained(FocusEvent e) {
@@ -511,4 +523,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         return txtFrom;
     }
 
+
+    public static String getSEARCHWORD() {
+        return SEARCHWORD;
+    }
 };

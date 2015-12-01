@@ -189,7 +189,10 @@ class AutoSuggestor {
 
 	private void checkForAndShowSuggestions() {
 		typedWord = getCurrentlyTypedWord();
-
+		if (typedWord == InputPanel.getSEARCHWORD())
+		{
+			return;
+		}
 		suggestionsPanel.removeAll();// remove previos words/jlabels that were
 										// added
 
