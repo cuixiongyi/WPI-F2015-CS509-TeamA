@@ -37,11 +37,11 @@ public class AlgoController {
 	/**
 	 * The start node get from front end It is a String
 	 */
-	private String startNode;
+	private Node startNode;
 	/**
 	 * The destination node get from the front end It is a String
 	 */
-	private String endNode;
+	private Node endNode;
 	/**
 	 * the result of the path finding
 	 */
@@ -62,7 +62,7 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-	public AlgoController(String from, String to) {
+	public AlgoController(Node from, Node to) {
 
 		this.startNode = from;
 		this.endNode = to;
@@ -80,11 +80,10 @@ public class AlgoController {
 		// we support searching node now only..
 
 		// get the node from database
-        Node fromNode = Database.getNodeFromName(startNode);    /////////////////
+		//Node fromNode = Database.getNodeFromName(startNode);    /////////////////
         // TODO this is a hack need to get the function working
-        Node toNode = Database.getNodeFromName(endNode);    /////////////////
 
-        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),fromNode, toNode);
+        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),startNode, endNode);
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
@@ -132,44 +131,6 @@ public class AlgoController {
 		testRes.add(new InputMatrix());
 
 		return testRes;
-	}
-
-	/**
-	 * Gets the starting node for a route
-	 * 
-	 * @return starting node of the route
-	 */
-	public String getStartNode() {
-		return startNode;
-	}
-
-	/**
-	 * Sets the starting node for a route
-	 * 
-	 * @param startNode
-	 *            starting node of the route
-	 */
-	public void setStartNode(String startNode) {
-		this.startNode = startNode;
-	}
-
-	/**
-	 * Gets the ending node for a route
-	 * 
-	 * @return ending node of the route
-	 */
-	public String getEndNode() {
-		return endNode;
-	}
-
-	/**
-	 * Sets the ending node for a route
-	 * 
-	 * @param endNode
-	 *            end node of the route
-	 */
-	public void setEndNode(String endNode) {
-		this.endNode = endNode;
 	}
 
 }

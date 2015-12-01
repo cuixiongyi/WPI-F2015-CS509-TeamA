@@ -336,8 +336,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         mapList.removeAll();
 
         
-		AlgoController algoController = new AlgoController(InputPanel.this.stateContext.getStartNode().getName(),
-                InputPanel.this.stateContext.getEndNode().getName());
+		AlgoController algoController = new AlgoController(InputPanel.this.stateContext.getStartNode(),
+                InputPanel.this.stateContext.getEndNode());
         
 
 		Stack<Node> path = algoController.getRoute();
