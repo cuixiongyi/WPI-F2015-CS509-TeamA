@@ -38,7 +38,7 @@ public class SearchSupply {
 			GeneralMap tempMap = iter_map.next();
 			int map_id = tempMap.getMapId();
 			String map_name = tempMap.getMapName();
-		//	System.out.println("map_id :"+ map_id +"   map_name"+map_name);
+	//		System.out.println("map_id :"+ map_id +"   map_name"+map_name);
 			allMaps.put(map_id, map_name);
 			allMapsabbr.put(map_id, tempMap.getMapAbbrName());
 		}
@@ -54,16 +54,19 @@ public class SearchSupply {
 		//	System.out.println("node_name :" + node_name+ "   map_name:"+map_name);
 		//	allNodesWithName.put(node_name + " " + map_name, tempNode);
 			allNodesWithName.put(map_name + " " + node_name, tempNode);
+		//	System.out.println(map_name+" "+node_name);
 			allNodesNameAndAbbr.put(map_name + " " + node_name, allMapsabbr.get(tempNode.getMap().getMapId())+" "+node_name);
 		}
 	}
 
 	public String getSearchPattern(String searchingStr) {
+	//	searchingStr = searchingStr.replaceAll(" ", "");
 		searchingStr = searchingStr.toLowerCase();
 		String newPattern = "(.*)";
 		for (int i = 0; i < searchingStr.length(); i++) {
 			newPattern += searchingStr.charAt(i) + "(.*)";
 		}
+		System.out.println(newPattern);
 		return newPattern;
 	}
 
@@ -90,12 +93,12 @@ public class SearchSupply {
 
 	public static void main(String[] args) {
 		Database.InitFromDatabase();
-		System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
+	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
 		SearchSupply ss = new SearchSupply();
-		Map<String,Node> getSS = ss.getSearchSupply("PC");
+		Map<String,Node> getSS = ss.getSearchSupply("Project Center");
 		for (String key : getSS.keySet()) {  
-		//    System.out.println("Key = " + key);  
+		    System.out.println("Key = " + key);  
 		}  
 	}
 }
