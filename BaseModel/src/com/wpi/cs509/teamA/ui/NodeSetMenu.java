@@ -23,10 +23,13 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	private InputPanel inputPanel;
 	private JMenuItem mntmSrc;
 	private JMenuItem mntmDes;
+	private JMenuItem cleanupMap;
+	
 	private StateContext stateContext;
 
 	private final static String SOURCE = "Add as source";
 	private final static String DES = "Add as destination";
+	private final static String CLEAN = "Clean up map";
 
 	/**
 	 * Create the Menu.
@@ -46,6 +49,10 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		mntmDes = new JMenuItem(DES);
 		add(mntmDes);
 		mntmDes.addActionListener(this);
+		
+		cleanupMap = new JMenuItem(CLEAN);
+		add(cleanupMap);
+		cleanupMap.addActionListener(this);
 
 	}
 
@@ -61,7 +68,10 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 			this.inputPanel.getToText().setText(node.getMap().getMapName()+" "+node.getName());
 			this.stateContext.setEndNode(node);
 			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
+		} else if(e.getSource()==cleanupMap){
+			stateContext.cleanup();
 		}
+		
 		stateContext.repaint();
 	}
 

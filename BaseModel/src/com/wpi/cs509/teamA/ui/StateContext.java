@@ -112,6 +112,10 @@ public class StateContext {
 		getImageComponent().repaint();
 		return ret;
 	}
+	
+	public boolean cleanup(){
+		return myState.cleanup();
+	}
 
     public void paintOnImage(Graphics2D g2) {
 
@@ -191,9 +195,9 @@ public class StateContext {
 	}
 
 	public void setStartNode(Node pStartNode) {
-        if (null == pStartNode)
-            return;
-        System.out.println("start = " + pStartNode.getName());
+//        if (null == pStartNode)
+//            return;
+//        System.out.println("start = " + pStartNode.getName());
         if (pStartNode == this.startNode) {
             return;
         }
@@ -206,9 +210,9 @@ public class StateContext {
 	}
 
 	public void setEndNode(Node pEndNode) {
-        if (null == pEndNode)
-            return;
-        System.out.println("end = " + pEndNode.getName());
+//        if (null == pEndNode)
+//            return;
+//        System.out.println("end = " + pEndNode.getName());
         if (pEndNode == this.endNode) {
             return;
         }
