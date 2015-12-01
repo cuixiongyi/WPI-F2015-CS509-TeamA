@@ -194,7 +194,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         }
 
         //result list
-        mapList = new JList<>(mapListModel);
+        mapList = new JList<>();
         mapList.setVisible(false);
         JScrollPane mapListScroll = new JScrollPane(mapList);
         mapListScroll.setBounds(50, 480, 200, 200);
@@ -358,11 +358,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		multiMapPathLists.add(singleMapPath);
 		
 		//reset and initiate the Jlist
-//		mapListModel=new DefaultListModel<>(); 
+
+        DefaultListModel<String> mapListModel = new DefaultListModel<>();
 		for(String name:mapNameList)
 		{
 			mapListModel.addElement(name);
 		}
+        mapList.setModel(mapListModel);
 		stateContext.setPath(multiMapPathLists.get(0));
 		stateContext.setMultiMapPathLists(this.multiMapPathLists);
 		stateContext.setCurrentMap(multiMapPathLists.get(0).get(0).getMap().getMapId());
@@ -456,14 +458,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	public void setSignUp(JButton signUp) {
 		this.signUp = signUp;
-	}
-
-	public DefaultListModel<String> getMapListModel() {
-		return mapListModel;
-	}
-
-	public void setMapListModel(DefaultListModel<String> mapListModel) {
-		this.mapListModel = mapListModel;
 	}
 
 	public JList<String> getMapList() {
