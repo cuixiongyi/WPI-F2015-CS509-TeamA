@@ -79,7 +79,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private AutoSuggestor autoSuggestorTo;
 
     private ImageComponent imageComponent;
-    private DefaultListModel<String> mapListModel = new DefaultListModel<>();
+//    private DefaultListModel<String> mapListModel = new DefaultListModel<>();
     private JList<String> mapList;
     private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
     private JLabel picLabel;
@@ -217,7 +217,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         }
 
         //result list
-        mapList = new JList<>(mapListModel);
+        mapList = new JList<>();
         mapList.setVisible(false);
         JScrollPane mapListScroll = new JScrollPane(mapList);
         mapListScroll.setBounds(50, 480, 200, 200);
@@ -378,12 +378,14 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		multiMapPathLists.add(singleMapPath);
 		
 		//reset and initiate the Jlist
+		DefaultListModel<String> mapListModel = new DefaultListModel<>();
 //		mapListModel.removeAllElements();
 //		mapListModel.clear();
 		for(String name:mapNameList)
 		{
 			mapListModel.addElement(name);
 		}
+		mapList.setModel(mapListModel);
 		stateContext.setPath(multiMapPathLists.get(0));
 		stateContext.setMultiMapPathLists(this.multiMapPathLists);
 		stateContext.setCurrentMap(multiMapPathLists.get(0).get(0).getMap().getMapId());
@@ -493,13 +495,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		this.signUp = signUp;
 	}
 
-	public DefaultListModel<String> getMapListModel() {
-		return mapListModel;
-	}
-
-	public void setMapListModel(DefaultListModel<String> mapListModel) {
-		this.mapListModel = mapListModel;
-	}
+//	public DefaultListModel<String> getMapListModel() {
+//		return mapListModel;
+//	}
+//
+//	public void setMapListModel(DefaultListModel<String> mapListModel) {
+//		this.mapListModel = mapListModel;
+//	}
 
 	public JList<String> getMapList() {
 		return mapList;

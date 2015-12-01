@@ -80,6 +80,8 @@ public class UserScreen extends JFrame {
 		 UIManager.put("control", new Color(142, 143, 145));
 		 UIManager.put("text", new Color(255,255,255));
 		 UIManager.put("TextField.background", new Color(180, 180, 180));
+		 UIManager.put("List.background", new Color(180, 180, 180));
+		 UIManager.put("PasswordField.background", new Color(180, 180, 180));
 		 
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
