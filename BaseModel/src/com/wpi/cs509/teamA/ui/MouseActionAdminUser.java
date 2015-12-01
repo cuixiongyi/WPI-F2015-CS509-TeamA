@@ -32,8 +32,8 @@ public class MouseActionAdminUser extends MouseActionState {
         yPos = e.getY();
         if (e.getButton() == MouseEvent.BUTTON3 )
         {
-            NodeManageMenu nodeManageMenu = new NodeManageMenu(stateContext.getImageComponent(), xPos, yPos, stateContext);
-            nodeManageMenu.show(e.getComponent(), xPos, yPos);
+            //NodeManageMenu nodeManageMenu = new NodeManageMenu(stateContext.getImageComponent(), xPos, yPos, stateContext);
+            //nodeManageMenu.show(e.getComponent(), xPos, yPos);
             imageComponent.repaint();
             return false;
         }
