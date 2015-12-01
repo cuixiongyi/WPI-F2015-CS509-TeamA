@@ -205,6 +205,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int currentMapID = -1;
+                    if(InputPanel.this.getMapList().getSelectedValue()!=null){
                     if (InputPanel.this.getMapList().getSelectedValue().equals("Campus Map")) {
                         currentMapID = 1;
                     } else if (InputPanel.this.getMapList().getSelectedValue().equals("Atwater Kent  Laboratories- GroundFloor")) {
@@ -220,9 +221,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
                     } else if (InputPanel.this.getMapList().getSelectedValue().equals("Project Center-Second Floor 2nd")) {
                         currentMapID = 7;
                     }
+                    
 
                     stateContext.setCurrentMap(currentMapID,InputPanel.this.getMapList());
                     imageComponent.repaint();
+                    }
                 }
             }
         });
