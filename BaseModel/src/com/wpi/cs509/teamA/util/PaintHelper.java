@@ -102,6 +102,15 @@ public class PaintHelper {
 	}
 
 
+    public static void paintIcons(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
+        setStyle(style, g2);
+        if (null == nodes)
+            return;
+        for (Node node : nodes) {
+        	paintIcon(node, g2);
+        }
+    }
+    
     public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
         setStyle(style, g2);
         if (null == nodes)
@@ -112,8 +121,10 @@ public class PaintHelper {
         		paintNode(node, g2);
         	}
         }
-
     }
+    
+    
+    
     public static void paintNodes(List<Node> nodes, Graphics2D g2) {
         paintNodes(nodes, g2, DrawStyleEnum.BasicNode);
     }
