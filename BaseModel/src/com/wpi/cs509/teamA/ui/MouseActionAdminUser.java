@@ -1,7 +1,6 @@
 package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.util.PaintHelper;
-import javafx.scene.input.MouseButton;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

@@ -76,16 +76,17 @@ public class PaintHelper {
         paintNode(nodes.get(nodes.size()-1), g2);
     }
 
-   public static void paintIcons(List<Node> nodes, Graphics2D g2) {
-        for (Node node : nodes) {
+   public static boolean paintIcon(Node node, Graphics2D g2) {
             BufferedImage image = NodeIcon.getImage(node);
             if (null == image) {
-                continue;
+                return false; 
             }
             Coordinate coorTrans = transferCoor(node.getLocation());
-            g2.drawImage(image, coorTrans.getX(), coorTrans.getY(), image.getWidth(stateContext.getImageComponent()),
+            int xCoor = coorTrans.getX() - (image.getWidth()/2);
+            int yCoor = coorTrans.getY() - (image.getHeight()/2);
+            g2.drawImage(image, xCoor, yCoor, image.getWidth(stateContext.getImageComponent()),
                     image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
-        }
+            return true;
 	}
 
 
@@ -94,7 +95,10 @@ public class PaintHelper {
         if (null == nodes)
             return;
         for (Node node : nodes) {
-            paintNode(node, g2);
+        	if (!paintIcon(node, g2))
+        	{
+        		paintNode(node, g2);
+        	}
         }
 
     }

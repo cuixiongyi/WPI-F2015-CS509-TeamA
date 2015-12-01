@@ -18,17 +18,26 @@ public class NodeIcon {
 	private static String classroomIconName = "Classroom_Icon.png";
 	private static String restroomIconName = "Restroom_Icon.png";
 	private static String parkingIconName = "Parking_Icon.png";
+	private static String startIconName = "Start_Icon.png";
+	private static String endIconName = "End_Icon.png";
 
 
-	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;;
-	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;;
-	private static String restroomIconFilePath = PaintHelper.getUserDir() + restroomIconName;;
-	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;;
+	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
+	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;
+	private static String restroomIconFilePath = PaintHelper.getUserDir() + restroomIconName;
+	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;
+	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
+	private static String endIconFilePath = PaintHelper.getUserDir() + endIconName;;
 
+	
 	private static BufferedImage labIcon;
 	private static BufferedImage classroomIcon;
 	private static BufferedImage restroomIcon;
 	private static BufferedImage parkingIcon;
+	private static BufferedImage startIcon;
+	private static BufferedImage endIcon;
+
+
 
     static {
         try {
@@ -36,18 +45,13 @@ public class NodeIcon {
             classroomIcon = ImageIO.read(new FileInputStream(classroomIconFilePath));
             restroomIcon = ImageIO.read(new FileInputStream(restroomIconFilePath));
             parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
+            startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
-	public NodeIcon() {
-		CreateImages();
-	}
 
-	void CreateImages() {
-
-	}
 
 	/**
 	 * @return the node
@@ -64,6 +68,17 @@ public class NodeIcon {
 		this.node = node;
 	}
 
+	
+	static public BufferedImage getStartIcon()
+	{
+		return startIcon;
+	}
+	
+	static public BufferedImage getEndIcon()
+	{
+		return endIcon;
+	}
+	
 	/**
 	 * @todo Fix this function to support multiple images for different node
 	 *       types
@@ -128,5 +143,22 @@ public class NodeIcon {
 	public void setParkingIcon(BufferedImage image) {
 		this.parkingIcon = image;
 	}
-
+	
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setStartIcon(BufferedImage image) {
+		this.startIcon = image;
+	}
+	
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setEndIcon(BufferedImage image) {
+		this.endIcon = image;
+	}
+	
+	
 }
