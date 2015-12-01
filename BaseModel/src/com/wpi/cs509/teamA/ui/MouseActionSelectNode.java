@@ -53,8 +53,8 @@ public class MouseActionSelectNode extends MouseActionState {
 
             Node node = getNodeFromClick(coorTrans);
             if (null != node) {
-                nodesToPaintIcon.clear();
-                nodesToPaintIcon.add(node);
+               // nodesToPaintIcon.clear();
+               // nodesToPaintIcon.add(node);
             }
         }
             return false;
@@ -71,12 +71,10 @@ public class MouseActionSelectNode extends MouseActionState {
     			break;
     		}
     	}
-        PaintHelper.paintIcons(nodesToPaintIcon, g2);
-
-
         java.util.List<Node> iconNodes = stateContext.getIconNodes();
         PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
-
+        //PaintHelper.paintIcons(stateContext.getCurrentMap().getNodes(), g2);
+        
         /*
         g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
         g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);

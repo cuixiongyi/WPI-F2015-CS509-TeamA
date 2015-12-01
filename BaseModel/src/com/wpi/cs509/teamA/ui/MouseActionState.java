@@ -35,7 +35,7 @@ public abstract class MouseActionState {
 
     };
 
-    abstract public void paintOnImage(Graphics2D g2);
+	abstract public void paintOnImage(Graphics2D g2);
 
     public boolean execute(MouseEvent e) {
         xPos = e.getX();
