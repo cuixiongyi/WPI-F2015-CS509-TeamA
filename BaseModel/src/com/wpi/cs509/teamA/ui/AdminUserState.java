@@ -22,7 +22,7 @@ public class AdminUserState extends UserState implements ActionListener {
 		numNodeBtn = 0;
 		numEdgeBtn = 0;
 
-		btnMngNode = new JToggleButton("Mangage Node");
+		btnMngNode = new JToggleButton("Manage Node");
 		btnMngNode.addActionListener(this);
 		// btnMngNode.setVisible(true);
 		btnMngNode.setBounds(80, 380, 150, 30);
