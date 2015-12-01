@@ -117,6 +117,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		mapidTextField.setText(String.valueOf(stateContext.getCurrentMap().getMapId()));
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
+		mapidTextField.setEnabled(false);
 
 		comboBoxType = new JComboBox<String>();
 		comboBoxType.setBounds(192, 60, 207, 27);
