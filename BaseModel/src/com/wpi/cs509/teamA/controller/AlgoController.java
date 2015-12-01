@@ -89,8 +89,8 @@ public class AlgoController {
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
 
-		//generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-		generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		//generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 		return result = generalAlgorithm.findPath(edges);
 
 	}
