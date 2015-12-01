@@ -7,6 +7,7 @@ import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,16 @@ public abstract class MouseActionState {
     public Node getNodeFromClick(Coordinate coor) {
         return Database.getNodeFromCoordinate(coor, stateContext.getCurrentMap().getMapId());
     }
+
     abstract public boolean cleanup();
 
+    protected void paintRoute(Graphics2D g2) {
+        ArrayList<ArrayList<Node>> multiMapPath = stateContext.getMultiMapPathLists();
+        for (ArrayList<Node> path : multiMapPath) {
+            if (path.get(0).getMap().getMapId() == stateContext.getCurrentMap().getMapId()) {
+                PaintHelper.paintPath(path, g2);
+                break;
+            }
+        }
+    }
 }

@@ -183,13 +183,14 @@ public class PaintHelper {
         if (null == nodeSrc || null == nodeDest)
             return;
 
-        g2.setStroke(new BasicStroke(5));
+        //g2.setStroke(new BasicStroke(5));
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
 
    public static void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {
+            setStyle(DrawStyleEnum.NewEdge, g2);
             for (int i = 0; i < nodes.size() - 1; ++i) {
                 paintEdge(nodes.get(i), nodes.get(i + 1), g2);
             }
@@ -221,14 +222,11 @@ public class PaintHelper {
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }
-public StateContext getStateContext() {
-	return stateContext;
-}
-
-public static void setStateContext(StateContext pstateContext) {
-	PaintHelper.stateContext = pstateContext;
-}
-   
-
+    public StateContext getStateContext() {
+        return stateContext;
+    }
+    public static void setStateContext(StateContext pstateContext) {
+        PaintHelper.stateContext = pstateContext;
+    }
 
 }

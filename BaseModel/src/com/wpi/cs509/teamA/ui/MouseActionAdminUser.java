@@ -47,5 +47,7 @@ public class MouseActionAdminUser extends MouseActionState {
                 g2, PaintHelper.DrawStyleEnum.BasicEdge);
         PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(),
                 g2, PaintHelper.DrawStyleEnum.NewNode);
+        paintRoute(g2);
+
     }
 }
