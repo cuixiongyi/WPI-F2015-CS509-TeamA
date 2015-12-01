@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -199,17 +200,29 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
                 stateContext.setAddedNewNode(true);
                 stateContext.setNewNode(node);
 				// show what we have saved..
-				imagePanel.repaint();
-				this.setVisible(false);
+
 			}
 			else {
+                NodeDaoImpl dao = new NodeDaoImpl();
+                existingNode.setName(nameTextField.getText());
+                existingNode.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
+                dao.editNode(existingNode);
+                Database.InitFromDatabase();
 
 			}
 		}
 		if (e.getActionCommand().equals("Delete")) {
+            if (null != existingNode) {
+                NodeDaoImpl dao = new NodeDaoImpl();
+                dao.deleteNode(existingNode);
+                Database.InitFromDatabase();
 
-		}
+            }
 
+        }
+        imagePanel.repaint();
+        stateContext.getImageComponent().repaint();
+        this.setVisible(false);
 
 	}
 
