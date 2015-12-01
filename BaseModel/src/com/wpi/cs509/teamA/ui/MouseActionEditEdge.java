@@ -46,7 +46,7 @@ public class MouseActionEditEdge  extends MouseActionState {
         });
 
         imageComponent.repaint();
-
+        stateContext.cleanUpRoute();
     }
 
     @Override

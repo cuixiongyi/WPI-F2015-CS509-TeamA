@@ -28,6 +28,8 @@ public class MouseActionEditNode extends MouseActionState {
         stateContext.setNewNode(null);
 
         imageComponent.repaint();
+        stateContext.cleanUpRoute();
+
     }
 
 	@Override
@@ -78,6 +80,5 @@ public class MouseActionEditNode extends MouseActionState {
         }
         PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
         PaintHelper.paintNodes(nodesToPaint, g2, PaintHelper.DrawStyleEnum.NewNode);
-
     }
 }
