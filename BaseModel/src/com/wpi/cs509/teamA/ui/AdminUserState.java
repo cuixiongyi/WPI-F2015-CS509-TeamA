@@ -52,6 +52,9 @@ public class AdminUserState extends UserState implements ActionListener {
 		this.btnMngEdge.setVisible(false);
 		this.btnMngNode.setVisible(false);
 		this.btnSynchronize.setVisible(false);
+        stateContext.setStartNode(null);
+        stateContext.setEndNode(null);
+        stateContext.setMultiMapPathLists(null);
 		return false;
 	}
 

@@ -97,19 +97,25 @@ public class StateContext {
 			myState.cleanup();
 		}
 		this.myState = newState;
-	}
+        if (null != imageComponent)
+            imageComponent.repaint();
+
+    }
 
 	public void switchUserState(UserState newState) {
 		if (null != myUserState) {
 			myUserState.cleanup();
 		}
 		this.myUserState = newState;
-	}
+        if (null != imageComponent)
+            imageComponent.repaint();
+    }
 
 	public boolean execute(MouseEvent e) {
 		myUserState.execute(e);
 		boolean ret =  myState.execute(e);
-		getImageComponent().repaint();
+        if (null != imageComponent)
+		    getImageComponent().repaint();
 		return ret;
 	}
 	

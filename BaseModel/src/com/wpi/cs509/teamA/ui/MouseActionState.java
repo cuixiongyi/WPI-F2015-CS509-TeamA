@@ -54,11 +54,16 @@ public abstract class MouseActionState {
 
     protected void paintRoute(Graphics2D g2) {
         ArrayList<ArrayList<Node>> multiMapPath = stateContext.getMultiMapPathLists();
-        for (ArrayList<Node> path : multiMapPath) {
-            if (path.get(0).getMap().getMapId() == stateContext.getCurrentMap().getMapId()) {
-                PaintHelper.paintPath(path, g2);
-                break;
+        if (null != multiMapPath) {
+            for (ArrayList<Node> path : multiMapPath) {
+                if (null != path) {
+                    if (path.get(0).getMap().getMapId() == stateContext.getCurrentMap().getMapId()) {
+                        PaintHelper.paintPath(path, g2);
+                        break;
+                    }
+                }
             }
         }
+
     }
 }

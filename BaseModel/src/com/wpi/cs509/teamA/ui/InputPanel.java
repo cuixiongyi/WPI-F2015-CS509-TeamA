@@ -338,6 +338,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 			this.incrementAdminClicked();
 			stateContext.switchToState(new MouseActionSelectNode(stateContext));
 			stateContext.switchUserState(new NormalUserState(stateContext));
+            stateContext.cleanUpRoute();
 			this.repaint();
 			imageComponent.repaint();
 		}
