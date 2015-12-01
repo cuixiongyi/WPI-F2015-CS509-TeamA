@@ -107,6 +107,7 @@ public class StateContext {
 			myUserState.cleanup();
 		}
 		this.myUserState = newState;
+        cleanUpRoute();
         if (null != imageComponent)
             imageComponent.repaint();
     }
