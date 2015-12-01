@@ -52,7 +52,10 @@ public class MouseActionEditNode extends MouseActionState {
 
             if (null != node) {
                 /// TODO add edit node action
-                JOptionPane.showMessageDialog(null, "Too close from another node.");
+                NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext, node);
+                nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                nodeInfo.setVisible(nodeInfo.isFocusable());
+                //JOptionPane.showMessageDialog(null, "Too close from another node.");
             } else {
                 // Create a NodeInformationDialog
                 NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext, coorTrans.getX(), coorTrans.getY());

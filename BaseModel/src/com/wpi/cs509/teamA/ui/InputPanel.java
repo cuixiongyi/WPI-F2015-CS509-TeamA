@@ -278,8 +278,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void focusLost(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {
             if (((JTextField) e.getSource()).getText().trim().equals("")) {
-                lastSetSearchWord = true;
-                lastSetEmptySearchWord = false;
+                //lastSetSearchWord = true;
+                //lastSetEmptySearchWord = false;
                 ((JTextField) e.getSource()).setText(SEARCHWORD);
             }
 
@@ -292,16 +292,16 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
     private void processTextField(JTextField txt) {
         if (txt.getText().trim().equals(SEARCHWORD) ) {
-            if (!lastSetSearchWord) {
-                lastSetEmptySearchWord = true;
-                lastSetSearchWord = false;
+           // if (!lastSetSearchWord) {
+                //lastSetEmptySearchWord = true;
+                //lastSetSearchWord = false;
                 txt.setText("");
-            }
+          //  }
         }
-        else if (lastSetSearchWord){
+      /*  else if (lastSetSearchWord){
             lastSetSearchWord = false;
             lastSetEmptySearchWord = false;
-        }
+        }*/
     }
     public void focusGained(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {

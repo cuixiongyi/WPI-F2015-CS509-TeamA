@@ -33,6 +33,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private JPanel contentPanel = new JPanel();
 	private JButton saveButton;
 	private JButton cancelButton;
+	private JButton deleteButton = null;
 	private JLabel lbCoordinate;
 	private JTextField xPosField;
 	private JTextField yPosField;
@@ -40,6 +41,8 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	private JTextField mapidTextField;
 	private int xPos;
 	private int yPos;
+
+	private Node existingNode = null;
 
     private StateContext stateContext;
 	private ImageComponent imagePanel;
@@ -60,7 +63,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		yPos = yPosition;
         this.stateContext = pStateContext;
 		imagePanel = stateContext.getImageComponent();
-		setBounds(100, 100, 420, 250);
+		setBounds(100, 100, 500, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -117,14 +120,11 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		comboBoxType = new JComboBox<String>();
 		comboBoxType.setBounds(192, 60, 207, 27);
-		comboBoxType.addItem("UNDEFINED");
-		comboBoxType.addItem("PATHNODE");
-		comboBoxType.addItem("OFFICE");
-		comboBoxType.addItem("CLASSROOM");
-		comboBoxType.addItem("MEETINGROOM");
-		comboBoxType.addItem("RESTROOM");
-		comboBoxType.addItem("LAB");
-		comboBoxType.addItem("PARKING");
+
+		for (NodeType type : NodeType.values()) {
+			comboBoxType.addItem(type.toString());
+
+		}
 		comboBoxType.setMaximumRowCount(5);
 		contentPanel.add(comboBoxType);
 
@@ -133,6 +133,21 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
+		deleteButton = new JButton("Delete");
+		deleteButton.setFont(new Font("Arial", Font.PLAIN, 15));
+		deleteButton.setActionCommand("Delete");
+		deleteButton.addActionListener(this);
+		buttonPane.add(deleteButton);
+		deleteButton.setEnabled(false);
+		deleteButton.setVisible(true);
+
+		cancelButton = new JButton(CANCEL);
+		cancelButton.setFont(new Font("Arial", Font.PLAIN, 15));
+		cancelButton.setActionCommand(CANCEL);
+		cancelButton.addActionListener(this);
+		buttonPane.add(cancelButton);
+
+
 		saveButton = new JButton(SAVE);
 		saveButton.setFont(new Font("Arial", Font.PLAIN, 15));
 		saveButton.setActionCommand(SAVE);
@@ -140,13 +155,20 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		buttonPane.add(saveButton);
 		getRootPane().setDefaultButton(saveButton);
 
-		cancelButton = new JButton(CANCEL);
-		cancelButton.setFont(new Font("Arial", Font.PLAIN, 15));
-		cancelButton.setActionCommand(CANCEL);
-		cancelButton.addActionListener(this);
-		buttonPane.add(cancelButton);
+
 	}
 
+	public NodeInformationDialog(StateContext pStateContext, Node pNode) {
+		this( pStateContext, pNode.getLocation().getX(), pNode.getLocation().getY());
+		if (null == pNode) {
+			return;
+		}
+		existingNode = pNode;
+		deleteButton.setEnabled(true);
+		comboBoxType.setSelectedItem(existingNode.getNodeType().toString());
+		nameTextField.setText(existingNode.getName());
+		mapidTextField.setText((new Integer(existingNode.getMap().getMapId())).toString());
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -157,7 +179,9 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 			if (comboBoxType.getSelectedItem().toString().trim().equals("") || nameTextField.getText().trim().equals("")
 					|| mapidTextField.getText().trim().equals("")) {
 				JOptionPane.showMessageDialog(null, "Please fill all fields.");
-			} else {
+				return;
+			}
+			if ( existingNode == null){
 				// Save node information
 				Node node = new Node();
 				Coordinate coordinate = new Coordinate(this.xPos, this.yPos);
@@ -177,7 +201,14 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				imagePanel.repaint();
 				this.setVisible(false);
 			}
+			else {
+
+			}
 		}
+		if (e.getActionCommand().equals("Delete")) {
+
+		}
+
 
 	}
 

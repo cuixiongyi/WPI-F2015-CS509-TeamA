@@ -208,6 +208,7 @@ public class StateContext {
         }
         this.multiMapPathLists.clear();
         this.startNode = pStartNode;
+        imageComponent.repaint();
 	}
 
 	public Node getEndNode() {
@@ -223,6 +224,7 @@ public class StateContext {
         }
         this.multiMapPathLists.clear();
         this.endNode = pEndNode;
+        imageComponent.repaint();
 
     }
 

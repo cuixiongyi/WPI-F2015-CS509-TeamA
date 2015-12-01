@@ -82,7 +82,4 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		stateContext.repaint();
 	}
 
-	public void setNode(Node node, JTextField txt) {
-
-	}
 }
