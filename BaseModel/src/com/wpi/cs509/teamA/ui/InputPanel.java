@@ -101,6 +101,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
      * Constructor. Initialize all the input panel.
      */
     public InputPanel() {
+    	this.setBounds(0, 0, 600, 1000);
         // // User input block
 
         this.btnSearch = new JButton(SEARCH);
