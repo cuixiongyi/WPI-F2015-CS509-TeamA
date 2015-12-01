@@ -71,18 +71,7 @@ public class MouseActionSelectNode extends MouseActionState {
     			break;
     		}
     	}
-        java.util.List<Node> iconNodes = stateContext.getIconNodes();
-        PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
-        //PaintHelper.paintIcons(stateContext.getCurrentMap().getNodes(), g2);
-        
-        /*
-        g2.drawOval(sourceX - ovalOffset, sourceY - ovalOffset, 10, 10);
-        g2.drawOval(desX - ovalOffset, desY - ovalOffset, 10, 10);
-        Font font = g.getFont().deriveFont(20.0f);
-        g.setFont(font);
-        g2.drawString("Source", sourceX, sourceY - ovalOffset);
-        g2.drawString("Destination", desX, desY - ovalOffset);
-*/
+        PaintHelper.paintIcons(stateContext.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
 
     }
 }

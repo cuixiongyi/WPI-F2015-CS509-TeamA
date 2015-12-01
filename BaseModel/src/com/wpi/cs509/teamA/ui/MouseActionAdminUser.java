@@ -34,6 +34,7 @@ public class MouseActionAdminUser extends MouseActionState {
         {
             NodeManageMenu nodeManageMenu = new NodeManageMenu(stateContext.getImageComponent(), xPos, yPos, stateContext);
             nodeManageMenu.show(e.getComponent(), xPos, yPos);
+            imageComponent.repaint();
             return false;
         }
 
@@ -42,9 +43,9 @@ public class MouseActionAdminUser extends MouseActionState {
 
     @Override
     public void paintOnImage(Graphics2D g2) {
-        PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(),
-                g2, PaintHelper.DrawStyleEnum.NewNode);
         PaintHelper.paintEdges(stateContext.getCurrentMap().getEdges(),
                 g2, PaintHelper.DrawStyleEnum.BasicEdge);
+        PaintHelper.paintNodes(stateContext.getCurrentMap().getNodes(),
+                g2, PaintHelper.DrawStyleEnum.NewNode);
     }
 }
