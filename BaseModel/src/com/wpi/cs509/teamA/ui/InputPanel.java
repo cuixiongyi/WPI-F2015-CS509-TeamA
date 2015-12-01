@@ -328,13 +328,17 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	}
 	
 	public void clickSearch(){
+		if(InputPanel.this.stateContext.getStartNode()==null || InputPanel.this.stateContext.getEndNode()==null)
+			return;
 		this.picLabel.setVisible(false);
 		this.getMapList().setVisible(true);
         multiMapPathLists = new ArrayList<ArrayList<Node>>();
         mapList.removeAll();
 
+        
 		AlgoController algoController = new AlgoController(InputPanel.this.stateContext.getStartNode().getName(),
                 InputPanel.this.stateContext.getEndNode().getName());
+        
 
 		Stack<Node> path = algoController.getRoute();
 		
@@ -372,6 +376,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		stateContext.setMultiMapPathLists(this.multiMapPathLists);
 		stateContext.setCurrentMap(multiMapPathLists.get(0).get(0).getMap().getMapId());
 		stateContext.getImageComponent().repaint();
+        
 		
 	}
 
