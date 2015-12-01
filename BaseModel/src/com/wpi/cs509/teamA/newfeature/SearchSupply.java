@@ -18,6 +18,8 @@ import com.wpi.cs509.teamA.util.Database;
 public class SearchSupply {
 	private Map<String, Node> allNodesWithName;
 	private Map<Integer, String> allMaps;
+	private Map<Integer,String> allMapsabbr;
+	private Map<String, String> allNodesNameAndAbbr;
 
 	public SearchSupply() {
 		initSearchSupply();
@@ -26,7 +28,9 @@ public class SearchSupply {
 	public void initSearchSupply() {
 		
 		allMaps = new HashMap<Integer,String>();
+		allMapsabbr = new HashMap<Integer,String>();
 		allNodesWithName = new HashMap<String,Node>();
+		allNodesNameAndAbbr = new HashMap<String,String>();
 		
 		// get maps
 		Iterator<GeneralMap> iter_map = Database.getAllMapFromDatabase().iterator();
@@ -36,6 +40,7 @@ public class SearchSupply {
 			String map_name = tempMap.getMapName();
 		//	System.out.println("map_id :"+ map_id +"   map_name"+map_name);
 			allMaps.put(map_id, map_name);
+			allMapsabbr.put(map_id, tempMap.getMapAbbrName());
 		}
 
 		// get nodes and transfer
@@ -49,6 +54,7 @@ public class SearchSupply {
 		//	System.out.println("node_name :" + node_name+ "   map_name:"+map_name);
 		//	allNodesWithName.put(node_name + " " + map_name, tempNode);
 			allNodesWithName.put(map_name + " " + node_name, tempNode);
+			allNodesNameAndAbbr.put(map_name + " " + node_name, allMapsabbr.get(tempNode.getMap().getMapId())+" "+node_name);
 		}
 	}
 
@@ -76,7 +82,7 @@ public class SearchSupply {
 			// create matcher
 			Matcher m = r.matcher(tempKey.toLowerCase());
 			if (m.find()) {
-				listResults.put(tempKey, tempNode);
+				listResults.put(allNodesNameAndAbbr.get(tempKey), tempNode);
 			}
 		}
 		return listResults;
