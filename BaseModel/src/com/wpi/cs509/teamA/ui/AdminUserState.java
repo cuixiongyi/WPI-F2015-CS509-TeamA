@@ -11,7 +11,7 @@ import com.wpi.cs509.teamA.util.Database;
 
 public class AdminUserState extends UserState implements ActionListener {
 
-	private JButton btnSynchronize;
+	
 	private JToggleButton btnMngNode;
 	private JToggleButton btnMngEdge;
 
@@ -23,24 +23,24 @@ public class AdminUserState extends UserState implements ActionListener {
 		numNodeBtn = 0;
 		numEdgeBtn = 0;
 
-		btnMngNode = new JToggleButton("Mangage Node");
+		btnMngNode = new JToggleButton("Manage Node");
 		btnMngNode.addActionListener(this);
 		// btnMngNode.setVisible(true);
-		btnMngNode.setBounds(80, 420, 75, 30);
+		btnMngNode.setBounds(80, 380, 150, 30);
 		System.out.println(inputPanel);
 		inputPanel.add(btnMngNode);
 
 		btnMngEdge = new JToggleButton("Manage Edge");
 		btnMngEdge.addActionListener(this);
 		// btnMngEdge.setVisible(true);
-		btnMngEdge.setBounds(155, 420, 75, 30);
+		btnMngEdge.setBounds(80, 420, 150, 30);
 		inputPanel.add(btnMngEdge);
 
-		btnSynchronize = new JButton("Sync");
-		btnSynchronize.addActionListener(this);
-		btnSynchronize.setVisible(true);
-		btnSynchronize.setBounds(80, 380, 150, 30);
-		inputPanel.add(btnSynchronize);
+//		btnSynchronize = new JButton("Sync");
+//		btnSynchronize.addActionListener(this);
+//		btnSynchronize.setVisible(true);
+//		btnSynchronize.setBounds(80, 380, 150, 30);
+//		inputPanel.add(btnSynchronize);
 
 		inputPanel.repaint();
 
@@ -51,10 +51,7 @@ public class AdminUserState extends UserState implements ActionListener {
 		// TODO Auto-generated method stub
 		this.btnMngEdge.setVisible(false);
 		this.btnMngNode.setVisible(false);
-		this.btnSynchronize.setVisible(false);
-        stateContext.setStartNode(null);
-        stateContext.setEndNode(null);
-        stateContext.setMultiMapPathLists(null);
+		
 		return false;
 	}
 
