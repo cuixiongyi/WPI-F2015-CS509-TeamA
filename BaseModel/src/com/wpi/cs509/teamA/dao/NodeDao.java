@@ -88,4 +88,8 @@ public interface NodeDao {
 	 */
 	public List<Node> getNodeFromIds(List<Integer> nodeIds);
 	
+	public boolean editNode(Node node_edit);
+	
+	public boolean deleteNode(Node node_del);
+	
 }

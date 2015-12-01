@@ -286,4 +286,36 @@ public class NodeDaoImpl implements NodeDao {
 		return null;
 	}
 
+	@Override
+	public boolean editNode(Node node_edit) {
+		try {
+			String editNodeToDB = "update RouteFinder.node set name=?,classification=? where id=?";
+			pstmt = conn.prepareStatement(editNodeToDB);
+			pstmt.setString(1, node_edit.getName());
+			pstmt.setString(2, node_edit.getNodeType().toString());
+			pstmt.setInt(3, node_edit.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteNode(Node node_del) {
+		// delete relations using this node
+		
+		//delete maprelations using this node
+		
+		//delete this node
+		
+		return false;
+	}
+
 }
