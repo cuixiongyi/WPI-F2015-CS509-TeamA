@@ -46,6 +46,8 @@ public class NodeIcon {
             restroomIcon = ImageIO.read(new FileInputStream(restroomIconFilePath));
             parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
             startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
+            endIcon = ImageIO.read(new FileInputStream(endIconFilePath));
+
         }
         catch (Exception e) {
             e.printStackTrace();
