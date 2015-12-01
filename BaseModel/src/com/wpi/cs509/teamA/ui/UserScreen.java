@@ -83,6 +83,12 @@ public class UserScreen extends JFrame {
 
         UIManager.put("List.background", new Color(180, 180, 180));
         UIManager.put("PasswordField.background", new Color(180, 180, 180));
+        UIManager.put("TextField.disabled", new Color(180, 180, 180));
+        UIManager.put("TextField.disabledText", new Color(255,255,255));
+        UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
+        
+        
+        
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

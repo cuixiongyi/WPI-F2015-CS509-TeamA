@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -118,6 +118,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
 		mapidTextField.setEnabled(false);
+		mapidTextField.setDisabledTextColor(new Color(255,255,255));
 
 		comboBoxType = new JComboBox<String>();
 		comboBoxType.setBounds(192, 60, 207, 27);
