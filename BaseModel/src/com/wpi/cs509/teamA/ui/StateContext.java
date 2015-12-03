@@ -34,32 +34,21 @@ public class StateContext {
 	 * The current state
 	 */
 	private MouseActionState myState;
-	private UserState myUserState;
-
-	private UserAccount myAccount;
-
 
 	private ImageComponent imageComponent;
 	private InputPanel inputPanel;
 
     private Node nodeFromText = null;
-    private Node startNode;
-	private Node endNode;
+
 
 
     private Node focusNode = null;
-	private List<Node> path;
-	private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 
 
     private boolean addedNewNode = false;
     private Node newNode = null;
 
-	/**
-	 * if filterNodeType[i] == 1 then display that type of node
-	 * filterNodeType[i] == 0 don't display
-	 */
-	private List<Integer> filterNodeType;
+
 	private List<Node> iconNodes;
 
 
