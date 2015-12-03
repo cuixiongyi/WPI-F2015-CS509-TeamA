@@ -1,20 +1,10 @@
 package com.wpi.cs509.teamA.ui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
-import java.awt.Dialog.ModalityType;
 import javax.swing.JMenuItem;
 
 /**
@@ -32,15 +22,17 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmAdd;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
+	private StateContext stateContext;
 
 	private final static String ADD = "Add Node";
 	private final static String DELETE = "Delete Node";
 	private final static String EDIT = "Edit Node";
+	private final static int closeRange = 5;
 
 	/**
 	 * Create the Menu.
 	 */
-	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition) {
+	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, StateContext pStateContext) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
@@ -59,23 +51,20 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 		add(mntmEdit);
 		mntmEdit.addActionListener(this);
 
+
+		this.stateContext = pStateContext;
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mntmAdd) {
+				stateContext.switchToState(new MouseActionEditNode(stateContext));
 
-			// Create a NodeInformationDialog
-			NodeInformationDialog nodeInfo = new NodeInformationDialog(imagePanel, xPos, yPos);
-			nodeInfo.setModalityType(ModalityType.APPLICATION_MODAL);
-			nodeInfo.setVisible(nodeInfo.isFocusable());
-
-		}
-		if (e.getSource() == mntmDelete) {
+		} else if (e.getSource() == mntmDelete) {
 			// TODO: Show a dialog to ask the user if they really want to delete
 			// TODO: Database
-		}
-		if (e.getSource() == mntmEdit) {
+		} else if (e.getSource() == mntmEdit) {
 
 		}
 

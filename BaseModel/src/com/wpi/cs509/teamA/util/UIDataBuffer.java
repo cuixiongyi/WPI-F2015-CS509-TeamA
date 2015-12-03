@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
@@ -26,7 +27,7 @@ public class UIDataBuffer {
 	public static Map<Integer, List<Node>> getAllNodes() {
 		// get node from db
 		List<Node> allNodesInDB = new ArrayList<Node>();
-		allNodesInDB.addAll(new NodeDaoImpl().getAllNodes());
+		allNodesInDB.addAll(Database.getAllNodesForCurrentMap(UIDataBuffer.currentMapId));
 		Map<Integer, List<Node>> resMap = new HashMap<Integer, List<Node>>();
 		resMap.put(1, allNodesInDB);
 		return resMap;
@@ -65,9 +66,9 @@ public class UIDataBuffer {
 		// return resMap;
 	}
 
-	public static Set<NodeRelation> getAllEdges() {
+	public static List<Edge> getAllEdges() {
 		NodeRelationDao nrd = new NodeRelationDaoImpl();
-		Set<NodeRelation> res = nrd.getAllNodeRelations();
+		List<Edge> res = nrd.getAllEdges();
 		return res;
 
 		// Coordinate firstNodeCoordinate = new Coordinate();

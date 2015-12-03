@@ -1,9 +1,12 @@
 package com.wpi.cs509.teamA.dao;
 
+import java.util.List;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.Edge;
+import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
+
 import com.wpi.cs509.teamA.util.Coordinate;
 
 public interface NodeRelationDao {
@@ -32,7 +35,7 @@ public interface NodeRelationDao {
 	 * @param nodeRelation
 	 * @return
 	 */
-	public Set<NodeRelation> insertMultipleEdges(Set<NodeRelation> nodeRelation);
+//	public List<Edge> insertMultipleEdges(Set<Edge> nodeRelation);
 
 	/**
 	 * 
@@ -47,7 +50,7 @@ public interface NodeRelationDao {
 	 * @param coordinate
 	 * @return
 	 */
-	public int checkNodeInDBByCoordinate(Coordinate coordinate);
+//	public int checkNodeInDBByCoordinate(Coordinate coordinate);
 
 	/**
 	 * Check if an relation has already exists in DB
@@ -66,7 +69,7 @@ public interface NodeRelationDao {
 	 * 
 	 * @return a set of NodeRelation instance querying from relation table
 	 */
-	public Set<NodeRelation> getAllNodeRelations();
+	public List<Edge> getAllNodeRelationsForCurrentMap(int map_id);
 
 	/**
 	 * 
@@ -75,6 +78,15 @@ public interface NodeRelationDao {
 	 * 
 	 * @return A set of Edge instances
 	 */
-	public Set<Edge> getAllEdges();
+	public List<Edge> getAllEdges();
 
+	/**
+	 * 
+	 * This method is for algorithm, the Edge structure is different from node
+	 * relation.
+	 * 
+	 * @return A set of Edge instances
+	 */
+	public List<Edge> getAllMapEdges();
+	public boolean deleteOrAddEdge(Node n1, Node n2);
 }

@@ -1,11 +1,11 @@
 package com.wpi.cs509.teamA.strategy;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Stack;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
-import com.wpi.cs509.teamA.util.InputMatrix;
+import com.wpi.cs509.teamA.controller.allEdges;
 
 /**
  * We decided to use a Strategy Pattern for the path finding algorithms. We did
@@ -22,6 +22,6 @@ import com.wpi.cs509.teamA.util.InputMatrix;
  */
 public interface AlgoStrategy {
 	
-	List<Integer> getRoute(Node startNode, Node endNode, Graph context);
+	Stack<Node> getRoute(allEdges edges);
 
 }

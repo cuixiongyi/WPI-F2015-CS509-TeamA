@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.DupEntranceMapDao;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 
 /**
@@ -127,7 +127,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
 	 * @author CS 509-Team A
 	 * @return an array of nodes
 	 */
-	public Set<Node> initAllNodes() {
+/*	public Set<Node> initAllNodes() {
 
 		Set<Node> allNodes = new HashSet<Node>();
 		int iter_nodes = 0;
@@ -153,7 +153,7 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
 			JdbcConnect.connClose();
 		}
 		return allNodes;
-	}
+	}*/
 
 	/**
 	 * insert nodes to the database at once execute INSERT INTO RouteFinder.node

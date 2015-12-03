@@ -1,11 +1,13 @@
 package com.wpi.cs509.teamA.bean;
-
-import java.util.HashMap;
-import java.util.Map;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
-import com.wpi.cs509.teamA.util.Coordinate;
-import com.wpi.cs509.teamA.util.NodeType;
+import com.wpi.cs509.teamA.util.*;
+import java.util.HashSet;
+import java.util.Set;
+
+
+
+
 
 /**
  * Node definition. This class represents the smallest unit of a map. It include
@@ -17,27 +19,32 @@ import com.wpi.cs509.teamA.util.NodeType;
 public class Node {
 
 	/** id of the node */
-	private int id;
+	protected int id;
 
 	/** name of the node */
 	private String name;
 
 	/** the coordinate of the node */
-	private Coordinate location = new Coordinate();
+	protected Coordinate location;
 
 	// which map this node belongs to
 	/** define which map the node belongs to */
-	private int mapId;
+	protected GeneralMap map;
 
 	// neighbor node id and distance
 	// private Map<String, Integer> neighbors;
 	/** neighbor node */
 	//
-	private Map<Integer,Double> neighbors = new HashMap<Integer,Double>();
-
+	//private Set<Node> neighbors = new HashSet<Node>();
+	private Set<Edge>neighborE=new HashSet<Edge>();
+	
+	
 	/** type of the node */
 	// this may cause great complex when input data
 	private NodeType nodeType;
+
+    /** Display coordinate on map image */
+    private Coordinate displayCoor;
 
 	/** default constructor */
 	public Node() {
@@ -46,8 +53,16 @@ public class Node {
 
 	// TODO: We may remove this method in the future, for now it is just for
 	// testing..
-	public Node(int id) {
+//	public Node(int id, int x, int y) {
+//		this.id = id;
+//		this.location = new Coordinate(x,y);
+//	}
+	// TODO: We may remove this method in the future, for now it is just for
+	// testing..
+	public Node(int id, int x, int y, GeneralMap mapId) {
 		this.id = id;
+		this.location = new Coordinate(x,y);
+		this.map = mapId;
 	}
 
 	/**
@@ -60,32 +75,37 @@ public class Node {
 	 *            coordinate x
 	 * @param y
 	 *            coordinate y
-	 * @param mapId
-	 *            the map where the node is on
-	 * @param neighbors
-	 *            the neighbors this node has
 	 * @param nodeType
 	 *            the type of the node, an enum class
 	 */
-	public Node(int id, String name, int x, int y, int mapId, Map<Integer,Double> neighbors, String nodeType) {
+	public Node(int id, String name, int x, int y, GeneralMap map, String nodeType) {
 
 		this.id = id;
 		this.name = name;
 		this.location = new Coordinate(x, y);
-		this.mapId = mapId;
-		this.neighbors = neighbors;
+		this.map = map;
 		this.nodeType = NodeType.valueOf(nodeType);
-
+        this.displayCoor = new Coordinate(x, y);
 	}
 
 	/**
 	 * add an new node on the map and set it's attributes
 	 */
 	public void saveNode() {
-		
 		NodeDao nd = new NodeDaoImpl();
 		nd.saveNode(this);
+//		Node node = new Node();
+//		node.setNeighbors(new HashSet<Integer>());
+//		node.setId(1);
+//		// more setters for the node
+//
+//		// add node id as the neighbours
+//
+//		node.getNeighbors().add(2);
+//		node.getNeighbors().add(3);
+//		node.getNeighbors().add(4);
 		
+		// database
 	}
 
 	// add neighbors to the node
@@ -102,6 +122,16 @@ public class Node {
 	public void deleteNode() {
 		// deleteFromNeighbour
 		// this.deleteFromNeighbour(this.id);
+
+	}
+
+	/**
+	 * delete the node from one of it's neighbor
+	 * 
+	 * @param nodeId
+	 *            the neighbor id
+	 */
+	private void deleteFromNeighbour(String nodeId) {
 
 	}
 
@@ -153,31 +183,34 @@ public class Node {
 	/**
 	 * @return the mapId
 	 */
-	public int getMapId() {
-		return mapId;
+	public GeneralMap getMap() {
+		return this.map;
 	}
 
 	/**
 	 * @param mapId
 	 *            the mapId to set
 	 */
-	public void setMapId(int mapId) {
-		this.mapId = mapId;
+	public void setMap(GeneralMap map) {
+		this.map = map;
 	}
 
 	/**
 	 * @return the neighbors
 	 */
-	public Map<Integer,Double> getNeighbors() {
-		return neighbors;
+	public Set<Edge> getNeighborE() {
+		return neighborE;
 	}
 
 	/**
 	 * @param neighbors
 	 *            the neighbors to set
 	 */
-	public void setNeighbors(Map<Integer,Double> neighbors) {
-		this.neighbors = neighbors;
+	public void setNeighborE(Set<Edge>neighbors) {
+		this.neighborE = neighbors;
+	}
+	public void addNeighborE(Edge e){
+		this.neighborE.add(e);
 	}
 
 	/**
@@ -195,4 +228,7 @@ public class Node {
 		this.nodeType = nodeType;
 	}
 
-}
+	public double DistanceTo(Node a){
+		return this.getMap().getScale()*Math.sqrt(Math.pow(a.getLocation().getX()-this.getLocation().getX(),2)+Math.pow(a.getLocation().getY()-this.getLocation().getY(),2));
+	}
+}	

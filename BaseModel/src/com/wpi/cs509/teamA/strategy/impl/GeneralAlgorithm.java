@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
+import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
@@ -56,21 +60,21 @@ public class GeneralAlgorithm {
 	 * @param context
 	 * @return
 	 */
-	public Map<Integer, List<Node>> findPath(Node startNode, Node endNode, Graph context) {
+	public Stack<Node> findPath(allEdges edges) {
 
-		Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
+		Stack<Node> result = new Stack<Node>();
 
 		// different strategy will use different algorithm..
-		List<Integer> nodeIds = algoStrategy.getRoute(startNode, endNode, context);
+		result = algoStrategy.getRoute(edges);
 
-		// TODO: Query node objects from node Id's and add all node objects to
-		// result
-		NodeDao nd = new NodeDaoImpl();
-		// add this one by one to the result
-		List<Node> routeOnOneMap = nd.getNodeFromIds(nodeIds);
-
-		// 
-		result.put(UIDataBuffer.getCurrentMapId(), routeOnOneMap);
+//		// TODO: Query node objects from node Id's and add all node objects to
+//		// result
+//		NodeDao nd = new NodeDaoImpl();
+//		// add this one by one to the result
+//		List<Node> routeOnOneMap = nd.getNodeFromIds(nodeIds);
+//
+//		// 
+//		result.put(UIDataBuffer.getCurrentMapId(), routeOnOneMap);
 
 		return result;
 	}

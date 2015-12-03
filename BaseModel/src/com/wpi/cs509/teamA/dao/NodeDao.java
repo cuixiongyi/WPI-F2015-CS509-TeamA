@@ -25,11 +25,18 @@ public interface NodeDao {
 	public int getNeighborsNum();
 	
 	/**
-	 * Get all the initialized nodes
+	 * Get all the initialized nodes(current map)
 	 * 
 	 * @return A set of initialized node object
 	 */
-	public Set<Node> getAllNodes();
+	public Set<Node> getAllNodesForCurrentMap();
+	
+	/**
+	 * Get all the initialized nodes(for all maps)
+	 * 
+	 * @return A set of initialized node object
+	 */
+	public List<Node> getAllNodes();	
 	
 	/**
 	 * 
@@ -80,5 +87,9 @@ public interface NodeDao {
 	 * @return
 	 */
 	public List<Node> getNodeFromIds(List<Integer> nodeIds);
+	
+	public boolean editNode(Node node_edit);
+	
+	public boolean deleteNode(Node node_del);
 	
 }

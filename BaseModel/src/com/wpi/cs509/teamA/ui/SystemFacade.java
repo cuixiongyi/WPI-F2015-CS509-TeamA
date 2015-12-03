@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.ui;
 
 import com.wpi.cs509.teamA.bean.DupEntranceMap;
 import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
+import com.wpi.cs509.teamA.util.Database;
 
 /**
  * This is class is to initialize all the resources that will be used in the
@@ -26,7 +27,10 @@ public class SystemFacade implements Runnable {
 		t = new Thread(this, "initialize data thread");
 		t.start();
 		try {
-			Thread.sleep(50000);
+            /// TODO CXY : this is a hack, to get database ready before UserScreen start
+            t.join();
+
+            //Thread.sleep(50000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,10 +42,13 @@ public class SystemFacade implements Runnable {
 	public void run() {
 
 		// TODO Auto-generated method stub
+		// load all data from the database
+		Database.InitFromDatabase();
 		// initialize the relationship map
 		DupEntranceMap.initDupEntranceMap();
 		// initialize all the matrix for the map
 		InitAllMatrixDaoImpl.initAllMatrix();
+		
 	}
 
 }

@@ -8,14 +8,17 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.List;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-
+import com.wpi.cs509.teamA.bean.GeneralMap;
 //import com.sun.prism.paint.Color;
+import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -34,6 +37,10 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
+
+
+	private StateContext stateContext;
+
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
@@ -68,18 +75,20 @@ public class UserScreen extends JFrame {
 			// and feel.
 		}
 
-		UIManager.put("nimbusBase", new Color(142, 143, 145));
-		// UIManager.put("nimbusBlueGrey", new Color(169,46,3));
-		// UIManager.put("control", new Color(169,46,3));
+		UIManager.put("nimbusBase", new Color(50, 50, 50));
+		 UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
+		 UIManager.put("control", new Color(142, 143, 145));
+		 UIManager.put("text", new Color(255,255,255));
+		 UIManager.put("TextField.background", new Color(180, 180, 180));
 
-		// for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		// if ("Nimbus".equals(info.getName())) {
-		// UIManager.setLookAndFeel(info.getClassName());
-		// break;
-		// }
-		// }
-		//
-
+        UIManager.put("List.background", new Color(180, 180, 180));
+        UIManager.put("PasswordField.background", new Color(180, 180, 180));
+        UIManager.put("TextField.disabled", new Color(180, 180, 180));
+        UIManager.put("TextField.disabledText", new Color(255,255,255));
+        UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
+        
+        
+        
 		container = getContentPane();
 		// container.setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,19 +133,13 @@ public class UserScreen extends JFrame {
 		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
 		// the panel to show image
-		imgComponent = new ImageComponent(inputPanel);
+		imgComponent = new ImageComponent();
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
-		// display the image. Note that "/" only works on UNIX
-		// TODO: default map? change the way to do this...
-		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
-		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
-		imgComponent.setVisible(true);
-
+		
 		JScrollPane imgScrollPanel = new JScrollPane();
 		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
 		// contentPane.add(imgScrollPanel, gbcScrollPane);
-		imgScrollPanel.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		// // for scroll panel
 		imgScrollPanel.setViewportView(imgComponent);
 		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -147,10 +150,42 @@ public class UserScreen extends JFrame {
 		setSize(800, 500);
 		setVisible(true);
 		setResizable(true);
+
+		// TODO: default map? change the way to do this...
+		// TODO load map image with different names
+
+	/*	
+		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
+		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
+		imgComponent.setVisible(true);
+*/
+		
+		imgComponent.setInputPanel(this.inputPanel);
+        inputPanel.setImageComponent(this.imgComponent);
+
+        stateContext = new StateContext();
+       
+
+        imgComponent.setStateContext(stateContext);
+        PaintHelper.setStateContext(stateContext);
+        inputPanel.setStateContext(stateContext);
+        stateContext.setImageComponent(imgComponent);
+        stateContext.setInputPanel(inputPanel);
+        imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
+        imgComponent.setVisible(true);
+        inputPanel.setUserScreen(this);
+		imgComponent.repaint();
+		stateContext.switchToState(new MouseActionSelectNode(stateContext));
+		stateContext.switchUserState(new NormalUserState(stateContext));
 	}
 
 	public JButton getBtnNeighborManage() {
 		return this.btnNeighborManage;
+	}
+	
+
+	public static UserScreen getUserScreen() {
+		return userScreen;
 	}
 
 	public static UserScreen launchUserScreen() {
@@ -169,7 +204,9 @@ public class UserScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 
-		// singleton
+        new SystemFacade();
+
+        // singleton
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
@@ -177,7 +214,6 @@ public class UserScreen extends JFrame {
 			}
 		});
 
-		new SystemFacade();
 	}
 
 }

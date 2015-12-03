@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
@@ -39,7 +41,7 @@ public class NodeDaoImpl implements NodeDao {
 		// TODO Auto-generated method stub
 
 		try {
-			String getNodeNum = "select count(*) from RouteFinder.node";
+			String getNodeNum = "select count(*) from routefinder.node";
 			pstmt = conn.prepareStatement(getNodeNum);
 			rs = pstmt.executeQuery();
 			// if there is a result..
@@ -66,13 +68,39 @@ public class NodeDaoImpl implements NodeDao {
 		return 0;
 	}
 
+	public int getNodeIdFromName(String node_name) {
+		ResultSet resultSet = null;
+		try {
+			String selectAllNodes = "SELECT id FROM routefinder.node where map_id=? and name=?;";
+			pstmt = conn.prepareStatement(selectAllNodes);
+			// TODO: potential danger..
+			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
+			pstmt.setString(2, node_name);
+
+			resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getInt("id");
+			}
+			return -1;
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+
+		return -1;
+	}
+
 	@Override
-	public Set<Node> getAllNodes() {
+	public Set<Node> getAllNodesForCurrentMap() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		Set<Node> res = new HashSet<Node>();
+		
 		try {
-			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM RouteFinder.node where map_id=?;";
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM routefinder.node where map_id=?;";
 			pstmt = conn.prepareStatement(selectAllNodes);
 			// TODO: potential danger..
 			pstmt.setInt(1, UIDataBuffer.getCurrentMapId());
@@ -85,10 +113,9 @@ public class NodeDaoImpl implements NodeDao {
 				location.setX(resultSet.getInt("x"));
 				location.setY(resultSet.getInt("y"));
 				node.setLocation(location);
-				node.setMapId(resultSet.getInt("map_id"));
+				node.setMap(Database.getMapEntityFromMapId(resultSet.getInt("map_id")));
 				node.setNodeType(NodeType.valueOf(resultSet.getString("classification")));
 				res.add(node);
-
 			}
 
 			return res;
@@ -117,12 +144,12 @@ public class NodeDaoImpl implements NodeDao {
 		// TODO: Check if the node exists.. the same coordinate should be
 		// considered the same node..F
 		try {
-			String insertNodeToDB = "INSERT INTO RouteFinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
+			String insertNodeToDB = "INSERT INTO routefinder.node (name, x, y, map_id, classification) VALUES (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(insertNodeToDB);
 			pstmt.setString(1, node.getName());
 			pstmt.setInt(2, node.getLocation().getX());
 			pstmt.setInt(3, node.getLocation().getY());
-			pstmt.setInt(4, node.getMapId());
+			pstmt.setInt(4, node.getMap().getMapId());
 			// get the node type from the node and then transhform it to string
 			// to store it in the db
 			pstmt.setString(5, node.getNodeType().toString());
@@ -196,7 +223,7 @@ public class NodeDaoImpl implements NodeDao {
 				c.setX(resultSet.getInt("x"));
 				c.setY(resultSet.getInt("y"));
 				node.setLocation(c);
-				node.setMapId(resultSet.getInt("map_id"));
+				node.setMap(Database.getMapEntityFromMapId(resultSet.getInt("map_id")));
 				node.setNodeType(NodeType.valueOf(resultSet.getString("classification").toUpperCase()));
 				return node;
 			}
@@ -222,6 +249,98 @@ public class NodeDaoImpl implements NodeDao {
 		}
 
 		return res;
+	}
+
+	@Override
+	public List<Node> getAllNodes() {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		List<Node> res = new ArrayList<Node>();
+		try {
+			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM routefinder.node;";
+			pstmt = conn.prepareStatement(selectAllNodes);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				Node node = new Node();
+				node.setId(resultSet.getInt("id"));
+				node.setName(resultSet.getString("name"));
+				Coordinate location = new Coordinate();
+				location.setX(resultSet.getInt("x"));
+				location.setY(resultSet.getInt("y"));
+				node.setLocation(location);
+				node.setMap(Database.getMapEntityFromMapId(resultSet.getInt("map_id")));
+				node.setNodeType(NodeType.valueOf(resultSet.getString("classification")));
+				res.add(node);
+			}
+
+			return res;
+
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+
+		return null;
+	}
+
+	@Override
+	public boolean editNode(Node node_edit) {
+		try {
+			String editNodeToDB = "update RouteFinder.node set name=?,classification=? where id=?";
+			pstmt = conn.prepareStatement(editNodeToDB);
+			pstmt.setString(1, node_edit.getName());
+			pstmt.setString(2, node_edit.getNodeType().toString());
+			pstmt.setInt(3, node_edit.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteNode(Node node_del) {
+		
+		try {
+			// delete maprelations using this node
+			String deleteMRFromDB = "delete from maprelations where node_from=? or node_to=?";
+			pstmt = conn.prepareStatement(deleteMRFromDB);
+			pstmt.setInt(1, node_del.getId());
+			pstmt.setInt(2, node_del.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			
+			//delete relations using this node
+			String deleteRelationsFromDB = "delete from relations where node_from=? or node_to=?";
+			pstmt = conn.prepareStatement(deleteRelationsFromDB);
+			pstmt.setInt(1, node_del.getId());
+			pstmt.setInt(2, node_del.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			
+			//delete this node
+			String deleteNodeFromDB = "delete from node where id=?";
+			pstmt = conn.prepareStatement(deleteNodeFromDB);
+			pstmt.setInt(1, node_del.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}	
+		return false;
 	}
 
 }

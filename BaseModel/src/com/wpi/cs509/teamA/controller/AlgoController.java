@@ -6,16 +6,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
+//import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
 /**
@@ -33,15 +37,15 @@ public class AlgoController {
 	/**
 	 * The start node get from front end It is a String
 	 */
-	private String startNode;
+	private Node startNode;
 	/**
 	 * The destination node get from the front end It is a String
 	 */
-	private String endNode;
+	private Node endNode;
 	/**
 	 * the result of the path finding
 	 */
-	private Map<Integer, List<Node>> result = new HashMap<Integer, List<Node>>();
+	private Stack<Node> result = new Stack<Node>();
 
 	/**
 	 * default constructor
@@ -58,7 +62,7 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-	public AlgoController(String from, String to) {
+	public AlgoController(Node from, Node to) {
 
 		this.startNode = from;
 		this.endNode = to;
@@ -71,57 +75,22 @@ public class AlgoController {
 	 * @return a map data structure that the key is the map id and the value is
 	 *         a list of nodes that represents the path on that map
 	 */
-	public Map<Integer, List<Node>> getRoute() {
+	public Stack<Node> getRoute() {
 
 		// we support searching node now only..
 
 		// get the node from database
-		Node fromNode = this.getNodeFromName(startNode);
-		Node toNode = this.getNodeFromName(endNode);
+		//Node fromNode = Database.getNodeFromName(startNode);    /////////////////
+        // TODO this is a hack need to get the function working
 
-		// use this two to decide how which maps are involved in searching..
-		int startMapId = fromNode.getMapId();
-		int endMapId = toNode.getMapId();
-
-		// get all edges from database..
-		NodeRelationDao nrd = new NodeRelationDaoImpl();
-		Edge[] inputEdges = new Edge[nrd.getNodeRelationNum()];
-		Set<Edge> edges = nrd.getAllEdges();
-		int temp = 0;
-		for (Edge edge : edges) {
-			inputEdges[temp++] = edge;
-			// System.out.println("edge: " + edge.getId1() + " " +
-			// edge.getId2());
-
-		}
-
-		// TODO: Build Graph of all nodes in scenario in the following format:
-		// (int nodeid1, int nodeid2, int distance)
-		Graph context = new Graph(inputEdges);
-
+        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),startNode, endNode);
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-		// TODO: Make a decision here which strategy we will use..
-		// always use Dijkstra's for now
-		// in the same map..
-		if (startMapId == endMapId) {
 
-			// assemble 2 nodes just for test.. definitely should not use id to
-			// search..
-			fromNode.setId(Integer.valueOf(startNode));
-			toNode.setId(Integer.valueOf(endNode));
-
-			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, context);
-			return result;
-		} else {
-			// for later use
-
-			generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
-			result = generalAlgorithm.findPath(fromNode, toNode, context);
-			return result;
-		}
+		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		//generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+		return result = generalAlgorithm.findPath(edges);
 
 	}
 
@@ -136,9 +105,7 @@ public class AlgoController {
 
 		// use node name to find the Node we need
 		// search database?
-
 		return new Node();
-
 	}
 
 	/**
@@ -164,44 +131,6 @@ public class AlgoController {
 		testRes.add(new InputMatrix());
 
 		return testRes;
-	}
-
-	/**
-	 * Gets the starting node for a route
-	 * 
-	 * @return starting node of the route
-	 */
-	public String getStartNode() {
-		return startNode;
-	}
-
-	/**
-	 * Sets the starting node for a route
-	 * 
-	 * @param startNode
-	 *            starting node of the route
-	 */
-	public void setStartNode(String startNode) {
-		this.startNode = startNode;
-	}
-
-	/**
-	 * Gets the ending node for a route
-	 * 
-	 * @return ending node of the route
-	 */
-	public String getEndNode() {
-		return endNode;
-	}
-
-	/**
-	 * Sets the ending node for a route
-	 * 
-	 * @param endNode
-	 *            end node of the route
-	 */
-	public void setEndNode(String endNode) {
-		this.endNode = endNode;
 	}
 
 }
