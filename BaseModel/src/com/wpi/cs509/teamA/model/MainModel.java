@@ -130,17 +130,17 @@ public final class MainModel extends StateContext{
         List<GeneralMap> maps = Database.getAllMapFromDatabase();
         this.multiMapPathLists = new ArrayList<ArrayList<Node>>();
 
-        for (int ii = 0; ii < maps.size(); ++ii) {
+        for (int ii = 1; ii <= maps.size(); ++ii) {
             ArrayList<Node> path = new ArrayList<Node>();
             int idx = -1;
-            for (ArrayList<Node> pathtmp : pMultiMapPathLists) {
-                if (pathtmp.get(0).getMap().getMapId() == ii) {
-                    idx = ii;
+            for (int jj = 0; jj <  pMultiMapPathLists.size(); ++jj) {
+                if (pMultiMapPathLists.get(jj).get(0).getMap().getMapId() == ii) {
+                    idx = jj;
                     break;
                 }
             }
             if (-1 != idx) {
-                path = pMultiMapPathLists.get(idx-1);
+                path = pMultiMapPathLists.get(idx);
             }
             this.multiMapPathLists.add(path);
         }
