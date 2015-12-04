@@ -294,7 +294,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		}
 		if(e.getSource()==getBtnSearch())
 		{
-            
+
 		}
 	
 
