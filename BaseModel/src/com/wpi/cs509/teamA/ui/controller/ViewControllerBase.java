@@ -13,6 +13,9 @@ public class ViewControllerBase {
     static protected InputPanel inputPanel = null;
     static protected MainModel model = null;
 
+    protected ViewControllerBase() {
+
+    }
     static public void init(ImageComponent pIC, InputPanel pIP, MainModel pMM) {
         if (null == pIC)
             throw new NullPointerException("Empty ImageComponent");
@@ -25,8 +28,6 @@ public class ViewControllerBase {
         inputPanel = pIP;
         model = pMM;
     }
-    public ViewControllerBase() {
 
-    }
 
 }
