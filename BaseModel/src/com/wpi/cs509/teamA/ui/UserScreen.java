@@ -43,7 +43,6 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
 
 
-	private StateContext stateContext;
 
 	MainModel mainModel = null;
 	ViewManager viewManager = null;
@@ -111,10 +110,21 @@ public class UserScreen extends JFrame {
 		gblContentPane.rowWeights = new double[] { Double.MIN_VALUE };
 		contentPane.setLayout(gblContentPane);
 
-		// input panel and components
-
+/**
+ * set dependence
+ */
 		inputPanel = new InputPanel();
-		GridBagConstraints gbcInputPanel = new GridBagConstraints();
+        imgComponent = new ImageComponent();
+        mainModel = new MainModel();
+        ViewControllerBase.init(imgComponent, inputPanel, mainModel);
+        viewManager = new ViewManager();
+        imgComponent.setModel(mainModel);
+        inputPanel.setModel(mainModel);
+        PaintHelper.setModel(mainModel);
+
+        // input panel and components
+
+        GridBagConstraints gbcInputPanel = new GridBagConstraints();
 		gbcInputPanel.gridwidth = 7;
 		// gbcInputPanel.gridheight = GridBagConstraints.RELATIVE;
 		gbcInputPanel.insets = new Insets(0, 0, 5, 5);
@@ -140,7 +150,6 @@ public class UserScreen extends JFrame {
 		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
 
 		// the panel to show image
-		imgComponent = new ImageComponent();
 		imgComponent.setMaximumSize(new Dimension(1024, 1024));
 
 		
@@ -167,22 +176,15 @@ public class UserScreen extends JFrame {
 		imgComponent.setVisible(true);
 */
 
-		mainModel = new MainModel();
-		ViewControllerBase.init(imgComponent, inputPanel, mainModel);
-		viewManager = new ViewManager();
 
-		imgComponent.setModel(mainModel);
-        inputPanel.setMainModel(mainModel);
 
-        stateContext = new StateContext();
-       
 
-        PaintHelper.setStateContext(stateContext);
+
         imgComponent.setPreferredSize(new Dimension(mainModel.getCurrentMap().getImage().getWidth(), mainModel.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
         inputPanel.setUserScreen(this);
 		imgComponent.repaint();
-		mainModel.switchToState(new MouseActionSelectNode(stateContext));
+		mainModel.switchToState(new MouseActionSelectNode(mainModel));
 //		stateContext.switchUserState(new NormalUserState(stateContext));
 		viewManager.updateView();
 	}

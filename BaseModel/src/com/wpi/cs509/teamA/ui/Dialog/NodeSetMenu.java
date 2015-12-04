@@ -3,8 +3,10 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import javax.swing.JPopupMenu;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +28,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmDes;
 	private JMenuItem cleanupMap;
 	
-	private StateContext stateContext;
+	private MainModel model = null;
 
 	private final static String SOURCE = "Add as source";
 	private final static String DES = "Add as destination";
@@ -35,10 +37,12 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeSetMenu(InputPanel inputPanel, Node node, StateContext stateContext) {
+	public NodeSetMenu(InputPanel inputPanel,
+					   MainModel pModel,
+					   Node node) {
 		this.node = node;
 		this.inputPanel = inputPanel;
-		this.stateContext = stateContext;
+		this.model = pModel;
 
 		setBounds(100, 100, 450, 300);
 
@@ -68,19 +72,19 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		if (e.getSource() == mntmSrc) {
 
 			this.inputPanel.getFromText().setText(node.getMap().getMapName()+" "+node.getName());
-			this.stateContext.setStartNode(node);
+			model.setStartNode(node);
 			this.inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
 					
 		} else if (e.getSource()==mntmDes){
 
 			this.inputPanel.getToText().setText(node.getMap().getMapName()+" "+node.getName());
-			this.stateContext.setEndNode(node);
+			model.setEndNode(node);
 			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		} else if(e.getSource()==cleanupMap){
-			stateContext.cleanUpRoute();
+			model.cleanUpRoute();
 		}
-		
-		stateContext.repaint();
+
+		ViewManager.updateView();
 	}
 
 }

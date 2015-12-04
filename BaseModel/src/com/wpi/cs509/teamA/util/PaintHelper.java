@@ -105,6 +105,9 @@ public class PaintHelper {
     }
    public static boolean paintIcon(Node node, Graphics2D g2) {
 	   		BufferedImage image = null;
+       if (null == node) {
+           return false;
+       }
 	   		if (node == model.getStartNode())
 	   		{
 	   			image = NodeIcon.getStartIcon();

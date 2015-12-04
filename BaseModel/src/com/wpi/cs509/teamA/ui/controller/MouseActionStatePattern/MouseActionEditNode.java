@@ -4,6 +4,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.Dialog.NodeInformationDialog;
+import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
@@ -49,13 +50,13 @@ public class MouseActionEditNode extends MouseActionState {
 
             if (null != node) {
                 /// TODO add edit node action
-                NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext, node);
+                NodeInformationDialog nodeInfo = new NodeInformationDialog(imageComponent, model, node);
                 nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 nodeInfo.setVisible(nodeInfo.isFocusable());
                 //JOptionPane.showMessageDialog(null, "Too close from another node.");
             } else {
                 // Create a NodeInformationDialog
-                NodeInformationDialog nodeInfo = new NodeInformationDialog(stateContext, coorTrans.getX(), coorTrans.getY());
+                NodeInformationDialog nodeInfo = new NodeInformationDialog(imageComponent, model, coorTrans.getX(), coorTrans.getY());
                 nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 nodeInfo.setVisible(nodeInfo.isFocusable());
 

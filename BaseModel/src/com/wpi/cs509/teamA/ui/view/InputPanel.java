@@ -54,9 +54,7 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
 @SuppressWarnings("serial")
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
 
-    public void setMainModel(MainModel pmodel) {
-        this.model = pmodel;
-    }
+
 
     private MainModel model = null;
 
@@ -517,5 +515,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
     public static String getSEARCHWORD() {
         return SEARCHWORD;
+    }
+    public void setModel(MainModel pmodel) {
+        this.model = pmodel;
     }
 };

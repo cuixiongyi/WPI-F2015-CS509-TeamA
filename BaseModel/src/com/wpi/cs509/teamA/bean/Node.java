@@ -88,25 +88,6 @@ public class Node {
         this.displayCoor = new Coordinate(x, y);
 	}
 
-	/**
-	 * add an new node on the map and set it's attributes
-	 */
-	public void saveNode() {
-		NodeDao nd = new NodeDaoImpl();
-		nd.saveNode(this);
-//		Node node = new Node();
-//		node.setNeighbors(new HashSet<Integer>());
-//		node.setId(1);
-//		// more setters for the node
-//
-//		// add node id as the neighbours
-//
-//		node.getNeighbors().add(2);
-//		node.getNeighbors().add(3);
-//		node.getNeighbors().add(4);
-		
-		// database
-	}
 
 	// add neighbors to the node
 	/** add neighbors to the node */

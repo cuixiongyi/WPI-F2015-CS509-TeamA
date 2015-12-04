@@ -41,7 +41,7 @@ public class MouseActionSelectNode extends MouseActionState {
             Node node = getNodeFromClick(coorTrans);
 
                 /// TODO add edit node action
-                NodeSetMenu nodeSetMenu = new NodeSetMenu(inputPanel, node, stateContext);
+                NodeSetMenu nodeSetMenu = new NodeSetMenu(inputPanel, model, node);
                 nodeSetMenu.show(e.getComponent(), xPos, yPos);
 
 

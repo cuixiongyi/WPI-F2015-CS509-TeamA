@@ -4,7 +4,10 @@ import com.sun.org.apache.bcel.internal.generic.DADD;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.dao.NodeDao;
+import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.NodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ public final class MainModel extends StateContext{
         this.currentMap = null;
 //        multiMapPathLists = new ArrayList<ArrayList<Node>>();
         hasValidRoute = false;
+        setCurrentMapID(1);
 
     }
 
@@ -159,6 +163,18 @@ public final class MainModel extends StateContext{
         this.hasValidRoute = hasValidRoute;
     }
 
+    public void saveNode(Node node) {
+        NodeDao nd = new NodeDaoImpl();
+        nd.saveNode(node);
+        Database.InitFromDatabase();
 
+    }
+
+    public void editNode(Node node) {
+
+        NodeDaoImpl dao = new NodeDaoImpl();
+        dao.editNode(node);
+        Database.InitFromDatabase();
+    }
 
 }

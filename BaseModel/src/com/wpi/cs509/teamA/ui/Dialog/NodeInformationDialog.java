@@ -12,6 +12,7 @@ import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -120,7 +121,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 		mapidTextField = new JTextField();
 		mapidTextField.setBounds(192, 144, 96, 27);
-		mapidTextField.setText(String.valueOf(model.getCurrentMap().getMapId()));
+		mapidTextField.setText(String.valueOf(model.getCurrentMapID()));
 		contentPanel.add(mapidTextField);
 		mapidTextField.setColumns(10);
 		mapidTextField.setEnabled(false);
@@ -166,8 +167,10 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 	}
 
-	public NodeInformationDialog(StateContext pStateContext, Node pNode) {
-		this( pStateContext, pNode.getLocation().getX(), pNode.getLocation().getY());
+	public NodeInformationDialog(ImageComponent imageComponent,
+								 MainModel pModel,
+								 Node pNode) {
+		this( imageComponent, pModel, pNode.getLocation().getX(), pNode.getLocation().getY());
 		if (null == pNode) {
 			return;
 		}
@@ -194,26 +197,19 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 				Node node = new Node();
 				Coordinate coordinate = new Coordinate(this.xPos, this.yPos);
 				node.setLocation(coordinate);
-				node.setMap(this.stateContext.getCurrentMap());
+				node.setMap(model.getCurrentMap());
 				node.setName(nameTextField.getText());
 				node.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
 
 				// call database save function..
 				// TODO: Maybe we can use mutlti-thread here..
-				node.saveNode();
-                Database.InitFromDatabase();
-
-                stateContext.setAddedNewNode(true);
-                stateContext.setNewNode(node);
-				// show what we have saved..
+				model.saveNode(node);
 
 			}
 			else {
-                NodeDaoImpl dao = new NodeDaoImpl();
                 existingNode.setName(nameTextField.getText());
                 existingNode.setNodeType(NodeType.valueOf(comboBoxType.getSelectedItem().toString()));
-                dao.editNode(existingNode);
-                Database.InitFromDatabase();
+                model.editNode(existingNode);
 
 			}
 		}
@@ -226,13 +222,9 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
             }
 
         }
-        imagePanel.repaint();
-        stateContext.getImageComponent().repaint();
+		ViewManager.updateView();
         this.setVisible(false);
 
 	}
 
-    public StateContext getStateContext() {
-        return stateContext;
-    }
 }
