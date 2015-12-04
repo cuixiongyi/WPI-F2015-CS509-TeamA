@@ -7,11 +7,15 @@ import java.util.List;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 public class PaintHelper {
-	
-	private static StateContext stateContext;
+
+
+
+    static private MainModel model = null;
     private final static int ovalOffset = 10;
     private final static int ovalOffset_SelectedNode = ovalOffset + 5;
     private static BasicStroke basicNodeStrock = new BasicStroke(2);
@@ -76,22 +80,22 @@ public class PaintHelper {
     }
 
     public static void paintIcon2(Node node, Graphics2D g2, BufferedImage image) {
-        if (null == node ||  node.getMap().getMapId() != stateContext.getCurrentMap().getMapId())
+        if (null == node ||  node.getMap().getMapId() != model.getCurrentMapID())
             return;
         Coordinate coorTrans = transferCoor(node.getLocation());
         int xCoor = coorTrans.getX() - (image.getWidth()/2);
         int yCoor = coorTrans.getY() - (image.getHeight()/2);
-        g2.drawImage(image, xCoor, yCoor, image.getWidth(stateContext.getImageComponent()),
-                image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
+        g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
+                image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
     }
     public static void paintStartEndNode(Graphics2D g2) {
-        Node node = stateContext.getStartNode();
+        Node node = model.getStartNode();
         if (node != null) {
             BufferedImage image = NodeIcon.getStartIcon();
             paintIcon2(node, g2, image);
         }
 
-        node = stateContext.getEndNode();
+        node = model.getEndNode();
         if (null != node) {
             BufferedImage image = NodeIcon.getEndIcon();
             paintIcon2(node, g2, image);
@@ -101,11 +105,11 @@ public class PaintHelper {
     }
    public static boolean paintIcon(Node node, Graphics2D g2) {
 	   		BufferedImage image = null;
-	   		if (node == stateContext.getStartNode())
+	   		if (node == model.getStartNode())
 	   		{
 	   			image = NodeIcon.getStartIcon();
 	   		}
-	   		else if (node == stateContext.getEndNode())
+	   		else if (node == model.getEndNode())
 	   		{
 	   			image = NodeIcon.getEndIcon();
 	   		}
@@ -119,8 +123,8 @@ public class PaintHelper {
             Coordinate coorTrans = transferCoor(node.getLocation());
             int xCoor = coorTrans.getX() - (image.getWidth()/2);
             int yCoor = coorTrans.getY() - (image.getHeight()/2);
-            g2.drawImage(image, xCoor, yCoor, image.getWidth(stateContext.getImageComponent()),
-                    image.getHeight(stateContext.getImageComponent()), stateContext.getImageComponent());
+            g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
+                    image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
             return true;
 	}
 
@@ -222,9 +226,9 @@ public class PaintHelper {
 
     public static Coordinate backTransferCoor(Coordinate origin) {
         Coordinate result=new Coordinate();
-        float scale=stateContext.getCurrentMap().getDisplayScale();
-        result.setX(origin.getX()-stateContext.getImageComponent().getImageXpos());
-        result.setY(origin.getY()-stateContext.getImageComponent().getImageYpos());
+        float scale=model.getCurrentMap().getDisplayScale();
+        result.setX(origin.getX()-ViewManager.getImageComponent().getImageXpos());
+        result.setY(origin.getY()-ViewManager.getImageComponent().getImageYpos());
 
         return result;
     }
@@ -232,24 +236,21 @@ public class PaintHelper {
     public static Coordinate transferCoor(Coordinate origin)
    {
 	   Coordinate result=new Coordinate();
-	   float scale=stateContext.getCurrentMap().getDisplayScale();
-	   result.setX(Math.round((origin.getX()+stateContext.getImageComponent().getImageXpos())*scale));
-	   result.setY(Math.round((origin.getY()+stateContext.getImageComponent().getImageYpos())*scale));
+	   float scale=model.getCurrentMap().getDisplayScale();
+	   result.setX(Math.round((origin.getX()+ViewManager.getImageComponent().getImageXpos())*scale));
+	   result.setY(Math.round((origin.getY()+ViewManager.getImageComponent().getImageYpos())*scale));
 	
 	   return result;
 	   
    }
 
+    public static void setModel(MainModel model) {
+        PaintHelper.model = model;
+    }
     public static String dirtmp = "/BaseModel/src/";
     //public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
-    }
-    public StateContext getStateContext() {
-        return stateContext;
-    }
-    public static void setStateContext(StateContext pstateContext) {
-        PaintHelper.stateContext = pstateContext;
     }
 
 }

@@ -17,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.NormalUserState;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -172,7 +171,7 @@ public class UserScreen extends JFrame {
 		ViewControllerBase.init(imgComponent, inputPanel, mainModel);
 		viewManager = new ViewManager();
 
-		imgComponent.setMainModel(mainModel);
+		imgComponent.setModel(mainModel);
         inputPanel.setMainModel(mainModel);
 
         stateContext = new StateContext();
