@@ -30,7 +30,7 @@ public class StateContext {
 	/**
 	 * Constructor. Initialize a default state.
 	 */
-	public StateContext() {
+	protected StateContext() {
 
 
 		myState = new MouseActionSelectNode(this);
