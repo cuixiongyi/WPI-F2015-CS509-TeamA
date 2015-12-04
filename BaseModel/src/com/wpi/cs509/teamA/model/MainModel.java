@@ -178,4 +178,8 @@ public final class MainModel extends StateContext{
         Database.InitFromDatabase();
     }
 
+    public boolean ifLogin() {
+        return false;
+    }
+
 }

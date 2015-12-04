@@ -139,7 +139,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 		AdminDialog.this.setVisible(false);
 		inputPanel.incrementAdminClicked();
 	//	inputPanel.getBtnNeighborManage().setVisible(true);
-		inputPanel.getAdminLogin().setText(LOGOUT);
+		inputPanel.getBtnLogin().setText(LOGOUT);
 //		inputPanel.getBtnSynchronize().setVisible(true);
 //		inputPanel.getBtnMngEdge().setVisible(true);
 //		inputPanel.getBtnMngNode().setVisible(true);	

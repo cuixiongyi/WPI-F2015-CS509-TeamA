@@ -68,10 +68,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JComboBox<String> comboBoxMap;
 
 
-    private final static String SEARCH = "Search";
-    private final static String LOGIN = "Login";
-    private final static String TO = "To: ";
-    private final static String FROM = "From: ";
+
 
 
     private static final String SEARCHWORD = "Search WPI Maps";
@@ -98,12 +95,12 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public InputPanel() {
         // // User input block
 
-        this.btnSearch = new JButton(SEARCH);
-        this.adminLogin = new JButton(LOGIN);
+        this.btnSearch = new JButton(UIConstant.SEARCH);
+        this.adminLogin = new JButton(UIConstant.LOGIN);
         this.btnNeighborManage = new JButton("Edges");
         btnNeighborManage.setSize(75, 30);
         btnNeighborManage.setLocation(80, 380);
-        this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
+        this.getBtnLogin().setFont(new Font("Arial", Font.PLAIN, 12));
         this.btnNeighborManage.setVisible(false);
 
         this.setLayout(null);
@@ -111,14 +108,14 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         this.add(adminLogin);
         this.add(btnNeighborManage);
 
-        this.getAdminLogin().setBounds(150, 0, 75, 30);
-        this.getAdminLogin().setFont(new Font("Arial", Font.PLAIN, 12));
-        this.getAdminLogin().addActionListener(this);
+        this.getBtnLogin().setBounds(150, 0, 75, 30);
+        this.getBtnLogin().setFont(new Font("Arial", Font.PLAIN, 12));
+        this.getBtnLogin().addActionListener(this);
 
         this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
         //this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
         //this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-        this.getAdminLogin().setBounds(150, 0, 75, 30);
+        this.getBtnLogin().setBounds(150, 0, 75, 30);
         this.getBtnSearch().setBounds(80, 300, 150, 38);
         this.getBtnSearch().addActionListener(this);
 
@@ -133,12 +130,12 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         // this.getStartPoint().setBounds(80, 150, 150, 38);
         // this.setBounds(0, 0, 1178, 516);
 
-        lblFrom = new JLabel(FROM);
+        lblFrom = new JLabel(UIConstant.FROM);
         lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
         lblFrom.setBounds(15, 155, 61, 16);
         add(lblFrom);
 
-        lblTo = new JLabel(TO);
+        lblTo = new JLabel(UIConstant.TO);
         lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
         lblTo.setBounds(15, 230, 61, 16);
         add(lblTo);
@@ -248,33 +245,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	
 
-	public void clickLogin() {
-		if (adminClicked % 2 == 0) {
-			AdminDialog adminDialog = new AdminDialog(model, InputPanel.this);
-			adminDialog.setModalityType(ModalityType.APPLICATION_MODAL);
-			adminDialog.setVisible(isFocusable());
-			// stateContext.switchToAdminUser();
-            ViewManager.updateView();
 
-		} else {
 
-			JOptionPane.showMessageDialog(null, "You have logged out");
-			Database.InitFromDatabase();
-			// InputPanel.this.getBtnNeighborManage().setVisible(false);
-			InputPanel.this.getAdminLogin().setText(LOGIN);
-			// InputPanel.this.getBtnSynchronize().setVisible(false);
-			this.incrementAdminClicked();
-			model.switchToState(new MouseActionSelectNode(model));
-            ViewManager.updateView();
 
-		}
-	}
-
-	public void clickSignup() {
-		SignupDialog signUpDialog = new SignupDialog( InputPanel.this);
-		signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-		signUpDialog.setVisible(true);
-	}
 
 	/**
 	 * This is Button click event
@@ -286,11 +259,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// TODO: we need a pop up window here to verify the admin role.
 		// If it is the admin, give it the admin mouse click event. If
 		// not, give it normal user
-		if (e.getSource() == getAdminLogin()) {
-			clickLogin();
+		if (e.getSource() == getBtnLogin()) {
 		}
 		if (e.getSource() == signUp) {
-			clickSignup();
 		}
 		if(e.getSource()==getBtnSearch())
 		{
@@ -334,7 +305,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	/**
 	 * @return the adminLogin
 	 */
-	public JButton getAdminLogin() {
+	public JButton getBtnLogin() {
 		return adminLogin;
 	}
 
@@ -353,7 +324,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		return btnNeighborManage;
 	}
 
-	public JButton getSignUp() {
+	public JButton getBtnSignUp() {
 		return signUp;
 	}
 
@@ -401,4 +372,5 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void setModel(MainModel pmodel) {
         this.model = pmodel;
     }
+
 };
