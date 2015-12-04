@@ -199,6 +199,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         add(mapListScroll);
 
 
+      
     }
 
     public void focusLost(FocusEvent e) {
@@ -245,9 +246,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	
 
-
-
-
+	
 
 	/**
 	 * This is Button click event
@@ -262,6 +261,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		if (e.getSource() == getBtnLogin()) {
 		}
 		if (e.getSource() == signUp) {
+			
 		}
 		if(e.getSource()==getBtnSearch())
 		{
@@ -372,5 +372,4 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void setModel(MainModel pmodel) {
         this.model = pmodel;
     }
-
 };

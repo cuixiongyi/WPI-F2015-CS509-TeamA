@@ -8,6 +8,7 @@ import java.util.List;
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
+
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 public class PaintHelper {
@@ -249,8 +250,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-    //public static String dirtmp = "/BaseModel/src/";
-    public static String dirtmp = "/src/";
+    public static String dirtmp = "/BaseModel/src/";
+    //public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }

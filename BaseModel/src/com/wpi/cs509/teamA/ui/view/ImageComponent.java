@@ -27,9 +27,6 @@ public class ImageComponent extends JComponent {
 	private MainModel model = null;
 
 	private Image image;
-	private final static String LOGIN = "Login";
-
-	private ImageMouseListener mouseListener;
 
 	private int imageXpos=0;
 	private int imageYpos=0;

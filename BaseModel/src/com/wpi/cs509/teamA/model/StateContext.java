@@ -20,7 +20,7 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSele
  *
  */
 // TODO: make this class singleton
-public class StateContext {
+public class StateContext  {
 
 	/**
 	 * The current state
