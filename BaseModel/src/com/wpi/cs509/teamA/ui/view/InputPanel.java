@@ -185,10 +185,10 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         BufferedImage logo;
         try {
             logo = ImageIO.read(new File(PaintHelper.getUserDir()+ "logo_iteration1.png"));
-            picLabel = new JLabel(new ImageIcon(logo));
-            picLabel.setBounds(50, 480, 200, 200);
-            add(picLabel);
-            picLabel.setOpaque(true);
+//            picLabel = new JLabel(new ImageIcon(logo));
+//            picLabel.setBounds(50, 480, 200, 200);
+//            add(picLabel);
+//            picLabel.setOpaque(true);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -275,58 +275,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		signUpDialog.setVisible(true);
 	}
-	
-	public void clickSearch(){
-		if(InputPanel.this.model.getStartNode()==null || InputPanel.this.model.getEndNode()==null)
-			return;
-		this.picLabel.setVisible(false);
-		this.getMapList().setVisible(true);
-        multiMapPathLists = new ArrayList<ArrayList<Node>>();
-        mapList.removeAll();
-
-        
-		AlgoController algoController = new AlgoController(InputPanel.this.model.getStartNode(),
-                InputPanel.this.model.getEndNode());
-        
-
-		Stack<Node> path = algoController.getRoute();
-		
-//		ArrayList<ArrayList<Node>> listOfLists = new ArrayList<ArrayList<Node>>();
-		ArrayList<Node> singleMapPath = new ArrayList<Node>();
-		ArrayList<String> mapNameList=new ArrayList<String>();
-		int tmpMapId=path.peek().getMap().getMapId();
-		mapNameList.add(path.peek().getMap().getMapName());
-		while (path.size() > 0)
-		{
-			Node node = path.pop();
-			if(node.getMap().getMapId()==tmpMapId)
-			{
-				singleMapPath.add(node);
-			}
-			else {
-				multiMapPathLists.add(singleMapPath);
-				singleMapPath=new ArrayList<Node>();
-				singleMapPath.add(node);
-				tmpMapId=node.getMap().getMapId();
-				mapNameList.add(node.getMap().getMapName());
-			}
-		}
-		multiMapPathLists.add(singleMapPath);
-		
-		//reset and initiate the Jlist
-
-        DefaultListModel<String> mapListModel = new DefaultListModel<>();
-		for(String name:mapNameList)
-		{
-			mapListModel.addElement(name);
-		}
-        mapList.setModel(mapListModel);
-        model.setMultiMapPathLists(this.multiMapPathLists);
-        model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
-        ViewManager.updateView();
-
-		
-	}
 
 	/**
 	 * This is Button click event
@@ -346,7 +294,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		}
 		if(e.getSource()==getBtnSearch())
 		{
-			clickSearch();
+            
 		}
 	
 
