@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.model;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.Observable;
 
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 
@@ -19,8 +20,8 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSele
  * @author CS 509-Team A
  *
  */
-// TODO: make this class singleton
-public class StateContext  {
+
+public class StateContext  extends Observable{
 
 	/**
 	 * The current state
