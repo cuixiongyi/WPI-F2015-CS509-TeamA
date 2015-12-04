@@ -108,7 +108,8 @@ public final class MainModel extends StateContext{
         if (pStartNode == this.startNode) {
             return;
         }
-        this.multiMapPathLists.clear();
+        this.multiMapPathLists = new ArrayList<ArrayList<Node>>();
+
         this.startNode = pStartNode;
     }
 
@@ -139,7 +140,7 @@ public final class MainModel extends StateContext{
                 }
             }
             if (-1 != idx) {
-                path = pMultiMapPathLists.get(idx);
+                path = pMultiMapPathLists.get(idx-1);
             }
             this.multiMapPathLists.add(path);
         }

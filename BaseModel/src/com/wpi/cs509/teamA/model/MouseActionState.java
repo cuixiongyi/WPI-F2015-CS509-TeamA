@@ -48,15 +48,10 @@ public abstract class MouseActionState extends ViewControllerBase {
 
     protected void paintRoute(Graphics2D g2) {
         ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
-        if (null != multiMapPath) {
-            for (ArrayList<Node> path : multiMapPath) {
-                if (null != path) {
-                    if (path.get(0).getMap().getMapId() == model.getCurrentMapID()) {
-                        PaintHelper.paintPath(path, g2);
-                        break;
-                    }
-                }
-            }
+        if (null != multiMapPath && 0 != multiMapPath.size()) {
+            int idx = model.getCurrentMapID()-1;
+            PaintHelper.paintPath(multiMapPath.get(idx), g2);
+
         }
 
     }

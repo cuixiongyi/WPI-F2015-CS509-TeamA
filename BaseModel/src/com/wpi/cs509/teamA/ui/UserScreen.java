@@ -19,6 +19,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
+import com.wpi.cs509.teamA.ui.controller.ViewControllerImpl;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
@@ -41,6 +42,7 @@ public class UserScreen extends JFrame {
 	private Container container;
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
+    private ViewControllerImpl controller = null;
 
 
 
@@ -121,7 +123,7 @@ public class UserScreen extends JFrame {
         imgComponent.setModel(mainModel);
         inputPanel.setModel(mainModel);
         PaintHelper.setModel(mainModel);
-
+        controller = new ViewControllerImpl();
         // input panel and components
 
         GridBagConstraints gbcInputPanel = new GridBagConstraints();
