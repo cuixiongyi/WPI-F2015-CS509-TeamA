@@ -8,16 +8,21 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.List;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import com.wpi.cs509.teamA.bean.GeneralMap;
 //import com.sun.prism.paint.Color;
-import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.NormalUserState;
+import com.wpi.cs509.teamA.model.StateContext;
+import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
+import com.wpi.cs509.teamA.ui.view.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.swing.BoxLayout;
@@ -40,6 +45,9 @@ public class UserScreen extends JFrame {
 
 
 	private StateContext stateContext;
+
+	MainModel mainModel = null;
+	ViewManager viewManager = null;
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -159,24 +167,25 @@ public class UserScreen extends JFrame {
 		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
 		imgComponent.setVisible(true);
 */
-		
-		imgComponent.setInputPanel(this.inputPanel);
-        inputPanel.setImageComponent(this.imgComponent);
+
+		mainModel = new MainModel();
+		ViewControllerBase.init(imgComponent, inputPanel, mainModel);
+		viewManager = new ViewManager();
+
+		imgComponent.setMainModel(mainModel);
+        inputPanel.setMainModel(mainModel);
 
         stateContext = new StateContext();
        
 
-        imgComponent.setStateContext(stateContext);
         PaintHelper.setStateContext(stateContext);
-        inputPanel.setStateContext(stateContext);
-        stateContext.setImageComponent(imgComponent);
-        stateContext.setInputPanel(inputPanel);
-        imgComponent.setPreferredSize(new Dimension(stateContext.getCurrentMap().getImage().getWidth(), stateContext.getCurrentMap().getImage().getHeight()));
+        imgComponent.setPreferredSize(new Dimension(mainModel.getCurrentMap().getImage().getWidth(), mainModel.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
         inputPanel.setUserScreen(this);
 		imgComponent.repaint();
-		stateContext.switchToState(new MouseActionSelectNode(stateContext));
-		stateContext.switchUserState(new NormalUserState(stateContext));
+		mainModel.switchToState(new MouseActionSelectNode(stateContext));
+//		stateContext.switchUserState(new NormalUserState(stateContext));
+		viewManager.updateView();
 	}
 
 	public JButton getBtnNeighborManage() {

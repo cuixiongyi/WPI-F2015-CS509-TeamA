@@ -7,8 +7,7 @@ import java.util.List;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.ui.NodeIcon;
-import com.wpi.cs509.teamA.ui.StateContext;
+import com.wpi.cs509.teamA.model.StateContext;
 
 public class PaintHelper {
 	
