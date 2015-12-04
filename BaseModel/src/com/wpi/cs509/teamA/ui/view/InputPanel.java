@@ -15,17 +15,7 @@ import java.util.*;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -92,12 +82,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JTextField txtFrom;
     private JTextField txtTo;
 
+
     /**
      * Constructor. Initialize all the input panel.
      */
     public InputPanel() {
         // // User input block
-
+        
         this.btnSearch = new JButton(SEARCH);
         this.adminLogin = new JButton(LOGIN);
         this.btnNeighborManage = new JButton("Edges");

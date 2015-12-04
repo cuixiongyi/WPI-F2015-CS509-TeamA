@@ -8,12 +8,17 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JScrollPane;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
@@ -25,6 +30,7 @@ import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
@@ -39,10 +45,11 @@ import javax.swing.JButton;
 public class UserScreen extends JFrame {
 
 	private static UserScreen userScreen;
-	private Container container;
 	private JPanel contentPane;
 	private ImageComponent imgComponent;
     private ViewControllerImpl controller = null;
+    private static JPanel popUpPane;
+    private static int yPos=0;
 
 
 
@@ -54,22 +61,20 @@ public class UserScreen extends JFrame {
 	 * the top of the UI
 	 */
 	private InputPanel inputPanel;
-	private JButton btnNeighborManage;
-	private JPanel wrappingImgPanel;
 
 	/**
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
 
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//				| UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -84,10 +89,10 @@ public class UserScreen extends JFrame {
 		}
 
 		UIManager.put("nimbusBase", new Color(50, 50, 50));
-		 UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
-		 UIManager.put("control", new Color(142, 143, 145));
-		 UIManager.put("text", new Color(255,255,255));
-		 UIManager.put("TextField.background", new Color(180, 180, 180));
+		UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
+		UIManager.put("control", new Color(142, 143, 145));
+		UIManager.put("text", new Color(255,255,255));
+		UIManager.put("TextField.background", new Color(180, 180, 180));
 
         UIManager.put("List.background", new Color(180, 180, 180));
         UIManager.put("PasswordField.background", new Color(180, 180, 180));
@@ -95,22 +100,16 @@ public class UserScreen extends JFrame {
         UIManager.put("TextField.disabledText", new Color(255,255,255));
         UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
         
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        
-		container = getContentPane();
 		// container.setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		this.setBounds(100, 100, 1600, 1000);
+		this.setBounds(50, 0, 1200, 770);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gblContentPane = new GridBagLayout();
-		gblContentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 30, 50, 50 };
-		gblContentPane.rowHeights = new int[] { 0 };
-		gblContentPane.columnWeights = new double[] { Double.MIN_VALUE };
-		gblContentPane.rowWeights = new double[] { Double.MIN_VALUE };
-		contentPane.setLayout(gblContentPane);
+		contentPane.setLayout(null);
+		
 
 /**
  * set dependence
@@ -118,7 +117,7 @@ public class UserScreen extends JFrame {
 		inputPanel = new InputPanel();
         imgComponent = new ImageComponent();
         mainModel = new MainModel();
-        ViewControllerBase.init(imgComponent, inputPanel, mainModel);
+        ViewControllerBase.init(imgComponent, inputPanel, mainModel,this);
         viewManager = new ViewManager();
         imgComponent.setModel(mainModel);
         inputPanel.setModel(mainModel);
@@ -126,61 +125,14 @@ public class UserScreen extends JFrame {
         controller = new ViewControllerImpl();
         // input panel and components
 
-        GridBagConstraints gbcInputPanel = new GridBagConstraints();
-		gbcInputPanel.gridwidth = 7;
-		// gbcInputPanel.gridheight = GridBagConstraints.RELATIVE;
-		gbcInputPanel.insets = new Insets(0, 0, 5, 5);
-		gbcInputPanel.fill = GridBagConstraints.BOTH;
-		gbcInputPanel.gridx = 10;
-		gbcInputPanel.gridy = 0;
-		gbcInputPanel.weightx = 0.1;
+        inputPanel.setBounds(905, 30, 300, 750);
+        imgComponent.setBounds(0, 0, 900, 750);
+		contentPane.add(inputPanel);
+		contentPane.add(imgComponent);
+		imgComponent.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
-		contentPane.add(inputPanel, gbcInputPanel);
-
-		// initialize image block, wrapping panel to limit size of image
-		// component
-		wrappingImgPanel = new JPanel();
-		wrappingImgPanel.setMaximumSize(new Dimension(1024, 1024));
-		GridBagConstraints gbcwrappingImgPanel = new GridBagConstraints();
-		gbcwrappingImgPanel.insets = new Insets(0, 0, 5, 5);
-		gbcwrappingImgPanel.fill = GridBagConstraints.BOTH;
-		gbcwrappingImgPanel.gridx = 0;
-		gbcwrappingImgPanel.gridy = 0;
-		gbcwrappingImgPanel.weightx = 0.6;
-		gbcwrappingImgPanel.weighty = 0.6;
-		contentPane.add(wrappingImgPanel, gbcwrappingImgPanel);
-		wrappingImgPanel.setLayout(new BoxLayout(wrappingImgPanel, BoxLayout.X_AXIS));
-
-		// the panel to show image
-		imgComponent.setMaximumSize(new Dimension(1024, 1024));
-
-		
-		JScrollPane imgScrollPanel = new JScrollPane();
-		imgScrollPanel.setMaximumSize(new Dimension(1024, 1024));
-		// contentPane.add(imgScrollPanel, gbcScrollPane);
-		// // for scroll panel
-		imgScrollPanel.setViewportView(imgComponent);
-		imgScrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		imgScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-		wrappingImgPanel.add(imgScrollPanel);
-
-		setSize(800, 500);
 		setVisible(true);
-		setResizable(true);
-
-		// TODO: default map? change the way to do this...
-		// TODO load map image with different names
-
-	/*	
-		imgComponent.setImagePath(System.getProperty("user.dir") + "/src/Final_Campus_Map.jpg");
-		imgComponent.setPreferredSize(new Dimension(imgComponent.getImgWidth(), imgComponent.getImgHeight()));
-		imgComponent.setVisible(true);
-*/
-
-
-
-
+		setResizable(false);
 
         imgComponent.setPreferredSize(new Dimension(mainModel.getCurrentMap().getImage().getWidth(), mainModel.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);
@@ -189,12 +141,33 @@ public class UserScreen extends JFrame {
 		mainModel.switchToState(new MouseActionSelectNode(mainModel));
 //		stateContext.switchUserState(new NormalUserState(stateContext));
 		viewManager.updateView();
+		
+		popUpPane=new JPanel();
+		contentPane.add(popUpPane);
+		popUpPane.setBounds(20,200,100,100);
+		popUpPane.setBackground(Color.RED);
+//		popUpPane.setOpaque();
+	
+		Timer timer = new Timer(1000/60,new MyActionListener());
+		timer.start();
+		popUpPane.setVisible(true);
 	}
 
-	public JButton getBtnNeighborManage() {
-		return this.btnNeighborManage;
-	}
 	
+	public static class MyActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(yPos<600)
+			popUpPane.setLocation(800, yPos++);
+
+		}
+
+		}
+
+	
+	
+
 
 	public static UserScreen getUserScreen() {
 		return userScreen;
