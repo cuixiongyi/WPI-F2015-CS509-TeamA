@@ -11,9 +11,11 @@ public class SuggestionHistoryPanel extends SuggestionBasicPanel {
 	public SuggestionHistoryPanel(String string, AutoSuggestor autoSuggestor, Node node) {
 		super(string, autoSuggestor, node);
 		
-		SuggestorPainter.setStyle(SuggestorPainter.DrawStyleEnum.History,this);
+		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.History,this);
 		// TODO Auto-generated constructor stub
+		this.initComponent();
 	}
+	
 	
 	
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by cuixi on 12/4/2015.
@@ -28,18 +29,16 @@ public class SuggestionBasicPanel extends JPanel {
 	private Dimension preferredSize;
 	private Font font;
 	private Node nodeInformation;
-	private Icon icon;
+	private BufferedImage imageIcon;
 
 	private JLabel textLabel;
 
 	public SuggestionBasicPanel(String string, AutoSuggestor autoSuggestor, Node node) {
 		// super(string);
 		this.setLayout(new BorderLayout());
-		this.textLabel = new JLabel(string, JLabel.LEFT);
-		
-		this.add(textLabel, BorderLayout.WEST);
-		Icon icon = UIManager.getIcon("Classroom_Icon.png");
-		this.add(new JLabel(icon, JLabel.RIGHT), BorderLayout.EAST);
+		this.textLabel = new JLabel(string, JLabel.LEFT);		
+		this.add(textLabel, BorderLayout.WEST);	
+		this.add(new JLabel(new ImageIcon(imageIcon), JLabel.RIGHT), BorderLayout.EAST);
 		this.setBorder(BorderFactory.createLineBorder(Color.blue));
 
 		this.autoSuggestor = autoSuggestor;
@@ -49,10 +48,10 @@ public class SuggestionBasicPanel extends JPanel {
 
 		this.nodeInformation = node;
 
-		initComponent();
+		
 	}
 
-	private void initComponent() {
+	protected void initComponent() {
 		textLabel.setFocusable(true);
 		textLabel.setForeground(suggestionsTextColor);
 		textLabel.setPreferredSize(preferredSize);
@@ -170,12 +169,10 @@ public class SuggestionBasicPanel extends JPanel {
 		this.suggestionsTextColor = suggestionsTextColor;
 	}
 
-	public Icon getIcon() {
-		return icon;
-	}
 
-	public void setIcon(Icon icon) {
-		this.icon = icon;
+
+	public void setImageIcon(BufferedImage locationIcon) {
+		this.imageIcon = locationIcon;
 	}
 
 }
