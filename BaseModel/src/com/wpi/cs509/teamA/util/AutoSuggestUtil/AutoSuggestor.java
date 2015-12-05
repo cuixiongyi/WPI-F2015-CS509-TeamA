@@ -28,6 +28,8 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.newfeature.SearchSupply;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.util.NodeType;
+import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
 public class AutoSuggestor {
 
@@ -324,13 +326,33 @@ public class AutoSuggestor {
 
 	}
 
-	protected void addWordToSuggestions(String word, Node nodeInformation) {
-		SuggestionBasicPanel SuggestionBasicPanel = new SuggestionBasicPanel(word, this,
+	protected void addWordToSuggestions(String word, Node nodeInformation, SuggestorEnum suggestorEnum) {
+		switch(suggestorEnum){
+	case Location:
+		SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this,
 				nodeInformation);
+		addSugestionsPanel(suggestionLocationPanel);
+		break;
+	case Professor:
+		SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this,
+				nodeInformation);
+		addSugestionsPanel(suggestionProfessorPanel);
+		break;
+	case History:
+		SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this,
+				nodeInformation);
+		addSugestionsPanel(suggestionHistoryPanel);
+		break;
+		}	
+		
 
-		calculatePopUpWindowSize(SuggestionBasicPanel);
+		
+	}
+	
+	public void addSugestionsPanel(SuggestionBasicPanel suggestionPanel){
+		calculatePopUpWindowSize(suggestionPanel);
 
-		suggestionsPanel.add(SuggestionBasicPanel);
+		suggestionsPanel.add(suggestionPanel);
 	}
 
 	public String getCurrentlyTypedWord() {// get newest word after last white
@@ -410,21 +432,28 @@ public class AutoSuggestor {
 		if (typedWord.isEmpty()) {
 			return false;
 		}
-		// System.out.println("Typed word: " + typedWord);
-		SearchSupply dictionary = new SearchSupply();
-		Map<String, Node> nodeMap = dictionary.getSearchSupply(typedWord);
-		Set<Entry<String, Node>> stringSet = nodeMap.entrySet();
-		Iterator<Entry<String, Node>> iter = stringSet.iterator();
-
-		boolean suggestionAdded = false;
-		while (iter.hasNext()) {
-			Entry<String, Node> nodeInfo = iter.next();
-			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue());
-			suggestionAdded = true;
-
-		}
-
-		return suggestionAdded;
+	
+//		SearchSupply dictionary = new SearchSupply();
+//		Map<String, Node> nodeMap = dictionary.getSearchSupply(typedWord);
+//		Set<Entry<String, Node>> stringSet = nodeMap.entrySet();
+//		Iterator<Entry<String, Node>> iter = stringSet.iterator();
+	
+//		boolean suggestionAdded = false;
+//		while (iter.hasNext()) {
+//			Entry<String, Node> nodeInfo = iter.next();
+//			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue(), suggestorEnum);
+//			suggestionAdded = true;
+//
+//		}
+		
+		//hack
+		Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
+		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.History);
+		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Professor);
+		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Location);
+		
+		
+		return true;
 	}
 
 	public void setInputPanel(InputPanel inputPanel) {

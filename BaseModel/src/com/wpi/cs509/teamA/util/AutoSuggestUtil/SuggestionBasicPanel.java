@@ -36,10 +36,7 @@ public class SuggestionBasicPanel extends JPanel {
 	public SuggestionBasicPanel(String string, AutoSuggestor autoSuggestor, Node node) {
 		// super(string);
 		this.setLayout(new BorderLayout());
-		this.textLabel = new JLabel(string, JLabel.LEFT);		
-		this.add(textLabel, BorderLayout.WEST);	
-		this.add(new JLabel(new ImageIcon(imageIcon), JLabel.RIGHT), BorderLayout.EAST);
-		this.setBorder(BorderFactory.createLineBorder(Color.blue));
+		this.textLabel = new JLabel(string, JLabel.LEFT);
 
 		this.autoSuggestor = autoSuggestor;
 		this.textField = autoSuggestor.getTextField();
@@ -52,10 +49,15 @@ public class SuggestionBasicPanel extends JPanel {
 	}
 
 	protected void initComponent() {
+				
+		this.add(textLabel, BorderLayout.EAST);	
+		this.add(new JLabel(new ImageIcon(imageIcon), JLabel.LEFT), BorderLayout.WEST);
+		this.setBorder(BorderFactory.createLineBorder(Color.blue));
 		textLabel.setFocusable(true);
 		textLabel.setForeground(suggestionsTextColor);
 		textLabel.setPreferredSize(preferredSize);
 		textLabel.setFont(font);
+		
 
 		addMouseListener(new MouseAdapter() {
 			@Override
