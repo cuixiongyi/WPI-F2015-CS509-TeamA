@@ -32,11 +32,8 @@ public class StateContext  extends Observable{
 	 * Constructor. Initialize a default state.
 	 */
 	protected StateContext() {
+		myState = null;
 
-
-		myState = new MouseActionSelectNode(this);
-
-		this.switchToState(new MouseActionSelectNode(this));
 	}
 
 	/**
@@ -50,17 +47,22 @@ public class StateContext  extends Observable{
 			myState.cleanup();
 		}
 		this.myState = newState;
+        modelChanged();
+
     }
 
 
 	public boolean execute(MouseEvent e) {
 		boolean ret =  myState.execute(e);
-		return ret;
+        modelChanged();
+        return ret;
 	}
 	
 	public boolean cleanup(){
-		return myState.cleanup();
-	}
+		boolean ret =  myState.cleanup();
+        modelChanged();
+        return ret;
+    }
 
     public void paintOnImage(Graphics2D g2) {
 		myState.paintOnImage(g2);
@@ -75,5 +77,10 @@ public class StateContext  extends Observable{
 	public MouseActionState getMyState() {
 		return myState;
 	}
+
+    public void modelChanged() {
+        setChanged();
+        notifyObservers();
+    }
 
 }

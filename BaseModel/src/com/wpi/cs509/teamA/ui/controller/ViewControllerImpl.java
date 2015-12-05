@@ -20,7 +20,7 @@ import java.util.Stack;
  class ViewControllerImpl extends ViewControllerBase{
 
     public void clickLogin() {
-        if (model.ifLogin()) {
+        if (model.ifLoginAdmin()) {
             AdminDialog adminDialog = new AdminDialog(model, inputPanel);
             adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
             adminDialog.setVisible(inputPanel.isFocusable());

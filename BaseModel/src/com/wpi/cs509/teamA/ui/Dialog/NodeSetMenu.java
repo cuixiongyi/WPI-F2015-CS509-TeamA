@@ -84,7 +84,6 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 			model.cleanUpRoute();
 		}
 
-		ViewManager.updateView();
 	}
 
 }

@@ -50,6 +50,7 @@ public class UserScreen extends JFrame {
     private ViewController controller = null;
     private static JPanel popUpPane;
     private static int yPos=0;
+    private ViewManager vm = null;
 
 
 
@@ -118,12 +119,15 @@ public class UserScreen extends JFrame {
 		inputPanel = new InputPanel();
         imgComponent = new ImageComponent();
         mainModel = new MainModel();
+        mainModel.switchToState(new MouseActionSelectNode(mainModel));
         ViewControllerBase.init(imgComponent, inputPanel, mainModel,this);
         viewManager = new ViewManager();
         imgComponent.setModel(mainModel);
         inputPanel.setModel(mainModel);
         PaintHelper.setModel(mainModel);
         controller = new ViewController();
+        vm = new ViewManager();
+        mainModel.addObserver(vm);
         // input panel and components
 
         inputPanel.setBounds(905, 30, 300, 750);

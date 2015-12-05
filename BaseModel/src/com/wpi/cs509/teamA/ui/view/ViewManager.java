@@ -5,10 +5,13 @@ import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Created by cuixi on 12/3/2015.
  */
-public class ViewManager extends ViewControllerBase{
+public class ViewManager extends ViewControllerBase implements Observer{
 
     public ViewManager() {
 
@@ -32,5 +35,13 @@ public class ViewManager extends ViewControllerBase{
     }
     static public InputPanel getInputPanel() {
         return inputPanel;
+    }
+
+    @Override
+    public void update(Observable obs, Object arg) {
+        if ( model != obs) {
+            return;
+        }
+        ViewManager.updateView();
     }
 }

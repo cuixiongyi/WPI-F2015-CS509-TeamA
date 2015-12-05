@@ -144,7 +144,6 @@ public class SignupDialog extends JDialog implements ActionListener  {
 				saveAccount(getUsername(),getPassword(passwordField),getEmail(),isAdmin);
 				JOptionPane.showMessageDialog(null, "Congratulations, you can log in now.", "Sign up succefful.",
 						JOptionPane.INFORMATION_MESSAGE);
-				ViewManager.updateView();
 				dispose();
 			} else {
 				JOptionPane.showMessageDialog(null, "Password not the same. Try again.", "Error Message",

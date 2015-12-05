@@ -222,7 +222,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
             }
 
         }
-		ViewManager.updateView();
         this.setVisible(false);
 
 	}

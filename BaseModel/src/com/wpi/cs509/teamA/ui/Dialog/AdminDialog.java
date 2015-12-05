@@ -145,7 +145,6 @@ public class AdminDialog extends JDialog implements ActionListener {
 //		inputPanel.getBtnMngNode().setVisible(true);	
 		model.switchToState(new MouseActionAdminUser(model));
 		//stateContext.switchUserState(new AdminUserState(stateContext));
-		ViewManager.updateView();
 	}
 
 	/**

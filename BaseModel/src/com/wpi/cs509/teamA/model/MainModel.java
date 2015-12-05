@@ -30,8 +30,6 @@ public final class MainModel extends StateContext{
 
     private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
-    private boolean hasValidRoute = false;
-
     /**
      * if filterNodeType[i] == 1 then display that type of node
      * filterNodeType[i] == 0 don't display
@@ -42,16 +40,14 @@ public final class MainModel extends StateContext{
         this.myAccount = new UserAccount();
         this.currentMap = null;
 //        multiMapPathLists = new ArrayList<ArrayList<Node>>();
-        hasValidRoute = false;
         setCurrentMapID(1);
 
     }
 
-    public void cleanUpRoute() {
+    public synchronized void cleanUpRoute() {
         this.setStartNode(null);
         this.setEndNode(null);
         this.setMultiMapPathLists(null);
-        this.setHasValidRoute(false);
     }
 
 
@@ -60,18 +56,18 @@ public final class MainModel extends StateContext{
      *
      */
 
-    public UserAccount getMyAccount() {
+    public synchronized UserAccount getMyAccount() {
         return myAccount;
     }
 
-    public void setMyAccount(UserAccount pAccount) {
+    public synchronized void setMyAccount(UserAccount pAccount) {
         if (null == pAccount) {
             pAccount = new UserAccount();
         }
         this.myAccount = pAccount;
     }
 
-    public void setFocusToNode(Node node ) {
+    public synchronized void setFocusToNode(Node node ) {
         if (null == node) {
             return;
         }
@@ -79,54 +75,54 @@ public final class MainModel extends StateContext{
         this.focusNode = node;
 
     }
-    public int getCurrentMapID() {
+    public synchronized int getCurrentMapID() {
         return currentMap.getMapId();
 
     }
-    public GeneralMap getCurrentMap() {
+    public synchronized GeneralMap getCurrentMap() {
         return currentMap;
     }
 
-    public void setCurrentMap(GeneralMap currentMap) {
+    public synchronized void setCurrentMap(GeneralMap currentMap) {
         this.currentMap = currentMap;
     }
-    public void setCurrentMapID(int mapID) {
+    public synchronized void setCurrentMapID(int mapID) {
         this.currentMap = Database.getMapEntityFromMapId(mapID);
     }
 
-    public Node getFocusNode() {
+    public synchronized Node getFocusNode() {
         return this.focusNode;
     }
 
 
-    public Node getStartNode() {
+    public synchronized Node getStartNode() {
         return startNode;
     }
 
 
-    public void setStartNode(Node pStartNode) {
+    public synchronized void setStartNode(Node pStartNode) {
         if (pStartNode == this.startNode) {
             return;
         }
-        this.multiMapPathLists = new ArrayList<ArrayList<Node>>();
+        this.multiMapPathLists = null;
 
         this.startNode = pStartNode;
     }
 
 
-    public Node getEndNode() {
+    public synchronized Node getEndNode() {
         return endNode;
     }
 
-    public void setEndNode(Node endNode) {
+    public synchronized void setEndNode(Node endNode) {
         this.endNode = endNode;
     }
 
-    public ArrayList<ArrayList<Node>> getMultiMapPathLists() {
+    public synchronized ArrayList<ArrayList<Node>> getMultiMapPathLists() {
         return multiMapPathLists;
     }
 
-    public void setMultiMapPathLists(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
+    public synchronized void setMultiMapPathLists(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
         List<GeneralMap> maps = Database.getAllMapFromDatabase();
         this.multiMapPathLists = new ArrayList<ArrayList<Node>>();
 
@@ -146,39 +142,29 @@ public final class MainModel extends StateContext{
         }
     }
 
-    public List<Integer> getFilterNodeType() {
+    public synchronized List<Integer> getFilterNodeType() {
         return filterNodeType;
     }
 
-    public void setFilterNodeType(List<Integer> filterNodeType) {
+    public synchronized void setFilterNodeType(List<Integer> filterNodeType) {
         this.filterNodeType = filterNodeType;
     }
 
-
-
-    public boolean isHasValidRoute() {
-        return hasValidRoute;
-    }
-
-    private void setHasValidRoute(boolean hasValidRoute) {
-        this.hasValidRoute = hasValidRoute;
-    }
-
-    public void saveNode(Node node) {
+    public synchronized void saveNode(Node node) {
         NodeDao nd = new NodeDaoImpl();
         nd.saveNode(node);
         Database.InitFromDatabase();
 
     }
 
-    public void editNode(Node node) {
+    public synchronized void editNode(Node node) {
 
         NodeDaoImpl dao = new NodeDaoImpl();
         dao.editNode(node);
         Database.InitFromDatabase();
     }
 
-    public boolean ifLogin() {
+    public synchronized boolean ifLoginAdmin() {
         return false;
     }
 
