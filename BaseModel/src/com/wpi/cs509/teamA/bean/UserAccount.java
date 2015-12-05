@@ -36,8 +36,6 @@ public class UserAccount {
 
 	}
 
-	
-
 	/**
 	 * constructor with information
 	 * 

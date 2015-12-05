@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.exception.PwdIncorrectException;
+import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 
 public interface UserAccountDao {
 
@@ -29,6 +31,10 @@ public interface UserAccountDao {
 	 * @return a HashMap<String, Integer>
 	 * 
 	 */
-	public void addAccountToDatabase(UserAccount add_user);
+	public boolean addAccountToDatabase(UserAccount add_user);
+	
+	public boolean checkUserNameInDatabase(String username);
+	
+	public UserAccount loginAuthorization(String username, String password) throws UserAccountNotFoundException,PwdIncorrectException;
 	
 }
