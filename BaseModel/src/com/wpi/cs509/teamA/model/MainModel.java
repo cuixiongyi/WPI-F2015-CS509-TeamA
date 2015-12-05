@@ -65,6 +65,8 @@ public final class MainModel extends StateContext{
             pAccount = new UserAccount();
         }
         this.myAccount = pAccount;
+        modelChanged();
+
     }
 
     public synchronized void setFocusToNode(Node node ) {
@@ -73,6 +75,7 @@ public final class MainModel extends StateContext{
         }
         setCurrentMap(node.getMap());
         this.focusNode = node;
+        modelChanged();
 
     }
     public synchronized int getCurrentMapID() {
@@ -85,9 +88,11 @@ public final class MainModel extends StateContext{
 
     public synchronized void setCurrentMap(GeneralMap currentMap) {
         this.currentMap = currentMap;
+        modelChanged();
     }
     public synchronized void setCurrentMapID(int mapID) {
         this.currentMap = Database.getMapEntityFromMapId(mapID);
+        modelChanged();
     }
 
     public synchronized Node getFocusNode() {
@@ -107,6 +112,8 @@ public final class MainModel extends StateContext{
         this.multiMapPathLists = null;
 
         this.startNode = pStartNode;
+        modelChanged();
+
     }
 
 
@@ -116,6 +123,7 @@ public final class MainModel extends StateContext{
 
     public synchronized void setEndNode(Node endNode) {
         this.endNode = endNode;
+        modelChanged();
     }
 
     public synchronized ArrayList<ArrayList<Node>> getMultiMapPathLists() {
@@ -140,6 +148,7 @@ public final class MainModel extends StateContext{
             }
             this.multiMapPathLists.add(path);
         }
+        modelChanged();
     }
 
     public synchronized List<Integer> getFilterNodeType() {
@@ -148,12 +157,15 @@ public final class MainModel extends StateContext{
 
     public synchronized void setFilterNodeType(List<Integer> filterNodeType) {
         this.filterNodeType = filterNodeType;
+        modelChanged();
+
     }
 
     public synchronized void saveNode(Node node) {
         NodeDao nd = new NodeDaoImpl();
         nd.saveNode(node);
         Database.InitFromDatabase();
+        modelChanged();
 
     }
 
@@ -162,6 +174,8 @@ public final class MainModel extends StateContext{
         NodeDaoImpl dao = new NodeDaoImpl();
         dao.editNode(node);
         Database.InitFromDatabase();
+        modelChanged();
+
     }
 
     public synchronized boolean ifLoginAdmin() {
