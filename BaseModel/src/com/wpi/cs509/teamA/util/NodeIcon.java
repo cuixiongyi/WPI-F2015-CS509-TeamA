@@ -20,6 +20,9 @@ public class NodeIcon {
 	private static String parkingIconName = "Parking_Icon.png";
 	private static String startIconName = "Start_Icon.png";
 	private static String endIconName = "End_Icon.png";
+	private static String professorIconName = "Professor_Icon.png";
+	private static String historyIconName = "History_Icon.png";
+	private static String locationIconName = "Location_Icon.png";
 
 
 	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
@@ -28,6 +31,7 @@ public class NodeIcon {
 	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;
 	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
 	private static String endIconFilePath = PaintHelper.getUserDir() + endIconName;;
+
 
 	
 	private static BufferedImage labIcon;

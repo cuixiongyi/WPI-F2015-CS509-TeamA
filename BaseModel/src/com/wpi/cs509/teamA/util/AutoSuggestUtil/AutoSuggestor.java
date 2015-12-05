@@ -57,10 +57,7 @@ public class AutoSuggestor {
 			checkForAndShowSuggestions();
 		}
 	};
-	private final Color suggestionsTextColor;
-	private final Color suggestionFocusedColor;
-	private final Dimension preferredSize = new Dimension(1000, 23);
-	private final Font labelFont = new Font("SimSun", Font.PLAIN, 23);
+	
 	private int lastFocusableIndex = 0;
 
 	/**
@@ -75,12 +72,12 @@ public class AutoSuggestor {
 	private MainModel model = null;
 
 	public AutoSuggestor(JTextField textField, JFrame container, ArrayList<String> words, Color popUpBackground,
-						 Color textColor, Color suggestionFocusedColor, float opacity, double locationX, double locationY,
+						 float opacity, double locationX, double locationY,
 						 MainModel pModel, SetNodeOption pSetNodeOption) {
 		this.textField = textField;
-		this.suggestionsTextColor = textColor;
+		
 		this.container = container;
-		this.suggestionFocusedColor = suggestionFocusedColor;
+	
 		this.windowLocationX = locationX;
 		this.windowLocationY = locationY;
 
@@ -139,8 +136,8 @@ public class AutoSuggestor {
 															// label on
 															// popwindow
 				for (int i = 0; i < suggestionsPanel.getComponentCount(); i++) {
-					if (suggestionsPanel.getComponent(i) instanceof SuggestionLabel) {
-						((SuggestionLabel) suggestionsPanel.getComponent(i)).setFocused(true);
+					if (suggestionsPanel.getComponent(i) instanceof SuggestionBasicPanel) {
+						((SuggestionBasicPanel) suggestionsPanel.getComponent(i)).setFocused(true);
 						autoSuggestionPopUpWindow.toFront();
 						autoSuggestionPopUpWindow.requestFocusInWindow();
 						suggestionsPanel.requestFocusInWindow();
@@ -172,11 +169,11 @@ public class AutoSuggestor {
 		textField.requestFocusInWindow();
 	}
 
-	public ArrayList<SuggestionLabel> getAddedSuggestionLabels() {
-		ArrayList<SuggestionLabel> sls = new ArrayList<>();
+	public ArrayList<SuggestionBasicPanel> getAddedSuggestionBasicPanels() {
+		ArrayList<SuggestionBasicPanel> sls = new ArrayList<>();
 		for (int i = 0; i < suggestionsPanel.getComponentCount(); i++) {
-			if (suggestionsPanel.getComponent(i) instanceof SuggestionLabel) {
-				SuggestionLabel sl = (SuggestionLabel) suggestionsPanel.getComponent(i);
+			if (suggestionsPanel.getComponent(i) instanceof SuggestionBasicPanel) {
+				SuggestionBasicPanel sl = (SuggestionBasicPanel) suggestionsPanel.getComponent(i);
 				sls.add(sl);
 			}
 		}
@@ -222,12 +219,12 @@ public class AutoSuggestor {
 			public void actionPerformed(ActionEvent ae) {// allows scrolling of
 															// labels in pop
 															// window
-				ArrayList<SuggestionLabel> sls = getAddedSuggestionLabels();
+				ArrayList<SuggestionBasicPanel> sls = getAddedSuggestionBasicPanels();
 				int max = sls.size();
 				System.out.println("up" + lastFocusableIndex);
 				if (max > 1) {// more than 1 suggestion
 					for (int i = lastFocusableIndex; i >= 0; i--) {
-						SuggestionLabel sl = sls.get(i);
+						SuggestionBasicPanel sl = sls.get(i);
 						if (sl.isFocused()) {
 
 							if (lastFocusableIndex == 0) {
@@ -280,12 +277,12 @@ public class AutoSuggestor {
 			public void actionPerformed(ActionEvent ae) {// allows scrolling of
 															// labels in pop
 															// window
-				ArrayList<SuggestionLabel> sls = getAddedSuggestionLabels();
+				ArrayList<SuggestionBasicPanel> sls = getAddedSuggestionBasicPanels();
 				int max = sls.size();
 
 				if (max > 1) {// more than 1 suggestion
 					for (int i = 0; i < max; i++) {
-						SuggestionLabel sl = sls.get(i);
+						SuggestionBasicPanel sl = sls.get(i);
 						if (sl.isFocused()) {
 							if (lastFocusableIndex == max - 1) {
 								lastFocusableIndex = 0;
@@ -328,12 +325,12 @@ public class AutoSuggestor {
 	}
 
 	protected void addWordToSuggestions(String word, Node nodeInformation) {
-		SuggestionLabel suggestionLabel = new SuggestionLabel(word, suggestionFocusedColor, suggestionsTextColor, this,
-				preferredSize, labelFont, nodeInformation);
+		SuggestionBasicPanel SuggestionBasicPanel = new SuggestionBasicPanel(word, this,
+				nodeInformation);
 
-		calculatePopUpWindowSize(suggestionLabel);
+		calculatePopUpWindowSize(SuggestionBasicPanel);
 
-		suggestionsPanel.add(suggestionLabel);
+		suggestionsPanel.add(SuggestionBasicPanel);
 	}
 
 	public String getCurrentlyTypedWord() {// get newest word after last white
@@ -347,12 +344,12 @@ public class AutoSuggestor {
 		return wordBeingTyped.trim();
 	}
 
-	private void calculatePopUpWindowSize(JLabel label) {
+	private void calculatePopUpWindowSize(SuggestionBasicPanel SuggestionBasicPanel) {
 		// so we can size the JWindow correctly
-		if (tW < label.getPreferredSize().width) {
-			tW = label.getPreferredSize().width;
+		if (tW < SuggestionBasicPanel.getPreferredSize().width) {
+			tW = SuggestionBasicPanel.getPreferredSize().width;
 		}
-		tH += label.getPreferredSize().height;
+		tH += SuggestionBasicPanel.getPreferredSize().height;
 	}
 
 	private void showPopUpWindow(double windowLocationX2, double windowLocationY2) {
@@ -379,7 +376,7 @@ public class AutoSuggestor {
 		autoSuggestionPopUpWindow.setLocation(windowX, windowY);
 		autoSuggestionPopUpWindow.setMinimumSize(new Dimension(textField.getWidth(), 30));
 		// autoSuggestionPopUpWindow.setBounds(windowX, windowY,
-		// autoSuggestionLabel.getWidth(), autoSuggestionPopUpLabel.getWidth());
+		// autoSuggestionBasicPanel.getWidth(), autoSuggestionPopUpLabel.getWidth());
 		autoSuggestionPopUpWindow.revalidate();
 		autoSuggestionPopUpWindow.repaint();
 

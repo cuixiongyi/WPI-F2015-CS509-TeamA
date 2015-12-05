@@ -343,10 +343,10 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void setUserScreen(UserScreen userScreen2) {
         this.userScreen = userScreen2;
 
-        autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null, Color.WHITE.brighter(), Color.BLACK,
+        autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null, 
                 Color.GRAY, 0.75f, 0.0, 0.0, model, AutoSuggestor.SetNodeOption.setStartNode);
         autoSuggestorFrom.setInputPanel(this);
-        autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null, Color.WHITE.brighter(), Color.BLACK,
+        autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null,
                 Color.GRAY, 0.75f, 0.0, 0.0, model, AutoSuggestor.SetNodeOption.setEndNode);
         autoSuggestorTo.setInputPanel(this);
     }
