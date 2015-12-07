@@ -63,7 +63,8 @@ public class MouseActionSelectNode extends MouseActionState {
     @Override
     public void paintOnImage(Graphics2D g2) {
 
-        paintRoute(g2);
+        PaintHelper.paintRoute(g2);
+
         PaintHelper.paintIcons(model.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
         PaintHelper.paintStartEndNode(g2);
     }

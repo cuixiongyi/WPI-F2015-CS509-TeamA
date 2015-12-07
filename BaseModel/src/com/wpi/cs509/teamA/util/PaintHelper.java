@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.util;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.wpi.cs509.teamA.bean.Edge;
@@ -217,6 +218,15 @@ public class PaintHelper {
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
+    public static void paintRoute(Graphics2D g2) {
+        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
+        if (null != multiMapPath && 0 != multiMapPath.size()) {
+            int idx = model.getCurrentMapID()-1;
+            PaintHelper.paintPath(multiMapPath.get(idx), g2);
+
+        }
+
+    }
 
    public static void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {

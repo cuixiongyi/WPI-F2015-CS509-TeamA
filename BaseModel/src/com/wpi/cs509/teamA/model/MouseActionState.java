@@ -39,15 +39,6 @@ public abstract class MouseActionState  {
 
     abstract public boolean cleanup();
 
-    protected void paintRoute(Graphics2D g2) {
-        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
-        if (null != multiMapPath && 0 != multiMapPath.size()) {
-            int idx = model.getCurrentMapID()-1;
-            PaintHelper.paintPath(multiMapPath.get(idx), g2);
-
-        }
-
-    }
     protected void getMouseTransCoor(MouseEvent e) {
         xPos = e.getX();
         yPos = e.getY();

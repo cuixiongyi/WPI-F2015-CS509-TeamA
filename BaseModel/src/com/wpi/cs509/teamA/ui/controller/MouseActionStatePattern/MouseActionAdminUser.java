@@ -50,7 +50,7 @@ public class MouseActionAdminUser extends MouseActionState {
                 g2, PaintHelper.DrawStyleEnum.BasicEdge);
         PaintHelper.paintNodes(model.getCurrentMap().getNodes(),
                 g2, PaintHelper.DrawStyleEnum.NewNode);
-        paintRoute(g2);
+        PaintHelper.paintRoute(g2);
 
         PaintHelper.paintStartEndNode(g2);
 
