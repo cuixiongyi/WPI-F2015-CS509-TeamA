@@ -15,9 +15,9 @@ import java.util.ArrayList;
  *
  * This is the abstract class for state pattern
  */
-public abstract class MouseActionState extends ViewControllerBase {
+public abstract class MouseActionState  {
 
-    protected StateContext stateContext;
+    protected MainModel model;
 
     protected int xPos;
     protected int yPos;
@@ -25,8 +25,8 @@ public abstract class MouseActionState extends ViewControllerBase {
     protected Coordinate coor = null;
     protected Coordinate coorTrans = null;
 //    MainModel model = null;
-    public MouseActionState(StateContext pSC) {
-        stateContext = pSC;
+    public MouseActionState(MainModel pSC) {
+        model = pSC;
         this.xPos = -1;
         this.yPos = -1;
 
@@ -34,14 +34,7 @@ public abstract class MouseActionState extends ViewControllerBase {
 
 	abstract public void paintOnImage(Graphics2D g2);
 
-    public boolean execute(MouseEvent e) {
-        xPos = e.getX();
-        yPos = e.getY();
-        coor = new Coordinate(e.getX(), e.getY());
-        coorTrans = PaintHelper.backTransferCoor(coor);
-        return true;
-    }
-
+    abstract public boolean execute(MouseEvent e);
 
 
     abstract public boolean cleanup();
@@ -54,6 +47,12 @@ public abstract class MouseActionState extends ViewControllerBase {
 
         }
 
+    }
+    protected void getMouseTransCoor(MouseEvent e) {
+        xPos = e.getX();
+        yPos = e.getY();
+        coor = new Coordinate(e.getX(), e.getY());
+        coorTrans = PaintHelper.backTransferCoor(coor);
     }
 
     public Node getNodeFromClick(Coordinate coor) {

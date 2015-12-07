@@ -4,6 +4,7 @@ import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.util.Database;
@@ -28,8 +29,8 @@ public class MouseActionEditEdge  extends MouseActionState {
 
     private Node lastNode = null;
 
-    public MouseActionEditEdge(StateContext pSC) {
-        super(pSC);
+    public MouseActionEditEdge(MainModel pMM) {
+        super(pMM);
 
 
         model.cleanUpRoute();
@@ -45,7 +46,7 @@ public class MouseActionEditEdge  extends MouseActionState {
     @Override
     public boolean execute(MouseEvent e) {
         /// update coor and coorTrans
-        super.execute(e);
+        getMouseTransCoor(e);
 
         // we have to minus 5 to correct deviation
         xPos = e.getX();

@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.util.PaintHelper;
@@ -13,10 +14,9 @@ import java.awt.event.MouseEvent;
 public class MouseActionAdminUser extends MouseActionState {
 
 
-    public MouseActionAdminUser(StateContext pStateContext) {
-        super(pStateContext);
+    public MouseActionAdminUser(MainModel pMM) {
+        super(pMM);
 
-        imageComponent.repaint();
     }
 
     @Override
@@ -28,7 +28,8 @@ public class MouseActionAdminUser extends MouseActionState {
     @Override
     public boolean execute(MouseEvent e) {
         /// update coor and coorTrans
-        super.execute(e);
+        getMouseTransCoor(e);
+
 
         xPos = e.getX();
         yPos = e.getY();
@@ -36,7 +37,7 @@ public class MouseActionAdminUser extends MouseActionState {
         {
             //NodeManageMenu nodeManageMenu = new NodeManageMenu(stateContext.getImageComponent(), xPos, yPos, stateContext);
             //nodeManageMenu.show(e.getComponent(), xPos, yPos);
-            imageComponent.repaint();
+
             return false;
         }
 

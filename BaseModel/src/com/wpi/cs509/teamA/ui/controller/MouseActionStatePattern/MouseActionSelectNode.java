@@ -1,9 +1,11 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
@@ -18,8 +20,8 @@ public class MouseActionSelectNode extends MouseActionState {
 
     private java.util.List<Node> nodesToPaintIcon = new ArrayList<Node>();
 
-    public MouseActionSelectNode(StateContext pSC) {
-        super( pSC);
+    public MouseActionSelectNode(MainModel pMM) {
+        super( pMM);
 
     }
 
@@ -35,13 +37,12 @@ public class MouseActionSelectNode extends MouseActionState {
         /**
          * update coor and coorTrans
          */
-        super.execute(e);
+        Node node = getNodeFromClick(e);
 
         if (e.getButton() == MouseEvent.BUTTON3) {
-            Node node = getNodeFromClick(coorTrans);
 
                 /// TODO add edit node action
-                NodeSetMenu nodeSetMenu = new NodeSetMenu(inputPanel, model, node);
+                NodeSetMenu nodeSetMenu = new NodeSetMenu(ViewManager.getInputPanel(), model, node);
                 nodeSetMenu.show(e.getComponent(), xPos, yPos);
 
 
@@ -49,7 +50,6 @@ public class MouseActionSelectNode extends MouseActionState {
 
         if (e.getButton() == MouseEvent.BUTTON1) {
 
-            Node node = getNodeFromClick(coorTrans);
             if (null != node) {
                // nodesToPaintIcon.clear();
                // nodesToPaintIcon.add(node);
