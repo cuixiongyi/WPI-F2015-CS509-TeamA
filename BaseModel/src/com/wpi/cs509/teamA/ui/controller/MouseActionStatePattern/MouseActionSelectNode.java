@@ -37,6 +37,7 @@ public class MouseActionSelectNode extends MouseActionState {
         /**
          * update coor and coorTrans
          */
+        getMouseTransCoor(e);
         Node node = getNodeFromClick(e);
 
         if (e.getButton() == MouseEvent.BUTTON3) {

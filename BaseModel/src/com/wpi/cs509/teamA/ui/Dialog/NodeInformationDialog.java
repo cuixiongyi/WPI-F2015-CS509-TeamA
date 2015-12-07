@@ -48,7 +48,6 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 	private Node existingNode = null;
 
-    private StateContext stateContext;
 	private ImageComponent imagePanel;
 
 	private final static String COORDINATE = "Node Coordinate";

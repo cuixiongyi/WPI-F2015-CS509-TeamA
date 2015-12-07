@@ -59,7 +59,7 @@ public abstract class MouseActionState  {
         return Database.getNodeFromCoordinate(coor, model.getCurrentMap().getMapId());
     }
     public Node getNodeFromClick(MouseEvent e) {
-        return Database.getNodeFromCoordinate(PaintHelper.backTransferCoor(new Coordinate(e.getX(), e.getY()))
-                , model.getCurrentMap().getMapId());
+        getMouseTransCoor(e);
+        return getNodeFromClick(coorTrans);
     }
 }

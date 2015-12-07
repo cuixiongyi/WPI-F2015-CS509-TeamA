@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -26,7 +27,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmAdd;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
-	private StateContext stateContext;
+	private MainModel model;
 
 	private final static String ADD = "Add Node";
 	private final static String DELETE = "Delete Node";
@@ -36,7 +37,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, StateContext pStateContext) {
+	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, MainModel pmodel) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;
@@ -56,14 +57,14 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 		mntmEdit.addActionListener(this);
 
 
-		this.stateContext = pStateContext;
+		this.model = pmodel;
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mntmAdd) {
-				stateContext.switchToState(new MouseActionEditNode(stateContext));
+				model.switchToState(new MouseActionEditNode(model));
 
 		} else if (e.getSource() == mntmDelete) {
 			// TODO: Show a dialog to ask the user if they really want to delete
