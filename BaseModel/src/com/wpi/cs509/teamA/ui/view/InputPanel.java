@@ -15,17 +15,8 @@ import java.util.*;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -53,9 +44,6 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
  */
 @SuppressWarnings("serial")
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
-
-
-
     private MainModel model = null;
 
     private JButton btnSearch;
@@ -65,11 +53,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JLabel lblTo;
     private JButton btnNeighborManage;
     private JButton btnSynchronize;
+    private JButton filter;
     private JComboBox<String> comboBoxMap;
-
-
-
-
 
     private static final String SEARCHWORD = "Search WPI Maps";
     private UserScreen userScreen;
@@ -94,51 +79,42 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
      */
     public InputPanel() {
         // // User input block
-
-        this.btnSearch = new JButton(UIConstant.SEARCH);
-        this.adminLogin = new JButton(UIConstant.LOGIN);
-        this.btnNeighborManage = new JButton("Edges");
-        btnNeighborManage.setSize(75, 30);
-        btnNeighborManage.setLocation(80, 380);
-        this.getBtnLogin().setFont(new Font("Arial", Font.PLAIN, 12));
-        this.btnNeighborManage.setVisible(false);
-
+    	
         this.setLayout(null);
-        this.add(btnSearch);
-        this.add(adminLogin);
-        this.add(btnNeighborManage);
+        JTabbedPane tabbedPane = new JTabbedPane();
 
+        JPanel searchResultTab =new JPanel();
+        JPanel filterTab=new JPanel();
+        JPanel adminTab=new JPanel();
+
+
+        
+        this.add(tabbedPane,BorderLayout.CENTER);
+        
+        tabbedPane.setBounds(0,230,300,550);
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+
+        tabbedPane.addTab("Search Result",searchResultTab);
+        tabbedPane.addTab("Location Filter",filterTab);
+        tabbedPane.addTab("Admin Tools",adminTab);
+
+        //login panel
+        this.adminLogin = new JButton(UIConstant.LOGIN);
         this.getBtnLogin().setBounds(150, 0, 75, 30);
-        this.getBtnLogin().setFont(new Font("Arial", Font.PLAIN, 12));
         this.getBtnLogin().addActionListener(this);
-
-        this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
-        //this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-        //this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-        this.getBtnLogin().setBounds(150, 0, 75, 30);
-        this.getBtnSearch().setBounds(80, 300, 150, 38);
-        this.getBtnSearch().addActionListener(this);
-
-        // this.getEndPoint().setFont(new Font("Arial", Font.PLAIN, 12));
-        // this.getStartPoint().setFont(new Font("Arial", Font.PLAIN, 12));
+        this.add(adminLogin);
 
         this.signUp = new JButton("SignUp");
         this.add(signUp);
         this.signUp.addActionListener(this);
         this.signUp.setBounds(80, 0, 75, 30);
 
-        // this.getStartPoint().setBounds(80, 150, 150, 38);
-        // this.setBounds(0, 0, 1178, 516);
 
-        lblFrom = new JLabel(UIConstant.FROM);
-        lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblFrom.setBounds(15, 155, 61, 16);
-        add(lblFrom);
-
-        lblTo = new JLabel(UIConstant.TO);
-        lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblTo.setBounds(15, 230, 61, 16);
-        add(lblTo);
+        //search panel
+        JLabel lblMap = new JLabel("Map: ");
+        lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblMap.setBounds(15, 60, 61, 21);
+        add(lblMap);
 
         comboBoxMap = new JComboBox<String>();
         comboBoxMap.setBounds(80, 55, 150, 30);
@@ -146,38 +122,69 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         for(GeneralMap map:allMapList) {
             comboBoxMap.addItem(map.getMapAbbrName());
         }
-
         comboBoxMap.setMaximumRowCount(2);
         comboBoxMap.addFocusListener(this);
         comboBoxMap.requestFocus();
         add(comboBoxMap);
 
-        JLabel lblMap = new JLabel("Map: ");
-        lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblMap.setBounds(15, 60, 61, 21);
-        add(lblMap);
+        lblFrom = new JLabel(UIConstant.FROM);
+        lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblFrom.setBounds(15, 105, 61, 16);
+        add(lblFrom);
 
         txtFrom = new JTextField();
-        txtFrom.setBounds(80, 150, 150, 27);
+        txtFrom.setBounds(80, 100, 150, 27);
         txtFrom.setText(SEARCHWORD);
         add(txtFrom);
         txtFrom.addFocusListener(this);
         txtFrom.setColumns(10);
+
+        lblTo = new JLabel(UIConstant.TO);
+        lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblTo.setBounds(15, 130, 61, 16);
+        add(lblTo);
+
         txtTo = new JTextField();
-        txtTo.setBounds(80, 225, 150, 27);
+        txtTo.setBounds(80, 125, 150, 27);
         txtTo.addFocusListener(this);
         txtTo.setText(SEARCHWORD);
         add(txtTo);
         txtTo.setColumns(10);
 
+        this.btnSearch = new JButton(UIConstant.SEARCH);
+        this.add(btnSearch);
+        this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
+        this.getBtnSearch().setBounds(80, 160, 150, 38);
+        this.getBtnSearch().addActionListener(this);
 
+        //tab panel-search result
+        mapList = new JList<>();
+        mapList.setVisible(false);
+        JScrollPane mapListScroll = new JScrollPane(mapList);
+        mapListScroll.setBounds(50, 500, 200, 200);
+        searchResultTab.add(mapListScroll);
+
+
+        //tab panel-filter
+        this.filter= new JButton("Filter");
+        filter.setPreferredSize(new Dimension(250, 450));
+        filterTab.add(filter);
+        
+
+        //tab panel-admin tool
+        this.btnNeighborManage = new JButton("Edges");
+        btnNeighborManage.setSize(75, 30);
+//        btnNeighborManage.setLocation(80, 380);
+
+//        this.btnNeighborManage.setVisible(false);
+        adminTab.add(btnNeighborManage);
 
 
         btnSynchronize = new JButton("Sync");
         btnSynchronize.addActionListener(this);
-        btnSynchronize.setVisible(false);
-        btnSynchronize.setBounds(155, 380, 75, 30);
-        add(btnSynchronize);
+//        btnSynchronize.setVisible(false);
+//        btnSynchronize.setBounds(155, 380, 75, 30);
+        adminTab.add(btnSynchronize);
 
         BufferedImage logo;
         try {
@@ -192,11 +199,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         }
 
         //result list
-        mapList = new JList<>();
-        mapList.setVisible(false);
-        JScrollPane mapListScroll = new JScrollPane(mapList);
-        mapListScroll.setBounds(50, 480, 200, 200);
-        add(mapListScroll);
+
 
 
       
