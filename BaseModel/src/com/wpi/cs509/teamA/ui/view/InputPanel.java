@@ -56,7 +56,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JButton filter;
     private JComboBox<String> comboBoxMap;
 
-    private static final String SEARCHWORD = "Search WPI Maps";
     private UserScreen userScreen;
     private AutoSuggestor autoSuggestorFrom;
     private AutoSuggestor autoSuggestorTo;
@@ -134,7 +133,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         txtFrom = new JTextField();
         txtFrom.setBounds(80, 100, 150, 27);
-        txtFrom.setText(SEARCHWORD);
+        txtFrom.setText(UIConstant.SEARCHWORD);
         add(txtFrom);
         txtFrom.addFocusListener(this);
         txtFrom.setColumns(10);
@@ -147,7 +146,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         txtTo = new JTextField();
         txtTo.setBounds(80, 125, 150, 27);
         txtTo.addFocusListener(this);
-        txtTo.setText(SEARCHWORD);
+        txtTo.setText(UIConstant.SEARCHWORD);
         add(txtTo);
         txtTo.setColumns(10);
 
@@ -210,7 +209,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             if (((JTextField) e.getSource()).getText().trim().equals("")) {
                 //lastSetSearchWord = true;
                 //lastSetEmptySearchWord = false;
-                ((JTextField) e.getSource()).setText(SEARCHWORD);
+                ((JTextField) e.getSource()).setText(UIConstant.SEARCHWORD);
             }
 
         }else if(e.getSource()==comboBoxMap){
@@ -221,7 +220,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     }
 
     private void processTextField(JTextField txt) {
-        if (txt.getText().trim().equals(SEARCHWORD) ) {
+        if (txt.getText().trim().equals(UIConstant.SEARCHWORD) ) {
            // if (!lastSetSearchWord) {
                 //lastSetEmptySearchWord = true;
                 //lastSetSearchWord = false;
@@ -369,9 +368,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     }
 
 
-    public static String getSEARCHWORD() {
-        return SEARCHWORD;
-    }
     public void setModel(MainModel pmodel) {
         this.model = pmodel;
     }

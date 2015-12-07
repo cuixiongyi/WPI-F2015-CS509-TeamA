@@ -27,6 +27,7 @@ import javax.swing.event.DocumentListener;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.newfeature.SearchSupply;
+import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
@@ -184,7 +185,7 @@ public class AutoSuggestor {
 
 	private void checkForAndShowSuggestions() {
 		typedWord = getCurrentlyTypedWord();
-		if (typedWord == InputPanel.getSEARCHWORD())
+		if (typedWord == UIConstant.SEARCHWORD)
 		{
 			return;
 		}

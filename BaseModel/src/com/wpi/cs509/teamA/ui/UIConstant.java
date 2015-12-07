@@ -8,4 +8,6 @@ public class UIConstant {
     public final static String LOGIN = "Login";
     public final static String TO = "To: ";
     public final static String FROM = "From: ";
+    public static final String SEARCHWORD = "Search WPI Maps";
+
 }
