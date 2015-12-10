@@ -14,7 +14,7 @@ import java.awt.event.MouseWheelListener;
 public class ImageMouseWheelListener implements MouseWheelListener{
 
 
-    static double scaleIncConst = 0.2;
+    static float scaleIncConst = 0.15f;
 
     private ImageComponent imageComponent = null;
     private MainModel model = null;
@@ -46,11 +46,13 @@ public class ImageMouseWheelListener implements MouseWheelListener{
         changeDisplayScale(scaleInc);
     }
 
-    private void changeDisplayScale(double scaleInc) {
+    private void changeDisplayScale(float scaleInc) {
         GeneralMap map = model.getCurrentMap();
-        map.setDisplayScale(map.getDisplayScale()+(float)scaleInc);
-        int x = scaleImageOffset(imageComponent.getImageXpos(), scaleInc);
-        int y = scaleImageOffset(imageComponent.getImageYpos(), scaleInc);
+        map.setDisplayScale(map.getDisplayScale()+scaleInc);
+        int xpos = imageComponent.getImageXpos();
+        int ypos = imageComponent.getImageYpos();
+        int x = scaleImageOffset(xpos, scaleInc);
+        int y = scaleImageOffset(ypos, scaleInc);
 
         imageComponent.setImageXpos(x);
         imageComponent.setImageXpos(y);
@@ -59,16 +61,16 @@ public class ImageMouseWheelListener implements MouseWheelListener{
 
     }
 
-    private int scaleImageOffset(int x, double scaleInc) {
-        double ret = 0;
+    private int scaleImageOffset(int x, float scaleInc) {
+        float ret = 0;
         if (x > 0) {
-            ret = (double)x / (1.0d+scaleInc);
+            ret = (float)x * (1.0f+scaleInc);
         }
         else {
-            ret = (double)x / (1.0d-scaleInc);
+            ret = (float)x * (1.0f-scaleInc);
         }
 
-        return (int)Math.round(ret);
+        return Math.round(ret);
     }
 
 }

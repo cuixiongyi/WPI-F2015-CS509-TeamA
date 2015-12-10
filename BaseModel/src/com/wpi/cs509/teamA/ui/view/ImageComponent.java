@@ -7,6 +7,7 @@ import java.awt.Image;
 import javax.swing.JComponent;
 
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 
@@ -49,14 +50,6 @@ public class ImageComponent extends JComponent {
 	}
 
 
-	public void clearText() {
-
-	}
-
-	public void paintText() {
-
-	}
-
     private boolean testBeforeRepaint()
     {
         try {
@@ -87,7 +80,8 @@ public class ImageComponent extends JComponent {
 	public void paintComponent(Graphics g) {
 
         /// test for null stateContext and null image
-		this.image = model.getCurrentMap().getImage();
+		GeneralMap map = model.getCurrentMap();
+		this.image = map.getImage();
         if ( ! testBeforeRepaint())
             return;
 
@@ -96,7 +90,8 @@ public class ImageComponent extends JComponent {
 
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, imageXpos, imageYpos, image.getWidth(this), image.getHeight(this), this);
+        g2.drawImage(image, imageXpos, imageYpos, Math.round(image.getWidth(this)*map.getDisplayScale()),
+				Math.round(image.getHeight(this)*map.getDisplayScale()), this);
         setForeground(Color.RED);
 
 		{

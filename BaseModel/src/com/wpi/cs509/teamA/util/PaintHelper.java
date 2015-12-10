@@ -240,8 +240,8 @@ public class PaintHelper {
     public static Coordinate backTransferCoor(Coordinate origin) {
         Coordinate result=new Coordinate();
         float scale=model.getCurrentMap().getDisplayScale();
-        result.setX(origin.getX()-ViewManager.getImageComponent().getImageXpos());
-        result.setY(origin.getY()-ViewManager.getImageComponent().getImageYpos());
+        result.setX(Math.round((origin.getX()-ViewManager.getImageComponent().getImageXpos())/scale));
+        result.setY(Math.round((origin.getY()-ViewManager.getImageComponent().getImageYpos())/scale));
 
         return result;
     }
@@ -250,8 +250,8 @@ public class PaintHelper {
    {
 	   Coordinate result=new Coordinate();
 	   float scale=model.getCurrentMap().getDisplayScale();
-	   result.setX(Math.round((origin.getX()+ViewManager.getImageComponent().getImageXpos())*scale));
-	   result.setY(Math.round((origin.getY()+ViewManager.getImageComponent().getImageYpos())*scale));
+	   result.setX(Math.round(origin.getX()*scale+ViewManager.getImageComponent().getImageXpos()));
+	   result.setY(Math.round(origin.getY()*scale+ViewManager.getImageComponent().getImageYpos()));
 	
 	   return result;
 	   
