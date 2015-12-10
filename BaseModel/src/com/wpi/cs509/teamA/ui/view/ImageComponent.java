@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 
 /**
@@ -93,6 +94,7 @@ public class ImageComponent extends JComponent {
         g2.drawImage(image, imageXpos, imageYpos, Math.round(image.getWidth(this)*map.getDisplayScale()),
 				Math.round(image.getHeight(this)*map.getDisplayScale()), this);
         setForeground(Color.RED);
+        PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
 
 		{
 			model.paintOnImage(g2);
