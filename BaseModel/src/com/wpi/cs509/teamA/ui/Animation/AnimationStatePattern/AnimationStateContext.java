@@ -19,7 +19,7 @@ public class AnimationStateContext {
         }
         myState.paintAnimation();
     }
-    
+
     public void switchState(AnimationState state) {
         myState = state;
     }
