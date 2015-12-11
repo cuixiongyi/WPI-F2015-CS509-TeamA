@@ -4,6 +4,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -43,28 +44,30 @@ public class ImageMouseWheelListener implements MouseWheelListener{
         }
 
 
-        changeDisplayScale(scaleInc);
+        changeDisplayScale(scaleInc, new Coordinate(Math.round(e.getX()), Math.round(e.getY())));
     }
 
-    private void changeDisplayScale(float scaleInc) {
+    private void changeDisplayScale(float scaleInc, Coordinate coor) {
         GeneralMap map = model.getCurrentMap();
         map.setDisplayScale(map.getDisplayScale()+scaleInc);
         int xpos = imageComponent.getImageXpos();
         int ypos = imageComponent.getImageYpos();
-        int x = scaleImageOffset(xpos, scaleInc);
-        int y = scaleImageOffset(ypos, scaleInc);
+        int x = scaleImageOffset(xpos, scaleInc, coor.getX());
+        int y = scaleImageOffset(ypos, scaleInc, coor.getY());
 
-        imageComponent.setImageXpos(x);
-        imageComponent.setImageXpos(y);
+//        imageComponent.setImageXpos(x);
+//        imageComponent.setImageXpos(y);
         imageComponent.repaint();
 
 
     }
 
-    private int scaleImageOffset(int x, float scaleInc) {
+    private int scaleImageOffset(int x, float scaleInc, int mouseCoor) {
         float ret = 0;
+        if (mouseCoor - x < 0)
+            mouseCoor = 0;
         if (x > 0) {
-            ret = (float)x * (1.0f+scaleInc);
+            ret = x - (mouseCoor - x) * (1.0f+scaleInc);
         }
         else {
             ret = (float)x * (1.0f-scaleInc);

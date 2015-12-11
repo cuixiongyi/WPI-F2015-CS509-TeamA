@@ -103,6 +103,8 @@ public class ImageComponent extends JComponent {
             //PaintHelper.paintPath(nodes, g2);
         }
 
+//        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
+//        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
 
 /*
 
