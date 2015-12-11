@@ -265,8 +265,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-    public static String dirtmp = "/BaseModel/src/";
-    //public static String dirtmp = "/src/";
+//    public static String dirtmp = "/BaseModel/src/";
+    public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }
