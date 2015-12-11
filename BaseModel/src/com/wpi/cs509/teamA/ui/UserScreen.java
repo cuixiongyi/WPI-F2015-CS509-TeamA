@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -27,6 +28,7 @@ import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.PopupPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
@@ -45,11 +47,11 @@ import javax.swing.JButton;
 public class UserScreen extends JFrame {
 
 	private static UserScreen userScreen;
-	private JPanel contentPane;
+	private JLayeredPane contentPane;
 	private ImageComponent imgComponent;
     private ViewController controller = null;
     private static JPanel popUpPane;
-    private static int yPos=0;
+    private static int yPos;
 
 
 
@@ -106,7 +108,7 @@ public class UserScreen extends JFrame {
 		// container.setLayout(new BorderLayout());
 
 		this.setBounds(50, 0, 1200, 770);
-		contentPane = new JPanel();
+		contentPane = new  JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -128,10 +130,10 @@ public class UserScreen extends JFrame {
         mainModel.addObserver(viewManager);
         // input panel and components
 
-        inputPanel.setBounds(905, 30, 300, 750);
+        inputPanel.setBounds(905, 0, 300, 750);
         imgComponent.setBounds(0, 0, 900, 750);
-		contentPane.add(inputPanel);
-		contentPane.add(imgComponent);
+		contentPane.add(inputPanel, new Integer(0));
+		contentPane.add(imgComponent,new Integer(0));
 		imgComponent.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
 	
@@ -146,15 +148,16 @@ public class UserScreen extends JFrame {
 //		stateContext.switchUserState(new NormalUserState(stateContext));
 		viewManager.updateView();
 		
-		popUpPane=new JPanel();
-		contentPane.add(popUpPane);
-		popUpPane.setBounds(20,200,100,100);
-		popUpPane.setBackground(Color.RED);
+		popUpPane=new PopupPanel();
+		contentPane.add(popUpPane,new Integer(2));
+//		popUpPane.setSize(100,100);
+//		popUpPane.setBackground(Color.RED);
 //		popUpPane.setOpaque();
 	
-		Timer timer = new Timer(1000/60,new MyActionListener());
+		Timer timer = new Timer(3,new MyActionListener());
 		timer.start();
 		popUpPane.setVisible(true);
+		yPos=700;
 	}
 
 
@@ -163,9 +166,10 @@ public class UserScreen extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if(yPos<600)
-			popUpPane.setLocation(800, yPos++);
-
+			if(yPos>550)
+			{
+			popUpPane.setLocation(400, yPos--);
+			}
 		}
 
 		}
