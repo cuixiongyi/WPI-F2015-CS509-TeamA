@@ -29,8 +29,9 @@ public class ImageKeyboardListener {
 				if (e.isAltDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
 
 					for (GeneralMap mp : model.getMultiMapLists()) {
-
+						
 						PaintHelper.printRoute(mp, mp.getImage());
+						
 
 					}
 				}

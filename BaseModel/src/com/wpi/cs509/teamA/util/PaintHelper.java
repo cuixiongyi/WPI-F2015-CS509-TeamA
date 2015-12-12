@@ -240,7 +240,7 @@ public class PaintHelper {
 		g2.drawImage(image, imageComponent.getImageXpos(), imageComponent.getImageYpos(),
 				Math.round(image.getWidth(imageComponent) * scale), Math.round(image.getHeight(imageComponent) * scale),
 				imageComponent);
-
+		model.paintOnImage(g2);
 	}
 
 	public static synchronized void printRoute(GeneralMap map, BufferedImage image) {
@@ -249,12 +249,14 @@ public class PaintHelper {
 		BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
 				Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = bi.createGraphics();
-		paintEverything(g2, map, image, 1);
+		g2.drawImage(image, 0, 0,
+				Math.round(image.getWidth(imageComponent)), Math.round(image.getHeight(imageComponent) ),
+				imageComponent);
 		paintMultiMaps(g2, map);
 
 		try {
 			ImageIO.write(bi, "PNG", new File("D://" + map.getImageName()));
-			System.out.println(map.getImageName());
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

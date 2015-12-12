@@ -73,13 +73,16 @@ import java.util.Stack;
             if(node.getMap().getMapId()==tmpMapId)
             {
                 singleMapPath.add(node);
+                mapList.add(node.getMap());
             }
             else {
                 multiMapPathLists.add(singleMapPath);
+                
                 singleMapPath=new ArrayList<Node>();
                 singleMapPath.add(node);
                 tmpMapId=node.getMap().getMapId();
                 mapNameList.add(node.getMap().getMapName());
+              
                 mapList.add(node.getMap());
             }
         }

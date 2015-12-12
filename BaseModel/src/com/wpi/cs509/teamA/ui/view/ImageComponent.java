@@ -84,7 +84,7 @@ public class ImageComponent extends JComponent {
 	 
 		Graphics2D g2 = (Graphics2D) g;
 		PaintHelper.paintEverything(g2, map, image,scale);
-		model.paintOnImage(g2);
+	
 		
 		/// CXY test
 		// GeneralMap tmp = stateContext.getCurrentMap();
