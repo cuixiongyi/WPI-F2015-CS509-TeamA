@@ -4,6 +4,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
+import com.wpi.cs509.teamA.util.Coordinate;
 
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -14,7 +15,7 @@ import java.awt.event.MouseWheelListener;
 public class ImageMouseWheelListener implements MouseWheelListener{
 
 
-    static double scaleIncConst = 0.2;
+    static float scaleIncConst = 0.15f;
 
     private ImageComponent imageComponent = null;
     private MainModel model = null;
@@ -43,32 +44,36 @@ public class ImageMouseWheelListener implements MouseWheelListener{
         }
 
 
-        changeDisplayScale(scaleInc);
+        changeDisplayScale(scaleInc, new Coordinate(Math.round(e.getX()), Math.round(e.getY())));
     }
 
-    private void changeDisplayScale(double scaleInc) {
+    private void changeDisplayScale(float scaleInc, Coordinate coor) {
         GeneralMap map = model.getCurrentMap();
-        map.setDisplayScale(map.getDisplayScale()+(float)scaleInc);
-        int x = scaleImageOffset(imageComponent.getImageXpos(), scaleInc);
-        int y = scaleImageOffset(imageComponent.getImageYpos(), scaleInc);
+        map.setDisplayScale(map.getDisplayScale()+scaleInc);
+        int xpos = imageComponent.getImageXpos();
+        int ypos = imageComponent.getImageYpos();
+        int x = scaleImageOffset(xpos, scaleInc, coor.getX());
+        int y = scaleImageOffset(ypos, scaleInc, coor.getY());
 
-        imageComponent.setImageXpos(x);
-        imageComponent.setImageXpos(y);
+//        imageComponent.setImageXpos(x);
+//        imageComponent.setImageXpos(y);
         imageComponent.repaint();
 
 
     }
 
-    private int scaleImageOffset(int x, double scaleInc) {
-        double ret = 0;
+    private int scaleImageOffset(int x, float scaleInc, int mouseCoor) {
+        float ret = 0;
+        if (mouseCoor - x < 0)
+            mouseCoor = 0;
         if (x > 0) {
-            ret = (double)x / (1.0d+scaleInc);
+            ret = x - (mouseCoor - x) * (1.0f+scaleInc);
         }
         else {
-            ret = (double)x / (1.0d-scaleInc);
+            ret = (float)x * (1.0f-scaleInc);
         }
 
-        return (int)Math.round(ret);
+        return Math.round(ret);
     }
 
 }

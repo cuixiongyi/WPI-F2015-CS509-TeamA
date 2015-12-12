@@ -1,5 +1,10 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
+import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.dao.UserAccountDao;
+import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
+import com.wpi.cs509.teamA.exception.PwdIncorrectException;
+import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionAdminUser;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -41,6 +46,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private JButton cancelButton;
 	private ImageComponent imgPanel;
 	private InputPanel inputPanel;
+	private UserAccount user;
 
     private MainModel model;
 
@@ -116,24 +122,41 @@ public class AdminDialog extends JDialog implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(CANCEL))
-			AdminDialog.this.setVisible(false);
+			this.dispose();
 		if (e.getActionCommand().equals(OK)) {
 			// Check password
-			if (isPasswordCorrect(getUsername(),getPassword())) {
-				successfulLogin();			
-				dispose();
-				}
-			else {
-                //TODO add a warning box for wrong password
-				JOptionPane.showMessageDialog(null, "Username or password error.", "Error Message",
+			try{
+				UserAccountDao uad2 = new UserAccountDaoImpl();
+				user = uad2.loginAuthorization(this.getUsername(), this.getPassword());
+				System.out.println("the user's email:" + user.getEmail()+"admin?:"+getIsAdmin());
+				model.setMyAccount(user);
+				successfulLogin();
+				this.dispose();
+			}catch(PwdIncorrectException pie){
+				// pop up a window said incorrect password
+				JOptionPane.showMessageDialog(null, "Incorrect password. Try again.", "Error Message",
 						JOptionPane.ERROR_MESSAGE);
 				passwordField.selectAll();
 				passwordField.setText("");
 				userName.setText("");
-				
-            }
+			}catch(UserAccountNotFoundException uanfe){
+				// pop up a window said cannot find the user account
+				JOptionPane.showMessageDialog(null, "User not exist. Try again.", "Error Message",
+						JOptionPane.ERROR_MESSAGE);
+				passwordField.selectAll();
+				passwordField.setText("");
+				userName.setText("");
+			}
 		}
 	}
+
+	private String getIsAdmin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 	public void successfulLogin() {
 		AdminDialog.this.setVisible(false);
@@ -151,14 +174,6 @@ public class AdminDialog extends JDialog implements ActionListener {
 	 * Checks the passed-in array against the correct password. After this
 	 * method returns, you should invoke eraseArray on the passed-in array.
 	 */
-	private static boolean isPasswordCorrect(String username,String password) {
-		if (username.equals("wpi") && password.equals("goodjob")) {
-            return true;	
-		}
-		else 
-			return false;
-
-	}
 
 	
 	public String getUsername() {

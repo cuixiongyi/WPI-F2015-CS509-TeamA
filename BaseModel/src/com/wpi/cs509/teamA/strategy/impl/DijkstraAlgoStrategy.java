@@ -23,7 +23,6 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	@Override
 	public Stack<Node> getRoute(allEdges alledges) {
 		this.startNodeId = alledges.getStartNode().getId();
-		this.endNodeId = alledges.getEndNode().getId();
 		Graph context = new Graph (alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
@@ -33,24 +32,33 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		
 		Vertex source= new Vertex(); 
 		source=	context.getGraph().get(startNodeId);  //point to the same object
+
+		// what is dij about?
+		Dijkstra dij = new Dijkstra(graph, source);
 		Vertex destination =new Vertex();
-		destination = context.getGraph().get(endNodeId);
-		//NavigableSet<Vertex> q = new TreeSet<>();
-		PriorityQueue<Vertex> q = new PriorityQueue<Vertex>();
-
-		// set-up vertices
-		for (Vertex v : graph.values()) {
-			v.setPrevious((v == source) ? source : null);
-			v.setDist((v == source) ? 0 : Double.MAX_VALUE);
-			q.add(v);
-			//System.out.println("+++"+v.id);
-			//System.out.println(q.size());
-		}
-
-		dijkstra(q);
 		
-		Vertex d= new Vertex();
-		d=destination;
+		if(alledges.getEnd().length==1){
+			this.endNodeId = alledges.getEndNode().getId();
+			destination = context.getGraph().get(endNodeId);
+		}
+		else{
+			double i=Integer.MAX_VALUE;
+			for(Node n: alledges.getEnd()){
+				Vertex des =new Vertex();
+				des=context.getGraph().get(n.getId());
+				if(des.getDist()<i){
+					i=des.getDist();
+					//System.out.println("Des ID: "+ des.getId()+ "\n"+"Des Dis: "+des.getDist());
+					destination = des;
+				}
+			}
+		}
+		return findPathFromDij(source, destination);
+	}
+
+	private Stack<Node> findPathFromDij(Vertex source, Vertex d){
+		//Vertex d= new Vertex();
+		//d=d;
 		//System.out.println(d.getDist());
 		Stack<Node> result= new Stack<Node>();
 		do{
@@ -59,40 +67,5 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		}while(d!=source) ;
 		result.push(source);
 		return result;
-	}
-
-	/** Implementation of dijkstra's algorithm using a binary heap. */
-	private void dijkstra(final PriorityQueue<Vertex> q) {
-		Vertex u, v;
-		while (!q.isEmpty()) {
-
-			u = q.poll(); // vertex with shortest distance (first iteration
-								// will return source)
-			//System.out.println("id is"+u.getId());
-			//System.out.println(u.getDist());
-			//System.out.println(u.getNeighborV().size());
-			//System.out.println(this.endNodeId)
-			if (u.getDist() == Double.MAX_VALUE)
-				break; // we can ignore u (and any other remaining vertices)
-						// since they are unreachable
-
-			// look at distances to each neighbor
-			for (Map.Entry<Vertex, Double> a : u.getNeighborV().entrySet()) {
-				v = a.getKey(); // the neighbor in this iteration
-
-				double alternateDist = u.getDist() + a.getValue();
-				if (alternateDist < v.getDist()) { // shorter path to neighbor
-													// found
-					//System.out.println("+++++");
-					q.remove(v);
-					v.setDist(alternateDist);
-					//System.out.println(v.getId());
-					//System.out.println(v.getDist());
-					v.setPrevious(u);
-					q.add(v);
-					//System.out.println(q.size());
-				}
-			}
 		}
-	}
 }

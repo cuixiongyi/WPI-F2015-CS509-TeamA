@@ -16,6 +16,7 @@ public class NodeIcon {
 
 	private static String labIconName = "Lab_Icon.png";
 	private static String classroomIconName = "Classroom_Icon.png";
+	private static String officeIconName = "Office_Icon.png";
 	private static String restroomIconName = "Restroom_Icon.png";
 	private static String parkingIconName = "Parking_Icon.png";
 	private static String startIconName = "Start_Icon.png";
@@ -24,6 +25,7 @@ public class NodeIcon {
 
 	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
 	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;
+	private static String officeIconFilePath = PaintHelper.getUserDir() + officeIconName;
 	private static String restroomIconFilePath = PaintHelper.getUserDir() + restroomIconName;
 	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;
 	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
@@ -34,6 +36,7 @@ public class NodeIcon {
 	private static BufferedImage classroomIcon;
 	private static BufferedImage restroomIcon;
 	private static BufferedImage parkingIcon;
+	private static BufferedImage officeIcon;
 	private static BufferedImage startIcon;
 	private static BufferedImage endIcon;
 
@@ -45,6 +48,7 @@ public class NodeIcon {
 		try {
 			labIcon = ImageIO.read(new FileInputStream(labIconFilePath));
 			classroomIcon = ImageIO.read(new FileInputStream(classroomIconFilePath));
+			officeIcon = ImageIO.read(new FileInputStream(officeIconFilePath));
 			restroomIcon = ImageIO.read(new FileInputStream(restroomIconFilePath));
 			parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
 			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
@@ -90,7 +94,7 @@ public class NodeIcon {
 			return classroomIcon;
 		}
 		case OFFICE: {
-			return classroomIcon;
+			return officeIcon;
 		}
 		case MEETINGROOM: {
 			return classroomIcon;
@@ -113,45 +117,12 @@ public class NodeIcon {
 
 	
 
-	
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setLabIcon(BufferedImage image) {
-		this.labIcon = image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setClassroomIcon(BufferedImage image) {
-		this.classroomIcon = image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setRestroomIcon(BufferedImage image) {
-		this.restroomIcon = image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setParkingIcon(BufferedImage image) {
-		this.parkingIcon = image;
-	}
-
 	/**
 	 * @param image
 	 *            the image to set
 	 */
 	public void setStartIcon(BufferedImage image) {
-		this.startIcon = image;
+		NodeIcon.startIcon = image;
 	}
 
 	/**
@@ -159,7 +130,49 @@ public class NodeIcon {
 	 *            the image to set
 	 */
 	public void setEndIcon(BufferedImage image) {
-		this.endIcon = image;
+		NodeIcon.endIcon = image;
+	}
+
+	/**
+	 * @return the labIcon
+	 */
+	public static BufferedImage getLabIcon() {
+		return labIcon;
+	}
+
+	/**
+	 * @return the classroomIcon
+	 */
+	public static BufferedImage getClassroomIcon() {
+		return classroomIcon;
+	}
+
+	/**
+	 * @return the restroomIcon
+	 */
+	public static BufferedImage getRestroomIcon() {
+		return restroomIcon;
+	}
+
+	/**
+	 * @return the parkingIcon
+	 */
+	public static BufferedImage getParkingIcon() {
+		return parkingIcon;
+	}
+
+	/**
+	 * @return the officeIcon
+	 */
+	public static BufferedImage getOfficeIcon() {
+		return officeIcon;
+	}
+
+	/**
+	 * @param officeIcon the officeIcon to set
+	 */
+	public static void setOfficeIcon(BufferedImage officeIcon) {
+		NodeIcon.officeIcon = officeIcon;
 	}
 
 

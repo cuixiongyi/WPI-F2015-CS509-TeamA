@@ -20,13 +20,11 @@ import java.util.List;
 public class MouseActionEditNode extends MouseActionState {
 //	private JToggleButton btnMngNode; 	
 
-    private List<Node> nodesToPaint;
 
 
     public MouseActionEditNode(MainModel pMM) {
         super( pMM);
 
-        nodesToPaint = new ArrayList<>();
 
         model.cleanUpRoute();
 
@@ -71,6 +69,5 @@ public class MouseActionEditNode extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
 
         PaintHelper.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
-        PaintHelper.paintNodes(nodesToPaint, g2, PaintHelper.DrawStyleEnum.NewNode);
     }
 }

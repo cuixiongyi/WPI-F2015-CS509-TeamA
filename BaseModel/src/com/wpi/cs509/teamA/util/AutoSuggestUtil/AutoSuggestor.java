@@ -26,6 +26,7 @@ import javax.swing.event.DocumentListener;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.newfeature.SearchSupply;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
@@ -434,24 +435,24 @@ public class AutoSuggestor {
 			return false;
 		}
 	
-//		SearchSupply dictionary = new SearchSupply();
-//		Map<String, Node> nodeMap = dictionary.getSearchSupply(typedWord);
-//		Set<Entry<String, Node>> stringSet = nodeMap.entrySet();
-//		Iterator<Entry<String, Node>> iter = stringSet.iterator();
+		SearchSupply dictionary = new SearchSupply();
+		Map<String, NodeForSearch> nodeMap = dictionary.getSearchSupply(typedWord);
+		Set<Entry<String, NodeForSearch>> stringSet = nodeMap.entrySet();
+		Iterator<Entry<String, NodeForSearch>> iter = stringSet.iterator();
 	
-//		boolean suggestionAdded = false;
-//		while (iter.hasNext()) {
-//			Entry<String, Node> nodeInfo = iter.next();
-//			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue(), suggestorEnum);
-//			suggestionAdded = true;
-//
-//		}
+		boolean suggestionAdded = false;
+		while (iter.hasNext()) {
+			Entry<String, NodeForSearch> nodeInfo = iter.next();
+			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue().getNode(), nodeInfo.getValue().getNode_label());
+			suggestionAdded = true;
+
+		}
 		
 		//hack
-		Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
-		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.History);
-		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Professor);
-		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Location);
+//		Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
+//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.History);
+//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Professor);
+//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Location);
 		
 		
 		return true;
