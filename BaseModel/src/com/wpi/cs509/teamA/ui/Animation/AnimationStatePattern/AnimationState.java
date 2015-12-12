@@ -20,25 +20,40 @@ public abstract class AnimationState {
         object = obj;
     }
 
-    public abstract void execute();
+    public abstract AnimationStateEnum execute();
 
     public void updateBaseLine() {
         if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
             baseLine = (int)object.getParent().getLocation().getY() + object.getParent().getHeight();
+        }
+        else if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
+            baseLine = (int)object.getParent().getLocation().getX();
 
         }
     }
     public final void setToMiddleBottom() {
         setToBottom();
-        setToMiddle();
+        setToHorizontal_Middle();
     }
-    public final void setToMiddle() {
+    public final void setToVertical_Middle() {
+        Point parentL = object.getParent().getLocation();
+        int y = (int)parentL.getY() + object.getParent().getHeight()/2 - object.getPanel().getHeight()/2;
+        object.getPanel().setLocation( (int)object.getPanel().getLocation().getX(), y);
+
+    }
+    public final void setToLeft() {
+        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine - object.getPanel().getWidth());
+
+    }
+
+    public final void setToHorizontal_Middle() {
         Point parentL = object.getParent().getLocation();
 
         int x = (int)parentL.getX() + object.getParent().getWidth()/2 - object.getPanel().getWidth()/2;
         object.getPanel().setLocation(x, (int)object.getPanel().getLocation().getY());
 
     }
+
     public final void setToBottom() {
         object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine);
 

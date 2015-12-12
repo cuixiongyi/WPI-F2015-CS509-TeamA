@@ -13,8 +13,9 @@ public class AnimationStateStayIn extends AnimationState{
     }
 
 @Override
-public void execute() {
+public AnimationStateEnum execute() {
 
+    return AnimationStateEnum.SLIDING_IN;
 }
 
 

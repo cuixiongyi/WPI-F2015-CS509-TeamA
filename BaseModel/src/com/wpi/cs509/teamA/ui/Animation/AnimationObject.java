@@ -42,7 +42,7 @@ public class AnimationObject {
         stateContext.getMyState().updateBaseLine();
         if (AnimationPosition.BOTTOMM_MIDDLE == position) {
             stateContext.getMyState().setToBottom();
-            stateContext.getMyState().setToMiddle();
+            stateContext.getMyState().setToHorizontal_Middle();
 
         }
 
