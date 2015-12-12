@@ -334,7 +334,7 @@ public class PaintHelper {
 		PaintHelper.model = model;
 	}
 
-	// public static String dirtmp = "/BaseModel/src/";
+//	 public static String dirtmp = "/BaseModel/src/";
 	public static String dirtmp = "/src/";
 
 	public static String getUserDir() {
