@@ -27,7 +27,7 @@ public class ImageComponent extends JComponent {
 
 	private MainModel model = null;
 
-	private Image image;
+	private BufferedImage image;
 
 	private int imageXpos = 0;
 	private int imageYpos = 0;
@@ -74,6 +74,7 @@ public class ImageComponent extends JComponent {
 		/// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
 		image = map.getImage();
+		float scale = map.getDisplayScale();
 		
 		if (!testBeforeRepaint())
 			return;
@@ -82,7 +83,7 @@ public class ImageComponent extends JComponent {
 		// no need to paint the image again
 	 
 		Graphics2D g2 = (Graphics2D) g;
-		PaintHelper.paintEverything(g2, map);
+		PaintHelper.paintEverything(g2, map, image,scale);
 
 		/// CXY test
 		// GeneralMap tmp = stateContext.getCurrentMap();

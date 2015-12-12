@@ -131,7 +131,10 @@ public class PaintHelper {
                 return false; 
             }
             Coordinate coorTrans = transferCoor(node.getLocation());
+           
             int xCoor = coorTrans.getX() - (image.getWidth()/2);
+            
+            
             int yCoor = coorTrans.getY() - (image.getHeight()/2);
             g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
                     image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
@@ -224,35 +227,46 @@ public class PaintHelper {
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
-    public static void paintEverything(Graphics2D g2,GeneralMap map) {
+    public static void paintEverything(Graphics2D g2,GeneralMap map, BufferedImage image, float scale) {
        
-        BufferedImage image = map.getImage();
+        
         ImageComponent imageComponent = ViewManager.getImageComponent();
 
         g2.drawImage(image, imageComponent.getImageXpos(),
                 imageComponent.getImageYpos(),
-                Math.round(image.getWidth(imageComponent)*map.getDisplayScale()),
-                Math.round(image.getHeight(imageComponent)*map.getDisplayScale()), imageComponent);
+                Math.round(image.getWidth(imageComponent)*scale),
+                Math.round(image.getHeight(imageComponent)*scale), imageComponent);
         model.paintOnImage(g2);
     }
     
 
-    public static synchronized void printRoute(GeneralMap map) {
-    	System.out.println("memeda");
-    	 BufferedImage image = map.getImage();
+    public static synchronized void printRoute(GeneralMap map,BufferedImage image) {
+    	
          ImageComponent imageComponent = ViewManager.getImageComponent();
         BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
                 Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
     	Graphics2D g2 = bi.createGraphics();
-       paintEverything(g2, map);
+    	paintEverything(g2, map, image, 1);
+
+
        try {
-			ImageIO.write(bi, "PNG", new File("C://"+map.getImageName()));
+			ImageIO.write(bi, "PNG", new File("D://"+map.getImageName()));
+			System.out.println(map.getImageName());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
        
        
     }
+    
+    public static void paintMultiMaps(Graphics2D g2, GeneralMap map){
+    	PaintHelper.paintRoute(g2 , map);
+    	
+    	 PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+      PaintHelper.paintStartEndNode(g2);
+    }
+//  
+    
     public static void paintRoute(Graphics2D g2) {
 //        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
 //        if (null != multiMapPath && 0 != multiMapPath.size()) {
@@ -267,6 +281,20 @@ public class PaintHelper {
 
 
     }
+    public static void paintRoute(Graphics2D g2, GeneralMap map) {
+//      ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
+//      if (null != multiMapPath && 0 != multiMapPath.size()) {
+//          int idx = model.getCurrentMapID()-1;
+//          PaintHelper.paintPath(multiMapPath.get(idx), g2);
+//
+//      }
+      ArrayList<Node> path = model.getRouteOnMap(map);
+      if (null == path)
+          return;
+      PaintHelper.paintPath(path, g2);
+
+
+  }
 
    public static void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {

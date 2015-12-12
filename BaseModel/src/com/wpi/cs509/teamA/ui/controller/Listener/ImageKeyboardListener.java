@@ -26,12 +26,12 @@ public class ImageKeyboardListener {
 
 			public boolean postProcessKeyEvent(KeyEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("hehe");
+			
 				if (e.isAltDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
 
 					for (GeneralMap mp : model.getMultiMapLists()) {
 
-						PaintHelper.printRoute(mp);
+						PaintHelper.printRoute(mp,mp.getImage());
 
 					}
 				}
