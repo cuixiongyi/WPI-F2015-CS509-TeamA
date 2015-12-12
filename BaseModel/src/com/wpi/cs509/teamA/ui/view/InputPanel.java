@@ -91,11 +91,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         this.add(tabbedPane,BorderLayout.CENTER);
         
         tabbedPane.setBounds(0,230,300,550);
-        tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        tabbedPane.addTab("Search Result",searchResultTab);
-        tabbedPane.addTab("Location Filter",filterTab);
-        tabbedPane.addTab("Admin Tools",adminTab);
+        tabbedPane.addTab("Result",searchResultTab);
+        tabbedPane.addTab("Filter",filterTab);
+        tabbedPane.addTab("Admin",adminTab);
 
         //login panel
         this.adminLogin = new JButton(UIConstant.LOGIN);
@@ -158,10 +158,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         //tab panel-search result
         mapList = new JList<>();
-        mapList.setVisible(false);
-        JScrollPane mapListScroll = new JScrollPane(mapList);
-        mapListScroll.setBounds(50, 500, 200, 200);
-        searchResultTab.add(mapListScroll);
+        mapList.setPreferredSize(new Dimension(250, 450));
+        searchResultTab.add(mapList);
 
 
         //tab panel-filter

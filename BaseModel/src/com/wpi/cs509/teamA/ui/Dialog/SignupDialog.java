@@ -119,7 +119,9 @@ public class SignupDialog extends JDialog implements ActionListener  {
 		buttonPane.add(cancelButton);
 		
 		adminCheck=new JCheckBox("Admin");
+		adminCheck.addActionListener(this);
 		buttonPane.add(adminCheck);
+		
         
 		
         getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -134,6 +136,12 @@ public class SignupDialog extends JDialog implements ActionListener  {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==adminCheck)
+		{
+			if(adminCheck.isSelected())
+				setIsAdmin(true);
+			else setIsAdmin(false);
+		}
 		if (e.getActionCommand().equals("CANCEL"))
 		{
 			SignupDialog.this.setVisible(false);
@@ -143,7 +151,7 @@ public class SignupDialog extends JDialog implements ActionListener  {
 			// Check password
 			if (isPasswordSame(getPassword(passwordField),getPassword(passwordField2))) {
 				SignupDialog.this.setVisible(false);
-				if(saveAccount(getUsername(),getPassword(passwordField),getEmail(),isAdmin))
+				if(saveAccount(getUsername(),getPassword(passwordField),getEmail(),getIsAdmin()))
 				{
 					JOptionPane.showMessageDialog(null, "Congratulations, you can log in now.", "Sign up succefful.",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -217,6 +225,14 @@ public class SignupDialog extends JDialog implements ActionListener  {
 
     public String getPassword(JPasswordField passwordField) {
         return new String(passwordField.getPassword());
+    }
+    
+    public boolean getIsAdmin(){
+    	return isAdmin;
+    }
+    
+    public void setIsAdmin(boolean bo){
+    	isAdmin=bo;
     }
 
 }

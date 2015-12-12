@@ -70,43 +70,7 @@ public class UserScreen extends JFrame {
 	 */
 	private UserScreen() {
 
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
-//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-//				| UnsupportedLookAndFeelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
-		}
-
-		UIManager.put("nimbusBase", new Color(50, 50, 50));
-		UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
-		UIManager.put("control", new Color(142, 143, 145));
-		UIManager.put("text", new Color(255,255,255));
-		UIManager.put("TextField.background", new Color(180, 180, 180));
-
-        UIManager.put("List.background", new Color(180, 180, 180));
-        UIManager.put("PasswordField.background", new Color(180, 180, 180));
-        UIManager.put("TextField.disabled", new Color(180, 180, 180));
-        UIManager.put("TextField.disabledText", new Color(255,255,255));
-        UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
-        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-		// container.setLayout(new BorderLayout());
-
 		this.setBounds(50, 0, 1200, 770);
 		contentPane = new  JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
