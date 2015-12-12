@@ -128,7 +128,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 			try{
 				UserAccountDao uad2 = new UserAccountDaoImpl();
 				user = uad2.loginAuthorization(this.getUsername(), this.getPassword());
-				System.out.println("the user's email:" + user.getEmail());
+				System.out.println("the user's email:" + user.getEmail()+"admin?:"+getIsAdmin());
 				model.setMyAccount(user);
 				successfulLogin();
 				this.dispose();
@@ -150,6 +150,14 @@ public class AdminDialog extends JDialog implements ActionListener {
 		}
 	}
 
+	private String getIsAdmin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 	public void successfulLogin() {
 		AdminDialog.this.setVisible(false);
 		inputPanel.incrementAdminClicked();
@@ -166,37 +174,6 @@ public class AdminDialog extends JDialog implements ActionListener {
 	 * Checks the passed-in array against the correct password. After this
 	 * method returns, you should invoke eraseArray on the passed-in array.
 	 */
-//	private void isPasswordCorrect(String username,String password) {
-//		if (username.equals("wpi") && password.equals("goodjob")) {
-//            return true;	
-//		}
-//		else 
-//		
-//		try{
-//			UserAccountDao uad2 = new UserAccountDaoImpl();
-//			user = uad2.loginAuthorization(username, password);
-//			System.out.println("the user's email:" + user.getEmail());
-//		}catch(PwdIncorrectException pie){
-//			// pop up a window said incorrect password
-//			JOptionPane.showMessageDialog(null, "Incorrect password. Try again.", "Error Message",
-//					JOptionPane.ERROR_MESSAGE);
-//			passwordField.selectAll();
-//			passwordField.setText("");
-//			userName.setText("");
-//		}catch(UserAccountNotFoundException uanfe){
-//			// pop up a window said cannot find the user account
-//			JOptionPane.showMessageDialog(null, "User not exist. Try again.", "Error Message",
-//					JOptionPane.ERROR_MESSAGE);
-//			passwordField.selectAll();
-//			passwordField.setText("");
-//			userName.setText("");
-//		}finally{
-//			successfulLogin();
-//			this.dispose();
-//		}
-//		
-//
-//	}
 
 	
 	public String getUsername() {
