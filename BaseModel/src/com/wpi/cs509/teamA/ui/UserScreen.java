@@ -50,8 +50,8 @@ public class UserScreen extends JFrame {
 	private JLayeredPane contentPane;
 	private ImageComponent imgComponent;
     private ViewController controller = null;
-    private static JPanel popUpPane;
-    private static int yPos;
+    private  JPanel popUpPane;
+    private  int yPos;
 
 
 
@@ -150,10 +150,6 @@ public class UserScreen extends JFrame {
 		
 		popUpPane=new PopupPanel();
 		contentPane.add(popUpPane,new Integer(2));
-//		popUpPane.setSize(100,100);
-//		popUpPane.setBackground(Color.RED);
-//		popUpPane.setOpaque();
-	
 		Timer timer = new Timer(3,new MyActionListener());
 		timer.start();
 		popUpPane.setVisible(true);
@@ -162,7 +158,7 @@ public class UserScreen extends JFrame {
 
 
 	
-	public static class MyActionListener implements ActionListener{
+	public class MyActionListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {

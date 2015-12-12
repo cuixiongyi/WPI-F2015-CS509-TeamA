@@ -38,6 +38,7 @@ public final class MainModel extends StateContext{
     public MainModel() {
 
         this.myAccount = new UserAccount();
+        myAccount=null;
         this.currentMap = null;
 //        multiMapPathLists = new ArrayList<ArrayList<Node>>();
         setCurrentMapID(1);
@@ -79,9 +80,6 @@ public final class MainModel extends StateContext{
     }
 
     public synchronized void setMyAccount(UserAccount pAccount) {
-        if (null == pAccount) {
-            pAccount = new UserAccount();
-        }
         this.myAccount = pAccount;
         modelChanged();
 
