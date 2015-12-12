@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.dao.UserAccountDao;
+import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
@@ -141,9 +143,14 @@ public class SignupDialog extends JDialog implements ActionListener  {
 			// Check password
 			if (isPasswordSame(getPassword(passwordField),getPassword(passwordField2))) {
 				SignupDialog.this.setVisible(false);
-				saveAccount(getUsername(),getPassword(passwordField),getEmail(),isAdmin);
-				JOptionPane.showMessageDialog(null, "Congratulations, you can log in now.", "Sign up succefful.",
-						JOptionPane.INFORMATION_MESSAGE);
+				if(saveAccount(getUsername(),getPassword(passwordField),getEmail(),isAdmin))
+				{
+					JOptionPane.showMessageDialog(null, "Congratulations, you can log in now.", "Sign up succefful.",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				else JOptionPane.showMessageDialog(null, "UserName Exist. Try again.", "Error Message",
+						JOptionPane.ERROR_MESSAGE);
+				
 				dispose();
 			} else {
 				JOptionPane.showMessageDialog(null, "Password not the same. Try again.", "Error Message",
@@ -161,12 +168,15 @@ public class SignupDialog extends JDialog implements ActionListener  {
 		
 	}
 	
-	private void saveAccount(String username, String password, String email, boolean isAdmin)
+	private boolean saveAccount(String username, String password, String email, boolean isAdmin)
 	{
 		UserAccount account=new UserAccount();
 		account.setUsername(username);
 		account.setPassword(password);
 		account.setAdmin(isAdmin);
+		account.setEmail(email);
+		UserAccountDao uad = new UserAccountDaoImpl();
+		return uad.addAccountToDatabase(account);
 		
 	}
 	

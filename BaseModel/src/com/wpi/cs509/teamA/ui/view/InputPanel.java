@@ -261,6 +261,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// If it is the admin, give it the admin mouse click event. If
 		// not, give it normal user
 		if (e.getSource() == getBtnLogin()) {
+			
 		}
 		if (e.getSource() == signUp) {
 			
