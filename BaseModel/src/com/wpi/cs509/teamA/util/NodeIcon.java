@@ -117,54 +117,12 @@ public class NodeIcon {
 
 	
 
-	
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setofficeIcon(BufferedImage image) {
-		this.officeIcon = image;
-	}
-
-	
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setLabIcon(BufferedImage image) {
-		this.labIcon = image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setClassroomIcon(BufferedImage image) {
-		this.classroomIcon = image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setRestroomIcon(BufferedImage image) {
-		this.restroomIcon = image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setParkingIcon(BufferedImage image) {
-		this.parkingIcon = image;
-	}
-
 	/**
 	 * @param image
 	 *            the image to set
 	 */
 	public void setStartIcon(BufferedImage image) {
-		this.startIcon = image;
+		NodeIcon.startIcon = image;
 	}
 
 	/**
@@ -172,7 +130,49 @@ public class NodeIcon {
 	 *            the image to set
 	 */
 	public void setEndIcon(BufferedImage image) {
-		this.endIcon = image;
+		NodeIcon.endIcon = image;
+	}
+
+	/**
+	 * @return the labIcon
+	 */
+	public static BufferedImage getLabIcon() {
+		return labIcon;
+	}
+
+	/**
+	 * @return the classroomIcon
+	 */
+	public static BufferedImage getClassroomIcon() {
+		return classroomIcon;
+	}
+
+	/**
+	 * @return the restroomIcon
+	 */
+	public static BufferedImage getRestroomIcon() {
+		return restroomIcon;
+	}
+
+	/**
+	 * @return the parkingIcon
+	 */
+	public static BufferedImage getParkingIcon() {
+		return parkingIcon;
+	}
+
+	/**
+	 * @return the officeIcon
+	 */
+	public static BufferedImage getOfficeIcon() {
+		return officeIcon;
+	}
+
+	/**
+	 * @param officeIcon the officeIcon to set
+	 */
+	public static void setOfficeIcon(BufferedImage officeIcon) {
+		NodeIcon.officeIcon = officeIcon;
 	}
 
 
