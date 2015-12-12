@@ -115,18 +115,11 @@ public class PaintHelper {
        if (null == node) {
            return false;
        }
-	   		if (node == model.getStartNode())
-	   		{
-	   			image = NodeIcon.getStartIcon();
-	   		}
-	   		else if (node == model.getEndNode())
-	   		{
-	   			image = NodeIcon.getEndIcon();
-	   		}
-	   		else
+	   		if (model.hasFilter(node.getNodeType()))
 	   		{
 	   			image = NodeIcon.getImage(node);
 	   		}
+	   		
             if (null == image) {
                 return false; 
             }
@@ -271,8 +264,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-    public static String dirtmp = "/BaseModel/src/";
-//    public static String dirtmp = "/src/";
+    //public static String dirtmp = "/BaseModel/src/";
+   public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }
