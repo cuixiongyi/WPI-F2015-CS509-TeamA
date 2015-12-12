@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wpi.cs509.teamA.bean.Edge;
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 
+import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 public class PaintHelper {
@@ -218,6 +220,17 @@ public class PaintHelper {
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
+    public static void paintEverything(Graphics2D g2) {
+        GeneralMap map = model.getCurrentMap();
+        BufferedImage image = map.getImage();
+        ImageComponent imageComponent = ViewManager.getImageComponent();
+
+        g2.drawImage(image, imageComponent.getImageXpos(),
+                imageComponent.getImageYpos(),
+                Math.round(image.getWidth(imageComponent)*map.getDisplayScale()),
+                Math.round(image.getHeight(imageComponent)*map.getDisplayScale()), imageComponent);
+        model.paintOnImage(g2);
+    }
     public static void paintRoute(Graphics2D g2) {
 //        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
 //        if (null != multiMapPath && 0 != multiMapPath.size()) {
@@ -265,8 +278,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-//    public static String dirtmp = "/BaseModel/src/";
-    public static String dirtmp = "/src/";
+    public static String dirtmp = "/BaseModel/src/";
+//    public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }

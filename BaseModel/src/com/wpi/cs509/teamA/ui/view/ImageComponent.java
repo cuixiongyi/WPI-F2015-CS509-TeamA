@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 
 /**
@@ -90,18 +91,13 @@ public class ImageComponent extends JComponent {
 
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, imageXpos, imageYpos, Math.round(image.getWidth(this)*map.getDisplayScale()),
-				Math.round(image.getHeight(this)*map.getDisplayScale()), this);
-        setForeground(Color.RED);
+        PaintHelper.paintEverything(g2);
 
-		{
-			model.paintOnImage(g2);
 
             /// CXY test
             //GeneralMap tmp = stateContext.getCurrentMap();
             //List<Node> nodes = tmp.getNodes();
             //PaintHelper.paintPath(nodes, g2);
-        }
 
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
