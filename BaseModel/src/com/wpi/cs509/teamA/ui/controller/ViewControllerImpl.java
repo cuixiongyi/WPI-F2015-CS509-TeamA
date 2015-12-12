@@ -20,21 +20,23 @@ import java.util.Stack;
  class ViewControllerImpl extends ViewControllerBase{
 
     public void clickLogin() {
-        if (model.ifLoginAdmin()) {
+        if (model.getMyAccount()==null) {
             AdminDialog adminDialog = new AdminDialog(model, inputPanel);
             adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
             adminDialog.setVisible(inputPanel.isFocusable());
             // stateContext.switchToAdminUser();
             ViewManager.updateView();
 
-        } else {
+        } else  {
 
             JOptionPane.showMessageDialog(null, "You have logged out");
+            model.setMyAccount(null);
             Database.InitFromDatabase();
             // InputPanel.this.getBtnNeighborManage().setVisible(false);
             inputPanel.getBtnLogin().setText(UIConstant.LOGIN);
             // InputPanel.this.getBtnSynchronize().setVisible(false);
             model.switchToState(new MouseActionSelectNode(model));
+            
             ViewManager.updateView();
 
         }

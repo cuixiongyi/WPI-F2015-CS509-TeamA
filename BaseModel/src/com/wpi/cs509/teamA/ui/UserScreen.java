@@ -3,14 +3,20 @@ package com.wpi.cs509.teamA.ui;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
@@ -21,6 +27,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -30,6 +37,8 @@ import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -45,8 +54,8 @@ public class UserScreen extends JFrame {
 	private JLayeredPane contentPane;
 	private ImageComponent imgComponent;
     private ViewController controller = null;
-    private static JPanel popUpPane;
-    private static int yPos;
+    private  JPanel popUpPane;
+    private  int yPos;
 
 
 
@@ -65,49 +74,14 @@ public class UserScreen extends JFrame {
 	 */
 	private UserScreen() {
 
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
-//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-//				| UnsupportedLookAndFeelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
-		}
-
-		UIManager.put("nimbusBase", new Color(50, 50, 50));
-		UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
-		UIManager.put("control", new Color(142, 143, 145));
-		UIManager.put("text", new Color(255,255,255));
-		UIManager.put("TextField.background", new Color(180, 180, 180));
-
-        UIManager.put("List.background", new Color(180, 180, 180));
-        UIManager.put("PasswordField.background", new Color(180, 180, 180));
-        UIManager.put("TextField.disabled", new Color(180, 180, 180));
-        UIManager.put("TextField.disabledText", new Color(255,255,255));
-        UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
-        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-		// container.setLayout(new BorderLayout());
 
 		this.setBounds(50, 0, 1200, 770);
 		contentPane = new  JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 
 /**
  * set dependence
@@ -149,15 +123,10 @@ public class UserScreen extends JFrame {
         AnimationObject AO = viewManager.getAC().checkObjectExist(popUpPane);
         AO.switchState(new AnimationStateSlidingUp(AO));
 
-//        viewManager.getAC().
-//		popUpPane.setSize(100,100);
-//		popUpPane.setBackground(Color.RED);
-//		popUpPane.setOpaque();
-	
 		popUpPane.setVisible(true);
-		yPos=700;
 	}
 
+	
 
 
 	public static UserScreen getUserScreen() {
