@@ -17,6 +17,8 @@ import java.util.List;
  */
 public final class MainModel extends StateContext {
 
+public static MainModel staticModel = null;
+	
 	private UserAccount myAccount;
 	private GeneralMap currentMap = null;
 	private List<NodeType> iconFilter = null;
@@ -25,7 +27,10 @@ public final class MainModel extends StateContext {
 
 	private Node focusNode;
 
+	private ArrayList<ArrayList<Node>> multiMapPathListsForEachMap = null;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
+
+	private ArrayList<GeneralMap> multiMapLists = null;
 
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
@@ -39,7 +44,7 @@ public final class MainModel extends StateContext {
 		myAccount = null;
 		this.currentMap = null;
 		this.iconFilter = new ArrayList<NodeType>();
-		// multiMapPathLists = new ArrayList<ArrayList<Node>>();
+		// multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 
 	}
@@ -68,11 +73,13 @@ public final class MainModel extends StateContext {
 	public synchronized void cleanUpRoute() {
 		this.setStartNode(null);
 		this.setEndNode(null);
+		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
+
 	}
 
 	public synchronized ArrayList<Node> getRouteOnCurrentMap() {
-		// ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathLists();
+		// ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathListsForEachMap();
 		// if (null != multiMapPath && 0 != multiMapPath.size()) {
 		// int idx = getCurrentMapID()-1;
 		// return multiMapPath.get(idx);
@@ -81,7 +88,7 @@ public final class MainModel extends StateContext {
 		ArrayList<Node> ret = null;
 		try {
 			int idx = getCurrentMapID() - 1;
-			ret = getMultiMapPathLists().get(idx);
+			ret = getMultiMapPathListsForEachMap().get(idx);
 		} catch (Exception e) {
 			return null;
 		}
@@ -144,7 +151,7 @@ public final class MainModel extends StateContext {
 		if (pStartNode == this.startNode) {
 			return;
 		}
-		this.multiMapPathLists = null;
+		this.multiMapPathListsForEachMap = null;
 
 		this.startNode = pStartNode;
 		modelChanged();
@@ -160,13 +167,14 @@ public final class MainModel extends StateContext {
 		modelChanged();
 	}
 
-	public synchronized ArrayList<ArrayList<Node>> getMultiMapPathLists() {
-		return multiMapPathLists;
+	public synchronized ArrayList<ArrayList<Node>> getMultiMapPathListsForEachMap() {
+		return multiMapPathListsForEachMap;
 	}
 
-	public synchronized void setMultiMapPathLists(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
+	public synchronized void setMultiMapPathListsForEachMap(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
 		List<GeneralMap> maps = Database.getAllMapFromDatabase();
-		this.multiMapPathLists = new ArrayList<ArrayList<Node>>();
+		this.setMultiMapPathLists(pMultiMapPathLists);
+		this.multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 
 		for (int ii = 1; ii <= maps.size(); ++ii) {
 			ArrayList<Node> path = new ArrayList<Node>();
@@ -180,7 +188,7 @@ public final class MainModel extends StateContext {
 			if (-1 != idx) {
 				path = pMultiMapPathLists.get(idx);
 			}
-			this.multiMapPathLists.add(path);
+			this.multiMapPathListsForEachMap.add(path);
 		}
 		modelChanged();
 	}
@@ -212,8 +220,45 @@ public final class MainModel extends StateContext {
 
 	}
 
+	public ArrayList<ArrayList<Node>> getMultiMapPathLists() {
+		return multiMapPathLists;
+	}
+
+	public void setMultiMapPathLists(ArrayList<ArrayList<Node>> multiMapPathLists) {
+		this.multiMapPathLists = multiMapPathLists;
+	}
+
+public synchronized void setFocusNode(Node focusNode) {
+		this.focusNode = focusNode;
+		modelChanged();
+
+	}
+
+	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
+		if(multiMapLists==null){
+			ArrayList<GeneralMap> result = new ArrayList<GeneralMap>();
+			result.add(this.getCurrentMap());
+			return result;
+		}
+		
+		return multiMapLists;
+	}
+
+	public synchronized void setMultiMapLists(ArrayList<GeneralMap> multiMapLists) {
+		this.multiMapLists = multiMapLists;
+		modelChanged();
+
+	}
+
 	public synchronized boolean ifLoginAdmin() {
 		return false;
 	}
 
+    public static MainModel getStaticModel() {
+    	return staticModel;
+    }
+    public static void setStaticModel(MainModel pModel) {
+    	 staticModel = pModel;
+    }
+    
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JComponent;
 
 
@@ -28,12 +30,12 @@ public class ImageComponent extends JComponent {
 
 	private MainModel model = null;
 
-	private Image image;
+	private BufferedImage image;
 
-	private int imageXpos=0;
-	private int imageYpos=0;
-	private int imageStartXpos=0;
-	private int imageStartYpos=0;
+	private int imageXpos = 0;
+	private int imageYpos = 0;
+	private int imageStartXpos = 0;
+	private int imageStartYpos = 0;
 	private int pressxPos;
 	private int pressyPos;
 
@@ -82,28 +84,37 @@ public class ImageComponent extends JComponent {
 
         /// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
-		this.image = map.getImage();
-        if ( ! testBeforeRepaint())
-            return;
+		image = map.getImage();
+		float scale = map.getDisplayScale();
+		
+		if (!testBeforeRepaint())
+			return;
 
 		// if isInitilized
 		// no need to paint the image again
+	 
+		Graphics2D g2 = (Graphics2D) g;
+		PaintHelper.paintEverything(g2, map, image,scale);
+	
+	
+		
+		/// CXY test
+		// GeneralMap tmp = stateContext.getCurrentMap();
+		// List<Node> nodes = tmp.getNodes();
+		// PaintHelper.paintPath(nodes, g2);
 
+		// g.drawString("XY", this.getImageXpos(), this.getImageYpos());
+		// g.drawString("Start", this.getImageStartXpos(),
+		// this.getImageStartYpos());
 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, imageXpos, imageYpos, Math.round(image.getWidth(this)*map.getDisplayScale()),
-				Math.round(image.getHeight(this)*map.getDisplayScale()), this);
-        setForeground(Color.RED);
-        PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+       
+        
 
-		{
-			model.paintOnImage(g2);
             /// CXY test
             //GeneralMap tmp = stateContext.getCurrentMap();
             //List<Node> nodes = tmp.getNodes();
             //PaintHelper.paintPath(nodes, g2);
-        }
-
+        
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
 

@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.bean;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * this class represents all the users, if this user is an admin
@@ -23,7 +24,7 @@ public class UserAccount {
 	 */
 	private boolean isAdmin;
 
-	private HashMap<String, Integer> history;
+	private List<History> history;
 	
 	
 	/** default constructor */
@@ -98,11 +99,11 @@ public class UserAccount {
 		this.isAdmin = isAdmin;
 	}
 	
-	public HashMap<String, Integer> getHistory() {
+	public List<History> getHistory() {
 		return history;
 	}
 
-	public void setHistory(HashMap<String, Integer> history) {
+	public void setHistory(List<History> history) {
 		this.history = history;
 	}
 

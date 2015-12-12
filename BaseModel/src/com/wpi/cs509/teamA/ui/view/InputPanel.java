@@ -30,6 +30,7 @@ import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.MyListCellRenderer;
+import com.wpi.cs509.teamA.util.NodeIcon;
 import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
 
@@ -180,109 +181,116 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 //        mapList.setModel(model);
         
 
+		// tab panel-filter
+		this.classroomFilter = new JButton("Classrooms", new ImageIcon(NodeIcon.getClassroomIcon()));
+		this.officeFilter = new JButton("Offices", new ImageIcon(NodeIcon.getOfficeIcon()));
+		this.restroomFilter = new JButton("Restrooms", new ImageIcon(NodeIcon.getRestroomIcon()));
+		this.labFilter = new JButton("Labs", new ImageIcon(NodeIcon.getLabIcon()));
+		this.parkingFilter = new JButton("Parking", new ImageIcon(NodeIcon.getParkingIcon()));
 
-        //tab panel-filter
-        this.classroomFilter = new JButton("Classrooms");
-        this.officeFilter = new JButton("Offices");
-        this.restroomFilter = new JButton("Restrooms");
-        this.labFilter = new JButton("Labs");
-        this.parkingFilter = new JButton("Parking");
-//        filter.setPreferredSize(new Dimension(250, 450));
-        filterTab.add(classroomFilter);
-        filterTab.add(officeFilter);
-        filterTab.add(restroomFilter);
-        filterTab.add(labFilter);
-        filterTab.add(parkingFilter);
-        
-        
-        
+		ArrayList<JButton> filterButtons = new ArrayList<JButton>();
+		filterButtons.add(classroomFilter);
+		filterButtons.add(officeFilter);
+		filterButtons.add(restroomFilter);
+		filterButtons.add(labFilter);
+		filterButtons.add(parkingFilter);
 
-        //tab panel-admin tool
-        this.btnNeighborManage = new JButton("Edges");
-        btnNeighborManage.setSize(75, 30);
-//        btnNeighborManage.setLocation(80, 380);
+		int filterIconWidth = 255;
+		int filterIconHeight = 50;
+		int filterYspacing = 10;
+		int filterXpos = 15;
+		int filterYpos = 10;
+		int iconTextGap = 30;
+		Font buttonFont = new Font("Arial", Font.BOLD, 20);
 
-//        this.btnNeighborManage.setVisible(false);
-        adminTab.add(btnNeighborManage);
+		for (JButton button : filterButtons) {
+			button.setBounds(filterXpos, filterYpos, filterIconWidth, filterIconHeight);
+			button.setHorizontalAlignment(SwingConstants.LEFT);
+			if (button.equals(officeFilter)) {
+				button.setIconTextGap(iconTextGap - 5);
+			} else if (button.equals(classroomFilter)) {
+				button.setIconTextGap(iconTextGap - 2);
+			} else {
+				button.setIconTextGap(iconTextGap);
+			}
+			button.setFont(buttonFont);
+			filterYpos += filterYspacing + filterIconHeight;
+			filterTab.add(button);
+		}
+
+		// tab panel-admin tool
+		this.btnNeighborManage = new JButton("Edges");
+		btnNeighborManage.setSize(75, 30);
+		// btnNeighborManage.setLocation(80, 380);
+
+		// this.btnNeighborManage.setVisible(false);
+		adminTab.add(btnNeighborManage);
+
+		btnSynchronize = new JButton("Sync");
+		btnSynchronize.addActionListener(this);
+		// btnSynchronize.setVisible(false);
+		btnSynchronize.setBounds(155, 280, 75, 30);
+		adminTab.add(btnSynchronize);
+		openMap=new JButton("OpenMap");
+		openMap.setBounds(130,100,70,30);
+		adminTab.add(openMap);
+		
+		
+		BufferedImage logo;
+		try {
+			logo = ImageIO.read(new File(PaintHelper.getUserDir() + "logo_iteration1.png"));
+			// picLabel = new JLabel(new ImageIcon(logo));
+			// picLabel.setBounds(50, 480, 200, 200);
+			// add(picLabel);
+			// picLabel.setOpaque(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
-        btnSynchronize = new JButton("Sync");
-        btnSynchronize.addActionListener(this);
-//        btnSynchronize.setVisible(false);
-        btnSynchronize.setBounds(155, 280, 75, 30);
-        adminTab.add(btnSynchronize);
-        
-        this.openMap=new JButton("Open");
-        openMap.setBounds(20, 50, 70, 30);
-        adminTab.add(openMap);
-        fc = new JFileChooser();
-       
-        
-
-        BufferedImage logo;
-        try {
-            logo = ImageIO.read(new File(PaintHelper.getUserDir()+ "logo_iteration1.png"));
-//            picLabel = new JLabel(new ImageIcon(logo));
-//            picLabel.setBounds(50, 480, 200, 200);
-//            add(picLabel);
-//            picLabel.setOpaque(true);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        //result list
-
-
-
-      
-    }
+	}
 
 	public void focusLost(FocusEvent e) {
-        if (e.getSource() == txtFrom || e.getSource() == txtTo) {
-            if (((JTextField) e.getSource()).getText().trim().equals("")) {
-                //lastSetSearchWord = true;
-                //lastSetEmptySearchWord = false;
-                ((JTextField) e.getSource()).setText(UIConstant.SEARCHWORD);
-            }
+		if (e.getSource() == txtFrom || e.getSource() == txtTo) {
+			if (((JTextField) e.getSource()).getText().trim().equals("")) {
+				// lastSetSearchWord = true;
+				// lastSetEmptySearchWord = false;
+				((JTextField) e.getSource()).setText(UIConstant.SEARCHWORD);
+			}
 
-        }else if(e.getSource()==comboBoxMap){
-            this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
-            this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
+		} else if (e.getSource() == comboBoxMap) {
+			this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
+			this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
 
-        }
-    }
+		}
+	}
 
-    private void processTextField(JTextField txt) {
-        if (txt.getText().trim().equals(UIConstant.SEARCHWORD) ) {
-           // if (!lastSetSearchWord) {
-                //lastSetEmptySearchWord = true;
-                //lastSetSearchWord = false;
-                txt.setText("");
-          //  }
-        }
-      /*  else if (lastSetSearchWord){
-            lastSetSearchWord = false;
-            lastSetEmptySearchWord = false;
-        }*/
-    }
-    public void focusGained(FocusEvent e) {
-        if (e.getSource() == txtFrom || e.getSource() == txtTo) {
-            processTextField((JTextField)e.getSource());
+	private void processTextField(JTextField txt) {
+		if (txt.getText().trim().equals(UIConstant.SEARCHWORD)) {
+			// if (!lastSetSearchWord) {
+			// lastSetEmptySearchWord = true;
+			// lastSetSearchWord = false;
+			txt.setText("");
+			// }
+		}
+		/*
+		 * else if (lastSetSearchWord){ lastSetSearchWord = false;
+		 * lastSetEmptySearchWord = false; }
+		 */
+	}
 
+	public void focusGained(FocusEvent e) {
+		if (e.getSource() == txtFrom || e.getSource() == txtTo) {
+			processTextField((JTextField) e.getSource());
 
-        }else if(e.getSource()==comboBoxMap){
-            this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
-            this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
+		} else if (e.getSource() == comboBoxMap) {
+			this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
+			this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
 
-        }
+		}
 
-    }
-
-
-	
-
-	
+	}
 
 	/**
 	 * This is Button click event
@@ -450,7 +458,5 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	public void setOpenMap(JButton openMap) {
 		this.openMap = openMap;
 	}
-
-	
 
 };

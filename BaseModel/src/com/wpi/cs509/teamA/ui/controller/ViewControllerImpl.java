@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
@@ -74,21 +75,29 @@ import java.util.Stack;
 
         ArrayList<Node> singleMapPath = new ArrayList<Node>();
         ArrayList<String> mapNameList=new ArrayList<String>();
+        ArrayList<GeneralMap>mapList = new ArrayList<GeneralMap>();
         int tmpMapId=path.peek().getMap().getMapId();
         mapNameList.add(path.peek().getMap().getMapName());
+        mapList.add(path.peek().getMap());
+      
         while (path.size() > 0)
         {
             Node node = path.pop();
             if(node.getMap().getMapId()==tmpMapId)
             {
                 singleMapPath.add(node);
+           
             }
             else {
                 multiMapPathLists.add(singleMapPath);
+               
                 singleMapPath=new ArrayList<Node>();
                 singleMapPath.add(node);
                 tmpMapId=node.getMap().getMapId();
                 mapNameList.add(node.getMap().getMapName());
+              
+                mapList.add(node.getMap());
+               
             }
         }
         multiMapPathLists.add(singleMapPath);
@@ -101,8 +110,9 @@ import java.util.Stack;
             mapListModel.addElement(name);
         }
         inputPanel.getMapList().setModel(mapListModel);
-        model.setMultiMapPathLists(multiMapPathLists);
+        model.setMultiMapPathListsForEachMap(multiMapPathLists);
         model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
+        model.setMultiMapLists(mapList);
         ViewManager.updateView();
 
 
