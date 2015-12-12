@@ -42,7 +42,7 @@ public abstract class AnimationState {
 
     }
     public final void setToLeft() {
-        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine - object.getPanel().getWidth());
+        object.getPanel().setLocation(baseLine - object.getPanel().getWidth(), (int)object.getPanel().getLocation().getY());
 
     }
 

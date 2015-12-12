@@ -18,7 +18,6 @@ import java.util.Observer;
  */
 public class ViewManager extends ViewControllerBase implements Observer{
 
-    private AnimationControl ac = new AnimationControl();
 
     private int mousePos = 0;
     public ViewManager() {
@@ -55,7 +54,7 @@ public class ViewManager extends ViewControllerBase implements Observer{
         ViewManager.updateView();
     }
 
-    public AnimationControl getAC() {
+    static public AnimationControl getAC() {
         return ac;
     }
 

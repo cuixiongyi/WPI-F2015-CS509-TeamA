@@ -45,6 +45,12 @@ public class AnimationObject {
             stateContext.getMyState().setToHorizontal_Middle();
 
         }
+        if (AnimationPosition.LEFT_MIDDLE == position) {
+            stateContext.getMyState().setToVertical_Middle();
+            stateContext.getMyState().setToLeft();
+
+
+        }
 
     }
 

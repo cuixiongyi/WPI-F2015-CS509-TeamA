@@ -25,7 +25,7 @@ public class AnimationStateSlidingUp extends AnimationState{
         updateBaseLine();
         if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
             Point location = object.getPanel().getLocation();
-            if (baseLine - location.getY()  < object.getRange() ) {
+            if (baseLine - location.getY()  < object.getPanel().getHeight() ) {
                 object.getPanel().setLocation((int)location.getX(), (int)location.getY()-speed);
                 return AnimationStateEnum.SLIDING_OUT;
 

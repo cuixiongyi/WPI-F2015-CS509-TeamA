@@ -6,17 +6,17 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import java.awt.*;
 
 /**
- * Created by cuixi on 12/10/2015.
+ * Created by cuixi on 12/12/2015.
  */
+public class AnimationStateSlidingIn extends AnimationState{
 
-public class AnimationStateSlidingOut extends AnimationState{
-
-    public AnimationStateSlidingOut(AnimationObject obj) {
+    public AnimationStateSlidingIn(AnimationObject obj) {
         super(obj);
         updateBaseLine();
         if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
 
         }
+
     }
 
     @Override
@@ -24,13 +24,13 @@ public class AnimationStateSlidingOut extends AnimationState{
         updateBaseLine();
         if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
             Point location = object.getPanel().getLocation();
-            if (object.getPanel().getLocation().getX() < baseLine) {
-                object.getPanel().setLocation((int)location.getX()+speed, (int)location.getY());
-                return AnimationStateEnum.SLIDING_OUT;
+            if (object.getPanel().getLocation().getX() + object.getPanel().getWidth() > baseLine) {
+                object.getPanel().setLocation((int)location.getX()-speed, (int)location.getY());
+                return AnimationStateEnum.SLIDING_IN;
 
             }
         }
-        return AnimationStateEnum.SLIDED_OUT;
+        return AnimationStateEnum.SLIDED_IN;
     }
 
 
