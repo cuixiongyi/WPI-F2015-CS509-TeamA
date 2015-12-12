@@ -451,13 +451,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		this.openMap = openMap;
 	}
 
-	public JFileChooser getFc() {
-		return fc;
-	}
-
-	public void setFc(JFileChooser fc) {
-		this.fc = fc;
-	}
 	
 
 };
