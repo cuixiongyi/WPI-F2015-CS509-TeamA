@@ -69,7 +69,12 @@ public class SearchSupply{
 	public Map<String,NodeForSearch> getAllInformationForSearch(){
 		Map<String,NodeForSearch> allFromDatabase = Database.getAllNodesForSearch();
 	//	System.out.println(allFromDatabase.size());
-/*		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		// get User Account
+		
+		if(MainModel.getStaticModel().getMyAccount()==null){
+			return allFromDatabase;
+		}
+		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
 		Iterator<History> iter = currentUser.getHistory().iterator();
 		while (iter.hasNext()) {
 			History tempHistory = iter.next();
@@ -82,7 +87,7 @@ public class SearchSupply{
 					nodeNameComplete, nodeNameAbbr,
 					SuggestorEnum.History);
 			allFromDatabase.put(nodeNameComplete, tempNodeForSearch);
-		}*/
+		}
 		return allFromDatabase;
 	}
 	

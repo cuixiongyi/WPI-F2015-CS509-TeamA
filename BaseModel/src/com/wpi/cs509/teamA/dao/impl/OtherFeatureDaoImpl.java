@@ -14,7 +14,7 @@ import com.wpi.cs509.teamA.bean.OtherFeature;
 import com.wpi.cs509.teamA.dao.OtherFeatureDao;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 
-public class OtherFeatureDaoImpl implements OtherFeatureDao{
+public class OtherFeatureDaoImpl implements OtherFeatureDao {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -37,9 +37,33 @@ public class OtherFeatureDaoImpl implements OtherFeatureDao{
 			pstmt = conn.prepareStatement(selectAllOtherFeatures);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
-				res.add(new OtherFeature(resultSet.getString("label"),resultSet.getInt("node_id")));
+				res.add(new OtherFeature(resultSet.getString("label"), resultSet.getInt("node_id")));
 			}
-	//		System.out.println("res size: "+res.size());
+			// System.out.println("res size: "+res.size());
+			return res;
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> getAllFeatureLabels() {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		List<String> res = new ArrayList<String>();
+		try {
+			String selectAllOtherFeatures = "SELECT distinct(label) FROM routefinder.other_features;";
+			pstmt = conn.prepareStatement(selectAllOtherFeatures);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				res.add(resultSet.getString("label"));
+			}
+			// System.out.println("res size: "+res.size());
 			return res;
 		} catch (SQLException se) {
 			System.out.println("fail to connect database..");
