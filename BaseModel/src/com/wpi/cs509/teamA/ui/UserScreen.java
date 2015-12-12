@@ -75,6 +75,15 @@ public class UserScreen extends JFrame {
 	 */
 	private UserScreen() {
 
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.setBounds(50, 0, 1200, 770);
