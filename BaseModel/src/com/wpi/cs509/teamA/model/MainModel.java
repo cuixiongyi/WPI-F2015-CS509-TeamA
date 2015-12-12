@@ -35,7 +35,10 @@ public final class MainModel extends StateContext{
      * filterNodeType[i] == 0 don't display
      */
     private List<Integer> filterNodeType;
-    public MainModel() {
+	private ArrayList<GeneralMap> multiMapLists;
+  
+
+	public MainModel() {
 
         this.myAccount = new UserAccount();
         this.currentMap = null;
@@ -147,6 +150,17 @@ public final class MainModel extends StateContext{
     public synchronized ArrayList<ArrayList<Node>> getMultiMapPathLists() {
         return multiMapPathLists;
     }
+    
+    public synchronized void setMultiMapList(ArrayList<GeneralMap> mapList){
+    	this.multiMapLists = mapList;
+    }
+    
+    /**
+  	 * @return the multiMapLists
+  	 */
+  	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
+  		return multiMapLists;
+  	}
 
     public synchronized void setMultiMapPathLists(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
         List<GeneralMap> maps = Database.getAllMapFromDatabase();

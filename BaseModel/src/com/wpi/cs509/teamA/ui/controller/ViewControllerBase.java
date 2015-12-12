@@ -14,6 +14,7 @@ public class ViewControllerBase {
     static protected InputPanel inputPanel = null;
     static protected UserScreen userScreen = null;
     static protected MainModel model = null;
+  
 
     protected ViewControllerBase() {
 

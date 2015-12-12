@@ -25,6 +25,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
+import com.wpi.cs509.teamA.ui.controller.Listener.ImageKeyboardListener;
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
@@ -51,6 +52,7 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
     private ViewController controller = null;
     private static JPanel popUpPane;
+    private ImageKeyboardListener kbListener;
     private static int yPos;
 
 
@@ -135,10 +137,14 @@ public class UserScreen extends JFrame {
 		contentPane.add(inputPanel, new Integer(0));
 		contentPane.add(imgComponent,new Integer(0));
 		imgComponent.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		kbListener = new ImageKeyboardListener();
+		kbListener.setModel(mainModel);
 
 	
 		setVisible(true);
 		setResizable(false);
+		
+		
 
         imgComponent.setPreferredSize(new Dimension(mainModel.getCurrentMap().getImage().getWidth(), mainModel.getCurrentMap().getImage().getHeight()));
         imgComponent.setVisible(true);

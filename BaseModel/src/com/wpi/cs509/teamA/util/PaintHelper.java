@@ -237,12 +237,12 @@ public class PaintHelper {
     }
     
 
-    public static void printRoute(Graphics2D g2, GeneralMap map) {
+    public static void printRoute(GeneralMap map) {
     	 BufferedImage image = map.getImage();
          ImageComponent imageComponent = ViewManager.getImageComponent();
         BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
                 Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
-    	g2 = bi.createGraphics();
+    	Graphics2D g2 = bi.createGraphics();
        paintEverything(g2, map);
        try {
 			ImageIO.write(bi, "PNG", new File("C://"+map.getImageName()));
@@ -299,8 +299,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-    public static String dirtmp = "/BaseModel/src/";
-//    public static String dirtmp = "/src/";
+  //  public static String dirtmp = "/BaseModel/src/";
+    public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }
