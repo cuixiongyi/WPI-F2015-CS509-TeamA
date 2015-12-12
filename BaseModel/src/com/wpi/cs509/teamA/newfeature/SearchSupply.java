@@ -47,9 +47,9 @@ public class SearchSupply{
 		return priority;
 	}
 	
-	public Map<String, NodeForSearch> sortByPriority(Map<NodeForSearch,Integer> searchResultsList){
-	//	System.out.println(searchResultsList.size());
-		Map<String, NodeForSearch> newSortedList = new HashMap<String, NodeForSearch>();
+	public ArrayList<NodeForSearch> sortByPriority(Map<NodeForSearch,Integer> searchResultsList){
+	
+		ArrayList<NodeForSearch> newSortedList = new ArrayList<NodeForSearch>();
 		ArrayList<Entry<NodeForSearch, Integer>> arrayList = 
 				new ArrayList<Entry<NodeForSearch, Integer>>(searchResultsList.entrySet());
 		
@@ -59,7 +59,9 @@ public class SearchSupply{
 		    }
 		});
 		for (Entry<NodeForSearch, Integer> entry : arrayList) {
-			newSortedList.put(entry.getKey().getStringForDisplay(), entry.getKey());
+		//	System.out.println("Entry: "+ entry.getKey().getPriority());
+			newSortedList.add(entry.getKey());
+	//		newSortedList.put(entry.getKey().getStringForDisplay(), entry.getKey());
 		}
 		return newSortedList;
 	}
@@ -84,7 +86,7 @@ public class SearchSupply{
 		return allFromDatabase;
 	}
 	
-	public Map<String, NodeForSearch> getSearchSupply(String searchingStr) {
+	public ArrayList<NodeForSearch> getSearchSupply(String searchingStr) {
 
 		Map<NodeForSearch,Integer> searchResultsList = new HashMap<NodeForSearch,Integer>();;
 		String newPattern = getSearchPattern(searchingStr);
@@ -103,7 +105,7 @@ public class SearchSupply{
 				searchResultsList.put(tempNode,tempNode.getPriority());
 			}
 		}
-		Map<String,NodeForSearch>newsearchResultsList = sortByPriority(searchResultsList);
+		ArrayList<NodeForSearch>newsearchResultsList = sortByPriority(searchResultsList);
 		return newsearchResultsList;
 	}
 
@@ -113,9 +115,9 @@ public class SearchSupply{
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
 		SearchSupply ss = new SearchSupply();
-		Map<String,NodeForSearch> getSS = ss.getSearchSupply("pizza");
-		for (String key : getSS.keySet()) {  
-		    System.out.println("Key = " + key);  
+		ArrayList<NodeForSearch> getSS = ss.getSearchSupply("p");
+		for (NodeForSearch entry : getSS) {
+		    System.out.println("Key = " + entry.getStringForDisplay()+" ,Priority = " + entry.getPriority());  
 		}  
 	}
 }
