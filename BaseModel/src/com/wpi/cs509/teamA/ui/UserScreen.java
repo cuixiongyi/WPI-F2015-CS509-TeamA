@@ -16,7 +16,9 @@ import javax.swing.border.EtchedBorder;
 
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
@@ -143,7 +145,11 @@ public class UserScreen extends JFrame {
 		
 		popUpPane=new PopupPanel();
 		contentPane.add(popUpPane,new Integer(2));
-		viewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE);
+		viewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
+        AnimationObject AO = viewManager.getAC().checkObjectExist(popUpPane);
+        AO.switchState(new AnimationStateSlidingUp(AO));
+
+//        viewManager.getAC().
 //		popUpPane.setSize(100,100);
 //		popUpPane.setBackground(Color.RED);
 //		popUpPane.setOpaque();

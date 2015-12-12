@@ -13,18 +13,16 @@ public class AnimationStateContext {
     }
 
 
-    public void paintAnimation() {
-        if (null == myState) {
-            return;
-        }
-        myState.paintAnimation();
-    }
-
     public void execute() {
         myState.execute();
     };
 
     public void switchState(AnimationState state) {
         myState = state;
+    }
+
+
+    public AnimationState getMyState() {
+        return myState;
     }
 }

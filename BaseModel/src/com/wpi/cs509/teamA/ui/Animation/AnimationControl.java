@@ -14,7 +14,7 @@ public class AnimationControl {
 
 
     static private List<AnimationObject> objects = null;
-    private static Timer timer = new Timer(3,new MyActionListener());
+    private static Timer timer = new Timer(10,new MyActionListener());
 
     public static class MyActionListener implements ActionListener {
         @Override
@@ -32,15 +32,16 @@ public class AnimationControl {
 
     }
 
-    public void create(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition) {
+    public void create(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition, int pRange) {
         if (null != checkObjectExist(pPanel))
             return;
 
-        AnimationObject newAO = new AnimationObject(pPanel, pParent, pStyle, pPosition);
+        AnimationObject newAO = new AnimationObject(pPanel, pParent, pStyle, pPosition, pRange);
         objects.add(newAO);
 
     }
-    private AnimationObject checkObjectExist(JComponent ppanel) {
+
+    public AnimationObject checkObjectExist(JComponent ppanel) {
         for (AnimationObject obj : objects) {
             if (ppanel == obj.getPanel()) {
                 return obj;

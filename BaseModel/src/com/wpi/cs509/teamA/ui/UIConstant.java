@@ -12,6 +12,6 @@ public class UIConstant {
 
 
     /// Animation Constant
-    public static int SLIDING_SPEED = 3;
+    public static int SLIDING_SPEED = 1;
 
 }

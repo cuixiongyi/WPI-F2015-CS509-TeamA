@@ -1,6 +1,10 @@
 package com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern;
 
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.UIConstant;
+
+import java.awt.*;
 
 /**
  * Created by cuixi on 12/10/2015.
@@ -8,10 +12,41 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 public abstract class AnimationState {
 
     protected AnimationObject object = null;
+    protected int baseLine = 0;
+
+    protected int speed = UIConstant.SLIDING_SPEED;
+
     public AnimationState(AnimationObject obj) {
         object = obj;
     }
 
     public abstract void execute();
+
+    public void updateBaseLine() {
+        if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
+            baseLine = (int)object.getParent().getLocation().getY() + object.getParent().getHeight();
+
+        }
+    }
+    public final void setToMiddleBottom() {
+        setToBottom();
+        setToMiddle();
+    }
+    public final void setToMiddle() {
+        Point parentL = object.getParent().getLocation();
+
+        int x = (int)parentL.getX() + object.getParent().getWidth()/2 - object.getPanel().getWidth()/2;
+        object.getPanel().setLocation(x, (int)object.getPanel().getLocation().getY());
+
+    }
+    public final void setToBottom() {
+        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine);
+
+    }
+
+    public final void setToBottomUpperLimit() {
+        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine-object.getRange());
+
+    }
 
 }

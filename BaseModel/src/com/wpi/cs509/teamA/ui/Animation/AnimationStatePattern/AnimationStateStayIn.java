@@ -18,10 +18,4 @@ public void execute() {
 }
 
 
-    @Override
-    public void paintAnimation() {
-        if (null == object) {
-            return;
-        }
-    }
 }
