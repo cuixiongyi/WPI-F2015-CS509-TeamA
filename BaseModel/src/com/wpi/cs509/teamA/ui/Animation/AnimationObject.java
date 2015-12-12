@@ -1,9 +1,7 @@
 package com.wpi.cs509.teamA.ui.Animation;
 
-import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationState;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateContext;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateStayIn;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import javax.swing.*;
 
@@ -12,13 +10,13 @@ import javax.swing.*;
  */
 public class AnimationObject {
 
-    private JPanel panel = null;
-    private JPanel parent = null;
+    private JComponent panel = null;
+    private JComponent parent = null;
     private AnimationStyle style = AnimationStyle.UNDEFINED;
     private AnimationPosition position = AnimationPosition.UNDEFINED;
     private AnimationStateContext stateContext = null;
 
-    AnimationObject(JPanel pPanel, JPanel pParent, AnimationStyle pStyle, AnimationPosition pPosition) {
+    AnimationObject(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition) {
         if (pStyle == AnimationStyle.UNDEFINED) {
             throw new NullPointerException();
         }
@@ -41,8 +39,11 @@ public class AnimationObject {
     }
 
 
+    public void execute() {
+        stateContext.execute();
+    }
 
-    public JPanel getPanel() {
+    public JComponent getPanel() {
         return panel;
     }
 
@@ -50,7 +51,7 @@ public class AnimationObject {
         this.panel = panel;
     }
 
-    public JPanel getParent() {
+    public JComponent getParent() {
         return parent;
     }
 

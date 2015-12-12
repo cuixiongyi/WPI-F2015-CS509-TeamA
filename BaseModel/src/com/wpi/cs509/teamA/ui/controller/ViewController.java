@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui.controller;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.util.Database;
@@ -20,6 +21,7 @@ public class ViewController extends ViewControllerBase{
 
     private ImageMouseListener mouseListener = null;
     private ImageMouseWheelListener wheelListener = null;
+
 
     private ViewControllerImpl impl = null;
     public ViewController() {

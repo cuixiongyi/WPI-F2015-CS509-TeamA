@@ -13,11 +13,10 @@ public class AnimationStateSlidingOut extends AnimationState{
 
     }
 
-
     @Override
-    public void paintAnimation() {
-        if (null == object) {
-            return;
-        }
+    public void execute() {
+
     }
+
+
 }

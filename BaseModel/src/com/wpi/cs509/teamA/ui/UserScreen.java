@@ -3,38 +3,31 @@ package com.wpi.cs509.teamA.ui;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
-import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
-import com.wpi.cs509.teamA.ui.view.PopupPanel;
+import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -112,7 +105,7 @@ public class UserScreen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 
 /**
  * set dependence
@@ -150,32 +143,15 @@ public class UserScreen extends JFrame {
 		
 		popUpPane=new PopupPanel();
 		contentPane.add(popUpPane,new Integer(2));
+		viewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE);
 //		popUpPane.setSize(100,100);
 //		popUpPane.setBackground(Color.RED);
 //		popUpPane.setOpaque();
 	
-		Timer timer = new Timer(3,new MyActionListener());
-		timer.start();
 		popUpPane.setVisible(true);
 		yPos=700;
 	}
 
-
-	
-	public static class MyActionListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			if(yPos>550)
-			{
-			popUpPane.setLocation(400, yPos--);
-			}
-		}
-
-		}
-
-	
-	
 
 
 	public static UserScreen getUserScreen() {

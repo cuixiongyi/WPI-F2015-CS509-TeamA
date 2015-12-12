@@ -12,6 +12,11 @@ public class AnimationStateStayIn extends AnimationState{
 
     }
 
+@Override
+public void execute() {
+
+}
+
 
     @Override
     public void paintAnimation() {

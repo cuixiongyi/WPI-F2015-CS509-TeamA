@@ -20,6 +20,10 @@ public class AnimationStateContext {
         myState.paintAnimation();
     }
 
+    public void execute() {
+        myState.execute();
+    };
+
     public void switchState(AnimationState state) {
         myState = state;
     }

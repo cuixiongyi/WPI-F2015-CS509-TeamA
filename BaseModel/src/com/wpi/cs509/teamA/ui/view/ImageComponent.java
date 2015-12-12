@@ -96,7 +96,6 @@ public class ImageComponent extends JComponent {
 
 		{
 			model.paintOnImage(g2);
-
             /// CXY test
             //GeneralMap tmp = stateContext.getCurrentMap();
             //List<Node> nodes = tmp.getNodes();

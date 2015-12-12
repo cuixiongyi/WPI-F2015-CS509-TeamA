@@ -12,5 +12,6 @@ public abstract class AnimationState {
         object = obj;
     }
 
-    public abstract void paintAnimation();
+    public abstract void execute();
+
 }
