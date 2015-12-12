@@ -159,6 +159,11 @@ public final class MainModel extends StateContext{
   	 * @return the multiMapLists
   	 */
   	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
+  		if(multiMapPathLists==null){
+  			ArrayList<GeneralMap> currentMapList = new ArrayList<GeneralMap>();
+  			currentMapList.add(this.currentMap); 
+  			return currentMapList;
+  		}
   		return multiMapLists;
   	}
 

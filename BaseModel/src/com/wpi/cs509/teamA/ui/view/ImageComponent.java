@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JComponent;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
@@ -71,6 +73,7 @@ public class ImageComponent extends JComponent {
 
 		/// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
+		image = map.getImage();
 		
 		if (!testBeforeRepaint())
 			return;

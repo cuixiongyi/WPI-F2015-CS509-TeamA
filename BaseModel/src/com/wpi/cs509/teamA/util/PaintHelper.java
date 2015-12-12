@@ -237,7 +237,8 @@ public class PaintHelper {
     }
     
 
-    public static void printRoute(GeneralMap map) {
+    public static synchronized void printRoute(GeneralMap map) {
+    	System.out.println("memeda");
     	 BufferedImage image = map.getImage();
          ImageComponent imageComponent = ViewManager.getImageComponent();
         BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),

@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui.controller;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.ui.controller.Listener.ImageKeyboardListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.util.Database;
@@ -22,9 +23,11 @@ public class ViewController extends ViewControllerBase{
     private ImageMouseWheelListener wheelListener = null;
 
     private ViewControllerImpl impl = null;
+	private ImageKeyboardListener kbListener;
     public ViewController() {
         mouseListener = new ImageMouseListener(imageComponent, model);
         wheelListener = new ImageMouseWheelListener(imageComponent, model);
+        kbListener = new ImageKeyboardListener(model);
         impl = new ViewControllerImpl();
         addButtonSearch();
         addButtonSignup();

@@ -9,6 +9,8 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.KeyEventPostProcessor;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -50,12 +52,10 @@ public class UserScreen extends JFrame {
 	private static UserScreen userScreen;
 	private JLayeredPane contentPane;
 	private ImageComponent imgComponent;
-    private ViewController controller = null;
-    private static JPanel popUpPane;
-    private ImageKeyboardListener kbListener;
-    private static int yPos;
-
-
+	private ViewController controller = null;
+	private static JPanel popUpPane;
+	private ImageKeyboardListener kbListener;
+	private static int yPos;
 
 	MainModel mainModel = null;
 	ViewManager viewManager = null;
@@ -66,20 +66,21 @@ public class UserScreen extends JFrame {
 	 */
 	private InputPanel inputPanel;
 
-
 	/**
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
 
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
-//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-//				| UnsupportedLookAndFeelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		// //
+		// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
+		// } catch (ClassNotFoundException | InstantiationException |
+		// IllegalAccessException
+		// | UnsupportedLookAndFeelException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -96,93 +97,81 @@ public class UserScreen extends JFrame {
 		UIManager.put("nimbusBase", new Color(50, 50, 50));
 		UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(142, 143, 145));
 		UIManager.put("control", new Color(142, 143, 145));
-		UIManager.put("text", new Color(255,255,255));
+		UIManager.put("text", new Color(255, 255, 255));
 		UIManager.put("TextField.background", new Color(180, 180, 180));
 
-        UIManager.put("List.background", new Color(180, 180, 180));
-        UIManager.put("PasswordField.background", new Color(180, 180, 180));
-        UIManager.put("TextField.disabled", new Color(180, 180, 180));
-        UIManager.put("TextField.disabledText", new Color(255,255,255));
-        UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
-        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+		UIManager.put("List.background", new Color(180, 180, 180));
+		UIManager.put("PasswordField.background", new Color(180, 180, 180));
+		UIManager.put("TextField.disabled", new Color(180, 180, 180));
+		UIManager.put("TextField.disabledText", new Color(255, 255, 255));
+		UIManager.put("TextField[Disabled].textForeground", new Color(180, 180, 180));
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		// container.setLayout(new BorderLayout());
 
 		this.setBounds(50, 0, 1200, 770);
-		contentPane = new  JLayeredPane();
+		contentPane = new JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 
-/**
- * set dependence
- */
+		/**
+		 * set dependence
+		 */
 		inputPanel = new InputPanel();
-        imgComponent = new ImageComponent();
-        mainModel = new MainModel();
-        mainModel.switchToState(new MouseActionSelectNode(mainModel));
-        ViewControllerBase.init(imgComponent, inputPanel, mainModel,this);
-        viewManager = new ViewManager();
-        imgComponent.setModel(mainModel);
-        inputPanel.setModel(mainModel);
-        PaintHelper.setModel(mainModel);
-        controller = new ViewController();
-        mainModel.addObserver(viewManager);
-        // input panel and components
+		imgComponent = new ImageComponent();
+		mainModel = new MainModel();
+		mainModel.switchToState(new MouseActionSelectNode(mainModel));
+		ViewControllerBase.init(imgComponent, inputPanel, mainModel, this);
+		viewManager = new ViewManager();
+		imgComponent.setModel(mainModel);
+		inputPanel.setModel(mainModel);
+		PaintHelper.setModel(mainModel);
+		controller = new ViewController();
+		mainModel.addObserver(viewManager);
+		// input panel and components
 
-        inputPanel.setBounds(905, 0, 300, 750);
-        imgComponent.setBounds(0, 0, 900, 750);
+		inputPanel.setBounds(905, 0, 300, 750);
+		imgComponent.setBounds(0, 0, 900, 750);
 		contentPane.add(inputPanel, new Integer(0));
-		contentPane.add(imgComponent,new Integer(0));
+		contentPane.add(imgComponent, new Integer(0));
 		imgComponent.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-		kbListener = new ImageKeyboardListener();
-		kbListener.setModel(mainModel);
 
-	
 		setVisible(true);
 		setResizable(false);
-		
-		
 
-        imgComponent.setPreferredSize(new Dimension(mainModel.getCurrentMap().getImage().getWidth(), mainModel.getCurrentMap().getImage().getHeight()));
-        imgComponent.setVisible(true);
-        inputPanel.setUserScreen(this);
+		imgComponent.setPreferredSize(new Dimension(mainModel.getCurrentMap().getImage().getWidth(),
+				mainModel.getCurrentMap().getImage().getHeight()));
+		imgComponent.setVisible(true);
+		inputPanel.setUserScreen(this);
 		imgComponent.repaint();
 		mainModel.switchToState(new MouseActionSelectNode(mainModel));
-//		stateContext.switchUserState(new NormalUserState(stateContext));
+		// stateContext.switchUserState(new NormalUserState(stateContext));
 		viewManager.updateView();
-		
-		popUpPane=new PopupPanel();
-		contentPane.add(popUpPane,new Integer(2));
-//		popUpPane.setSize(100,100);
-//		popUpPane.setBackground(Color.RED);
-//		popUpPane.setOpaque();
-	
-		Timer timer = new Timer(3,new MyActionListener());
+
+		popUpPane = new PopupPanel();
+		contentPane.add(popUpPane, new Integer(2));
+		// popUpPane.setSize(100,100);
+		// popUpPane.setBackground(Color.RED);
+		// popUpPane.setOpaque();
+
+		Timer timer = new Timer(3, new MyActionListener());
 		timer.start();
 		popUpPane.setVisible(true);
-		yPos=700;
+		yPos = 700;
 	}
 
-
-	
-	public static class MyActionListener implements ActionListener{
+	public static class MyActionListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if(yPos>550)
-			{
-			popUpPane.setLocation(400, yPos--);
+			if (yPos > 550) {
+				popUpPane.setLocation(400, yPos--);
 			}
 		}
 
-		}
-
-	
-	
-
+	}
 
 	public static UserScreen getUserScreen() {
 		return userScreen;
@@ -204,9 +193,9 @@ public class UserScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 
-        new SystemFacade();
+		new SystemFacade();
 
-        // singleton
+		// singleton
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
@@ -215,5 +204,4 @@ public class UserScreen extends JFrame {
 		});
 
 	}
-
 }
