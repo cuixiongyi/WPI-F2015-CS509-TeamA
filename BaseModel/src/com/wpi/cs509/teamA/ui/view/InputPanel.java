@@ -53,7 +53,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JLabel lblTo;
     private JButton btnNeighborManage;
     private JButton btnSynchronize;
-    private JButton filter;
+    private JButton classroomFilter;
+    private JButton officeFilter;
+    private JButton restroomFilter;
+    private JButton labFilter;
+    private JButton parkingFilter;
     private JComboBox<String> comboBoxMap;
 
     private UserScreen userScreen;
@@ -164,9 +168,19 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 
         //tab panel-filter
-        this.filter= new JButton("Filter");
-        filter.setPreferredSize(new Dimension(250, 450));
-        filterTab.add(filter);
+        this.classroomFilter = new JButton("Classrooms");
+        this.officeFilter = new JButton("Offices");
+        this.restroomFilter = new JButton("Restrooms");
+        this.labFilter = new JButton("Labs");
+        this.parkingFilter = new JButton("Parking");
+//        filter.setPreferredSize(new Dimension(250, 450));
+        filterTab.add(classroomFilter);
+        filterTab.add(officeFilter);
+        filterTab.add(restroomFilter);
+        filterTab.add(labFilter);
+        filterTab.add(parkingFilter);
+        
+        
         
 
         //tab panel-admin tool
@@ -203,7 +217,42 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
       
     }
 
-    public void focusLost(FocusEvent e) {
+    /**
+	 * @return the classroomFilter
+	 */
+	public JButton getClassroomFilter() {
+		return classroomFilter;
+	}
+
+	/**
+	 * @return the officeFilter
+	 */
+	public JButton getOfficeFilter() {
+		return officeFilter;
+	}
+
+	/**
+	 * @return the restroomFilter
+	 */
+	public JButton getRestroomFilter() {
+		return restroomFilter;
+	}
+
+	/**
+	 * @return the labFilter
+	 */
+	public JButton getLabFilter() {
+		return labFilter;
+	}
+
+	/**
+	 * @return the parkingFilter
+	 */
+	public JButton getParkingFilter() {
+		return parkingFilter;
+	}
+
+	public void focusLost(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {
             if (((JTextField) e.getSource()).getText().trim().equals("")) {
                 //lastSetSearchWord = true;

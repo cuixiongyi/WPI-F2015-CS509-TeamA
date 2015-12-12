@@ -8,6 +8,7 @@ import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.NodeType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,6 +47,12 @@ import java.util.Stack;
         SignupDialog signUpDialog = new SignupDialog( inputPanel);
         signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         signUpDialog.setVisible(true);
+    }
+    
+    public void clickFilter(NodeType nodeType)
+    {
+    	model.setFilter(nodeType);
+    	ViewManager.updateView();
     }
 
     public void clickSearch() {
