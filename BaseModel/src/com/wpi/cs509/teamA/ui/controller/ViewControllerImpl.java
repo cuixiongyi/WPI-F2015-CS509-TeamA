@@ -4,6 +4,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
+import com.wpi.cs509.teamA.ui.Dialog.OpenMapDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
@@ -13,6 +14,7 @@ import com.wpi.cs509.teamA.util.NodeType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -115,5 +117,21 @@ import java.util.Stack;
 
 
     }
+
+	public void clickOpenMap() {
+		// TODO Auto-generated method stub
+		OpenMapDialog openMapDialog=new OpenMapDialog(model);
+		openMapDialog.setVisible(true);
+		ViewManager.updateView();
+//		int returnVal = inputPanel.getFc().showOpenDialog(null);
+//		 if (returnVal == JFileChooser.APPROVE_OPTION) {
+//             File file = inputPanel.getFc().getSelectedFile();
+             //This is where a real application would open the file.
+//         } else {
+//             log.append("Open command cancelled by user." + newline);
+//         }
+//		 }
+		
+	}
 
 }
