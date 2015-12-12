@@ -98,13 +98,14 @@ public class ImageComponent extends JComponent {
 
 		{
 			model.paintOnImage(g2);
-
             /// CXY test
             //GeneralMap tmp = stateContext.getCurrentMap();
             //List<Node> nodes = tmp.getNodes();
             //PaintHelper.paintPath(nodes, g2);
         }
 
+//        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
+//        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
 
 /*
 

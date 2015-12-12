@@ -38,6 +38,7 @@ public final class MainModel extends StateContext{
     public MainModel() {
 
         this.myAccount = new UserAccount();
+        myAccount=null;
         this.currentMap = null;
 //        multiMapPathLists = new ArrayList<ArrayList<Node>>();
         setCurrentMapID(1);
@@ -48,6 +49,24 @@ public final class MainModel extends StateContext{
         this.setStartNode(null);
         this.setEndNode(null);
         this.setMultiMapPathLists(null);
+    }
+
+    public synchronized ArrayList<Node> getRouteOnCurrentMap() {
+//        ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathLists();
+//        if (null != multiMapPath && 0 != multiMapPath.size()) {
+//            int idx = getCurrentMapID()-1;
+//            return multiMapPath.get(idx);
+//
+//        }
+        ArrayList<Node> ret = null;
+        try {
+            int idx = getCurrentMapID()-1;
+            ret = getMultiMapPathLists().get(idx);
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return ret;
     }
 
 
@@ -61,9 +80,6 @@ public final class MainModel extends StateContext{
     }
 
     public synchronized void setMyAccount(UserAccount pAccount) {
-        if (null == pAccount) {
-            pAccount = new UserAccount();
-        }
         this.myAccount = pAccount;
         modelChanged();
 
