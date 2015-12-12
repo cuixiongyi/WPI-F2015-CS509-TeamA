@@ -235,6 +235,12 @@ public synchronized void setFocusNode(Node focusNode) {
 	}
 
 	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
+		if(multiMapLists==null){
+			ArrayList<GeneralMap> result = new ArrayList<GeneralMap>();
+			result.add(this.getCurrentMap());
+			return result;
+		}
+		
 		return multiMapLists;
 	}
 

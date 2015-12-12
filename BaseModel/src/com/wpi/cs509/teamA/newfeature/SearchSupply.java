@@ -113,7 +113,7 @@ public class SearchSupply{
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
 		SearchSupply ss = new SearchSupply();
-		Map<String,NodeForSearch> getSS = ss.getSearchSupply("pizza");
+		Map<String,NodeForSearch> getSS = ss.getSearchSupply("p");
 		for (String key : getSS.keySet()) {  
 		    System.out.println("Key = " + key);  
 		}  

@@ -25,7 +25,7 @@ public class ImageKeyboardListener {
 
 			public boolean postProcessKeyEvent(KeyEvent e) {
 				// TODO Auto-generated method stub
-				int i = 0;
+			
 				if (e.isAltDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
 				
 					

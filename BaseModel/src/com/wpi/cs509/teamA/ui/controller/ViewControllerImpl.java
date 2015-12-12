@@ -110,7 +110,7 @@ import java.util.Stack;
         inputPanel.getMapList().setModel(mapListModel);
         model.setMultiMapPathListsForEachMap(multiMapPathLists);
         model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
-        model.setMultiMapList(mapList);
+        model.setMultiMapLists(mapList);
         ViewManager.updateView();
 
 
