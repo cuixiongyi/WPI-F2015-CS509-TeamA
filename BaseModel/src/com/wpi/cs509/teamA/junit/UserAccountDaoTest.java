@@ -21,7 +21,7 @@ public class UserAccountDaoTest {
 		
 		//add account to database
 		UserAccount ua = new UserAccount();
-		ua.setUsername("yizhouyan");
+		ua.setUsername("yizhouyan3");
 		ua.setPassword("hammer");
 		ua.setAdmin(true);
 		ua.setEmail("yyan2@wpi.edu");

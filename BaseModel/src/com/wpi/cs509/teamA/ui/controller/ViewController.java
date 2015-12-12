@@ -1,9 +1,11 @@
 package com.wpi.cs509.teamA.ui.controller;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.NodeType;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -21,6 +23,7 @@ public class ViewController extends ViewControllerBase{
     private ImageMouseListener mouseListener = null;
     private ImageMouseWheelListener wheelListener = null;
 
+
     private ViewControllerImpl impl = null;
     public ViewController() {
         mouseListener = new ImageMouseListener(imageComponent, model);
@@ -31,8 +34,7 @@ public class ViewController extends ViewControllerBase{
         addListSelectionListener();
         addComboBoxMapChanged();
         addButtonLogin();
-
-
+        addFilterButtons();
     }
 
     private void addButtonLogin() {
@@ -62,6 +64,38 @@ public class ViewController extends ViewControllerBase{
         });
     }
 
+    public void addFilterButtons(){
+    	inputPanel.getClassroomFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.CLASSROOM);
+            }
+    	});
+    	inputPanel.getOfficeFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.OFFICE);
+            }
+    	});
+    	inputPanel.getParkingFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.PARKING);
+            }
+    	});
+    	inputPanel.getRestroomFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.RESTROOM);
+            }
+    	});
+    	inputPanel.getLabFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.LAB);
+            }
+    	});
+    }
 
         public void addListSelectionListener() {
         inputPanel.getMapList().addListSelectionListener(new ListSelectionListener() {
@@ -78,7 +112,7 @@ public class ViewController extends ViewControllerBase{
             public void itemStateChanged(ItemEvent e) {
                 Object value = inputPanel.getComboBoxMap().getSelectedItem();
                 boolean tmp = matchAndSetMapIDFromString(value);
-
+                model.clearFilters();
                 }
         });
 

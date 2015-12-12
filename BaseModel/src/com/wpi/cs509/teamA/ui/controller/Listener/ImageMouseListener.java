@@ -34,6 +34,8 @@ public class ImageMouseListener implements MouseInputListener {
             @Override
             public void mouseDragged(MouseEvent e) {
                 // TODO Auto-generated method stub
+                int x = imageComponent.getImageXpos();
+                int y = imageComponent.getImageYpos();
                 imageComponent.setImageXpos(imageComponent.getImageStartXpos() +  e.getX()-imageComponent.getPressxPos());
                 imageComponent.setImageYpos(imageComponent.getImageStartYpos() +  e.getY()-imageComponent.getPressyPos());
                 imageComponent.repaint();

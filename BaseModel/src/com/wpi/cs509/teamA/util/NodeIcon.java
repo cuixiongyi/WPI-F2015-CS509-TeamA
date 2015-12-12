@@ -16,6 +16,7 @@ public class NodeIcon {
 
 	private static String labIconName = "Lab_Icon.png";
 	private static String classroomIconName = "Classroom_Icon.png";
+	private static String officeIconName = "Office_Icon.png";
 	private static String restroomIconName = "Restroom_Icon.png";
 	private static String parkingIconName = "Parking_Icon.png";
 	private static String startIconName = "Start_Icon.png";
@@ -24,6 +25,7 @@ public class NodeIcon {
 
 	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
 	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;
+	private static String officeIconFilePath = PaintHelper.getUserDir() + officeIconName;
 	private static String restroomIconFilePath = PaintHelper.getUserDir() + restroomIconName;
 	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;
 	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
@@ -34,6 +36,7 @@ public class NodeIcon {
 	private static BufferedImage classroomIcon;
 	private static BufferedImage restroomIcon;
 	private static BufferedImage parkingIcon;
+	private static BufferedImage officeIcon;
 	private static BufferedImage startIcon;
 	private static BufferedImage endIcon;
 
@@ -45,6 +48,7 @@ public class NodeIcon {
 		try {
 			labIcon = ImageIO.read(new FileInputStream(labIconFilePath));
 			classroomIcon = ImageIO.read(new FileInputStream(classroomIconFilePath));
+			officeIcon = ImageIO.read(new FileInputStream(officeIconFilePath));
 			restroomIcon = ImageIO.read(new FileInputStream(restroomIconFilePath));
 			parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
 			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
@@ -90,7 +94,7 @@ public class NodeIcon {
 			return classroomIcon;
 		}
 		case OFFICE: {
-			return classroomIcon;
+			return officeIcon;
 		}
 		case MEETINGROOM: {
 			return classroomIcon;
@@ -112,6 +116,15 @@ public class NodeIcon {
 	}
 
 	
+
+	
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setofficeIcon(BufferedImage image) {
+		this.officeIcon = image;
+	}
 
 	
 	/**

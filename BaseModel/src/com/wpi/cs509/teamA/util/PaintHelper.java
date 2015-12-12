@@ -14,7 +14,13 @@ import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 public class PaintHelper {
 
-
+	/**
+	 * currently all paint funcitons have 2 overloads, with or without
+	 * DrawStyleEnum In the case that DrawStyleEnum is not provided - All
+	 * functions that draw a list of items (paintNodes, paintEdges) Set style to
+	 * a default style - All functions that draw one single item (paintNode,
+	 * paintEdge) use current style to draw
+	 */
 
     static private MainModel model = null;
     private final static int ovalOffset = 10;
@@ -219,12 +225,17 @@ public class PaintHelper {
     }
 
     public static void paintRoute(Graphics2D g2) {
-        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
-        if (null != multiMapPath && 0 != multiMapPath.size()) {
-            int idx = model.getCurrentMapID()-1;
-            PaintHelper.paintPath(multiMapPath.get(idx), g2);
+//        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
+//        if (null != multiMapPath && 0 != multiMapPath.size()) {
+//            int idx = model.getCurrentMapID()-1;
+//            PaintHelper.paintPath(multiMapPath.get(idx), g2);
+//
+//        }
+        ArrayList<Node> path = model.getRouteOnCurrentMap();
+        if (null == path)
+            return;
+        PaintHelper.paintPath(path, g2);
 
-        }
 
     }
 
@@ -240,8 +251,8 @@ public class PaintHelper {
     public static Coordinate backTransferCoor(Coordinate origin) {
         Coordinate result=new Coordinate();
         float scale=model.getCurrentMap().getDisplayScale();
-        result.setX(origin.getX()-ViewManager.getImageComponent().getImageXpos());
-        result.setY(origin.getY()-ViewManager.getImageComponent().getImageYpos());
+        result.setX(Math.round((origin.getX()-ViewManager.getImageComponent().getImageXpos())/scale));
+        result.setY(Math.round((origin.getY()-ViewManager.getImageComponent().getImageYpos())/scale));
 
         return result;
     }
@@ -250,8 +261,8 @@ public class PaintHelper {
    {
 	   Coordinate result=new Coordinate();
 	   float scale=model.getCurrentMap().getDisplayScale();
-	   result.setX(Math.round((origin.getX()+ViewManager.getImageComponent().getImageXpos())*scale));
-	   result.setY(Math.round((origin.getY()+ViewManager.getImageComponent().getImageYpos())*scale));
+	   result.setX(Math.round(origin.getX()*scale+ViewManager.getImageComponent().getImageXpos()));
+	   result.setY(Math.round(origin.getY()*scale+ViewManager.getImageComponent().getImageYpos()));
 	
 	   return result;
 	   
@@ -260,8 +271,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-    //public static String dirtmp = "/BaseModel/src/";
-    public static String dirtmp = "/src/";
+    public static String dirtmp = "/BaseModel/src/";
+//    public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }

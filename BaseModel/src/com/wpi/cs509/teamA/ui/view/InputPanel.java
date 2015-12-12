@@ -29,8 +29,10 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MyListCellRenderer;
 import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
+
 
 
 /**
@@ -53,7 +55,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JLabel lblTo;
     private JButton btnNeighborManage;
     private JButton btnSynchronize;
-    private JButton filter;
+    private JButton classroomFilter;
+    private JButton officeFilter;
+    private JButton restroomFilter;
+    private JButton labFilter;
+    private JButton parkingFilter;
     private JComboBox<String> comboBoxMap;
 
     private UserScreen userScreen;
@@ -91,11 +97,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         this.add(tabbedPane,BorderLayout.CENTER);
         
         tabbedPane.setBounds(0,230,300,550);
-        tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        tabbedPane.addTab("Search Result",searchResultTab);
-        tabbedPane.addTab("Location Filter",filterTab);
-        tabbedPane.addTab("Admin Tools",adminTab);
+        tabbedPane.addTab("Result",searchResultTab);
+        tabbedPane.addTab("Filter",filterTab);
+        tabbedPane.addTab("Admin",adminTab);
+        
+        adminTab.setLayout(null);
 
         //login panel
         this.adminLogin = new JButton(UIConstant.LOGIN);
@@ -158,16 +166,33 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         //tab panel-search result
         mapList = new JList<>();
-        mapList.setVisible(false);
-        JScrollPane mapListScroll = new JScrollPane(mapList);
-        mapListScroll.setBounds(50, 500, 200, 200);
-        searchResultTab.add(mapListScroll);
+        mapList.setPreferredSize(new Dimension(250, 450));
+//        mapList.setFixedCellHeight(40);
+        mapList.setCellRenderer(new MyListCellRenderer());
+        searchResultTab.add(mapList);
+        ///for test
+        DefaultListModel model = new DefaultListModel();
+        model.addElement("This is a short textdddddddddd");
+        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
+        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
+//        mapList.setModel(model);
+        
 
 
         //tab panel-filter
-        this.filter= new JButton("Filter");
-        filter.setPreferredSize(new Dimension(250, 450));
-        filterTab.add(filter);
+        this.classroomFilter = new JButton("Classrooms");
+        this.officeFilter = new JButton("Offices");
+        this.restroomFilter = new JButton("Restrooms");
+        this.labFilter = new JButton("Labs");
+        this.parkingFilter = new JButton("Parking");
+//        filter.setPreferredSize(new Dimension(250, 450));
+        filterTab.add(classroomFilter);
+        filterTab.add(officeFilter);
+        filterTab.add(restroomFilter);
+        filterTab.add(labFilter);
+        filterTab.add(parkingFilter);
+        
+        
         
 
         //tab panel-admin tool
@@ -182,7 +207,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         btnSynchronize = new JButton("Sync");
         btnSynchronize.addActionListener(this);
 //        btnSynchronize.setVisible(false);
-//        btnSynchronize.setBounds(155, 380, 75, 30);
+        btnSynchronize.setBounds(155, 280, 75, 30);
         adminTab.add(btnSynchronize);
 
         BufferedImage logo;
@@ -204,7 +229,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
       
     }
 
-    public void focusLost(FocusEvent e) {
+	public void focusLost(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {
             if (((JTextField) e.getSource()).getText().trim().equals("")) {
                 //lastSetSearchWord = true;
@@ -261,6 +286,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// If it is the admin, give it the admin mouse click event. If
 		// not, give it normal user
 		if (e.getSource() == getBtnLogin()) {
+			
 		}
 		if (e.getSource() == signUp) {
 			
@@ -371,4 +397,41 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void setModel(MainModel pmodel) {
         this.model = pmodel;
     }
+
+
+    /**
+	 * @return the classroomFilter
+	 */
+	public JButton getClassroomFilter() {
+		return classroomFilter;
+	}
+
+	/**
+	 * @return the officeFilter
+	 */
+	public JButton getOfficeFilter() {
+		return officeFilter;
+	}
+
+	/**
+	 * @return the restroomFilter
+	 */
+	public JButton getRestroomFilter() {
+		return restroomFilter;
+	}
+
+	/**
+	 * @return the labFilter
+	 */
+	public JButton getLabFilter() {
+		return labFilter;
+	}
+
+	/**
+	 * @return the parkingFilter
+	 */
+	public JButton getParkingFilter() {
+		return parkingFilter;
+	}
+
 };

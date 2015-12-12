@@ -6,6 +6,8 @@ import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
@@ -52,8 +54,13 @@ public class MouseActionSelectNode extends MouseActionState {
         if (e.getButton() == MouseEvent.BUTTON1) {
 
             if (null != node) {
-               // nodesToPaintIcon.clear();
-               // nodesToPaintIcon.add(node);
+            }
+        }
+        if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+            if (null != node) {
+                if (node.getNodeType() == NodeType.LAB) {
+//                    model.setCurrentMap();
+                }
             }
         }
             return false;
@@ -65,7 +72,6 @@ public class MouseActionSelectNode extends MouseActionState {
 
         PaintHelper.paintRoute(g2);
 
-        PaintHelper.paintIcons(model.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
         PaintHelper.paintStartEndNode(g2);
     }
 }

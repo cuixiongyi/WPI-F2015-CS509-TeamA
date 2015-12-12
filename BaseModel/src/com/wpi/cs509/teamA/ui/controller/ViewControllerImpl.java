@@ -8,6 +8,7 @@ import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.NodeType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,21 +21,23 @@ import java.util.Stack;
  class ViewControllerImpl extends ViewControllerBase{
 
     public void clickLogin() {
-        if (model.ifLoginAdmin()) {
+        if (model.getMyAccount()==null) {
             AdminDialog adminDialog = new AdminDialog(model, inputPanel);
             adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
             adminDialog.setVisible(inputPanel.isFocusable());
             // stateContext.switchToAdminUser();
             ViewManager.updateView();
 
-        } else {
+        } else  {
 
             JOptionPane.showMessageDialog(null, "You have logged out");
+            model.setMyAccount(null);
             Database.InitFromDatabase();
             // InputPanel.this.getBtnNeighborManage().setVisible(false);
             inputPanel.getBtnLogin().setText(UIConstant.LOGIN);
             // InputPanel.this.getBtnSynchronize().setVisible(false);
             model.switchToState(new MouseActionSelectNode(model));
+            
             ViewManager.updateView();
 
         }
@@ -44,6 +47,12 @@ import java.util.Stack;
         SignupDialog signUpDialog = new SignupDialog( inputPanel);
         signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         signUpDialog.setVisible(true);
+    }
+    
+    public void clickFilter(NodeType nodeType)
+    {
+    	model.setFilter(nodeType);
+    	ViewManager.updateView();
     }
 
     public void clickSearch() {
