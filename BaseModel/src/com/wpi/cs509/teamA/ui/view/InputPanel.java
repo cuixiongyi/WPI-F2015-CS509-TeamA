@@ -170,7 +170,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         model.addElement("This is a short textdddddddddd");
         model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
         model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
-        mapList.setModel(model);
+//        mapList.setModel(model);
         
 
 
