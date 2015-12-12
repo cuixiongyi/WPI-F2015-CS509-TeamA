@@ -29,8 +29,10 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MyListCellRenderer;
 import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
+
 
 
 /**
@@ -88,7 +90,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 
         
-        this.add(tabbedPane,BorderLayout.CENTER);
+        this.add(tabbedPane);
+        tabbedPane.setLayout(null);
         
         tabbedPane.setBounds(0,230,300,550);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -159,13 +162,21 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         //tab panel-search result
         mapList = new JList<>();
         mapList.setPreferredSize(new Dimension(250, 450));
-        mapList.setFixedCellHeight(40);
+//        mapList.setFixedCellHeight(40);
+        mapList.setCellRenderer(new MyListCellRenderer());
         searchResultTab.add(mapList);
+        ///for test
+        DefaultListModel model = new DefaultListModel();
+        model.addElement("This is a short textdddddddddd");
+        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
+        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
+        mapList.setModel(model);
+        
 
 
         //tab panel-filter
         this.filter= new JButton("Filter");
-        filter.setPreferredSize(new Dimension(250, 450));
+        filter.setBounds(100,100,100,100);
         filterTab.add(filter);
         
 
