@@ -6,12 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.JComponent;
 
-
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.util.PaintHelper;
-
 
 /**
  * An component to show the images. This component has two different states
@@ -25,15 +23,14 @@ import com.wpi.cs509.teamA.util.PaintHelper;
 @SuppressWarnings("serial")
 public class ImageComponent extends JComponent {
 
-
 	private MainModel model = null;
 
 	private Image image;
 
-	private int imageXpos=0;
-	private int imageYpos=0;
-	private int imageStartXpos=0;
-	private int imageStartYpos=0;
+	private int imageXpos = 0;
+	private int imageYpos = 0;
+	private int imageStartXpos = 0;
+	private int imageStartYpos = 0;
 	private int pressxPos;
 	private int pressyPos;
 
@@ -50,150 +47,125 @@ public class ImageComponent extends JComponent {
 
 	}
 
-
-    private boolean testBeforeRepaint()
-    {
-        try {
-            if (null == model)
-            {
-//                return false;
+	private boolean testBeforeRepaint() {
+		try {
+			if (null == model) {
+				// return false;
 				throw new NullPointerException();
-            }
-            if (null == model.getCurrentMap().getImage()) {
-//                return false;
-                throw new NullPointerException();
-            }
+			}
+			if (null == model.getCurrentMap().getImage()) {
+				// return false;
+				throw new NullPointerException();
+			}
 			if (null == this.image) {
 				return false;
 			}
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-
-
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 
-        /// test for null stateContext and null image
+		/// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
-		this.image = map.getImage();
-        if ( ! testBeforeRepaint())
-            return;
+		
+		if (!testBeforeRepaint())
+			return;
 
 		// if isInitilized
 		// no need to paint the image again
+	 
+		Graphics2D g2 = (Graphics2D) g;
+		PaintHelper.paintEverything(g2, map);
 
+		/// CXY test
+		// GeneralMap tmp = stateContext.getCurrentMap();
+		// List<Node> nodes = tmp.getNodes();
+		// PaintHelper.paintPath(nodes, g2);
 
-        Graphics2D g2 = (Graphics2D) g;
-        PaintHelper.paintEverything(g2);
+		// g.drawString("XY", this.getImageXpos(), this.getImageYpos());
+		// g.drawString("Start", this.getImageStartXpos(),
+		// this.getImageStartYpos());
 
+		/*
+		 * 
+		 * if (pathNodeList != null && pathNodeList.get(0).getMapId() ==
+		 * UIDataBuffer.getCurrentMapId()) { // paint the route if (pathNodeList
+		 * != null && pathNodeList.size() != 0) { for (int i = 0; i <
+		 * pathNodeList.size() - 1; i++) { int xstart, ystart, xend, yend;
+		 * xstart = pathNodeList.get(i).getLocation().getX(); ystart =
+		 * pathNodeList.get(i).getLocation().getY();
+		 * 
+		 * xend = pathNodeList.get(i + 1).getLocation().getX(); yend =
+		 * pathNodeList.get(i + 1).getLocation().getY();
+		 * 
+		 * g2.setStroke(new BasicStroke(5)); g2.draw(new Line2D.Float(xstart,
+		 * ystart, xend, yend)); // System.out.println("draw line.." + xstart +
+		 * " " + ystart // + " // " + xend + " " + yend); } } int sourceX =
+		 * pathNodeList.get(0).getLocation().getX(); int sourceY =
+		 * pathNodeList.get(0).getLocation().getY();
+		 * 
+		 * int desX = pathNodeList.get(pathNodeList.size() -
+		 * 1).getLocation().getX(); int desY =
+		 * pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * }
+		 */
 
-            /// CXY test
-            //GeneralMap tmp = stateContext.getCurrentMap();
-            //List<Node> nodes = tmp.getNodes();
-            //PaintHelper.paintPath(nodes, g2);
-
-//        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
-//        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
-
-/*
-
-		if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
-			// paint the route
-			if (pathNodeList != null && pathNodeList.size() != 0) {
-				for (int i = 0; i < pathNodeList.size() - 1; i++) {
-					int xstart, ystart, xend, yend;
-					xstart = pathNodeList.get(i).getLocation().getX();
-					ystart = pathNodeList.get(i).getLocation().getY();
-
-					xend = pathNodeList.get(i + 1).getLocation().getX();
-					yend = pathNodeList.get(i + 1).getLocation().getY();
-
-					g2.setStroke(new BasicStroke(5));
-					g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
-					// System.out.println("draw line.." + xstart + " " + ystart
-					// + "
-					// " + xend + " " + yend);
-				}
-			}
-			int sourceX = pathNodeList.get(0).getLocation().getX();
-			int sourceY = pathNodeList.get(0).getLocation().getY();
-
-			int desX = pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
-			int desY = pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
-			
-			
-			
-
-			
-		}
-*/
-		
 		g2 = null;
 
 	}
-
 
 	public int getImageXpos() {
 		return imageXpos;
 	}
 
-
 	public void setImageXpos(int imageXpos) {
 		this.imageXpos = imageXpos;
 	}
-
 
 	public int getImageYpos() {
 		return imageYpos;
 	}
 
-
 	public void setImageYpos(int imageYpos) {
 		this.imageYpos = imageYpos;
 	}
-
 
 	public int getImageStartXpos() {
 		return imageStartXpos;
 	}
 
-
 	public void setImageStartXpos(int imageStartXpos) {
 		this.imageStartXpos = imageStartXpos;
 	}
-
 
 	public int getImageStartYpos() {
 		return imageStartYpos;
 	}
 
-
 	public void setImageStartYpos(int imageStartYpos) {
 		this.imageStartYpos = imageStartYpos;
 	}
-
 
 	public int getPressxPos() {
 		return pressxPos;
 	}
 
-
 	public void setPressxPos(int pressxPos) {
 		this.pressxPos = pressxPos;
 	}
 
-
 	public int getPressyPos() {
 		return pressyPos;
 	}
-
 
 	public void setPressyPos(int pressyPos) {
 		this.pressyPos = pressyPos;
@@ -202,7 +174,5 @@ public class ImageComponent extends JComponent {
 	public void setModel(MainModel model) {
 		this.model = model;
 	}
-
-
 
 }

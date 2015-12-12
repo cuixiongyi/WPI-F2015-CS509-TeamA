@@ -3,8 +3,12 @@ package com.wpi.cs509.teamA.util;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
@@ -220,8 +224,8 @@ public class PaintHelper {
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
-    public static void paintEverything(Graphics2D g2) {
-        GeneralMap map = model.getCurrentMap();
+    public static void paintEverything(Graphics2D g2,GeneralMap map) {
+       
         BufferedImage image = map.getImage();
         ImageComponent imageComponent = ViewManager.getImageComponent();
 
@@ -230,6 +234,23 @@ public class PaintHelper {
                 Math.round(image.getWidth(imageComponent)*map.getDisplayScale()),
                 Math.round(image.getHeight(imageComponent)*map.getDisplayScale()), imageComponent);
         model.paintOnImage(g2);
+    }
+    
+
+    public static void printRoute(Graphics2D g2, GeneralMap map) {
+    	 BufferedImage image = map.getImage();
+         ImageComponent imageComponent = ViewManager.getImageComponent();
+        BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
+                Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
+    	g2 = bi.createGraphics();
+       paintEverything(g2, map);
+       try {
+			ImageIO.write(bi, "PNG", new File("C://"+map.getImageName()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+       
+       
     }
     public static void paintRoute(Graphics2D g2) {
 //        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
@@ -283,5 +304,6 @@ public class PaintHelper {
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }
+
 
 }
