@@ -128,12 +128,11 @@ public class PaintHelper {
 	}
 
 	public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
-		System.out.println("Drawing nodes.");
 		setStyle(style, g2);
 		if (null == nodes)
 			return;
 		for (Node node : nodes) {
-			if (model.hasFilter(node.getNodeType())) {
+			if (!model.hasFilter(node.getNodeType())) {
 				paintIcon(node, g2);
 			} else {
 				if (model.ifLoginAdmin()) {
