@@ -253,7 +253,7 @@ public class PaintHelper {
 				Math.round(image.getWidth(imageComponent)), Math.round(image.getHeight(imageComponent) ),
 				imageComponent);
 		paintMultiMaps(g2, map);
-
+	
 		try {
 			ImageIO.write(bi, "PNG", new File("D://" + map.getImageName()));
 			

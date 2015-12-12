@@ -25,10 +25,13 @@ public class ImageKeyboardListener {
 
 			public boolean postProcessKeyEvent(KeyEvent e) {
 				// TODO Auto-generated method stub
-
+				int i = 0;
 				if (e.isAltDown() && e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q) {
-
+					System.out.println("start");
+					System.out.println(model.getMultiMapLists().size());
 					for (GeneralMap mp : model.getMultiMapLists()) {
+						
+					//	System.out.println(mp.getMapName());
 						
 						PaintHelper.printRoute(mp, mp.getImage());
 						

@@ -67,23 +67,27 @@ import java.util.Stack;
         ArrayList<GeneralMap>mapList = new ArrayList<GeneralMap>();
         int tmpMapId=path.peek().getMap().getMapId();
         mapNameList.add(path.peek().getMap().getMapName());
+        mapList.add(path.peek().getMap());
+      
         while (path.size() > 0)
         {
             Node node = path.pop();
             if(node.getMap().getMapId()==tmpMapId)
             {
                 singleMapPath.add(node);
-                mapList.add(node.getMap());
+           
             }
             else {
                 multiMapPathLists.add(singleMapPath);
-                
+               
                 singleMapPath=new ArrayList<Node>();
                 singleMapPath.add(node);
                 tmpMapId=node.getMap().getMapId();
                 mapNameList.add(node.getMap().getMapName());
               
                 mapList.add(node.getMap());
+                System.out.println(node.getMap());
+                System.out.println("map"+mapList.size());
             }
         }
         multiMapPathLists.add(singleMapPath);
@@ -97,6 +101,8 @@ import java.util.Stack;
         }
         inputPanel.getMapList().setModel(mapListModel);
         model.setMultiMapPathLists(multiMapPathLists);
+        System.out.println("hehe"+mapListModel.getSize());
+        
         model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
         model.setMultiMapList(mapList);
         ViewManager.updateView();
