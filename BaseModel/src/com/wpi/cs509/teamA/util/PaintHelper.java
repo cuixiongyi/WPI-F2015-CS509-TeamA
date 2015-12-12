@@ -88,19 +88,40 @@ public class PaintHelper {
 	public static void paintStartEndNode(Graphics2D g2) {
 		Node node = model.getStartNode();
 		if (node != null) {
-			BufferedImage image = NodeIcon.getStartIcon();
-			paintIcon2(node, g2, image);
+			paintStartIcon(g2,node);
 		}
 
 		node = model.getEndNode();
 		if (null != node) {
-			BufferedImage image = NodeIcon.getEndIcon();
-			paintIcon2(node, g2, image);
+			paintEndIcon(g2,node);
 
 		}
 
 	}
+	
+	public static void paintStartIcon(Graphics2D g2, Node node){
+		BufferedImage image = NodeIcon.getStartIcon();
+		paintIcon2(node, g2, image);
+	}
+	public static void paintEndIcon(Graphics2D g2, Node node){
+		BufferedImage image = NodeIcon.getEndIcon();
+		paintIcon2(node, g2, image);
+	}
 
+	public static void paintStartEndNode(Graphics2D g2, GeneralMap map) {
+		
+		Node node = model.getStartNode();
+		if(node != null&&node.getMap()==map){
+			paintStartIcon(g2,node);
+		}
+	
+		node = model.getEndNode();
+		if (node != null&&node.getMap()==map) {
+			paintEndIcon(g2,node);
+		}
+
+	}
+	
 	public static boolean paintIcon(Node node, Graphics2D g2) {
 		BufferedImage image = null;
 		if (null == node) {
@@ -244,7 +265,7 @@ public class PaintHelper {
 		PaintHelper.paintRoute(g2, map);
 
 		PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
-		PaintHelper.paintStartEndNode(g2);
+		PaintHelper.paintStartEndNode(g2,map);
 	}
 	//
 
