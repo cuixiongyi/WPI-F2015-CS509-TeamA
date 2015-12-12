@@ -23,7 +23,7 @@ public class SuggestorPainter {
 	private static Color locationTxtColor = Color.WHITE;
 	private static Color professorTxtColor = Color.WHITE;
 
-	private static Dimension preferredSize = new Dimension(100, 23);
+	private static Dimension preferredSize = new Dimension(50, 23);
 
 	private static String professorIconName = "Professor_Icon.png";
 	private static String historyIconName = "History_Icon.png";

@@ -37,7 +37,6 @@ import javax.swing.JTextField;
  */
 public class AdminDialog extends JDialog implements ActionListener {
 
-	private JPanel contentPanel;
 	private JTextField userName;
 	private JPasswordField passwordField;
 	private JLabel lbUserName;
@@ -65,9 +64,9 @@ public class AdminDialog extends JDialog implements ActionListener {
 		this.inputPanel = inputPanel;
 		setTitle(LOG);
 		
-		contentPanel = new JPanel(new GridBagLayout());
+		JPanel contentPanel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
-        cs.fill = GridBagConstraints.HORIZONTAL;
+        cs.fill = GridBagConstraints.CENTER;
         
         lbUserName = new JLabel("Username: ");
         cs.gridx = 0;
