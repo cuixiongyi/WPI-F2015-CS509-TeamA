@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
@@ -72,18 +73,19 @@ public class UserAccountDaoImpl implements UserAccountDao {
 		}
 
 	@Override
-	public HashMap<String, Integer> getAllHistoryForUser(int user_id) {
+	public List<History> getAllHistoryForUser(int user_id) {
 		// TODO Auto-generated method stub
 
 		ResultSet resultSet = null;
-		Map<String,Integer> res = new HashMap<String,Integer>();
+		List<History> res = new ArrayList<History>();
 		try {
-			String selectAllUsers = "SELECT historystring,count FROM routefinder.history where userid=?;";
+			String selectAllUsers = "SELECT nodeid,count,searchString FROM routefinder.history where userid=?;";
 			pstmt = conn.prepareStatement(selectAllUsers);
 			pstmt.setInt(1, user_id);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
-				res.put(resultSet.getString("historystring"), resultSet.getInt("count"));
+				res.add(new History(resultSet.getString("searchString"),
+						resultSet.getInt("nodeid"), resultSet.getInt("count")));
 			}
 		} catch (SQLException se) {
 			System.out.println("fail to connect database..");

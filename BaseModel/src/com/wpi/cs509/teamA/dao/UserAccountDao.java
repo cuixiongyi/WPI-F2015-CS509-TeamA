@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.exception.PwdIncorrectException;
 import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
@@ -23,7 +24,7 @@ public interface UserAccountDao {
 	 * @return a HashMap<String, Integer>
 	 * 
 	 */
-	public Map<String,Integer> getAllHistoryForUser(int user_id);
+	public List<History> getAllHistoryForUser(int user_id);
 	
 	/**
 	 * insert user account into the database

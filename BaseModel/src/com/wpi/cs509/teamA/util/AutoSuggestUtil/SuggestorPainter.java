@@ -48,7 +48,14 @@ public class SuggestorPainter {
 	}
 
 	public enum SuggestorEnum {
-		Location, Professor, History,
+		Location(1), Professor(2), Major(2), History(3),Activity(1), Others(1);
+		private int part_value;
+		private SuggestorEnum(int value){
+			part_value = value;
+		}
+		public int getValue(){
+			return part_value;
+		}
 	}
 
 	protected static void setStyle(SuggestorEnum style, SuggestionBasicPanel suggestionPanel) {

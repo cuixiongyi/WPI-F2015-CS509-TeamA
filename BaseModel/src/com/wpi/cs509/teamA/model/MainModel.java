@@ -17,7 +17,8 @@ import java.util.List;
  */
 public final class MainModel extends StateContext{
 
-
+	public static MainModel staticModel = null;
+	
 
     private UserAccount myAccount;
     private GeneralMap currentMap = null;
@@ -182,4 +183,11 @@ public final class MainModel extends StateContext{
         return false;
     }
 
+    public static MainModel getStaticModel() {
+    	return staticModel;
+    }
+    public static void setStaticModel(MainModel pModel) {
+    	 staticModel = pModel;
+    }
+    
 }

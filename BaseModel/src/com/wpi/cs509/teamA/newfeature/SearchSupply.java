@@ -1,64 +1,29 @@
 package com.wpi.cs509.teamA.newfeature;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeName;
+import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
-public class SearchSupply {
-	private Map<String, Node> allNodesWithName;
-	private Map<Integer, String> allMaps;
-	private Map<Integer,String> allMapsabbr;
-	private Map<String, String> allNodesNameAndAbbr;
-
-	public SearchSupply() {
-		initSearchSupply();
-	}
-
-	public void initSearchSupply() {
-		
-		allMaps = new HashMap<Integer,String>();
-		allMapsabbr = new HashMap<Integer,String>();
-		allNodesWithName = new HashMap<String,Node>();
-		allNodesNameAndAbbr = new HashMap<String,String>();
-		
-		// get maps
-		Iterator<GeneralMap> iter_map = Database.getAllMapFromDatabase().iterator();
-		while (iter_map.hasNext()) {
-			GeneralMap tempMap = iter_map.next();
-			int map_id = tempMap.getMapId();
-			String map_name = tempMap.getMapName();
-	//		System.out.println("map_id :"+ map_id +"   map_name"+map_name);
-			allMaps.put(map_id, map_name);
-			allMapsabbr.put(map_id, tempMap.getMapAbbrName());
-		}
-
-		// get nodes and transfer
-		Iterator<Node> iter = Database.getAllNodeListFromDatabase().iterator();
-		while (iter.hasNext()) {
-			Node tempNode = iter.next();
-			String node_name = tempNode.getName();
-			if(node_name.equals("Location"))
-				continue;
-			String map_name = allMaps.get(tempNode.getMap().getMapId());
-		//	System.out.println("node_name :" + node_name+ "   map_name:"+map_name);
-		//	allNodesWithName.put(node_name + " " + map_name, tempNode);
-			allNodesWithName.put(map_name + " " + node_name, tempNode);
-		//	System.out.println(map_name+" "+node_name);
-			allNodesNameAndAbbr.put(map_name + " " + node_name, allMapsabbr.get(tempNode.getMap().getMapId())+" "+node_name);
-		}
-	}
-
+public class SearchSupply{
+	
 	public String getSearchPattern(String searchingStr) {
 	//	searchingStr = searchingStr.replaceAll(" ", "");
 		searchingStr = searchingStr.toLowerCase();
@@ -70,33 +35,85 @@ public class SearchSupply {
 		return newPattern;
 	}
 
-	public Map<String, Node> getSearchSupply(String searchingStr) {
+	public int updatePriority(String searchingStr,String tempKey, int priority){
+		tempKey = tempKey.toLowerCase();
+		String [] searchSplits = searchingStr.toLowerCase().split(" ");
+		for(int i = 0; i < searchSplits.length; i++){
+			if(!tempKey.contains(searchSplits[i].trim())){
+				priority = 0;
+				return priority;
+			}
+		}
+		return priority;
+	}
+	
+	public Map<String, NodeForSearch> sortByPriority(Map<NodeForSearch,Integer> searchResultsList){
+	//	System.out.println(searchResultsList.size());
+		Map<String, NodeForSearch> newSortedList = new HashMap<String, NodeForSearch>();
+		ArrayList<Entry<NodeForSearch, Integer>> arrayList = 
+				new ArrayList<Entry<NodeForSearch, Integer>>(searchResultsList.entrySet());
+		
+		Collections.sort(arrayList, new Comparator<Map.Entry<NodeForSearch, Integer>>() {
+		    public int compare(Map.Entry<NodeForSearch, Integer> map1, Map.Entry<NodeForSearch, Integer> map2) {
+		        return (map2.getValue() - map1.getValue());
+		    }
+		});
+		for (Entry<NodeForSearch, Integer> entry : arrayList) {
+			newSortedList.put(entry.getKey().getStringForDisplay(), entry.getKey());
+		}
+		return newSortedList;
+	}
+	
+	public Map<String,NodeForSearch> getAllInformationForSearch(){
+		Map<String,NodeForSearch> allFromDatabase = Database.getAllNodesForSearch();
+	//	System.out.println(allFromDatabase.size());
+/*		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		Iterator<History> iter = currentUser.getHistory().iterator();
+		while (iter.hasNext()) {
+			History tempHistory = iter.next();
+			String hisString = tempHistory.getHistoryStr();
+			int hisNodeId = tempHistory.getNodeid();
+			String nodeNameComplete = hisString;
+			String nodeNameAbbr = hisString;
+			int hisCount = tempHistory.getCount();
+			NodeForSearch tempNodeForSearch = new NodeForSearch(Database.getNodeFromId(hisNodeId), 
+					nodeNameComplete, nodeNameAbbr,
+					SuggestorEnum.History);
+			allFromDatabase.put(nodeNameComplete, tempNodeForSearch);
+		}*/
+		return allFromDatabase;
+	}
+	
+	public Map<String, NodeForSearch> getSearchSupply(String searchingStr) {
 
-		Map<String, Node> listResults = new HashMap<String, Node>();
+		Map<NodeForSearch,Integer> searchResultsList = new HashMap<NodeForSearch,Integer>();;
 		String newPattern = getSearchPattern(searchingStr);
 
 		// create Pattern
 		Pattern r = Pattern.compile(newPattern);
 
-		for (Map.Entry<String, Node> entry : allNodesWithName.entrySet()) {
+		for (Map.Entry<String, NodeForSearch> entry : getAllInformationForSearch().entrySet()) {
 			String tempKey = entry.getKey();
-			Node tempNode = entry.getValue();
-		//	System.out.println("name:"+ tempKey);
+			NodeForSearch tempNode = entry.getValue();
 			// create matcher
 			Matcher m = r.matcher(tempKey.toLowerCase());
 			if (m.find()) {
-				listResults.put(allNodesNameAndAbbr.get(tempKey), tempNode);
+		//		System.out.println(tempNode.getStringForSearch());
+				tempNode.setPriority(updatePriority(searchingStr,tempKey,tempNode.getPriority()));
+				searchResultsList.put(tempNode,tempNode.getPriority());
 			}
 		}
-		return listResults;
+		Map<String,NodeForSearch>newsearchResultsList = sortByPriority(searchResultsList);
+		return newsearchResultsList;
 	}
 
+	
 	public static void main(String[] args) {
 		Database.InitFromDatabase();
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
 		SearchSupply ss = new SearchSupply();
-		Map<String,Node> getSS = ss.getSearchSupply("Project Center");
+		Map<String,NodeForSearch> getSS = ss.getSearchSupply("pizza");
 		for (String key : getSS.keySet()) {  
 		    System.out.println("Key = " + key);  
 		}  
