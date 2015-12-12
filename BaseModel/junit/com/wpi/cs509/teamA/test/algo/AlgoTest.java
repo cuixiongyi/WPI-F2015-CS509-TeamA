@@ -11,6 +11,7 @@ import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 
 public class AlgoTest {
@@ -142,10 +143,11 @@ public class AlgoTest {
 //				,edge17,edge18};
 		//Graph context = new Graph (edges); //for running the algorithm
 		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
-	
-		AstarAlgoStrategy d= new AstarAlgoStrategy();
+		DijkstraMultipleDestinations d = new DijkstraMultipleDestinations();
+		//AstarAlgoStrategy d= new AstarAlgoStrategy();
 		Stack<Node> route= new Stack<Node>();
-		allEdges edgess= new allEdges(edges, mapedges,node9, node18);
+		Node[] node00={node15, node7, node3};
+		allEdges edgess= new allEdges(edges, mapedges,node9, node00);
 		route=d.getRoute(edgess);
 		System.out.print("Route: ");
 		while (!route.isEmpty())
