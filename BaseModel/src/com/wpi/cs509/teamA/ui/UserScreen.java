@@ -9,6 +9,8 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.KeyEventPostProcessor;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -30,6 +32,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
+import com.wpi.cs509.teamA.ui.controller.Listener.ImageKeyboardListener;
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
@@ -74,6 +77,7 @@ public class UserScreen extends JFrame {
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
+
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -146,8 +150,9 @@ public class UserScreen extends JFrame {
 
 //        popUpPaneLeft.setVisible(true);
 
-	}
+		}
 
+	
 	
 
 

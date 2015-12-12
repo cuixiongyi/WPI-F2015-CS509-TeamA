@@ -3,13 +3,19 @@ package com.wpi.cs509.teamA.util;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import com.wpi.cs509.teamA.bean.Edge;
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 
+import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 public class PaintHelper {
@@ -132,6 +138,7 @@ public class PaintHelper {
 	}
 
 
+
     public static void paintIcons(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
         setStyle(style, g2);
         if (null == nodes)
@@ -217,21 +224,6 @@ public class PaintHelper {
         g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
     }
 
-    public static void paintRoute(Graphics2D g2) {
-//        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathListsForEachMap();
-//        if (null != multiMapPath && 0 != multiMapPath.size()) {
-//            int idx = model.getCurrentMapID()-1;
-//            PaintHelper.paintPath(multiMapPath.get(idx), g2);
-//
-//        }
-        ArrayList<Node> path = model.getRouteOnCurrentMap();
-        if (null == path)
-            return;
-        PaintHelper.paintPath(path, g2);
-
-
-    }
-
    public static void paintPath(List<Node> nodes, Graphics2D g2) {
         if (null != nodes) {
             setStyle(DrawStyleEnum.NewEdge, g2);
@@ -256,18 +248,88 @@ public class PaintHelper {
 	   float scale=model.getCurrentMap().getDisplayScale();
 	   result.setX(Math.round(origin.getX()*scale+ViewManager.getImageComponent().getImageXpos()));
 	   result.setY(Math.round(origin.getY()*scale+ViewManager.getImageComponent().getImageYpos()));
-	
+
 	   return result;
-	   
+
    }
 
-    public static void setModel(MainModel model) {
-        PaintHelper.model = model;
+	public static synchronized void printRoute(GeneralMap map, BufferedImage image) {
+
+		ImageComponent imageComponent = ViewManager.getImageComponent();
+		BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
+				Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = bi.createGraphics();
+		g2.drawImage(image, 0, 0, Math.round(image.getWidth(imageComponent)),
+				Math.round(image.getHeight(imageComponent)), imageComponent);
+
+		paintMultiMaps(g2, map);
+
+		try {
+			ImageIO.write(bi, "PNG", new File("D://" + map.getImageName()));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+
+    public static void paintRoute(Graphics2D g2) {
+        // ArrayList<ArrayList<Node>> multiMapPath =
+        // model.getMultiMapPathLists();
+        // if (null != multiMapPath && 0 != multiMapPath.size()) {
+        // int idx = model.getCurrentMapID()-1;
+        // PaintHelper.paintPath(multiMapPath.get(idx), g2);
+        //
+        // }
+        ArrayList<Node> path = model.getRouteOnCurrentMap();
+        if (null == path)
+            return;
+        PaintHelper.paintPath(path, g2);
+
     }
-    public static String dirtmp = "/BaseModel/src/";
-//   public static String dirtmp = "/src/";
-    public static String getUserDir() {
-        return System.getProperty("user.dir") + dirtmp;
-    }
+
+    public static void paintMultiMaps(Graphics2D g2, GeneralMap map) {
+		float scale = model.getCurrentMap().getDisplayScale();
+		int imageXpos = ViewManager.getImageComponent().getImageXpos();
+		int imageYpos = ViewManager.getImageComponent().getImageYpos();
+		GeneralMap originalMap = model.getCurrentMap();
+		PaintHelper.setPrintMap(map, 1, 0, 0);
+
+		PaintHelper.paintRoute(g2);
+
+		PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+		PaintHelper.paintStartEndNode(g2);
+
+		PaintHelper.restorePrintMap(originalMap, scale, imageXpos, imageYpos);
+
+	}
+
+	public static void setPrintMap(GeneralMap map, float scale, int imageXpos, int imageYpos) {
+		model.setCurrentMap(map);
+		model.getCurrentMap().setDisplayScale(scale);
+		ViewManager.getImageComponent().setImageXpos(imageXpos);
+		ViewManager.getImageComponent().setImageYpos(imageYpos);
+	}
+
+	public static void restorePrintMap(GeneralMap originalMap, float scale, int imageXpos, int imageYpos) {
+		model.setCurrentMap(originalMap);
+		model.getCurrentMap().setDisplayScale(scale);
+		ViewManager.getImageComponent().setImageXpos(imageXpos);
+		ViewManager.getImageComponent().setImageYpos(imageYpos);
+	}
+
+
+
+	public static void setModel(MainModel model) {
+		PaintHelper.model = model;
+	}
+
+	// public static String dirtmp = "/BaseModel/src/";
+	public static String dirtmp = "/src/";
+
+	public static String getUserDir() {
+		return System.getProperty("user.dir") + dirtmp;
+	}
 
 }

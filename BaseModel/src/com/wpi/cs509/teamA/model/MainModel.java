@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.model;
 
+import com.sun.org.apache.bcel.internal.generic.DADD;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
@@ -28,6 +29,8 @@ public static MainModel staticModel = null;
 
 	private ArrayList<ArrayList<Node>> multiMapPathListsForEachMap = null;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
+
+	private ArrayList<GeneralMap> multiMapLists = null;
 
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
@@ -225,6 +228,22 @@ public static MainModel staticModel = null;
 		this.multiMapPathLists = multiMapPathLists;
 	}
 
+public synchronized void setFocusNode(Node focusNode) {
+		this.focusNode = focusNode;
+		modelChanged();
+
+	}
+
+	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
+		return multiMapLists;
+	}
+
+	public synchronized void setMultiMapLists(ArrayList<GeneralMap> multiMapLists) {
+		this.multiMapLists = multiMapLists;
+		modelChanged();
+
+	}
+
 	public synchronized boolean ifLoginAdmin() {
 		return false;
 	}
@@ -235,7 +254,5 @@ public static MainModel staticModel = null;
     public static void setStaticModel(MainModel pModel) {
     	 staticModel = pModel;
     }
-
-
     
 }

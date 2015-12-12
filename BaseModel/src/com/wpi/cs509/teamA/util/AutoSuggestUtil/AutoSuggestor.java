@@ -434,24 +434,24 @@ public class AutoSuggestor {
 			return false;
 		}
 	
-//		SearchSupply dictionary = new SearchSupply();
-//		Map<String, Node> nodeMap = dictionary.getSearchSupply(typedWord);
-//		Set<Entry<String, Node>> stringSet = nodeMap.entrySet();
-//		Iterator<Entry<String, Node>> iter = stringSet.iterator();
+		SearchSupply dictionary = new SearchSupply();
+		Map<String, Node> nodeMap = dictionary.getSearchSupply(typedWord);
+		Set<Entry<String, Node>> stringSet = nodeMap.entrySet();
+		Iterator<Entry<String, Node>> iter = stringSet.iterator();
 	
-//		boolean suggestionAdded = false;
-//		while (iter.hasNext()) {
-//			Entry<String, Node> nodeInfo = iter.next();
-//			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue(), suggestorEnum);
-//			suggestionAdded = true;
-//
-//		}
+		boolean suggestionAdded = false;
+		while (iter.hasNext()) {
+			Entry<String, Node> nodeInfo = iter.next();
+			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue(), SuggestorEnum.Location);
+			suggestionAdded = true;
+
+		}
 		
 		//hack
-		Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
-		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.History);
-		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Professor);
-		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Location);
+//		Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
+//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.History);
+//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Professor);
+//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Location);
 		
 		
 		return true;
