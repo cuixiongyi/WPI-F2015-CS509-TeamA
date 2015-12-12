@@ -218,7 +218,7 @@ public class PaintHelper {
     }
 
     public static void paintRoute(Graphics2D g2) {
-//        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
+//        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathListsForEachMap();
 //        if (null != multiMapPath && 0 != multiMapPath.size()) {
 //            int idx = model.getCurrentMapID()-1;
 //            PaintHelper.paintPath(multiMapPath.get(idx), g2);
@@ -264,8 +264,8 @@ public class PaintHelper {
     public static void setModel(MainModel model) {
         PaintHelper.model = model;
     }
-//    public static String dirtmp = "/BaseModel/src/";
-   public static String dirtmp = "/src/";
+    public static String dirtmp = "/BaseModel/src/";
+//   public static String dirtmp = "/src/";
     public static String getUserDir() {
         return System.getProperty("user.dir") + dirtmp;
     }

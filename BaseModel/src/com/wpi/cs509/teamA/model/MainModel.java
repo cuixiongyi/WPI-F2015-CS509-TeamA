@@ -1,6 +1,5 @@
 package com.wpi.cs509.teamA.model;
 
-import com.sun.org.apache.bcel.internal.generic.DADD;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
@@ -27,6 +26,7 @@ public static MainModel staticModel = null;
 
 	private Node focusNode;
 
+	private ArrayList<ArrayList<Node>> multiMapPathListsForEachMap = null;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	/**
@@ -41,7 +41,7 @@ public static MainModel staticModel = null;
 		myAccount = null;
 		this.currentMap = null;
 		this.iconFilter = new ArrayList<NodeType>();
-		// multiMapPathLists = new ArrayList<ArrayList<Node>>();
+		// multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 
 	}
@@ -70,11 +70,13 @@ public static MainModel staticModel = null;
 	public synchronized void cleanUpRoute() {
 		this.setStartNode(null);
 		this.setEndNode(null);
+		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
+
 	}
 
 	public synchronized ArrayList<Node> getRouteOnCurrentMap() {
-		// ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathLists();
+		// ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathListsForEachMap();
 		// if (null != multiMapPath && 0 != multiMapPath.size()) {
 		// int idx = getCurrentMapID()-1;
 		// return multiMapPath.get(idx);
@@ -83,7 +85,7 @@ public static MainModel staticModel = null;
 		ArrayList<Node> ret = null;
 		try {
 			int idx = getCurrentMapID() - 1;
-			ret = getMultiMapPathLists().get(idx);
+			ret = getMultiMapPathListsForEachMap().get(idx);
 		} catch (Exception e) {
 			return null;
 		}
@@ -146,7 +148,7 @@ public static MainModel staticModel = null;
 		if (pStartNode == this.startNode) {
 			return;
 		}
-		this.multiMapPathLists = null;
+		this.multiMapPathListsForEachMap = null;
 
 		this.startNode = pStartNode;
 		modelChanged();
@@ -162,13 +164,14 @@ public static MainModel staticModel = null;
 		modelChanged();
 	}
 
-	public synchronized ArrayList<ArrayList<Node>> getMultiMapPathLists() {
-		return multiMapPathLists;
+	public synchronized ArrayList<ArrayList<Node>> getMultiMapPathListsForEachMap() {
+		return multiMapPathListsForEachMap;
 	}
 
-	public synchronized void setMultiMapPathLists(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
+	public synchronized void setMultiMapPathListsForEachMap(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
 		List<GeneralMap> maps = Database.getAllMapFromDatabase();
-		this.multiMapPathLists = new ArrayList<ArrayList<Node>>();
+		this.setMultiMapPathLists(pMultiMapPathLists);
+		this.multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 
 		for (int ii = 1; ii <= maps.size(); ++ii) {
 			ArrayList<Node> path = new ArrayList<Node>();
@@ -182,7 +185,7 @@ public static MainModel staticModel = null;
 			if (-1 != idx) {
 				path = pMultiMapPathLists.get(idx);
 			}
-			this.multiMapPathLists.add(path);
+			this.multiMapPathListsForEachMap.add(path);
 		}
 		modelChanged();
 	}
@@ -214,6 +217,14 @@ public static MainModel staticModel = null;
 
 	}
 
+	public ArrayList<ArrayList<Node>> getMultiMapPathLists() {
+		return multiMapPathLists;
+	}
+
+	public void setMultiMapPathLists(ArrayList<ArrayList<Node>> multiMapPathLists) {
+		this.multiMapPathLists = multiMapPathLists;
+	}
+
 	public synchronized boolean ifLoginAdmin() {
 		return false;
 	}
@@ -224,5 +235,7 @@ public static MainModel staticModel = null;
     public static void setStaticModel(MainModel pModel) {
     	 staticModel = pModel;
     }
+
+
     
 }

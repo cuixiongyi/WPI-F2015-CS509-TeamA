@@ -98,8 +98,9 @@ import java.util.Stack;
         {
             mapListModel.addElement(name);
         }
+
         inputPanel.getMapList().setModel(mapListModel);
-        model.setMultiMapPathLists(multiMapPathLists);
+        model.setMultiMapPathListsForEachMap(multiMapPathLists);
         model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
         ViewManager.updateView();
 
