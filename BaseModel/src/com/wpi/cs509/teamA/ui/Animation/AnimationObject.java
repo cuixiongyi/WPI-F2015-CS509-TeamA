@@ -38,8 +38,9 @@ public class AnimationObject {
         position = pPosition;
         stateContext = new AnimationStateContext();
         stateContext.switchState(new AnimationStateStayIn(this));
-        range = pRange;
         stateContext.getMyState().updateBaseLine();
+
+        range = pRange;
         if (AnimationPosition.BOTTOMM_MIDDLE == position) {
             stateContext.getMyState().setToBottom();
             stateContext.getMyState().setToHorizontal_Middle();
@@ -51,6 +52,7 @@ public class AnimationObject {
 
 
         }
+        stateContext.getMyState().updatePos();
 
     }
 
@@ -102,5 +104,13 @@ public class AnimationObject {
 
     public void setRange(int range) {
         this.range = range;
+    }
+
+    public double getSpeed() {
+        return stateContext.getMyState().getSpeed();
+    }
+
+    public void setSpeed(double speed) {
+        this.stateContext.getMyState().setSpeed(speed);
     }
 }

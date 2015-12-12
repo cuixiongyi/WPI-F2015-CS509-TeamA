@@ -15,7 +15,11 @@ public class AnimationStateSlidingIn extends AnimationState{
         updateBaseLine();
         if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
 
+
         }
+        updatePos();
+
+
 
     }
 
@@ -25,7 +29,10 @@ public class AnimationStateSlidingIn extends AnimationState{
         if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
             Point location = object.getPanel().getLocation();
             if (object.getPanel().getLocation().getX() + object.getPanel().getWidth() > baseLine) {
-                object.getPanel().setLocation((int)location.getX()-speed, (int)location.getY());
+                pos.setX( pos.getX()-speed);
+                object.getPanel().setLocation((int)pos.getX(), (int)pos.getY());
+
+//                object.getPanel().setLocation((int)(location.getX()-speed), (int)location.getY());
                 return AnimationStateEnum.SLIDING_IN;
 
             }

@@ -2,9 +2,11 @@ package com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern;
 
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.Point2d;
 import com.wpi.cs509.teamA.ui.UIConstant;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 /**
  * Created by cuixi on 12/10/2015.
@@ -12,9 +14,11 @@ import java.awt.*;
 public abstract class AnimationState {
 
     protected AnimationObject object = null;
-    protected int baseLine = 0;
+    protected double baseLine = 0;
 
-    protected int speed = UIConstant.SLIDING_SPEED;
+    protected double speed = UIConstant.SLIDING_SPEED;
+
+    protected Point2d pos = null;
 
     public AnimationState(AnimationObject obj) {
         object = obj;
@@ -24,10 +28,10 @@ public abstract class AnimationState {
 
     public void updateBaseLine() {
         if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
-            baseLine = (int)object.getParent().getLocation().getY() + object.getParent().getHeight();
+            baseLine = object.getParent().getLocation().getY() + object.getParent().getHeight();
         }
         else if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
-            baseLine = (int)object.getParent().getLocation().getX();
+            baseLine = object.getParent().getLocation().getX();
 
         }
     }
@@ -38,11 +42,11 @@ public abstract class AnimationState {
     public final void setToVertical_Middle() {
         Point parentL = object.getParent().getLocation();
         int y = (int)parentL.getY() + object.getParent().getHeight()/2 - object.getPanel().getHeight()/2;
-        object.getPanel().setLocation( (int)object.getPanel().getLocation().getX(), y);
+        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), y);
 
     }
     public final void setToLeft() {
-        object.getPanel().setLocation(baseLine - object.getPanel().getWidth(), (int)object.getPanel().getLocation().getY());
+        object.getPanel().setLocation((int)baseLine - object.getPanel().getWidth(), (int)object.getPanel().getLocation().getY());
 
     }
 
@@ -55,13 +59,24 @@ public abstract class AnimationState {
     }
 
     public final void setToBottom() {
-        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine);
+        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), (int)baseLine);
 
     }
 
     public final void setToBottomUpperLimit() {
-        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), baseLine-object.getRange());
+        object.getPanel().setLocation((int)object.getPanel().getLocation().getX(), (int)baseLine-object.getRange());
 
     }
 
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+    public void updatePos() {
+        pos = new Point2d(object.getPanel().getLocation().getX(), object.getPanel().getLocation().getY());
+
+    }
 }
