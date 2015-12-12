@@ -3,267 +3,326 @@ package com.wpi.cs509.teamA.util;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import com.wpi.cs509.teamA.bean.Edge;
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 
+import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 public class PaintHelper {
 
+	/**
+	 * currently all paint funcitons have 2 overloads, with or without
+	 * DrawStyleEnum In the case that DrawStyleEnum is not provided - All
+	 * functions that draw a list of items (paintNodes, paintEdges) Set style to
+	 * a default style - All functions that draw one single item (paintNode,
+	 * paintEdge) use current style to draw
+	 */
 
+	static private MainModel model = null;
+	private final static int ovalOffset = 10;
+	private final static int ovalOffset_SelectedNode = ovalOffset + 5;
+	private static BasicStroke basicNodeStrock = new BasicStroke(2);
+	private static BasicStroke basicEdgeStrock = new BasicStroke(5);
 
-    static private MainModel model = null;
-    private final static int ovalOffset = 10;
-    private final static int ovalOffset_SelectedNode = ovalOffset + 5;
-    private static BasicStroke basicNodeStrock = new BasicStroke(2);
-    private static BasicStroke basicEdgeStrock = new BasicStroke(5);
+	/**
+	 * currently all paint funcitons have 2 overloads, with or without
+	 * DrawStyleEnum In the case that DrawStyleEnum is not provided - All
+	 * functions that draw a list of items (paintNodes, paintEdges) Set style to
+	 * a default style - All functions that draw one single item (paintNode,
+	 * paintEdge) use current style to draw
+	 */
 
+	public enum DrawStyleEnum {
+		Undefined, BasicNode, BasicEdge, BasicText, NewNode, NewEdge, SelectedNode,
+	}
 
-    /**
-     * currently all paint funcitons have 2 overloads, with or without DrawStyleEnum
-     * In the case that DrawStyleEnum is not provided
-     *      - All functions that draw a list of items (paintNodes, paintEdges)
-     *          Set style to a default style
-     *      - All functions that draw one single item (paintNode, paintEdge)
-     *          use current style to draw
-     */
+	private static void setStyle(DrawStyleEnum style, Graphics2D g2) {
+		switch (style) {
+		case Undefined:
+		case BasicNode:
+			g2.setStroke(basicNodeStrock);
+			g2.setColor(Color.blue);
+			break;
+		case BasicEdge:
+			g2.setStroke(basicEdgeStrock);
+			g2.setColor(Color.blue);
+			break;
+		case BasicText:
 
-    public enum DrawStyleEnum {
-        Undefined,
-        BasicNode,
-        BasicEdge,
-        BasicText,
-        NewNode,
-        NewEdge,
-        SelectedNode,
-    }
+			break;
+		case NewNode:
+			g2.setStroke(basicNodeStrock);
+			g2.setColor(Color.red);
+			break;
+		case NewEdge:
+			g2.setStroke(basicEdgeStrock);
+			g2.setColor(Color.red);
+			break;
+		case SelectedNode:
+			g2.setColor(Color.red);
+			break;
 
-    private static void setStyle(DrawStyleEnum style, Graphics2D g2) {
-        switch (style) {
-            case Undefined:
-            case BasicNode:
-                g2.setStroke(basicNodeStrock);
-                g2.setColor(Color.blue);
-                break;
-            case BasicEdge:
-                g2.setStroke(basicEdgeStrock);
-                g2.setColor(Color.blue);
-                break;
-            case BasicText:
+		}
+	}
 
-                break;
-            case NewNode:
-                g2.setStroke(basicNodeStrock);
-                g2.setColor(Color.red);
-                break;
-            case NewEdge:
-                g2.setStroke(basicEdgeStrock);
-                g2.setColor(Color.red);
-                break;
-            case SelectedNode:
-                g2.setColor(Color.red);
-                break;
+	public static void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
+		for (int i = 0; i < nodes.size() - 1; ++i) {
+			paintNode(nodes.get(i), g2);
+			paintEdge(nodes.get(i), nodes.get(i + 1), g2);
+		}
+		paintNode(nodes.get(nodes.size() - 1), g2);
+	}
 
+	public static void paintIcon2(Node node, Graphics2D g2, BufferedImage image) {
+		if (null == node || node.getMap().getMapId() != model.getCurrentMapID())
+			return;
+		Coordinate coorTrans = transferCoor(node.getLocation());
+		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
+		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
+		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
+				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+	}
 
-        }
-    }
+	public static void paintStartEndNode(Graphics2D g2) {
+		Node node = model.getStartNode();
+		if (node != null) {
+			BufferedImage image = NodeIcon.getStartIcon();
+			paintIcon2(node, g2, image);
+		}
 
-    public static void paintEdgeAndNodes(List<Node> nodes, Graphics2D g2) {
-        for (int i = 0; i < nodes.size()-1; ++i) {
-            paintNode(nodes.get(i), g2);
-            paintEdge(nodes.get(i), nodes.get(i+1), g2);
-        }
-        paintNode(nodes.get(nodes.size()-1), g2);
-    }
+		node = model.getEndNode();
+		if (null != node) {
+			BufferedImage image = NodeIcon.getEndIcon();
+			paintIcon2(node, g2, image);
 
-    public static void paintIcon2(Node node, Graphics2D g2, BufferedImage image) {
-        if (null == node ||  node.getMap().getMapId() != model.getCurrentMapID())
-            return;
-        Coordinate coorTrans = transferCoor(node.getLocation());
-        int xCoor = coorTrans.getX() - (image.getWidth()/2);
-        int yCoor = coorTrans.getY() - (image.getHeight()/2);
-        g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
-                image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
-    }
-    public static void paintStartEndNode(Graphics2D g2) {
-        Node node = model.getStartNode();
-        if (node != null) {
-            BufferedImage image = NodeIcon.getStartIcon();
-            paintIcon2(node, g2, image);
-        }
+		}
 
-        node = model.getEndNode();
-        if (null != node) {
-            BufferedImage image = NodeIcon.getEndIcon();
-            paintIcon2(node, g2, image);
+	}
 
-        }
+	public static boolean paintIcon(Node node, Graphics2D g2) {
+		BufferedImage image = null;
+		if (null == node) {
+			return false;
+		}
+		image = NodeIcon.getImage(node);
 
-    }
-   public static boolean paintIcon(Node node, Graphics2D g2) {
-	   		BufferedImage image = null;
-       if (null == node) {
-           return false;
-       }
-	   		if (node == model.getStartNode())
-	   		{
-	   			image = NodeIcon.getStartIcon();
-	   		}
-	   		else if (node == model.getEndNode())
-	   		{
-	   			image = NodeIcon.getEndIcon();
-	   		}
-	   		else
-	   		{
-	   			image = NodeIcon.getImage(node);
-	   		}
-            if (null == image) {
-                return false; 
-            }
-            Coordinate coorTrans = transferCoor(node.getLocation());
-            int xCoor = coorTrans.getX() - (image.getWidth()/2);
-            int yCoor = coorTrans.getY() - (image.getHeight()/2);
-            g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
-                    image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
-            return true;
+		if (null == image) {
+			return false;
+		}
+		Coordinate coorTrans = transferCoor(node.getLocation());
+		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
+		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
+		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
+				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+		return true;
+	}
+
+	public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
+//		System.out.println("Drawing nodes.");
+		setStyle(style, g2);
+		if (null == nodes)
+			return;
+		for (Node node : nodes) {
+			if (model.hasFilter(node.getNodeType())) {
+				paintIcon(node, g2);
+			} else {
+				if (model.ifLoginAdmin()) {
+					paintNode(node, g2);
+				}
+			}
+		}
+	}
+
+	public static void paintNodes(List<Node> nodes, Graphics2D g2) {
+		paintNodes(nodes, g2, DrawStyleEnum.BasicNode);
+	}
+
+	/**
+	 * PaintNode function will paint node with defined style
+	 * 
+	 * @param node
+	 * @param g2
+	 * @param style
+	 */
+	public static void paintNode(Node node, Graphics2D g2, DrawStyleEnum style) {
+		if (null == node) {
+			return;
+		}
+		setStyle(style, g2);
+		Coordinate xy = transferCoor(node.getLocation());
+		int tmp = ovalOffset;
+		if (DrawStyleEnum.SelectedNode == style) {
+			tmp = ovalOffset_SelectedNode;
+		}
+		g2.fillOval(xy.getX() - tmp, xy.getY() - tmp, tmp * 2, tmp * 2);
+
+	}
+
+	public static void paintNode(Node node, Graphics2D g2) {
+		if (null == node)
+			return;
+		Coordinate xy = transferCoor(node.getLocation());
+		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, ovalOffset * 2, ovalOffset * 2);
+	}
+
+	public static void paintEdges(List<Edge> edges, Graphics2D g2) {
+		paintEdges(edges, g2, DrawStyleEnum.BasicEdge);
+	}
+
+	public static void paintEdges(List<Edge> edges, Graphics2D g2, DrawStyleEnum style) {
+		setStyle(style, g2);
+		if (null == edges)
+			return;
+		for (Edge edge : edges) {
+			paintEdge(edge.getNode1(), edge.getNode2(), g2);
+		}
+	}
+
+	public static void paintEdge(Edge edge, Graphics2D g2) {
+		if (null == edge)
+			return;
+		paintEdge(edge.getNode1(), edge.getNode2(), g2);
+	}
+
+	public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2, DrawStyleEnum style) {
+		setStyle(style, g2);
+		paintEdge(nodeSrc, nodeDest, g2);
+	}
+
+	public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
+		Coordinate start = transferCoor(nodeSrc.getLocation());
+		Coordinate end = transferCoor(nodeDest.getLocation());
+		if (null == nodeSrc || null == nodeDest)
+			return;
+
+		// g2.setStroke(new BasicStroke(5));
+		g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
+	}
+
+	public static void paintPath(List<Node> nodes, Graphics2D g2) {
+		if (null != nodes) {
+			setStyle(DrawStyleEnum.NewEdge, g2);
+			for (int i = 0; i < nodes.size() - 1; ++i) {
+				paintEdge(nodes.get(i), nodes.get(i + 1), g2);
+			}
+		}
+	}
+
+	public static Coordinate backTransferCoor(Coordinate origin) {
+		Coordinate result = new Coordinate();
+		float scale = model.getCurrentMap().getDisplayScale();
+		result.setX(Math.round((origin.getX() - ViewManager.getImageComponent().getImageXpos()) / scale));
+		result.setY(Math.round((origin.getY() - ViewManager.getImageComponent().getImageYpos()) / scale));
+
+		return result;
+	}
+
+	public static Coordinate transferCoor(Coordinate origin) {
+		Coordinate result = new Coordinate();
+		float scale = model.getCurrentMap().getDisplayScale();
+		result.setX(Math.round(origin.getX() * scale + ViewManager.getImageComponent().getImageXpos()));
+		result.setY(Math.round(origin.getY() * scale + ViewManager.getImageComponent().getImageYpos()));
+
+		return result;
+
+	}
+
+	public static void paintEverything(Graphics2D g2, GeneralMap map, BufferedImage image, float scale) {
+
+		ImageComponent imageComponent = ViewManager.getImageComponent();
+
+		g2.drawImage(image, imageComponent.getImageXpos(), imageComponent.getImageYpos(),
+				Math.round(image.getWidth(imageComponent) * scale), Math.round(image.getHeight(imageComponent) * scale),
+				imageComponent);
+		model.paintOnImage(g2);
+	}
+
+	public static synchronized void printRoute(GeneralMap map, BufferedImage image) {
+
+		ImageComponent imageComponent = ViewManager.getImageComponent();
+		BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
+				Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2 = bi.createGraphics();
+		g2.drawImage(image, 0, 0, Math.round(image.getWidth(imageComponent)),
+				Math.round(image.getHeight(imageComponent)), imageComponent);
+
+		paintMultiMaps(g2, map);
+
+		try {
+			ImageIO.write(bi, "PNG", new File("D://" + map.getImageName()));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void paintRoute(Graphics2D g2) {
+		// ArrayList<ArrayList<Node>> multiMapPath =
+		// model.getMultiMapPathLists();
+		// if (null != multiMapPath && 0 != multiMapPath.size()) {
+		// int idx = model.getCurrentMapID()-1;
+		// PaintHelper.paintPath(multiMapPath.get(idx), g2);
+		//
+		// }
+		ArrayList<Node> path = model.getRouteOnCurrentMap();
+		if (null == path)
+			return;
+		PaintHelper.paintPath(path, g2);
+
+	}
+
+	public static void paintMultiMaps(Graphics2D g2, GeneralMap map) {
+		float scale = model.getCurrentMap().getDisplayScale();
+		int imageXpos = ViewManager.getImageComponent().getImageXpos();
+		int imageYpos = ViewManager.getImageComponent().getImageYpos();
+		GeneralMap originalMap = model.getCurrentMap();
+		PaintHelper.setPrintMap(map, 1, 0, 0);
+
+		PaintHelper.paintRoute(g2);
+
+		PaintHelper.paintNodes(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+		PaintHelper.paintStartEndNode(g2);
+
+		PaintHelper.restorePrintMap(originalMap, scale, imageXpos, imageYpos);
+
+	}
+
+	public static void setPrintMap(GeneralMap map, float scale, int imageXpos, int imageYpos) {
+		model.setCurrentMap(map);
+		model.getCurrentMap().setDisplayScale(scale);
+		ViewManager.getImageComponent().setImageXpos(imageXpos);
+		ViewManager.getImageComponent().setImageYpos(imageYpos);
+	}
+
+	public static void restorePrintMap(GeneralMap originalMap, float scale, int imageXpos, int imageYpos) {
+		model.setCurrentMap(originalMap);
+		model.getCurrentMap().setDisplayScale(scale);
+		ViewManager.getImageComponent().setImageXpos(imageXpos);
+		ViewManager.getImageComponent().setImageYpos(imageYpos);
 	}
 
 
-    public static void paintIcons(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
-        setStyle(style, g2);
-        if (null == nodes)
-            return;
-        for (Node node : nodes) {
-        	paintIcon(node, g2);
-        }
-    }
-    
-    public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
-        setStyle(style, g2);
-        if (null == nodes)
-            return;
-        for (Node node : nodes) {
-        	if (!paintIcon(node, g2))
-        	{
-        		paintNode(node, g2);
-        	}
-        }
-    }
-    
-    
-    
-    public static void paintNodes(List<Node> nodes, Graphics2D g2) {
-        paintNodes(nodes, g2, DrawStyleEnum.BasicNode);
-    }
 
-    /**
-     * PaintNode function will paint node with defined style
-     * @param node
-     * @param g2
-     * @param style
-     */
-    public static void paintNode(Node node, Graphics2D g2, DrawStyleEnum style) {
-        if (null == node) {
-            return;
-        }
-        setStyle(style, g2);
-        Coordinate xy = transferCoor(node.getLocation());
-        int tmp = ovalOffset;
-        if (DrawStyleEnum.SelectedNode == style) {
-            tmp = ovalOffset_SelectedNode;
-        }
-        g2.fillOval(xy.getX() - tmp, xy.getY() - tmp, tmp*2, tmp*2);
+	public static void setModel(MainModel model) {
+		PaintHelper.model = model;
+	}
 
-    }
-    public static void paintNode(Node node, Graphics2D g2) {
-        if (null == node)
-            return;
-		Coordinate xy = transferCoor(node.getLocation());
-		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, ovalOffset*2, ovalOffset*2);
-    }
+//	 public static String dirtmp = "/BaseModel/src/";
+	public static String dirtmp = "/src/";
 
-    public static void paintEdges(List<Edge> edges, Graphics2D g2) {
-        paintEdges(edges, g2, DrawStyleEnum.BasicEdge);
-    }
-    public static void paintEdges(List<Edge> edges, Graphics2D g2, DrawStyleEnum style) {
-        setStyle(style, g2);
-        if (null == edges )
-            return;
-        for (Edge edge : edges) {
-            paintEdge(edge.getNode1(), edge.getNode2(), g2);
-        }
-    }
-
-    public static void paintEdge(Edge edge, Graphics2D g2) {
-        if (null == edge )
-            return;
-        paintEdge(edge.getNode1(), edge.getNode2(), g2);
-    }
-
-    public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2, DrawStyleEnum style) {
-        setStyle(style, g2);
-        paintEdge(nodeSrc, nodeDest, g2);
-    }
-    public static void paintEdge(Node nodeSrc, Node nodeDest, Graphics2D g2) {
-        Coordinate start = transferCoor(nodeSrc.getLocation());
-        Coordinate end = transferCoor(nodeDest.getLocation());
-        if (null == nodeSrc || null == nodeDest)
-            return;
-
-        //g2.setStroke(new BasicStroke(5));
-        g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
-    }
-
-    public static void paintRoute(Graphics2D g2) {
-        ArrayList<ArrayList<Node>> multiMapPath = model.getMultiMapPathLists();
-        if (null != multiMapPath && 0 != multiMapPath.size()) {
-            int idx = model.getCurrentMapID()-1;
-            PaintHelper.paintPath(multiMapPath.get(idx), g2);
-
-        }
-
-    }
-
-   public static void paintPath(List<Node> nodes, Graphics2D g2) {
-        if (null != nodes) {
-            setStyle(DrawStyleEnum.NewEdge, g2);
-            for (int i = 0; i < nodes.size() - 1; ++i) {
-                paintEdge(nodes.get(i), nodes.get(i + 1), g2);
-            }
-        }
-    }
-
-    public static Coordinate backTransferCoor(Coordinate origin) {
-        Coordinate result=new Coordinate();
-        float scale=model.getCurrentMap().getDisplayScale();
-        result.setX(origin.getX()-ViewManager.getImageComponent().getImageXpos());
-        result.setY(origin.getY()-ViewManager.getImageComponent().getImageYpos());
-
-        return result;
-    }
-
-    public static Coordinate transferCoor(Coordinate origin)
-   {
-	   Coordinate result=new Coordinate();
-	   float scale=model.getCurrentMap().getDisplayScale();
-	   result.setX(Math.round((origin.getX()+ViewManager.getImageComponent().getImageXpos())*scale));
-	   result.setY(Math.round((origin.getY()+ViewManager.getImageComponent().getImageYpos())*scale));
-	
-	   return result;
-	   
-   }
-
-    public static void setModel(MainModel model) {
-        PaintHelper.model = model;
-    }
-    //public static String dirtmp = "/BaseModel/src/";
-    public static String dirtmp = "/src/";
-    public static String getUserDir() {
-        return System.getProperty("user.dir") + dirtmp;
-    }
+	public static String getUserDir() {
+		return System.getProperty("user.dir") + dirtmp;
+	}
 
 }
