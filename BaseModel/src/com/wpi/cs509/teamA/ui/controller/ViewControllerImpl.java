@@ -86,8 +86,7 @@ import java.util.Stack;
                 mapNameList.add(node.getMap().getMapName());
               
                 mapList.add(node.getMap());
-                System.out.println(node.getMap());
-                System.out.println("map"+mapList.size());
+               
             }
         }
         multiMapPathLists.add(singleMapPath);
@@ -101,7 +100,7 @@ import java.util.Stack;
         }
         inputPanel.getMapList().setModel(mapListModel);
         model.setMultiMapPathLists(multiMapPathLists);
-        System.out.println("hehe"+mapListModel.getSize());
+       
         
         model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
         model.setMultiMapList(mapList);
