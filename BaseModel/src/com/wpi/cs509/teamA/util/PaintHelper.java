@@ -252,7 +252,16 @@ public class PaintHelper {
 	   return result;
 
    }
+    
+    public static void paintEverything(Graphics2D g2, GeneralMap map, BufferedImage image, float scale) {
 
+		ImageComponent imageComponent = ViewManager.getImageComponent();
+
+		g2.drawImage(image, imageComponent.getImageXpos(), imageComponent.getImageYpos(),
+				Math.round(image.getWidth(imageComponent) * scale), Math.round(image.getHeight(imageComponent) * scale),
+				imageComponent);
+		model.paintOnImage(g2);
+	}
 	public static synchronized void printRoute(GeneralMap map, BufferedImage image) {
 
 		ImageComponent imageComponent = ViewManager.getImageComponent();

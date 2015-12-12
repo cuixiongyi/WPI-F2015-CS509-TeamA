@@ -84,15 +84,18 @@ public class ImageComponent extends JComponent {
 
         /// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
-		this.image = map.getImage();
-        if ( ! testBeforeRepaint())
-            return;
+		image = map.getImage();
+		float scale = map.getDisplayScale();
+		
+		if (!testBeforeRepaint())
+			return;
 
 		// if isInitilized
 		// no need to paint the image again
 	 
 		Graphics2D g2 = (Graphics2D) g;
 		PaintHelper.paintEverything(g2, map, image,scale);
+	
 	
 		
 		/// CXY test
@@ -104,20 +107,14 @@ public class ImageComponent extends JComponent {
 		// g.drawString("Start", this.getImageStartXpos(),
 		// this.getImageStartYpos());
 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(image, imageXpos, imageYpos, Math.round(image.getWidth(this)*map.getDisplayScale()),
-				Math.round(image.getHeight(this)*map.getDisplayScale()), this);
-        setForeground(Color.RED);
-        PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+       
+        
 
-		{
-			model.paintOnImage(g2);
             /// CXY test
             //GeneralMap tmp = stateContext.getCurrentMap();
             //List<Node> nodes = tmp.getNodes();
             //PaintHelper.paintPath(nodes, g2);
-        }
-
+        
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
 

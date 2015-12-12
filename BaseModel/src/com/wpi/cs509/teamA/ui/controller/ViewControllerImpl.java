@@ -112,7 +112,7 @@ import java.util.Stack;
        
         
         model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
-        model.setMultiMapList(mapList);
+        model.setMultiMapLists(mapList);
         ViewManager.updateView();
 
 
