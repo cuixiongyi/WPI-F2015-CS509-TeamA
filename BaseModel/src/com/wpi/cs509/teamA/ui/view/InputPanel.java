@@ -91,7 +91,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         
         this.add(tabbedPane);
-        tabbedPane.setLayout(null);
         
         tabbedPane.setBounds(0,230,300,550);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -99,6 +98,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         tabbedPane.addTab("Result",searchResultTab);
         tabbedPane.addTab("Filter",filterTab);
         tabbedPane.addTab("Admin",adminTab);
+        
+        adminTab.setLayout(null);
 
         //login panel
         this.adminLogin = new JButton(UIConstant.LOGIN);
@@ -176,7 +177,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
         //tab panel-filter
         this.filter= new JButton("Filter");
-        filter.setBounds(100,100,100,100);
+        filter.setLocation(122,232);
         filterTab.add(filter);
         
 
@@ -192,7 +193,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         btnSynchronize = new JButton("Sync");
         btnSynchronize.addActionListener(this);
 //        btnSynchronize.setVisible(false);
-//        btnSynchronize.setBounds(155, 380, 75, 30);
+        btnSynchronize.setBounds(155, 280, 75, 30);
         adminTab.add(btnSynchronize);
 
         BufferedImage logo;
