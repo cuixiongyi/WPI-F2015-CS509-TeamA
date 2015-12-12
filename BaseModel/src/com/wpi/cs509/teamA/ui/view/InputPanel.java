@@ -159,6 +159,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         //tab panel-search result
         mapList = new JList<>();
         mapList.setPreferredSize(new Dimension(250, 450));
+        mapList.setFixedCellHeight(40);
         searchResultTab.add(mapList);
 
 
