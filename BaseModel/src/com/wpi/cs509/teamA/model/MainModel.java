@@ -29,6 +29,8 @@ public static MainModel staticModel = null;
 
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
+	private ArrayList<GeneralMap> multiMapLists = null;
+
 	/**
 	 * if filterNodeType[i] == 1 then display that type of node
 	 * filterNodeType[i] == 0 don't display
@@ -210,6 +212,22 @@ public static MainModel staticModel = null;
 		NodeDaoImpl dao = new NodeDaoImpl();
 		dao.editNode(node);
 		Database.InitFromDatabase();
+		modelChanged();
+
+	}
+
+	public synchronized void setFocusNode(Node focusNode) {
+		this.focusNode = focusNode;
+		modelChanged();
+
+	}
+
+	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
+		return multiMapLists;
+	}
+
+	public synchronized void setMultiMapLists(ArrayList<GeneralMap> multiMapLists) {
+		this.multiMapLists = multiMapLists;
 		modelChanged();
 
 	}
