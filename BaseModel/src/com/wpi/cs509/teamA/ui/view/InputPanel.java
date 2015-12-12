@@ -29,8 +29,10 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MyListCellRenderer;
 import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
+
 
 
 /**
@@ -100,6 +102,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         tabbedPane.addTab("Result",searchResultTab);
         tabbedPane.addTab("Filter",filterTab);
         tabbedPane.addTab("Admin",adminTab);
+        
+        adminTab.setLayout(null);
 
         //login panel
         this.adminLogin = new JButton(UIConstant.LOGIN);
@@ -163,8 +167,16 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         //tab panel-search result
         mapList = new JList<>();
         mapList.setPreferredSize(new Dimension(250, 450));
-        mapList.setFixedCellHeight(40);
+//        mapList.setFixedCellHeight(40);
+        mapList.setCellRenderer(new MyListCellRenderer());
         searchResultTab.add(mapList);
+        ///for test
+        DefaultListModel model = new DefaultListModel();
+        model.addElement("This is a short textdddddddddd");
+        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
+        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
+//        mapList.setModel(model);
+        
 
 
         //tab panel-filter
@@ -195,7 +207,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         btnSynchronize = new JButton("Sync");
         btnSynchronize.addActionListener(this);
 //        btnSynchronize.setVisible(false);
-//        btnSynchronize.setBounds(155, 380, 75, 30);
+        btnSynchronize.setBounds(155, 280, 75, 30);
         adminTab.add(btnSynchronize);
 
         BufferedImage logo;
@@ -216,41 +228,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
       
     }
-
-    /**
-	 * @return the classroomFilter
-	 */
-	public JButton getClassroomFilter() {
-		return classroomFilter;
-	}
-
-	/**
-	 * @return the officeFilter
-	 */
-	public JButton getOfficeFilter() {
-		return officeFilter;
-	}
-
-	/**
-	 * @return the restroomFilter
-	 */
-	public JButton getRestroomFilter() {
-		return restroomFilter;
-	}
-
-	/**
-	 * @return the labFilter
-	 */
-	public JButton getLabFilter() {
-		return labFilter;
-	}
-
-	/**
-	 * @return the parkingFilter
-	 */
-	public JButton getParkingFilter() {
-		return parkingFilter;
-	}
 
 	public void focusLost(FocusEvent e) {
         if (e.getSource() == txtFrom || e.getSource() == txtTo) {
@@ -420,4 +397,41 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     public void setModel(MainModel pmodel) {
         this.model = pmodel;
     }
+
+
+    /**
+	 * @return the classroomFilter
+	 */
+	public JButton getClassroomFilter() {
+		return classroomFilter;
+	}
+
+	/**
+	 * @return the officeFilter
+	 */
+	public JButton getOfficeFilter() {
+		return officeFilter;
+	}
+
+	/**
+	 * @return the restroomFilter
+	 */
+	public JButton getRestroomFilter() {
+		return restroomFilter;
+	}
+
+	/**
+	 * @return the labFilter
+	 */
+	public JButton getLabFilter() {
+		return labFilter;
+	}
+
+	/**
+	 * @return the parkingFilter
+	 */
+	public JButton getParkingFilter() {
+		return parkingFilter;
+	}
+
 };

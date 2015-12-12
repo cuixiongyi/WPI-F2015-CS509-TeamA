@@ -14,22 +14,29 @@ public class AnimationStateSlidingDown extends AnimationState {
         updateBaseLine();
         if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
 
-            setToMiddle();
-//            setToBottomUpperLimit();
+            setToHorizontal_Middle();
         }
+        updatePos();
+
+
     }
 
     @Override
-    public void execute() {
+    public AnimationStateEnum execute() {
         updateBaseLine();
         if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
             Point location = object.getPanel().getLocation();
             if (baseLine - location.getY()  > 0) {
-                object.getPanel().setLocation((int)location.getX(), (int)location.getY()-speed);
+                pos.setY( pos.getY()-speed);
+
+                object.getPanel().setLocation((int)pos.getX(), (int)pos.getY());
+
+//                object.getPanel().setLocation((int)location.getX(), (int)(location.getY()-speed));
+                return AnimationStateEnum.SLIDING_IN;
 
             }
         }
-
+        return AnimationStateEnum.SLIDED_IN;
 
     }
 }

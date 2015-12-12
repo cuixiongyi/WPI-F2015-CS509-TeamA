@@ -24,6 +24,7 @@ import javax.swing.border.EtchedBorder;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
@@ -55,7 +56,7 @@ public class UserScreen extends JFrame {
 	private ImageComponent imgComponent;
     private ViewController controller = null;
     private  JPanel popUpPane;
-    private  int yPos;
+    private  JPanel popUpPaneLeft;
 
 
 
@@ -73,6 +74,15 @@ public class UserScreen extends JFrame {
 	 * Initialize the user screen, constructor
 	 */
 	private UserScreen() {
+
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			// UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -119,11 +129,22 @@ public class UserScreen extends JFrame {
 		
 		popUpPane=new PopupPanel();
 		contentPane.add(popUpPane,new Integer(2));
-		viewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
-        AnimationObject AO = viewManager.getAC().checkObjectExist(popUpPane);
+		ViewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
+        AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
         AO.switchState(new AnimationStateSlidingUp(AO));
+        AO.setSpeed(0.5);
+        popUpPane.setVisible(true);
 
-		popUpPane.setVisible(true);
+
+//        popUpPaneLeft=new PopupPanel();
+//        contentPane.add(popUpPaneLeft,new Integer(5));
+//        ViewManager.getAC().create(popUpPaneLeft, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.LEFT_MIDDLE, popUpPaneLeft.getWidth());
+//        AnimationObject AO2 = ViewManager.getAC().checkObjectExist(popUpPaneLeft);
+//        AO2.switchState(new AnimationStateSlidingOut(AO2));
+//          AO2.setSpeed(0.5);
+
+//        popUpPaneLeft.setVisible(true);
+
 	}
 
 	
