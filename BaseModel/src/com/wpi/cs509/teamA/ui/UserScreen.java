@@ -124,15 +124,18 @@ public class UserScreen extends JFrame {
         AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
         AO.switchState(new AnimationStateSlidingUp(AO));
         AO.setSpeed(0.5);
-
-        popUpPaneLeft=new PopupPanel();
-        contentPane.add(popUpPaneLeft,new Integer(5));
-        ViewManager.getAC().create(popUpPaneLeft, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.LEFT_MIDDLE, popUpPaneLeft.getWidth());
-        AnimationObject AO2 = ViewManager.getAC().checkObjectExist(popUpPaneLeft);
-        AO2.switchState(new AnimationStateSlidingOut(AO2));
-
         popUpPane.setVisible(true);
-        popUpPaneLeft.setVisible(true);
+
+
+//        popUpPaneLeft=new PopupPanel();
+//        contentPane.add(popUpPaneLeft,new Integer(5));
+//        ViewManager.getAC().create(popUpPaneLeft, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.LEFT_MIDDLE, popUpPaneLeft.getWidth());
+//        AnimationObject AO2 = ViewManager.getAC().checkObjectExist(popUpPaneLeft);
+//        AO2.switchState(new AnimationStateSlidingOut(AO2));
+//          AO2.setSpeed(0.5);
+
+//        popUpPaneLeft.setVisible(true);
+
 	}
 
 	
