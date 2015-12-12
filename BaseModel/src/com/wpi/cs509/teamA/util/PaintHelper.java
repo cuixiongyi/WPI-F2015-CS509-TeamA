@@ -88,40 +88,42 @@ public class PaintHelper {
 	public static void paintStartEndNode(Graphics2D g2) {
 		Node node = model.getStartNode();
 		if (node != null) {
-			paintStartIcon(g2,node);
+			BufferedImage image = NodeIcon.getStartIcon();
+			paintIcon2(node, g2, image);
 		}
 
 		node = model.getEndNode();
 		if (null != node) {
-			paintEndIcon(g2,node);
+			BufferedImage image = NodeIcon.getEndIcon();
+			paintIcon2(node, g2, image);
 
 		}
 
 	}
-	
-	public static void paintStartIcon(Graphics2D g2, Node node){
-		BufferedImage image = NodeIcon.getStartIcon();
-		paintIcon2(node, g2, image);
-	}
-	public static void paintEndIcon(Graphics2D g2, Node node){
-		BufferedImage image = NodeIcon.getEndIcon();
-		paintIcon2(node, g2, image);
-	}
 
-	public static void paintStartEndNode(Graphics2D g2, GeneralMap map) {
-		
-		Node node = model.getStartNode();
-		if(node != null&&node.getMap()==map){
-			paintStartIcon(g2,node);
-		}
-	
-		node = model.getEndNode();
-		if (node != null&&node.getMap()==map) {
-			paintEndIcon(g2,node);
-		}
+	// public static void paintStartIcon(Graphics2D g2, Node node){
+	// BufferedImage image = NodeIcon.getStartIcon();
+	// paintIcon2(node, g2, image);
+	// }
+	// public static void paintEndIcon(Graphics2D g2, Node node){
+	// BufferedImage image = NodeIcon.getEndIcon();
+	// paintIcon2(node, g2, image);
+	// }
+	//
+	// public static void paintStartEndNode(Graphics2D g2, GeneralMap map) {
+	//
+	// Node node = model.getStartNode();
+	// if(node != null&&node.getMap()==map){
+	// paintStartIcon(g2,node);
+	// }
+	//
+	// node = model.getEndNode();
+	// if (node != null&&node.getMap()==map) {
+	// paintEndIcon(g2,node);
+	// }
+	//
+	// }
 
-	}
-	
 	public static boolean paintIcon(Node node, Graphics2D g2) {
 		BufferedImage image = null;
 		if (null == node) {
@@ -249,14 +251,14 @@ public class PaintHelper {
 		BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
 				Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = bi.createGraphics();
-		g2.drawImage(image, 0, 0,
-				Math.round(image.getWidth(imageComponent)), Math.round(image.getHeight(imageComponent) ),
-				imageComponent);
+		g2.drawImage(image, 0, 0, Math.round(image.getWidth(imageComponent)),
+				Math.round(image.getHeight(imageComponent)), imageComponent);
+
 		paintMultiMaps(g2, map);
-	
+
 		try {
 			ImageIO.write(bi, "PNG", new File("D://" + map.getImageName()));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -264,12 +266,34 @@ public class PaintHelper {
 	}
 
 	public static void paintMultiMaps(Graphics2D g2, GeneralMap map) {
-		PaintHelper.paintRoute(g2, map);
+		float scale = model.getCurrentMap().getDisplayScale();
+		int imageXpos = ViewManager.getImageComponent().getImageXpos();
+		int imageYpos = ViewManager.getImageComponent().getImageYpos();
+		GeneralMap originalMap = model.getCurrentMap();
+		PaintHelper.setPrintMap(map, 1, 0, 0);
+
+		PaintHelper.paintRoute(g2);
 
 		PaintHelper.paintIcons(map.getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
-		PaintHelper.paintStartEndNode(g2,map);
+		PaintHelper.paintStartEndNode(g2);
+
+		PaintHelper.restorePrintMap(originalMap, scale, imageXpos, imageYpos);
+
 	}
-	//
+
+	public static void setPrintMap(GeneralMap map, float scale, int imageXpos, int imageYpos) {
+		model.setCurrentMap(map);
+		model.getCurrentMap().setDisplayScale(scale);
+		ViewManager.getImageComponent().setImageXpos(imageXpos);
+		ViewManager.getImageComponent().setImageYpos(imageYpos);
+	}
+
+	public static void restorePrintMap(GeneralMap originalMap, float scale, int imageXpos, int imageYpos) {
+		model.setCurrentMap(originalMap);
+		model.getCurrentMap().setDisplayScale(scale);
+		ViewManager.getImageComponent().setImageXpos(imageXpos);
+		ViewManager.getImageComponent().setImageYpos(imageYpos);
+	}
 
 	public static void paintRoute(Graphics2D g2) {
 		// ArrayList<ArrayList<Node>> multiMapPath =
@@ -286,20 +310,21 @@ public class PaintHelper {
 
 	}
 
-	public static void paintRoute(Graphics2D g2, GeneralMap map) {
-		// ArrayList<ArrayList<Node>> multiMapPath =
-		// model.getMultiMapPathLists();
-		// if (null != multiMapPath && 0 != multiMapPath.size()) {
-		// int idx = model.getCurrentMapID()-1;
-		// PaintHelper.paintPath(multiMapPath.get(idx), g2);
-		//
-		// }
-		ArrayList<Node> path = model.getRouteOnMap(map);
-		if (null == path)
-			return;
-		PaintHelper.paintPath(path, g2);
-
-	}
+	// public static void paintRoute(Graphics2D g2, GeneralMap map) {
+	// // ArrayList<ArrayList<Node>> multiMapPath =
+	// // model.getMultiMapPathLists();
+	// // if (null != multiMapPath && 0 != multiMapPath.size()) {
+	// // int idx = model.getCurrentMapID()-1;
+	// // PaintHelper.paintPath(multiMapPath.get(idx), g2);
+	// //
+	// // }
+	//
+	// ArrayList<Node> path = model.getRouteOnMap(map);
+	// if (null == path)
+	// return;
+	// PaintHelper.paintPath(path, g2);
+	//
+	// }
 
 	public static void paintPath(List<Node> nodes, Graphics2D g2) {
 		if (null != nodes) {

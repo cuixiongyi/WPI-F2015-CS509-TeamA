@@ -213,21 +213,6 @@ public final class MainModel extends StateContext {
 		return false;
 	}
 
-	public synchronized ArrayList<Node> getRouteOnMap(GeneralMap map) {
-		// ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathLists();
-		// if (null != multiMapPath && 0 != multiMapPath.size()) {
-		// int idx = getCurrentMapID()-1;
-		// return multiMapPath.get(idx);
-		//
-		// }
-		ArrayList<Node> ret = null;
-		try {
-			int idx = map.getMapId() - 1;
-			ret = getMultiMapPathLists().get(idx);
-		} catch (Exception e) {
-			return null;
-		}
-		return ret;
-	}
+	
 
 }
