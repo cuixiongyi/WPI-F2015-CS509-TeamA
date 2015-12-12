@@ -60,6 +60,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JButton restroomFilter;
     private JButton labFilter;
     private JButton parkingFilter;
+    private JButton openMap;
+    private JFileChooser fc;
     private JComboBox<String> comboBoxMap;
 
     private UserScreen userScreen;
@@ -209,6 +211,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 //        btnSynchronize.setVisible(false);
         btnSynchronize.setBounds(155, 280, 75, 30);
         adminTab.add(btnSynchronize);
+        
+        this.openMap=new JButton("Open");
+        openMap.setBounds(20, 50, 70, 30);
+        adminTab.add(openMap);
+        fc = new JFileChooser();
+       
+        
 
         BufferedImage logo;
         try {
@@ -433,5 +442,22 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	public JButton getParkingFilter() {
 		return parkingFilter;
 	}
+
+	public JButton getOpenMap() {
+		return openMap;
+	}
+
+	public void setOpenMap(JButton openMap) {
+		this.openMap = openMap;
+	}
+
+	public JFileChooser getFc() {
+		return fc;
+	}
+
+	public void setFc(JFileChooser fc) {
+		this.fc = fc;
+	}
+	
 
 };

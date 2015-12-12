@@ -35,9 +35,22 @@ public class ViewController extends ViewControllerBase{
         addComboBoxMapChanged();
         addButtonLogin();
         addFilterButtons();
+        addOpenFile();
     }
 
-    private void addButtonLogin() {
+    private void addOpenFile() {
+		// TODO Auto-generated method stub
+    	inputPanel.getOpenMap().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickOpenMap();
+
+            }
+        });
+		
+	}
+
+	private void addButtonLogin() {
         inputPanel.getBtnLogin().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
