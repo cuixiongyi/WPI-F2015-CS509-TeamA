@@ -136,7 +136,9 @@ public class PaintHelper {
 			if (model.hasFilter(node.getNodeType())) {
 				paintIcon(node, g2);
 			} else {
-				paintNode(node, g2);
+				if (model.ifLoginAdmin()) {
+					paintNode(node, g2);
+				}
 			}
 		}
 	}
