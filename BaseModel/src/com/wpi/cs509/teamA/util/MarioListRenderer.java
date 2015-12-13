@@ -31,9 +31,9 @@ public class MarioListRenderer extends DefaultListCellRenderer {
         	label.setIcon(NodeIcon.getEndIconSmall());
         }else if(index==0){
         	label.setIcon(NodeIcon.getStartIconSmall());
-        }else 
-        {
-        	ImageIcon image=new ImageIcon(NodeIcon.getNumIcon(index));
+        }else{
+//        	ImageIcon image=new ImageIcon(NodeIcon.getNumIcon(index));
+        	ImageIcon image=new ImageIcon(NodeIcon.getNextIcon());
             label.setIcon(image);
         }
         label.setHorizontalTextPosition(JLabel.RIGHT);
