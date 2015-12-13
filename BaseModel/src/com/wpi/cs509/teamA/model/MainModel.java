@@ -89,6 +89,7 @@ public final class MainModel extends StateContext {
 		this.setEndNode(null);
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
+        this.clearPaths();
 
 	}
 
@@ -310,7 +311,7 @@ public final class MainModel extends StateContext {
 	}
 
 	public void clearPaths() {
-		this.paths = new ArrayList<Path> ();
+		this.paths = null;
 	}
 
     public Path getCurrentPath() {

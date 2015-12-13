@@ -10,24 +10,25 @@ import com.wpi.cs509.teamA.util.PaintHelper;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class MouseActionEditNode extends MouseActionState {
-//	private JToggleButton btnMngNode; 	
+/**
+ * Created by cuixi on 12/13/2015.
+ */
+public class MouseActionEditNodeInfo extends MouseActionState {
 
 
 
-    public MouseActionEditNode(MainModel pMM) {
+    public MouseActionEditNodeInfo(MainModel pMM) {
         super( pMM);
-
 
         model.cleanUpRoute();
 
     }
 
-	@Override
-	public boolean cleanup() {
+    @Override
+    public boolean cleanup() {
 
-		return false;
-	}
+        return false;
+    }
 
 
     @Override
@@ -36,9 +37,10 @@ public class MouseActionEditNode extends MouseActionState {
          * update coor and coorTrans
          */
         getMouseTransCoor(e);
-	    if (e.getButton() == MouseEvent.BUTTON1) {
+        Node node = getNodeFromClick(e);
 
-            Node node = getNodeFromClick(e);
+        if (e.getButton() == MouseEvent.BUTTON1) {
+
 
             if (null != node) {
                 /// TODO add edit node action

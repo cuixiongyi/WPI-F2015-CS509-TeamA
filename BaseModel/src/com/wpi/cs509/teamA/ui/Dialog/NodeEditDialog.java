@@ -10,9 +10,7 @@ import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -32,7 +30,7 @@ import javax.swing.JComboBox;
  *
  */
 @SuppressWarnings("serial")
-public class NodeInformationDialog extends JDialog implements ActionListener {
+public class NodeEditDialog extends JDialog implements ActionListener {
 
 	private JPanel contentPanel = new JPanel();
 	private JButton saveButton;
@@ -62,9 +60,9 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeInformationDialog(ImageComponent imageComponent,
-								 MainModel pModel,
-								 int xPosition, int yPosition) {
+	public NodeEditDialog(ImageComponent imageComponent,
+						  MainModel pModel,
+						  int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
 		model = pModel;
@@ -166,9 +164,9 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 
 	}
 
-	public NodeInformationDialog(ImageComponent imageComponent,
-								 MainModel pModel,
-								 Node pNode) {
+	public NodeEditDialog(ImageComponent imageComponent,
+						  MainModel pModel,
+						  Node pNode) {
 		this( imageComponent, pModel, pNode.getLocation().getX(), pNode.getLocation().getY());
 		if (null == pNode) {
 			return;
@@ -183,7 +181,7 @@ public class NodeInformationDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals(CANCEL))
-			NodeInformationDialog.this.setVisible(false);
+			NodeEditDialog.this.setVisible(false);
 		if (e.getActionCommand().equals(SAVE)) {
 			// Check if fields are filled
 			if (comboBoxType.getSelectedItem().toString().trim().equals("") || nameTextField.getText().trim().equals("")
