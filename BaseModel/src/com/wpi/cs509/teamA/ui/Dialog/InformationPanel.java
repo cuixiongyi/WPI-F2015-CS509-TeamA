@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeIcon;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
@@ -30,6 +31,7 @@ public class InformationPanel extends JPanel implements ActionListener {
     public InformationPanel()
     {
         textLabel=new JLabel();
+        textArea=new JTextArea();
         picLabel=new JLabel();
     }
 
@@ -49,10 +51,16 @@ public class InformationPanel extends JPanel implements ActionListener {
 
         this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
-        textLabel.setText(pre+node.getName());
-        textLabel.setBounds(103,3,150,100);
-        textLabel.setFont(new Font("helvitica", Font.BOLD, 18));
-        this.add(textLabel);
+
+//        textLabel.setText(pre+Database.getNodeInformation(node.getId()).PrintNodeInfo());
+//        textLabel.setBounds(103,3,150,100);
+//        textLabel.setFont(new Font("Arial", Font.BOLD, 10));
+//        this.add(textLabel);
+
+        textArea.setText(Database.getNodeInformation(node.getId()).PrintNodeInfo());
+        textArea.setBounds(103,3,150,100);
+        textArea.setFont(new Font("Arial", Font.BOLD, 10));
+        this.add(textArea);
 
         try{
             informationPic= NodeIcon.resize(ImageIO.read(new File(node.getMap().getMapImgPath())),100,100) ;
