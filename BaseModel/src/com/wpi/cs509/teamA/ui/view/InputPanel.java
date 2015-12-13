@@ -47,21 +47,24 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
 	private MainModel model = null;
 
-	private JButton btnSearch;
-	private JButton adminLogin;
-	private JButton signUp;
-	private JLabel lblFrom;
-	private JLabel lblTo;
-	private JButton btnNeighborManage;
-	private JButton btnSynchronize;
-	private JButton clearFilter;
-	private JButton classroomFilter;
-	private JButton officeFilter;
-	private JButton restroomFilter;
-	private JButton labFilter;
-	private JButton parkingFilter;
+    private JButton btnSearch;
+    private JButton adminLogin;
+    private JButton signUp;
+    private JLabel lblFrom;
+    private JLabel lblTo;
+    private JButton btnNeighborManage;
+    private JButton btnSynchronize;
+    private JButton classroomFilter;
+    private JButton officeFilter;
+    private JButton restroomFilter;
+    private JButton labFilter;
+    private JButton parkingFilter;
+    private JButton openMap;
 	private JButton allFilter;
-	private JComboBox<String> comboBoxMap;
+private JButton clearFilter;
+
+    private JFileChooser fc;
+    private JComboBox<String> comboBoxMap;
 
 	private UserScreen userScreen;
 	private AutoSuggestor autoSuggestorFrom;
@@ -238,7 +241,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// btnSynchronize.setVisible(false);
 		btnSynchronize.setBounds(155, 280, 75, 30);
 		adminTab.add(btnSynchronize);
-
+		openMap=new JButton("OpenMap");
+		openMap.setBounds(130,100,70,30);
+		adminTab.add(openMap);
+		
+		
 		BufferedImage logo;
 		try {
 			logo = ImageIO.read(new File(PaintHelper.getUserDir() + "logo_iteration1.png"));
@@ -449,19 +456,16 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	public JButton getParkingFilter() {
 		return parkingFilter;
 	}
-	
-	/**
-	 * @return the parkingFilter
-	 */
-	public JButton getAllFilter() {
-		return allFilter;
+
+	public JButton getOpenMap() {
+		return openMap;
 	}
-	
-	/**
-	 * @return the parkingFilter
-	 */
+
+	public void setOpenMap(JButton openMap) {
+		this.openMap = openMap;
+	}
+
 	public JButton getClearFilter() {
 		return clearFilter;
 	}
-
 };
