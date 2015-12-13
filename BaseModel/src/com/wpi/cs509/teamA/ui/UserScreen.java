@@ -32,7 +32,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
-import com.wpi.cs509.teamA.ui.controller.Listener.ImageKeyboardListener;
+
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
@@ -135,7 +135,7 @@ public class UserScreen extends JFrame {
 		
 		popUpPane=new PopupPanel();
 		contentPane.add(popUpPane,new Integer(2));
-		ViewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
+		ViewManager.getAC().create(popUpPane, imgComponent, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
         AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
         AO.switchState(new AnimationStateSlidingUp(AO));
         AO.setSpeed(0.5);
