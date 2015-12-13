@@ -23,4 +23,8 @@ public interface MapDao {
 	 */
 	public List<Integer> getAllMapIds();
 	
+	/**
+	 * insert a new map in the database
+	 */
+	public void saveMap(String mapName,String mapAbbrName,String mapPathName, double mapScale);
 }
