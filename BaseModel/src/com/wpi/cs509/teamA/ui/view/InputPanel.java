@@ -489,6 +489,12 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		return clearFilter;
 	}
 
+	
+	public JButton getAllFilter() 
+	{
+		return allFilter;
+
+	}
 
 	public JToggleButton getBtnMngNode() {
 		return btnMngNode;
@@ -496,5 +502,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	public JToggleButton getBtnMngEdge() {
 		return btnMngEdge;
+
 	}
 };

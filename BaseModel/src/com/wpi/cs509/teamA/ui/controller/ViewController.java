@@ -100,6 +100,12 @@ public class ViewController extends ViewControllerBase{
     }
 
     public void addFilterButtons(){
+    	inputPanel.getAllFilter().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impl.clickAllFilter();
+			}
+		});
     	inputPanel.getClassroomFilter().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,6 +136,12 @@ public class ViewController extends ViewControllerBase{
                 impl.clickFilter(NodeType.LAB);
             }
     	});
+		inputPanel.getClearFilter().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impl.clickClearFilter();
+			}
+		});
     }
 
         public void addListSelectionListener() {
@@ -150,43 +162,6 @@ public class ViewController extends ViewControllerBase{
                 model.clearFilters();
                 }
         });
-
-		inputPanel.getClassroomFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.CLASSROOM);
-			}
-		});
-		inputPanel.getOfficeFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.OFFICE);
-			}
-		});
-		inputPanel.getParkingFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.PARKING);
-			}
-		});
-		inputPanel.getRestroomFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.RESTROOM);
-			}
-		});
-		inputPanel.getLabFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.LAB);
-			}
-		});
-		inputPanel.getClearFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickClearFilter();
-			}
-		});
 	}
 
 
