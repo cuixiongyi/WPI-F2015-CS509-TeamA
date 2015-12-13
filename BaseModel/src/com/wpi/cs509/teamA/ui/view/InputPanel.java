@@ -54,11 +54,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	private JLabel lblTo;
 	private JButton btnNeighborManage;
 	private JButton btnSynchronize;
+	private JButton clearFilter;
 	private JButton classroomFilter;
 	private JButton officeFilter;
 	private JButton restroomFilter;
 	private JButton labFilter;
 	private JButton parkingFilter;
+	private JButton allFilter;
 	private JComboBox<String> comboBoxMap;
 
 	private UserScreen userScreen;
@@ -176,18 +178,22 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 				// mapList.setModel(model);
 
 		// tab panel-filter
+		this.clearFilter = new JButton("ALL");
 		this.classroomFilter = new JButton("Classrooms", new ImageIcon(NodeIcon.getClassroomIcon()));
 		this.officeFilter = new JButton("Offices", new ImageIcon(NodeIcon.getOfficeIcon()));
 		this.restroomFilter = new JButton("Restrooms", new ImageIcon(NodeIcon.getRestroomIcon()));
 		this.labFilter = new JButton("Labs", new ImageIcon(NodeIcon.getLabIcon()));
 		this.parkingFilter = new JButton("Parking", new ImageIcon(NodeIcon.getParkingIcon()));
+		this.allFilter = new JButton("CLEAR");
 
 		ArrayList<JButton> filterButtons = new ArrayList<JButton>();
+		filterButtons.add(clearFilter);
 		filterButtons.add(classroomFilter);
 		filterButtons.add(officeFilter);
 		filterButtons.add(restroomFilter);
 		filterButtons.add(labFilter);
 		filterButtons.add(parkingFilter);
+		filterButtons.add(allFilter);
 
 		int filterIconWidth = 255;
 		int filterIconHeight = 50;
@@ -199,13 +205,20 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		for (JButton button : filterButtons) {
 			button.setBounds(filterXpos, filterYpos, filterIconWidth, filterIconHeight);
-			button.setHorizontalAlignment(SwingConstants.LEFT);
-			if (button.equals(officeFilter)) {
-				button.setIconTextGap(iconTextGap - 5);
-			} else if (button.equals(classroomFilter)) {
-				button.setIconTextGap(iconTextGap - 2);
-			} else {
-				button.setIconTextGap(iconTextGap);
+			// set alignment for buttons without icons
+			if (button.equals(clearFilter) || button.equals(allFilter)) {
+				button.setHorizontalAlignment(SwingConstants.CENTER);
+			}
+			// set alignment for buttons with icons
+			else {
+				button.setHorizontalAlignment(SwingConstants.LEFT);
+				if (button.equals(officeFilter)) {
+					button.setIconTextGap(iconTextGap - 5);
+				} else if (button.equals(classroomFilter)) {
+					button.setIconTextGap(iconTextGap - 2);
+				} else {
+					button.setIconTextGap(iconTextGap);
+				}
 			}
 			button.setFont(buttonFont);
 			filterYpos += filterYspacing + filterIconHeight;
@@ -435,6 +448,20 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	 */
 	public JButton getParkingFilter() {
 		return parkingFilter;
+	}
+	
+	/**
+	 * @return the parkingFilter
+	 */
+	public JButton getAllFilter() {
+		return allFilter;
+	}
+	
+	/**
+	 * @return the parkingFilter
+	 */
+	public JButton getClearFilter() {
+		return clearFilter;
 	}
 
 };

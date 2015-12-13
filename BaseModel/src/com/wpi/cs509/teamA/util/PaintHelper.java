@@ -133,7 +133,7 @@ public class PaintHelper {
 		if (null == nodes)
 			return;
 		for (Node node : nodes) {
-			if (model.hasFilter(node.getNodeType())) {
+			if (!model.hasFilter(node.getNodeType())) {
 				paintIcon(node, g2);
 			} else {
 				if (model.ifLoginAdmin()) {
@@ -312,14 +312,12 @@ public class PaintHelper {
 		ViewManager.getImageComponent().setImageYpos(imageYpos);
 	}
 
-
-
 	public static void setModel(MainModel model) {
 		PaintHelper.model = model;
 	}
 
-//	 public static String dirtmp = "/BaseModel/src/";
-	public static String dirtmp = "/src/";
+	 public static String dirtmp = "/BaseModel/src/";
+//	public static String dirtmp = "/src/";
 
 	public static String getUserDir() {
 		return System.getProperty("user.dir") + dirtmp;
