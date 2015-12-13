@@ -238,21 +238,39 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		}
 
 		// tab panel-admin tool
-		this.btnNeighborManage = new JButton("Edges");
-		btnNeighborManage.setSize(75, 30);
-		// btnNeighborManage.setLocation(80, 380);
+		
+		
 
-		// this.btnNeighborManage.setVisible(false);
-		adminTab.add(btnNeighborManage);
-
-		btnSynchronize = new JButton("Sync");
-		btnSynchronize.addActionListener(this);
-		// btnSynchronize.setVisible(false);
-		btnSynchronize.setBounds(155, 280, 75, 30);
-		adminTab.add(btnSynchronize);
 		openMap=new JButton("OpenMap");
-		openMap.setBounds(130,100,70,30);
-		adminTab.add(openMap);
+//		adminTab.add(openMap);
+//		openMap.setFont(buttonFont);
+		
+		btnMngNode = new JToggleButton("Manage Node");
+//		adminTab.add(btnMngNode);
+//		btnMngNode.setFont(buttonFont);
+
+		btnMngEdge = new JToggleButton("Manage Edge");
+//		btnMngEdge.setFont(buttonFont);
+//		adminTab.add(btnMngEdge);
+		
+		ArrayList<AbstractButton> adminButtons = new ArrayList<AbstractButton>();
+		adminButtons.add(openMap);
+		adminButtons.add(btnMngNode);
+		adminButtons.add(btnMngEdge);
+		
+		int adminIconWidth = 255;
+		int adminIconHeight = 50;
+		int adminYspacing = 10;
+		int adminXpos = 15;
+		int adminYpos = 10;
+		
+		for (AbstractButton button : adminButtons)
+		{
+			button.setBounds(adminXpos, adminYpos, adminIconWidth, adminIconHeight);
+			button.setFont(buttonFont);
+			adminYpos += adminYspacing + adminIconHeight;
+			adminTab.add(button);
+		}
 		
 		
 		BufferedImage logo;
@@ -270,16 +288,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		numNodeBtn = 0;
 		numEdgeBtn = 0;
 
-		btnMngNode = new JToggleButton("Manage Node");
-		// btnMngNode.setVisible(true);
-		btnMngNode.setBounds(80, 380, 150, 30);
-		System.out.println(this);
-		this.add(btnMngNode);
-
-		btnMngEdge = new JToggleButton("Manage Edge");
-		// btnMngEdge.setVisible(true);
-		btnMngEdge.setBounds(80, 420, 150, 30);
-		this.add(btnMngEdge);
+		
 
 		// result list
 
