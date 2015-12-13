@@ -220,6 +220,15 @@ public class Database {
 		return allEdgesDataHM.get(map_id);
 	}
 
+	public static List<Node> getAllMapRelationNodesFromMapId(int map_id){
+		List<Node> tempNodeList = new ArrayList<Node>();
+		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
+		List<Integer> tempListInt = nrd2.getMapRelationsNodeForOneMap(map_id);
+		for(Integer tempInt : tempListInt){
+			tempNodeList.add(allNodesDataHM.get(tempInt));
+		}
+		return tempNodeList;
+	}
 	/** Deal with User Account */
 	public static List<UserAccount> getAllUserAccount() {
 		return allUsersDataHL;
