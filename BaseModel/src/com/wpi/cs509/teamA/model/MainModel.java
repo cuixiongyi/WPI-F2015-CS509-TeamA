@@ -1,6 +1,5 @@
 package com.wpi.cs509.teamA.model;
 
-import com.sun.org.apache.bcel.internal.generic.DADD;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by cuixi on 12/3/2015.
+ * 
  */
 public final class MainModel extends StateContext {
 

@@ -21,7 +21,8 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSele
  *
  */
 
-public class StateContext  extends Observable{
+@Deprecated
+public class StateContext extends Observable {
 
 	/**
 	 * The current state
@@ -36,7 +37,6 @@ public class StateContext  extends Observable{
 
 	}
 
-
 	/**
 	 * Set a new state.
 	 *
@@ -48,28 +48,25 @@ public class StateContext  extends Observable{
 			myState.cleanup();
 		}
 		this.myState = newState;
-        modelChanged();
+		modelChanged();
 
-    }
-
+	}
 
 	public boolean execute(MouseEvent e) {
-		boolean ret =  myState.execute(e);
-        modelChanged();
-        return ret;
+		boolean ret = myState.execute(e);
+		modelChanged();
+		return ret;
 	}
-	
-	public boolean cleanup(){
-		boolean ret =  myState.cleanup();
-        modelChanged();
-        return ret;
-    }
 
-    public void paintOnImage(Graphics2D g2) {
+	public boolean cleanup() {
+		boolean ret = myState.cleanup();
+		modelChanged();
+		return ret;
+	}
+
+	public void paintOnImage(Graphics2D g2) {
 		myState.paintOnImage(g2);
-    }
-
-
+	}
 
 	/**
 	 * setter and getter
@@ -79,10 +76,9 @@ public class StateContext  extends Observable{
 		return myState;
 	}
 
-    public void modelChanged() {
-        setChanged();
-        notifyObservers();
-    }
-
+	public void modelChanged() {
+		setChanged();
+		notifyObservers();
+	}
 
 }
