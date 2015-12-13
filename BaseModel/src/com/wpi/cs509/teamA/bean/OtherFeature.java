@@ -1,8 +1,14 @@
 package com.wpi.cs509.teamA.bean;
 
+/**
+ * 
+ * @author Team-A
+ *
+ */
 public class OtherFeature {
 	private String featureLabel;
 	private int nodeId;
+	
 	public OtherFeature(String featureLabel, int nodeId){
 		this.featureLabel = featureLabel;
 		this.nodeId = nodeId;

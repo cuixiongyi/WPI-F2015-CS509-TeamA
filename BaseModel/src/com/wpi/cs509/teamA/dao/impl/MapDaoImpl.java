@@ -5,17 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.MapDao;
-import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.JdbcConnect;
-import com.wpi.cs509.teamA.util.NodeType;
-import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 public class MapDaoImpl implements MapDao {
 	private Connection conn = null;

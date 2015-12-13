@@ -29,6 +29,7 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
 import com.wpi.cs509.teamA.util.MyListCellRenderer;
 import com.wpi.cs509.teamA.util.NodeIcon;
 import com.wpi.cs509.teamA.util.PaintHelper;
@@ -62,138 +63,149 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JButton labFilter;
     private JButton parkingFilter;
     private JButton openMap;
+	private JButton allFilter;
+	private JButton clearFilter;
+
+	private JToggleButton btnMngNode;
+	private JToggleButton btnMngEdge;
+
+	private static int numNodeBtn;
+	private static int numEdgeBtn;
+
     private JFileChooser fc;
     private JComboBox<String> comboBoxMap;
 
-    private UserScreen userScreen;
-    private AutoSuggestor autoSuggestorFrom;
-    private AutoSuggestor autoSuggestorTo;
-    private boolean lastSetEmptySearchWord = false;
-    private boolean lastSetSearchWord = false;
+	private UserScreen userScreen;
+	private AutoSuggestor autoSuggestorFrom;
+	private AutoSuggestor autoSuggestorTo;
+	private boolean lastSetEmptySearchWord = false;
+	private boolean lastSetSearchWord = false;
 
-    private DefaultListModel<String> mapListModel = new DefaultListModel<>();
-    private JList<String> mapList;
-    private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
-    private JLabel picLabel;
+	private DefaultListModel<String> mapListModel = new DefaultListModel<>();
+	private JList<String> mapList;
+	private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
+	private JLabel picLabel;
 
+	private int adminClicked = 0;
 
-    private int adminClicked = 0;
+	private JTextField txtFrom;
+	private JTextField txtTo;
 
-    private JTextField txtFrom;
-    private JTextField txtTo;
+	/**
+	 * Constructor. Initialize all the input panel.
+	 */
+	public InputPanel() {
+		// // User input block
 
-    /**
-     * Constructor. Initialize all the input panel.
-     */
-    public InputPanel() {
-        // // User input block
-    	
-        this.setLayout(null);
-        JTabbedPane tabbedPane = new JTabbedPane();
+		this.setLayout(null);
+		JTabbedPane tabbedPane = new JTabbedPane();
 
-        JPanel searchResultTab =new JPanel();
-        JPanel filterTab=new JPanel();
-        JPanel adminTab=new JPanel();
+		JPanel searchResultTab = new JPanel();
+		JPanel filterTab = new JPanel();
+		JPanel adminTab = new JPanel();
+		filterTab.setLayout(null);
 
+		this.add(tabbedPane, BorderLayout.CENTER);
 
-        
-        this.add(tabbedPane,BorderLayout.CENTER);
-        
-        tabbedPane.setBounds(0,230,300,550);
-        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		tabbedPane.setBounds(0, 230, 300, 550);
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        tabbedPane.addTab("Result",searchResultTab);
-        tabbedPane.addTab("Filter",filterTab);
-        tabbedPane.addTab("Admin",adminTab);
-        
-        adminTab.setLayout(null);
+		tabbedPane.addTab("Result", searchResultTab);
+		tabbedPane.addTab("Filter", filterTab);
+		tabbedPane.addTab("Admin", adminTab);
 
-        //login panel
-        this.adminLogin = new JButton(UIConstant.LOGIN);
-        this.getBtnLogin().setBounds(150, 0, 75, 30);
-        this.getBtnLogin().addActionListener(this);
-        this.add(adminLogin);
+		adminTab.setLayout(null);
 
-        this.signUp = new JButton("SignUp");
-        this.add(signUp);
-        this.signUp.addActionListener(this);
-        this.signUp.setBounds(80, 0, 75, 30);
+		// login panel
+		this.adminLogin = new JButton(UIConstant.LOGIN);
+		this.getBtnLogin().setBounds(150, 0, 75, 30);
+		this.getBtnLogin().addActionListener(this);
+		this.add(adminLogin);
 
+		this.signUp = new JButton("SignUp");
+		this.add(signUp);
+		this.signUp.addActionListener(this);
+		this.signUp.setBounds(80, 0, 75, 30);
 
-        //search panel
-        JLabel lblMap = new JLabel("Map: ");
-        lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblMap.setBounds(15, 60, 61, 21);
-        add(lblMap);
+		// search panel
+		JLabel lblMap = new JLabel("Map: ");
+		lblMap.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblMap.setBounds(15, 60, 61, 21);
+		add(lblMap);
 
-        comboBoxMap = new JComboBox<String>();
-        comboBoxMap.setBounds(80, 55, 150, 30);
-        List<GeneralMap> allMapList =Database.getAllMapFromDatabase();
-        for(GeneralMap map:allMapList) {
-            comboBoxMap.addItem(map.getMapAbbrName());
-        }
-        comboBoxMap.setMaximumRowCount(2);
-        comboBoxMap.addFocusListener(this);
-        comboBoxMap.requestFocus();
-        add(comboBoxMap);
+		comboBoxMap = new JComboBox<String>();
+		comboBoxMap.setBounds(80, 55, 150, 30);
+		List<GeneralMap> allMapList = Database.getAllMapFromDatabase();
+		for (GeneralMap map : allMapList) {
+			comboBoxMap.addItem(map.getMapAbbrName());
+		}
+		comboBoxMap.setMaximumRowCount(2);
+		comboBoxMap.addFocusListener(this);
+		comboBoxMap.requestFocus();
+		add(comboBoxMap);
 
-        lblFrom = new JLabel(UIConstant.FROM);
-        lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblFrom.setBounds(15, 105, 61, 16);
-        add(lblFrom);
+		lblFrom = new JLabel(UIConstant.FROM);
+		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFrom.setBounds(15, 105, 61, 16);
+		add(lblFrom);
 
-        txtFrom = new JTextField();
-        txtFrom.setBounds(80, 100, 150, 27);
-        txtFrom.setText(UIConstant.SEARCHWORD);
-        add(txtFrom);
-        txtFrom.addFocusListener(this);
-        txtFrom.setColumns(10);
+		txtFrom = new JTextField();
+		txtFrom.setBounds(80, 100, 150, 27);
+		txtFrom.setText(UIConstant.SEARCHWORD);
+		add(txtFrom);
+		txtFrom.addFocusListener(this);
+		txtFrom.setColumns(10);
 
-        lblTo = new JLabel(UIConstant.TO);
-        lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblTo.setBounds(15, 130, 61, 16);
-        add(lblTo);
+		lblTo = new JLabel(UIConstant.TO);
+		lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTo.setBounds(15, 130, 61, 16);
+		add(lblTo);
 
-        txtTo = new JTextField();
-        txtTo.setBounds(80, 125, 150, 27);
-        txtTo.addFocusListener(this);
-        txtTo.setText(UIConstant.SEARCHWORD);
-        add(txtTo);
-        txtTo.setColumns(10);
+		txtTo = new JTextField();
+		txtTo.setBounds(80, 125, 150, 27);
+		txtTo.addFocusListener(this);
+		txtTo.setText(UIConstant.SEARCHWORD);
+		add(txtTo);
+		txtTo.setColumns(10);
 
-        this.btnSearch = new JButton(UIConstant.SEARCH);
-        this.add(btnSearch);
-        this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
-        this.getBtnSearch().setBounds(80, 160, 150, 38);
-        this.getBtnSearch().addActionListener(this);
+		this.btnSearch = new JButton(UIConstant.SEARCH);
+		this.add(btnSearch);
+		this.getBtnSearch().setFont(new Font("Arial", Font.PLAIN, 15));
+		this.getBtnSearch().setBounds(80, 160, 150, 38);
+		this.getBtnSearch().addActionListener(this);
 
-        //tab panel-search result
-        mapList = new JList<>();
-        mapList.setPreferredSize(new Dimension(250, 450));
-//        mapList.setFixedCellHeight(40);
-        mapList.setCellRenderer(new MyListCellRenderer());
-        searchResultTab.add(mapList);
-        ///for test
-        DefaultListModel model = new DefaultListModel();
-        model.addElement("This is a short textdddddddddd");
-        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
-        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
-//        mapList.setModel(model);
-        
+		// tab panel-search result
+		mapList = new JList<>();
+		mapList.setPreferredSize(new Dimension(250, 450));
+		// mapList.setFixedCellHeight(40);
+		mapList.setCellRenderer(new MarioListRenderer());
+		searchResultTab.add(mapList);
+		/// for test
+		DefaultListModel<String> model = new DefaultListModel<>();
+		model.addElement("This is a short textdddddddddd");
+		model.addElement(
+				"This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
+		model.addElement(
+				"This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
+				// mapList.setModel(model);
 
 		// tab panel-filter
+		this.clearFilter = new JButton("ALL");
 		this.classroomFilter = new JButton("Classrooms", new ImageIcon(NodeIcon.getClassroomIcon()));
 		this.officeFilter = new JButton("Offices", new ImageIcon(NodeIcon.getOfficeIcon()));
 		this.restroomFilter = new JButton("Restrooms", new ImageIcon(NodeIcon.getRestroomIcon()));
 		this.labFilter = new JButton("Labs", new ImageIcon(NodeIcon.getLabIcon()));
 		this.parkingFilter = new JButton("Parking", new ImageIcon(NodeIcon.getParkingIcon()));
+		this.allFilter = new JButton("CLEAR");
 
 		ArrayList<JButton> filterButtons = new ArrayList<JButton>();
+		filterButtons.add(clearFilter);
 		filterButtons.add(classroomFilter);
 		filterButtons.add(officeFilter);
 		filterButtons.add(restroomFilter);
 		filterButtons.add(labFilter);
 		filterButtons.add(parkingFilter);
+		filterButtons.add(allFilter);
 
 		int filterIconWidth = 255;
 		int filterIconHeight = 50;
@@ -205,13 +217,20 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		for (JButton button : filterButtons) {
 			button.setBounds(filterXpos, filterYpos, filterIconWidth, filterIconHeight);
-			button.setHorizontalAlignment(SwingConstants.LEFT);
-			if (button.equals(officeFilter)) {
-				button.setIconTextGap(iconTextGap - 5);
-			} else if (button.equals(classroomFilter)) {
-				button.setIconTextGap(iconTextGap - 2);
-			} else {
-				button.setIconTextGap(iconTextGap);
+			// set alignment for buttons without icons
+			if (button.equals(clearFilter) || button.equals(allFilter)) {
+				button.setHorizontalAlignment(SwingConstants.CENTER);
+			}
+			// set alignment for buttons with icons
+			else {
+				button.setHorizontalAlignment(SwingConstants.LEFT);
+				if (button.equals(officeFilter)) {
+					button.setIconTextGap(iconTextGap - 5);
+				} else if (button.equals(classroomFilter)) {
+					button.setIconTextGap(iconTextGap - 2);
+				} else {
+					button.setIconTextGap(iconTextGap);
+				}
 			}
 			button.setFont(buttonFont);
 			filterYpos += filterYspacing + filterIconHeight;
@@ -219,21 +238,39 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		}
 
 		// tab panel-admin tool
-		this.btnNeighborManage = new JButton("Edges");
-		btnNeighborManage.setSize(75, 30);
-		// btnNeighborManage.setLocation(80, 380);
+		
+		
 
-		// this.btnNeighborManage.setVisible(false);
-		adminTab.add(btnNeighborManage);
-
-		btnSynchronize = new JButton("Sync");
-		btnSynchronize.addActionListener(this);
-		// btnSynchronize.setVisible(false);
-		btnSynchronize.setBounds(155, 280, 75, 30);
-		adminTab.add(btnSynchronize);
 		openMap=new JButton("OpenMap");
-		openMap.setBounds(130,100,70,30);
-		adminTab.add(openMap);
+//		adminTab.add(openMap);
+//		openMap.setFont(buttonFont);
+		
+		btnMngNode = new JToggleButton("Manage Node");
+//		adminTab.add(btnMngNode);
+//		btnMngNode.setFont(buttonFont);
+
+		btnMngEdge = new JToggleButton("Manage Edge");
+//		btnMngEdge.setFont(buttonFont);
+//		adminTab.add(btnMngEdge);
+		
+		ArrayList<AbstractButton> adminButtons = new ArrayList<AbstractButton>();
+		adminButtons.add(openMap);
+		adminButtons.add(btnMngNode);
+		adminButtons.add(btnMngEdge);
+		
+		int adminIconWidth = 255;
+		int adminIconHeight = 50;
+		int adminYspacing = 10;
+		int adminXpos = 15;
+		int adminYpos = 10;
+		
+		for (AbstractButton button : adminButtons)
+		{
+			button.setBounds(adminXpos, adminYpos, adminIconWidth, adminIconHeight);
+			button.setFont(buttonFont);
+			adminYpos += adminYspacing + adminIconHeight;
+			adminTab.add(button);
+		}
 		
 		
 		BufferedImage logo;
@@ -248,22 +285,17 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 			e.printStackTrace();
 		}
 
+		numNodeBtn = 0;
+		numEdgeBtn = 0;
+
+		
+
+		// result list
 
 	}
 
 	public void focusLost(FocusEvent e) {
-		if (e.getSource() == txtFrom || e.getSource() == txtTo) {
-			if (((JTextField) e.getSource()).getText().trim().equals("")) {
-				// lastSetSearchWord = true;
-				// lastSetEmptySearchWord = false;
-				((JTextField) e.getSource()).setText(UIConstant.SEARCHWORD);
-			}
-
-		} else if (e.getSource() == comboBoxMap) {
-			this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
-			this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
-
-		}
+	
 	}
 
 	private void processTextField(JTextField txt) {
@@ -294,8 +326,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	/**
 	 * This is Button click event
+	 * 
 	 * @param e
-     */
+	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
@@ -303,13 +336,12 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// If it is the admin, give it the admin mouse click event. If
 		// not, give it normal user
 		if (e.getSource() == getBtnLogin()) {
-			
+
 		}
 		if (e.getSource() == signUp) {
-			
+
 		}
-		if(e.getSource()==getBtnSearch())
-		{
+		if (e.getSource() == getBtnSearch()) {
 
 		}
 	
@@ -385,38 +417,38 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		this.mapList = mapList;
 	}
 
-    public void setUserScreen(UserScreen userScreen2) {
-        this.userScreen = userScreen2;
+	public void setUserScreen(UserScreen userScreen2) {
+		this.userScreen = userScreen2;
 
-        autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null, 
-                Color.GRAY, 0.75f, 0.0, 0.0, model, AutoSuggestor.SetNodeOption.setStartNode);
-        autoSuggestorFrom.setInputPanel(this);
-        autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null,
-                Color.GRAY, 0.75f, 0.0, 0.0, model, AutoSuggestor.SetNodeOption.setEndNode);
-        autoSuggestorTo.setInputPanel(this);
-    }
+		autoSuggestorFrom = new AutoSuggestor(txtFrom, userScreen, null, Color.GRAY, 0.75f, 0.0, 0.0, model,
+				AutoSuggestor.SetNodeOption.setStartNode);
+		autoSuggestorFrom.setInputPanel(this);
+		autoSuggestorTo = new AutoSuggestor(txtTo, userScreen, null, Color.GRAY, 0.75f, 0.0, 0.0, model,
+				AutoSuggestor.SetNodeOption.setEndNode);
+		autoSuggestorTo.setInputPanel(this);
+	}
 
-    public AutoSuggestor getAutoSuggestorFrom() {
-        return autoSuggestorFrom;
-    }
-    public AutoSuggestor getAutoSuggestorTo() {
-        return autoSuggestorTo;
-    }
-    public JTextField getToText(){
-        return txtTo;
-    }
+	public AutoSuggestor getAutoSuggestorFrom() {
+		return autoSuggestorFrom;
+	}
 
-    public JTextField getFromText(){
-        return txtFrom;
-    }
+	public AutoSuggestor getAutoSuggestorTo() {
+		return autoSuggestorTo;
+	}
 
+	public JTextField getToText() {
+		return txtTo;
+	}
 
-    public void setModel(MainModel pmodel) {
-        this.model = pmodel;
-    }
+	public JTextField getFromText() {
+		return txtFrom;
+	}
 
+	public void setModel(MainModel pmodel) {
+		this.model = pmodel;
+	}
 
-    /**
+	/**
 	 * @return the classroomFilter
 	 */
 	public JButton getClassroomFilter() {
@@ -459,4 +491,23 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		this.openMap = openMap;
 	}
 
+	public JButton getClearFilter() {
+		return clearFilter;
+	}
+
+	
+	public JButton getAllFilter() 
+	{
+		return allFilter;
+
+	}
+
+	public JToggleButton getBtnMngNode() {
+		return btnMngNode;
+	}
+
+	public JToggleButton getBtnMngEdge() {
+		return btnMngEdge;
+
+	}
 };

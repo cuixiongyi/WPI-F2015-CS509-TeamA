@@ -25,11 +25,12 @@ public class SuggestionBasicPanel extends JPanel {
 	private final JWindow autoSuggestionsPopUpWindow;
 	private final JTextField textField;
 	private final AutoSuggestor autoSuggestor;
-	private Color suggestionsTextColor, suggestionBorderColor;
+	private Color suggestionsTextColor, suggestionBorderColor,suggestionLineBorderColor;
 	private Dimension preferredSize;
 	private Font font;
 	private Node nodeInformation;
 	private BufferedImage imageIcon;
+	
 
 	private JLabel textLabel;
 
@@ -52,6 +53,7 @@ public class SuggestionBasicPanel extends JPanel {
 				
 		this.add(textLabel, BorderLayout.EAST);	
 		this.add(new JLabel(new ImageIcon(imageIcon), JLabel.LEFT), BorderLayout.WEST);
+		this.setBorder(BorderFactory.createLineBorder(suggestionLineBorderColor));
 		
 		textLabel.setFocusable(true);
 		textLabel.setForeground(suggestionsTextColor);
@@ -175,6 +177,14 @@ public class SuggestionBasicPanel extends JPanel {
 
 	public void setImageIcon(BufferedImage locationIcon) {
 		this.imageIcon = locationIcon;
+	}
+
+	public Color getSuggestionLineBorderColor() {
+		return suggestionLineBorderColor;
+	}
+
+	public void setSuggestionLineBorderColor(Color suggestionLineBorderColor) {
+		this.suggestionLineBorderColor = suggestionLineBorderColor;
 	}
 
 }

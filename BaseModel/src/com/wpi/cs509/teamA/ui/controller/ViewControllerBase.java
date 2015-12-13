@@ -6,36 +6,32 @@ import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 
-/**
- * Created by cuixi on 12/3/2015.
- */
 public class ViewControllerBase {
 
-    static protected ImageComponent imageComponent = null;
-    static protected InputPanel inputPanel = null;
-    static protected UserScreen userScreen = null;
-    static protected MainModel model = null;
-    static protected AnimationControl ac = new AnimationControl();
+	static protected ImageComponent imageComponent = null;
+	static protected InputPanel inputPanel = null;
+	static protected UserScreen userScreen = null;
+	static protected MainModel model = null;
+	static protected AnimationControl ac = new AnimationControl();
 
+	protected ViewControllerBase() {
 
-    protected ViewControllerBase() {
+	}
 
-    }
-    static public void init(ImageComponent pIC, InputPanel pIP, MainModel pMM,UserScreen pUS) {
-        if (null == pIC)
-            throw new NullPointerException("Empty ImageComponent");
-        if (null == pIP)
-            throw new NullPointerException("Empty ImageComponent");
-        if (null == pMM)
-            throw new NullPointerException("Empty MainModel");
-        if (null == pUS)
-            throw new NullPointerException("Empty UserScreen");
+	static public void init(ImageComponent pIC, InputPanel pIP, MainModel pMM, UserScreen pUS) {
+		if (null == pIC)
+			throw new NullPointerException("Empty ImageComponent");
+		if (null == pIP)
+			throw new NullPointerException("Empty ImageComponent");
+		if (null == pMM)
+			throw new NullPointerException("Empty MainModel");
+		if (null == pUS)
+			throw new NullPointerException("Empty UserScreen");
 
-        imageComponent = pIC;
-        inputPanel = pIP;
-        model = pMM;
-        userScreen=pUS;
-    }
-
+		imageComponent = pIC;
+		inputPanel = pIP;
+		model = pMM;
+		userScreen = pUS;
+	}
 
 }
