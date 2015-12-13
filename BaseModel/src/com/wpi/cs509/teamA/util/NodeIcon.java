@@ -25,6 +25,7 @@ public class NodeIcon {
 	private static String parkingIconName = "Parking_Icon.png";
 	private static String startIconName = "Start_Icon.png";
 	private static String endIconName = "End_Icon.png";
+	private static String nextIconName = "next_Icon.png";
 
 	private static String numPrefix = "numbers-";
 	private static String numPostfix = "-icon.png";
@@ -38,6 +39,7 @@ public class NodeIcon {
 	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;
 	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
 	private static String endIconFilePath = PaintHelper.getUserDir() + endIconName;
+	private static String nextIconFilePath = PaintHelper.getUserDir() + nextIconName;
 	
 	private static String iconDir=PaintHelper.getUserDir()+"numicon/"+numPrefix;
 	
@@ -49,6 +51,7 @@ public class NodeIcon {
 	private static BufferedImage officeIcon;
 	private static BufferedImage startIcon;
 	private static BufferedImage endIcon;
+	private static BufferedImage nextIcon;
 	
 	private static ArrayList<BufferedImage> numIcons;
 
@@ -62,6 +65,7 @@ public class NodeIcon {
 			parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
 			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
 			endIcon = ImageIO.read(new FileInputStream(endIconFilePath));
+			nextIcon=ImageIO.read(new FileInputStream(nextIconFilePath));
 
 			int numCount = 9;
 			numIcons = new ArrayList<BufferedImage>(numCount);
@@ -195,6 +199,10 @@ public class NodeIcon {
 
 	public static BufferedImage getNumIcon(int num) {
 		return numIcons.get(num);
+	}
+	
+	public static BufferedImage getNextIcon() {
+		return nextIcon;
 	}
 	
 	public static ImageIcon getStartIconSmall(){
