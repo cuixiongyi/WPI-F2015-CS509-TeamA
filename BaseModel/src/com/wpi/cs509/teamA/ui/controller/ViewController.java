@@ -52,6 +52,26 @@ public class ViewController extends ViewControllerBase{
 		
 	}
 
+    private void addButtonEditNode() {
+        inputPanel.getBtnMngNode().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickEditNode();
+
+            }
+        });
+    }
+
+    private void addButtonEditEdge() {
+        inputPanel.getBtnMngEdge().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickEditEdge();
+
+            }
+        });
+    }
+
 	private void addButtonLogin() {
         inputPanel.getBtnLogin().addActionListener(new ActionListener() {
             @Override
@@ -80,6 +100,12 @@ public class ViewController extends ViewControllerBase{
     }
 
     public void addFilterButtons(){
+    	inputPanel.getAllFilter().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impl.clickAllFilter();
+			}
+		});
     	inputPanel.getClassroomFilter().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,6 +136,12 @@ public class ViewController extends ViewControllerBase{
                 impl.clickFilter(NodeType.LAB);
             }
     	});
+		inputPanel.getClearFilter().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impl.clickClearFilter();
+			}
+		});
     }
 
         public void addListSelectionListener() {
@@ -130,9 +162,9 @@ public class ViewController extends ViewControllerBase{
                 model.clearFilters();
                 }
         });
+	}
 
 
-    }
 
     private boolean matchAndSetMapIDFromString(Object value) {
         if (value != null) {

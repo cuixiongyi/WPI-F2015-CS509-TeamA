@@ -61,7 +61,7 @@ public class AutoSuggestor {
 			checkForAndShowSuggestions();
 		}
 	};
-	
+
 	private int lastFocusableIndex = 0;
 
 	/**
@@ -76,12 +76,11 @@ public class AutoSuggestor {
 	private MainModel model = null;
 
 	public AutoSuggestor(JTextField textField, JFrame container, ArrayList<String> words, Color popUpBackground,
-						 float opacity, double locationX, double locationY,
-						 MainModel pModel, SetNodeOption pSetNodeOption) {
+			float opacity, double locationX, double locationY, MainModel pModel, SetNodeOption pSetNodeOption) {
 		this.textField = textField;
-		
+
 		this.container = container;
-	
+
 		this.windowLocationX = locationX;
 		this.windowLocationY = locationY;
 
@@ -186,8 +185,7 @@ public class AutoSuggestor {
 
 	private void checkForAndShowSuggestions() {
 		typedWord = getCurrentlyTypedWord();
-		if (typedWord == UIConstant.SEARCHWORD)
-		{
+		if (typedWord == UIConstant.SEARCHWORD) {
 			return;
 		}
 		suggestionsPanel.removeAll();// remove previos words/jlabels that were
@@ -329,29 +327,24 @@ public class AutoSuggestor {
 	}
 
 	protected void addWordToSuggestions(String word, Node nodeInformation, SuggestorEnum suggestorEnum) {
-		switch(suggestorEnum){
-	case Location:
-		SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this,
-				nodeInformation);
-		addSugestionsPanel(suggestionLocationPanel);
-		break;
-	case Professor:
-		SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this,
-				nodeInformation);
-		addSugestionsPanel(suggestionProfessorPanel);
-		break;
-	case History:
-		SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this,
-				nodeInformation);
-		addSugestionsPanel(suggestionHistoryPanel);
-		break;
-		}	
-		
+		switch (suggestorEnum) {
+		case Location:
+			SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionLocationPanel);
+			break;
+		case Professor:
+			SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionProfessorPanel);
+			break;
+		case History:
+			SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionHistoryPanel);
+			break;
+		}
 
-		
 	}
-	
-	public void addSugestionsPanel(SuggestionBasicPanel suggestionPanel){
+
+	public void addSugestionsPanel(SuggestionBasicPanel suggestionPanel) {
 		calculatePopUpWindowSize(suggestionPanel);
 
 		suggestionsPanel.add(suggestionPanel);
@@ -384,23 +377,24 @@ public class AutoSuggestor {
 
 		int windowX = 0;
 		int windowY = 0;
-		// System.out.println(textField.getX());
+		 System.out.println(container);
 		// System.out.println(container.getHeight());
 
-		windowX = textField.getX() + inputPanel.getX();
-		System.out.println(inputPanel.getX());
+		windowX = container.getX()+textField.getX() + inputPanel.getX();
+		
 		if (suggestionsPanel.getHeight() > autoSuggestionPopUpWindow.getMinimumSize().height) {
 			windowY = container.getY() + textField.getY() + textField.getHeight()
-					+ autoSuggestionPopUpWindow.getMinimumSize().height +23 ;
+					+ autoSuggestionPopUpWindow.getMinimumSize().height + 23;
 		} else {
 			windowY = container.getY() + textField.getY() + textField.getHeight()
-					+ autoSuggestionPopUpWindow.getHeight() +23;
+					+ autoSuggestionPopUpWindow.getHeight() + 23;
 		}
 
 		autoSuggestionPopUpWindow.setLocation(windowX, windowY);
 		autoSuggestionPopUpWindow.setMinimumSize(new Dimension(textField.getWidth(), 30));
 		// autoSuggestionPopUpWindow.setBounds(windowX, windowY,
-		// autoSuggestionBasicPanel.getWidth(), autoSuggestionPopUpLabel.getWidth());
+		// autoSuggestionBasicPanel.getWidth(),
+		// autoSuggestionPopUpLabel.getWidth());
 		autoSuggestionPopUpWindow.revalidate();
 		autoSuggestionPopUpWindow.repaint();
 
@@ -434,28 +428,54 @@ public class AutoSuggestor {
 		if (typedWord.isEmpty()) {
 			return false;
 		}
-	
+
 		SearchSupply dictionary = new SearchSupply();
-		Map<String, NodeForSearch> nodeMap = dictionary.getSearchSupply(typedWord);
-		Set<Entry<String, NodeForSearch>> stringSet = nodeMap.entrySet();
-		Iterator<Entry<String, NodeForSearch>> iter = stringSet.iterator();
-	
+		ArrayList<NodeForSearch> nodeMap = dictionary.getSearchSupply(typedWord);
+
+		Iterator<NodeForSearch> iter = nodeMap.iterator();
+
 		boolean suggestionAdded = false;
+		int i = 0;
+		SuggestorEnum temp;
+		if(!nodeMap.isEmpty()){
+		temp = nodeMap.get(0).getNode_label();
+		}else{
+			return false;
+		}
+		
 		while (iter.hasNext()) {
-			Entry<String, NodeForSearch> nodeInfo = iter.next();
-			addWordToSuggestions(nodeInfo.getKey(), nodeInfo.getValue().getNode(), nodeInfo.getValue().getNode_label());
+			NodeForSearch nodeInfo = iter.next();
+			if(nodeInfo.getNode_label()==temp){
+				i++;
+			}else{
+				temp = nodeInfo.getNode_label();
+			}
+			
+			if(i>=10){
+				continue;
+			}
+			
+			
+			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label());
+			if(nodeInfo.getNode_label()==temp){
+				
+			}
+		
+
 			suggestionAdded = true;
 
 		}
-		
-		//hack
-//		Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
-//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.History);
-//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Professor);
-//		addWordToSuggestions("hhaa", node, SuggestorPainter.SuggestorEnum.Location);
-		
-		
-		return true;
+
+		// hack
+		// Node node = new Node(100,"HEHE", 3, 4, null, "UNDEFINED");
+		// addWordToSuggestions("hhaa", node,
+		// SuggestorPainter.SuggestorEnum.History);
+		// addWordToSuggestions("hhaa", node,
+		// SuggestorPainter.SuggestorEnum.Professor);
+		// addWordToSuggestions("hhaa", node,
+		// SuggestorPainter.SuggestorEnum.Location);
+
+		return suggestionAdded;
 	}
 
 	public void setInputPanel(InputPanel inputPanel) {

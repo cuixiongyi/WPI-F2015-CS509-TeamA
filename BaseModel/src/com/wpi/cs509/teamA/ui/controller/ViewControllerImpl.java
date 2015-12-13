@@ -7,6 +7,8 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.OpenMapDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.UIConstant;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
@@ -21,102 +23,131 @@ import java.util.Stack;
 /**
  * Created by cuixi on 12/4/2015.
  */
- class ViewControllerImpl extends ViewControllerBase{
+class ViewControllerImpl extends ViewControllerBase {
 
-    public void clickLogin() {
-        if (model.getMyAccount()==null) {
-            AdminDialog adminDialog = new AdminDialog(model, inputPanel);
-            adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-            adminDialog.setVisible(inputPanel.isFocusable());
-            // stateContext.switchToAdminUser();
-            ViewManager.updateView();
+	public void clickLogin() {
+		if (model.getMyAccount() == null) {
+			AdminDialog adminDialog = new AdminDialog(model, inputPanel);
+			adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+			adminDialog.setVisible(inputPanel.isFocusable());
+			// stateContext.switchToAdminUser();
+			ViewManager.updateView();
 
-        } else  {
+		} else {
 
-            JOptionPane.showMessageDialog(null, "You have logged out");
-            model.setMyAccount(null);
-            Database.InitFromDatabase();
-            // InputPanel.this.getBtnNeighborManage().setVisible(false);
-            inputPanel.getBtnLogin().setText(UIConstant.LOGIN);
-            // InputPanel.this.getBtnSynchronize().setVisible(false);
-            model.switchToState(new MouseActionSelectNode(model));
-            
-            ViewManager.updateView();
+			JOptionPane.showMessageDialog(null, "You have logged out");
+			model.setMyAccount(null);
+			Database.InitFromDatabase();
+			// InputPanel.this.getBtnNeighborManage().setVisible(false);
+			inputPanel.getBtnLogin().setText(UIConstant.LOGIN);
+			// InputPanel.this.getBtnSynchronize().setVisible(false);
+			model.switchToState(new MouseActionSelectNode(model));
 
-        }
-    }
+			ViewManager.updateView();
 
-    public void clickSignup() {
-        SignupDialog signUpDialog = new SignupDialog( inputPanel);
-        signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        signUpDialog.setVisible(true);
-    }
-    
-    public void clickFilter(NodeType nodeType)
+		}
+	}
+
+	public void clickEditNode() {
+		JToggleButton button = inputPanel.getBtnMngNode();
+
+		if (MouseActionEditNode.class.isInstance(model.getMyState())) {
+			button.setSelected(false);
+			model.switchToState(new MouseActionSelectNode(model));
+		}
+		else {
+			model.switchToState(new MouseActionEditNode(model));
+			button.setSelected(true);
+		}
+	}
+
+	public void clickEditEdge() {
+		JToggleButton button = inputPanel.getBtnMngEdge();
+
+		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
+			button.setSelected(false);
+			model.switchToState(new MouseActionSelectNode(model));
+		}
+		else {
+			model.switchToState(new MouseActionEditEdge(model));
+			button.setSelected(true);
+		}
+	}
+
+
+	public void clickSignup() {
+		SignupDialog signUpDialog = new SignupDialog(inputPanel);
+		signUpDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+		signUpDialog.setVisible(true);
+	}
+
+	public void clickFilter(NodeType nodeType) {
+		model.setFilter(nodeType);
+		ViewManager.updateView();
+	}
+
+	public void clickAllFilter() {
+		model.addAllFilters();
+		ViewManager.updateView();
+	}
+
+	public void clickClearFilter()
     {
-    	model.setFilter(nodeType);
+    	model.clearFilters();
     	ViewManager.updateView();
     }
 
-    public void clickSearch() {
-        if(model.getStartNode()==null || model.getEndNode()==null)
-            return;
-//                    inputPanel.picLabel.setVisible(false);
-        inputPanel.getMapList().setVisible(true);
-        ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
-        inputPanel.getMapList().removeAll();
+	public void clickSearch() {
+		if (model.getStartNode() == null || model.getEndNode() == null)
+			return;
+		// inputPanel.picLabel.setVisible(false);
+		inputPanel.getMapList().setVisible(true);
+		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
+		inputPanel.getMapList().removeAll();
 
+		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 
-        AlgoController algoController = new AlgoController(model.getStartNode(),
-                model.getEndNode());
+		Stack<Node> path = algoController.getRoute();
 
+		ArrayList<Node> singleMapPath = new ArrayList<Node>();
+		ArrayList<String> mapNameList = new ArrayList<String>();
+		ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
+		int tmpMapId = path.peek().getMap().getMapId();
+		mapNameList.add(path.peek().getMap().getMapName());
+		mapList.add(path.peek().getMap());
 
-        Stack<Node> path = algoController.getRoute();
+		while (path.size() > 0) {
+			Node node = path.pop();
+			if (node.getMap().getMapId() == tmpMapId) {
+				singleMapPath.add(node);
 
-        ArrayList<Node> singleMapPath = new ArrayList<Node>();
-        ArrayList<String> mapNameList=new ArrayList<String>();
-        ArrayList<GeneralMap>mapList = new ArrayList<GeneralMap>();
-        int tmpMapId=path.peek().getMap().getMapId();
-        mapNameList.add(path.peek().getMap().getMapName());
-        mapList.add(path.peek().getMap());
-      
-        while (path.size() > 0)
-        {
-            Node node = path.pop();
-            if(node.getMap().getMapId()==tmpMapId)
-            {
-                singleMapPath.add(node);
-           
-            }
-            else {
-                multiMapPathLists.add(singleMapPath);
-               
-                singleMapPath=new ArrayList<Node>();
-                singleMapPath.add(node);
-                tmpMapId=node.getMap().getMapId();
-                mapNameList.add(node.getMap().getMapName());
-              
-                mapList.add(node.getMap());
-               
-            }
-        }
-        multiMapPathLists.add(singleMapPath);
+			} else {
+				multiMapPathLists.add(singleMapPath);
 
-        //reset and initiate the Jlist
+				singleMapPath = new ArrayList<Node>();
+				singleMapPath.add(node);
+				tmpMapId = node.getMap().getMapId();
+				mapNameList.add(node.getMap().getMapName());
 
-        DefaultListModel<String> mapListModel = new DefaultListModel<>();
-        for(String name:mapNameList)
-        {
-            mapListModel.addElement(name);
-        }
-        inputPanel.getMapList().setModel(mapListModel);
-        model.setMultiMapPathListsForEachMap(multiMapPathLists);
-        model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
-        model.setMultiMapLists(mapList);
-        ViewManager.updateView();
+				mapList.add(node.getMap());
 
+			}
+		}
+		multiMapPathLists.add(singleMapPath);
 
-    }
+		// reset and initiate the Jlist
+
+		DefaultListModel<String> mapListModel = new DefaultListModel<>();
+		for (String name : mapNameList) {
+			mapListModel.addElement(name);
+		}
+		inputPanel.getMapList().setModel(mapListModel);
+		model.setMultiMapPathListsForEachMap(multiMapPathLists);
+		model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
+		model.setMultiMapLists(mapList);
+		ViewManager.updateView();
+
+	}
 
 	public void clickOpenMap() {
 		// TODO Auto-generated method stub

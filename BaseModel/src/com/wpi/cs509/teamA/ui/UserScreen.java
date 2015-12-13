@@ -105,6 +105,7 @@ public class UserScreen extends JFrame {
         mainModel = new MainModel();
         mainModel.switchToState(new MouseActionSelectNode(mainModel));
         MainModel.setStaticModel(mainModel);
+        MainModel.setStaticModel(mainModel);
         ViewControllerBase.init(imgComponent, inputPanel, mainModel,this);
         viewManager = new ViewManager();
         imgComponent.setModel(mainModel);

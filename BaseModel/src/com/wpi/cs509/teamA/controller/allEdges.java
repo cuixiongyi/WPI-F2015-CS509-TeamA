@@ -16,14 +16,24 @@ public class allEdges {
 	private List<Edge> edges;
 	private List<Edge> mapEdges;
 	private Node startNode;
-	private Node endNode;
+	private Node endNode;//when there is one certain destination
+	private Node[] end;  
 	private HashMap<Integer, mapVertex> graphMaps;
 	
-	public allEdges(List<Edge> edges, List<Edge> mapEdges,Node startNode,Node endNode){
+	public allEdges(List<Edge> edges, List<Edge> mapEdges,Node startNode,Node end){
 		this.edges=edges;
 		this.mapEdges=mapEdges;
 		this.startNode=startNode;
-		this.endNode=endNode;
+		this.endNode=end;
+	}
+	
+	public allEdges(List<Edge> edges, List<Edge> mapEdges,Node startNode,Node[] end){
+		this.edges=edges;
+		this.mapEdges=mapEdges;
+		this.startNode=startNode;
+		this.end=end;
+		this.endNode=null;
+		
 	}
 	
 	public void init(){
@@ -32,6 +42,13 @@ public class allEdges {
 		System.out.println("initializing edges..");
 		System.out.println("maps on paths are: "+this.mapsOnPath.size());
 		this.edgesOnMap=new HashMap<Integer,List<Edge>>();
+	}
+	
+	public boolean isNormal(){
+		if(this.endNode==null){
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean isMultipleMap(){
@@ -117,6 +134,14 @@ public class allEdges {
 	
 	public Map<Integer, List<Edge>> getEdgesOnMap() {
 		return edgesOnMap;
+	}
+
+	public Node[] getEnd() {
+		return end;
+	}
+
+	public void setEnd(Node[] end) {
+		this.end = end;
 	}
 
 	public void setEdgesOnMap(Map<Integer, List<Edge>> edgesOnMap) {
