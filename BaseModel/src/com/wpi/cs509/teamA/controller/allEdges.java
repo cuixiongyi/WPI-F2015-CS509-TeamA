@@ -17,7 +17,7 @@ public class allEdges {
 	private List<Edge> mapEdges;
 	private Node startNode;
 	private Node endNode;// when there is one certain destination
-	private Node[] end;
+	private List<Node> end;
 	private HashMap<Integer, mapVertex> graphMaps;
 
 	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
@@ -27,7 +27,7 @@ public class allEdges {
 		this.endNode = end;
 	}
 
-	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
+	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, List<Node> end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
@@ -138,11 +138,11 @@ public class allEdges {
 		return edgesOnMap;
 	}
 
-	public Node[] getEnd() {
+	public List<Node> getEnd() {
 		return end;
 	}
 
-	public void setEnd(Node[] end) {
+	public void setEnd(List<Node> end) {
 		this.end = end;
 	}
 

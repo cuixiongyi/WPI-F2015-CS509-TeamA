@@ -23,7 +23,7 @@ public final class MainModel extends StateContext {
 	private List<NodeType> iconFilter = null;
 	private static NodeType[] nodeTypes;
 	private Node startNode;
-	private Node endNode;
+	private Node[] endNode;
 
 	private Node focusNode = null;
 	private boolean isFirstFocusNode = false;
@@ -175,7 +175,7 @@ public final class MainModel extends StateContext {
 
 	}
 
-	public synchronized Node getEndNode() {
+	public synchronized Node[] getEndNode() {
 		return endNode;
 	}
 
