@@ -7,6 +7,8 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.OpenMapDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.UIConstant;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
@@ -45,6 +47,33 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		}
 	}
+
+	public void clickEditNode() {
+		JToggleButton button = inputPanel.getBtnMngNode();
+
+		if (MouseActionEditNode.class.isInstance(model.getMyState())) {
+			button.setSelected(false);
+			model.switchToState(new MouseActionSelectNode(model));
+		}
+		else {
+			model.switchToState(new MouseActionEditNode(model));
+			button.setSelected(true);
+		}
+	}
+
+	public void clickEditEdge() {
+		JToggleButton button = inputPanel.getBtnMngEdge();
+
+		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
+			button.setSelected(false);
+			model.switchToState(new MouseActionSelectNode(model));
+		}
+		else {
+			model.switchToState(new MouseActionEditEdge(model));
+			button.setSelected(true);
+		}
+	}
+
 
 	public void clickSignup() {
 		SignupDialog signUpDialog = new SignupDialog(inputPanel);
