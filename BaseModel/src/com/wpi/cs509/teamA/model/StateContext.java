@@ -36,6 +36,7 @@ public class StateContext  extends Observable{
 
 	}
 
+
 	/**
 	 * Set a new state.
 	 *
@@ -82,5 +83,6 @@ public class StateContext  extends Observable{
         setChanged();
         notifyObservers();
     }
+
 
 }

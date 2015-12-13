@@ -52,6 +52,26 @@ public class ViewController extends ViewControllerBase{
 		
 	}
 
+    private void addButtonEditNode() {
+        inputPanel.getBtnMngNode().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickEditNode();
+
+            }
+        });
+    }
+
+    private void addButtonEditEdge() {
+        inputPanel.getBtnMngEdge().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickEditEdge();
+
+            }
+        });
+    }
+
 	private void addButtonLogin() {
         inputPanel.getBtnLogin().addActionListener(new ActionListener() {
             @Override

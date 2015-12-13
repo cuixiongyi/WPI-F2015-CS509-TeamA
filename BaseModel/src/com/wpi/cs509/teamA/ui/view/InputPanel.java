@@ -61,7 +61,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JButton parkingFilter;
     private JButton openMap;
 	private JButton allFilter;
-private JButton clearFilter;
+	private JButton clearFilter;
+
+	private JToggleButton btnMngNode;
+	private JToggleButton btnMngEdge;
+
+	private static int numNodeBtn;
+	private static int numEdgeBtn;
 
     private JFileChooser fc;
     private JComboBox<String> comboBoxMap;
@@ -257,6 +263,20 @@ private JButton clearFilter;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		numNodeBtn = 0;
+		numEdgeBtn = 0;
+
+		btnMngNode = new JToggleButton("Manage Node");
+		// btnMngNode.setVisible(true);
+		btnMngNode.setBounds(80, 380, 150, 30);
+		System.out.println(this);
+		this.add(btnMngNode);
+
+		btnMngEdge = new JToggleButton("Manage Edge");
+		// btnMngEdge.setVisible(true);
+		btnMngEdge.setBounds(80, 420, 150, 30);
+		this.add(btnMngEdge);
 
 		// result list
 
@@ -467,5 +487,14 @@ private JButton clearFilter;
 
 	public JButton getClearFilter() {
 		return clearFilter;
+	}
+
+
+	public JToggleButton getBtnMngNode() {
+		return btnMngNode;
+	}
+
+	public JToggleButton getBtnMngEdge() {
+		return btnMngEdge;
 	}
 };
