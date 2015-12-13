@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -247,7 +248,7 @@ public class PaintHelper {
 		model.paintOnImage(g2);
 	}
 
-	public static synchronized void printRoute(GeneralMap map, BufferedImage image) {
+	public static synchronized void printRoute(GeneralMap map, BufferedImage image, File file, int number) {
 
 		ImageComponent imageComponent = ViewManager.getImageComponent();
 		BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
@@ -259,7 +260,8 @@ public class PaintHelper {
 		paintMultiMaps(g2, map);
 
 		try {
-			ImageIO.write(bi, "PNG", new File("D://" + map.getImageName()));
+			System.out.println(file);
+			ImageIO.write(bi, "PNG", new File(file+"\\"+"Step"+number+"_"+map.getImageName()));
 
 		} catch (IOException e) {
 			e.printStackTrace();

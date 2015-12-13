@@ -295,18 +295,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	}
 
 	public void focusLost(FocusEvent e) {
-		if (e.getSource() == txtFrom || e.getSource() == txtTo) {
-			if (((JTextField) e.getSource()).getText().trim().equals("")) {
-				// lastSetSearchWord = true;
-				// lastSetEmptySearchWord = false;
-				((JTextField) e.getSource()).setText(UIConstant.SEARCHWORD);
-			}
-
-		} else if (e.getSource() == comboBoxMap) {
-			this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
-			this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
-
-		}
+	
 	}
 
 	private void processTextField(JTextField txt) {
