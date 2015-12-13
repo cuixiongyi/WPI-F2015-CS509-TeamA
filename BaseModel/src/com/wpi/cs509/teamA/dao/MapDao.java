@@ -1,7 +1,10 @@
 package com.wpi.cs509.teamA.dao;
 
 import java.util.List;
+import java.util.Set;
+
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.bean.Node;
 
 public interface MapDao {
 	/**
@@ -10,8 +13,8 @@ public interface MapDao {
 	 * @return a set of maps
 	 * 
 	 */
-	public List<GeneralMap> getAllMaps();
-
+	public List<GeneralMap> getAllMaps();	
+	
 	/**
 	 * get all maps ids in the database
 	 * 
@@ -19,5 +22,9 @@ public interface MapDao {
 	 * 
 	 */
 	public List<Integer> getAllMapIds();
-
+	
+	/**
+	 * insert a new map in the database
+	 */
+	public void saveMap(String mapName,String mapAbbrName,String mapPathName, double mapScale);
 }

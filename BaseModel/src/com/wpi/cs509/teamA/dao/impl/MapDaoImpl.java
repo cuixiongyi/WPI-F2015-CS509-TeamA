@@ -75,4 +75,25 @@ public class MapDaoImpl implements MapDao {
 		}
 		return null;
 	}
+
+	@Override
+	public void saveMap(String mapName, String mapAbbrName,String mapPathName, double mapScale) {
+		// TODO Auto-generated method stub
+		try {
+			String insertMapToDB = "INSERT INTO routefinder.map (name, image_name, scale, map_abbr) VALUES (?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(insertMapToDB);
+			pstmt.setString(1, mapName);
+			pstmt.setString(2, mapPathName );
+			pstmt.setDouble(3, mapScale);
+			pstmt.setString(4, mapAbbrName);
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}
+	}
 }

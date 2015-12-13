@@ -18,6 +18,8 @@ import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeName;
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.dao.OtherFeatureDao;
+import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
@@ -123,7 +125,7 @@ public class SearchSupply{
 		Database.InitFromDatabase();
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
-		MainModel.setStaticModel(new MainModel());
+	/*	MainModel.setStaticModel(new MainModel());
 				MainModel.getStaticModel().switchToState((new MouseActionSelectNode(MainModel.getStaticModel())));
         
 		SearchSupply ss = new SearchSupply();
@@ -132,5 +134,9 @@ public class SearchSupply{
 		for (NodeForSearch entry : getSS) {
 		    System.out.println("Key = " + entry.getStringForDisplay()+" ,Priority = " + entry.getPriority());  
 		}  
+		OtherFeatureDao testFeature= new OtherFeatureDaoImpl();
+		for ( Node n : testFeature.getListofNodesWithLabel("pizza")){
+			System.out.println(n.getName());
+		}*/
 	}
 }
