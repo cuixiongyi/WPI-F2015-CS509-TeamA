@@ -464,12 +464,16 @@ public class AutoSuggestor {
 		
 		while (iter.hasNext()) {
 			NodeForSearch nodeInfo = iter.next();
+			//skip label on source textfield
+			if(this.setNodeOption==setNodeOption.setStartNode&&nodeInfo.getNode_label()==SuggestorEnum.Labels)
+				continue;
+			//set limitation on same node_label
 			if(nodeInfo.getNode_label()==temp){
 				i++;
 			}else{
 				temp = nodeInfo.getNode_label();
+				i = 0;
 			}
-			
 			if(i>=MAXNUMLABEL){
 				continue;
 			}

@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by cuixi on 12/4/2015.
@@ -22,13 +23,13 @@ public class SuggestionBasicPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean focused = false;
-	private final JWindow autoSuggestionsPopUpWindow;
+	final JWindow autoSuggestionsPopUpWindow;
 	private final JTextField textField;
 	private final AutoSuggestor autoSuggestor;
 	private Color suggestionsTextColor, suggestionBorderColor,suggestionLineBorderColor;
 	private Dimension preferredSize;
 	private Font font;
-	private Node nodeInformation;
+	private ArrayList<Node> nodeInformation;
 	private BufferedImage imageIcon;
 	
 
@@ -44,7 +45,8 @@ public class SuggestionBasicPanel extends JPanel {
 
 		this.autoSuggestionsPopUpWindow = autoSuggestor.getAutoSuggestionPopUpWindow();
 
-		this.nodeInformation = node;
+		nodeInformation = new ArrayList<Node>();
+		nodeInformation.add(node);
 
 		
 	}
@@ -84,13 +86,15 @@ public class SuggestionBasicPanel extends JPanel {
 		return focused;
 	}
 
-	private void replaceWithSuggestedText() {
+	void replaceWithSuggestedText() {
 		String suggestedWord = textLabel.getText();
 		String text = textField.getText();
 		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
-			autoSuggestor.getModel().setStartNode(nodeInformation);
+			autoSuggestor.getModel().setStartNode(nodeInformation.get(0));
 		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-			autoSuggestor.getModel().setEndNode(nodeInformation);
+			for(Node node: nodeInformation){
+				autoSuggestor.getModel().setEndNode(node);
+			}
 		}
 
 		String typedWord = autoSuggestor.getCurrentlyTypedWord();
@@ -131,13 +135,7 @@ public class SuggestionBasicPanel extends JPanel {
 		this.font = font;
 	}
 
-	public Node getNodeInformation() {
-		return nodeInformation;
-	}
 
-	public void setNodeInformation(Node nodeInformation) {
-		this.nodeInformation = nodeInformation;
-	}
 
 	public JLabel getTextLabel() {
 		return textLabel;
