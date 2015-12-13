@@ -19,188 +19,165 @@ import java.util.List;
 /**
  * Created by cuixi on 12/4/2015.
  */
-public class ViewController extends ViewControllerBase {
+public class ViewController extends ViewControllerBase{
 
-	private ImageMouseListener mouseListener = null;
-	private ImageMouseWheelListener wheelListener = null;
+    private ImageMouseListener mouseListener = null;
+    private ImageMouseWheelListener wheelListener = null;
 
-	private ViewControllerImpl impl = null;
+    private ViewControllerImpl impl = null;
 
-	public ViewController() {
-		mouseListener = new ImageMouseListener(imageComponent, model);
-		wheelListener = new ImageMouseWheelListener(imageComponent, model);
+    public ViewController() {
+        mouseListener = new ImageMouseListener(imageComponent, model);
+        wheelListener = new ImageMouseWheelListener(imageComponent, model);
 
-		impl = new ViewControllerImpl();
-		addButtonSearch();
-		addButtonSignup();
-		addListSelectionListener();
-		addComboBoxMapChanged();
-		addButtonLogin();
-		addFilterButtons();
-		addOpenFile();
-	}
+        impl = new ViewControllerImpl();
+        addButtonSearch();
+        addButtonSignup();
+        addListSelectionListener();
+        addComboBoxMapChanged();
+        addButtonLogin();
+        addFilterButtons();
+        addOpenFile();
+    }
 
-	private void addOpenFile() {
+    private void addOpenFile() {
 		// TODO Auto-generated method stub
-		inputPanel.getOpenMap().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickOpenMap();
+    	inputPanel.getOpenMap().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickOpenMap();
 
-			}
-		});
-
+            }
+        });
+		
 	}
 
-	private void addButtonEditNode() {
-		inputPanel.getBtnMngNode().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickEditNode();
+    private void addButtonEditNode() {
+        inputPanel.getBtnMngNode().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickEditNode();
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	private void addButtonEditEdge() {
-		inputPanel.getBtnMngEdge().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickEditEdge();
+    private void addButtonEditEdge() {
+        inputPanel.getBtnMngEdge().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickEditEdge();
 
-			}
-		});
-	}
+            }
+        });
+    }
 
 	private void addButtonLogin() {
-		inputPanel.getBtnLogin().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickLogin();
+        inputPanel.getBtnLogin().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickLogin();
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	private void addButtonSearch() {
-		inputPanel.getBtnSearch().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickSearch();
-			}
-		});
-	}
+    private void addButtonSearch() {
+        inputPanel.getBtnSearch().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickSearch();
+            }
+        });
+    }
+    private void addButtonSignup() {
+        inputPanel.getBtnSignUp().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickSignup();
+            }
+        });
+    }
 
-	private void addButtonSignup() {
-		inputPanel.getBtnSignUp().addActionListener(new ActionListener() {
+    public void addFilterButtons(){
+    	inputPanel.getAllFilter().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				impl.clickSignup();
+				impl.clickAllFilter();
 			}
 		});
-	}
-
-	public void addFilterButtons() {
-		inputPanel.getClassroomFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.CLASSROOM);
-			}
-		});
-		inputPanel.getOfficeFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.OFFICE);
-			}
-		});
-		inputPanel.getParkingFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.PARKING);
-			}
-		});
-		inputPanel.getRestroomFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.RESTROOM);
-			}
-		});
-		inputPanel.getLabFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.LAB);
-			}
-		});
-	}
-
-	public void addListSelectionListener() {
-		inputPanel.getMapList().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				Object value = inputPanel.getMapList().getSelectedValue();
-				boolean tmp = matchAndSetMapIDFromString(value);
-			}
-		});
-	}
-
-	public void addComboBoxMapChanged() {
-		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				Object value = inputPanel.getComboBoxMap().getSelectedItem();
-				boolean tmp = matchAndSetMapIDFromString(value);
-				model.clearFilters();
-			}
-		});
-
-		inputPanel.getClassroomFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.CLASSROOM);
-			}
-		});
-		inputPanel.getOfficeFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.OFFICE);
-			}
-		});
-		inputPanel.getParkingFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.PARKING);
-			}
-		});
-		inputPanel.getRestroomFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.RESTROOM);
-			}
-		});
-		inputPanel.getLabFilter().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				impl.clickFilter(NodeType.LAB);
-			}
-		});
+    	inputPanel.getClassroomFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.CLASSROOM);
+            }
+    	});
+    	inputPanel.getOfficeFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.OFFICE);
+            }
+    	});
+    	inputPanel.getParkingFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.PARKING);
+            }
+    	});
+    	inputPanel.getRestroomFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.RESTROOM);
+            }
+    	});
+    	inputPanel.getLabFilter().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                impl.clickFilter(NodeType.LAB);
+            }
+    	});
 		inputPanel.getClearFilter().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				impl.clickClearFilter();
 			}
 		});
+    }
+
+        public void addListSelectionListener() {
+        inputPanel.getMapList().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                    Object value = inputPanel.getMapList().getSelectedValue();
+                    boolean tmp = matchAndSetMapIDFromString(value);
+            }
+        });
+    }
+
+    public void addComboBoxMapChanged() {
+        inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Object value = inputPanel.getComboBoxMap().getSelectedItem();
+                boolean tmp = matchAndSetMapIDFromString(value);
+                model.clearFilters();
+                }
+        });
 	}
 
-	private boolean matchAndSetMapIDFromString(Object value) {
-		if (value != null) {
-			List<GeneralMap> maps = Database.getAllMapFromDatabase();
-			for (GeneralMap map : maps) {
-				if (value.equals(map.getMapAbbrName()) || value.equals(map.getMapName())) {
-					model.setCurrentMapID(map.getMapId());
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+
+
+    private boolean matchAndSetMapIDFromString(Object value) {
+        if (value != null) {
+            List<GeneralMap> maps = Database.getAllMapFromDatabase();
+            for (GeneralMap map : maps) {
+                if (value.equals(map.getMapAbbrName()) || value.equals(map.getMapName())) {
+                    model.setCurrentMapID(map.getMapId());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 }
