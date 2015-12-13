@@ -147,6 +147,7 @@ public final class MainModel extends StateContext {
 		this.currentMap = pCurrentMap;
 		currentMap.setDisplayScale(1.0f);
 		isFirstChangeMap = true;
+		addAllFilters();
 		modelChanged();
 	}
 
