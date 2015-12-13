@@ -35,7 +35,9 @@ public final class MainModel extends StateContext {
 
 	private ArrayList<GeneralMap> multiMapLists = null;
 
-	private ArrayList<Path> paths = null;
+    private ArrayList<Path> paths = null;
+    private Path currentPath = null;
+
 
 	public MainModel() {
 
@@ -307,8 +309,18 @@ public final class MainModel extends StateContext {
 		this.paths.add(path);
 	}
 
-	public void setNewPaths() {
+	public void clearPaths() {
 		this.paths = new ArrayList<Path> ();
 	}
 
+    public Path getCurrentPath() {
+        return currentPath;
+    }
+
+    public void setCurrentPath(int idx) {
+        if (idx >= paths.size()) {
+            throw new StackOverflowError();
+        }
+        this.currentPath = paths.get(idx);
+    }
 }

@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -222,6 +223,15 @@ public class PaintHelper {
 		}
 	}
 
+	public static void paintPath(Path path, Graphics2D g2) {
+		if (null != path && 0 < path.getNodes().size()) {
+			ArrayList<Node> nodes = path.getNodes();
+			setStyle(DrawStyleEnum.NewEdge, g2);
+			for (int i = 0; i < nodes.size() - 1; ++i) {
+				paintEdge(nodes.get(i), nodes.get(i + 1), g2);
+			}
+		}
+	}
 	public static Coordinate backTransferCoor(Coordinate origin) {
 		Coordinate result = new Coordinate();
 		float scale = model.getCurrentMap().getDisplayScale();
@@ -280,7 +290,7 @@ public class PaintHelper {
 		// PaintHelper.paintPath(multiMapPath.get(idx), g2);
 		//
 		// }
-		ArrayList<Node> path = model.getRouteOnCurrentMap();
+		Path path = model.getCurrentPath();
 		if (null == path)
 			return;
 		PaintHelper.paintPath(path, g2);

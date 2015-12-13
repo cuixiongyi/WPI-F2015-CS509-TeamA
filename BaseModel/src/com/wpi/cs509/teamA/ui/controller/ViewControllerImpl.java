@@ -10,6 +10,7 @@ import javax.swing.JToggleButton;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
@@ -102,22 +103,32 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode().get(0));
 
-		Stack<Node> path = algoController.getRoute();
+		Stack<Node> pathNodes = algoController.getRoute();
 
 		ArrayList<Node> singleMapPath = new ArrayList<Node>();
 		ArrayList<String> mapNameList = new ArrayList<String>();
 		ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
-		int tmpMapId = path.peek().getMap().getMapId();
-		mapNameList.add(path.peek().getMap().getMapAbbrName());
-		mapList.add(path.peek().getMap());
+		int tmpMapId = -1;
+		mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
+		mapList.add(pathNodes.peek().getMap());
+		model.clearPaths();
+		Path path = new Path();
 
-		while (path.size() > 0) {
-			Node node = path.pop();
+		while (pathNodes.size() > 0) {
+
+					Node node = pathNodes.pop();
 			if (node.getMap().getMapId() == tmpMapId) {
 				singleMapPath.add(node);
+				path.addNode(node);
+
 
 			} else {
-				multiMapPathLists.add(singleMapPath);
+						multiMapPathLists.add(singleMapPath);
+
+				model.addOnePath(path);
+				path = new Path();
+				path.setMap(node.getMap());
+				path.addNode(node);
 
 				singleMapPath = new ArrayList<Node>();
 				singleMapPath.add(node);
@@ -128,6 +139,8 @@ class ViewControllerImpl extends ViewControllerBase {
 
 			}
 		}
+		model.addOnePath(path);
+
 		multiMapPathLists.add(singleMapPath);
 
 		// reset and initiate the Jlist
