@@ -42,6 +42,7 @@ public final class MainModel extends StateContext {
 		this.iconFilter = new ArrayList<NodeType>();
 		MainModel.nodeTypes = NodeType.values();
 		addAllFilters();
+		multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
 
