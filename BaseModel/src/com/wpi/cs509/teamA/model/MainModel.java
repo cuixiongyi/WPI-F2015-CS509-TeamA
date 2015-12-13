@@ -42,6 +42,7 @@ public final class MainModel extends StateContext {
 		this.iconFilter = new ArrayList<NodeType>();
 		MainModel.nodeTypes = NodeType.values();
 		addAllFilters();
+		// multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
 
@@ -179,16 +180,8 @@ public final class MainModel extends StateContext {
 		return endNode;
 	}
 
-	public synchronized void setEndNode(Node pendNode) {
-		if (null == this.endNode) {
-			endNode = new ArrayList<Node>();
-		}
-		this.endNode.add(pendNode);
-		modelChanged();
-	}
-
-	public synchronized void clearEndNode() {
-		endNode = new ArrayList<Node>();
+	public synchronized void setEndNode(Node endNode) {
+		this.endNode = endNode;
 		modelChanged();
 	}
 

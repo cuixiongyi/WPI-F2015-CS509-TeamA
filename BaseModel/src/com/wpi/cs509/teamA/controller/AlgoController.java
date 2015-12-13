@@ -41,7 +41,7 @@ public class AlgoController {
 	/**
 	 * The destination node get from the front end It is a String
 	 */
-	private Node endNode;
+	private ArrayList<Node> endNodeList;
 	/**
 	 * the result of the path finding
 	 */
@@ -62,10 +62,10 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-	public AlgoController(Node from, Node to) {
+	public AlgoController(Node from, ArrayList<Node> to) {
 
 		this.startNode = from;
-		this.endNode = to;
+		this.endNodeList = to;
 	}
 
 	/**
@@ -76,8 +76,13 @@ public class AlgoController {
 	 *         a list of nodes that represents the path on that map
 	 */
 	public Stack<Node> getRoute() {
-
-		allEdges edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), startNode, endNode);
+		    allEdges edges;
+		if(endNodeList.size()==1){
+			edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), startNode, endNodeList.get(0));
+			}
+		else{
+			edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), startNode, endNodeList);
+			}
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
