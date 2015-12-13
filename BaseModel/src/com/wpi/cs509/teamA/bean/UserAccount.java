@@ -17,7 +17,7 @@ public class UserAccount {
 	private String username;
 	/** pass word of the account */
 	private String password;
-	/** email of the user*/
+	/** email of the user */
 	private String email;
 	/**
 	 * if this account is an admin
@@ -25,8 +25,7 @@ public class UserAccount {
 	private boolean isAdmin;
 
 	private List<History> history;
-	
-	
+
 	/** default constructor */
 	public UserAccount() {
 		this.id = -1;
@@ -98,7 +97,7 @@ public class UserAccount {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
+
 	public List<History> getHistory() {
 		return history;
 	}
