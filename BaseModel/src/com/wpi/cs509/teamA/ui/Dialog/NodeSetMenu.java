@@ -2,15 +2,19 @@ package com.wpi.cs509.teamA.ui.Dialog;
 
 import javax.swing.JPopupMenu;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 
 /**
@@ -29,10 +33,12 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem cleanupMap;
 	
 	private MainModel model = null;
+	private JMenuItem printRoute;
 
 	private final static String SOURCE = "Add as source";
 	private final static String DES = "Add as destination";
 	private final static String CLEAN = "Clean up route";
+	private final static String PRINT = "Print Route";
 
 	/**
 	 * Create the Menu.
@@ -58,6 +64,10 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		cleanupMap = new JMenuItem(CLEAN);
 		add(cleanupMap);
 		cleanupMap.addActionListener(this);
+		
+		printRoute = new JMenuItem(PRINT);
+		add(printRoute);
+		printRoute.addActionListener(this);
 
 		if (null == node) {
 			mntmDes.setEnabled(false);
@@ -82,7 +92,30 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		} else if(e.getSource()==cleanupMap){
 			model.cleanUpRoute();
+		} else if(e.getSource()==printRoute){
+			try {
+
+				JFileChooser filechooser = new JFileChooser();
+				filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int result = filechooser.showSaveDialog(null);
+
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File selectedfile = filechooser.getSelectedFile();
+					File file = new File(selectedfile.getPath());
+					 
+					for (int i = 0; i< model.getMultiMapLists().size();i++) {
+						GeneralMap map = model.getMultiMapLists().get(i);
+						// System.out.println(mp.getMapName());
+						PaintHelper.printRoute(map, map.getImage(), file, i);
+
+					}
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+
+			}
 		}
+		
 
 	}
 
