@@ -117,7 +117,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
 
         if(e.getSource()==okButton)
         {
-
+            
         }
 
     }
@@ -130,21 +130,37 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         List<OtherFeature> labels=new ArrayList<OtherFeature>();
         List<Activity> activities=new ArrayList<Activity>();
 
-        for(int i=0;i<major.getText().split(",").length-1;i=i+2)
+        for(int i=0;i<major.getText().split(";").length-1;i=i+2)
         {
-            Major m=new Major(major.getText().split(",")[i],major.getText().split(",")[i+1],node.getId());
+            Major m=new Major(major.getText().split(";")[i],major.getText().split(";")[i+1],node.getId());
             majors.add(m);
         }
 
+        for(int j=0;j<professor.getText().split(";").length-1;j++)
+        {
+            Professor p=new Professor(professor.getText().split(";")[j],node.getId());
+            professors.add(p);
+        }
+
+        for(int k=0;k<feature.getText().split(";").length-1;k++)
+        {
+            OtherFeature f=new OtherFeature(feature.getText().split(";")[k],node.getId());
+            labels.add(f);
+        }
+
+        for(int ii=0;ii<activity.getText().split(";").length-1;ii++)
+        {
+            Activity a=new Activity();
+            activities.add(a);
+
+        }
+
+        NodeInformation nodeInfo =new NodeInformation(node,majors,professors,labels,activities);
+        return nodeInfo;
 
 
 
 
-
-//        NodeInformation info=new NodeInformation(node,major.getText().trim(),);
-
-
-        return null;
 
     }
     
