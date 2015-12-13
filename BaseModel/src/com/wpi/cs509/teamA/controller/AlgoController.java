@@ -107,6 +107,7 @@ public class AlgoController {
 				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			else
 				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+			endNode=null;
 		}
 		
 		if(this.isMultipleDestination){
