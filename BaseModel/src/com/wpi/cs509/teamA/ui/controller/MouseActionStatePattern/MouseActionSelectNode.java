@@ -3,7 +3,15 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
+import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
+import com.wpi.cs509.teamA.ui.Dialog.InformationPanel;
 import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
+import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
+import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.PaintHelper;
@@ -46,6 +54,18 @@ public class MouseActionSelectNode extends MouseActionState {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 
 			if (null != node) {
+				ViewManager.getNodeInformation().setNode(node);
+				UserScreen.getUserScreen().getContentPane().add(ViewManager.getNodeInformation(),new Integer(3));
+				ViewManager.getAC().create(ViewManager.getNodeInformation(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
+						ViewManager.getNodeInformation().getHeight());
+				AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
+				AO.switchState(new AnimationStateSlidingUp(AO));
+				AO.setSpeed(2.0);
+				ViewManager.getNodeInformation().setVisible(true);
+
+			}else{
+				ViewManager.infoPanelSlideDown();
+
 			}
 		}
 		if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
