@@ -174,11 +174,21 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         mapList.setCellRenderer(new MyListCellRenderer());
         searchResultTab.add(mapList);
         ///for test
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<String> model = new DefaultListModel<>();
         model.addElement("This is a short textdddddddddd");
-        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
-        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
-//        mapList.setModel(model);
+        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. "
+        		+ "This is a long text. This is a long text. This is a long text. This is a long text. "
+        		+ "This is a long text. This is a long text. This is a long text. This is a long text. "
+        		+ "This is a long text. ");
+        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
+        		+ "This is an even longer text. ");
+        mapList.setModel(model);
         
 
 		// tab panel-filter
