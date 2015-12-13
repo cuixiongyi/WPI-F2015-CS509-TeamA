@@ -5,7 +5,6 @@ import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 
-@Deprecated
 public interface NodeRelationDao {
 
 	/**

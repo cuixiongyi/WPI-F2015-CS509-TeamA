@@ -21,7 +21,6 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSele
  *
  */
 
-@Deprecated
 public class StateContext extends Observable {
 
 	/**

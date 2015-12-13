@@ -1,12 +1,20 @@
 package com.wpi.cs509.teamA.ui.controller;
 
+import java.awt.Dialog;
+import java.util.ArrayList;
+import java.util.Stack;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
+
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.OpenMapDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
-import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
@@ -14,15 +22,6 @@ import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Stack;
-
-/**
- * Created by cuixi on 12/4/2015.
- */
 class ViewControllerImpl extends ViewControllerBase {
 
 	public void clickLogin() {
@@ -54,8 +53,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		if (MouseActionEditNode.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
 			model.switchToState(new MouseActionSelectNode(model));
-		}
-		else {
+		} else {
 			model.switchToState(new MouseActionEditNode(model));
 			button.setSelected(true);
 		}
@@ -67,13 +65,11 @@ class ViewControllerImpl extends ViewControllerBase {
 		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
 			model.switchToState(new MouseActionSelectNode(model));
-		}
-		else {
+		} else {
 			model.switchToState(new MouseActionEditEdge(model));
 			button.setSelected(true);
 		}
 	}
-
 
 	public void clickSignup() {
 		SignupDialog signUpDialog = new SignupDialog(inputPanel);
@@ -91,11 +87,10 @@ class ViewControllerImpl extends ViewControllerBase {
 		ViewManager.updateView();
 	}
 
-	public void clickClearFilter()
-    {
-    	model.clearFilters();
-    	ViewManager.updateView();
-    }
+	public void clickClearFilter() {
+		model.clearFilters();
+		ViewManager.updateView();
+	}
 
 	public void clickSearch() {
 		if (model.getStartNode() == null || model.getEndNode() == null)
@@ -151,18 +146,18 @@ class ViewControllerImpl extends ViewControllerBase {
 
 	public void clickOpenMap() {
 		// TODO Auto-generated method stub
-		OpenMapDialog openMapDialog=new OpenMapDialog(model);
+		OpenMapDialog openMapDialog = new OpenMapDialog(model);
 		openMapDialog.setVisible(true);
 		ViewManager.updateView();
-//		int returnVal = inputPanel.getFc().showOpenDialog(null);
-//		 if (returnVal == JFileChooser.APPROVE_OPTION) {
-//             File file = inputPanel.getFc().getSelectedFile();
-             //This is where a real application would open the file.
-//         } else {
-//             log.append("Open command cancelled by user." + newline);
-//         }
-//		 }
-		
+		// int returnVal = inputPanel.getFc().showOpenDialog(null);
+		// if (returnVal == JFileChooser.APPROVE_OPTION) {
+		// File file = inputPanel.getFc().getSelectedFile();
+		// This is where a real application would open the file.
+		// } else {
+		// log.append("Open command cancelled by user." + newline);
+		// }
+		// }
+
 	}
 
 }
