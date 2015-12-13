@@ -173,22 +173,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 //        mapList.setFixedCellHeight(40);
         mapList.setCellRenderer(new MyListCellRenderer());
         searchResultTab.add(mapList);
-        ///for test
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.addElement("This is a short textdddddddddd");
-        model.addElement("This is a long text. This is a long text. This is a long text. This is a long text. "
-        		+ "This is a long text. This is a long text. This is a long text. This is a long text. "
-        		+ "This is a long text. This is a long text. This is a long text. This is a long text. "
-        		+ "This is a long text. ");
-        model.addElement("This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. This is an even longer text. This is an even longer text. "
-        		+ "This is an even longer text. ");
-        mapList.setModel(model);
+        
+        
         
 
 		// tab panel-filter

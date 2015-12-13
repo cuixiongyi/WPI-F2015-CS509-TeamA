@@ -3,8 +3,10 @@ package com.wpi.cs509.teamA.util;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -22,6 +24,18 @@ public class NodeIcon {
 	private static String startIconName = "Start_Icon.png";
 	private static String endIconName = "End_Icon.png";
 	
+	private static String num0IconName="numbers-0-icon.png";
+	private static String num1IconName="numbers-1-icon.png";
+	private static String num2IconName="numbers-2-icon.png";
+	private static String num3IconName="numbers-3-icon.png";
+	private static String num4IconName="numbers-4-icon.png";
+	private static String num5IconName="numbers-5-icon.png";
+	private static String num6IconName="numbers-6-icon.png";
+	private static String num7IconName="numbers-7-icon.png";
+	private static String num8IconName="numbers-8-icon.png";
+	private static String num9IconName="numbers-9-icon.png";
+	
+	
 
 	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
 	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;
@@ -31,6 +45,17 @@ public class NodeIcon {
 	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
 	private static String endIconFilePath = PaintHelper.getUserDir() + endIconName;
 	
+	private static String num0IconPath=PaintHelper.getUserDir() + num0IconName;
+	private static String num1IconPath=PaintHelper.getUserDir() + num1IconName;
+	private static String num2IconPath=PaintHelper.getUserDir() + num2IconName;
+	private static String num3IconPath=PaintHelper.getUserDir() + num3IconName;
+	private static String num4IconPath=PaintHelper.getUserDir() + num4IconName;
+	private static String num5IconPath=PaintHelper.getUserDir() + num5IconName;
+	private static String num6IconPath=PaintHelper.getUserDir() + num6IconName;
+	private static String num7IconPath=PaintHelper.getUserDir() + num7IconName;
+	private static String num8IconPath=PaintHelper.getUserDir() + num8IconName;
+	private static String num9IconPath=PaintHelper.getUserDir() + num9IconName;
+	
 
 	private static BufferedImage labIcon;
 	private static BufferedImage classroomIcon;
@@ -39,6 +64,19 @@ public class NodeIcon {
 	private static BufferedImage officeIcon;
 	private static BufferedImage startIcon;
 	private static BufferedImage endIcon;
+	
+	private static BufferedImage num0Icon;
+	private static BufferedImage num1Icon;
+	private static BufferedImage num2Icon;
+	private static BufferedImage num3Icon;
+	private static BufferedImage num4Icon;
+	private static BufferedImage num5Icon;
+	private static BufferedImage num6Icon;
+	private static BufferedImage num7Icon;
+	private static BufferedImage num8Icon;
+	private static BufferedImage num9Icon;
+	
+	private static Map<Integer, BufferedImage> numIconMap;
 
 
 	
@@ -53,6 +91,16 @@ public class NodeIcon {
 			parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
 			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
 			endIcon = ImageIO.read(new FileInputStream(endIconFilePath));
+			num0Icon=ImageIO.read(new FileInputStream(num0IconPath));
+			num1Icon=ImageIO.read(new FileInputStream(num1IconPath));
+			num2Icon=ImageIO.read(new FileInputStream(num2IconPath));
+			num3Icon=ImageIO.read(new FileInputStream(num3IconPath));
+			num4Icon=ImageIO.read(new FileInputStream(num4IconPath));
+			num5Icon=ImageIO.read(new FileInputStream(num5IconPath));
+			num6Icon=ImageIO.read(new FileInputStream(num6IconPath));
+			num7Icon=ImageIO.read(new FileInputStream(num7IconPath));
+			num8Icon=ImageIO.read(new FileInputStream(num8IconPath));
+			num9Icon=ImageIO.read(new FileInputStream(num9IconPath));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,6 +221,86 @@ public class NodeIcon {
 	 */
 	public static void setOfficeIcon(BufferedImage officeIcon) {
 		NodeIcon.officeIcon = officeIcon;
+	}
+
+	public static BufferedImage getNum0Icon() {
+		return num0Icon;
+	}
+
+	public static void setNum0Icon(BufferedImage num0Icon) {
+		NodeIcon.num0Icon = num0Icon;
+	}
+
+	public static BufferedImage getNum1Icon() {
+		return num1Icon;
+	}
+
+	public static void setNum1Icon(BufferedImage num1Icon) {
+		NodeIcon.num1Icon = num1Icon;
+	}
+
+	public static BufferedImage getNum2Icon() {
+		return num2Icon;
+	}
+
+	public static void setNum2Icon(BufferedImage num2Icon) {
+		NodeIcon.num2Icon = num2Icon;
+	}
+
+	public static BufferedImage getNum3Icon() {
+		return num3Icon;
+	}
+
+	public static void setNum3Icon(BufferedImage num3Icon) {
+		NodeIcon.num3Icon = num3Icon;
+	}
+
+	public static BufferedImage getNum4Icon() {
+		return num4Icon;
+	}
+
+	public static void setNum4Icon(BufferedImage num4Icon) {
+		NodeIcon.num4Icon = num4Icon;
+	}
+
+	public static BufferedImage getNum5Icon() {
+		return num5Icon;
+	}
+
+	public static void setNum5Icon(BufferedImage num5Icon) {
+		NodeIcon.num5Icon = num5Icon;
+	}
+
+	public static BufferedImage getNum6Icon() {
+		return num6Icon;
+	}
+
+	public static void setNum6Icon(BufferedImage num6Icon) {
+		NodeIcon.num6Icon = num6Icon;
+	}
+
+	public static BufferedImage getNum7Icon() {
+		return num7Icon;
+	}
+
+	public static void setNum7Icon(BufferedImage num7Icon) {
+		NodeIcon.num7Icon = num7Icon;
+	}
+
+	public static BufferedImage getNum8Icon() {
+		return num8Icon;
+	}
+
+	public static void setNum8Icon(BufferedImage num8Icon) {
+		NodeIcon.num8Icon = num8Icon;
+	}
+
+	public static BufferedImage getNum9Icon() {
+		return num9Icon;
+	}
+
+	public static void setNum9Icon(BufferedImage num9Icon) {
+		NodeIcon.num9Icon = num9Icon;
 	}
 
 
