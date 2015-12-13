@@ -112,14 +112,16 @@ public class UserScreen extends JFrame {
 		// stateContext.switchUserState(new NormalUserState(stateContext));
 		viewManager.updateView();
 
-		popUpPane = new PopupPanel();
-		contentPane.add(popUpPane, new Integer(2));
-		ViewManager.getAC().create(popUpPane, imgComponent, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
-				popUpPane.getHeight());
-		AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
-		AO.switchState(new AnimationStateSlidingUp(AO));
-		AO.setSpeed(0.5);
-		popUpPane.setVisible(true);
+//		popUpPane = new PopupPanel();
+//		contentPane.add(popUpPane, new Integer(2));
+//		ViewManager.getAC().create(popUpPane, imgComponent, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
+//				popUpPane.getHeight());
+//		AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
+//		AO.switchState(new AnimationStateSlidingUp(AO));
+//		AO.setSpeed(0.5);
+//		popUpPane.setVisible(true);
+
+
 
 		// popUpPaneLeft=new PopupPanel();
 		// contentPane.add(popUpPaneLeft,new Integer(5));

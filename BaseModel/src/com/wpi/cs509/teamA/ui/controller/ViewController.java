@@ -155,7 +155,6 @@ public class ViewController extends ViewControllerBase {
 			public void itemStateChanged(ItemEvent e) {
 				Object value = inputPanel.getComboBoxMap().getSelectedItem();
 				boolean tmp = matchAndSetMapIDFromString(value);
-				model.clearFilters();
 			}
 		});
 	}

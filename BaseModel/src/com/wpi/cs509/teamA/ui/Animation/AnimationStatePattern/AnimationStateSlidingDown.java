@@ -27,7 +27,7 @@ public class AnimationStateSlidingDown extends AnimationState {
         if (AnimationPosition.BOTTOMM_MIDDLE == object.getPosition()) {
             Point location = object.getPanel().getLocation();
             if (baseLine - location.getY()  > 0) {
-                pos.setY( pos.getY()-speed);
+                pos.setY( pos.getY()+speed);
 
                 object.getPanel().setLocation((int)pos.getX(), (int)pos.getY());
 

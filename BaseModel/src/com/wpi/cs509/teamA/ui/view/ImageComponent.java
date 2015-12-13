@@ -12,6 +12,8 @@ import javax.swing.JComponent;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
@@ -100,6 +102,7 @@ public class ImageComponent extends JComponent {
 			this.setImageYpos(0);
 			model.getCurrentMap().setDisplayScale(1.0f);
 
+			ViewManager.infoPanelSlideDown();
 		}
 		if (model.isFisrtFocusNode()) {
 			Node node = model.getFocusNode();

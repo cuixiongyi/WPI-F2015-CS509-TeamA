@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.model;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
@@ -33,6 +34,10 @@ public final class MainModel extends StateContext {
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	private ArrayList<GeneralMap> multiMapLists = null;
+
+    private ArrayList<Path> paths = null;
+    private Path currentPath = null;
+
 
 	public MainModel() {
 
@@ -85,6 +90,7 @@ public final class MainModel extends StateContext {
 		this.setEndNode(null);
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
+        this.clearPaths();
 
 	}
 
@@ -148,6 +154,7 @@ public final class MainModel extends StateContext {
 		this.currentMap = pCurrentMap;
 		currentMap.setDisplayScale(1.0f);
 		isFirstChangeMap = true;
+		addAllFilters();
 		modelChanged();
 	}
 
@@ -297,4 +304,29 @@ public final class MainModel extends StateContext {
 		staticModel = pModel;
 	}
 
+	public ArrayList<Path> getPaths() {
+		return paths;
+	}
+	public Path getOnePath(int idx) {
+		return paths.get(idx);
+	}
+
+	public void addOnePath(Path path) {
+		this.paths.add(path);
+	}
+
+	public void clearPaths() {
+		this.paths = null;
+	}
+
+    public Path getCurrentPath() {
+        return currentPath;
+    }
+
+    public void setCurrentPath(int idx) {
+        if (idx >= paths.size()) {
+            throw new StackOverflowError();
+        }
+        this.currentPath = paths.get(idx);
+    }
 }

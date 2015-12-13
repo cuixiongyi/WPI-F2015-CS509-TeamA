@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -128,12 +129,29 @@ public class PaintHelper {
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
 				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+		
+		if (model.getCurrentMap().getDisplayScale() > 1.2)
+		{
+			String nodeTitle = node.getName();
+			if (node.getNodeType() == NodeType.PARKING) 
+			{
+				nodeTitle += " (" + 20 + ")"; // where to change parking info
+			}
+
+		    FontMetrics metrics = g2.getFontMetrics();
+		    int titleXCoor = (coorTrans.getX() - (metrics.stringWidth(nodeTitle)/2));
+		    int titleYCoor = coorTrans.getY() - 25;
+			
+			g2.drawString(nodeTitle, titleXCoor, titleYCoor);
+		}
 		return true;
 	}
 
 	public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
 //		System.out.println("Drawing nodes.");
 		setStyle(style, g2);
+		g2.setFont(new Font("Arial", Font.BOLD, 14));
+		g2.setColor(Color.BLACK);
 		if (null == nodes)
 			return;
 		for (Node node : nodes) {
@@ -145,6 +163,7 @@ public class PaintHelper {
 				}
 			}
 		}
+		setStyle(style, g2);
 	}
 
 	public static void paintNodes(List<Node> nodes, Graphics2D g2) {
@@ -222,6 +241,15 @@ public class PaintHelper {
 		}
 	}
 
+	public static void paintPath(Path path, Graphics2D g2) {
+		if (null != path && 0 < path.getNodes().size()) {
+			ArrayList<Node> nodes = path.getNodes();
+			setStyle(DrawStyleEnum.NewEdge, g2);
+			for (int i = 0; i < nodes.size() - 1; ++i) {
+				paintEdge(nodes.get(i), nodes.get(i + 1), g2);
+			}
+		}
+	}
 	public static Coordinate backTransferCoor(Coordinate origin) {
 		Coordinate result = new Coordinate();
 		float scale = model.getCurrentMap().getDisplayScale();
@@ -280,7 +308,7 @@ public class PaintHelper {
 		// PaintHelper.paintPath(multiMapPath.get(idx), g2);
 		//
 		// }
-		ArrayList<Node> path = model.getRouteOnCurrentMap();
+		Path path = model.getCurrentPath();
 		if (null == path)
 			return;
 		PaintHelper.paintPath(path, g2);

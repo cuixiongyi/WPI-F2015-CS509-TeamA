@@ -15,6 +15,7 @@ import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Major;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.NodeInformation;
 import com.wpi.cs509.teamA.bean.OtherFeature;
 import com.wpi.cs509.teamA.bean.Professor;
 import com.wpi.cs509.teamA.bean.UserAccount;
@@ -138,7 +139,7 @@ public class Database {
 		Iterator<Integer> iter = nodeIds.iterator();
 		while (iter.hasNext()) {
 			int nodeId = iter.next();
-			res.add(Database.getNodeFromId(nodeId));
+			res.add(allNodesDataHM.get(nodeId));
 		}
 		return res;
 	}
@@ -219,6 +220,15 @@ public class Database {
 		return allEdgesDataHM.get(map_id);
 	}
 
+	public static List<Node> getAllMapRelationNodesFromMapId(int map_id){
+		List<Node> tempNodeList = new ArrayList<Node>();
+		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
+		List<Integer> tempListInt = nrd2.getMapRelationsNodeForOneMap(map_id);
+		for(Integer tempInt : tempListInt){
+			tempNodeList.add(allNodesDataHM.get(tempInt));
+		}
+		return tempNodeList;
+	}
 	/** Deal with User Account */
 	public static List<UserAccount> getAllUserAccount() {
 		return allUsersDataHL;
@@ -248,12 +258,30 @@ public class Database {
 	public static List<Professor> getAllProfessor() {
 		return allProfessors;
 	}
-
+	
+	public static List<Professor> getProfessorListWithNodeId(int nodeId){
+		List<Professor> tempProfessor = new ArrayList<Professor>();
+		for(Professor pp : allProfessors){
+			if(pp.getNodeId() == nodeId)
+				tempProfessor.add(pp);
+		}
+		return tempProfessor;
+	}
+	
 	/** Deal with majors */
 	public static List<Major> getAllMajors() {
 		return allMajors;
 	}
-
+	
+	public static List<Major> getMajorListWithNodeId(int nodeId){
+		List<Major> tempMajor = new ArrayList<Major>();
+		for(Major m : allMajors){
+			if(m.getNodeId() == nodeId)
+				tempMajor.add(m);
+		}
+		return tempMajor;
+	}
+	
 	/** Deal with other features*/
 	public static List<OtherFeature> getAllOtherFeatures() {
 		return allOtherLabels;
@@ -263,6 +291,25 @@ public class Database {
 		return labelList;
 	}
 	
+	public static List<OtherFeature> getAllOtherFeatureListWithNodeId(int nodeId){
+		List<OtherFeature> tempOtherFeatures = new ArrayList<OtherFeature>();
+		for(OtherFeature of: allOtherLabels){
+			if(of.getNodeId() == nodeId)
+				tempOtherFeatures.add(of);
+		}
+		return tempOtherFeatures;
+	}
+	
+	/** Deal with Node information*/
+	public static NodeInformation getNodeInformation(int nodeId){
+		// find node with this node id
+		Node tempNode = allNodesDataHM.get(nodeId);
+		List<Major> tempMajors = Database.getMajorListWithNodeId(nodeId) ;
+		List<Professor> tempProfessors = Database.getProfessorListWithNodeId(nodeId);
+		List<OtherFeature> tempOtherFeatures = Database.getAllOtherFeatureListWithNodeId(nodeId);
+		NodeInformation nodeInfo = new NodeInformation(tempNode,tempMajors,tempProfessors,tempOtherFeatures,null);
+		return nodeInfo;
+	}
 	/** Deal with searching */
 	public static Map<String, NodeForSearch> getAllNodesForSearch() {
 		return allNodesForSearch;
@@ -275,7 +322,7 @@ public class Database {
 		Map<Integer, String> allMapsSearch = new HashMap<Integer, String>();
 		Map<Integer, String> allMapsabbrSearch = new HashMap<Integer, String>();
 		// get maps
-		Iterator<GeneralMap> iter_map = Database.getAllMapFromDatabase().iterator();
+		Iterator<GeneralMap> iter_map = allMapDataHL.iterator();
 		while (iter_map.hasNext()) {
 			GeneralMap tempMap = iter_map.next();
 			int map_id = tempMap.getMapId();
@@ -286,7 +333,7 @@ public class Database {
 		}
 
 		// get nodes and transfer
-		Iterator<Node> iter = Database.getAllNodeListFromDatabase().iterator();
+		Iterator<Node> iter = allNodesDataHL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			String nodeName = tempNode.getName();
@@ -301,7 +348,7 @@ public class Database {
 		}
 
 		// Init professor information
-		Iterator<Professor> iterProfessor = Database.getAllProfessor().iterator();
+		Iterator<Professor> iterProfessor = allProfessors.iterator();
 		while (iterProfessor.hasNext()) {
 			Professor tempProfessor = iterProfessor.next();
 			String tempProfessorName = tempProfessor.getProfessorName();
@@ -317,7 +364,7 @@ public class Database {
 	//	System.out.println("get all professor size: "+ Database.getAllProfessor().size());
 		
 		// Init major information
-		Iterator<Major> iterMajor = Database.getAllMajors().iterator();
+		Iterator<Major> iterMajor = allMajors.iterator();
 		while (iterMajor.hasNext()) {
 			Major tempMajor = iterMajor.next();
 			Node tempNode = getNodeFromId(tempMajor.getNodeId());
@@ -330,7 +377,7 @@ public class Database {
 
 		// Init other information
 	//	System.out.println("get all features size: "+ Database.getAllOtherFeatures().size());
-		Iterator<OtherFeature> iterOtherFeature = Database.getAllOtherFeatures().iterator();
+		Iterator<OtherFeature> iterOtherFeature = allOtherLabels.iterator();
 		while (iterOtherFeature.hasNext()) {
 			OtherFeature otherFeature = iterOtherFeature.next();
 			Node tempNode = getNodeFromId(otherFeature.getNodeId());
@@ -343,7 +390,7 @@ public class Database {
 		}
 		
 		// Init label information
-		Iterator<String> iterLabels = Database.getAllLabels().iterator();
+		Iterator<String> iterLabels = labelList.iterator();
 		while (iterLabels.hasNext()) {
 			String nodeNameComplete = iterLabels.next();
 			Node tempNode = null;
