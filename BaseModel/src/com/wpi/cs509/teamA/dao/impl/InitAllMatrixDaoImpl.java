@@ -32,7 +32,6 @@ public class InitAllMatrixDaoImpl implements InitAllMatrixDao {
 	private InitAllMatrixDaoImpl() {
 		// we init all the matrix here
 		// traverse all the maps in the Maps enum class
-		System.out.println("initializing all the maps.. should happen only once..");
 
 		// TODO: we need to read database twice, first to get the map id, second
 		// to get the corresponding node id on that map, can we make any
@@ -58,7 +57,6 @@ public class InitAllMatrixDaoImpl implements InitAllMatrixDao {
 		if (initAllMatrixImpl == null) {
 			initAllMatrixImpl = new InitAllMatrixDaoImpl();
 		}
-		System.out.println("try to init all matrix.. the matrix has been init already..");
 		
 		return initAllMatrixImpl;
 
