@@ -37,7 +37,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		Dijkstra dij = new Dijkstra(graph, source);
 		Vertex destination =new Vertex();
 		
-		if(alledges.getEnd().length==1){
+		if(alledges.isNormal()){
 			this.endNodeId = alledges.getEndNode().getId();
 			destination = context.getGraph().get(endNodeId);
 		}
