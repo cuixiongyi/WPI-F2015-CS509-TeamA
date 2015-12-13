@@ -1,10 +1,14 @@
 package com.wpi.cs509.teamA.util;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -21,6 +25,10 @@ public class NodeIcon {
 	private static String parkingIconName = "Parking_Icon.png";
 	private static String startIconName = "Start_Icon.png";
 	private static String endIconName = "End_Icon.png";
+
+	private static String numPrefix = "numbers-";
+	private static String numPostfix = "-icon.png";
+
 	
 
 	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
@@ -31,6 +39,8 @@ public class NodeIcon {
 	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
 	private static String endIconFilePath = PaintHelper.getUserDir() + endIconName;
 	
+	private static String iconDir=PaintHelper.getUserDir()+"numicon/"+numPrefix;
+	
 
 	private static BufferedImage labIcon;
 	private static BufferedImage classroomIcon;
@@ -39,10 +49,9 @@ public class NodeIcon {
 	private static BufferedImage officeIcon;
 	private static BufferedImage startIcon;
 	private static BufferedImage endIcon;
-
-
 	
-	
+	private static ArrayList<BufferedImage> numIcons;
+
 	
 	static {
 		try {
@@ -53,6 +62,15 @@ public class NodeIcon {
 			parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
 			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
 			endIcon = ImageIO.read(new FileInputStream(endIconFilePath));
+
+			int numCount = 9;
+			numIcons = new ArrayList<BufferedImage>(numCount);
+
+			for (int ii = 0; ii <= numCount; ii++) {
+				String tmp = iconDir+Integer.toString(ii)+numPostfix;
+				numIcons.add(ImageIO.read(new FileInputStream(tmp)));
+			}
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,7 +193,25 @@ public class NodeIcon {
 		NodeIcon.officeIcon = officeIcon;
 	}
 
-
+	public static BufferedImage getNumIcon(int num) {
+		return numIcons.get(num);
+	}
+	
+	public static ImageIcon getStartIconSmall(){
+		ImageIcon stIcon =new ImageIcon(startIcon);
+    	Image stImage=stIcon.getImage();
+    	Image newstImage=stImage.getScaledInstance(33, 33,  java.awt.Image.SCALE_SMOOTH);
+    	stIcon = new ImageIcon(newstImage);
+    	return stIcon;
+	}
+	
+	public static ImageIcon getEndIconSmall(){
+		ImageIcon edIcon =new ImageIcon(endIcon);
+    	Image edImage=edIcon.getImage();
+    	Image newedImage=edImage.getScaledInstance(33, 33,  java.awt.Image.SCALE_SMOOTH);
+    	edIcon = new ImageIcon(newedImage);
+    	return edIcon;
+	}
 	
 
 }
