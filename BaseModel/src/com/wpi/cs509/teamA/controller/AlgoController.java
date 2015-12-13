@@ -17,6 +17,7 @@ import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.Database;
@@ -41,7 +42,7 @@ public class AlgoController {
 	/**
 	 * The destination node get from the front end It is a String
 	 */
-	private Node endNode;
+	private Node endNode=null;
 	/**
 	 * the result of the path finding
 	 */
@@ -62,10 +63,23 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
+	 allEdges edges;
+	 boolean isMultipleDestination = false;
+	 
 	public AlgoController(Node from, Node to) {
 
-		this.startNode = from;
-		this.endNode = to;
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+		endNode=to;
+		
+	}
+	
+	public AlgoController(Node from, Node[] to) {
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+	}
+	
+	public AlgoController(Node from, Node[] to, boolean isMultiopleDestination) {
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+		this.isMultipleDestination=true;
 	}
 
 	/**
@@ -77,14 +91,73 @@ public class AlgoController {
 	 */
 	public Stack<Node> getRoute() {
 
-		allEdges edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), startNode, endNode);
+		// we support searching node now only..
+
+		// get the node from database
+		//Node fromNode = Database.getNodeFromName(startNode);    /////////////////
+        // TODO this is a hack need to get the function working
+
+       
+        
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
-
-		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-		// generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+		
+		if(endNode!=null){
+			if(edges.getMaps().size()>10)
+				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+			else
+				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+			endNode=null;
+		}
+		
+		if(this.isMultipleDestination){
+			generalAlgorithm.setAlgoStrategy(new DijkstraMultipleDestinations());
+			this.isMultipleDestination=false;
+		}
+		else{
+			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		}
 		return result = generalAlgorithm.findPath(edges);
 
+	}
+
+	/**
+	 * Gets the node that corresponding to a given location name
+	 * 
+	 * @param nodeName
+	 *            The name of the location
+	 * @return node corresponding to the location name
+	 */
+	private Node getNodeFromName(String nodeName) {
+
+		// use node name to find the Node we need
+		// search database?
+		return new Node();
+	}
+
+	/**
+	 * This method will decide how many maps will be used in this searching
+	 * based on the source and destination user has inputed.
+	 * 
+	 * @return a list of input matrix that we will need as the input of the
+	 *         algorithm
+	 */
+	private List<InputMatrix> getAlgoMatrix(int startMapId, int endMapId) {
+
+		// Initialize all the matrix
+		// we can initialize it in a much more earlier phase of the system
+		// check the workflow here..
+		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();
+
+		// TODO: find the maps we need from the allMatrixes and return a list of
+		// matrix that we want
+
+		// test only
+		List<InputMatrix> testRes = new ArrayList<InputMatrix>();
+		testRes.add(new InputMatrix());
+		testRes.add(new InputMatrix());
+
+		return testRes;
 	}
 
 }
