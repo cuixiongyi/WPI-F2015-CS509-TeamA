@@ -19,7 +19,7 @@ import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 // TODO: Using proxy pattern to handle all the database connection
-
+@Deprecated
 public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	private Connection conn = null;

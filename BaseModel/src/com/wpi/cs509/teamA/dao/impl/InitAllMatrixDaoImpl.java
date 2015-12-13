@@ -16,6 +16,7 @@ import com.wpi.cs509.teamA.util.ProxyMap;
  * @author CS 509-Team A
  *
  */
+@Deprecated
 public class InitAllMatrixDaoImpl implements InitAllMatrixDao {
 
 	private static InitAllMatrixDaoImpl initAllMatrixImpl;

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.util.Coordinate;
@@ -21,6 +19,12 @@ import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
+/**
+ * This class is intended for exchange node info
+ * 
+ * @author Team A
+ *
+ */
 public class NodeDaoImpl implements NodeDao {
 
 	private Connection conn = null;
@@ -98,7 +102,7 @@ public class NodeDaoImpl implements NodeDao {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		Set<Node> res = new HashSet<Node>();
-		
+
 		try {
 			String selectAllNodes = "SELECT id, name, x, y, map_id, classification FROM routefinder.node where map_id=?;";
 			pstmt = conn.prepareStatement(selectAllNodes);
@@ -309,7 +313,7 @@ public class NodeDaoImpl implements NodeDao {
 
 	@Override
 	public boolean deleteNode(Node node_del) {
-		
+
 		try {
 			// delete maprelations using this node
 			String deleteMRFromDB = "delete from maprelations where node_from=? or node_to=?";
@@ -318,16 +322,16 @@ public class NodeDaoImpl implements NodeDao {
 			pstmt.setInt(2, node_del.getId());
 			pstmt.executeUpdate();
 			conn.commit();
-			
-			//delete relations using this node
+
+			// delete relations using this node
 			String deleteRelationsFromDB = "delete from relations where node_from=? or node_to=?";
 			pstmt = conn.prepareStatement(deleteRelationsFromDB);
 			pstmt.setInt(1, node_del.getId());
 			pstmt.setInt(2, node_del.getId());
 			pstmt.executeUpdate();
 			conn.commit();
-			
-			//delete this node
+
+			// delete this node
 			String deleteNodeFromDB = "delete from node where id=?";
 			pstmt = conn.prepareStatement(deleteNodeFromDB);
 			pstmt.setInt(1, node_del.getId());
@@ -339,7 +343,7 @@ public class NodeDaoImpl implements NodeDao {
 		} finally {
 			JdbcConnect.resultClose(rs, pstmt);
 			JdbcConnect.connClose();
-		}	
+		}
 		return false;
 	}
 
