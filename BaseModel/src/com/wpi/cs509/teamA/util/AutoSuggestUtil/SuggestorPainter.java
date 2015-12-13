@@ -50,15 +50,15 @@ public class SuggestorPainter {
 	private static String historyIconName = "History_Icon.png";
 	private static String locationIconName = "Location_Icon.png";
 	private static String othersIconName = "Others_Icon.png";
-	private static String activityIconName = "Activity_Icon.png";
+	private static String activityIconName = "Activity_Icon.jpg";
 	private static String majorIconName = "Major_Icon.png";
 
-	private static String professorIconFilePath = PaintHelper.getUserDir() + professorIconName;
-	private static String historyIconFilePath = PaintHelper.getUserDir() + historyIconName;
-	private static String locationIconFilePath = PaintHelper.getUserDir() + locationIconName;
-	private static String majorIconFilePath = PaintHelper.getUserDir() + majorIconName;
-	private static String activityIconFilePath = PaintHelper.getUserDir() + activityIconName;
-	private static String othersIconFilePath = PaintHelper.getUserDir() + othersIconName;
+	private static String professorIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + professorIconName;
+	private static String historyIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + historyIconName;
+	private static String locationIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + locationIconName;
+	private static String majorIconFilePath = PaintHelper.getUserDir() +"suggestionicon/" + majorIconName;
+	private static String activityIconFilePath = PaintHelper.getUserDir() +"suggestionicon/" + activityIconName;
+	private static String othersIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + othersIconName;
 
 	private static BufferedImage professorIcon;
 	private static BufferedImage locationIcon;

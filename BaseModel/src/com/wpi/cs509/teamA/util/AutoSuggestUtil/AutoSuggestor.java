@@ -343,19 +343,19 @@ public class AutoSuggestor {
 			addSugestionsPanel(suggestionHistoryPanel);
 			break;
 		case Activity:
-			SuggestionBasicPanel suggestionActivityPanel = new SuggestionLocationPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionActivityPanel = new SuggestionActivityPanel(word, this, nodeInformation);
 			addSugestionsPanel(suggestionActivityPanel);
 			break;
 		case Others:
-			SuggestionBasicPanel suggestionOthersPanel = new SuggestionProfessorPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionOthersPanel = new SuggestionOthersPanel(word, this, nodeInformation);
 			addSugestionsPanel(suggestionOthersPanel);
 			break;
 		case Major:
-			SuggestionBasicPanel suggestionMajorPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionMajorPanel = new SuggestionMajorPanel(word, this, nodeInformation);
 			addSugestionsPanel(suggestionMajorPanel);
 			break;
 		case Labels:
-			SuggestionBasicPanel suggestionLabelPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation);
 			addSugestionsPanel(suggestionLabelPanel);
 			break;
 		

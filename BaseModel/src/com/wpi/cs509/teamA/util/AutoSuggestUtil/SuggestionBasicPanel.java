@@ -26,14 +26,16 @@ public class SuggestionBasicPanel extends JPanel {
 	final JWindow autoSuggestionsPopUpWindow;
 	private final JTextField textField;
 	private final AutoSuggestor autoSuggestor;
-	private Color suggestionsTextColor, suggestionBorderColor,suggestionLineBorderColor;
-	private Dimension preferredSize;
-	private Font font;
+	protected Color suggestionsTextColor;
+	private Color suggestionBorderColor;
+	protected Color suggestionLineBorderColor;
+	protected Dimension preferredSize;
+	protected Font font;
 	private ArrayList<Node> nodeInformation;
-	private BufferedImage imageIcon;
+	protected BufferedImage imageIcon;
 	
 
-	private JLabel textLabel;
+	protected JLabel textLabel;
 
 	public SuggestionBasicPanel(String string, AutoSuggestor autoSuggestor, Node node) {
 		// super(string);
