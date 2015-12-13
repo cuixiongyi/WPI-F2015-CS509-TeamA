@@ -45,6 +45,8 @@ public class AutoSuggestor {
 	private double windowLocationX;
 	private double windowLocationY;
 	private InputPanel inputPanel;
+	private final static int MAXNUMLABEL = 4;
+	
 	private DocumentListener documentListener = new DocumentListener() {
 		@Override
 		public void insertUpdate(DocumentEvent de) {
@@ -340,6 +342,23 @@ public class AutoSuggestor {
 			SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
 			addSugestionsPanel(suggestionHistoryPanel);
 			break;
+		case Activity:
+			SuggestionBasicPanel suggestionActivityPanel = new SuggestionLocationPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionActivityPanel);
+			break;
+		case Others:
+			SuggestionBasicPanel suggestionOthersPanel = new SuggestionProfessorPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionOthersPanel);
+			break;
+		case Major:
+			SuggestionBasicPanel suggestionMajorPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionMajorPanel);
+			break;
+		case Labels:
+			SuggestionBasicPanel suggestionLabelPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			addSugestionsPanel(suggestionLabelPanel);
+			break;
+		
 		}
 
 	}
@@ -451,15 +470,13 @@ public class AutoSuggestor {
 				temp = nodeInfo.getNode_label();
 			}
 			
-			if(i>=10){
+			if(i>=MAXNUMLABEL){
 				continue;
 			}
 			
-			
+
 			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label());
-			if(nodeInfo.getNode_label()==temp){
-				
-			}
+		    
 		
 
 			suggestionAdded = true;
