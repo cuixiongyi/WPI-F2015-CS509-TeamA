@@ -249,7 +249,7 @@ public final class MainModel extends StateContext {
 
 	}
 
-	public synchronized boolean ifLoginAdmin() {
+	public synchronized boolean isLoginAdmin() {
 		return false;
 	}
 

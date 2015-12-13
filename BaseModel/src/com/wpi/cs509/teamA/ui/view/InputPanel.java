@@ -468,4 +468,9 @@ private JButton clearFilter;
 	public JButton getClearFilter() {
 		return clearFilter;
 	}
+	
+	public JButton getAllFilter() 
+	{
+		return allFilter;
+	}
 };
