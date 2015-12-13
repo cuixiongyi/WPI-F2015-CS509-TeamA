@@ -11,6 +11,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 
 public class SuggestionLabelPanel extends SuggestionBasicPanel {
 
@@ -18,38 +19,13 @@ public class SuggestionLabelPanel extends SuggestionBasicPanel {
 		super(string, autoSuggestor, node);
 		
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Labels,this);
+		OtherFeatureDaoImpl nodeList = new OtherFeatureDaoImpl();
+	
+		this.getNodeInformation().addAll(nodeList.getListofNodesWithLabel(this.getName()));
 		// TODO Auto-generated constructor stub
 		this.initComponent();
 	}
-public MouseAdapter mouseClicked(){
-		
-		return new MouseAdapter(){
-			public void mouseClicked(MouseEvent me) {
-				super.mouseClicked(me);
 
-				replaceWithSuggestedText();
-
-				autoSuggestionsPopUpWindow.setVisible(false);
-			}
-		
-		};
-	}
-	
-	private Action keyboardEnter() {
-		return new AbstractAction() {
-			/**
-			 *
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				replaceWithSuggestedText();
-				autoSuggestionsPopUpWindow.setVisible(false);
-			}
-		};
-	}
-	
 	
 	
 

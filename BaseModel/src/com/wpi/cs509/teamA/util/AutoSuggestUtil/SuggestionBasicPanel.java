@@ -47,6 +47,7 @@ public class SuggestionBasicPanel extends JPanel {
 
 		nodeInformation = new ArrayList<Node>();
 		nodeInformation.add(node);
+		
 
 		
 	}
@@ -155,6 +156,20 @@ public class SuggestionBasicPanel extends JPanel {
 	}
 
 
+
+	/**
+	 * @return the nodeInformation
+	 */
+	public ArrayList<Node> getNodeInformation() {
+		return nodeInformation;
+	}
+
+	/**
+	 * @param nodeInformation the nodeInformation to set
+	 */
+	public void setNodeInformation(ArrayList<Node> nodeInformation) {
+		this.nodeInformation = nodeInformation;
+	}
 
 	public void setImageIcon(BufferedImage locationIcon) {
 		this.imageIcon = locationIcon;
