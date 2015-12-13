@@ -18,7 +18,7 @@ public class MarioListRenderer extends DefaultListCellRenderer {
 
         JLabel label = (JLabel) super.getListCellRendererComponent(
                 list, value, index, isSelected, cellHasFocus);
-        label.setIcon(imageMap.get((String) value));
+//        label.setIcon(imageMap.get((String) value));
         label.setHorizontalTextPosition(JLabel.RIGHT);
         label.setFont(font);
         return label;

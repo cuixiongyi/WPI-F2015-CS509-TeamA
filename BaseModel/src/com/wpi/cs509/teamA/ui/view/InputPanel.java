@@ -177,7 +177,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		mapList = new JList<>();
 		mapList.setPreferredSize(new Dimension(250, 450));
 		// mapList.setFixedCellHeight(40);
-		mapList.setCellRenderer(new MyListCellRenderer());
+//		mapList.setCellRenderer(new MyListCellRenderer());
 		searchResultTab.add(mapList);
 		/// for test
 		DefaultListModel model = new DefaultListModel();
