@@ -1,4 +1,5 @@
 package com.wpi.cs509.teamA.strategy.impl;
+
 import com.wpi.cs509.teamA.bean.*;
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +14,11 @@ public class Graph {
 	public Graph(List<Edge> edges) {
 		graph = new HashMap<>(edges.size());
 
-//		for (Edge e : edges)
-//		{
-//			this.edges.add(e);
-//		}
-//		
+		// for (Edge e : edges)
+		// {
+		// this.edges.add(e);
+		// }
+		//
 		// one pass to find all vertices
 		for (Edge e : edges) {
 			if (!graph.containsKey(e.getNode1().getId())) {
@@ -29,22 +30,20 @@ public class Graph {
 		}
 
 		// another pass to set neighboring vertices
-		//must add vertex neighbor when all edges information are collected
+		// must add vertex neighbor when all edges information are collected
 		for (Edge e : edges) {
 			graph.get(e.getNode1().getId()).getNeighborV().put(graph.get(e.getNode2().getId()), e.getDist());
 			graph.get(e.getNode2().getId()).getNeighborV().put(graph.get(e.getNode1().getId()), e.getDist());
 		}
-		
-		//add edges info to nodes for deletions
+
+		// add edges info to nodes for deletions
 	}
 
-	public List<Edge> getEdges()
-	{
+	public List<Edge> getEdges() {
 		return this.edges;
 	}
-	
+
 	public HashMap<Integer, Vertex> getGraph() {
 		return graph;
 	}
 }
-

@@ -16,16 +16,17 @@ public interface UserAccountDao {
 	 * @return a list of user accounts
 	 * 
 	 */
-	public List<UserAccount> getAllUserAccounts();	
-	
+	public List<UserAccount> getAllUserAccounts();
+
 	/**
-	 * get all history for a user and return a HashMap including searching string and count
+	 * get all history for a user and return a HashMap including searching
+	 * string and count
 	 * 
 	 * @return a HashMap<String, Integer>
 	 * 
 	 */
 	public List<History> getAllHistoryForUser(int user_id);
-	
+
 	/**
 	 * insert user account into the database
 	 * 
@@ -33,9 +34,25 @@ public interface UserAccountDao {
 	 * 
 	 */
 	public boolean addAccountToDatabase(UserAccount add_user);
-	
+
+	/**
+	 * 
+	 * @param username
+	 * @return true if user exists, false otherwise
+	 */
 	public boolean checkUserNameInDatabase(String username);
-	
-	public UserAccount loginAuthorization(String username, String password) throws UserAccountNotFoundException,PwdIncorrectException;
-	
+
+	/**
+	 * 
+	 * TODO: Do not throw exception here
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws UserAccountNotFoundException
+	 * @throws PwdIncorrectException
+	 */
+	public UserAccount loginAuthorization(String username, String password)
+			throws UserAccountNotFoundException, PwdIncorrectException;
+
 }

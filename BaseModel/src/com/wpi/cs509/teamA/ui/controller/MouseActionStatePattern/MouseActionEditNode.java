@@ -3,20 +3,13 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
-import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.Dialog.NodeInformationDialog;
-import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by xiongyi on 11/23/15.
- */
 public class MouseActionEditNode extends MouseActionState {
 //	private JToggleButton btnMngNode; 	
 

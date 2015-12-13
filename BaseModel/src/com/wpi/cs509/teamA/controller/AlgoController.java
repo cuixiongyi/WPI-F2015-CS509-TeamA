@@ -77,60 +77,14 @@ public class AlgoController {
 	 */
 	public Stack<Node> getRoute() {
 
-		// we support searching node now only..
-
-		// get the node from database
-		//Node fromNode = Database.getNodeFromName(startNode);    /////////////////
-        // TODO this is a hack need to get the function working
-
-        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),startNode, endNode);
+		allEdges edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), startNode, endNode);
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-
 		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-		//generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+		// generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 		return result = generalAlgorithm.findPath(edges);
 
-	}
-
-	/**
-	 * Gets the node that corresponding to a given location name
-	 * 
-	 * @param nodeName
-	 *            The name of the location
-	 * @return node corresponding to the location name
-	 */
-	private Node getNodeFromName(String nodeName) {
-
-		// use node name to find the Node we need
-		// search database?
-		return new Node();
-	}
-
-	/**
-	 * This method will decide how many maps will be used in this searching
-	 * based on the source and destination user has inputed.
-	 * 
-	 * @return a list of input matrix that we will need as the input of the
-	 *         algorithm
-	 */
-	private List<InputMatrix> getAlgoMatrix(int startMapId, int endMapId) {
-
-		// Initialize all the matrix
-		// we can initialize it in a much more earlier phase of the system
-		// check the workflow here..
-		Map<Integer, InputMatrix> allMatrixes = InitAllMatrixDaoImpl.initAllMatrix().getAllInitializedMatrix();
-
-		// TODO: find the maps we need from the allMatrixes and return a list of
-		// matrix that we want
-
-		// test only
-		List<InputMatrix> testRes = new ArrayList<InputMatrix>();
-		testRes.add(new InputMatrix());
-		testRes.add(new InputMatrix());
-
-		return testRes;
 	}
 
 }

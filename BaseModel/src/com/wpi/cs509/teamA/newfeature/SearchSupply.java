@@ -26,7 +26,7 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 public class SearchSupply{
 	
 	public String getSearchPattern(String searchingStr) {
-	//	searchingStr = searchingStr.replaceAll(" ", "");
+		// searchingStr = searchingStr.replaceAll(" ", "");
 		searchingStr = searchingStr.toLowerCase();
 		String newPattern = "(.*)";
 		for (int i = 0; i < searchingStr.length(); i++) {
@@ -36,33 +36,34 @@ public class SearchSupply{
 		return newPattern;
 	}
 
-	public int updatePriority(String searchingStr,String tempKey, int priority){
+	public int updatePriority(String searchingStr, String tempKey, int priority) {
 		tempKey = tempKey.toLowerCase();
-		String [] searchSplits = searchingStr.toLowerCase().split(" ");
-		for(int i = 0; i < searchSplits.length; i++){
-			if(!tempKey.contains(searchSplits[i].trim())){
+		String[] searchSplits = searchingStr.toLowerCase().split(" ");
+		for (int i = 0; i < searchSplits.length; i++) {
+			if (!tempKey.contains(searchSplits[i].trim())) {
 				priority = 0;
 				return priority;
 			}
 		}
 		return priority;
 	}
-	
-	public ArrayList<NodeForSearch> sortByPriority(Map<NodeForSearch,Integer> searchResultsList){
-	
+
+	public ArrayList<NodeForSearch> sortByPriority(Map<NodeForSearch, Integer> searchResultsList) {
+
 		ArrayList<NodeForSearch> newSortedList = new ArrayList<NodeForSearch>();
-		ArrayList<Entry<NodeForSearch, Integer>> arrayList = 
-				new ArrayList<Entry<NodeForSearch, Integer>>(searchResultsList.entrySet());
-		
+		ArrayList<Entry<NodeForSearch, Integer>> arrayList = new ArrayList<Entry<NodeForSearch, Integer>>(
+				searchResultsList.entrySet());
+
 		Collections.sort(arrayList, new Comparator<Map.Entry<NodeForSearch, Integer>>() {
-		    public int compare(Map.Entry<NodeForSearch, Integer> map1, Map.Entry<NodeForSearch, Integer> map2) {
-		        return (map2.getValue() - map1.getValue());
-		    }
+			public int compare(Map.Entry<NodeForSearch, Integer> map1, Map.Entry<NodeForSearch, Integer> map2) {
+				return (map2.getValue() - map1.getValue());
+			}
 		});
 		for (Entry<NodeForSearch, Integer> entry : arrayList) {
-		//	System.out.println("Entry: "+ entry.getKey().getPriority());
+			// System.out.println("Entry: "+ entry.getKey().getPriority());
 			newSortedList.add(entry.getKey());
-	//		newSortedList.put(entry.getKey().getStringForDisplay(), entry.getKey());
+			// newSortedList.put(entry.getKey().getStringForDisplay(),
+			// entry.getKey());
 		}
 		return newSortedList;
 	}
@@ -108,16 +109,16 @@ public class SearchSupply{
 			// create matcher
 			Matcher m = r.matcher(tempKey.toLowerCase());
 			if (m.find()) {
-		//		System.out.println(tempNode.getStringForSearch());
-				tempNode.setPriority(updatePriority(searchingStr,tempKey,tempNode.getPriority()));
-				searchResultsList.put(tempNode,tempNode.getPriority());
+				// System.out.println(tempNode.getStringForSearch());
+				tempNode.setPriority(updatePriority(searchingStr, tempKey, tempNode.getPriority()));
+				searchResultsList.put(tempNode, tempNode.getPriority());
 			}
 		}
-		ArrayList<NodeForSearch>newsearchResultsList = sortByPriority(searchResultsList);
+		ArrayList<NodeForSearch> newsearchResultsList = sortByPriority(searchResultsList);
 		return newsearchResultsList;
 	}
 
-	
+	// TODO: remove this method
 	public static void main(String[] args) {
 		Database.InitFromDatabase();
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());

@@ -1,11 +1,9 @@
 package com.wpi.cs509.teamA.strategy.impl;
+
 import com.wpi.cs509.teamA.bean.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
-
-
 
 public class Vertex extends Node implements Comparable<Vertex> {
 	private GeneralMap map;
@@ -15,25 +13,26 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	private double gcost;
 
 	private Map<Vertex, Double> neighborV = new HashMap<>();
-	public Vertex(){
-		
+
+	public Vertex() {
+
 	}
-	
+
 	public Vertex(Node node) {
 		this.id = node.getId();
 		this.location = node.getLocation();
-		this.map=node.getMap();;
+		this.map = node.getMap();
+		;
 	}
 
 	public GeneralMap getMap() {
 		return map;
 	}
 
-
 	public void setMap(GeneralMap map) {
 		this.map = map;
 	}
-	
+
 	public double getGcost() {
 		return gcost;
 	}
@@ -41,6 +40,7 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	public void setGcost(double gcost) {
 		this.gcost = gcost;
 	}
+
 	/**
 	 * @return the hcost
 	 */
@@ -49,13 +49,12 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	}
 
 	/**
-	 * @param hcost the hcost to set
+	 * @param hcost
+	 *            the hcost to set
 	 */
 	public void setHcost(double hcost) {
 		this.hcost = hcost;
 	}
-
-
 
 	public int compareTo(Vertex other) {
 		return Double.compare(dist, other.dist);
@@ -90,7 +89,6 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	public void setPrevious(Vertex previous) {
 		this.previous = previous;
 	}
-
 
 	/**
 	 * @return the neighbors
