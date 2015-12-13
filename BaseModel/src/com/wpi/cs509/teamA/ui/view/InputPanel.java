@@ -29,6 +29,7 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
 import com.wpi.cs509.teamA.util.MyListCellRenderer;
 import com.wpi.cs509.teamA.util.NodeIcon;
 import com.wpi.cs509.teamA.util.PaintHelper;
@@ -177,10 +178,10 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		mapList = new JList<>();
 		mapList.setPreferredSize(new Dimension(250, 450));
 		// mapList.setFixedCellHeight(40);
-//		mapList.setCellRenderer(new MyListCellRenderer());
+		mapList.setCellRenderer(new MarioListRenderer());
 		searchResultTab.add(mapList);
 		/// for test
-		DefaultListModel model = new DefaultListModel();
+		DefaultListModel<String> model = new DefaultListModel<>();
 		model.addElement("This is a short textdddddddddd");
 		model.addElement(
 				"This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");

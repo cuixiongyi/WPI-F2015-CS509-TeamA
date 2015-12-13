@@ -1,9 +1,12 @@
 package com.wpi.cs509.teamA.util;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
@@ -18,7 +21,11 @@ public class MarioListRenderer extends DefaultListCellRenderer {
 
         JLabel label = (JLabel) super.getListCellRendererComponent(
                 list, value, index, isSelected, cellHasFocus);
-//        label.setIcon(imageMap.get((String) value));
+        ImageIcon image=new ImageIcon(NodeIcon.getNumIcon(index));
+        label.setIcon(image);
+        if (isSelected) {
+        	label.setBackground(new Color(99,184,255));
+        }
         label.setHorizontalTextPosition(JLabel.RIGHT);
         label.setFont(font);
         return label;
