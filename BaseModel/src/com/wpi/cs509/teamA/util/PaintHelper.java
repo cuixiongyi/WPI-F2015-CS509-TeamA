@@ -101,10 +101,13 @@ public class PaintHelper {
 			paintIcon2(node, g2, image);
 		}
 
-		node = model.getEndNode();
-		if (null != node) {
+		ArrayList<Node> endNodes = model.getEndNode();
+		if (null != endNodes) {
 			BufferedImage image = NodeIcon.getEndIcon();
-			paintIcon2(node, g2, image);
+			for (Node endNode:
+			endNodes) {
+				paintIcon2(endNode, g2, image);
+			}
 
 		}
 

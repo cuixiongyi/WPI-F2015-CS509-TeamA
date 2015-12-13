@@ -23,7 +23,7 @@ public final class MainModel extends StateContext {
 	private List<NodeType> iconFilter = null;
 	private static NodeType[] nodeTypes;
 	private Node startNode;
-	private Node endNode;
+	private ArrayList<Node> endNode = null;
 
 	private Node focusNode = null;
 	private boolean isFirstFocusNode = false;
@@ -42,8 +42,8 @@ public final class MainModel extends StateContext {
 		this.iconFilter = new ArrayList<NodeType>();
 		MainModel.nodeTypes = NodeType.values();
 		addAllFilters();
-		// multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
+		endNode = new ArrayList<Node>();
 
 	}
 
@@ -175,12 +175,20 @@ public final class MainModel extends StateContext {
 
 	}
 
-	public synchronized Node getEndNode() {
+	public synchronized ArrayList<Node> getEndNode() {
 		return endNode;
 	}
 
-	public synchronized void setEndNode(Node endNode) {
-		this.endNode = endNode;
+	public synchronized void setEndNode(Node pendNode) {
+		if (null == this.endNode) {
+			endNode = new ArrayList<Node>();
+		}
+		this.endNode.add(pendNode);
+		modelChanged();
+	}
+
+	public synchronized void clearEndNode() {
+		endNode = new ArrayList<Node>();
 		modelChanged();
 	}
 
