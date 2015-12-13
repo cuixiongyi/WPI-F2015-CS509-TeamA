@@ -26,7 +26,9 @@ public final class MainModel extends StateContext {
 	private Node startNode;
 	private Node endNode;
 
-	private Node focusNode;
+	private Node focusNode = null;
+	private boolean isFirstFocusNode = false;
+	private boolean isFirstChangeMap = false;
 
 	private ArrayList<ArrayList<Node>> multiMapPathListsForEachMap = null;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
@@ -125,6 +127,7 @@ public final class MainModel extends StateContext {
 		}
 		setCurrentMap(node.getMap());
 		this.focusNode = node;
+		isFirstFocusNode = true;
 		modelChanged();
 
 	}
@@ -138,13 +141,18 @@ public final class MainModel extends StateContext {
 		return currentMap;
 	}
 
-	public synchronized void setCurrentMap(GeneralMap currentMap) {
-		this.currentMap = currentMap;
+	public synchronized void setCurrentMap(GeneralMap pCurrentMap) {
+		if (pCurrentMap == this.currentMap) {
+			return;
+		}
+		this.currentMap = pCurrentMap;
+		currentMap.setDisplayScale(1.0f);
+		isFirstChangeMap = true;
 		modelChanged();
 	}
 
 	public synchronized void setCurrentMapID(int mapID) {
-		this.currentMap = Database.getMapEntityFromMapId(mapID);
+		setCurrentMap( Database.getMapEntityFromMapId(mapID));
 		modelChanged();
 	}
 
@@ -163,6 +171,7 @@ public final class MainModel extends StateContext {
 		this.multiMapPathListsForEachMap = null;
 
 		this.startNode = pStartNode;
+		this.setFocusNode(pStartNode);
 		modelChanged();
 
 	}
@@ -229,6 +238,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void setFocusNode(Node focusNode) {
 		this.focusNode = focusNode;
+		isFirstFocusNode = true;
 		modelChanged();
 
 	}
@@ -249,6 +259,21 @@ public final class MainModel extends StateContext {
 
 	}
 
+	public synchronized boolean isFisrtFocusNode() {
+		return this.isFirstFocusNode;
+	}
+
+	public synchronized void setFisrtFocusNode2False() {
+		this.isFirstFocusNode = false;
+	}
+
+	public synchronized boolean isFisrtChangeMap() {
+		return this.isFirstChangeMap;
+	}
+
+	public synchronized void setFisrtChangeMapFalse() {
+		this.isFirstChangeMap = false;
+	}
 	public synchronized boolean isLoginAdmin() {
 		return false;
 	}

@@ -135,7 +135,7 @@ public class UserScreen extends JFrame {
 		
 		popUpPane=new PopupPanel();
 		contentPane.add(popUpPane,new Integer(2));
-		ViewManager.getAC().create(popUpPane, contentPane, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
+		ViewManager.getAC().create(popUpPane, imgComponent, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE, popUpPane.getHeight());
         AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
         AO.switchState(new AnimationStateSlidingUp(AO));
         AO.setSpeed(0.5);
