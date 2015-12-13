@@ -23,7 +23,7 @@ public final class MainModel extends StateContext {
 	private List<NodeType> iconFilter = null;
 	private static NodeType[] nodeTypes;
 	private Node startNode;
-	private ArrayList<Node> endNode = null;
+	private ArrayList<Node> endNode;
 
 	private Node focusNode = null;
 	private boolean isFirstFocusNode = false;
@@ -177,6 +177,8 @@ public final class MainModel extends StateContext {
 	}
 
 	public synchronized ArrayList<Node> getEndNode() {
+		
+		
 		return endNode;
 	}
 
@@ -184,6 +186,7 @@ public final class MainModel extends StateContext {
 		if (null == this.endNode) {
 			endNode = new ArrayList<Node>();
 		}
+		
 		this.endNode.add(pendNode);
 		modelChanged();
 	}

@@ -93,12 +93,13 @@ class ViewControllerImpl extends ViewControllerBase {
 	}
 
 	public void clickSearch() {
-		if (model.getStartNode() == null || model.getEndNode() == null)
+		if (model.getStartNode() == null || model.getEndNode() == null ||model.getEndNode().isEmpty())
 			return;
 		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
+
 
 		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 

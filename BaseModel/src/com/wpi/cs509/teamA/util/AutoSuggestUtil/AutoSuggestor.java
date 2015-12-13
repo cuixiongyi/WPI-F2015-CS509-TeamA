@@ -328,34 +328,35 @@ public class AutoSuggestor {
 
 	}
 
-	protected void addWordToSuggestions(String word, Node nodeInformation, SuggestorEnum suggestorEnum) {
+	protected void addWordToSuggestions(String word, Node nodeInformation, SuggestorEnum suggestorEnum, String displayName) {
 		switch (suggestorEnum) {
 		case Location:
-			SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionLocationPanel);
 			break;
 		case Professor:
-			SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionProfessorPanel);
 			break;
 		case History:
-			SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionHistoryPanel);
 			break;
 		case Activity:
-			SuggestionBasicPanel suggestionActivityPanel = new SuggestionActivityPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionActivityPanel = new SuggestionActivityPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionActivityPanel);
 			break;
 		case Others:
-			SuggestionBasicPanel suggestionOthersPanel = new SuggestionOthersPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionOthersPanel = new SuggestionOthersPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionOthersPanel);
 			break;
 		case Major:
-			SuggestionBasicPanel suggestionMajorPanel = new SuggestionMajorPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionMajorPanel = new SuggestionMajorPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionMajorPanel);
 			break;
 		case Labels:
-			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation, displayName);
+			
 			addSugestionsPanel(suggestionLabelPanel);
 			break;
 		
@@ -479,8 +480,8 @@ public class AutoSuggestor {
 			}
 			
 
-			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label());
-		    
+			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label(), nodeInfo.getStringForDisplay());
+			
 		
 
 			suggestionAdded = true;

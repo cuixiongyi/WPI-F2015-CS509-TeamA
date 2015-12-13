@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -22,14 +23,16 @@ import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 
 public class SuggestionLabelPanel extends SuggestionBasicPanel {
 
-	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node) {
+	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName) {
 		super(string, autoSuggestor, node);
 		
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Labels,this);
 		OtherFeatureDaoImpl nodeList = new OtherFeatureDaoImpl();
+		System.out.println(nodeList);
 		
-	
-		this.getNodeInformation().addAll(nodeList.getListofNodesWithLabel(this.getName()));
+	   ArrayList<Node> labelResult = (ArrayList<Node>) nodeList.getListofNodesWithLabel(displayName);
+	   
+		this.setNodeInformation(labelResult);
 		// TODO Auto-generated constructor stub
 		this.initComponent();
 	}

@@ -8,7 +8,7 @@ import com.wpi.cs509.teamA.bean.Node;
 
 public class SuggestionActivityPanel extends SuggestionBasicPanel {
 
-	public SuggestionActivityPanel(String string, AutoSuggestor autoSuggestor, Node node) {
+	public SuggestionActivityPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName) {
 		super(string, autoSuggestor, node);
 		
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Activity,this);

@@ -8,7 +8,7 @@ import com.wpi.cs509.teamA.bean.Node;
 
 public class SuggestionHistoryPanel extends SuggestionBasicPanel {
 
-	public SuggestionHistoryPanel(String string, AutoSuggestor autoSuggestor, Node node) {
+	public SuggestionHistoryPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName) {
 		super(string, autoSuggestor, node);
 		
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.History,this);

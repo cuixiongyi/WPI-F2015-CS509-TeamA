@@ -8,7 +8,7 @@ import com.wpi.cs509.teamA.bean.Node;
 
 public class SuggestionMajorPanel extends SuggestionBasicPanel {
 
-	public SuggestionMajorPanel(String string, AutoSuggestor autoSuggestor, Node node) {
+	public SuggestionMajorPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName) {
 		super(string, autoSuggestor, node);
 		
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Major,this);
