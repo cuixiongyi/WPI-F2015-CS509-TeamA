@@ -86,7 +86,9 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			while (resultSet.next()) {
 				res.add(new History(resultSet.getString("searchString"),
 						resultSet.getInt("nodeid"), resultSet.getInt("count")));
+			//	System.out.println("History get:"+resultSet.getString("searchString"));
 			}
+			return res;
 		} catch (SQLException se) {
 			System.out.println("fail to connect database..");
 			se.printStackTrace();

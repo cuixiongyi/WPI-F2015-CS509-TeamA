@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class UserAccount {
 		this.email = "";
 		this.password = "";
 		this.isAdmin = false;
-
+		this.history = new ArrayList<History>();
 	}
 
 	/**
@@ -105,6 +106,7 @@ public class UserAccount {
 
 	public void setHistory(List<History> history) {
 		this.history = history;
+	//	System.out.println("H: "+history.size());
 	}
 
 	public String getEmail() {

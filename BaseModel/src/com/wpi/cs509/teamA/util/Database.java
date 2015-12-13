@@ -99,8 +99,8 @@ public class Database {
 		allMapEdgesHL = nrd2.getAllMapEdges();
 
 		// get all user accounts from database
-		UserAccountDao uad = new UserAccountDaoImpl();
-		allUsersDataHL = uad.getAllUserAccounts();
+	//	UserAccountDao uad = new UserAccountDaoImpl();
+	//	allUsersDataHL = uad.getAllUserAccounts();
 
 		// get all professors from database
 		ProfessorDao pd = new ProfessorDaoImpl();
