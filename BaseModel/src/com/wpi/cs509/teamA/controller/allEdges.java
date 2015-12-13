@@ -32,9 +32,8 @@ public class allEdges {
 		this.mapEdges=mapEdges;
 		this.startNode=startNode;
 		this.end=end;
-		if(end.length==1){
-			endNode=end[0];
-		}
+		this.endNode=null;
+		
 	}
 	
 	public void init(){
@@ -45,6 +44,12 @@ public class allEdges {
 		this.edgesOnMap=new HashMap<Integer,List<Edge>>();
 	}
 	
+	public boolean isNormal(){
+		if(this.endNode==null){
+			return false;
+		}
+		return true;
+	}
 	
 	public boolean isMultipleMap(){
 		if(startNode.getMap()==endNode.getMap())
