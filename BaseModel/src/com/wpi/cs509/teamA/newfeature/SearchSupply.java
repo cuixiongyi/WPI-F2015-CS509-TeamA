@@ -18,14 +18,17 @@ import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeName;
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.dao.OtherFeatureDao;
+import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
 public class SearchSupply{
 	
 	public String getSearchPattern(String searchingStr) {
-	//	searchingStr = searchingStr.replaceAll(" ", "");
+		// searchingStr = searchingStr.replaceAll(" ", "");
 		searchingStr = searchingStr.toLowerCase();
 		String newPattern = "(.*)";
 		for (int i = 0; i < searchingStr.length(); i++) {
@@ -35,31 +38,34 @@ public class SearchSupply{
 		return newPattern;
 	}
 
-	public int updatePriority(String searchingStr,String tempKey, int priority){
+	public int updatePriority(String searchingStr, String tempKey, int priority) {
 		tempKey = tempKey.toLowerCase();
-		String [] searchSplits = searchingStr.toLowerCase().split(" ");
-		for(int i = 0; i < searchSplits.length; i++){
-			if(!tempKey.contains(searchSplits[i].trim())){
+		String[] searchSplits = searchingStr.toLowerCase().split(" ");
+		for (int i = 0; i < searchSplits.length; i++) {
+			if (!tempKey.contains(searchSplits[i].trim())) {
 				priority = 0;
 				return priority;
 			}
 		}
 		return priority;
 	}
-	
-	public Map<String, NodeForSearch> sortByPriority(Map<NodeForSearch,Integer> searchResultsList){
-	//	System.out.println(searchResultsList.size());
-		Map<String, NodeForSearch> newSortedList = new HashMap<String, NodeForSearch>();
-		ArrayList<Entry<NodeForSearch, Integer>> arrayList = 
-				new ArrayList<Entry<NodeForSearch, Integer>>(searchResultsList.entrySet());
-		
+
+	public ArrayList<NodeForSearch> sortByPriority(Map<NodeForSearch, Integer> searchResultsList) {
+
+		ArrayList<NodeForSearch> newSortedList = new ArrayList<NodeForSearch>();
+		ArrayList<Entry<NodeForSearch, Integer>> arrayList = new ArrayList<Entry<NodeForSearch, Integer>>(
+				searchResultsList.entrySet());
+
 		Collections.sort(arrayList, new Comparator<Map.Entry<NodeForSearch, Integer>>() {
-		    public int compare(Map.Entry<NodeForSearch, Integer> map1, Map.Entry<NodeForSearch, Integer> map2) {
-		        return (map2.getValue() - map1.getValue());
-		    }
+			public int compare(Map.Entry<NodeForSearch, Integer> map1, Map.Entry<NodeForSearch, Integer> map2) {
+				return (map2.getValue() - map1.getValue());
+			}
 		});
 		for (Entry<NodeForSearch, Integer> entry : arrayList) {
-			newSortedList.put(entry.getKey().getStringForDisplay(), entry.getKey());
+			// System.out.println("Entry: "+ entry.getKey().getPriority());
+			newSortedList.add(entry.getKey());
+			// newSortedList.put(entry.getKey().getStringForDisplay(),
+			// entry.getKey());
 		}
 		return newSortedList;
 	}
@@ -67,7 +73,14 @@ public class SearchSupply{
 	public Map<String,NodeForSearch> getAllInformationForSearch(){
 		Map<String,NodeForSearch> allFromDatabase = Database.getAllNodesForSearch();
 	//	System.out.println(allFromDatabase.size());
-/*		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		// get User Account
+		
+		if(MainModel.getStaticModel().getMyAccount()==null){
+			return allFromDatabase;
+		}
+		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		System.out.println("User information: "+ currentUser.getEmail());
+		System.out.println("History size: "+currentUser.getHistory().size());
 		Iterator<History> iter = currentUser.getHistory().iterator();
 		while (iter.hasNext()) {
 			History tempHistory = iter.next();
@@ -80,11 +93,11 @@ public class SearchSupply{
 					nodeNameComplete, nodeNameAbbr,
 					SuggestorEnum.History);
 			allFromDatabase.put(nodeNameComplete, tempNodeForSearch);
-		}*/
+		}
 		return allFromDatabase;
 	}
 	
-	public Map<String, NodeForSearch> getSearchSupply(String searchingStr) {
+	public ArrayList<NodeForSearch> getSearchSupply(String searchingStr) {
 
 		Map<NodeForSearch,Integer> searchResultsList = new HashMap<NodeForSearch,Integer>();;
 		String newPattern = getSearchPattern(searchingStr);
@@ -98,24 +111,32 @@ public class SearchSupply{
 			// create matcher
 			Matcher m = r.matcher(tempKey.toLowerCase());
 			if (m.find()) {
-		//		System.out.println(tempNode.getStringForSearch());
-				tempNode.setPriority(updatePriority(searchingStr,tempKey,tempNode.getPriority()));
-				searchResultsList.put(tempNode,tempNode.getPriority());
+				// System.out.println(tempNode.getStringForSearch());
+				tempNode.setPriority(updatePriority(searchingStr, tempKey, tempNode.getPriority()));
+				searchResultsList.put(tempNode, tempNode.getPriority());
 			}
 		}
-		Map<String,NodeForSearch>newsearchResultsList = sortByPriority(searchResultsList);
+		ArrayList<NodeForSearch> newsearchResultsList = sortByPriority(searchResultsList);
 		return newsearchResultsList;
 	}
 
-	
+	// TODO: remove this method
 	public static void main(String[] args) {
 		Database.InitFromDatabase();
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
+	/*	MainModel.setStaticModel(new MainModel());
+				MainModel.getStaticModel().switchToState((new MouseActionSelectNode(MainModel.getStaticModel())));
+        
 		SearchSupply ss = new SearchSupply();
-		Map<String,NodeForSearch> getSS = ss.getSearchSupply("p");
-		for (String key : getSS.keySet()) {  
-		    System.out.println("Key = " + key);  
+		
+		ArrayList<NodeForSearch> getSS = ss.getSearchSupply("p");
+		for (NodeForSearch entry : getSS) {
+		    System.out.println("Key = " + entry.getStringForDisplay()+" ,Priority = " + entry.getPriority());  
 		}  
+		OtherFeatureDao testFeature= new OtherFeatureDaoImpl();
+		for ( Node n : testFeature.getListofNodesWithLabel("pizza")){
+			System.out.println(n.getName());
+		}*/
 	}
 }

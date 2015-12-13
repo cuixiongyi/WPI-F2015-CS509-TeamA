@@ -29,10 +29,13 @@ import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
 import com.wpi.cs509.teamA.util.MyListCellRenderer;
 import com.wpi.cs509.teamA.util.NodeIcon;
 import com.wpi.cs509.teamA.util.PaintHelper;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
+
+
 
 /**
  * JPanel that have input text fields and buttons which will be shown on the top
@@ -45,21 +48,32 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
  */
 @SuppressWarnings("serial")
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
-	private MainModel model = null;
+    private MainModel model = null;
 
-	private JButton btnSearch;
-	private JButton adminLogin;
-	private JButton signUp;
-	private JLabel lblFrom;
-	private JLabel lblTo;
-	private JButton btnNeighborManage;
-	private JButton btnSynchronize;
-	private JButton classroomFilter;
-	private JButton officeFilter;
-	private JButton restroomFilter;
-	private JButton labFilter;
-	private JButton parkingFilter;
-	private JComboBox<String> comboBoxMap;
+    private JButton btnSearch;
+    private JButton adminLogin;
+    private JButton signUp;
+    private JLabel lblFrom;
+    private JLabel lblTo;
+    private JButton btnNeighborManage;
+    private JButton btnSynchronize;
+    private JButton classroomFilter;
+    private JButton officeFilter;
+    private JButton restroomFilter;
+    private JButton labFilter;
+    private JButton parkingFilter;
+    private JButton openMap;
+	private JButton allFilter;
+	private JButton clearFilter;
+
+	private JToggleButton btnMngNode;
+	private JToggleButton btnMngEdge;
+
+	private static int numNodeBtn;
+	private static int numEdgeBtn;
+
+    private JFileChooser fc;
+    private JComboBox<String> comboBoxMap;
 
 	private UserScreen userScreen;
 	private AutoSuggestor autoSuggestorFrom;
@@ -164,10 +178,10 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		mapList = new JList<>();
 		mapList.setPreferredSize(new Dimension(250, 450));
 		// mapList.setFixedCellHeight(40);
-		mapList.setCellRenderer(new MyListCellRenderer());
+		mapList.setCellRenderer(new MarioListRenderer());
 		searchResultTab.add(mapList);
 		/// for test
-		DefaultListModel model = new DefaultListModel();
+		DefaultListModel<String> model = new DefaultListModel<>();
 		model.addElement("This is a short textdddddddddd");
 		model.addElement(
 				"This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
@@ -176,18 +190,22 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 				// mapList.setModel(model);
 
 		// tab panel-filter
+		this.clearFilter = new JButton("ALL");
 		this.classroomFilter = new JButton("Classrooms", new ImageIcon(NodeIcon.getClassroomIcon()));
 		this.officeFilter = new JButton("Offices", new ImageIcon(NodeIcon.getOfficeIcon()));
 		this.restroomFilter = new JButton("Restrooms", new ImageIcon(NodeIcon.getRestroomIcon()));
 		this.labFilter = new JButton("Labs", new ImageIcon(NodeIcon.getLabIcon()));
 		this.parkingFilter = new JButton("Parking", new ImageIcon(NodeIcon.getParkingIcon()));
+		this.allFilter = new JButton("CLEAR");
 
 		ArrayList<JButton> filterButtons = new ArrayList<JButton>();
+		filterButtons.add(clearFilter);
 		filterButtons.add(classroomFilter);
 		filterButtons.add(officeFilter);
 		filterButtons.add(restroomFilter);
 		filterButtons.add(labFilter);
 		filterButtons.add(parkingFilter);
+		filterButtons.add(allFilter);
 
 		int filterIconWidth = 255;
 		int filterIconHeight = 50;
@@ -199,13 +217,20 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		for (JButton button : filterButtons) {
 			button.setBounds(filterXpos, filterYpos, filterIconWidth, filterIconHeight);
-			button.setHorizontalAlignment(SwingConstants.LEFT);
-			if (button.equals(officeFilter)) {
-				button.setIconTextGap(iconTextGap - 5);
-			} else if (button.equals(classroomFilter)) {
-				button.setIconTextGap(iconTextGap - 2);
-			} else {
-				button.setIconTextGap(iconTextGap);
+			// set alignment for buttons without icons
+			if (button.equals(clearFilter) || button.equals(allFilter)) {
+				button.setHorizontalAlignment(SwingConstants.CENTER);
+			}
+			// set alignment for buttons with icons
+			else {
+				button.setHorizontalAlignment(SwingConstants.LEFT);
+				if (button.equals(officeFilter)) {
+					button.setIconTextGap(iconTextGap - 5);
+				} else if (button.equals(classroomFilter)) {
+					button.setIconTextGap(iconTextGap - 2);
+				} else {
+					button.setIconTextGap(iconTextGap);
+				}
 			}
 			button.setFont(buttonFont);
 			filterYpos += filterYspacing + filterIconHeight;
@@ -213,19 +238,41 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		}
 
 		// tab panel-admin tool
-		this.btnNeighborManage = new JButton("Edges");
-		btnNeighborManage.setSize(75, 30);
-		// btnNeighborManage.setLocation(80, 380);
+		
+		
 
-		// this.btnNeighborManage.setVisible(false);
-		adminTab.add(btnNeighborManage);
+		openMap=new JButton("OpenMap");
+//		adminTab.add(openMap);
+//		openMap.setFont(buttonFont);
+		
+		btnMngNode = new JToggleButton("Manage Node");
+//		adminTab.add(btnMngNode);
+//		btnMngNode.setFont(buttonFont);
 
-		btnSynchronize = new JButton("Sync");
-		btnSynchronize.addActionListener(this);
-		// btnSynchronize.setVisible(false);
-		btnSynchronize.setBounds(155, 280, 75, 30);
-		adminTab.add(btnSynchronize);
-
+		btnMngEdge = new JToggleButton("Manage Edge");
+//		btnMngEdge.setFont(buttonFont);
+//		adminTab.add(btnMngEdge);
+		
+		ArrayList<AbstractButton> adminButtons = new ArrayList<AbstractButton>();
+		adminButtons.add(openMap);
+		adminButtons.add(btnMngNode);
+		adminButtons.add(btnMngEdge);
+		
+		int adminIconWidth = 255;
+		int adminIconHeight = 50;
+		int adminYspacing = 10;
+		int adminXpos = 15;
+		int adminYpos = 10;
+		
+		for (AbstractButton button : adminButtons)
+		{
+			button.setBounds(adminXpos, adminYpos, adminIconWidth, adminIconHeight);
+			button.setFont(buttonFont);
+			adminYpos += adminYspacing + adminIconHeight;
+			adminTab.add(button);
+		}
+		
+		
 		BufferedImage logo;
 		try {
 			logo = ImageIO.read(new File(PaintHelper.getUserDir() + "logo_iteration1.png"));
@@ -238,23 +285,17 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 			e.printStackTrace();
 		}
 
+		numNodeBtn = 0;
+		numEdgeBtn = 0;
+
+		
+
 		// result list
 
 	}
 
 	public void focusLost(FocusEvent e) {
-		if (e.getSource() == txtFrom || e.getSource() == txtTo) {
-			if (((JTextField) e.getSource()).getText().trim().equals("")) {
-				// lastSetSearchWord = true;
-				// lastSetEmptySearchWord = false;
-				((JTextField) e.getSource()).setText(UIConstant.SEARCHWORD);
-			}
-
-		} else if (e.getSource() == comboBoxMap) {
-			this.autoSuggestorFrom.getAutoSuggestionPopUpWindow().setVisible(false);
-			this.autoSuggestorTo.getAutoSuggestionPopUpWindow().setVisible(false);
-
-		}
+	
 	}
 
 	private void processTextField(JTextField txt) {
@@ -303,12 +344,17 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		if (e.getSource() == getBtnSearch()) {
 
 		}
+	
 
 	}
+	
 
+	
 	public void incrementAdminClicked() {
 		this.adminClicked++;
 	}
+
+
 
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
@@ -437,4 +483,31 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		return parkingFilter;
 	}
 
+	public JButton getOpenMap() {
+		return openMap;
+	}
+
+	public void setOpenMap(JButton openMap) {
+		this.openMap = openMap;
+	}
+
+	public JButton getClearFilter() {
+		return clearFilter;
+	}
+
+	
+	public JButton getAllFilter() 
+	{
+		return allFilter;
+
+	}
+
+	public JToggleButton getBtnMngNode() {
+		return btnMngNode;
+	}
+
+	public JToggleButton getBtnMngEdge() {
+		return btnMngEdge;
+
+	}
 };

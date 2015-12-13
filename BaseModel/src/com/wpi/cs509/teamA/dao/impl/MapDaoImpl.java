@@ -5,17 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.MapDao;
-import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.JdbcConnect;
-import com.wpi.cs509.teamA.util.NodeType;
-import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 public class MapDaoImpl implements MapDao {
 	private Connection conn = null;
@@ -81,5 +74,26 @@ public class MapDaoImpl implements MapDao {
 			JdbcConnect.connClose();
 		}
 		return null;
+	}
+
+	@Override
+	public void saveMap(String mapName, String mapAbbrName,String mapPathName, double mapScale) {
+		// TODO Auto-generated method stub
+		try {
+			String insertMapToDB = "INSERT INTO routefinder.map (name, image_name, scale, map_abbr) VALUES (?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(insertMapToDB);
+			pstmt.setString(1, mapName);
+			pstmt.setString(2, mapPathName );
+			pstmt.setDouble(3, mapScale);
+			pstmt.setString(4, mapAbbrName);
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}
 	}
 }

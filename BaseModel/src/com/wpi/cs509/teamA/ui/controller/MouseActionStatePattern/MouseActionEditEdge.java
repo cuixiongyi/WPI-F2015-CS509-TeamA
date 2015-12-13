@@ -6,7 +6,6 @@ import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
-import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
@@ -16,9 +15,6 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
-/**
- * Created by xiongyi on 11/23/15.
- */
 public class MouseActionEditEdge  extends MouseActionState {
 
     private JButton btnNeighborManage;

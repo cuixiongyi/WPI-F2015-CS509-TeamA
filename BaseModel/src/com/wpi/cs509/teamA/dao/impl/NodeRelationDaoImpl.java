@@ -19,7 +19,6 @@ import com.wpi.cs509.teamA.util.JdbcConnect;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 // TODO: Using proxy pattern to handle all the database connection
-
 public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	private Connection conn = null;
@@ -209,7 +208,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 
 		return null;
 	}
-	
+
 	@Override
 	public List<Edge> getAllEdges() {
 		// TODO Auto-generated method stub
@@ -324,11 +323,10 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 					JdbcConnect.resultClose(rs, pstmt);
 					JdbcConnect.connClose();
 				}
-			}
-			else{
-				//insert edge for map relations(among different maps)
+			} else {
+				// insert edge for map relations(among different maps)
 				double distance = 0;
-				if((n1.getMap().getMapId()==1)||(n1.getMap().getMapId()==1))
+				if ((n1.getMap().getMapId() == 1) || (n1.getMap().getMapId() == 1))
 					distance = 0;
 				else
 					distance = 10;

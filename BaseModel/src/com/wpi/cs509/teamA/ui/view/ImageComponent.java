@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.util.PaintHelper;
@@ -94,10 +95,20 @@ public class ImageComponent extends JComponent {
 		// no need to paint the image again
 	 
 		Graphics2D g2 = (Graphics2D) g;
+		if (model.isFisrtChangeMap()) {
+			this.setImageXpos(0);
+			this.setImageYpos(0);
+			model.getCurrentMap().setDisplayScale(1.0f);
+
+		}
+		if (model.isFisrtFocusNode()) {
+			Node node = model.getFocusNode();
+			this.setImageXpos(this.getWidth()/2 - (int)(node.getLocation().getX()*model.getCurrentMap().getDisplayScale()));
+			this.setImageYpos(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getCurrentMap().getDisplayScale()));
+		}
 		PaintHelper.paintEverything(g2, map, image,scale);
-	
-	
-		
+
+
 		/// CXY test
 		// GeneralMap tmp = stateContext.getCurrentMap();
 		// List<Node> nodes = tmp.getNodes();
@@ -117,40 +128,9 @@ public class ImageComponent extends JComponent {
         
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
+		model.setFisrtFocusNode2False();
+		model.setFisrtChangeMapFalse();
 
-/*
-
-		if (pathNodeList != null && pathNodeList.get(0).getMapId() == UIDataBuffer.getCurrentMapId()) {
-			// paint the route
-			if (pathNodeList != null && pathNodeList.size() != 0) {
-				for (int i = 0; i < pathNodeList.size() - 1; i++) {
-					int xstart, ystart, xend, yend;
-					xstart = pathNodeList.get(i).getLocation().getX();
-					ystart = pathNodeList.get(i).getLocation().getY();
-
-					xend = pathNodeList.get(i + 1).getLocation().getX();
-					yend = pathNodeList.get(i + 1).getLocation().getY();
-
-					g2.setStroke(new BasicStroke(5));
-					g2.draw(new Line2D.Float(xstart, ystart, xend, yend));
-					// System.out.println("draw line.." + xstart + " " + ystart
-					// + "
-					// " + xend + " " + yend);
-				}
-			}
-			int sourceX = pathNodeList.get(0).getLocation().getX();
-			int sourceY = pathNodeList.get(0).getLocation().getY();
-
-			int desX = pathNodeList.get(pathNodeList.size() - 1).getLocation().getX();
-			int desY = pathNodeList.get(pathNodeList.size() - 1).getLocation().getY();
-			
-			
-			
-
-			
-		}
-*/
-		
 		g2 = null;
 
 	}

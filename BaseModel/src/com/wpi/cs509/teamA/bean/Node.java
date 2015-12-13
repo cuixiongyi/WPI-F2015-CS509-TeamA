@@ -1,13 +1,10 @@
 package com.wpi.cs509.teamA.bean;
+
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.*;
 import java.util.HashSet;
 import java.util.Set;
-
-
-
-
 
 /**
  * Node definition. This class represents the smallest unit of a map. It include
@@ -31,37 +28,23 @@ public class Node {
 	/** define which map the node belongs to */
 	protected GeneralMap map;
 
-	// neighbor node id and distance
-	// private Map<String, Integer> neighbors;
 	/** neighbor node */
-	//
-	//private Set<Node> neighbors = new HashSet<Node>();
-	private Set<Edge>neighborE=new HashSet<Edge>();
-	
-	
+	private Set<Edge> neighborE = new HashSet<Edge>();
+
 	/** type of the node */
-	// this may cause great complex when input data
 	private NodeType nodeType;
 
-    /** Display coordinate on map image */
-    private Coordinate displayCoor;
+	/** Display coordinate on map image */
+	private Coordinate displayCoor;
 
 	/** default constructor */
 	public Node() {
 
 	}
 
-	// TODO: We may remove this method in the future, for now it is just for
-	// testing..
-//	public Node(int id, int x, int y) {
-//		this.id = id;
-//		this.location = new Coordinate(x,y);
-//	}
-	// TODO: We may remove this method in the future, for now it is just for
-	// testing..
 	public Node(int id, int x, int y, GeneralMap mapId) {
 		this.id = id;
-		this.location = new Coordinate(x,y);
+		this.location = new Coordinate(x, y);
 		this.map = mapId;
 	}
 
@@ -85,34 +68,18 @@ public class Node {
 		this.location = new Coordinate(x, y);
 		this.map = map;
 		this.nodeType = NodeType.valueOf(nodeType);
-        this.displayCoor = new Coordinate(x, y);
+		this.displayCoor = new Coordinate(x, y);
 	}
 
-
-	// add neighbors to the node
 	/** add neighbors to the node */
 	public void addNeighbour(String nodeId) {
 
 	}
 
-	// delete the node itself
-	// it will also delete this node from all its neighbours
 	/**
 	 * delete the node itself and also delte this node from all its neighbors
 	 */
 	public void deleteNode() {
-		// deleteFromNeighbour
-		// this.deleteFromNeighbour(this.id);
-
-	}
-
-	/**
-	 * delete the node from one of it's neighbor
-	 * 
-	 * @param nodeId
-	 *            the neighbor id
-	 */
-	private void deleteFromNeighbour(String nodeId) {
 
 	}
 
@@ -187,10 +154,11 @@ public class Node {
 	 * @param neighbors
 	 *            the neighbors to set
 	 */
-	public void setNeighborE(Set<Edge>neighbors) {
+	public void setNeighborE(Set<Edge> neighbors) {
 		this.neighborE = neighbors;
 	}
-	public void addNeighborE(Edge e){
+
+	public void addNeighborE(Edge e) {
 		this.neighborE.add(e);
 	}
 
@@ -209,7 +177,8 @@ public class Node {
 		this.nodeType = nodeType;
 	}
 
-	public double DistanceTo(Node a){
-		return this.getMap().getScale()*Math.sqrt(Math.pow(a.getLocation().getX()-this.getLocation().getX(),2)+Math.pow(a.getLocation().getY()-this.getLocation().getY(),2));
+	public double DistanceTo(Node a) {
+		return this.getMap().getScale() * Math.sqrt(Math.pow(a.getLocation().getX() - this.getLocation().getX(), 2)
+				+ Math.pow(a.getLocation().getY() - this.getLocation().getY(), 2));
 	}
-}	
+}

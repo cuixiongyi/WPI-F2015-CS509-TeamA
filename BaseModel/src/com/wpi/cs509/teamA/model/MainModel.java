@@ -1,6 +1,5 @@
 package com.wpi.cs509.teamA.model;
 
-import com.sun.org.apache.bcel.internal.generic.DADD;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
@@ -13,30 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by cuixi on 12/3/2015.
+ * 
  */
 public final class MainModel extends StateContext {
 
-public static MainModel staticModel = null;
-	
+	public static MainModel staticModel = null;
+
 	private UserAccount myAccount;
 	private GeneralMap currentMap = null;
 	private List<NodeType> iconFilter = null;
+	private static NodeType[] nodeTypes;
 	private Node startNode;
 	private Node endNode;
 
-	private Node focusNode;
+	private Node focusNode = null;
+	private boolean isFirstFocusNode = false;
+	private boolean isFirstChangeMap = false;
 
 	private ArrayList<ArrayList<Node>> multiMapPathListsForEachMap = null;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	private ArrayList<GeneralMap> multiMapLists = null;
-
-	/**
-	 * if filterNodeType[i] == 1 then display that type of node
-	 * filterNodeType[i] == 0 don't display
-	 */
-	private List<Integer> filterNodeType;
 
 	public MainModel() {
 
@@ -44,6 +40,8 @@ public static MainModel staticModel = null;
 		myAccount = null;
 		this.currentMap = null;
 		this.iconFilter = new ArrayList<NodeType>();
+		MainModel.nodeTypes = NodeType.values();
+		addAllFilters();
 		// multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 
@@ -55,13 +53,24 @@ public static MainModel staticModel = null;
 		} else {
 			iconFilter.remove(filter);
 		}
+		modelChanged();
 	}
 
-	public synchronized void clearFilters()
-	{
+	// Cooresponds to "ALL" filter on the UI
+	public synchronized void clearFilters() {
 		iconFilter.clear();
 	}
-	
+
+	// Cooresponds to "CLEAR" filter on the UI
+	public synchronized void addAllFilters() {
+		for (NodeType type : nodeTypes) {
+			if (!iconFilter.contains(type)) {
+				iconFilter.add(type);
+			}
+		}
+		modelChanged();
+	}
+
 	public synchronized boolean hasFilter(NodeType filter) {
 		if (iconFilter.contains(filter)) {
 			return true;
@@ -79,7 +88,8 @@ public static MainModel staticModel = null;
 	}
 
 	public synchronized ArrayList<Node> getRouteOnCurrentMap() {
-		// ArrayList<ArrayList<Node>> multiMapPath = getMultiMapPathListsForEachMap();
+		// ArrayList<ArrayList<Node>> multiMapPath =
+		// getMultiMapPathListsForEachMap();
 		// if (null != multiMapPath && 0 != multiMapPath.size()) {
 		// int idx = getCurrentMapID()-1;
 		// return multiMapPath.get(idx);
@@ -116,6 +126,7 @@ public static MainModel staticModel = null;
 		}
 		setCurrentMap(node.getMap());
 		this.focusNode = node;
+		isFirstFocusNode = true;
 		modelChanged();
 
 	}
@@ -129,13 +140,18 @@ public static MainModel staticModel = null;
 		return currentMap;
 	}
 
-	public synchronized void setCurrentMap(GeneralMap currentMap) {
-		this.currentMap = currentMap;
+	public synchronized void setCurrentMap(GeneralMap pCurrentMap) {
+		if (pCurrentMap == this.currentMap) {
+			return;
+		}
+		this.currentMap = pCurrentMap;
+		currentMap.setDisplayScale(1.0f);
+		isFirstChangeMap = true;
 		modelChanged();
 	}
 
 	public synchronized void setCurrentMapID(int mapID) {
-		this.currentMap = Database.getMapEntityFromMapId(mapID);
+		setCurrentMap( Database.getMapEntityFromMapId(mapID));
 		modelChanged();
 	}
 
@@ -154,6 +170,7 @@ public static MainModel staticModel = null;
 		this.multiMapPathListsForEachMap = null;
 
 		this.startNode = pStartNode;
+		this.setFocusNode(pStartNode);
 		modelChanged();
 
 	}
@@ -193,16 +210,6 @@ public static MainModel staticModel = null;
 		modelChanged();
 	}
 
-	public synchronized List<Integer> getFilterNodeType() {
-		return filterNodeType;
-	}
-
-	public synchronized void setFilterNodeType(List<Integer> filterNodeType) {
-		this.filterNodeType = filterNodeType;
-		modelChanged();
-
-	}
-
 	public synchronized void saveNode(Node node) {
 		NodeDao nd = new NodeDaoImpl();
 		nd.saveNode(node);
@@ -228,19 +235,20 @@ public static MainModel staticModel = null;
 		this.multiMapPathLists = multiMapPathLists;
 	}
 
-public synchronized void setFocusNode(Node focusNode) {
+	public synchronized void setFocusNode(Node focusNode) {
 		this.focusNode = focusNode;
+		isFirstFocusNode = true;
 		modelChanged();
 
 	}
 
 	public synchronized ArrayList<GeneralMap> getMultiMapLists() {
-		if(multiMapLists==null){
+		if (multiMapLists == null) {
 			ArrayList<GeneralMap> result = new ArrayList<GeneralMap>();
 			result.add(this.getCurrentMap());
 			return result;
 		}
-		
+
 		return multiMapLists;
 	}
 
@@ -250,15 +258,31 @@ public synchronized void setFocusNode(Node focusNode) {
 
 	}
 
-	public synchronized boolean ifLoginAdmin() {
+	public synchronized boolean isFisrtFocusNode() {
+		return this.isFirstFocusNode;
+	}
+
+	public synchronized void setFisrtFocusNode2False() {
+		this.isFirstFocusNode = false;
+	}
+
+	public synchronized boolean isFisrtChangeMap() {
+		return this.isFirstChangeMap;
+	}
+
+	public synchronized void setFisrtChangeMapFalse() {
+		this.isFirstChangeMap = false;
+	}
+	public synchronized boolean isLoginAdmin() {
 		return false;
 	}
 
-    public static MainModel getStaticModel() {
-    	return staticModel;
-    }
-    public static void setStaticModel(MainModel pModel) {
-    	 staticModel = pModel;
-    }
-    
+	public static MainModel getStaticModel() {
+		return staticModel;
+	}
+
+	public static void setStaticModel(MainModel pModel) {
+		staticModel = pModel;
+	}
+
 }

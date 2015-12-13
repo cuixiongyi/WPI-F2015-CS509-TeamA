@@ -1,7 +1,9 @@
 package com.wpi.cs509.teamA.bean;
 
 /**
- * Created by cuixi on 12/10/2015.
+ * 
+ * @author Team-A
+ *
  */
 public class ParkingLot {
     private Node node = null;

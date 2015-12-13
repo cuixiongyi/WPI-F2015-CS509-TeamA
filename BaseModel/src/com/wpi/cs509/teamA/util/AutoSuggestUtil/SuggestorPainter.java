@@ -19,11 +19,15 @@ public class SuggestorPainter {
 	private static Color locationColor = Color.WHITE;
 	private static Color professorColor = Color.WHITE;
 
-	private static Color historyTxtColor = Color.WHITE;
-	private static Color locationTxtColor = Color.WHITE;
-	private static Color professorTxtColor = Color.WHITE;
+	private static Color historyTxtColor = Color.BLACK;
+	private static Color locationTxtColor = Color.BLACK;
+	private static Color professorTxtColor = Color.BLACK;
+	
+	private static Color historyTxtBorderColor = Color.BLACK;
+	private static Color locationTxtBorderColor = Color.BLACK;
+	private static Color professorTxtBorderColor = Color.BLACK;
 
-	private static Dimension preferredSize = new Dimension(100, 23);
+	private static Dimension preferredSize = new Dimension(115, 23);
 
 	private static String professorIconName = "Professor_Icon.png";
 	private static String historyIconName = "History_Icon.png";
@@ -48,7 +52,7 @@ public class SuggestorPainter {
 	}
 
 	public enum SuggestorEnum {
-		Location(1), Professor(2), Major(2), History(3),Activity(1), Others(1);
+		Location(1), Professor(2), Major(2), History(3),Activity(1), Others(1), Labels(10);
 		private int part_value;
 		private SuggestorEnum(int value){
 			part_value = value;
@@ -66,6 +70,7 @@ public class SuggestorPainter {
 			suggestionPanel.setSuggestionBorderColor(locationColor);
 			suggestionPanel.setPreferredSize(preferredSize);
 			suggestionPanel.setImageIcon(locationIcon);
+			suggestionPanel.setSuggestionLineBorderColor(locationTxtBorderColor);
 			break;
 		case Professor:
 			suggestionPanel.setFont(professorFont);
@@ -73,6 +78,7 @@ public class SuggestorPainter {
 			suggestionPanel.setSuggestionBorderColor(professorColor);
 			suggestionPanel.setPreferredSize(preferredSize);
 			suggestionPanel.setImageIcon(professorIcon);
+			suggestionPanel.setSuggestionLineBorderColor(professorTxtBorderColor);
 			break;
 		case History:
 			suggestionPanel.setFont(historyFont);
@@ -80,6 +86,7 @@ public class SuggestorPainter {
 			suggestionPanel.setSuggestionBorderColor(historyColor);
 			suggestionPanel.setPreferredSize(preferredSize);
 			suggestionPanel.setImageIcon(historyIcon);
+			suggestionPanel.setSuggestionLineBorderColor(historyTxtBorderColor);
 			break;
 
 		}
