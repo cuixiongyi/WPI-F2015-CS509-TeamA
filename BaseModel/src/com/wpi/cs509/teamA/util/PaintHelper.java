@@ -129,12 +129,29 @@ public class PaintHelper {
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
 				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+		
+		if (model.getCurrentMap().getDisplayScale() > 1.2)
+		{
+			String nodeTitle = node.getName();
+			if (node.getNodeType() == NodeType.PARKING) 
+			{
+				nodeTitle += " (" + 20 + ")"; // where to change parking info
+			}
+
+		    FontMetrics metrics = g2.getFontMetrics();
+		    int titleXCoor = (coorTrans.getX() - (metrics.stringWidth(nodeTitle)/2));
+		    int titleYCoor = coorTrans.getY() - 25;
+			
+			g2.drawString(nodeTitle, titleXCoor, titleYCoor);
+		}
 		return true;
 	}
 
 	public static void paintNodes(List<Node> nodes, Graphics2D g2, DrawStyleEnum style) {
 //		System.out.println("Drawing nodes.");
 		setStyle(style, g2);
+		g2.setFont(new Font("Arial", Font.BOLD, 14));
+		g2.setColor(Color.BLACK);
 		if (null == nodes)
 			return;
 		for (Node node : nodes) {
@@ -146,6 +163,7 @@ public class PaintHelper {
 				}
 			}
 		}
+		setStyle(style, g2);
 	}
 
 	public static void paintNodes(List<Node> nodes, Graphics2D g2) {
