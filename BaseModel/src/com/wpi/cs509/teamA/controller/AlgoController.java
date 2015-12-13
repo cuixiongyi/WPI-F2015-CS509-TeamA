@@ -62,10 +62,15 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
+	 allEdges edges;
 	public AlgoController(Node from, Node to) {
 
-		this.startNode = from;
-		this.endNode = to;
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+		
+	}
+	
+	public AlgoController(Node from, Node[] to) {
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
 	}
 
 	/**
@@ -83,7 +88,8 @@ public class AlgoController {
 		//Node fromNode = Database.getNodeFromName(startNode);    /////////////////
         // TODO this is a hack need to get the function working
 
-        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),startNode, endNode);
+       
+        
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 

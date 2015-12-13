@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
@@ -143,10 +144,14 @@ public class AlgoTest {
 		//Graph context = new Graph (edges); //for running the algorithm
 		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
 	
-		AstarAlgoStrategy d= new AstarAlgoStrategy();
+		//AstarAlgoStrategy d= new AstarAlgoStrategy();
+		Node[] end={node11, node14};
+		 AlgoController algoController = new AlgoController(node4,
+	               end);
 		Stack<Node> route= new Stack<Node>();
-		allEdges edgess= new allEdges(edges, mapedges,node9, node18);
-		route=d.getRoute(edgess);
+		//allEdges edgess= new allEdges(edges, mapedges,node9, node18);
+		//route=d.getRoute(edgess);
+		route=algoController.getRoute();
 		System.out.print("Route: ");
 		while (!route.isEmpty())
 		{
