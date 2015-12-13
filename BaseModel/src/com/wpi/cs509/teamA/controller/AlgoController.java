@@ -17,6 +17,7 @@ import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
 import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.util.Database;
@@ -41,7 +42,7 @@ public class AlgoController {
 	/**
 	 * The destination node get from the front end It is a String
 	 */
-	private Node endNode;
+	private Node endNode=null;
 	/**
 	 * the result of the path finding
 	 */
@@ -63,14 +64,22 @@ public class AlgoController {
 	 *            the destination node
 	 */
 	 allEdges edges;
+	 boolean isMultipleDestination = false;
+	 
 	public AlgoController(Node from, Node to) {
 
 		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+		endNode=to;
 		
 	}
 	
 	public AlgoController(Node from, Node[] to) {
 		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+	}
+	
+	public AlgoController(Node from, Node[] to, boolean isMultiopleDestination) {
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+		this.isMultipleDestination=true;
 	}
 
 	/**
@@ -92,10 +101,21 @@ public class AlgoController {
         
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
-
-
-		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-		//generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+		
+		if(endNode!=null){
+			if(edges.getMaps().size()>10)
+				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+			else
+				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		}
+		
+		if(this.isMultipleDestination){
+			generalAlgorithm.setAlgoStrategy(new DijkstraMultipleDestinations());
+			this.isMultipleDestination=false;
+		}
+		else{
+			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		}
 		return result = generalAlgorithm.findPath(edges);
 
 	}
