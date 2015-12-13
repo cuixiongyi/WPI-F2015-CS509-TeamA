@@ -100,7 +100,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
 
-		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode());
+		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode().get(0));
 
 		Stack<Node> path = algoController.getRoute();
 

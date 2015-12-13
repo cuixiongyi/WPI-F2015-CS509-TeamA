@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.model;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
@@ -33,6 +34,8 @@ public final class MainModel extends StateContext {
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	private ArrayList<GeneralMap> multiMapLists = null;
+
+	private ArrayList<Path> paths = null;
 
 	public MainModel() {
 
@@ -291,6 +294,21 @@ public final class MainModel extends StateContext {
 
 	public static void setStaticModel(MainModel pModel) {
 		staticModel = pModel;
+	}
+
+	public ArrayList<Path> getPaths() {
+		return paths;
+	}
+	public Path getOnePath(int idx) {
+		return paths.get(idx);
+	}
+
+	public void addOnePath(Path path) {
+		this.paths.add(path);
+	}
+
+	public void setNewPaths() {
+		this.paths = new ArrayList<Path> ();
 	}
 
 }
