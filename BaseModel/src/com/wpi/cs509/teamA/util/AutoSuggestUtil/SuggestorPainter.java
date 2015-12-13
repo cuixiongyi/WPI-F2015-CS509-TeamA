@@ -52,7 +52,7 @@ public class SuggestorPainter {
 	}
 
 	public enum SuggestorEnum {
-		Location(1), Professor(2), Major(2), History(3),Activity(1), Others(1);
+		Location(1), Professor(2), Major(2), History(3),Activity(1), Others(1), Labels(10);
 		private int part_value;
 		private SuggestorEnum(int value){
 			part_value = value;

@@ -8,4 +8,5 @@ import com.wpi.cs509.teamA.bean.OtherFeature;
 
 public interface OtherFeatureDao {
 	public List<OtherFeature> getAllOtherFeatures();	
+	public List<String> getAllFeatureLabels();
 }

@@ -19,6 +19,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeName;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
@@ -69,7 +70,14 @@ public class SearchSupply{
 	public Map<String,NodeForSearch> getAllInformationForSearch(){
 		Map<String,NodeForSearch> allFromDatabase = Database.getAllNodesForSearch();
 	//	System.out.println(allFromDatabase.size());
-/*		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		// get User Account
+		
+		if(MainModel.getStaticModel().getMyAccount()==null){
+			return allFromDatabase;
+		}
+		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		System.out.println("User information: "+ currentUser.getEmail());
+		System.out.println("History size: "+currentUser.getHistory().size());
 		Iterator<History> iter = currentUser.getHistory().iterator();
 		while (iter.hasNext()) {
 			History tempHistory = iter.next();
@@ -82,7 +90,7 @@ public class SearchSupply{
 					nodeNameComplete, nodeNameAbbr,
 					SuggestorEnum.History);
 			allFromDatabase.put(nodeNameComplete, tempNodeForSearch);
-		}*/
+		}
 		return allFromDatabase;
 	}
 	
@@ -114,7 +122,11 @@ public class SearchSupply{
 		Database.InitFromDatabase();
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
+		MainModel.setStaticModel(new MainModel());
+				MainModel.getStaticModel().switchToState((new MouseActionSelectNode(MainModel.getStaticModel())));
+        
 		SearchSupply ss = new SearchSupply();
+		
 		ArrayList<NodeForSearch> getSS = ss.getSearchSupply("p");
 		for (NodeForSearch entry : getSS) {
 		    System.out.println("Key = " + entry.getStringForDisplay()+" ,Priority = " + entry.getPriority());  

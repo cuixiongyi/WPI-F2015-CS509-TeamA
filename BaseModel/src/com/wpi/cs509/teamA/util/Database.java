@@ -49,7 +49,8 @@ public class Database {
 	private static List<Professor> allProfessors;
 	private static List<Major> allMajors;
 	private static List<OtherFeature> allOtherLabels;
-
+	private static List<String> labelList;
+	
 	/** For search supply */
 	private static Map<String, NodeForSearch> allNodesForSearch;
 
@@ -98,8 +99,8 @@ public class Database {
 		allMapEdgesHL = nrd2.getAllMapEdges();
 
 		// get all user accounts from database
-		UserAccountDao uad = new UserAccountDaoImpl();
-		allUsersDataHL = uad.getAllUserAccounts();
+	//	UserAccountDao uad = new UserAccountDaoImpl();
+	//	allUsersDataHL = uad.getAllUserAccounts();
 
 		// get all professors from database
 		ProfessorDao pd = new ProfessorDaoImpl();
@@ -109,9 +110,14 @@ public class Database {
 		MajorDao majord = new MajorDaoImpl();
 		allMajors = majord.getAllMajors();
 
-		// get all other labaels from database
+		// get all other labels from database
 		OtherFeatureDao ofd = new OtherFeatureDaoImpl();
 		allOtherLabels = ofd.getAllOtherFeatures();
+		
+		// get all labels from database
+		OtherFeatureDao ofd2 = new OtherFeatureDaoImpl();
+		labelList = ofd2.getAllFeatureLabels();
+		
 		// load nodes for searchSupply
 		allNodesForSearch = new HashMap<String, NodeForSearch>();
 		InitNodesForSearchSupply();
@@ -253,6 +259,10 @@ public class Database {
 		return allOtherLabels;
 	}
 	
+	public static List<String> getAllLabels(){
+		return labelList;
+	}
+	
 	/** Deal with searching */
 	public static Map<String, NodeForSearch> getAllNodesForSearch() {
 		return allNodesForSearch;
@@ -329,6 +339,17 @@ public class Database {
 			String nodeNameAbbr = tempNode.getName();
 			NodeForSearch tempNodeForSearch = new NodeForSearch(tempNode, nodeNameComplete, nodeNameAbbr,
 					SuggestorEnum.Others);
+			allNodesForSearch.put(nodeNameComplete, tempNodeForSearch);
+		}
+		
+		// Init label information
+		Iterator<String> iterLabels = Database.getAllLabels().iterator();
+		while (iterLabels.hasNext()) {
+			String nodeNameComplete = iterLabels.next();
+			Node tempNode = null;
+			String nodeNameAbbr = nodeNameComplete;
+			NodeForSearch tempNodeForSearch = new NodeForSearch(tempNode, nodeNameComplete, nodeNameAbbr,
+					SuggestorEnum.Labels);
 			allNodesForSearch.put(nodeNameComplete, tempNodeForSearch);
 		}
 	//	MainModel model = MainModel.getStaticModel().getMyAccount();
