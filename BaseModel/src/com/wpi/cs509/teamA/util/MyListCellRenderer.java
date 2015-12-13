@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.util;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 
@@ -15,7 +16,7 @@ public class MyListCellRenderer extends DefaultListCellRenderer {
 	
 	private final JPanel p = new JPanel(new BorderLayout());
 	private final JPanel IconPanel = new JPanel(new BorderLayout());
-	private final JLabel l = new JLabel("icon"); //<-- this will be an icon instead of a text
+	private final JLabel l = new JLabel(); //<-- this will be an icon instead of a text
 	private final JLabel lt = new JLabel();
     private final String pre = "<html><body style='width: 180px;'>";
     private final Font font = new Font("helvitica", Font.BOLD, 20);
@@ -29,7 +30,7 @@ public class MyListCellRenderer extends DefaultListCellRenderer {
         
       //text
         lt.setFont(font);
-        lt.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+//        lt.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         p.add(lt, BorderLayout.CENTER);
         
         
