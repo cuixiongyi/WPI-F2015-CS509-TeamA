@@ -2,6 +2,7 @@ package com.wpi.cs509.teamA.model;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
@@ -23,7 +24,7 @@ public final class MainModel extends StateContext {
 	private List<NodeType> iconFilter = null;
 	private static NodeType[] nodeTypes;
 	private Node startNode;
-	private Node endNode;
+	private ArrayList<Node> endNode = null;
 
 	private Node focusNode = null;
 	private boolean isFirstFocusNode = false;
@@ -34,6 +35,10 @@ public final class MainModel extends StateContext {
 
 	private ArrayList<GeneralMap> multiMapLists = null;
 
+    private ArrayList<Path> paths = null;
+    private Path currentPath = null;
+
+
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -42,8 +47,8 @@ public final class MainModel extends StateContext {
 		this.iconFilter = new ArrayList<NodeType>();
 		MainModel.nodeTypes = NodeType.values();
 		addAllFilters();
-		// multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
+		endNode = new ArrayList<Node>();
 
 	}
 
@@ -175,12 +180,20 @@ public final class MainModel extends StateContext {
 
 	}
 
-	public synchronized Node getEndNode() {
+	public synchronized ArrayList<Node> getEndNode() {
 		return endNode;
 	}
 
-	public synchronized void setEndNode(Node endNode) {
-		this.endNode = endNode;
+	public synchronized void setEndNode(Node pendNode) {
+		if (null == this.endNode) {
+			endNode = new ArrayList<Node>();
+		}
+		this.endNode.add(pendNode);
+		modelChanged();
+	}
+
+	public synchronized void clearEndNode() {
+		endNode = new ArrayList<Node>();
 		modelChanged();
 	}
 
@@ -285,4 +298,29 @@ public final class MainModel extends StateContext {
 		staticModel = pModel;
 	}
 
+	public ArrayList<Path> getPaths() {
+		return paths;
+	}
+	public Path getOnePath(int idx) {
+		return paths.get(idx);
+	}
+
+	public void addOnePath(Path path) {
+		this.paths.add(path);
+	}
+
+	public void clearPaths() {
+		this.paths = new ArrayList<Path> ();
+	}
+
+    public Path getCurrentPath() {
+        return currentPath;
+    }
+
+    public void setCurrentPath(int idx) {
+        if (idx >= paths.size()) {
+            throw new StackOverflowError();
+        }
+        this.currentPath = paths.get(idx);
+    }
 }
