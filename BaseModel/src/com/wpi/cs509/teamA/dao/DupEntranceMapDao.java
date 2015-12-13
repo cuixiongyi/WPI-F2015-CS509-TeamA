@@ -8,6 +8,10 @@ package com.wpi.cs509.teamA.dao;
  * @author CS 509-Team A
  *
  */
+
+@Deprecated
 public interface DupEntranceMapDao {
+
+	// TODO: Add methods here
 
 }

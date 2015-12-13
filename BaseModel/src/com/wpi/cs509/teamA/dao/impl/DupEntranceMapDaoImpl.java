@@ -127,33 +127,25 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
 	 * @author CS 509-Team A
 	 * @return an array of nodes
 	 */
-/*	public Set<Node> initAllNodes() {
-
-		Set<Node> allNodes = new HashSet<Node>();
-		int iter_nodes = 0;
-		try {
-			stmt = conn.createStatement();
-			String selectFromNodes = "select id, name, x, y, map_id, classification " + "from RouteFinder.node";
-
-			ResultSet rs = stmt.executeQuery(selectFromNodes);
-			while (rs.next()) {
-				int temp_id = rs.getInt("id");
-				String temp_name = rs.getString("name");
-				int temp_x = rs.getInt("x");
-				int temp_y = rs.getInt("y");
-				int temp_mapid = rs.getInt("map_id");
-				String temp_class = rs.getString("classification");
-				Map<Integer, Double> neighborsForNode = initNodesNeighbors(rs.getInt("id"));
-				allNodes.add(new Node(temp_id, temp_name, temp_x, temp_y, temp_mapid, neighborsForNode, temp_class));
-			}
-		} catch (SQLException se) {
-			se.printStackTrace();
-		} finally {
-			JdbcConnect.resultClose(rs, stmt);
-			JdbcConnect.connClose();
-		}
-		return allNodes;
-	}*/
+	/*
+	 * public Set<Node> initAllNodes() {
+	 * 
+	 * Set<Node> allNodes = new HashSet<Node>(); int iter_nodes = 0; try { stmt
+	 * = conn.createStatement(); String selectFromNodes =
+	 * "select id, name, x, y, map_id, classification " +
+	 * "from RouteFinder.node";
+	 * 
+	 * ResultSet rs = stmt.executeQuery(selectFromNodes); while (rs.next()) {
+	 * int temp_id = rs.getInt("id"); String temp_name = rs.getString("name");
+	 * int temp_x = rs.getInt("x"); int temp_y = rs.getInt("y"); int temp_mapid
+	 * = rs.getInt("map_id"); String temp_class =
+	 * rs.getString("classification"); Map<Integer, Double> neighborsForNode =
+	 * initNodesNeighbors(rs.getInt("id")); allNodes.add(new Node(temp_id,
+	 * temp_name, temp_x, temp_y, temp_mapid, neighborsForNode, temp_class)); }
+	 * } catch (SQLException se) { se.printStackTrace(); } finally {
+	 * JdbcConnect.resultClose(rs, stmt); JdbcConnect.connClose(); } return
+	 * allNodes; }
+	 */
 
 	/**
 	 * insert nodes to the database at once execute INSERT INTO RouteFinder.node

@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.wpi.cs509.teamA.bean.Major;
 import com.wpi.cs509.teamA.dao.MajorDao;
 import com.wpi.cs509.teamA.util.JdbcConnect;
@@ -39,7 +36,7 @@ public class MajorDaoImpl implements MajorDao {
 				String majorName = resultSet.getString("major");
 				String majorAbbrName = resultSet.getString("majorabbr");
 				int node_id = resultSet.getInt("node_id");
-				res.add(new Major(majorName,majorAbbrName,node_id));
+				res.add(new Major(majorName, majorAbbrName, node_id));
 			}
 			return res;
 		} catch (SQLException se) {

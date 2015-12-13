@@ -37,12 +37,12 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public List<UserAccount> getAllUserAccounts() {
 		ResultSet resultSet = null;
 		List<UserAccount> res = new ArrayList<UserAccount>();
-		
+
 		try {
 			String selectAllUsers = "SELECT id, username,password, isAdmin,email FROM routefinder.user_account;";
 			pstmt = conn.prepareStatement(selectAllUsers);
@@ -69,8 +69,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 		}
 		
 			return null;
-
-		}
+	}
 
 	@Override
 	public List<History> getAllHistoryForUser(int user_id) {
@@ -84,9 +83,8 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			pstmt.setInt(1, user_id);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
-				res.add(new History(resultSet.getString("searchString"),
-						resultSet.getInt("nodeid"), resultSet.getInt("count")));
-			//	System.out.println("History get:"+resultSet.getString("searchString"));
+				res.add(new History(resultSet.getString("searchString"), resultSet.getInt("nodeid"),
+						resultSet.getInt("count")));
 			}
 			return res;
 		} catch (SQLException se) {
@@ -98,18 +96,17 @@ public class UserAccountDaoImpl implements UserAccountDao {
 		return null;
 	}
 
-	public boolean checkUserNameInDatabase(String username){
+	public boolean checkUserNameInDatabase(String username) {
 		ResultSet resultSet = null;
 		try {
 			String checkUserNameInDB = "SELECT count(id) FROM routefinder.user_account where username=?";
 			pstmt = conn.prepareStatement(checkUserNameInDB);
 			pstmt.setString(1, username);
 			resultSet = pstmt.executeQuery();
-			if(resultSet.next()) {
-				if(resultSet.getInt(1)==0)
+			if (resultSet.next()) {
+				if (resultSet.getInt(1) == 0)
 					return false;
-			}
-			else 
+			} else
 				return true;
 		} catch (SQLException se) {
 			System.out.println("fail to connect database..");
@@ -119,10 +116,11 @@ public class UserAccountDaoImpl implements UserAccountDao {
 		}
 		return true;
 	}
+
 	@Override
 	public boolean addAccountToDatabase(UserAccount add_user) {
 		try {
-			if(checkUserNameInDatabase(add_user.getUsername())){
+			if (checkUserNameInDatabase(add_user.getUsername())) {
 				System.out.println("User exists");
 				return false;
 			}
@@ -146,7 +144,8 @@ public class UserAccountDaoImpl implements UserAccountDao {
 	}
 
 	@Override
-	public UserAccount loginAuthorization(String username, String password) throws UserAccountNotFoundException,PwdIncorrectException {
+	public UserAccount loginAuthorization(String username, String password)
+			throws UserAccountNotFoundException, PwdIncorrectException {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		try {
@@ -154,12 +153,12 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			pstmt = conn.prepareStatement(UserAccountsInDB);
 			pstmt.setString(1, username);
 			resultSet = pstmt.executeQuery();
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				UserAccount userinfo = new UserAccount();
 				userinfo.setId(resultSet.getInt("id"));
 				userinfo.setUsername(resultSet.getString("username"));
 				userinfo.setPassword(resultSet.getString("password"));
-				if(!userinfo.getPassword().equals(password)){
+				if (!userinfo.getPassword().equals(password)) {
 					throw new PwdIncorrectException();
 				}
 				userinfo.setAdmin(resultSet.getBoolean("isAdmin"));
@@ -167,9 +166,9 @@ public class UserAccountDaoImpl implements UserAccountDao {
 				// add history for this user
 				userinfo.setHistory(this.getAllHistoryForUser(userinfo.getId()));
 				return userinfo;
-			}
-			else{
-			//	System.out.println("We cannot find this username, please sign up first");
+			} else {
+				// System.out.println("We cannot find this username, please sign
+				// up first");
 				throw new UserAccountNotFoundException();
 			}
 		} catch (SQLException se) {

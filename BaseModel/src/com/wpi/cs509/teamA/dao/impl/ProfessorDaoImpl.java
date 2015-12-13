@@ -5,11 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Professor;
 import com.wpi.cs509.teamA.dao.ProfessorDao;
 import com.wpi.cs509.teamA.util.JdbcConnect;
@@ -39,7 +35,7 @@ public class ProfessorDaoImpl implements ProfessorDao {
 			while (resultSet.next()) {
 				String prof_name = resultSet.getString("professor");
 				int node_id = resultSet.getInt("nodeid");
-				res.add(new Professor(prof_name,node_id));
+				res.add(new Professor(prof_name, node_id));
 			}
 			return res;
 		} catch (SQLException se) {
