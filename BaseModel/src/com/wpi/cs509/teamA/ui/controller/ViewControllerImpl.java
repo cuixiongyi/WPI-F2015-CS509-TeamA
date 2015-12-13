@@ -113,7 +113,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		ArrayList<String> mapNameList = new ArrayList<String>();
 		ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
 		int tmpMapId = path.peek().getMap().getMapId();
-		mapNameList.add(path.peek().getMap().getMapName());
+		mapNameList.add(path.peek().getMap().getMapAbbrName());
 		mapList.add(path.peek().getMap());
 
 		while (path.size() > 0) {
@@ -127,7 +127,7 @@ class ViewControllerImpl extends ViewControllerBase {
 				singleMapPath = new ArrayList<Node>();
 				singleMapPath.add(node);
 				tmpMapId = node.getMap().getMapId();
-				mapNameList.add(node.getMap().getMapName());
+				mapNameList.add(node.getMap().getMapAbbrName());
 
 				mapList.add(node.getMap());
 
