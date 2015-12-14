@@ -24,14 +24,14 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.util.MarioListRenderer;
-import com.wpi.cs509.teamA.util.SameLabelListCellRenderer;
+
 
 public class SuggestionLabelPanel extends SuggestionBasicPanel {
-	private InputPanel inputPanel;
+//	private InputPanel inputPanel;
 	private String displayName;
-	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName, InputPanel inputPanel) {
+	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName) {
 		super(string, autoSuggestor, node);
-		this.inputPanel = inputPanel;
+	//	this.inputPanel = inputPanel;
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Labels,this);
 		OtherFeatureDaoImpl nodeList = new OtherFeatureDaoImpl();
 		this.displayName = displayName;
@@ -90,26 +90,26 @@ public class SuggestionLabelPanel extends SuggestionBasicPanel {
 		};
 	}
 	
-	void replaceWithSuggestedText() {
-		String suggestedWord = textLabel.getText();
-		String text = textField.getText();	
-		DefaultListModel<String> mapListModel = new DefaultListModel<>();
-		for(Node node: nodeInformation){
-				autoSuggestor.getModel().setEndNode(node);	
-				mapListModel.addElement(node.getName());
-		}
-		inputPanel.getMapList().setCellRenderer(new SameLabelListCellRenderer(SuggestorPainter.getIconFromName(displayName)));
-		
-		inputPanel.getMapList().setVisible(true);
-		inputPanel.getMapList().removeAll();
-		inputPanel.getMapList().setModel(mapListModel);
-		inputPanel.getMapList().setEnabled(false);
-		
-		String typedWord = autoSuggestor.getCurrentlyTypedWord();
-		String t = textField.getText().substring(0, textField.getText().lastIndexOf(typedWord));
-		String tmp = t + textField.getText().substring(textField.getText().lastIndexOf(typedWord)).replace(typedWord, suggestedWord);
-		textField.setText(tmp);
-	}
+//	void replaceWithSuggestedText() {
+//		String suggestedWord = textLabel.getText();
+//		String text = textField.getText();	
+//		DefaultListModel<String> mapListModel = new DefaultListModel<>();
+//		for(Node node: nodeInformation){
+//				autoSuggestor.getModel().setEndNode(node);	
+//				mapListModel.addElement(node.getName());
+//		}
+//		inputPanel.getMapList().setCellRenderer(new SameLabelListCellRenderer(SuggestorPainter.getIconFromName(displayName)));
+//		
+//		inputPanel.getMapList().setVisible(true);
+//		inputPanel.getMapList().removeAll();
+//		inputPanel.getMapList().setModel(mapListModel);
+//		inputPanel.getMapList().setEnabled(false);
+//		
+//		String typedWord = autoSuggestor.getCurrentlyTypedWord();
+//		String t = textField.getText().substring(0, textField.getText().lastIndexOf(typedWord));
+//		String tmp = t + textField.getText().substring(textField.getText().lastIndexOf(typedWord)).replace(typedWord, suggestedWord);
+//		textField.setText(tmp);
+//	}
 
 	
 	

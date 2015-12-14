@@ -64,7 +64,6 @@ class UpdateParkingLot extends TimerTask {
 		ParkingManager.updateParkingLot();
 
 		ViewManager.updateView();
-//		System.out.println(ParkingManager.randomIncrementNumber());
-
+		
 	}
 }
