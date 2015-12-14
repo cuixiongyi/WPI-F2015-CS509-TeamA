@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * Created by cuixi on 12/13/2015.
  */
-public class NodeInfoDIalog extends JDialog implements ActionListener {
+public class NodeInfoDialog extends JDialog implements ActionListener {
 
 
     private JButton okButton;
@@ -31,7 +31,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
     private Node node = null;
 
 
-    public NodeInfoDIalog(Node pnode){
+    public NodeInfoDialog(Node pnode){
         this.node=pnode;
 
         JPanel contentPanel = new JPanel(new GridBagLayout());
