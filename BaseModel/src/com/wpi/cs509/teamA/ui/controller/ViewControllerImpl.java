@@ -24,6 +24,7 @@ import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNodeInfo;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
@@ -54,6 +55,10 @@ class ViewControllerImpl extends ViewControllerBase {
 		}
 	}
 
+
+
+
+
 	public void clickOnSwapStartEnd()
 	{
 		if(inputPanel.getFromText().getText()!=null && inputPanel.getToText().getText()!=null )
@@ -70,6 +75,7 @@ class ViewControllerImpl extends ViewControllerBase {
 			model.switchToState(new MouseActionEditNode(model));
 			button.setSelected(true);
             inputPanel.getBtnMngEdge().setSelected(false);
+			inputPanel.getBtnEditNodeInfo().setSelected(false);
 
         }
 	}
@@ -83,10 +89,27 @@ class ViewControllerImpl extends ViewControllerBase {
 		} else {
 			model.switchToState(new MouseActionEditEdge(model));
 			button.setSelected(true);
-            inputPanel.getBtnMngNode().setSelected(false);
+			inputPanel.getBtnEditNodeInfo().setSelected(false);
+			inputPanel.getBtnMngNode().setSelected(false);
 
 
         }
+	}
+
+	public  void clickEditNodeInfo(){
+		JToggleButton button = inputPanel.getBtnEditNodeInfo();
+
+		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
+			button.setSelected(false);
+			model.switchToState(new MouseActionSelectNode(model));
+		} else {
+			model.switchToState(new MouseActionEditNodeInfo(model));
+			button.setSelected(true);
+			inputPanel.getBtnMngEdge().setSelected(false);
+			inputPanel.getBtnMngNode().setSelected(false);
+
+
+		}
 	}
 
 	public void clickSignup() {

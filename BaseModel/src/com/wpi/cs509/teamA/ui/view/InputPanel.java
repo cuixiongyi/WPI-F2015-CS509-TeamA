@@ -56,6 +56,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	private JToggleButton btnMngNode;
 	private JToggleButton btnMngEdge;
+	private JToggleButton btnEditNodeInfo;
 
     JTabbedPane tabbedPane;
 
@@ -245,11 +246,14 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		btnMngEdge = new JToggleButton("Manage Edge");
 //		btnMngEdge.setFont(buttonFont);
 //		adminTab.add(btnMngEdge);
+
+		btnEditNodeInfo =new JToggleButton("Edit Node Information");
 		
 		ArrayList<AbstractButton> adminButtons = new ArrayList<AbstractButton>();
 		adminButtons.add(openMap);
 		adminButtons.add(btnMngNode);
 		adminButtons.add(btnMngEdge);
+		adminButtons.add(btnEditNodeInfo);
 		
 		int adminIconWidth = 255;
 		int adminIconHeight = 50;
@@ -530,5 +534,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	public JLabel getLblSwapStartEnd() {
 		return lblSwapStartEnd;
+	}
+
+	public JToggleButton getBtnEditNodeInfo() {
+		return btnEditNodeInfo;
 	}
 };

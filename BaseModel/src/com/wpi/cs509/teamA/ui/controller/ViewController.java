@@ -33,6 +33,7 @@ public class ViewController extends ViewControllerBase {
 		addButtonEditNode();
 		addButtonEditEdge();
 		addLabelRotate();
+		addButtonEditNodeInfo();
 	}
 
 	private void addOpenFile() {
@@ -45,6 +46,15 @@ public class ViewController extends ViewControllerBase {
 			}
 		});
 
+	}
+
+	private void addButtonEditNodeInfo(){
+		inputPanel.getBtnEditNodeInfo().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impl.clickEditNodeInfo();
+			}
+		});
 	}
 
 	private void addLabelRotate(){
