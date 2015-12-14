@@ -26,6 +26,7 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEdit
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
 import com.wpi.cs509.teamA.util.NodeType;
 
 class ViewControllerImpl extends ViewControllerBase {
@@ -108,6 +109,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
 		inputPanel.getMapList().setEnabled(true);
+		inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
 

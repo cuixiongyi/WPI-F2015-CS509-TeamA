@@ -148,9 +148,10 @@ public class SuggestorPainter {
 		switch (name){
 			case "RestRoom": 			
 				return new ImageIcon(NodeIcon.getRestroomIcon());
+				
 			case "ParkingLot":
 				return new ImageIcon(NodeIcon.getParkingIcon());
-			case "Pizza":
+			case "pizza":
 				return new ImageIcon(othersIcon);
 		}
 		return null;
