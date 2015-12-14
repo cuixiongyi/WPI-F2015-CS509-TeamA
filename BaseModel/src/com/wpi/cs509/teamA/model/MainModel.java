@@ -172,6 +172,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void setCurrentMapID(int mapID) {
 		setCurrentMap( Database.getMapEntityFromMapId(mapID));
+		setAnimationNode(null);
 		modelChanged();
 	}
 
@@ -354,6 +355,7 @@ public final class MainModel extends StateContext {
         Path path = getOnePath(currentPathIdx);
         this.setFocusNode(path.getNodes().get(0));
 		this.setCurrentMap(path.getMap());
+		this.setAnimationNode(getCurrentPath().getNodes().get(0));
     }
 
     public synchronized boolean setNextPath() {
