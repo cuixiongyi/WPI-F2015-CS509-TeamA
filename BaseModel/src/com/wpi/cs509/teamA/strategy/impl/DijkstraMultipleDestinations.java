@@ -16,8 +16,8 @@ public class DijkstraMultipleDestinations implements AlgoStrategy {
 	@Override
 	public Stack<Node> getRoute(allEdges alledges) {
 		this.startNodeId = alledges.getStartNode().getId();
-		this.endNodeId = new int[alledges.getEnd().size() + 1];
-		this.matrix = new double[alledges.getEnd().size() + 1][alledges.getEnd().size() + 1];
+		this.endNodeId = new int[alledges.getEnd().length + 1];
+		this.matrix = new double[alledges.getEnd().length + 1][alledges.getEnd().length + 1];
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
@@ -36,7 +36,7 @@ public class DijkstraMultipleDestinations implements AlgoStrategy {
 		// object
 		i = 0;
 
-		final Object[][] pathMatrix = new Object[alledges.getEnd().size() + 1][alledges.getEnd().size() + 1];
+		final Object[][] pathMatrix = new Object[alledges.getEnd().length + 1][alledges.getEnd().length + 1];
 		while (i < endNodeId.length) { // last end node does not need to run
 										// Dijkstra on
 			source = context.getGraph().get(endNodeId[i]);
