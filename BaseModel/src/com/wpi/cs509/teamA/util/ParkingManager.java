@@ -14,21 +14,25 @@ public class ParkingManager {
 	private static Timer timer = new Timer();
 	static private MainModel model = null;
 	static ArrayList<String> parkingName;
+	static ArrayList<Integer> originalNum;
 
 	public ParkingManager() {
 		timer.schedule(new UpdateParkingLot(), 1000, 2000);
 		parkingName = new ArrayList<String>();
+		originalNum = new ArrayList<Integer>();
 		for (Node n : Database.getAllNodeListFromDatabase()) {
 			if (n.getNodeType() == NodeType.PARKING) {
 				parkingName.add(n.getName());
+				originalNum.add(randomNumber());
 			}
 		}
+
 	}
 
 	public static void updateParkingLot() {
 		HashMap<String, Integer> parking = new HashMap<String, Integer>();
-		for(String park : parkingName){
-			parking.put(park, randomNumber());
+		for (int i = 0; i < parkingName.size();i++) {
+			parking.put(parkingName.get(i), originalNum.get(i)+randomIncrementNumber());
 		}
 		model.setParkingAvilibility(parking);
 	}
@@ -38,6 +42,14 @@ public class ParkingManager {
 		int i = (int) (d * 30);
 		return i;
 	}
+	
+	public static int randomIncrementNumber() {
+		double d = Math.random();
+		int i = (int)((1-d*2)*2);
+		return i;
+	}
+	
+	
 
 	@SuppressWarnings("static-access")
 	public void setModel(MainModel mainModel) {
@@ -50,8 +62,9 @@ class UpdateParkingLot extends TimerTask {
 
 	public void run() {
 		ParkingManager.updateParkingLot();
-		System.out.println("hh");
+
 		ViewManager.updateView();
+		System.out.println(ParkingManager.randomIncrementNumber());
 
 	}
 }
