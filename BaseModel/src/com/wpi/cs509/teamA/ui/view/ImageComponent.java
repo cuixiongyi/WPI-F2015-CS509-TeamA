@@ -90,6 +90,10 @@ public class ImageComponent extends JComponent {
 			return;
 
 		LinearTransform lt = model.getLinearTransform();
+		if (null == lt) {
+			int a = 0;
+			a++;
+		}
 		// if isInitilized
 		// no need to paint the image again
 	 
@@ -106,10 +110,10 @@ public class ImageComponent extends JComponent {
 			}
 			model.setFisrtChangeMapFalse();
 		}
-		if (model.isFisrtFocusNode()) {
-			Node node = model.getFocusNode();
-			lt.setX(this.getWidth()/2 - (int)(node.getLocation().getX()*model.getLinearTransform().getScale()));
-			lt.setY(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getLinearTransform().getScale()));
+		Node nodeFocus = model.getFocusNode();
+		if (model.isFisrtFocusNode() && null != nodeFocus) {
+			lt.setX(this.getWidth()/2 - (int)(nodeFocus.getLocation().getX()*lt.getScale()));
+			lt.setY(this.getHeight()/2 - (int)(nodeFocus.getLocation().getY()*lt.getScale()));
 			model.setFisrtFocusNode2False();
 		}
 

@@ -303,8 +303,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             getBtnMngNode().setEnabled(false);
             getOpenMap().setEnabled(false);
             tabbedPane.setEnabledAt(2, false);
-
-
         }
     }
 

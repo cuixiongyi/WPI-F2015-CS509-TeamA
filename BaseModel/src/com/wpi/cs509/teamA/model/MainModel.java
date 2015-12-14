@@ -45,6 +45,7 @@ public final class MainModel extends StateContext {
     private Node nodeAnimation = null;
 	private LinearTransform linearTransform = new LinearTransform();;
 
+	private ArrayList<Node> endNearestNodes;
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -194,6 +195,7 @@ public final class MainModel extends StateContext {
 
 		this.startNode = pStartNode;
 		this.setFocusNode(pStartNode);
+        this.endNearestNodes.clear();
 		modelChanged();
 
 	}
@@ -210,7 +212,8 @@ public final class MainModel extends StateContext {
 		}
 		
 		this.endNode.add(pendNode);
-		modelChanged();
+        this.endNearestNodes.clear();
+        modelChanged();
 	}
 
 	public synchronized void clearEndNode() {
@@ -271,7 +274,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void setFocusNode(Node focusNode) {
 		this.focusNode = focusNode;
-		if (null != focusNode) {
+		if (null == focusNode) {
 			isFirstFocusNode = false;
 		}
 		isFirstFocusNode = true;
@@ -353,6 +356,9 @@ public final class MainModel extends StateContext {
     }
 
     public synchronized void setCurrentPath(int idx) {
+		if (null == paths) {
+			return;
+		}
         if (idx >= paths.size() || idx < 0) {
             return;
 //            throw new ArrayIndexOutOfBoundsException();
@@ -393,7 +399,15 @@ public final class MainModel extends StateContext {
         modelChanged();
     }
 
-    public void setAnimationNode(Node node) {
+	public ArrayList<Node> getEndNearestNodes() {
+		return endNearestNodes;
+	}
+
+	public void setEndNearestNodes(ArrayList<Node> endNearestNodes) {
+		this.endNearestNodes = endNearestNodes;
+	}
+
+	public void setAnimationNode(Node node) {
     	this.nodeAnimation = node;
     	modelChanged();
     }

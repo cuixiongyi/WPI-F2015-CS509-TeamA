@@ -2,12 +2,13 @@ package com.wpi.cs509.teamA.ui.Animation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.Timer;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 
 /**
@@ -15,10 +16,9 @@ import com.wpi.cs509.teamA.model.MainModel;
  */
 public class AnimationPathControl {
 
-	private static Timer timer = new Timer(400, new MyActionListener());
+	private static Timer timer = null;
 	private static MainModel model;
-	private static List<Node> path;
-	private static GeneralMap map;
+	private static Path path;
 	private static int currentNodeIndex;
 
 	public AnimationPathControl() {
@@ -28,32 +28,40 @@ public class AnimationPathControl {
 	public static void init(MainModel model) {
 		AnimationPathControl.model = model;
 		path = null;
-		map = null;
 		currentNodeIndex = 0;
+        timer = new Timer(400, new MyActionListener());
 		timer.start();
 	}
 
 	public static class MyActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			if (model.getCurrentPath() != null) {
-				if ((path == null) || (map == null))
+			Path currPath = model.getCurrentPath();
+			if (null == currPath) {
+				model.setAnimationNode(null);
+				AnimationPathControl.path = null;
+                return;
+			}
+
+			if (model.getCurrentMap().equals(currPath.getMap())) {
+				if ((AnimationPathControl.path == null))
 				{
-					path = model.getCurrentPath().getNodes();
-					map = model.getCurrentMap();
+					AnimationPathControl.path = currPath;
 					currentNodeIndex = 0;
 				}
-				
-				else if ((!model.getCurrentPath().getNodes().equals(path)) || (!model.getCurrentMap().equals(map))) {
-					path = model.getCurrentPath().getNodes();
-					map = model.getCurrentMap();
+				else if (!(currPath.equals(AnimationPathControl.path)) && model.getCurrentMap().equals(model.getCurrentMap())) {
+					AnimationPathControl.path = model.getCurrentPath();
 					currentNodeIndex = 0;
 				}
 			}
+            else {
+                AnimationPathControl.path = null;
+                model.setAnimationNode(null);
+            }
 
-			if (path != null) {
-				model.setAnimationNode(path.get(currentNodeIndex));
-				if (++currentNodeIndex >= path.size()) {
+			if (AnimationPathControl.path != null) {
+				model.setAnimationNode(AnimationPathControl.path.getNodes().get(currentNodeIndex));
+				if (++currentNodeIndex >= currPath.getNodes().size()) {
 					currentNodeIndex = 0;
 				}
 			}
