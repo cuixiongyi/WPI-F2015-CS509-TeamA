@@ -63,18 +63,26 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-	 allEdges edges;
+	 private allEdges edges;
+	 private boolean flag=false;
 	 boolean isMultipleDestination = false;
 	 
 	public AlgoController(Node from, Node to) {
 
-		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
-		endNode=to;
+		
 		
 	}
 	
-	public AlgoController(Node from, Node[] to) {
-		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+	public AlgoController(Node from, ArrayList<Node> to) {
+		if(to.size()==1){
+			edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to.get(0));
+			flag=true;
+		}else{
+			Node[] end = new Node[to.size()];
+			to.toArray(end);
+			edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, end);
+			flag=false;
+		}
 	}
 	
 	public AlgoController(Node from, Node[] to, boolean isMultiopleDestination) {
@@ -102,8 +110,9 @@ public class AlgoController {
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 		
-		if(endNode!=null){
+		if(flag){
 			edges.init();
+			System.out.println("normal path");
 			if(edges.getMaps().size()>10)
 				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			else
@@ -112,10 +121,12 @@ public class AlgoController {
 		}
 		
 		if(this.isMultipleDestination){
+			System.out.println("multiple destination");
 			generalAlgorithm.setAlgoStrategy(new DijkstraMultipleDestinations());
 			this.isMultipleDestination=false;
 		}
 		else{
+			System.out.println("Find nearest");
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 		}
 		return result = generalAlgorithm.findPath(edges);
