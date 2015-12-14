@@ -113,7 +113,7 @@ public class ImageComponent extends JComponent {
 		Node animationNode = model.getAnimationNode();
 		if (null != animationNode) {
 			PaintHelper.paintNode(animationNode, g2);
-			model.setAnimationNode(null);
+			//model.setAnimationNode(null);
 		}
 
 		/// CXY test

@@ -18,10 +18,10 @@ import com.wpi.cs509.teamA.util.PaintHelper;
  */
 public class AnimationPathControl {
 
-	private static Timer timer = new Timer(100, new MyActionListener());
+	private static Timer timer = new Timer(400, new MyActionListener());
 	private static MainModel model;
 	private static List<Node> path;
-	private static GeneralMap currentMap;
+	private static GeneralMap map;
 	private static int currentNodeIndex;
 
 	public AnimationPathControl() {
@@ -30,10 +30,8 @@ public class AnimationPathControl {
 
 	public static void init(MainModel model) {
 		AnimationPathControl.model = model;
-		if (model.getCurrentPath() != null) {
-		path = model.getCurrentPath().getNodes();
-		}
-		currentMap = model.getCurrentMap();
+		path = null;
+		map = null;
 		currentNodeIndex = 0;
 		timer.start();
 	}
@@ -42,24 +40,25 @@ public class AnimationPathControl {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if (model.getCurrentPath() != null) {
-				path = model.getCurrentPath().getNodes();
-				}
-			if (path != null && null != model.getCurrentPath()) {
-				if ((!model.getCurrentPath().getNodes().equals(path))
-						|| (!model.getCurrentMap().equals(currentMap))) {
-					currentMap = model.getCurrentMap();
+				if ((path == null) || (map == null))
+				{
 					path = model.getCurrentPath().getNodes();
+					map = model.getCurrentMap();
 					currentNodeIndex = 0;
-					model.setAnimationNode(path.get(currentNodeIndex));
-				} else {
-					if (path.size() > currentNodeIndex) {
-						model.setAnimationNode(path.get(currentNodeIndex));
-					} else {
-						currentNodeIndex = 0;
-						model.setAnimationNode(path.get(currentNodeIndex));
-					}
 				}
-				currentNodeIndex++;
+				
+				else if ((!model.getCurrentPath().getNodes().equals(path)) || (!model.getCurrentMap().equals(map))) {
+					path = model.getCurrentPath().getNodes();
+					map = model.getCurrentMap();
+					currentNodeIndex = 0;
+				}
+			}
+
+			if (path != null) {
+				model.setAnimationNode(path.get(currentNodeIndex));
+				if (++currentNodeIndex >= path.size()) {
+					currentNodeIndex = 0;
+				}
 			}
 		}
 	}
