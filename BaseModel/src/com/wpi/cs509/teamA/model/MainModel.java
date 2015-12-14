@@ -195,7 +195,7 @@ public final class MainModel extends StateContext {
 
 		this.startNode = pStartNode;
 		this.setFocusNode(pStartNode);
-        this.endNearestNodes.clear();
+        this.endNearestNodes = null;
 		modelChanged();
 
 	}

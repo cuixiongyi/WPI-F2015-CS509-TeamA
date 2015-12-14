@@ -9,6 +9,7 @@ import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 
+import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.LinearTransform;
@@ -31,6 +32,7 @@ public class PaintHelperBasics {
 	private final static int ovalOffset_SelectedNode = ovalOffset + 5;
 	private static BasicStroke basicNodeStrock = new BasicStroke(2);
 	private static BasicStroke basicEdgeStrock = new BasicStroke(5);
+	public final static double SCALELOWWERBOUND_DRAWICON = 1.1;
 
 	/**
 	 * currently all paint funcitons have 2 overloads, with or without
@@ -114,7 +116,7 @@ public class PaintHelperBasics {
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
 				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
 		
-		if (linearTransform.getScale() > 1.1)
+		if (linearTransform.getScale() > SCALELOWWERBOUND_DRAWICON)
 		{
 			String nodeTitle = node.getName();
 			if (node.getNodeType() == NodeType.PARKING)
@@ -213,8 +215,8 @@ public class PaintHelperBasics {
 		PaintHelperBasics.model = model;
 	}
 
-//	 public static String dirtmp = "/BaseModel/src/";
-	public static String dirtmp = "/src/";
+	 public static String dirtmp = "/BaseModel/src/";
+//	public static String dirtmp = "/src/";
 
 	public static String getUserDir() {
 		return System.getProperty("user.dir") + dirtmp;
