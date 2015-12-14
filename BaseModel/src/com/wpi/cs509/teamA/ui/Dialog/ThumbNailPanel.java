@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
  */
 public class ThumbNailPanel extends JPanel implements MouseListener {
     private JPanel contentPane;
-    private InnerComponent innerComponent;
+    private JPanel innerComponent;
     private MainModel model;
     private List<Path> paths;
     private List<JLabel> icons;
@@ -30,23 +30,16 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
     private int resizeY = 150;
     private int picInset = 160;
 
-    public  ThumbNailPanel(MainModel model){
-        this.setSize(660,210);
-        this.model = model;
-        this.icons = new ArrayList<JLabel>();
-        this.iconTexts = new ArrayList<JLabel>();
-        this.setLayout(null);
+    private static int onePicSize = 100;
 
-        JScrollPane scroll = new JScrollPane(innerComponent);
-//        contentPane.add(scroll);
-//        this.add(contentPane);
-        setVisible(true);
+    public  ThumbNailPanel(MainModel model){
+        this.model = model;
+        newLayout();
+        setVisible(false);
 
     }
 
     public class InnerComponent extends JComponent{
-
-
         @Override
         public void paintComponent(Graphics g) {
 
@@ -56,10 +49,31 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
 
     }
 
+    private void newLayout() {
+//        contentPane.removeAll();
+        this.removeAll();
+        this.icons = new ArrayList<JLabel>();
+        this.iconTexts = new ArrayList<JLabel>();
+
+        innerComponent = new JPanel();
+
+    }
+
+    private void setLayoutPost() {
+        innerComponent.setLayout(new GridLayout(icons.size(), 1, 0, 0));
+        for (int ii = 0; ii < icons.size(); ii++) {
+            innerComponent.add(icons.get(ii));
+        }
+        JScrollPane scroll = new JScrollPane(innerComponent);
+//        contentPane.add(scroll);
+        this.add(scroll);
+        this.setSize(onePicSize, onePicSize*icons.size());
+        setVisible(true);
+    }
     public void update()
     {
+        newLayout();
         this.paths = this.model.getPaths();
-        this.removeAll();
 
         int picX=10;
         int picY=10;
@@ -68,22 +82,23 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
 
         for(Path newPath : this.paths)
         {
-            JLabel newIcon = new JLabel(new ImageIcon(NodeIcon.resize(newPath.getMap().getImage(),resizeX,resizeY)));
+            JLabel newIcon = new JLabel(new ImageIcon(NodeIcon.resize(newPath.getMap().getImage(),onePicSize,onePicSize)));
             JLabel newText = new JLabel(newPath.getMap().getMapName());
             newIcon.addMouseListener(this);
             icons.add(newIcon);
             iconTexts.add(newText);
 
-            newIcon.setBounds(picX,picY,resizeX,resizeY);
+            newIcon.setBounds(onePicSize*(icons.size()-1),0,onePicSize,onePicSize);
             newText.setBounds(textX,textY,150,30);
 
             picX=picX+picInset;
             textX=textX+picInset;
 
-            this.add(newIcon);
-            this.add(newText);
+//            this.add(newIcon);
+//            this.add(newText);
             System.out.println("Made a new icon: " + newText.getText());
         }
+        setLayoutPost();
         setCurrentMap(0);
     }
 

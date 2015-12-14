@@ -86,7 +86,7 @@ public class UserScreen extends JFrame {
 		MainModel.setStaticModel(mainModel);
 		MainModel.setStaticModel(mainModel);
 		ViewControllerBase.init(imgComponent, inputPanel, mainModel, this);
-		viewManager = new ViewManager();
+	viewManager = new ViewManager();
 		imgComponent.setModel(mainModel);
 		inputPanel.setModel(mainModel);
 		PaintHelperBasics.setModel(mainModel);

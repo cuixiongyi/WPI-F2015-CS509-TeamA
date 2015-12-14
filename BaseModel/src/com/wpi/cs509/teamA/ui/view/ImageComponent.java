@@ -113,6 +113,7 @@ public class ImageComponent extends JComponent {
 			model.setFisrtFocusNode2False();
 		}
 		PaintHelperComposite.paintEverything(g2, image, lt);
+		ViewManager.getThumbNailPanel().setLocation(0,0);
 
 
 		/// CXY test
