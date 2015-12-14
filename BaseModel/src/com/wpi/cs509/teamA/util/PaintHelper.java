@@ -135,7 +135,7 @@ public class PaintHelper {
 			String nodeTitle = node.getName();
 			if (node.getNodeType() == NodeType.PARKING) 
 			{
-				nodeTitle += " (" + 20 + ")"; // where to change parking info
+				nodeTitle += " (" + model.getParkingAvilibility().get(node.getName()) + ")"; // where to change parking info
 			}
 
 		    FontMetrics metrics = g2.getFontMetrics();

@@ -10,6 +10,7 @@ import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,6 +35,8 @@ public final class MainModel extends StateContext {
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	private ArrayList<GeneralMap> multiMapLists = null;
+	
+	private HashMap<String, Integer> parkingAvilibility = null;
 
     private ArrayList<Path> paths = null;
     private int currentPathIdx = 0;
@@ -50,7 +53,12 @@ public final class MainModel extends StateContext {
 		multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
-
+		parkingAvilibility = new HashMap<String, Integer>();
+		for(Node n: Database.getAllNodeListFromDatabase()){
+			if(n.getNodeType() == NodeType.PARKING){
+				parkingAvilibility.put(n.getName(), 0);
+			}
+		}	
 	}
 
 	public synchronized void setFilter(NodeType filter) {
@@ -359,4 +367,12 @@ public final class MainModel extends StateContext {
         setCurrentPath(currentPathIdx-1);
         return true;
     }
+
+	public HashMap<String, Integer> getParkingAvilibility() {
+		return parkingAvilibility;
+	}
+
+	public void setParkingAvilibility(HashMap<String, Integer> parkingAvilibility) {
+		this.parkingAvilibility = parkingAvilibility;
+	}
 }
