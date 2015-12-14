@@ -6,8 +6,11 @@ import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.LinearTransform;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,13 +88,13 @@ public class MouseActionEditEdge  extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
 
         //TODO draw newly added edge
-
-        PaintHelper.paintNodes(model.getCurrentMap().getNodes(),
-                g2, PaintHelper.DrawStyleEnum.BasicNode);
-        PaintHelper.paintEdges(model.getCurrentMap().getEdges(),
-                g2, PaintHelper.DrawStyleEnum.BasicEdge);
+        LinearTransform lt = model.getLinearTransform();
+        PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(),
+                g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
+        PaintHelperComposite.paintEdges(model.getCurrentMap().getEdges(),
+                g2, PaintHelperBasics.DrawStyleEnum.BasicEdge, lt);
         if (null != lastNode && model.getCurrentMap().getMapId() == lastNode.getMap().getMapId()) {
-            PaintHelper.paintNode(lastNode, g2, PaintHelper.DrawStyleEnum.SelectedNode);
+            PaintHelperBasics.paintDot(lastNode, g2, PaintHelperBasics.DrawStyleEnum.SelectedNode);
         }
     }
 }

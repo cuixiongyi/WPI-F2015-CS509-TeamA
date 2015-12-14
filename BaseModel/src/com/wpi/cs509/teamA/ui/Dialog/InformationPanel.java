@@ -3,7 +3,6 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeIcon;
-import com.wpi.cs509.teamA.util.PaintHelper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by xiongkuang on 12/13/15.

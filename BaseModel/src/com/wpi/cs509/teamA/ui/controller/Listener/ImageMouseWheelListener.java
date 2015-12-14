@@ -54,7 +54,9 @@ public class ImageMouseWheelListener implements MouseWheelListener{
 
     private void changeDisplayScale(float scaleInc, Coordinate coor) {
         GeneralMap map = model.getCurrentMap();
-        map.setDisplayScale(map.getDisplayScale()+scaleInc);
+        double scale = map.getDisplayScale()+scaleInc;
+        map.setDisplayScale((float)scale);
+        model.getLinearTransform().setScale(scale);
         int xpos = imageComponent.getImageXpos();
         int ypos = imageComponent.getImageYpos();
         int x = scaleImageOffset(xpos, scaleInc, coor.getX());

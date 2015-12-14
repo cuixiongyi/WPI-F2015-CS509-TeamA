@@ -3,11 +3,10 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
-import com.wpi.cs509.teamA.ui.Dialog.NodeEditDialog;
 import com.wpi.cs509.teamA.ui.Dialog.NodeInfoDIalog;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.LinearTransform;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -64,7 +63,8 @@ public class MouseActionEditNodeInfo extends MouseActionState {
 
     @Override
     public void paintOnImage(Graphics2D g2) {
+        LinearTransform lt = model.getLinearTransform();
 
-        PaintHelper.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.BasicNode);
+        PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
     }
 }

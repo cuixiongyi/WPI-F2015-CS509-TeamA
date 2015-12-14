@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +33,7 @@ public class PopupPanel  extends JPanel implements ActionListener {
         
         
         try {
-            logo = ImageIO.read(new File(PaintHelper.getUserDir()+ "logo_iteration1.png"));
+            logo = ImageIO.read(new File(PaintHelperBasics.getUserDir()+ "logo_iteration1.png"));
             picLabel = new JLabel(new ImageIcon(logo));
             picLabel.setBounds(0,20,200, 200);
             this.add(picLabel);

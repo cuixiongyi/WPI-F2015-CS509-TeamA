@@ -4,16 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.util.NodeType;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 
 public class NodeIcon {
@@ -33,16 +30,16 @@ public class NodeIcon {
 
 	
 
-	private static String labIconFilePath = PaintHelper.getUserDir() + labIconName;
-	private static String classroomIconFilePath = PaintHelper.getUserDir() + classroomIconName;
-	private static String officeIconFilePath = PaintHelper.getUserDir() + officeIconName;
-	private static String restroomIconFilePath = PaintHelper.getUserDir() + restroomIconName;
-	private static String parkingIconFilePath = PaintHelper.getUserDir() + parkingIconName;
-	private static String startIconFilePath = PaintHelper.getUserDir() + startIconName;
-	private static String endIconFilePath = PaintHelper.getUserDir() + endIconName;
-	private static String nextIconFilePath = PaintHelper.getUserDir() + nextIconName;
+	private static String labIconFilePath = PaintHelperBasics.getUserDir() + labIconName;
+	private static String classroomIconFilePath = PaintHelperBasics.getUserDir() + classroomIconName;
+	private static String officeIconFilePath = PaintHelperBasics.getUserDir() + officeIconName;
+	private static String restroomIconFilePath = PaintHelperBasics.getUserDir() + restroomIconName;
+	private static String parkingIconFilePath = PaintHelperBasics.getUserDir() + parkingIconName;
+	private static String startIconFilePath = PaintHelperBasics.getUserDir() + startIconName;
+	private static String endIconFilePath = PaintHelperBasics.getUserDir() + endIconName;
+	private static String nextIconFilePath = PaintHelperBasics.getUserDir() + nextIconName;
 	
-	private static String iconDir=PaintHelper.getUserDir()+"numicon/"+numPrefix;
+	private static String iconDir= PaintHelperBasics.getUserDir()+"numicon/"+numPrefix;
 	
 
 	private static BufferedImage labIcon;

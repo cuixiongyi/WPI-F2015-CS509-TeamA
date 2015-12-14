@@ -1,14 +1,12 @@
 package com.wpi.cs509.teamA.model;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 /**
  *
@@ -42,7 +40,7 @@ public abstract class MouseActionState {
 		xPos = e.getX();
 		yPos = e.getY();
 		coor = new Coordinate(e.getX(), e.getY());
-		coorTrans = PaintHelper.backTransferCoor(coor);
+		coorTrans = model.getLinearTransform().backTransferCoor(coor);
 	}
 
 	public Node getNodeFromClick(Coordinate coor) {
