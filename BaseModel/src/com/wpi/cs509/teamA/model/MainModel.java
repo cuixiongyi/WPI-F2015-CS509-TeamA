@@ -315,6 +315,7 @@ public final class MainModel extends StateContext {
 		if (null == paths) {
 			paths = new ArrayList<Path>();
 		}
+        path.setMap(path.getNodes().get(0).getMap());
 		this.paths.add(path);
 	}
 
