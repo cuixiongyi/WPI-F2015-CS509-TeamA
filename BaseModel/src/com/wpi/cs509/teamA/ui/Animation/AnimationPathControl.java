@@ -2,7 +2,6 @@ package com.wpi.cs509.teamA.ui.Animation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Timer;
@@ -10,8 +9,6 @@ import javax.swing.Timer;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.Animation.AnimationControl.MyActionListener;
-import com.wpi.cs509.teamA.util.PaintHelper;
 
 /**
  * Created by cuixi on 12/10/2015.

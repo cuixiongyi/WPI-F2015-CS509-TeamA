@@ -2,7 +2,10 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.LinearTransform;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -41,11 +44,12 @@ public class MouseActionAdminUser extends MouseActionState {
 
 	@Override
 	public void paintOnImage(Graphics2D g2) {
-		PaintHelper.paintEdges(model.getCurrentMap().getEdges(), g2, PaintHelper.DrawStyleEnum.BasicEdge);
-		PaintHelper.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelper.DrawStyleEnum.NewNode);
-		PaintHelper.paintRoute(g2);
+		LinearTransform lt = model.getLinearTransform();
+		PaintHelperComposite.paintEdges(model.getCurrentMap().getEdges(), g2, PaintHelperBasics.DrawStyleEnum.BasicEdge, lt);
+		PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelperBasics.DrawStyleEnum.NewNode, lt);
+		PaintHelperComposite.paintRoute(g2, lt);
 
-		PaintHelper.paintStartEndNode(g2);
+		PaintHelperComposite.paintStartEndNode(g2, lt);
 
 	}
 }

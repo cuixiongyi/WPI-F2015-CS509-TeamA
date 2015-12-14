@@ -1,6 +1,9 @@
 package com.wpi.cs509.teamA.ui.Animation;
 
 import javax.swing.*;
+
+import com.wpi.cs509.teamA.ui.view.ViewManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ public class AnimationControl {
             for (AnimationObject obj : objects) {
                 obj.execute();
             }
+        
         }
     }
 
@@ -32,12 +36,14 @@ public class AnimationControl {
 
     }
 
-    public void create(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition, int pRange) {
-        if (null != checkObjectExist(pPanel))
-            return;
+    public AnimationObject create(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition, int pRange) {
+        AnimationObject ret = checkObjectExist(pPanel);
+        if (null != ret)
+            return ret;
 
-        AnimationObject newAO = new AnimationObject(pPanel, pParent, pStyle, pPosition, pRange);
-        objects.add(newAO);
+        ret = new AnimationObject(pPanel, pParent, pStyle, pPosition, pRange);
+        objects.add(ret);
+        return ret;
 
     }
 

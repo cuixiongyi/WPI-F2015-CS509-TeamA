@@ -364,6 +364,7 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			pstmt = conn.prepareStatement(selectAllNodes);
 			// TODO: potential danger..
 			pstmt.setInt(1, map_id);
+			pstmt.setInt(2, map_id);
 			resultSet = pstmt.executeQuery();
 			while (resultSet.next()) {
 				res.add(resultSet.getInt("id"));

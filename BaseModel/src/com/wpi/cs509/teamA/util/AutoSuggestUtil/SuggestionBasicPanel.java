@@ -24,14 +24,14 @@ public class SuggestionBasicPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private boolean focused = false;
 	final JWindow autoSuggestionsPopUpWindow;
-	private final JTextField textField;
-	private final AutoSuggestor autoSuggestor;
+	protected final JTextField textField;
+	protected final AutoSuggestor autoSuggestor;
 	protected Color suggestionsTextColor;
 	private Color suggestionBorderColor;
 	protected Color suggestionLineBorderColor;
 	protected Dimension preferredSize;
 	protected Font font;
-	private ArrayList<Node> nodeInformation;
+	protected ArrayList<Node> nodeInformation;
 	protected BufferedImage imageIcon;
 	
 
@@ -95,9 +95,7 @@ public class SuggestionBasicPanel extends JPanel {
 		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
 			autoSuggestor.getModel().setStartNode(nodeInformation.get(0));
 		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-			for(Node node: nodeInformation){
-				autoSuggestor.getModel().setEndNode(node);
-			}
+			autoSuggestor.getModel().setEndNode(nodeInformation.get(0));
 		}
 
 		String typedWord = autoSuggestor.getCurrentlyTypedWord();

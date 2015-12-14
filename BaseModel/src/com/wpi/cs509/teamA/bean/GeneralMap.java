@@ -1,8 +1,6 @@
 package com.wpi.cs509.teamA.bean;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +12,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 /**
  * This is a class that defines all the map we want. It is also the class that
@@ -174,7 +172,7 @@ public class GeneralMap implements AdjacencyMatrix {
 	public void readImage() {
 
 		// display the image. Note that " /" only works on UNIX
-		this.mapImgPath = PaintHelper.getUserDir() + this.imageName;
+		this.mapImgPath = PaintHelperBasics.getUserDir() + this.imageName;
 		try {
 			image = ImageIO.read(new FileInputStream(mapImgPath));
 		} catch (FileNotFoundException e) {

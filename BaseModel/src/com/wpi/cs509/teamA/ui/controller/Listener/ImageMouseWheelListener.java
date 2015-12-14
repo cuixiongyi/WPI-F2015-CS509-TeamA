@@ -16,6 +16,8 @@ public class ImageMouseWheelListener implements MouseWheelListener{
 
 
     static float scaleIncConst = 0.15f;
+    static private double upperBound = 2.5;
+    static private double lowerBound = 0.5;
 
     private ImageComponent imageComponent = null;
     private MainModel model = null;
@@ -43,13 +45,18 @@ public class ImageMouseWheelListener implements MouseWheelListener{
             scaleInc -= scaleIncConst;
         }
 
+        double scale = model.getCurrentMap().getDisplayScale();
+        if (scale + scaleInc > upperBound || scale + scaleInc < lowerBound)
+            return;
 
         changeDisplayScale(scaleInc, new Coordinate(Math.round(e.getX()), Math.round(e.getY())));
     }
 
     private void changeDisplayScale(float scaleInc, Coordinate coor) {
         GeneralMap map = model.getCurrentMap();
-        map.setDisplayScale(map.getDisplayScale()+scaleInc);
+        double scale = map.getDisplayScale()+scaleInc;
+        map.setDisplayScale((float)scale);
+        model.getLinearTransform().setScale(scale);
         int xpos = imageComponent.getImageXpos();
         int ypos = imageComponent.getImageYpos();
         int x = scaleImageOffset(xpos, scaleInc, coor.getX());

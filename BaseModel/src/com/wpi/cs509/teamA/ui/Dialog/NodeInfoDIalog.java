@@ -117,7 +117,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
 
         if(e.getSource()==okButton)
         {
-            
+
         }
 
     }

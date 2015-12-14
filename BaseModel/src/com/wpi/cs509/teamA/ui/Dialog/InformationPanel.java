@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeIcon;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -31,7 +31,7 @@ public class InformationPanel extends JPanel implements ActionListener {
     public InformationPanel()
     {
         textLabel=new JLabel();
-        textArea=new JTextArea();
+//        textArea=new JTextArea();
         picLabel=new JLabel();
     }
 
@@ -39,33 +39,28 @@ public class InformationPanel extends JPanel implements ActionListener {
         refresh();
         this.node = node;
         updateDisplay(node);
+        this.repaint();
     }
 
     public void updateDisplay(Node pnode){
 
         String pre = "<html><body style='width: 150px;'>";
-        this.setSize(256,106);
+        this.setSize(306,126);
         this.setLayout(null);
 
         node=pnode;
 
         this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
-
-//        textLabel.setText(pre+Database.getNodeInformation(node.getId()).PrintNodeInfo());
-//        textLabel.setBounds(103,3,150,100);
-//        textLabel.setFont(new Font("Arial", Font.BOLD, 10));
-//        this.add(textLabel);
-
-        textArea.setText(Database.getNodeInformation(node.getId()).PrintNodeInfo().get(0));
-        textArea.setBounds(103,3,150,100);
-        textArea.setFont(new Font("Arial", Font.BOLD, 10));
-        this.add(textArea);
+        textLabel.setText(pre+Database.getNodeInformation(node.getId()).PrintNodeInfo());
+        textLabel.setBounds(123,3,180,120);
+        textLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        this.add(textLabel);
 
         try{
-            informationPic= NodeIcon.resize(ImageIO.read(new File(node.getMap().getMapImgPath())),100,100) ;
+            informationPic= PaintHelperBasics.resize(ImageIO.read(new File(node.getMap().getMapImgPath())),120,120) ;
             picLabel.setIcon(new ImageIcon(informationPic));
-            picLabel.setBounds(3,3,100,100);
+            picLabel.setBounds(3,3,120,120);
             this.add(picLabel);
 
         } catch (IOException e) {

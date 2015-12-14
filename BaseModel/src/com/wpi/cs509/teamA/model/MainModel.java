@@ -7,9 +7,11 @@ import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,12 +36,15 @@ public final class MainModel extends StateContext {
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	private ArrayList<GeneralMap> multiMapLists = null;
+	
+	private HashMap<String, Integer> parkingAvilibility = null;
 
     private ArrayList<Path> paths = null;
-    private Path currentPath = null;
+    private int currentPathIdx = 0;
 
     private Node nodeAnimation = null;
-    
+	private LinearTransform linearTransform = new LinearTransform();;
+
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -51,7 +56,13 @@ public final class MainModel extends StateContext {
 		multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
-
+		parkingAvilibility = new HashMap<String, Integer>();
+        linearTransform = new LinearTransform();
+		for(Node n: Database.getAllNodeListFromDatabase()){
+			if(n.getNodeType() == NodeType.PARKING){
+				parkingAvilibility.put(n.getName(), 0);
+			}
+		}	
 	}
 
 	public synchronized void setFilter(NodeType filter) {
@@ -305,36 +316,72 @@ public final class MainModel extends StateContext {
 		staticModel = pModel;
 	}
 
-	public ArrayList<Path> getPaths() {
+	public synchronized ArrayList<Path> getPaths() {
 		return paths;
 	}
-	public Path getOnePath(int idx) {
+	public synchronized Path getOnePath(int idx) {
+		if (null == paths || 0 > idx || paths.size() <= idx )
+			return null;
 		return paths.get(idx);
 	}
 
-	public void addOnePath(Path path) {
+	public synchronized void addOnePath(Path ppath) {
 		if (null == paths) {
 			paths = new ArrayList<Path>();
 		}
-        path.setMap(path.getNodes().get(0).getMap());
-		this.paths.add(path);
+		ppath.setMap(ppath.getNodes().get(0).getMap());
+		this.paths.add(ppath);
 	}
 
-	public void clearPaths() {
+	public synchronized void clearPaths() {
 		this.paths = null;
 	}
 
-    public Path getCurrentPath() {
-        return currentPath;
+    public synchronized Path getCurrentPath() {
+        return getOnePath(currentPathIdx);
     }
 
-    public void setCurrentPath(int idx) {
-        if (idx >= paths.size()) {
-            throw new StackOverflowError();
-        }
-        this.currentPath = paths.get(idx);
+    public synchronized int getCurrentPathIdx() {
+        return currentPathIdx;
     }
-    
+
+    public synchronized void setCurrentPath(int idx) {
+        if (idx >= paths.size() || idx < 0) {
+            return;
+//            throw new ArrayIndexOutOfBoundsException();
+        }
+        this.currentPathIdx = idx;
+        Path path = getOnePath(currentPathIdx);
+        this.setFocusNode(path.getNodes().get(0));
+		this.setCurrentMap(path.getMap());
+    }
+
+    public synchronized boolean setNextPath() {
+        if (currentPathIdx+1 >= paths.size()) {
+            return false;
+        }
+        setCurrentPath(currentPathIdx+1);
+        return true;
+    }
+
+    public synchronized boolean setPrivousPath() {
+        if (currentPathIdx-1 < 0) {
+            return false;
+        }
+        setCurrentPath(currentPathIdx-1);
+        return true;
+    }
+
+    public synchronized LinearTransform getLinearTransform() {
+        modelChanged();
+        return linearTransform;
+    }
+
+    public synchronized void setLinearTransform(LinearTransform linearTransform) {
+        this.linearTransform = linearTransform;
+        modelChanged();
+    }
+
     public void setAnimationNode(Node node) {
     	this.nodeAnimation = node;
     	modelChanged();
@@ -342,4 +389,13 @@ public final class MainModel extends StateContext {
     public Node getAnimationNode() {
     	return this.nodeAnimation;
     }
+	public HashMap<String, Integer> getParkingAvilibility() {
+		return parkingAvilibility;
+	}
+
+	public void setParkingAvilibility(HashMap<String, Integer> parkingAvilibility) {
+		this.parkingAvilibility = parkingAvilibility;
+	}
+
+
 }

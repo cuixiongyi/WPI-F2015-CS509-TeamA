@@ -14,7 +14,6 @@ import javax.swing.JList;
 public class MarioListRenderer extends DefaultListCellRenderer {
 
     Font font = new Font("helvitica", Font.BOLD, 24);
-
     @Override
     public Component getListCellRendererComponent(
             JList list, Object value, int index,
@@ -40,4 +39,6 @@ public class MarioListRenderer extends DefaultListCellRenderer {
         label.setFont(font);
         return label;
     }
+    
+  
 }

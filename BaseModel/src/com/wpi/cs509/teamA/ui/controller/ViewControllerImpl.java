@@ -12,15 +12,21 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.OpenMapDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
+import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
 import com.wpi.cs509.teamA.util.NodeType;
 
 class ViewControllerImpl extends ViewControllerBase {
@@ -44,7 +50,6 @@ class ViewControllerImpl extends ViewControllerBase {
 			model.switchToState(new MouseActionSelectNode(model));
 
 			ViewManager.updateView();
-
 		}
 	}
 
@@ -53,11 +58,13 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		if (MouseActionEditNode.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
-			model.switchToState(new MouseActionSelectNode(model));
+            model.switchToState(new MouseActionSelectNode(model));
 		} else {
 			model.switchToState(new MouseActionEditNode(model));
 			button.setSelected(true);
-		}
+            inputPanel.getBtnMngEdge().setSelected(false);
+
+        }
 	}
 
 	public void clickEditEdge() {
@@ -65,11 +72,14 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
-			model.switchToState(new MouseActionSelectNode(model));
+            model.switchToState(new MouseActionSelectNode(model));
 		} else {
 			model.switchToState(new MouseActionEditEdge(model));
 			button.setSelected(true);
-		}
+            inputPanel.getBtnMngNode().setSelected(false);
+
+
+        }
 	}
 
 	public void clickSignup() {
@@ -98,6 +108,8 @@ class ViewControllerImpl extends ViewControllerBase {
 			return;
 		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
+		inputPanel.getMapList().setEnabled(true);
+		inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
 
@@ -116,14 +128,14 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		while (pathNodes.size() > 0) {
 
-					Node node = pathNodes.pop();
+			Node node = Database.getNodeFromId(pathNodes.pop().getId());
 			if (node.getMap().getMapId() == tmpMapId) {
 				singleMapPath.add(node);
 				path.addNode(node);
 
 
 			} else {
-						multiMapPathLists.add(singleMapPath);
+				multiMapPathLists.add(singleMapPath);
 
 				model.addOnePath(path);
 				path = new Path();
@@ -139,6 +151,7 @@ class ViewControllerImpl extends ViewControllerBase {
 
 			}
 		}
+
 		model.addOnePath(path);
 
 		multiMapPathLists.add(singleMapPath);
@@ -149,11 +162,13 @@ class ViewControllerImpl extends ViewControllerBase {
 		for (String name : mapNameList) {
 			mapListModel.addElement(name);
 		}
-		inputPanel.getMapList().setModel(mapListModel);
-//		model.setMultiMapPathListsForEachMap(multiMapPathLists);
 		model.setCurrentPath(0);
-		model.setCurrentMap(model.getCurrentPath().getMap());
 		model.setMultiMapLists(mapList);
+		System.out.println(mapList);
+        inputPanel.getMapList().setModel(mapListModel);
+
+		addThumbNail();
+
 		ViewManager.updateView();
 
 	}
@@ -171,6 +186,21 @@ class ViewControllerImpl extends ViewControllerBase {
 		// log.append("Open command cancelled by user." + newline);
 		// }
 		// }
+
+	}
+
+	private AnimationObject addThumbNail() {
+		ViewManager.getThumbNailPanel().update();
+		AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+		if (null == ret) {
+			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(5));
+			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
+					ViewManager.getThumbNailPanel().getWidth());
+			ret.switchState(new AnimationStateSlidingUp(ret));
+			ret.setSpeed(2.0);
+			ViewManager.getThumbNailPanel().setVisible(true);
+		}
+		return ret;
 
 	}
 

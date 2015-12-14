@@ -7,8 +7,12 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.NodeIcon;
+
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 public class SuggestorPainter {
 
@@ -53,12 +57,12 @@ public class SuggestorPainter {
 	private static String activityIconName = "Activity_Icon.jpg";
 	private static String majorIconName = "Major_Icon.png";
 
-	private static String professorIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + professorIconName;
-	private static String historyIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + historyIconName;
-	private static String locationIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + locationIconName;
-	private static String majorIconFilePath = PaintHelper.getUserDir() +"suggestionicon/" + majorIconName;
-	private static String activityIconFilePath = PaintHelper.getUserDir() +"suggestionicon/" + activityIconName;
-	private static String othersIconFilePath = PaintHelper.getUserDir() + "suggestionicon/" + othersIconName;
+	private static String professorIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + professorIconName;
+	private static String historyIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + historyIconName;
+	private static String locationIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + locationIconName;
+	private static String majorIconFilePath = PaintHelperBasics.getUserDir() +"suggestionicon/" + majorIconName;
+	private static String activityIconFilePath = PaintHelperBasics.getUserDir() +"suggestionicon/" + activityIconName;
+	private static String othersIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + othersIconName;
 
 	private static BufferedImage professorIcon;
 	private static BufferedImage locationIcon;
@@ -111,20 +115,20 @@ public class SuggestorPainter {
 					historyTxtBorderColor, suggestionPanel);
 			break;
 		case Major:
-			setsuggestionPanel(majorFont, majorTxtColor, majorColor, preferredSize, majorIcon,
-					majorTxtBorderColor, suggestionPanel);
+			setsuggestionPanel(majorFont, majorTxtColor, majorColor, preferredSize, majorIcon, majorTxtBorderColor,
+					suggestionPanel);
 			break;
 		case Activity:
 			setsuggestionPanel(activityFont, activityTxtColor, activityColor, preferredSize, activityIcon,
 					activityTxtBorderColor, suggestionPanel);
 			break;
 		case Labels:
-			setsuggestionPanel(labelFont, labelTxtColor, labelColor, preferredSize, null,
-					labelTxtBorderColor, suggestionPanel);
+			setsuggestionPanel(labelFont, labelTxtColor, labelColor, preferredSize, null, labelTxtBorderColor,
+					suggestionPanel);
 			break;
 		case Others:
-			setsuggestionPanel(othersFont, othersTxtColor, othersColor, preferredSize, othersIcon,
-					othersTxtBorderColor, suggestionPanel);
+			setsuggestionPanel(othersFont, othersTxtColor, othersColor, preferredSize, othersIcon, othersTxtBorderColor,
+					suggestionPanel);
 			break;
 
 			
@@ -140,6 +144,20 @@ public class SuggestorPainter {
 		suggestionPanel.setPreferredSize(size);
 		suggestionPanel.setImageIcon(icon);
 		suggestionPanel.setSuggestionLineBorderColor(txtBorderColor);
+	}
+
+	protected static Icon getIconFromName(String name){
+		switch (name){
+			case "RestRoom": 			
+				return new ImageIcon(NodeIcon.getRestroomIcon());
+				
+			case "ParkingLot":
+				return new ImageIcon(NodeIcon.getParkingIcon());
+			case "pizza":
+				return new ImageIcon(othersIcon);
+		}
+		return null;
+		
 	}
 
 }

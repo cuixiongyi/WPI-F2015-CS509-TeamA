@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -32,7 +34,7 @@ public class SignupDialog extends JDialog implements ActionListener  {
 	private JTextField email;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField2;
-	private boolean isAdmin;
+	private boolean isAdmin=false;
 	private JCheckBox adminCheck;
 	private JLabel lbUserName;
 	private JLabel lbEmail;
@@ -119,6 +121,18 @@ public class SignupDialog extends JDialog implements ActionListener  {
 		buttonPane.add(cancelButton);
 		
 		adminCheck=new JCheckBox("Admin");
+		adminCheck.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+
+				if(e.getStateChange() == ItemEvent.SELECTED)
+					setIsAdmin(true);
+				else
+					setIsAdmin(false);
+
+
+			}
+		});
 		adminCheck.addActionListener(this);
 		buttonPane.add(adminCheck);
 		
@@ -136,12 +150,7 @@ public class SignupDialog extends JDialog implements ActionListener  {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==adminCheck)
-		{
-			if(adminCheck.isSelected())
-				setIsAdmin(true);
-			else setIsAdmin(false);
-		}
+
 		if (e.getActionCommand().equals("CANCEL"))
 		{
 			SignupDialog.this.setVisible(false);
@@ -151,6 +160,7 @@ public class SignupDialog extends JDialog implements ActionListener  {
 			// Check password
 			if (isPasswordSame(getPassword(passwordField),getPassword(passwordField2))) {
 				SignupDialog.this.setVisible(false);
+				System.out.println("Is Admin?:  "+isAdmin);
 				if(saveAccount(getUsername(),getPassword(passwordField),getEmail(),getIsAdmin()))
 				{
 					JOptionPane.showMessageDialog(null, "Congratulations, you can log in now.", "Sign up succefful.",

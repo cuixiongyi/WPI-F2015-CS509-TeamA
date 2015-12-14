@@ -12,6 +12,9 @@ public class NodeInformation {
 	private List<Professor> professor;
 	private List<OtherFeature> labels;
 	private List<Activity> activities;
+	String breakLine= "<br>";
+	String bold="<b>";
+	String cbold="</b>";
 	
 	public NodeInformation(Node node, List<Major> major, List<Professor> professor,
 			List<OtherFeature> labels, List<Activity> activities){
@@ -62,42 +65,44 @@ public class NodeInformation {
 		this.activities = activities;
 	}
 	
-	public List<String> PrintNodeInfo(){
-		List<String> listOfString = new ArrayList<String>();
-		listOfString.add("Node name");
-		listOfString.add(this.node.getName());
-		listOfString.add("Map name");
-		listOfString.add(this.node.getMap().getMapName());
+	public String PrintNodeInfo(){
+		String line = "";
+		line = line+bold+"Node name: "+cbold+breakLine+ this.node.getName() +breakLine+bold+
+				"Map name: "+cbold+ breakLine+ this.node.getMap().getMapName()+breakLine;
 		
 		//print majors
 		if((major!=null) && (major.size()!=0)){
 			for(Major m: major){
-				listOfString.add("Major");
-				listOfString.add(m.getMajorName());
+				line = line+bold+"Major: "+cbold+breakLine+ m.getMajorName()+breakLine;
+		//		listOfString.add("Major");
+		//		listOfString.add(m.getMajorName());
 			}
 		}
 		// print professors
 		if((professor!=null)&&(professor.size()!=0)){
 			for(Professor p:professor){
-				listOfString.add("Professor");
-				listOfString.add(p.getProfessorName());
+				line = line+bold+"Professor: "+cbold+breakLine+ p.getProfessorName()+breakLine;
+		//		listOfString.add("Professor");
+		//		listOfString.add(p.getProfessorName());
 			}
 		}
 		//print labels
 		if((labels!=null)&&(labels.size()!=0)){
 			for(OtherFeature ll:labels){
-				listOfString.add("Labels");
-				listOfString.add(ll.getFeatureLabel());
+				line = line+bold+"Labels: "+cbold+breakLine+ ll.getFeatureLabel()+breakLine;
+		//		listOfString.add("Labels");
+		//		listOfString.add(ll.getFeatureLabel());
 			}
 		}
 		//print activities
 		if((activities!=null)&&(activities.size()!=0)){
 			for(Activity aa:activities){
-				listOfString.add("Activity desc");
-				listOfString.add(aa.getActivityName());
+				line = line+bold+"Activity desc: "+cbold+breakLine+ aa.getActivityName()+breakLine;
+		//		listOfString.add("Activity desc");
+		//		listOfString.add(aa.getActivityName());
 			}
 		}
-		return listOfString;
+		return line;
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
