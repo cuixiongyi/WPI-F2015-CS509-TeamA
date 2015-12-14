@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
@@ -13,12 +14,14 @@ import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
 import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
 import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.PaintHelper;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.List;
 
 public class MouseActionSelectNode extends MouseActionState {
 
@@ -45,13 +48,17 @@ public class MouseActionSelectNode extends MouseActionState {
 
 		if (e.getButton() == MouseEvent.BUTTON3) {
 
-			/// TODO add edit node action
-			NodeSetMenu nodeSetMenu = new NodeSetMenu(ViewManager.getInputPanel(), model, node);
-			nodeSetMenu.show(e.getComponent(), xPos, yPos);
+            /// TODO add edit node action
+            NodeSetMenu nodeSetMenu = new NodeSetMenu(ViewManager.getInputPanel(), model, node);
+            nodeSetMenu.show(e.getComponent(), xPos, yPos);
 
 		}
 
+
 		if (e.getButton() == MouseEvent.BUTTON1) {
+            if (jumpToNextPath(node)) {
+                return true;
+            }
 
 			if (null != node) {
 				ViewManager.getNodeInformation().setNode(node);
@@ -85,4 +92,31 @@ public class MouseActionSelectNode extends MouseActionState {
 		PaintHelper.paintNodes(model.getCurrentMap().getNodes(), g2);
 		PaintHelper.paintStartEndNode(g2);
 	}
+
+    private boolean jumpToNextPath(Node node) {
+
+        Path path = model.getCurrentPath();
+        List<Node> nodes = path.getNodes();
+
+        if (null != path && 0 != nodes.size()) {
+            List<Node> nodesCross = Database.getAllMapRelationNodesFromMapId(model.getCurrentMapID());
+            if (nodesCross.contains(node)) {
+                if(nodes.size() == 1) {
+                    model.setNextPath();
+                    return true;
+                }
+                if (nodes.get(0) == node && model.getCurrentPathIdx()-1 >0) {
+                    model.setPrivousPath();
+                    return true;
+
+                }
+                if (nodes.get(nodes.size()-1) == node && model.getCurrentPathIdx()+1 <model.getPaths().size()) {
+                    model.setNextPath();
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
 }

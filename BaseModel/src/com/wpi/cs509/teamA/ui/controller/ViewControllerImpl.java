@@ -12,10 +12,15 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
 import com.wpi.cs509.teamA.ui.Dialog.OpenMapDialog;
 import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
+import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
@@ -154,6 +159,17 @@ class ViewControllerImpl extends ViewControllerBase {
 		model.setCurrentPath(0);
 		model.setCurrentMap(model.getCurrentPath().getMap());
 		model.setMultiMapLists(mapList);
+
+
+		ViewManager.getThumbNailPanel().update();
+		UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(4));
+		ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
+				ViewManager.getThumbNailPanel().getHeight());
+		AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+		AO.switchState(new AnimationStateSlidingUp(AO));
+		AO.setSpeed(2.0);
+		ViewManager.getThumbNailPanel().setVisible(true);
+
 		ViewManager.updateView();
 
 	}

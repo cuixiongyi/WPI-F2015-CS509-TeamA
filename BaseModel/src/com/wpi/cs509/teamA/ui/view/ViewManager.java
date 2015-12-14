@@ -9,6 +9,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlid
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.Dialog.InformationPanel;
 import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
+import com.wpi.cs509.teamA.ui.Dialog.ThumbNailPanel;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
@@ -25,6 +26,7 @@ public class ViewManager extends ViewControllerBase implements Observer{
 
     private int mousePos = 0;
     private static InformationPanel nodeInformation =new InformationPanel();
+    private static ThumbNailPanel thumbNailPanel=new ThumbNailPanel(model);
     public ViewManager() {
 
 
@@ -82,6 +84,10 @@ public class ViewManager extends ViewControllerBase implements Observer{
 
     public static void setInformationNode(Node pnode) {
         nodeInformation.setNode(pnode);
+    }
+
+    public static ThumbNailPanel getThumbNailPanel() {
+        return thumbNailPanel;
     }
 }
 

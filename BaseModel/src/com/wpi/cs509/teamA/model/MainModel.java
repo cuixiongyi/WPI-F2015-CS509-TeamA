@@ -36,7 +36,7 @@ public final class MainModel extends StateContext {
 	private ArrayList<GeneralMap> multiMapLists = null;
 
     private ArrayList<Path> paths = null;
-    private Path currentPath = null;
+    private int currentPathIdx = 0;
 
 
 	public MainModel() {
@@ -308,15 +308,17 @@ public final class MainModel extends StateContext {
 		return paths;
 	}
 	public Path getOnePath(int idx) {
+		if (null == paths || 0 > idx || paths.size() <= idx )
+			return null;
 		return paths.get(idx);
 	}
 
-	public void addOnePath(Path path) {
+	public void addOnePath(Path ppath) {
 		if (null == paths) {
 			paths = new ArrayList<Path>();
 		}
-        path.setMap(path.getNodes().get(0).getMap());
-		this.paths.add(path);
+		ppath.setMap(ppath.getNodes().get(0).getMap());
+		this.paths.add(ppath);
 	}
 
 	public void clearPaths() {
@@ -324,13 +326,36 @@ public final class MainModel extends StateContext {
 	}
 
     public Path getCurrentPath() {
-        return currentPath;
+        return getOnePath(currentPathIdx);
+    }
+
+    public int getCurrentPathIdx() {
+        return currentPathIdx;
     }
 
     public void setCurrentPath(int idx) {
-        if (idx >= paths.size()) {
-            throw new StackOverflowError();
+        if (idx >= paths.size() || idx < 0) {
+            throw new ArrayIndexOutOfBoundsException();
         }
-        this.currentPath = paths.get(idx);
+        this.currentPathIdx = idx;
+        Path path = getOnePath(currentPathIdx);
+        this.setFocusNode(path.getNodes().get(0));
+		this.setCurrentMap(path.getMap());
+    }
+
+    public boolean setNextPath() {
+        if (currentPathIdx+1 >= paths.size()) {
+            return false;
+        }
+        setCurrentPath(currentPathIdx+1);
+        return true;
+    }
+
+    public boolean setPrivousPath() {
+        if (currentPathIdx-1 < 0) {
+            return false;
+        }
+        setCurrentPath(currentPathIdx-1);
+        return true;
     }
 }
