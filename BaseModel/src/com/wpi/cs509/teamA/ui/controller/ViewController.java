@@ -143,8 +143,10 @@ public class ViewController extends ViewControllerBase {
 	public void addListSelectionListener() {
 		inputPanel.getMapList().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				Object value = inputPanel.getMapList().getSelectedValue();
-				boolean tmp = matchAndSetMapIDFromString(value);
+//				Object value = inputPanel.getMapList().getSelectedValue();
+				model.setCurrentPath(inputPanel.getMapList().getSelectedIndex());
+
+//				boolean tmp = matchAndSetMapIDFromString(value);
 			}
 		});
 	}
@@ -153,8 +155,8 @@ public class ViewController extends ViewControllerBase {
 		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				Object value = inputPanel.getComboBoxMap().getSelectedItem();
-				boolean tmp = matchAndSetMapIDFromString(value);
+				model.setCurrentPath(inputPanel.getComboBoxMap().getSelectedIndex());
+//				boolean tmp = matchAndSetMapIDFromString(value);
 			}
 		});
 	}
