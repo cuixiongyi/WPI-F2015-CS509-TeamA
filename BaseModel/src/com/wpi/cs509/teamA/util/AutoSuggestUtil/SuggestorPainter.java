@@ -146,18 +146,18 @@ public class SuggestorPainter {
 		suggestionPanel.setSuggestionLineBorderColor(txtBorderColor);
 	}
 
-	protected static Icon getIconFromName(String name){
-		switch (name){
-			case "RestRoom": 			
-				return new ImageIcon(NodeIcon.getRestroomIcon());
-				
-			case "ParkingLot":
-				return new ImageIcon(NodeIcon.getParkingIcon());
-			case "pizza":
-				return new ImageIcon(othersIcon);
-		}
-		return null;
-		
-	}
+//	protected static Icon getIconFromName(String name){
+//		switch (name){
+//			case "RestRoom": 			
+//				return new ImageIcon(NodeIcon.getRestroomIcon());
+//				
+//			case "ParkingLot":
+//				return new ImageIcon(NodeIcon.getParkingIcon());
+//			case "pizza":
+//				return new ImageIcon(othersIcon);
+//		}
+//		return null;
+//		
+//	}
 
 }

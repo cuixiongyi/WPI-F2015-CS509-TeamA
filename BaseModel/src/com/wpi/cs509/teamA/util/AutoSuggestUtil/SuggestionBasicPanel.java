@@ -95,7 +95,9 @@ public class SuggestionBasicPanel extends JPanel {
 		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
 			autoSuggestor.getModel().setStartNode(nodeInformation.get(0));
 		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-			autoSuggestor.getModel().setEndNode(nodeInformation.get(0));
+			for(Node node: nodeInformation){
+				autoSuggestor.getModel().setEndNode(node);
+			}
 		}
 
 		String typedWord = autoSuggestor.getCurrentlyTypedWord();
