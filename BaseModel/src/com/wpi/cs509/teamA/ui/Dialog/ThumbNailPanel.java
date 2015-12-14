@@ -4,7 +4,9 @@ import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeIcon;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -82,7 +85,10 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
 
         for(Path newPath : this.paths)
         {
-            JLabel newIcon = new JLabel(new ImageIcon(NodeIcon.resize(newPath.getMap().getImage(),onePicSize,onePicSize)));
+            LinearTransform lt = new LinearTransform();
+            lt.setScale((float)onePicSize/newPath.getMap().getImage().getHeight());
+            BufferedImage bi = PaintImageHelper.paintImage(newPath, lt);
+            JLabel newIcon = new JLabel(new ImageIcon(bi));
             JLabel newText = new JLabel(newPath.getMap().getMapName());
             newIcon.addMouseListener(this);
             icons.add(newIcon);

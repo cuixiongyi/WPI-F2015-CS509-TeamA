@@ -125,14 +125,14 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		while (pathNodes.size() > 0) {
 
-					Node node = pathNodes.pop();
+			Node node = Database.getNodeFromId(pathNodes.pop().getId());
 			if (node.getMap().getMapId() == tmpMapId) {
 				singleMapPath.add(node);
 				path.addNode(node);
 
 
 			} else {
-						multiMapPathLists.add(singleMapPath);
+				multiMapPathLists.add(singleMapPath);
 
 				model.addOnePath(path);
 				path = new Path();
