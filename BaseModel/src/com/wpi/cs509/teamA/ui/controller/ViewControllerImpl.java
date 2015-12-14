@@ -54,6 +54,12 @@ class ViewControllerImpl extends ViewControllerBase {
 		}
 	}
 
+	public void clickOnSwapStartEnd()
+	{
+		if(inputPanel.getFromText().getText()!=null && inputPanel.getToText().getText()!=null )
+		{}
+	}
+
 	public void clickEditNode() {
 		JToggleButton button = inputPanel.getBtnMngNode();
 
