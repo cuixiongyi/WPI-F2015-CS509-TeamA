@@ -25,6 +25,8 @@ import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.ParkingManager;
+
 
 import javax.swing.BorderFactory;
 
@@ -47,6 +49,7 @@ public class UserScreen extends JFrame {
 
 	MainModel mainModel = null;
 	ViewManager viewManager = null;
+	ParkingManager parkingManager = null;
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -92,6 +95,8 @@ public class UserScreen extends JFrame {
 		PaintHelper.setModel(mainModel);
 		controller = new ViewController();
 		mainModel.addObserver(viewManager);
+		parkingManager = new ParkingManager();
+		parkingManager.setModel(mainModel);
 		// input panel and components
 
 		inputPanel.setBounds(905, 0, 300, 750);

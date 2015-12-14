@@ -1,6 +1,9 @@
 package com.wpi.cs509.teamA.ui.Animation;
 
 import javax.swing.*;
+
+import com.wpi.cs509.teamA.ui.view.ViewManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ public class AnimationControl {
             for (AnimationObject obj : objects) {
                 obj.execute();
             }
+        
         }
     }
 
