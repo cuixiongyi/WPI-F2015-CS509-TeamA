@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -20,12 +21,13 @@ import javax.swing.KeyStroke;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
+import com.wpi.cs509.teamA.ui.view.InputPanel;
 
 public class SuggestionLabelPanel extends SuggestionBasicPanel {
-
-	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName) {
+	private InputPanel inputPanel;
+	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName, InputPanel inputPanel) {
 		super(string, autoSuggestor, node);
-		
+		this.inputPanel = inputPanel;
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Labels,this);
 		OtherFeatureDaoImpl nodeList = new OtherFeatureDaoImpl();
 		System.out.println(nodeList);
@@ -82,6 +84,25 @@ public class SuggestionLabelPanel extends SuggestionBasicPanel {
 				autoSuggestionsPopUpWindow.setVisible(false);
 			}
 		};
+	}
+	
+	void replaceWithSuggestedText() {
+		String suggestedWord = textLabel.getText();
+		String text = textField.getText();	
+		DefaultListModel<String> mapListModel = new DefaultListModel<>();
+		for(Node node: nodeInformation){
+				autoSuggestor.getModel().setEndNode(node);	
+				mapListModel.addElement(node.getName());
+		}
+		inputPanel.getMapList().setVisible(true);
+		inputPanel.getMapList().removeAll();
+		inputPanel.getMapList().setModel(mapListModel);
+		inputPanel.getMapList().setEnabled(false);
+		
+		String typedWord = autoSuggestor.getCurrentlyTypedWord();
+		String t = textField.getText().substring(0, textField.getText().lastIndexOf(typedWord));
+		String tmp = t + textField.getText().substring(textField.getText().lastIndexOf(typedWord)).replace(typedWord, suggestedWord);
+		textField.setText(tmp);
 	}
 
 	

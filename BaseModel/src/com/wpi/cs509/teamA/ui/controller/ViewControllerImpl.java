@@ -107,6 +107,7 @@ class ViewControllerImpl extends ViewControllerBase {
 			return;
 		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
+		inputPanel.getMapList().setEnabled(true);
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
 
