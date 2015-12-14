@@ -69,7 +69,10 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	private JToggleButton btnMngNode;
 	private JToggleButton btnMngEdge;
 
-	private static int numNodeBtn;
+    JTabbedPane tabbedPane;
+
+
+    private static int numNodeBtn;
 	private static int numEdgeBtn;
 
     private JFileChooser fc;
@@ -98,8 +101,8 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// // User input block
 
 		this.setLayout(null);
-		JTabbedPane tabbedPane = new JTabbedPane();
 
+        tabbedPane = new JTabbedPane();
 		JPanel searchResultTab = new JPanel();
 		JPanel filterTab = new JPanel();
 		JPanel adminTab = new JPanel();
@@ -301,14 +304,19 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             getMapList().setSelectedIndex(model.getCurrentPathIdx());
 
         if (null != model.getMyAccount() && model.getMyAccount().isAdmin()) {
+
             getBtnMngEdge().setEnabled(true);
             getBtnMngNode().setEnabled(true);
             getOpenMap().setEnabled(true);
+            tabbedPane.setEnabledAt(2, true);
+
         }
         else {
             getBtnMngEdge().setEnabled(false);
             getBtnMngNode().setEnabled(false);
             getOpenMap().setEnabled(false);
+            tabbedPane.setEnabledAt(2, false);
+
 
         }
     }
