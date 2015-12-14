@@ -28,11 +28,21 @@ public interface UserAccountDao {
 	public List<History> getAllHistoryForUser(int user_id);
 
 	/**
+	 * save all user history back to database
+	 * that includes delete all existing searching data for this user 
+	 * and also insert all searching data in
+	 * 
+	 * @param user
+	 */
+	public void saveSearchHistoryToDatabase(UserAccount user);
+	
+	/**
 	 * insert user account into the database
 	 * 
 	 * @return a HashMap<String, Integer>
 	 * 
 	 */
+	
 	public boolean addAccountToDatabase(UserAccount add_user);
 
 	/**
