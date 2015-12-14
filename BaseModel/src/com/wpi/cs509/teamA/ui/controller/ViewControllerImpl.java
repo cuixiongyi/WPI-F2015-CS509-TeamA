@@ -109,7 +109,7 @@ class ViewControllerImpl extends ViewControllerBase {
 			return;
 		if(model.getMyAccount()!=null){
 			addHistory();
-			System.out.println("setHistory"+ model.getMyAccount().getHistory());
+		
 		}
 		
 		// inputPanel.picLabel.setVisible(false);

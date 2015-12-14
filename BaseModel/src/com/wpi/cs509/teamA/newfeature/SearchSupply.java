@@ -34,7 +34,7 @@ public class SearchSupply{
 		for (int i = 0; i < searchingStr.length(); i++) {
 			newPattern += searchingStr.charAt(i) + "(.*)";
 		}
-		System.out.println(newPattern);
+	
 		return newPattern;
 	}
 
