@@ -3,9 +3,11 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.NodeIcon;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -17,22 +19,22 @@ import javax.swing.ImageIcon;
 /**
  * Created by xiongkuang on 12/13/15.
  */
-public class ThumbNailPanel extends JScrollPane implements MouseListener {
+public class ThumbNailPanel extends JPanel implements MouseListener {
     private MainModel model;
     private List<Path> paths;
     private List<JLabel> icons;
     private List<JLabel> iconTexts;
-    private int resizeX = 200;
-    private int resizeY = 200;
-    private int picInset = 300;
+    private int resizeX = 150;
+    private int resizeY = 150;
+    private int picInset = 160;
 
     public  ThumbNailPanel(MainModel model){
-        this.setSize(800,220);
-        this.setLocation(110,110);
+        this.setSize(650,200);
         this.model = model;
         this.icons = new ArrayList<JLabel>();
         this.iconTexts = new ArrayList<JLabel>();
         this.setLayout(null);
+
     }
 
     public void update()
@@ -40,10 +42,10 @@ public class ThumbNailPanel extends JScrollPane implements MouseListener {
         this.paths = this.model.getPaths();
         this.removeAll();
 
-        int picX=0;
-        int picY=0;
+        int picX=10;
+        int picY=10;
         int textX=0;
-        int textY=205;
+        int textY=165;
 
         for(Path newPath : this.paths)
         {
@@ -54,7 +56,7 @@ public class ThumbNailPanel extends JScrollPane implements MouseListener {
             iconTexts.add(newText);
 
             newIcon.setBounds(picX,picY,resizeX,resizeY);
-            newText.setBounds(textX,textY,200,30);
+            newText.setBounds(textX,textY,150,30);
 
             picX=picX+picInset;
             textX=textX+picInset;
