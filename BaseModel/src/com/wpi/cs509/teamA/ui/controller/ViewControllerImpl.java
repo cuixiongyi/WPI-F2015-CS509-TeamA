@@ -44,7 +44,6 @@ class ViewControllerImpl extends ViewControllerBase {
 			model.switchToState(new MouseActionSelectNode(model));
 
 			ViewManager.updateView();
-
 		}
 	}
 
@@ -139,6 +138,7 @@ class ViewControllerImpl extends ViewControllerBase {
 
 			}
 		}
+
 		model.addOnePath(path);
 
 		multiMapPathLists.add(singleMapPath);
