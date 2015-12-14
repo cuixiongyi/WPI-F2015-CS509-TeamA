@@ -99,6 +99,7 @@ public class SuggestionLabelPanel extends SuggestionBasicPanel {
 				mapListModel.addElement(node.getName());
 		}
 		inputPanel.getMapList().setCellRenderer(new SameLabelListCellRenderer(SuggestorPainter.getIconFromName(displayName)));
+		
 		inputPanel.getMapList().setVisible(true);
 		inputPanel.getMapList().removeAll();
 		inputPanel.getMapList().setModel(mapListModel);
