@@ -61,13 +61,8 @@ public class MouseActionSelectNode extends MouseActionState {
 
 			if (null != node) {
 				ViewManager.getNodeInformation().setNode(node);
-				UserScreen.getUserScreen().getContentPane().add(ViewManager.getNodeInformation(),new Integer(3));
-				ViewManager.getAC().create(ViewManager.getNodeInformation(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
-						ViewManager.getNodeInformation().getHeight());
-				AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
-				AO.switchState(new AnimationStateSlidingUp(AO));
-				AO.setSpeed(2.0);
-				ViewManager.getNodeInformation().setVisible(true);
+				AnimationObject ret = addInfoAnimation();
+				ret.switchState(new AnimationStateSlidingUp(ret));
 
 			}else{
 				ViewManager.infoPanelSlideDown();
@@ -123,4 +118,18 @@ public class MouseActionSelectNode extends MouseActionState {
         }
         return false;
     }
+
+	private AnimationObject addInfoAnimation() {
+		AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
+		if (null == ret) {
+			UserScreen.getUserScreen().getContentPane().add(ViewManager.getNodeInformation(),new Integer(3));
+			ret = ViewManager.getAC().create(ViewManager.getNodeInformation(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
+						ViewManager.getNodeInformation().getHeight());
+			ret.setSpeed(2.0);
+			ViewManager.getNodeInformation().setVisible(true);
+		}
+
+
+		return ret;
+	}
 }

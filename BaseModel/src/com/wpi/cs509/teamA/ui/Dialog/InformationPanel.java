@@ -38,6 +38,7 @@ public class InformationPanel extends JPanel implements ActionListener {
         refresh();
         this.node = node;
         updateDisplay(node);
+        this.repaint();
     }
 
     public void updateDisplay(Node pnode){

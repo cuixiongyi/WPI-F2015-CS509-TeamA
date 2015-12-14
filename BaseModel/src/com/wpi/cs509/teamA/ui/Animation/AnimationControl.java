@@ -36,12 +36,14 @@ public class AnimationControl {
 
     }
 
-    public void create(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition, int pRange) {
-        if (null != checkObjectExist(pPanel))
-            return;
+    public AnimationObject create(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition, int pRange) {
+        AnimationObject ret = checkObjectExist(pPanel);
+        if (null != ret)
+            return ret;
 
-        AnimationObject newAO = new AnimationObject(pPanel, pParent, pStyle, pPosition, pRange);
-        objects.add(newAO);
+        ret = new AnimationObject(pPanel, pParent, pStyle, pPosition, pRange);
+        objects.add(ret);
+        return ret;
 
     }
 

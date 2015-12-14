@@ -128,14 +128,14 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		while (pathNodes.size() > 0) {
 
-					Node node = pathNodes.pop();
+			Node node = Database.getNodeFromId(pathNodes.pop().getId());
 			if (node.getMap().getMapId() == tmpMapId) {
 				singleMapPath.add(node);
 				path.addNode(node);
 
 
 			} else {
-						multiMapPathLists.add(singleMapPath);
+				multiMapPathLists.add(singleMapPath);
 
 				model.addOnePath(path);
 				path = new Path();
@@ -167,15 +167,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		System.out.println(mapList);
         inputPanel.getMapList().setModel(mapListModel);
 
-
-//		ViewManager.getThumbNailPanel().update();
-//		UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(4));
-//		ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
-//				ViewManager.getThumbNailPanel().getHeight());
-//		AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
-//		AO.switchState(new AnimationStateSlidingUp(AO));
-//		AO.setSpeed(2.0);
-//		ViewManager.getThumbNailPanel().setVisible(true);
+		addThumbNail();
 
 		ViewManager.updateView();
 
@@ -194,6 +186,21 @@ class ViewControllerImpl extends ViewControllerBase {
 		// log.append("Open command cancelled by user." + newline);
 		// }
 		// }
+
+	}
+
+	private AnimationObject addThumbNail() {
+		ViewManager.getThumbNailPanel().update();
+		AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+		if (null == ret) {
+			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(5));
+			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
+					ViewManager.getThumbNailPanel().getWidth());
+			ret.switchState(new AnimationStateSlidingUp(ret));
+			ret.setSpeed(2.0);
+			ViewManager.getThumbNailPanel().setVisible(true);
+		}
+		return ret;
 
 	}
 

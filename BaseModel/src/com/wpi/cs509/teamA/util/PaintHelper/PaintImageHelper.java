@@ -23,20 +23,22 @@ public class PaintImageHelper extends PaintHelperBasics{
 
     static private MainModel model = null;
 
-    public static synchronized void printRoute(Path path, BufferedImage image2, File file, int number) {
+    public static BufferedImage paintImage(Path path, LinearTransform lt) {
+        BufferedImage image = path.getMap().getImage();
+
+        BufferedImage bi = PaintHelperBasics.resize(image, (int)(image.getWidth()*lt.getScale()), (int)(image.getHeight()*lt.getScale()));
+        Graphics2D g2 = bi.createGraphics();
+
+        paintMultiMaps(g2, path, lt);
+        return bi;
+    }
+    public static synchronized void printRoute(Path path, LinearTransform plt, File file, int number) {
         if (null == path || path.getNodes().size() == 0) {
 
             return;
         }
-        BufferedImage image = path.getMap().getImage();
         ImageComponent imageComponent = ViewManager.getImageComponent();
-        BufferedImage bi = new BufferedImage(Math.round(image.getWidth(imageComponent)),
-                Math.round(image.getHeight(imageComponent)), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = bi.createGraphics();
-        g2.drawImage(image, 0, 0, Math.round(image.getWidth(imageComponent)),
-                Math.round(image.getHeight(imageComponent)), imageComponent);
-
-        paintMultiMaps(g2, path);
+        BufferedImage bi = paintImage(path, plt);
 
         try {
             System.out.println(file);
@@ -56,20 +58,19 @@ public class PaintImageHelper extends PaintHelperBasics{
     }
 
 
-    public static void paintMultiMaps(Graphics2D g2, Path path) {
+    public static void paintMultiMaps(Graphics2D g2, Path path, LinearTransform plt) {
 //        setPrintMap(map, 1, 0, 0);
         if (null == path || path.getNodes().size() == 0) {
 
             return;
         }
-        LinearTransform lt = new LinearTransform();
-        lt.setScale(1.2);
-        lt.setX(0);
-        lt.setX(0);
-        PaintHelperComposite.paintPath(path, g2, lt);
+        plt.setScale(1.2);
+        plt.setX(0);
+        plt.setX(0);
+        PaintHelperComposite.paintPath(path, g2, plt);
 
-        PaintHelperComposite.paintNodes(path.getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
-        PaintHelperComposite.paintStartEndNode(g2, lt);
+        PaintHelperComposite.paintNodes(path.getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, plt);
+        PaintHelperComposite.paintStartEndNode(g2, plt);
 
 //        PaintHelperBasics.restorePrintMap(originalMap, scale, imageXpos, imageYpos);
 
