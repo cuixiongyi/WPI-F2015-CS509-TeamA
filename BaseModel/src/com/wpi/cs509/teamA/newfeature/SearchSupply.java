@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.History;
@@ -25,8 +26,20 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSele
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
-public class SearchSupply{
-	
+public class SearchSupply {
+	public static String StringFilter(String str){
+		Matcher m = null;
+		Pattern p;
+		try{
+		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+		p = Pattern.compile(regEx);
+		m = p.matcher(str);
+		}catch(PatternSyntaxException pse){
+			System.out.println("Invalid char detected");
+		}
+		return m.replaceAll(" ").trim();
+	}
+
 	public String getSearchPattern(String searchingStr) {
 		// searchingStr = searchingStr.replaceAll(" ", "");
 		searchingStr = searchingStr.toLowerCase();
@@ -34,7 +47,7 @@ public class SearchSupply{
 		for (int i = 0; i < searchingStr.length(); i++) {
 			newPattern += searchingStr.charAt(i) + "(.*)";
 		}
-	
+
 		return newPattern;
 	}
 
@@ -69,18 +82,18 @@ public class SearchSupply{
 		}
 		return newSortedList;
 	}
-	
-	public Map<String,NodeForSearch> getAllInformationForSearch(){
-		Map<String,NodeForSearch> allFromDatabase = Database.getAllNodesForSearch();
-	//	System.out.println(allFromDatabase.size());
+
+	public Map<String, NodeForSearch> getAllInformationForSearch() {
+		Map<String, NodeForSearch> allFromDatabase = Database.getAllNodesForSearch();
+		// System.out.println(allFromDatabase.size());
 		// get User Account
-		
-		if(MainModel.getStaticModel().getMyAccount()==null){
+
+		if (MainModel.getStaticModel().getMyAccount() == null) {
 			return allFromDatabase;
 		}
 		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
-		System.out.println("User information: "+ currentUser.getEmail());
-		System.out.println("History size: "+currentUser.getHistory().size());
+		System.out.println("User information: " + currentUser.getEmail());
+		System.out.println("History size: " + currentUser.getHistory().size());
 		Iterator<History> iter = currentUser.getHistory().iterator();
 		while (iter.hasNext()) {
 			History tempHistory = iter.next();
@@ -89,17 +102,17 @@ public class SearchSupply{
 			String nodeNameComplete = hisString;
 			String nodeNameAbbr = hisString;
 			int hisCount = tempHistory.getCount();
-			NodeForSearch tempNodeForSearch = new NodeForSearch(Database.getNodeFromId(hisNodeId), 
-					nodeNameComplete, nodeNameAbbr,
-					SuggestorEnum.History);
+			NodeForSearch tempNodeForSearch = new NodeForSearch(Database.getNodeFromId(hisNodeId), nodeNameComplete,
+					nodeNameAbbr, SuggestorEnum.History);
 			allFromDatabase.put(nodeNameComplete, tempNodeForSearch);
 		}
 		return allFromDatabase;
 	}
-	
+
 	public ArrayList<NodeForSearch> getSearchSupply(String searchingStr) {
 
-		Map<NodeForSearch,Integer> searchResultsList = new HashMap<NodeForSearch,Integer>();;
+		Map<NodeForSearch, Integer> searchResultsList = new HashMap<NodeForSearch, Integer>();
+		searchingStr = SearchSupply.StringFilter(searchingStr);
 		String newPattern = getSearchPattern(searchingStr);
 
 		// create Pattern
@@ -121,22 +134,24 @@ public class SearchSupply{
 	}
 
 	// TODO: remove this method
-//	public static void main(String[] args) {
-//		Database.InitFromDatabase();
-	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
-	//	System.out.println(Database.getAllNodeFromDatabase().size());
-	/*	MainModel.setStaticModel(new MainModel());
-				MainModel.getStaticModel().switchToState((new MouseActionSelectNode(MainModel.getStaticModel())));
-        
-		SearchSupply ss = new SearchSupply();
-		
-		ArrayList<NodeForSearch> getSS = ss.getSearchSupply("p");
-		for (NodeForSearch entry : getSS) {
-		    System.out.println("Key = " + entry.getStringForDisplay()+" ,Priority = " + entry.getPriority());  
-		}  
-		OtherFeatureDao testFeature= new OtherFeatureDaoImpl();
-		for ( Node n : testFeature.getListofNodesWithLabel("pizza")){
-			System.out.println(n.getName());
-		}*/
-//	}
+	// public static void main(String[] args) {
+	// Database.InitFromDatabase();
+	// System.out.println("Map-7 nodes size: "+
+	// Database.getAllNodesForCurrentMap(7).size());
+	// System.out.println(Database.getAllNodeFromDatabase().size());
+	/*
+	 * MainModel.setStaticModel(new MainModel());
+	 * MainModel.getStaticModel().switchToState((new
+	 * MouseActionSelectNode(MainModel.getStaticModel())));
+	 * 
+	 * SearchSupply ss = new SearchSupply();
+	 * 
+	 * ArrayList<NodeForSearch> getSS = ss.getSearchSupply("p"); for
+	 * (NodeForSearch entry : getSS) { System.out.println("Key = " +
+	 * entry.getStringForDisplay()+" ,Priority = " + entry.getPriority()); }
+	 * OtherFeatureDao testFeature= new OtherFeatureDaoImpl(); for ( Node n :
+	 * testFeature.getListofNodesWithLabel("pizza")){
+	 * System.out.println(n.getName()); }
+	 */
+	// }
 }

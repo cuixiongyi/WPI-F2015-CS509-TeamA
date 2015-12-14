@@ -67,8 +67,8 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			JdbcConnect.resultClose(resultSet, pstmt);
 			JdbcConnect.connClose();
 		}
-		
-			return null;
+
+		return null;
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			System.out.println("fail to connect database..");
 			se.printStackTrace();
 		} finally {
-			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.resultClose(resultSet, pstmt);
 		}
 		return true;
 	}
@@ -146,7 +146,6 @@ public class UserAccountDaoImpl implements UserAccountDao {
 	@Override
 	public UserAccount loginAuthorization(String username, String password)
 			throws UserAccountNotFoundException, PwdIncorrectException {
-		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		try {
 			String UserAccountsInDB = "SELECT id, username,password, isAdmin,email FROM routefinder.user_account where username=?";
@@ -175,10 +174,40 @@ public class UserAccountDaoImpl implements UserAccountDao {
 			System.out.println("fail to connect database..");
 			se.printStackTrace();
 		} finally {
-			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.resultClose(resultSet, pstmt);
 			JdbcConnect.connClose();
 		}
 		return null;
+	}
+
+	@Override
+	public void saveSearchHistoryToDatabase(UserAccount user) {
+		try {
+			// delete all existing history for this user
+			String deleteHistoryFromDB = "delete from routefinder.history where userid=?";
+			pstmt = conn.prepareStatement(deleteHistoryFromDB);
+			pstmt.setInt(1, user.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+
+			// save new history for this user
+			for (History history : user.getHistory()) {
+				String insertHistoryToDB = "INSERT INTO routefinder.history (userid,count, nodeid, searchString)  VALUES (?, ?, ?, ?)";
+				pstmt = conn.prepareStatement(insertHistoryToDB);
+				pstmt.setInt(1, user.getId());
+				pstmt.setInt(2, history.getCount());
+				pstmt.setInt(3, history.getNodeid());
+				pstmt.setString(4, history.getHistoryStr());
+				pstmt.executeUpdate();
+				conn.commit();
+			}
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+			JdbcConnect.connClose();
+		}
 	}
 
 }
