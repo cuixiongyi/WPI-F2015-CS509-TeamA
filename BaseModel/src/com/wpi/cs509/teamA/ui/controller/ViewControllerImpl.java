@@ -105,8 +105,9 @@ class ViewControllerImpl extends ViewControllerBase {
 	}
 
 	public void clickSearch() {
-		if (model.getStartNode() == null || model.getEndNode() == null)
+		if (model.getStartNode() == null || model.getEndNode() == null || model.getEndNode().size()==0)
 			return;
+		ArrayList<Node> temp = model.getEndNode();
 		if(model.getMyAccount()!=null){
 			addHistory();
 		
