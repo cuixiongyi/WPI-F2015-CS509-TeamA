@@ -212,7 +212,7 @@ public final class MainModel extends StateContext {
 		}
 		
 		this.endNode.add(pendNode);
-        this.endNearestNodes.clear();
+        this.endNearestNodes = null;
         modelChanged();
 	}
 	

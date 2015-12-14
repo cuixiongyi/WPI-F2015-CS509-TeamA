@@ -17,7 +17,7 @@ public class AnimationControl {
 
 
     static private List<AnimationObject> objects = null;
-    private static Timer timer = new Timer(3,new MyActionListener());
+    private static Timer timer = new Timer(5,new MyActionListener());
 
     public static class MyActionListener implements ActionListener {
         @Override

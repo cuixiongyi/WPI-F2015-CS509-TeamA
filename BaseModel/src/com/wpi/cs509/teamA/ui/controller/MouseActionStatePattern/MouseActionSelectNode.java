@@ -104,7 +104,7 @@ public class MouseActionSelectNode extends MouseActionState {
                     model.setNextPath();
                     return true;
                 }
-                if (nodes.get(0).getId() == node.getId() && model.getCurrentPathIdx()-1 == 0) {
+                if (nodes.get(0).getId() == node.getId() && model.getCurrentPathIdx()-1 >= 0) {
                     model.setPrivousPath();
                     return true;
 

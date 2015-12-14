@@ -67,8 +67,8 @@ public class ImageMouseListener implements MouseInputListener {
 //        if (e.getButton() == MouseEvent.BUTTON1) {
             imageComponent.setPressxPos(e.getX());
             imageComponent.setPressyPos(e.getY());
-            imageComponent.setImageStartXpos(imageComponent.getImageXpos());
-            imageComponent.setImageStartYpos(imageComponent.getImageYpos());
+            imageComponent.setImageStartXpos((int)model.getLinearTransform().getX());
+            imageComponent.setImageStartYpos((int)model.getLinearTransform().getY());
 //        }
     }
 

@@ -58,7 +58,7 @@ public class PaintHelperComposite extends PaintHelperBasics{
 
     public static void paintStartEndNode(Graphics2D g2, LinearTransform pLinearTransform) {
         PaintHelperBasics.setLinearTransform(pLinearTransform);
-        if (pLinearTransform.getScale() < SCALELOWWERBOUND_DRAWICON) {
+        if (pLinearTransform.getScale() < 0.5) {
             return;
         }
 
