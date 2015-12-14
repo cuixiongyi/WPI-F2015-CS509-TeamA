@@ -303,10 +303,13 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
         if (null != model.getMyAccount() && model.getMyAccount().isAdmin()) {
             getBtnMngEdge().setEnabled(true);
             getBtnMngNode().setEnabled(true);
+            getOpenMap().setEnabled(true);
         }
         else {
             getBtnMngEdge().setEnabled(false);
             getBtnMngNode().setEnabled(false);
+            getOpenMap().setEnabled(false);
+
         }
     }
 
