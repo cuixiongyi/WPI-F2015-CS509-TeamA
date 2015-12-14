@@ -164,14 +164,14 @@ class ViewControllerImpl extends ViewControllerBase {
         inputPanel.getMapList().setModel(mapListModel);
 
 
-		ViewManager.getThumbNailPanel().update();
-		UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(4));
-		ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
-				ViewManager.getThumbNailPanel().getHeight());
-		AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
-		AO.switchState(new AnimationStateSlidingUp(AO));
-		AO.setSpeed(2.0);
-		ViewManager.getThumbNailPanel().setVisible(true);
+//		ViewManager.getThumbNailPanel().update();
+//		UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(4));
+//		ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
+//				ViewManager.getThumbNailPanel().getHeight());
+//		AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+//		AO.switchState(new AnimationStateSlidingUp(AO));
+//		AO.setSpeed(2.0);
+//		ViewManager.getThumbNailPanel().setVisible(true);
 
 		ViewManager.updateView();
 

@@ -20,6 +20,8 @@ import javax.swing.ImageIcon;
  * Created by xiongkuang on 12/13/15.
  */
 public class ThumbNailPanel extends JPanel implements MouseListener {
+    private JPanel contentPane;
+    private InnerComponent innerComponent;
     private MainModel model;
     private List<Path> paths;
     private List<JLabel> icons;
@@ -29,11 +31,28 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
     private int picInset = 160;
 
     public  ThumbNailPanel(MainModel model){
-        this.setSize(650,200);
+        this.setSize(660,210);
         this.model = model;
         this.icons = new ArrayList<JLabel>();
         this.iconTexts = new ArrayList<JLabel>();
         this.setLayout(null);
+
+        JScrollPane scroll = new JScrollPane(innerComponent);
+//        contentPane.add(scroll);
+//        this.add(contentPane);
+        setVisible(true);
+
+    }
+
+    public class InnerComponent extends JComponent{
+
+
+        @Override
+        public void paintComponent(Graphics g) {
+
+        }
+
+
 
     }
 
