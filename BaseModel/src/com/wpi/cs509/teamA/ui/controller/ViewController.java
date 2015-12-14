@@ -33,6 +33,8 @@ public class ViewController extends ViewControllerBase {
 		addButtonLogin();
 		addFilterButtons();
 		addOpenFile();
+		addButtonEditNode();
+		addButtonEditEdge();
 	}
 
 	private void addOpenFile() {
@@ -144,7 +146,8 @@ public class ViewController extends ViewControllerBase {
 		inputPanel.getMapList().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 //				Object value = inputPanel.getMapList().getSelectedValue();
-				model.setCurrentPath(inputPanel.getMapList().getSelectedIndex());
+				int idx = inputPanel.getMapList().getSelectedIndex();
+				model.setCurrentPath(idx);
 
 //				boolean tmp = matchAndSetMapIDFromString(value);
 			}
@@ -155,8 +158,9 @@ public class ViewController extends ViewControllerBase {
 		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				model.setCurrentPath(inputPanel.getComboBoxMap().getSelectedIndex());
-//				boolean tmp = matchAndSetMapIDFromString(value);
+//				model.setCurrentPath(inputPanel.getComboBoxMap().getSelectedIndex());
+				Object value = inputPanel.getComboBoxMap().getSelectedItem();
+				boolean tmp = matchAndSetMapIDFromString(value);
 			}
 		});
 	}

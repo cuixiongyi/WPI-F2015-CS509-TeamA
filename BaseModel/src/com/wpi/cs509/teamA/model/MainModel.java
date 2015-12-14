@@ -335,7 +335,8 @@ public final class MainModel extends StateContext {
 
     public void setCurrentPath(int idx) {
         if (idx >= paths.size() || idx < 0) {
-            throw new ArrayIndexOutOfBoundsException();
+            return;
+//            throw new ArrayIndexOutOfBoundsException();
         }
         this.currentPathIdx = idx;
         Path path = getOnePath(currentPathIdx);
