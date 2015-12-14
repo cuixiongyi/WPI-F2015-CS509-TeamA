@@ -18,6 +18,9 @@ public class AnimationStateSlidingUp extends AnimationState{
 //            setToBottom();
             setToHorizontal_Middle();
         }
+        else if (AnimationPosition.LEFT_MIDDLE == object.getPosition()) {
+            setToVertical_Middle();
+        }
         updatePos();
     }
 
