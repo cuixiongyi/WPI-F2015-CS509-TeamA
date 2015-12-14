@@ -42,10 +42,10 @@ public final class MainModel extends StateContext {
     private ArrayList<Path> paths = null;
     private int currentPathIdx = 0;
 
-    private LinearTransform linearTransform = new LinearTransform();;
+    private Node nodeAnimation = null;
+	private LinearTransform linearTransform = new LinearTransform();;
 
-
-    public MainModel() {
+	public MainModel() {
 
 		this.myAccount = new UserAccount();
 		myAccount = null;
@@ -172,6 +172,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void setCurrentMapID(int mapID) {
 		setCurrentMap( Database.getMapEntityFromMapId(mapID));
+		setAnimationNode(null);
 		modelChanged();
 	}
 
@@ -354,6 +355,7 @@ public final class MainModel extends StateContext {
         Path path = getOnePath(currentPathIdx);
         this.setFocusNode(path.getNodes().get(0));
 		this.setCurrentMap(path.getMap());
+		this.setAnimationNode(getCurrentPath().getNodes().get(0));
     }
 
     public synchronized boolean setNextPath() {
@@ -382,11 +384,20 @@ public final class MainModel extends StateContext {
         modelChanged();
     }
 
-    public HashMap<String, Integer> getParkingAvilibility() {
+    public void setAnimationNode(Node node) {
+    	this.nodeAnimation = node;
+    	modelChanged();
+    }
+    public Node getAnimationNode() {
+    	return this.nodeAnimation;
+    }
+	public HashMap<String, Integer> getParkingAvilibility() {
 		return parkingAvilibility;
 	}
 
 	public void setParkingAvilibility(HashMap<String, Integer> parkingAvilibility) {
 		this.parkingAvilibility = parkingAvilibility;
 	}
+
+
 }

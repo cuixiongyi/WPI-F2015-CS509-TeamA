@@ -12,6 +12,8 @@ import javax.swing.border.EtchedBorder;
 
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
+
+import com.wpi.cs509.teamA.ui.Animation.AnimationPathControl;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 
@@ -86,7 +88,8 @@ public class UserScreen extends JFrame {
 		MainModel.setStaticModel(mainModel);
 		MainModel.setStaticModel(mainModel);
 		ViewControllerBase.init(imgComponent, inputPanel, mainModel, this);
-	viewManager = new ViewManager();
+		AnimationPathControl.init(mainModel);
+		viewManager = new ViewManager();
 		imgComponent.setModel(mainModel);
 		inputPanel.setModel(mainModel);
 		PaintHelperBasics.setModel(mainModel);

@@ -100,11 +100,11 @@ public class ImageComponent extends JComponent {
 			model.getCurrentMap().setDisplayScale(1.0f);
 
 			ViewManager.infoPanelSlideDown();
-			model.setFisrtChangeMapFalse();
 			if (!model.isFisrtFocusNode()) {
 				model.setLinearTransform(new LinearTransform());
 
 			}
+			model.setFisrtChangeMapFalse();
 		}
 		if (model.isFisrtFocusNode()) {
 			Node node = model.getFocusNode();
@@ -112,9 +112,15 @@ public class ImageComponent extends JComponent {
 			lt.setY(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getCurrentMap().getDisplayScale()));
 			model.setFisrtFocusNode2False();
 		}
+
 		PaintHelperComposite.paintEverything(g2, image, lt);
 		ViewManager.getThumbNailPanel().setLocation(0,0);
+		Node animationNode = model.getAnimationNode();
 
+		if (null != animationNode) {
+			PaintHelperBasics.paintDot(animationNode, g2);
+			//model.setAnimationNode(null);
+		}
 
 		/// CXY test
 		// GeneralMap tmp = stateContext.getCurrentMap();
@@ -135,6 +141,7 @@ public class ImageComponent extends JComponent {
         
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
+
 
 		g2 = null;
 

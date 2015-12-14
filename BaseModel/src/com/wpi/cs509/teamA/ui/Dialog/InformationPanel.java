@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeIcon;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -57,7 +58,7 @@ public class InformationPanel extends JPanel implements ActionListener {
         this.add(textLabel);
 
         try{
-            informationPic= NodeIcon.resize(ImageIO.read(new File(node.getMap().getMapImgPath())),120,120) ;
+            informationPic= PaintHelperBasics.resize(ImageIO.read(new File(node.getMap().getMapImgPath())),120,120) ;
             picLabel.setIcon(new ImageIcon(informationPic));
             picLabel.setBounds(3,3,120,120);
             this.add(picLabel);

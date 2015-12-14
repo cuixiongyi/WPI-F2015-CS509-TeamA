@@ -172,7 +172,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		ViewManager.updateView();
 
 	}
-
+	
 	public void clickOpenMap() {
 		// TODO Auto-generated method stub
 		OpenMapDialog openMapDialog = new OpenMapDialog(model);
