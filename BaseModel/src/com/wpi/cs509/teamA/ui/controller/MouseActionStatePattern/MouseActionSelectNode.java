@@ -96,10 +96,14 @@ public class MouseActionSelectNode extends MouseActionState {
     private boolean jumpToNextPath(Node node) {
 
         Path path = model.getCurrentPath();
+        if (null == path)
+            return false;
+
         List<Node> nodes = path.getNodes();
 
         if (null != path && 0 != nodes.size()) {
-            List<Node> nodesCross = Database.getAllMapRelationNodesFromMapId(model.getCurrentMapID());
+            int mapID = model.getCurrentMapID();
+            List<Node> nodesCross = Database.getAllMapRelationNodesFromMapId(mapID);
             if (nodesCross.contains(node)) {
                 if(nodes.size() == 1) {
                     model.setNextPath();

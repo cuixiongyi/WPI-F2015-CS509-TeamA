@@ -294,6 +294,25 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	}
 
+	@Override
+	public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (null != model.getCurrentPath())
+            getMapList().setSelectedIndex(model.getCurrentPathIdx());
+
+        if (null != model.getMyAccount() && model.getMyAccount().isAdmin()) {
+            getBtnMngEdge().setEnabled(true);
+            getBtnMngNode().setEnabled(true);
+            getOpenMap().setEnabled(true);
+        }
+        else {
+            getBtnMngEdge().setEnabled(false);
+            getBtnMngNode().setEnabled(false);
+            getOpenMap().setEnabled(false);
+
+        }
+    }
+
 	public void focusLost(FocusEvent e) {
 	
 	}

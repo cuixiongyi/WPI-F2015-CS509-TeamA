@@ -49,7 +49,6 @@ class ViewControllerImpl extends ViewControllerBase {
 			model.switchToState(new MouseActionSelectNode(model));
 
 			ViewManager.updateView();
-
 		}
 	}
 
@@ -58,11 +57,13 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		if (MouseActionEditNode.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
-			model.switchToState(new MouseActionSelectNode(model));
+            model.switchToState(new MouseActionSelectNode(model));
 		} else {
 			model.switchToState(new MouseActionEditNode(model));
 			button.setSelected(true);
-		}
+            inputPanel.getBtnMngEdge().setSelected(false);
+
+        }
 	}
 
 	public void clickEditEdge() {
@@ -70,11 +71,14 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
-			model.switchToState(new MouseActionSelectNode(model));
+            model.switchToState(new MouseActionSelectNode(model));
 		} else {
 			model.switchToState(new MouseActionEditEdge(model));
 			button.setSelected(true);
-		}
+            inputPanel.getBtnMngNode().setSelected(false);
+
+
+        }
 	}
 
 	public void clickSignup() {
@@ -144,6 +148,7 @@ class ViewControllerImpl extends ViewControllerBase {
 
 			}
 		}
+
 		model.addOnePath(path);
 
 		multiMapPathLists.add(singleMapPath);
@@ -154,11 +159,9 @@ class ViewControllerImpl extends ViewControllerBase {
 		for (String name : mapNameList) {
 			mapListModel.addElement(name);
 		}
-		inputPanel.getMapList().setModel(mapListModel);
-//		model.setMultiMapPathListsForEachMap(multiMapPathLists);
 		model.setCurrentPath(0);
-		model.setCurrentMap(model.getCurrentPath().getMap());
 		model.setMultiMapLists(mapList);
+        inputPanel.getMapList().setModel(mapListModel);
 
 
 //		ViewManager.getThumbNailPanel().update();

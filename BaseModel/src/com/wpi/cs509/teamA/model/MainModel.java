@@ -304,16 +304,16 @@ public final class MainModel extends StateContext {
 		staticModel = pModel;
 	}
 
-	public ArrayList<Path> getPaths() {
+	public synchronized ArrayList<Path> getPaths() {
 		return paths;
 	}
-	public Path getOnePath(int idx) {
+	public synchronized Path getOnePath(int idx) {
 		if (null == paths || 0 > idx || paths.size() <= idx )
 			return null;
 		return paths.get(idx);
 	}
 
-	public void addOnePath(Path ppath) {
+	public synchronized void addOnePath(Path ppath) {
 		if (null == paths) {
 			paths = new ArrayList<Path>();
 		}
@@ -321,21 +321,22 @@ public final class MainModel extends StateContext {
 		this.paths.add(ppath);
 	}
 
-	public void clearPaths() {
+	public synchronized void clearPaths() {
 		this.paths = null;
 	}
 
-    public Path getCurrentPath() {
+    public synchronized Path getCurrentPath() {
         return getOnePath(currentPathIdx);
     }
 
-    public int getCurrentPathIdx() {
+    public synchronized int getCurrentPathIdx() {
         return currentPathIdx;
     }
 
-    public void setCurrentPath(int idx) {
+    public synchronized void setCurrentPath(int idx) {
         if (idx >= paths.size() || idx < 0) {
-            throw new ArrayIndexOutOfBoundsException();
+            return;
+//            throw new ArrayIndexOutOfBoundsException();
         }
         this.currentPathIdx = idx;
         Path path = getOnePath(currentPathIdx);
@@ -343,7 +344,7 @@ public final class MainModel extends StateContext {
 		this.setCurrentMap(path.getMap());
     }
 
-    public boolean setNextPath() {
+    public synchronized boolean setNextPath() {
         if (currentPathIdx+1 >= paths.size()) {
             return false;
         }
@@ -351,7 +352,7 @@ public final class MainModel extends StateContext {
         return true;
     }
 
-    public boolean setPrivousPath() {
+    public synchronized boolean setPrivousPath() {
         if (currentPathIdx-1 < 0) {
             return false;
         }
