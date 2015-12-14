@@ -100,8 +100,11 @@ public class ImageComponent extends JComponent {
 			model.getCurrentMap().setDisplayScale(1.0f);
 
 			ViewManager.infoPanelSlideDown();
-			model.setLinearTransform(new LinearTransform());
 			model.setFisrtChangeMapFalse();
+			if (!model.isFisrtFocusNode()) {
+				model.setLinearTransform(new LinearTransform());
+
+			}
 		}
 		if (model.isFisrtFocusNode()) {
 			Node node = model.getFocusNode();
