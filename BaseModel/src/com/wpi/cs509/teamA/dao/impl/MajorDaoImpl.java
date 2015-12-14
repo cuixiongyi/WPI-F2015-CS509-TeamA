@@ -24,6 +24,23 @@ public class MajorDaoImpl implements MajorDao {
 		}
 	}
 
+	public void saveMajors(Major major) {
+		// TODO Auto-generated method stub
+		try {
+			String insertMajorToDB = "INSERT INTO routefinder.major (major, node_id) VALUES (?, ?)";
+			pstmt = conn.prepareStatement(insertMajorToDB);
+			pstmt.setString(1, major.getMajorName());
+			pstmt.setInt(2, major.getNodeId());
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+		}
+	}
+	
 	public List<Major> getAllMajors() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;

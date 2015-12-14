@@ -47,4 +47,22 @@ public class ProfessorDaoImpl implements ProfessorDao {
 		}
 		return null;
 	}
+
+	@Override
+	public void saveProfessor(Professor professor) {
+		// TODO Auto-generated method stub
+		try {
+			String insertProfessorToDB = "INSERT INTO routefinder.professor (professor,nodeid) VALUES (?, ?)";
+			pstmt = conn.prepareStatement(insertProfessorToDB);
+			pstmt.setString(1, professor.getProfessorName());
+			pstmt.setInt(2, professor.getNodeId());
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+		}
+	}
 }

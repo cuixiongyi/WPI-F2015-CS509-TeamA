@@ -30,6 +30,23 @@ public class OtherFeatureDaoImpl implements OtherFeatureDao {
 		}
 	}
 
+	public void saveAllOtherFeatures(OtherFeature otherFeature) {
+		// TODO Auto-generated method stub
+		try {
+			String insertOtherFeaturesToDB = "INSERT INTO routefinder.other_features (label,node_id) VALUES (?, ?)";
+			pstmt = conn.prepareStatement(insertOtherFeaturesToDB);
+			pstmt.setString(1, otherFeature.getFeatureLabel());
+			pstmt.setInt(2, otherFeature.getNodeId());
+			pstmt.executeUpdate();
+			conn.commit();
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(rs, pstmt);
+		}
+	}
+
 	public List<OtherFeature> getAllOtherFeatures() {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;

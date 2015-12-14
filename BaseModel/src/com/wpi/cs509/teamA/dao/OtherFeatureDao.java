@@ -11,4 +11,5 @@ public interface OtherFeatureDao {
 	public List<OtherFeature> getAllOtherFeatures();	
 	public List<String> getAllFeatureLabels();
 	public List<Node> getListofNodesWithLabel(String newLabel);
+	public void saveAllOtherFeatures(OtherFeature otherFeature);
 }
