@@ -1,7 +1,11 @@
 package com.wpi.cs509.teamA.ui.controller.Listener;
 
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingIn;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -50,6 +54,18 @@ public class ImageMouseListener implements MouseInputListener {
             @Override
             public void mouseMoved(MouseEvent e) {
                 // TODO Auto-generated method stub
+                AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+                if (null == ret) {
+                    return;
+                }
+                int x = e.getX();
+                int y = e.getY();
+                if (x < 120) {
+                    ret.switchState(new AnimationStateSlidingOut(ret));
+                }
+                else {
+                    ret.switchState(new AnimationStateSlidingIn(ret));
+                }
             }
         });
     }
