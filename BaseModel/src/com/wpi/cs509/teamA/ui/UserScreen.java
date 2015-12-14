@@ -13,6 +13,7 @@ import javax.swing.border.EtchedBorder;
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
+import com.wpi.cs509.teamA.ui.Animation.AnimationPathControl;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
@@ -86,6 +87,7 @@ public class UserScreen extends JFrame {
 		MainModel.setStaticModel(mainModel);
 		MainModel.setStaticModel(mainModel);
 		ViewControllerBase.init(imgComponent, inputPanel, mainModel, this);
+		AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();
 		imgComponent.setModel(mainModel);
 		inputPanel.setModel(mainModel);

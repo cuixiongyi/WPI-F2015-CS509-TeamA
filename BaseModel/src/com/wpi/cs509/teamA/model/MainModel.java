@@ -38,7 +38,8 @@ public final class MainModel extends StateContext {
     private ArrayList<Path> paths = null;
     private Path currentPath = null;
 
-
+    private Node nodeAnimation = null;
+    
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -332,5 +333,13 @@ public final class MainModel extends StateContext {
             throw new StackOverflowError();
         }
         this.currentPath = paths.get(idx);
+    }
+    
+    public void setAnimationNode(Node node) {
+    	this.nodeAnimation = node;
+    	modelChanged();
+    }
+    public Node getAnimationNode() {
+    	return this.nodeAnimation;
     }
 }

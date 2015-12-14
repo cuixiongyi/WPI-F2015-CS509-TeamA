@@ -110,7 +110,11 @@ public class ImageComponent extends JComponent {
 			this.setImageYpos(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getCurrentMap().getDisplayScale()));
 		}
 		PaintHelper.paintEverything(g2, map, image,scale);
-
+		Node animationNode = model.getAnimationNode();
+		if (null != animationNode) {
+			PaintHelper.paintNode(animationNode, g2);
+			model.setAnimationNode(null);
+		}
 
 		/// CXY test
 		// GeneralMap tmp = stateContext.getCurrentMap();
@@ -131,6 +135,7 @@ public class ImageComponent extends JComponent {
         
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
+		
 		model.setFisrtFocusNode2False();
 		model.setFisrtChangeMapFalse();
 

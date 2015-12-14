@@ -188,7 +188,6 @@ public class PaintHelper {
 			tmp = ovalOffset_SelectedNode;
 		}
 		g2.fillOval(xy.getX() - tmp, xy.getY() - tmp, tmp * 2, tmp * 2);
-
 	}
 
 	public static void paintNode(Node node, Graphics2D g2) {
