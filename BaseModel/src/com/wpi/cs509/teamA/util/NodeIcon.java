@@ -24,6 +24,7 @@ public class NodeIcon {
 	private static String startIconName = "Start_Icon.png";
 	private static String endIconName = "End_Icon.png";
 	private static String nextIconName = "next_Icon.png";
+	private static String rotateIconName="rotate_Icon.png";
 
 	private static String numPrefix = "numbers-";
 	private static String numPostfix = "-icon.png";
@@ -38,7 +39,8 @@ public class NodeIcon {
 	private static String startIconFilePath = PaintHelperBasics.getUserDir() + startIconName;
 	private static String endIconFilePath = PaintHelperBasics.getUserDir() + endIconName;
 	private static String nextIconFilePath = PaintHelperBasics.getUserDir() + nextIconName;
-	
+	private static String rotateIconFilePath = PaintHelperBasics.getUserDir() + rotateIconName;
+
 	private static String iconDir= PaintHelperBasics.getUserDir()+"numicon/"+numPrefix;
 	
 
@@ -50,6 +52,7 @@ public class NodeIcon {
 	private static BufferedImage startIcon;
 	private static BufferedImage endIcon;
 	private static BufferedImage nextIcon;
+	private static BufferedImage rotateIcon;
 	
 	private static ArrayList<BufferedImage> numIcons;
 
@@ -64,6 +67,7 @@ public class NodeIcon {
 			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
 			endIcon = ImageIO.read(new FileInputStream(endIconFilePath));
 			nextIcon=ImageIO.read(new FileInputStream(nextIconFilePath));
+			rotateIcon=ImageIO.read(new FileInputStream(rotateIconFilePath));
 
 			int numCount = 9;
 			numIcons = new ArrayList<BufferedImage>(numCount);
@@ -218,6 +222,12 @@ public class NodeIcon {
     	edIcon = new ImageIcon(newedImage);
     	return edIcon;
 	}
+
+	public static ImageIcon getRotateIcon(){
+		return new ImageIcon(PaintHelperBasics.resize(rotateIcon,20,30));
+
+	}
+
 
 	
 

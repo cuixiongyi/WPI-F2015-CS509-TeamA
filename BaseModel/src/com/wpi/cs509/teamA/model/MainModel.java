@@ -45,6 +45,7 @@ public final class MainModel extends StateContext {
     private Node nodeAnimation = null;
 	private LinearTransform linearTransform = new LinearTransform();;
 
+	private ArrayList<Node> endNearestNodes;
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -99,7 +100,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void cleanUpRoute() {
 		this.setStartNode(null);
-		this.setEndNode(null);
+		this.addOneEndNode(null);
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
 		this.setAnimationNode(null);
@@ -194,6 +195,7 @@ public final class MainModel extends StateContext {
 
 		this.startNode = pStartNode;
 		this.setFocusNode(pStartNode);
+        this.endNearestNodes = null;
 		modelChanged();
 
 	}
@@ -204,13 +206,21 @@ public final class MainModel extends StateContext {
 		return endNode;
 	}
 
-	public synchronized void setEndNode(Node pendNode) {
+	public synchronized void addOneEndNode(Node pendNode) {
 		if (null == this.endNode) {
 			endNode = new ArrayList<Node>();
 		}
 		
 		this.endNode.add(pendNode);
-		modelChanged();
+        this.endNearestNodes = null;
+        modelChanged();
+	}
+	
+	public synchronized void setOneEndNode(Node pEndNode) {
+		endNode = new ArrayList<Node>();
+		addOneEndNode(pEndNode);
+		return;
+		
 	}
 
 	public synchronized void clearEndNode() {
@@ -271,7 +281,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void setFocusNode(Node focusNode) {
 		this.focusNode = focusNode;
-		if (null != focusNode) {
+		if (null == focusNode) {
 			isFirstFocusNode = false;
 		}
 		isFirstFocusNode = true;
@@ -353,6 +363,9 @@ public final class MainModel extends StateContext {
     }
 
     public synchronized void setCurrentPath(int idx) {
+		if (null == paths) {
+			return;
+		}
         if (idx >= paths.size() || idx < 0) {
             return;
 //            throw new ArrayIndexOutOfBoundsException();
@@ -393,7 +406,15 @@ public final class MainModel extends StateContext {
         modelChanged();
     }
 
-    public void setAnimationNode(Node node) {
+	public ArrayList<Node> getEndNearestNodes() {
+		return endNearestNodes;
+	}
+
+	public void setEndNearestNodes(ArrayList<Node> endNearestNodes) {
+		this.endNearestNodes = endNearestNodes;
+	}
+
+	public void setAnimationNode(Node node) {
     	this.nodeAnimation = node;
     	modelChanged();
     }

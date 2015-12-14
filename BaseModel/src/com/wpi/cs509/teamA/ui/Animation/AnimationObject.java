@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.ui.Animation;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationState;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateContext;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateStayIn;
+import com.wpi.cs509.teamA.ui.UIConstant;
 
 import javax.swing.*;
 
@@ -17,6 +18,8 @@ public class AnimationObject {
     private AnimationPosition position = AnimationPosition.UNDEFINED;
     private AnimationStateContext stateContext = null;
     private int range = 0;
+
+    protected double speed = UIConstant.SLIDING_SPEED;
 
     AnimationObject(JComponent pPanel, JComponent pParent, AnimationStyle pStyle, AnimationPosition pPosition, int pRange) {
         if (pStyle == AnimationStyle.UNDEFINED) {
@@ -63,6 +66,7 @@ public class AnimationObject {
 
     public void switchState(AnimationState state) {
         stateContext.switchState(state);
+        state.setSpeed(this.speed);
 
     }
 
@@ -107,10 +111,11 @@ public class AnimationObject {
     }
 
     public double getSpeed() {
-        return stateContext.getMyState().getSpeed();
+        return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(double pspeed) {
+        speed = pspeed;
         this.stateContext.getMyState().setSpeed(speed);
     }
 }

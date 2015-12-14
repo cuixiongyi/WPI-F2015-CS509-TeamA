@@ -64,9 +64,6 @@ public class PaintImageHelper extends PaintHelperBasics{
 
             return;
         }
-        plt.setScale(1.2);
-        plt.setX(0);
-        plt.setX(0);
         PaintHelperComposite.paintPath(path, g2, plt);
 
         PaintHelperComposite.paintNodes(path.getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, plt);

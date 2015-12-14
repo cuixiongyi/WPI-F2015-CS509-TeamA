@@ -73,6 +73,7 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
         this.setSize(onePicSize, onePicSize*icons.size());
         setVisible(true);
     }
+
     public void update()
     {
         newLayout();
@@ -105,7 +106,6 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
 
 //            this.add(newIcon);
 //            this.add(newText);
-            System.out.println("Made a new icon: " + newText.getText());
         }
         setLayoutPost();
         setCurrentMap(0);

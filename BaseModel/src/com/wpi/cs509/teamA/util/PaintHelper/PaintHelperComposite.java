@@ -5,6 +5,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.LinearTransform;
@@ -22,6 +23,8 @@ public class PaintHelperComposite extends PaintHelperBasics{
     static private MainModel model = null;
 
     static private LinearTransform linearTransform = null;
+
+
 
     public static void paintRoute(Graphics2D g2, LinearTransform pLinearTransform) {
         // ArrayList<ArrayList<Node>> multiMapPath =
@@ -55,7 +58,11 @@ public class PaintHelperComposite extends PaintHelperBasics{
 
     public static void paintStartEndNode(Graphics2D g2, LinearTransform pLinearTransform) {
         PaintHelperBasics.setLinearTransform(pLinearTransform);
-        Node node = model.getStartNode();
+        if (pLinearTransform.getScale() < 0.5) {
+            return;
+        }
+
+            Node node = model.getStartNode();
         if (node != null) {
             BufferedImage image = NodeIcon.getStartIcon();
             PaintHelperBasics.paintIcon2(node, g2, image);

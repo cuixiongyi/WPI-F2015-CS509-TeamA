@@ -104,7 +104,7 @@ public class MouseActionSelectNode extends MouseActionState {
                     model.setNextPath();
                     return true;
                 }
-                if (nodes.get(0).getId() == node.getId() && model.getCurrentPathIdx()-1 == 0) {
+                if (nodes.get(0).getId() == node.getId() && model.getCurrentPathIdx()-1 >= 0) {
                     model.setPrivousPath();
                     return true;
 
@@ -125,7 +125,7 @@ public class MouseActionSelectNode extends MouseActionState {
 			UserScreen.getUserScreen().getContentPane().add(ViewManager.getNodeInformation(),new Integer(3));
 			ret = ViewManager.getAC().create(ViewManager.getNodeInformation(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
 						ViewManager.getNodeInformation().getHeight());
-			ret.setSpeed(2.0);
+			ret.setSpeed(4.0);
 			ViewManager.getNodeInformation().setVisible(true);
 		}
 

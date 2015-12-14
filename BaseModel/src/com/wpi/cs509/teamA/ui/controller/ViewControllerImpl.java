@@ -15,6 +15,7 @@ import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.UIConstant;
@@ -24,6 +25,7 @@ import com.wpi.cs509.teamA.ui.Dialog.SignupDialog;
 import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditEdge;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNodeInfo;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
@@ -54,6 +56,16 @@ class ViewControllerImpl extends ViewControllerBase {
 		}
 	}
 
+
+
+
+
+	public void clickOnSwapStartEnd()
+	{
+		if(inputPanel.getFromText().getText()!=null && inputPanel.getToText().getText()!=null )
+		{}
+	}
+
 	public void clickEditNode() {
 		JToggleButton button = inputPanel.getBtnMngNode();
 
@@ -64,6 +76,7 @@ class ViewControllerImpl extends ViewControllerBase {
 			model.switchToState(new MouseActionEditNode(model));
 			button.setSelected(true);
             inputPanel.getBtnMngEdge().setSelected(false);
+			inputPanel.getBtnEditNodeInfo().setSelected(false);
 
         }
 	}
@@ -77,10 +90,27 @@ class ViewControllerImpl extends ViewControllerBase {
 		} else {
 			model.switchToState(new MouseActionEditEdge(model));
 			button.setSelected(true);
-            inputPanel.getBtnMngNode().setSelected(false);
+			inputPanel.getBtnEditNodeInfo().setSelected(false);
+			inputPanel.getBtnMngNode().setSelected(false);
 
 
         }
+	}
+
+	public  void clickEditNodeInfo(){
+		JToggleButton button = inputPanel.getBtnEditNodeInfo();
+
+		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
+			button.setSelected(false);
+			model.switchToState(new MouseActionSelectNode(model));
+		} else {
+			model.switchToState(new MouseActionEditNodeInfo(model));
+			button.setSelected(true);
+			inputPanel.getBtnMngEdge().setSelected(false);
+			inputPanel.getBtnMngNode().setSelected(false);
+
+
+		}
 	}
 
 	public void clickSignup() {
@@ -105,8 +135,9 @@ class ViewControllerImpl extends ViewControllerBase {
 	}
 
 	public void clickSearch() {
-		if (model.getStartNode() == null || model.getEndNode() == null)
+		if (model.getStartNode() == null || model.getEndNode() == null || model.getEndNode().size()==0)
 			return;
+		ArrayList<Node> temp = model.getEndNode();
 		if(model.getMyAccount()!=null){
 			addHistory();
 		
@@ -202,7 +233,7 @@ class ViewControllerImpl extends ViewControllerBase {
 			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(5));
 			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
 					ViewManager.getThumbNailPanel().getWidth());
-			ret.switchState(new AnimationStateSlidingUp(ret));
+			ret.switchState(new AnimationStateSlidingOut(ret));
 			ret.setSpeed(2.0);
 			ViewManager.getThumbNailPanel().setVisible(true);
 		}
