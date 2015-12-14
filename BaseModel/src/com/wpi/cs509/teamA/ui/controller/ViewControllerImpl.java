@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
@@ -106,6 +107,11 @@ class ViewControllerImpl extends ViewControllerBase {
 	public void clickSearch() {
 		if (model.getStartNode() == null || model.getEndNode() == null)
 			return;
+		if(model.getMyAccount()!=null){
+			addHistory();
+		
+		}
+		
 		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
 		inputPanel.getMapList().setEnabled(true);
@@ -202,6 +208,17 @@ class ViewControllerImpl extends ViewControllerBase {
 		}
 		return ret;
 
+	}
+	
+	private void addHistory(){
+		ArrayList<History> newHistory = (ArrayList<History>) model.getMyAccount().getHistory();
+		
+		newHistory.add(new History(model.getStartNode().getName(), model.getStartNode().getId(), 0));
+		if(model.getEndNode().size()==1){
+			newHistory.add(new History(model.getEndNode().get(0).getName(), model.getEndNode().get(0).getId(), 0));
+		}
+		
+		model.getMyAccount().setHistory(newHistory);
 	}
 
 }
