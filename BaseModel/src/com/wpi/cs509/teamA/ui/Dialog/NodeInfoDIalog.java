@@ -17,6 +17,7 @@ import java.util.*;
 public class NodeInfoDialog extends JDialog implements ActionListener {
 
 
+
     private JButton okButton;
     private JButton cancelButton;
     private JLabel lbMajor;
@@ -159,6 +160,7 @@ public class NodeInfoDialog extends JDialog implements ActionListener {
         return nodeInfo;
 
 
+        
 
 
 
