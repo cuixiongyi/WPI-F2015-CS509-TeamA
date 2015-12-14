@@ -161,6 +161,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		}
 		model.setCurrentPath(0);
 		model.setMultiMapLists(mapList);
+		System.out.println(mapList);
         inputPanel.getMapList().setModel(mapListModel);
 
 
