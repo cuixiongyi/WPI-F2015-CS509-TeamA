@@ -355,7 +355,7 @@ public class AutoSuggestor {
 			addSugestionsPanel(suggestionMajorPanel);
 			break;
 		case Labels:
-			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation, displayName, inputPanel);
+			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation, displayName);
 			
 			addSugestionsPanel(suggestionLabelPanel);
 			break;
