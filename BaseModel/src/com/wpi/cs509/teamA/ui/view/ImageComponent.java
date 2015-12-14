@@ -108,8 +108,8 @@ public class ImageComponent extends JComponent {
 		}
 		if (model.isFisrtFocusNode()) {
 			Node node = model.getFocusNode();
-			lt.setX(this.getWidth()/2 - (int)(node.getLocation().getX()*model.getCurrentMap().getDisplayScale()));
-			lt.setY(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getCurrentMap().getDisplayScale()));
+			lt.setX(this.getWidth()/2 - (int)(node.getLocation().getX()*model.getLinearTransform().getScale()));
+			lt.setY(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getLinearTransform().getScale()));
 			model.setFisrtFocusNode2False();
 		}
 

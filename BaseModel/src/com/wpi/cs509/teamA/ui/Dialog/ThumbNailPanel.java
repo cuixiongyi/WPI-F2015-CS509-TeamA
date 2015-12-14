@@ -78,6 +78,9 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
         newLayout();
         this.paths = this.model.getPaths();
 
+        if (null == paths) {
+            return;
+        }
         int picX=10;
         int picY=10;
         int textX=0;

@@ -102,6 +102,8 @@ public final class MainModel extends StateContext {
 		this.setEndNode(null);
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
+		this.setAnimationNode(null);
+		this.setFocusNode(null);
         this.clearPaths();
 
 	}
@@ -269,7 +271,11 @@ public final class MainModel extends StateContext {
 
 	public synchronized void setFocusNode(Node focusNode) {
 		this.focusNode = focusNode;
+		if (null != focusNode) {
+			isFirstFocusNode = false;
+		}
 		isFirstFocusNode = true;
+
 		modelChanged();
 
 	}
@@ -353,6 +359,9 @@ public final class MainModel extends StateContext {
         }
         this.currentPathIdx = idx;
         Path path = getOnePath(currentPathIdx);
+		if (null == path) {
+			return;
+		}
         this.setFocusNode(path.getNodes().get(0));
 		this.setCurrentMap(path.getMap());
 		this.setAnimationNode(getCurrentPath().getNodes().get(0));
