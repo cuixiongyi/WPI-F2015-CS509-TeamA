@@ -308,15 +308,17 @@ public final class MainModel extends StateContext {
 		return paths;
 	}
 	public Path getOnePath(int idx) {
+		if (null == paths || 0 > idx || paths.size() <= idx )
+			return null;
 		return paths.get(idx);
 	}
 
-	public void addOnePath(Path path) {
+	public void addOnePath(Path ppath) {
 		if (null == paths) {
 			paths = new ArrayList<Path>();
 		}
-        path.setMap(path.getNodes().get(0).getMap());
-		this.paths.add(path);
+		ppath.setMap(ppath.getNodes().get(0).getMap());
+		this.paths.add(ppath);
 	}
 
 	public void clearPaths() {
@@ -338,6 +340,7 @@ public final class MainModel extends StateContext {
         this.currentPathIdx = idx;
         Path path = getOnePath(currentPathIdx);
         this.setFocusNode(path.getNodes().get(0));
+		this.setCurrentMap(path.getMap());
     }
 
     public boolean setNextPath() {
