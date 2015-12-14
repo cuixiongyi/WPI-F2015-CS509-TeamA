@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by cuixi on 12/4/2015.
@@ -22,17 +23,19 @@ public class SuggestionBasicPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean focused = false;
-	private final JWindow autoSuggestionsPopUpWindow;
+	final JWindow autoSuggestionsPopUpWindow;
 	private final JTextField textField;
 	private final AutoSuggestor autoSuggestor;
-	private Color suggestionsTextColor, suggestionBorderColor,suggestionLineBorderColor;
-	private Dimension preferredSize;
-	private Font font;
-	private Node nodeInformation;
-	private BufferedImage imageIcon;
+	protected Color suggestionsTextColor;
+	private Color suggestionBorderColor;
+	protected Color suggestionLineBorderColor;
+	protected Dimension preferredSize;
+	protected Font font;
+	private ArrayList<Node> nodeInformation;
+	protected BufferedImage imageIcon;
 	
 
-	private JLabel textLabel;
+	protected JLabel textLabel;
 
 	public SuggestionBasicPanel(String string, AutoSuggestor autoSuggestor, Node node) {
 		// super(string);
@@ -44,7 +47,9 @@ public class SuggestionBasicPanel extends JPanel {
 
 		this.autoSuggestionsPopUpWindow = autoSuggestor.getAutoSuggestionPopUpWindow();
 
-		this.nodeInformation = node;
+		nodeInformation = new ArrayList<Node>();
+		nodeInformation.add(node);
+		
 
 		
 	}
@@ -60,32 +65,15 @@ public class SuggestionBasicPanel extends JPanel {
 		textLabel.setPreferredSize(preferredSize);
 		textLabel.setFont(font);
 		
-
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent me) {
-				super.mouseClicked(me);
-
-				replaceWithSuggestedText();
-
-				autoSuggestionsPopUpWindow.setVisible(false);
-			}
-		});
+		
+		
+		addMouseListener(mouseClicked());
 
 		getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "Enter released");
-		getActionMap().put("Enter released", new AbstractAction() {
-			/**
-			 *
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				replaceWithSuggestedText();
-				autoSuggestionsPopUpWindow.setVisible(false);
-			}
-		});
+		getActionMap().put("Enter released", keyboardEnter());
 	}
+
+	
 
 	public void setFocused(boolean focused) {
 		if (focused) {
@@ -101,13 +89,15 @@ public class SuggestionBasicPanel extends JPanel {
 		return focused;
 	}
 
-	private void replaceWithSuggestedText() {
+	void replaceWithSuggestedText() {
 		String suggestedWord = textLabel.getText();
 		String text = textField.getText();
 		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
-			autoSuggestor.getModel().setStartNode(nodeInformation);
+			autoSuggestor.getModel().setStartNode(nodeInformation.get(0));
 		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-			autoSuggestor.getModel().setEndNode(nodeInformation);
+			for(Node node: nodeInformation){
+				autoSuggestor.getModel().setEndNode(node);
+			}
 		}
 
 		String typedWord = autoSuggestor.getCurrentlyTypedWord();
@@ -148,13 +138,7 @@ public class SuggestionBasicPanel extends JPanel {
 		this.font = font;
 	}
 
-	public Node getNodeInformation() {
-		return nodeInformation;
-	}
 
-	public void setNodeInformation(Node nodeInformation) {
-		this.nodeInformation = nodeInformation;
-	}
 
 	public JLabel getTextLabel() {
 		return textLabel;
@@ -175,6 +159,20 @@ public class SuggestionBasicPanel extends JPanel {
 
 
 
+	/**
+	 * @return the nodeInformation
+	 */
+	public ArrayList<Node> getNodeInformation() {
+		return nodeInformation;
+	}
+
+	/**
+	 * @param nodeInformation the nodeInformation to set
+	 */
+	public void setNodeInformation(ArrayList<Node> nodeInformation) {
+		this.nodeInformation = nodeInformation;
+	}
+
 	public void setImageIcon(BufferedImage locationIcon) {
 		this.imageIcon = locationIcon;
 	}
@@ -186,5 +184,33 @@ public class SuggestionBasicPanel extends JPanel {
 	public void setSuggestionLineBorderColor(Color suggestionLineBorderColor) {
 		this.suggestionLineBorderColor = suggestionLineBorderColor;
 	}
+	
+	public MouseAdapter mouseClicked(){
+		
+		return new MouseAdapter(){
+			public void mouseClicked(MouseEvent me) {
+				super.mouseClicked(me);
 
+				replaceWithSuggestedText();
+
+				autoSuggestionsPopUpWindow.setVisible(false);
+			}
+		
+		};
+	}
+	
+	private Action keyboardEnter() {
+		return new AbstractAction() {
+			/**
+			 *
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				replaceWithSuggestedText();
+				autoSuggestionsPopUpWindow.setVisible(false);
+			}
+		};
+	}
 }

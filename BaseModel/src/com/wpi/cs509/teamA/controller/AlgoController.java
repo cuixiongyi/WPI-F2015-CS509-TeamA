@@ -103,6 +103,7 @@ public class AlgoController {
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 		
 		if(endNode!=null){
+			edges.init();
 			if(edges.getMaps().size()>10)
 				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			else
