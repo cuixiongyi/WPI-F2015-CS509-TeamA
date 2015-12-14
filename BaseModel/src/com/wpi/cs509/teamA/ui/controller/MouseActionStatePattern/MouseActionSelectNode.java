@@ -6,17 +6,16 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
-import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
-import com.wpi.cs509.teamA.ui.Dialog.InformationPanel;
 import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
-import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
 import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeType;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -87,10 +86,11 @@ public class MouseActionSelectNode extends MouseActionState {
 
 	@Override
 	public void paintOnImage(Graphics2D g2) {
+        LinearTransform lt = model.getLinearTransform();
 
-		PaintHelper.paintRoute(g2);
-		PaintHelper.paintNodes(model.getCurrentMap().getNodes(), g2);
-		PaintHelper.paintStartEndNode(g2);
+		PaintHelperComposite.paintRoute(g2, lt);
+		PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, lt);
+		PaintHelperComposite.paintStartEndNode(g2, lt);
 	}
 
     private boolean jumpToNextPath(Node node) {

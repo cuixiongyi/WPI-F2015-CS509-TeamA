@@ -4,15 +4,16 @@ import javax.swing.JPopupMenu;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.model.StateContext;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
@@ -102,11 +103,13 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File selectedfile = filechooser.getSelectedFile();
 					File file = new File(selectedfile.getPath());
-					 
-					for (int i = 0; i< model.getMultiMapLists().size();i++) {
+					if (null == model.getPaths())
+						return;
+					ArrayList<Path> paths = model.getPaths();
+					for (int i = 0; i< model.getPaths().size();i++) {
 						GeneralMap map = model.getMultiMapLists().get(i);
 						// System.out.println(mp.getMapName());
-						PaintHelper.printRoute(map, map.getImage(), file, i);
+						PaintImageHelper.printRoute(paths.get(i), map.getImage(), file, i);
 
 					}
 				}

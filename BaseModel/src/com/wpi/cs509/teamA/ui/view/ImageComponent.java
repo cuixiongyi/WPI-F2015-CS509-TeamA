@@ -1,9 +1,7 @@
 package com.wpi.cs509.teamA.ui.view;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
@@ -12,10 +10,9 @@ import javax.swing.JComponent;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
-import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
-import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.LinearTransform;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 
 
 /**
@@ -88,11 +85,11 @@ public class ImageComponent extends JComponent {
         /// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
 		image = map.getImage();
-		float scale = map.getDisplayScale();
-		
+
 		if (!testBeforeRepaint())
 			return;
 
+		LinearTransform lt = model.getLinearTransform();
 		// if isInitilized
 		// no need to paint the image again
 	 
@@ -103,19 +100,22 @@ public class ImageComponent extends JComponent {
 			model.getCurrentMap().setDisplayScale(1.0f);
 
 			ViewManager.infoPanelSlideDown();
+			model.setLinearTransform(new LinearTransform());
+			model.setFisrtChangeMapFalse();
 		}
 		if (model.isFisrtFocusNode()) {
 			Node node = model.getFocusNode();
-			this.setImageXpos(this.getWidth()/2 - (int)(node.getLocation().getX()*model.getCurrentMap().getDisplayScale()));
-			this.setImageYpos(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getCurrentMap().getDisplayScale()));
+			lt.setX(this.getWidth()/2 - (int)(node.getLocation().getX()*model.getCurrentMap().getDisplayScale()));
+			lt.setY(this.getHeight()/2 - (int)(node.getLocation().getY()*model.getCurrentMap().getDisplayScale()));
+			model.setFisrtFocusNode2False();
 		}
-		PaintHelper.paintEverything(g2, map, image,scale);
+		PaintHelperComposite.paintEverything(g2, image, lt);
 
 
 		/// CXY test
 		// GeneralMap tmp = stateContext.getCurrentMap();
 		// List<Node> nodes = tmp.getNodes();
-		// PaintHelper.paintPath(nodes, g2);
+		// PaintHelperBasics.paintPath(nodes, g2);
 
 		// g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 		// g.drawString("Start", this.getImageStartXpos(),
@@ -127,12 +127,10 @@ public class ImageComponent extends JComponent {
             /// CXY test
             //GeneralMap tmp = stateContext.getCurrentMap();
             //List<Node> nodes = tmp.getNodes();
-            //PaintHelper.paintPath(nodes, g2);
+            //PaintHelperBasics.paintPath(nodes, g2);
         
 //        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
 //        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
-		model.setFisrtFocusNode2False();
-		model.setFisrtChangeMapFalse();
 
 		g2 = null;
 
@@ -201,7 +199,5 @@ public class ImageComponent extends JComponent {
 	public void setModel(MainModel model) {
 		this.model = model;
 	}
-
-
 
 }

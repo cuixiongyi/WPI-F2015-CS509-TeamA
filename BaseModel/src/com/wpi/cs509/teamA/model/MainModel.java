@@ -7,6 +7,7 @@ import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeType;
 
 import java.util.ArrayList;
@@ -41,8 +42,10 @@ public final class MainModel extends StateContext {
     private ArrayList<Path> paths = null;
     private int currentPathIdx = 0;
 
+    private LinearTransform linearTransform = new LinearTransform();;
 
-	public MainModel() {
+
+    public MainModel() {
 
 		this.myAccount = new UserAccount();
 		myAccount = null;
@@ -54,6 +57,7 @@ public final class MainModel extends StateContext {
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
 		parkingAvilibility = new HashMap<String, Integer>();
+        linearTransform = new LinearTransform();
 		for(Node n: Database.getAllNodeListFromDatabase()){
 			if(n.getNodeType() == NodeType.PARKING){
 				parkingAvilibility.put(n.getName(), 0);
@@ -368,7 +372,17 @@ public final class MainModel extends StateContext {
         return true;
     }
 
-	public HashMap<String, Integer> getParkingAvilibility() {
+    public synchronized LinearTransform getLinearTransform() {
+        modelChanged();
+        return linearTransform;
+    }
+
+    public synchronized void setLinearTransform(LinearTransform linearTransform) {
+        this.linearTransform = linearTransform;
+        modelChanged();
+    }
+
+    public HashMap<String, Integer> getParkingAvilibility() {
 		return parkingAvilibility;
 	}
 

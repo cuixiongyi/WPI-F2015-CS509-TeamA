@@ -38,8 +38,12 @@ public class ImageMouseListener implements MouseInputListener {
 
                     int x = imageComponent.getImageXpos();
                     int y = imageComponent.getImageYpos();
-                    imageComponent.setImageXpos(imageComponent.getImageStartXpos() + e.getX() - imageComponent.getPressxPos());
-                    imageComponent.setImageYpos(imageComponent.getImageStartYpos() + e.getY() - imageComponent.getPressyPos());
+                    int x2 = imageComponent.getImageStartXpos() + e.getX() - imageComponent.getPressxPos();
+                    int y2 = imageComponent.getImageStartYpos() + e.getY() - imageComponent.getPressyPos();
+                    imageComponent.setImageXpos(x2);
+                    imageComponent.setImageYpos(y2);
+                model.getLinearTransform().setX(x2);
+                model.getLinearTransform().setY(y2);
                     imageComponent.repaint();
 //                }
             }
