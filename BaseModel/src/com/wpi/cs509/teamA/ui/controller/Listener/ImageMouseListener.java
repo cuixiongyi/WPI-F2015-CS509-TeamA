@@ -34,11 +34,14 @@ public class ImageMouseListener implements MouseInputListener {
             @Override
             public void mouseDragged(MouseEvent e) {
                 // TODO Auto-generated method stub
-                int x = imageComponent.getImageXpos();
-                int y = imageComponent.getImageYpos();
-                imageComponent.setImageXpos(imageComponent.getImageStartXpos() +  e.getX()-imageComponent.getPressxPos());
-                imageComponent.setImageYpos(imageComponent.getImageStartYpos() +  e.getY()-imageComponent.getPressyPos());
-                imageComponent.repaint();
+//                if (e.getButton() == MouseEvent.BUTTON1) {
+
+                    int x = imageComponent.getImageXpos();
+                    int y = imageComponent.getImageYpos();
+                    imageComponent.setImageXpos(imageComponent.getImageStartXpos() + e.getX() - imageComponent.getPressxPos());
+                    imageComponent.setImageYpos(imageComponent.getImageStartYpos() + e.getY() - imageComponent.getPressyPos());
+                    imageComponent.repaint();
+//                }
             }
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -57,10 +60,12 @@ public class ImageMouseListener implements MouseInputListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        imageComponent.setPressxPos(e.getX());
-        imageComponent.setPressyPos(e.getY());
-        imageComponent.setImageStartXpos(imageComponent.getImageXpos());
-        imageComponent.setImageStartYpos(imageComponent.getImageYpos());
+//        if (e.getButton() == MouseEvent.BUTTON1) {
+            imageComponent.setPressxPos(e.getX());
+            imageComponent.setPressyPos(e.getY());
+            imageComponent.setImageStartXpos(imageComponent.getImageXpos());
+            imageComponent.setImageStartYpos(imageComponent.getImageYpos());
+//        }
     }
 
     @Override

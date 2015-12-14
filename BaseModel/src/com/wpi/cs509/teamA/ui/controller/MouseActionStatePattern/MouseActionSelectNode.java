@@ -109,12 +109,12 @@ public class MouseActionSelectNode extends MouseActionState {
                     model.setNextPath();
                     return true;
                 }
-                if (nodes.get(0) == node && model.getCurrentPathIdx()-1 >0) {
+                if (nodes.get(0).getId() == node.getId() && model.getCurrentPathIdx()-1 >0) {
                     model.setPrivousPath();
                     return true;
 
                 }
-                if (nodes.get(nodes.size()-1) == node && model.getCurrentPathIdx()+1 <model.getPaths().size()) {
+                if (nodes.get(nodes.size()-1).getId() == node.getId() && model.getCurrentPathIdx()+1 <model.getPaths().size()) {
                     model.setNextPath();
                     return true;
                 }
