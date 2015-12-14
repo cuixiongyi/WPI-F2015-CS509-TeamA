@@ -16,6 +16,7 @@ import javax.swing.*;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.*;
 import com.wpi.cs509.teamA.util.*;
@@ -310,6 +311,17 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             getBtnMngNode().setEnabled(false);
             getOpenMap().setEnabled(false);
             tabbedPane.setEnabledAt(2, false);
+        }
+        Path path = model.getCurrentPath();
+		if (null == path) {
+            DefaultListModel<String> mapListModel = new DefaultListModel<>();
+            getMapList().setModel(mapListModel);
+        }
+        if (null != model.getCurrentMap()) {
+            getComboBoxMap().setSelectedIndex(model.getCurrentMap().getMapId()-1);
+        }
+        if (null != model.getStartNode()) {
+//            getFromText().setText(model.getStartNode().getName());
         }
     }
 

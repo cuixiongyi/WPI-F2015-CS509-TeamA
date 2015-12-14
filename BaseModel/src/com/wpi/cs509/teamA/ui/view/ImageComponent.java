@@ -118,7 +118,7 @@ public class ImageComponent extends JComponent {
 		}
 
 		PaintHelperComposite.paintEverything(g2, image, lt);
-		ViewManager.getThumbNailPanel().setLocation(0,0);
+//		ViewManager.getThumbNailPanel().setLocation(0,0);
 		Node animationNode = model.getAnimationNode();
 
 		if (null != animationNode) {

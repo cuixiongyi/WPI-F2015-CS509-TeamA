@@ -15,6 +15,7 @@ import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
+import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.UIConstant;
@@ -232,7 +233,7 @@ class ViewControllerImpl extends ViewControllerBase {
 			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(5));
 			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
 					ViewManager.getThumbNailPanel().getWidth());
-			ret.switchState(new AnimationStateSlidingUp(ret));
+			ret.switchState(new AnimationStateSlidingOut(ret));
 			ret.setSpeed(2.0);
 			ViewManager.getThumbNailPanel().setVisible(true);
 		}
