@@ -14,6 +14,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -22,15 +23,18 @@ import javax.swing.KeyStroke;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
+import com.wpi.cs509.teamA.util.SameLabelListCellRenderer;
 
 public class SuggestionLabelPanel extends SuggestionBasicPanel {
 	private InputPanel inputPanel;
+	private String displayName;
 	public SuggestionLabelPanel(String string, AutoSuggestor autoSuggestor, Node node, String displayName, InputPanel inputPanel) {
 		super(string, autoSuggestor, node);
 		this.inputPanel = inputPanel;
 		SuggestorPainter.setStyle(SuggestorPainter.SuggestorEnum.Labels,this);
 		OtherFeatureDaoImpl nodeList = new OtherFeatureDaoImpl();
-		System.out.println(nodeList);
+		this.displayName = displayName;
 		
 	   ArrayList<Node> labelResult = (ArrayList<Node>) nodeList.getListofNodesWithLabel(displayName);
 	   
@@ -94,6 +98,7 @@ public class SuggestionLabelPanel extends SuggestionBasicPanel {
 				autoSuggestor.getModel().setEndNode(node);	
 				mapListModel.addElement(node.getName());
 		}
+		inputPanel.getMapList().setCellRenderer(new SameLabelListCellRenderer(SuggestorPainter.getIconFromName(displayName)));
 		inputPanel.getMapList().setVisible(true);
 		inputPanel.getMapList().removeAll();
 		inputPanel.getMapList().setModel(mapListModel);
