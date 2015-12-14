@@ -14,7 +14,14 @@ import javax.swing.JList;
 public class MarioListRenderer extends DefaultListCellRenderer {
 
     Font font = new Font("helvitica", Font.BOLD, 24);
+    ImageIcon icon;
 
+    
+    public MarioListRenderer(ImageIcon icon){
+    	super();
+    	this.icon = icon;
+    	
+    }
     @Override
     public Component getListCellRendererComponent(
             JList list, Object value, int index,
@@ -36,6 +43,22 @@ public class MarioListRenderer extends DefaultListCellRenderer {
         	ImageIcon image=new ImageIcon(NodeIcon.getNextIcon());
             label.setIcon(image);
         }
+        label.setHorizontalTextPosition(JLabel.RIGHT);
+        label.setFont(font);
+        return label;
+    }
+    
+    public Component getListCellRendererComponent(
+            JList list, Object value, int index,
+            boolean isSelected, boolean cellHasFocus, ImageIcon icon) {
+
+        JLabel label = (JLabel) super.getListCellRendererComponent(
+                list, value, index, isSelected, cellHasFocus);
+        
+        if (isSelected) {
+        	label.setBackground(new Color(99,184,255));
+        }
+        label.setIcon(icon);
         label.setHorizontalTextPosition(JLabel.RIGHT);
         label.setFont(font);
         return label;
