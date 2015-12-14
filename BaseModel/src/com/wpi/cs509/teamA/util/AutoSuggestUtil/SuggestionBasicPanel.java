@@ -95,8 +95,10 @@ public class SuggestionBasicPanel extends JPanel {
 		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
 			autoSuggestor.getModel().setStartNode(nodeInformation.get(0));
 		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-			for(Node node: nodeInformation){
-				autoSuggestor.getModel().setEndNode(node);
+			if(nodeInformation.size()==1){
+				autoSuggestor.getModel().setOneEndNode(nodeInformation.get(0));
+			}else{
+				autoSuggestor.getModel().setEndNearestNodes(nodeInformation);
 			}
 		}
 

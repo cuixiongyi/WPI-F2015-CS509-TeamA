@@ -90,7 +90,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		} else if (e.getSource()==mntmDes){
 
 			this.inputPanel.getToText().setText(node.getMap().getMapName()+" "+node.getName());
-			model.setEndNode(node);
+			model.addOneEndNode(node);
 			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		} else if(e.getSource()==cleanupMap){
 			model.cleanUpRoute();
