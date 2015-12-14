@@ -86,4 +86,6 @@ public interface NodeRelationDao {
 	public List<Edge> getAllMapEdges();
 
 	public boolean deleteOrAddEdge(Node n1, Node n2);
+	
+	public List<Integer> getMapRelationsNodeForOneMap(int map_id);
 }

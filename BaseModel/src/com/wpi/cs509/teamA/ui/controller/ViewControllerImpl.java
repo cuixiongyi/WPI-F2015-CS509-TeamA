@@ -113,7 +113,7 @@ class ViewControllerImpl extends ViewControllerBase {
 		ArrayList<Node> singleMapPath = new ArrayList<Node>();
 		ArrayList<String> mapNameList = new ArrayList<String>();
 		ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
-		int tmpMapId = -1;
+		int tmpMapId = pathNodes.peek().getMap().getMapId();
 		mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
 		mapList.add(pathNodes.peek().getMap());
 		model.clearPaths();
@@ -155,8 +155,9 @@ class ViewControllerImpl extends ViewControllerBase {
 			mapListModel.addElement(name);
 		}
 		inputPanel.getMapList().setModel(mapListModel);
-		model.setMultiMapPathListsForEachMap(multiMapPathLists);
-		model.setCurrentMap(multiMapPathLists.get(0).get(0).getMap());
+//		model.setMultiMapPathListsForEachMap(multiMapPathLists);
+		model.setCurrentPath(0);
+		model.setCurrentMap(model.getCurrentPath().getMap());
 		model.setMultiMapLists(mapList);
 
 

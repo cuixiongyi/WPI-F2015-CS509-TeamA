@@ -57,7 +57,7 @@ public class InformationPanel extends JPanel implements ActionListener {
 //        textLabel.setFont(new Font("Arial", Font.BOLD, 10));
 //        this.add(textLabel);
 
-        textArea.setText(Database.getNodeInformation(node.getId()).PrintNodeInfo());
+        textArea.setText(Database.getNodeInformation(node.getId()).PrintNodeInfo().get(0));
         textArea.setBounds(103,3,150,100);
         textArea.setFont(new Font("Arial", Font.BOLD, 10));
         this.add(textArea);

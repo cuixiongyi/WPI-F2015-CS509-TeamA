@@ -16,6 +16,7 @@ import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;
+import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.UIDataBuffer;
 
 // TODO: Using proxy pattern to handle all the database connection
@@ -348,5 +349,34 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<Integer> getMapRelationsNodeForOneMap(int map_id) {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		List<Integer> res = new ArrayList<Integer>();
+		try {
+			String selectAllNodes = "select distinct(newMap.id) from ((select node.id from maprelations,node "
+					+ "where node.map_id = ? and maprelations.node_from=node.id) union "
+					+ "(select node.id from maprelations,node where node.map_id = ? and "
+					+ "maprelations.node_to =node.id)) as newMap;";
+			pstmt = conn.prepareStatement(selectAllNodes);
+			// TODO: potential danger..
+			pstmt.setInt(1, map_id);
+			resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				res.add(resultSet.getInt("id"));
+			}
+			return res;
+
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+			JdbcConnect.connClose();
+		}
+		return null;
 	}
 }

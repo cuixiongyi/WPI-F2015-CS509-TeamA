@@ -24,7 +24,7 @@ public final class MainModel extends StateContext {
 	private List<NodeType> iconFilter = null;
 	private static NodeType[] nodeTypes;
 	private Node startNode;
-	private ArrayList<Node> endNode = null;
+	private ArrayList<Node> endNode;
 
 	private Node focusNode = null;
 	private boolean isFirstFocusNode = false;
@@ -47,6 +47,7 @@ public final class MainModel extends StateContext {
 		this.iconFilter = new ArrayList<NodeType>();
 		MainModel.nodeTypes = NodeType.values();
 		addAllFilters();
+		multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
 
@@ -183,6 +184,8 @@ public final class MainModel extends StateContext {
 	}
 
 	public synchronized ArrayList<Node> getEndNode() {
+		
+		
 		return endNode;
 	}
 
@@ -190,6 +193,7 @@ public final class MainModel extends StateContext {
 		if (null == this.endNode) {
 			endNode = new ArrayList<Node>();
 		}
+		
 		this.endNode.add(pendNode);
 		modelChanged();
 	}
@@ -207,21 +211,21 @@ public final class MainModel extends StateContext {
 		List<GeneralMap> maps = Database.getAllMapFromDatabase();
 		this.setMultiMapPathLists(pMultiMapPathLists);
 		this.multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
-
-		for (int ii = 1; ii <= maps.size(); ++ii) {
-			ArrayList<Node> path = new ArrayList<Node>();
-			int idx = -1;
-			for (int jj = 0; jj < pMultiMapPathLists.size(); ++jj) {
-				if (pMultiMapPathLists.get(jj).get(0).getMap().getMapId() == ii) {
-					idx = jj;
-					break;
-				}
-			}
-			if (-1 != idx) {
-				path = pMultiMapPathLists.get(idx);
-			}
-			this.multiMapPathListsForEachMap.add(path);
-		}
+//
+//		for (int ii = 1; ii <= maps.size(); ++ii) {
+//			ArrayList<Node> path = new ArrayList<Node>();
+//			int idx = -1;
+//			for (int jj = 0; jj < pMultiMapPathLists.size(); ++jj) {
+//				if (pMultiMapPathLists.get(jj).get(0).getMap().getMapId() == ii) {
+//					idx = jj;
+//					break;
+//				}
+//			}
+//			if (-1 != idx) {
+//				path = pMultiMapPathLists.get(idx);
+//			}
+//			this.multiMapPathListsForEachMap.add(path);
+//		}
 		modelChanged();
 	}
 
@@ -308,6 +312,10 @@ public final class MainModel extends StateContext {
 	}
 
 	public void addOnePath(Path path) {
+		if (null == paths) {
+			paths = new ArrayList<Path>();
+		}
+        path.setMap(path.getNodes().get(0).getMap());
 		this.paths.add(path);
 	}
 

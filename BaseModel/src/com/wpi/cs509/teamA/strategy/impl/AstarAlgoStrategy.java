@@ -29,7 +29,7 @@ public class AstarAlgoStrategy implements AlgoStrategy {
 		this.endNode = alledges.getEndNode();
 		List<Node> l = new ArrayList<Node>();
 		Stack<Node> result = new Stack<Node>();
-		alledges.init();
+		//alledges.init();
 		if (!alledges.isMultipleMap()) {
 			l.add(endNode);
 			Graph context = new Graph(alledges.getEdgesOnMap(startNode.getMap()));

@@ -45,6 +45,8 @@ public class AutoSuggestor {
 	private double windowLocationX;
 	private double windowLocationY;
 	private InputPanel inputPanel;
+	private final static int MAXNUMLABEL = 4;
+	
 	private DocumentListener documentListener = new DocumentListener() {
 		@Override
 		public void insertUpdate(DocumentEvent de) {
@@ -326,20 +328,38 @@ public class AutoSuggestor {
 
 	}
 
-	protected void addWordToSuggestions(String word, Node nodeInformation, SuggestorEnum suggestorEnum) {
+	protected void addWordToSuggestions(String word, Node nodeInformation, SuggestorEnum suggestorEnum, String displayName) {
 		switch (suggestorEnum) {
 		case Location:
-			SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionLocationPanel = new SuggestionLocationPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionLocationPanel);
 			break;
 		case Professor:
-			SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionProfessorPanel = new SuggestionProfessorPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionProfessorPanel);
 			break;
 		case History:
-			SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this, nodeInformation);
+			SuggestionBasicPanel suggestionHistoryPanel = new SuggestionHistoryPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionHistoryPanel);
 			break;
+		case Activity:
+			SuggestionBasicPanel suggestionActivityPanel = new SuggestionActivityPanel(word, this, nodeInformation, displayName);
+			addSugestionsPanel(suggestionActivityPanel);
+			break;
+		case Others:
+			SuggestionBasicPanel suggestionOthersPanel = new SuggestionOthersPanel(word, this, nodeInformation, displayName);
+			addSugestionsPanel(suggestionOthersPanel);
+			break;
+		case Major:
+			SuggestionBasicPanel suggestionMajorPanel = new SuggestionMajorPanel(word, this, nodeInformation, displayName);
+			addSugestionsPanel(suggestionMajorPanel);
+			break;
+		case Labels:
+			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation, displayName);
+			
+			addSugestionsPanel(suggestionLabelPanel);
+			break;
+		
 		}
 
 	}
@@ -445,21 +465,23 @@ public class AutoSuggestor {
 		
 		while (iter.hasNext()) {
 			NodeForSearch nodeInfo = iter.next();
+			//skip label on source textfield
+			if(this.setNodeOption==setNodeOption.setStartNode&&nodeInfo.getNode_label()==SuggestorEnum.Labels)
+				continue;
+			//set limitation on same node_label
 			if(nodeInfo.getNode_label()==temp){
 				i++;
 			}else{
 				temp = nodeInfo.getNode_label();
+				i = 0;
 			}
-			
-			if(i>=10){
+			if(i>=MAXNUMLABEL){
 				continue;
 			}
 			
+
+			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label(), nodeInfo.getStringForDisplay());
 			
-			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label());
-			if(nodeInfo.getNode_label()==temp){
-				
-			}
 		
 
 			suggestionAdded = true;

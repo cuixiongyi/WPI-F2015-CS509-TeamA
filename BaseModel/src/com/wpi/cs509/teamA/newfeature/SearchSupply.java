@@ -121,8 +121,8 @@ public class SearchSupply{
 	}
 
 	// TODO: remove this method
-	public static void main(String[] args) {
-		Database.InitFromDatabase();
+//	public static void main(String[] args) {
+//		Database.InitFromDatabase();
 	//	System.out.println("Map-7 nodes size: "+ Database.getAllNodesForCurrentMap(7).size());
 	//	System.out.println(Database.getAllNodeFromDatabase().size());
 	/*	MainModel.setStaticModel(new MainModel());
@@ -138,5 +138,5 @@ public class SearchSupply{
 		for ( Node n : testFeature.getListofNodesWithLabel("pizza")){
 			System.out.println(n.getName());
 		}*/
-	}
+//	}
 }
