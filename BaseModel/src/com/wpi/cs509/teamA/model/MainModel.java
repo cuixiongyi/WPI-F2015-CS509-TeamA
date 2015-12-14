@@ -100,7 +100,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void cleanUpRoute() {
 		this.setStartNode(null);
-		this.setEndNode(null);
+		this.addOneEndNode(null);
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
 		this.setAnimationNode(null);
@@ -206,7 +206,7 @@ public final class MainModel extends StateContext {
 		return endNode;
 	}
 
-	public synchronized void setEndNode(Node pendNode) {
+	public synchronized void addOneEndNode(Node pendNode) {
 		if (null == this.endNode) {
 			endNode = new ArrayList<Node>();
 		}
@@ -214,6 +214,13 @@ public final class MainModel extends StateContext {
 		this.endNode.add(pendNode);
         this.endNearestNodes.clear();
         modelChanged();
+	}
+	
+	public synchronized void setOneEndNode(Node pEndNode) {
+		endNode = new ArrayList<Node>();
+		addOneEndNode(pEndNode);
+		return;
+		
 	}
 
 	public synchronized void clearEndNode() {
