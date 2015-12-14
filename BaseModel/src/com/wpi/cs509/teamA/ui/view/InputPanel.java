@@ -42,6 +42,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
     private JButton signUp;
     private JLabel lblFrom;
     private JLabel lblTo;
+	private JLabel lblSwapStartEnd;
     private JButton btnNeighborManage;
     private JButton btnSynchronize;
     private JButton classroomFilter;
@@ -129,30 +130,38 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		for (GeneralMap map : allMapList) {
 			comboBoxMap.addItem(map.getMapAbbrName());
 		}
-		comboBoxMap.setMaximumRowCount(2);
+		comboBoxMap.setMaximumRowCount(6);
 		comboBoxMap.addFocusListener(this);
+
 		comboBoxMap.requestFocus();
 		add(comboBoxMap);
 
-		lblFrom = new JLabel(UIConstant.FROM);
+		lblFrom = new JLabel();
+		lblFrom.setIcon(NodeIcon.getStartIconSmall());
 		lblFrom.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFrom.setBounds(15, 105, 61, 16);
 		add(lblFrom);
 
 		txtFrom = new JTextField();
-		txtFrom.setBounds(80, 100, 150, 27);
+		txtFrom.setBounds(80, 100, 150, 29);
 		txtFrom.setText(UIConstant.SEARCHWORD);
 		add(txtFrom);
 		txtFrom.addFocusListener(this);
 		txtFrom.setColumns(10);
 
-		lblTo = new JLabel(UIConstant.TO);
+		lblTo = new JLabel();
+		lblTo.setIcon(NodeIcon.getEndIconSmall());
 		lblTo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTo.setBounds(15, 130, 61, 16);
 		add(lblTo);
 
+		lblSwapStartEnd =new JLabel();
+		lblSwapStartEnd.setIcon(NodeIcon.getRotateIcon());
+		lblSwapStartEnd.setBounds(228,112,20,30);
+		add(lblSwapStartEnd);
+
 		txtTo = new JTextField();
-		txtTo.setBounds(80, 125, 150, 27);
+		txtTo.setBounds(80, 125, 150, 29);
 		txtTo.addFocusListener(this);
 		txtTo.setText(UIConstant.SEARCHWORD);
 		add(txtTo);
@@ -172,12 +181,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		searchResultTab.add(mapList);
 		/// for test
 		DefaultListModel<String> model = new DefaultListModel<>();
-		model.addElement("This is a short textdddddddddd");
-		model.addElement(
-				"This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. This is a long text. ");
-		model.addElement(
-				"This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. This is an even longer text. ");
-				// mapList.setModel(model);
 
 		// tab panel-filter
 		this.clearFilter = new JButton("ALL");
@@ -521,5 +524,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	public JToggleButton getBtnMngEdge() {
 		return btnMngEdge;
 
+	}
+
+	public JLabel getLblSwapStartEnd() {
+		return lblSwapStartEnd;
 	}
 };

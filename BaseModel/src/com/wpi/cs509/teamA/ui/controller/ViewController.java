@@ -8,10 +8,7 @@ import com.wpi.cs509.teamA.util.NodeType;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class ViewController extends ViewControllerBase {
@@ -35,6 +32,7 @@ public class ViewController extends ViewControllerBase {
 		addOpenFile();
 		addButtonEditNode();
 		addButtonEditEdge();
+		addLabelRotate();
 	}
 
 	private void addOpenFile() {
@@ -47,6 +45,35 @@ public class ViewController extends ViewControllerBase {
 			}
 		});
 
+	}
+
+	private void addLabelRotate(){
+		inputPanel.getLblSwapStartEnd().addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				impl.clickOnSwapStartEnd();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+
+			}
+		});
 	}
 
 	private void addButtonEditNode() {
