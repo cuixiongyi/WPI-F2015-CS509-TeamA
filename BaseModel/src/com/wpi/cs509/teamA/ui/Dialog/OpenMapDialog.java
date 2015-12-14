@@ -1,8 +1,6 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -120,11 +118,9 @@ public class OpenMapDialog  extends JDialog  implements ActionListener{
         pack();
         setResizable(false);
         setLocation(100,100);
-        
-        
-        
-		
-	}
+        this.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+
+    }
 
 
 	@Override
@@ -132,7 +128,8 @@ public class OpenMapDialog  extends JDialog  implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==open){
 			int returnVal = fc.showOpenDialog(null);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file =fc.getSelectedFile();
 				fileName.setText(file.getName());
 				filePath.setText(file.getPath());
