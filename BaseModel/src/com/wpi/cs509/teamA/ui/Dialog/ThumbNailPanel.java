@@ -74,14 +74,20 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
         setVisible(true);
     }
 
-    public void update()
+    public boolean update()
     {
+        if (null == this.model.getPaths()) {
+            setVisible(false);
+            return false;
+        }
+        if (this.paths == this.model.getPaths()) {
+            return false;
+        }
         newLayout();
+
         this.paths = this.model.getPaths();
 
-        if (null == paths) {
-            return;
-        }
+
         int picX=10;
         int picY=10;
         int textX=0;
@@ -109,6 +115,7 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
         }
         setLayoutPost();
         setCurrentMap(0);
+        return true;
     }
 
     void setCurrentMap(int index)
