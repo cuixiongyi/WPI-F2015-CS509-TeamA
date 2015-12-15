@@ -58,7 +58,7 @@ public class AstarAlgoStrategy implements AlgoStrategy {
 			l.clear();
 			startNode = alledges.getOtherNode(r.firstElement());
 			System.out.println("last on path is " + r.firstElement().getId());
-			// System.out.println("next start is "+startNode.getId());
+			//System.out.println("next start is "+startNode.getId());
 			r.addAll(result);
 			result = r;
 		}

@@ -1,11 +1,8 @@
 package com.wpi.cs509.teamA.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
@@ -85,8 +82,10 @@ public class AlgoController {
 		}
 	}
 	
-	public AlgoController(Node from, Node[] to, boolean isMultiopleDestination) {
-		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
+		Node[] end = new Node[to.size()];
+		to.toArray(end);
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, end);
 		this.isMultipleDestination=true;
 	}
 
@@ -113,11 +112,12 @@ public class AlgoController {
 		if(flag){
 			edges.init();
 			System.out.println("normal path");
-			if(edges.getMaps().size()>10)
+			if(edges.getMaps().size()>3)
 				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			else
 				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			endNode=null;
+			//flag=false;
+			return result = generalAlgorithm.findPath(edges);
 		}
 		
 		if(this.isMultipleDestination){
@@ -129,6 +129,7 @@ public class AlgoController {
 			System.out.println("Find nearest");
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 		}
+		
 		return result = generalAlgorithm.findPath(edges);
 
 	}
