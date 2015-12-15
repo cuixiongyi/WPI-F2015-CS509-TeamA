@@ -137,7 +137,7 @@ public class OpenMapDialog  extends JDialog  implements ActionListener{
 				filePath.setText(file.getPath());
 				mapScale.setText("1.0");
 			}else {
-				this.dispose();
+//				this.dispose();
 				System.out.println("Not saved");
 			}
 		}else if(e.getSource()==okButton){
