@@ -14,6 +14,7 @@ import com.wpi.cs509.teamA.util.NodeIcon;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by cuixi on 12/14/2015.
@@ -113,6 +114,15 @@ public class PaintHelperComposite extends PaintHelperBasics{
 
         }
 
+    }
+
+    public static void paintDots(List<Node> nodes, Graphics2D g2, LinearTransform pLinearTransform ) {
+        PaintHelperBasics.setLinearTransform(pLinearTransform);
+        for (Node node :
+                nodes) {
+            PaintHelperBasics.paintDot(node, g2, DrawStyleEnum.BasicNode);
+
+        }
     }
 
     public static void paintEdgeAndNodes(java.util.List<Node> nodes, Graphics2D g2) {

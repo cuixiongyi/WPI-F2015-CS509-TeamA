@@ -93,6 +93,8 @@ public class MouseActionEditEdge  extends MouseActionState {
                 g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
         PaintHelperComposite.paintEdges(model.getCurrentMap().getEdges(),
                 g2, PaintHelperBasics.DrawStyleEnum.BasicEdge, lt);
+        PaintHelperComposite.paintDots(model.getCurrentMap().getNodes(), g2, lt);
+
         if (null != lastNode && model.getCurrentMap().getMapId() == lastNode.getMap().getMapId()) {
             PaintHelperBasics.paintDot(lastNode, g2, PaintHelperBasics.DrawStyleEnum.SelectedNode);
         }
