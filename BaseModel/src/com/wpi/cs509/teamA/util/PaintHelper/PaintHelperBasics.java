@@ -87,15 +87,19 @@ public class PaintHelperBasics {
 	}
 
 
-
-	public static void paintIcon2(Node node, Graphics2D g2, BufferedImage image) {
-		if (null == node || node.getMap().getMapId() != model.getCurrentMapID())
-			return;
+	public static void paintIconForce(Node node, Graphics2D g2, BufferedImage image) {
 		Coordinate coorTrans = linearTransform.transferCoor(node.getLocation());
 		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
 				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+
+	}
+
+	public static void paintIcon2(Node node, Graphics2D g2, BufferedImage image) {
+		if (null == node || node.getMap().getMapId() != model.getCurrentMapID())
+			return;
+		paintIconForce(node, g2, image);
 	}
 
 
@@ -215,8 +219,8 @@ public class PaintHelperBasics {
 		PaintHelperBasics.model = model;
 	}
 
-//	 public static String dirtmp = "/BaseModel/src/";
-	public static String dirtmp = "/src/";
+	 public static String dirtmp = "/BaseModel/src/";
+//	public static String dirtmp = "/src/";
 
 	public static String getUserDir() {
 		return System.getProperty("user.dir") + dirtmp;

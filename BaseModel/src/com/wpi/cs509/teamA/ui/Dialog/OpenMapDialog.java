@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Arc2D;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -134,10 +135,10 @@ public class OpenMapDialog  extends JDialog  implements ActionListener{
             if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file =fc.getSelectedFile();
 				fileName.setText(file.getName());
-				filePath.setText(file.getPath());
-				mapScale.setText("1.0");
+                filePath.setText(file.getName().substring(0,file.getName().lastIndexOf(".")));
+                mapScale.setText("1.0");
 			}else {
-				this.dispose();
+//				this.dispose();
 				System.out.println("Not saved");
 			}
 		}else if(e.getSource()==okButton){
