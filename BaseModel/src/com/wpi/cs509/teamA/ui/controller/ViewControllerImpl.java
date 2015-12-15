@@ -67,8 +67,22 @@ class ViewControllerImpl extends ViewControllerBase {
 
 	public void clickOnSwapStartEnd()
 	{
-		if(inputPanel.getFromText().getText()!=null && inputPanel.getToText().getText()!=null )
-		{}
+		if(model.getStartNode()!=null&&model.getEndNode()!=null&&model.getEndNode().size()==1)
+		{
+
+			Node tmpEnd=model.getEndNode().get(0);
+			Node tmpStart=model.getStartNode();
+			model.setOneEndNode(tmpStart);
+			model.setStartNode(tmpEnd);
+			String tmpFromText=inputPanel.getFromText().getText();
+			String tmpToText=inputPanel.getToText().getText();
+			inputPanel.getFromText().setText(tmpToText);
+			inputPanel.getToText().setText(tmpFromText);
+			inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
+			inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
+			this.clickSearch();
+			
+		}
 	}
 
 	public void clickEditNode() {
