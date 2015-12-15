@@ -168,72 +168,77 @@ class ViewControllerImpl extends ViewControllerBase {
 //		inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
-		AlgoController algoController;
-		if (1 == model.getEndNode().size()) {
-			algoController = new AlgoController(model.getStartNode(), model.getEndNode());
-
-		}
-		else
-		{
-			algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
-
-		}
-
-		Stack<Node> pathNodes = algoController.getRoute();
-
-		ArrayList<Node> singleMapPath = new ArrayList<Node>();
-		ArrayList<String> mapNameList = new ArrayList<String>();
-		ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
-		int tmpMapId = pathNodes.peek().getMap().getMapId();
-		mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
-		mapList.add(pathNodes.peek().getMap());
-		model.clearPaths();
-		Path path = new Path();
-
-		while (pathNodes.size() > 0) {
-
-			Node node = Database.getNodeFromId(pathNodes.pop().getId());
-			if (node.getMap().getMapId() == tmpMapId) {
-				singleMapPath.add(node);
-				path.addNode(node);
-
+		try {
+			AlgoController algoController;
+			if (1 == model.getEndNode().size()) {
+				algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 
 			} else {
-				multiMapPathLists.add(singleMapPath);
-
-				model.addOnePath(path);
-				path = new Path();
-				path.setMap(node.getMap());
-				path.addNode(node);
-
-				singleMapPath = new ArrayList<Node>();
-				singleMapPath.add(node);
-				tmpMapId = node.getMap().getMapId();
-				mapNameList.add(node.getMap().getMapAbbrName());
-
-				mapList.add(node.getMap());
+				algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
 
 			}
+
+			Stack<Node> pathNodes = algoController.getRoute();
+			ArrayList<Node> singleMapPath = new ArrayList<Node>();
+			ArrayList<String> mapNameList = new ArrayList<String>();
+			ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
+			int tmpMapId = pathNodes.peek().getMap().getMapId();
+			mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
+			mapList.add(pathNodes.peek().getMap());
+			model.clearPaths();
+			Path path = new Path();
+
+			while (pathNodes.size() > 0) {
+
+				Node node = Database.getNodeFromId(pathNodes.pop().getId());
+				if (node.getMap().getMapId() == tmpMapId) {
+					singleMapPath.add(node);
+					path.addNode(node);
+
+
+				} else {
+					multiMapPathLists.add(singleMapPath);
+
+					model.addOnePath(path);
+					path = new Path();
+					path.setMap(node.getMap());
+					path.addNode(node);
+
+					singleMapPath = new ArrayList<Node>();
+					singleMapPath.add(node);
+					tmpMapId = node.getMap().getMapId();
+					mapNameList.add(node.getMap().getMapAbbrName());
+
+					mapList.add(node.getMap());
+
+				}
+			}
+
+			model.addOnePath(path);
+
+			multiMapPathLists.add(singleMapPath);
+
+			// reset and initiate the Jlist
+
+			DefaultListModel<String> mapListModel = new DefaultListModel<>();
+			for (String name : mapNameList) {
+				mapListModel.addElement(name);
+			}
+			model.setCurrentPath(0);
+			model.setMultiMapLists(mapList);
+			System.out.println(mapList);
+			inputPanel.getMapList().setModel(mapListModel);
+
+
+		}catch (Exception e){
+			JOptionPane.showMessageDialog(null, "No Connected Path!", "Warning Message",
+					JOptionPane.WARNING_MESSAGE);
+
 		}
-
-		model.addOnePath(path);
-
-		multiMapPathLists.add(singleMapPath);
-
-		// reset and initiate the Jlist
-
-		DefaultListModel<String> mapListModel = new DefaultListModel<>();
-		for (String name : mapNameList) {
-			mapListModel.addElement(name);
-		}
-		model.setCurrentPath(0);
-		model.setMultiMapLists(mapList);
-		System.out.println(mapList);
-        inputPanel.getMapList().setModel(mapListModel);
-
 		addThumbNail();
-
 		ViewManager.updateView();
+
+
 
 	}
 	
