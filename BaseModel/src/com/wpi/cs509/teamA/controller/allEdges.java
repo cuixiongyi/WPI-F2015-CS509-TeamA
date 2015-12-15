@@ -19,12 +19,14 @@ public class allEdges {
 	private Node endNode;// when there is one certain destination
 	private Node[] end;
 	private HashMap<Integer, mapVertex> graphMaps;
+	private boolean isMulEndNodes;
 
 	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
 		this.endNode = end;
+		this.isMulEndNodes=false;
 	}
 
 	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
@@ -32,7 +34,7 @@ public class allEdges {
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
 		this.end = end;
-		this.endNode = null;
+		this.isMulEndNodes=true;
 
 	}
 
@@ -45,7 +47,7 @@ public class allEdges {
 	}
 
 	public boolean isNormal() {
-		if (this.endNode == null) {
+		if (this.isMulEndNodes) {
 			return false;
 		}
 		return true;
@@ -139,7 +141,7 @@ public class allEdges {
 	}
 
 	public Node[] getEnd() {
-		return end;
+		return this.end;
 	}
 
 	public void setEnd(Node[] end) {
@@ -186,7 +188,8 @@ public class allEdges {
 	 */
 	public Stack<GeneralMap> getMaps() {
 		Stack<GeneralMap> result = new Stack<GeneralMap>();
-		if (mapEdges.isEmpty()) {
+		if (this.startNode.getMap().getMapId()==this.endNode.getMap().getMapId()) {
+		//if (mapEdges.isEmpty()) {
 			result.push(startNode.getMap());
 			return result;
 		}
