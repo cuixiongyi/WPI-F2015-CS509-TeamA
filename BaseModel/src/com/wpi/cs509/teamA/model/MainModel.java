@@ -108,6 +108,7 @@ public final class MainModel extends StateContext {
 		this.setFocusNode(null);
         this.clearPaths();
 
+
 	}
 
 	public synchronized ArrayList<Node> getRouteOnCurrentMap() {

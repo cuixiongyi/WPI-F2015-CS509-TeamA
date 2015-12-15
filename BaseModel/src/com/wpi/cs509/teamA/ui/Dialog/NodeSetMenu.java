@@ -7,6 +7,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
@@ -93,7 +94,11 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 			model.addOneEndNode(node);
 			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		} else if(e.getSource()==cleanupMap){
+			inputPanel.getFromText().setText("");
+			inputPanel.getToText().setText("");
 			model.cleanUpRoute();
+
+//			ViewManager.updateView();
 		} else if(e.getSource()==printRoute){
 			try {
 
@@ -113,6 +118,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 						LinearTransform lt = new LinearTransform();
 						lt.setScale(1.2);
 						PaintImageHelper.printRoute(paths.get(i), lt, file, i);
+
 
 					}
 				}
