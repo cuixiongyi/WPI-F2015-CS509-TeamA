@@ -95,11 +95,12 @@ public class SuggestionBasicPanel extends JPanel {
 		if (AutoSuggestor.SetNodeOption.setStartNode == autoSuggestor.getSetNodeOption()) {
 			autoSuggestor.getModel().setStartNode(nodeInformation.get(0));
 		} else if (AutoSuggestor.SetNodeOption.setEndNode == autoSuggestor.getSetNodeOption()) {
-			if(nodeInformation.size()==1){
-				autoSuggestor.getModel().setOneEndNode(nodeInformation.get(0));
-			}else{
-				autoSuggestor.getModel().setEndNearestNodes(nodeInformation);
-			}
+//			if(nodeInformation.size()==1){
+//				autoSuggestor.getModel().setOneEndNode(nodeInformation.get(0));
+//			}else{
+//				autoSuggestor.getModel().setEndNearestNodes(nodeInformation);
+//			}
+			autoSuggestor.getModel().setOneEndNode(nodeInformation.get(0));
 		}
 
 		String typedWord = autoSuggestor.getCurrentlyTypedWord();

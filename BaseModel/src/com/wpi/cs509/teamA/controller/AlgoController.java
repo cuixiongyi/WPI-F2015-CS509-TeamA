@@ -70,11 +70,6 @@ public class AlgoController {
 		if(to.size()==1){
 			edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to.get(0));
 			flag=true;
-		}else{
-			Node[] end = new Node[to.size()];
-			to.toArray(end);
-			edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, end);
-			flag=false;
 		}
 	}
 	
