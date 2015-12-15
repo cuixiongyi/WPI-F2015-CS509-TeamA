@@ -234,20 +234,28 @@ public final class MainModel extends StateContext {
 		return endNode;
 	}
 
-	public synchronized void addOneEndNode(Node pendNode) {
+	public synchronized boolean addOneEndNode(Node pendNode) {
 		if (null == this.endNode) {
 			endNode = new ArrayList<Node>();
 		}
-		
-		this.endNode.add(pendNode);
+
+		if (endNode.contains(pendNode)) {
+			endNode.remove(pendNode);
+			return false;
+		}
+		else {
+			this.endNode.add(pendNode);
+		}
  //       this.endNearestNodes = null;
         modelChanged();
+		return true;
 	}
 	
 	public synchronized void setOneEndNode(Node pEndNode) {
 		endNode = new ArrayList<Node>();
-		addOneEndNode(pEndNode);
-		setFocusNode(pEndNode);
+		if (addOneEndNode(pEndNode)) {
+			setFocusNode(pEndNode);
+		}
 		return;
 		
 	}
