@@ -99,14 +99,16 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		if (e.getSource() == mntmSrc) {
 
 			model.setStartNode(node);
-			this.inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
+			
 				this.inputPanel.getFromText().setText(node.getMap().getMapName()+" "+node.getName());
+				this.inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
 
 		} else if (e.getSource()==mntmDes){
 
 			model.addOneEndNode(node);
-			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
+			
 				this.inputPanel.getToText().setText(node.getMap().getMapName()+" "+node.getName());
+				this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		} else if(e.getSource()==cleanupMap){
 			inputPanel.getFromText().setText("");
 			inputPanel.getToText().setText("");
