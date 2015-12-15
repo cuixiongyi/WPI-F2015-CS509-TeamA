@@ -70,11 +70,11 @@ public class SuggestorPainter {
 	static {
 		try {
 			professorIcon = ImageHelper.readImage(professorIconName);
-			locationIcon = ImageHelper.readImage((historyIconName));
-			historyIcon = ImageHelper.readImage((locationIconName));
+			locationIcon = ImageHelper.readImage((locationIconName));
+			historyIcon = ImageHelper.readImage((historyIconName));
 			othersIcon = ImageHelper.readImage((othersIconName));
-			majorIcon = ImageHelper.readImage((activityIconName));
-			activityIcon = ImageHelper.readImage((majorIconName));
+			majorIcon = ImageHelper.readImage((majorIconName));
+			activityIcon = ImageHelper.readImage((activityIconName));
 
 		} catch (Exception e) {
 			e.printStackTrace();
