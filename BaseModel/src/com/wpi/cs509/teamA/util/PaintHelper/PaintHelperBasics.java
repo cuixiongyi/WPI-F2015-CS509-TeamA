@@ -30,7 +30,7 @@ public class PaintHelperBasics {
 	static private LinearTransform linearTransform = null;
 	private final static int ovalOffset = 10;
 	private final static int ovalOffset_SelectedNode = ovalOffset + 5;
-	private static BasicStroke basicNodeStrock = new BasicStroke(2);
+	private static BasicStroke basicNodeStrock = new BasicStroke(3);
 	private static BasicStroke basicEdgeStrock = new BasicStroke(5);
 	public final static double SCALELOWWERBOUND_DRAWICON = 1.1;
 
