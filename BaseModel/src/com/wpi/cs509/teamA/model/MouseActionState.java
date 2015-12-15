@@ -36,6 +36,11 @@ public abstract class MouseActionState {
 
 	abstract public boolean cleanup();
 
+	protected Coordinate getTransCoor(Coordinate xy) {
+
+		return model.getLinearTransform().backTransferCoor(xy);
+	}
+
 	protected void getMouseTransCoor(MouseEvent e) {
 		xPos = e.getX();
 		yPos = e.getY();
