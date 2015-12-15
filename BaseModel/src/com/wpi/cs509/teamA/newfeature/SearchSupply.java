@@ -31,8 +31,9 @@ public class SearchSupply {
 		Matcher m = null;
 		Pattern p;
 		try{
-		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？\\\\////]";
 		p = Pattern.compile(regEx);
+		
 		m = p.matcher(str);
 		}catch(PatternSyntaxException pse){
 			System.out.println("Invalid char detected");

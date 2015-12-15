@@ -13,6 +13,8 @@ import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
+import com.wpi.cs509.teamA.dao.UserAccountDao;
+import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
@@ -43,7 +45,10 @@ class ViewControllerImpl extends ViewControllerBase {
 			ViewManager.updateView();
 
 		} else {
-
+			//save history back to database
+			UserAccountDao uad = new UserAccountDaoImpl();
+			uad.saveSearchHistoryToDatabase(model.getMyAccount());
+			
 			JOptionPane.showMessageDialog(null, "You have logged out");
 			model.setMyAccount(null);
 			Database.InitFromDatabase();

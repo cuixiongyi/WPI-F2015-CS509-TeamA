@@ -6,7 +6,7 @@ import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.exception.PwdIncorrectException;
 import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionAdminUser;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
@@ -165,7 +165,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 //		inputPanel.getBtnSynchronize().setVisible(true);
 //		inputPanel.getBtnMngEdge().setVisible(true);
 //		inputPanel.getBtnMngNode().setVisible(true);	
-		model.switchToState(new MouseActionAdminUser(model));
+		model.switchToState(new MouseActionSelectNode(model));
 		//stateContext.switchUserState(new AdminUserState(stateContext));
 	}
 
