@@ -44,8 +44,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 				des = context.getGraph().get(n.getId());
 				if (des.getDist() < i) {
 					i = des.getDist();
-					// System.out.println("Des ID: "+ des.getId()+ "\n"+"Des
-					// Dis: "+des.getDist());
+					//System.out.println("Des ID: "+ des.getId()+ "\n"+"Des Dis: "+des.getDist());
 					destination = des;
 				}
 			}
