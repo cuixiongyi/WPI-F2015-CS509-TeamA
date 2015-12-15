@@ -33,7 +33,7 @@ public class PopupPanel  extends JPanel implements ActionListener {
         
         
         try {
-            logo = ImageIO.read(new File(PaintHelperBasics.getUserDir()+ "logo_iteration1.png"));
+            logo = ImageIO.read(new File(PaintHelperBasics.getUserDir()+ "com/wpi/cs509/teamA/resource/logo_iteration1.png"));
             picLabel = new JLabel(new ImageIcon(logo));
             picLabel.setBounds(0,20,200, 200);
             this.add(picLabel);

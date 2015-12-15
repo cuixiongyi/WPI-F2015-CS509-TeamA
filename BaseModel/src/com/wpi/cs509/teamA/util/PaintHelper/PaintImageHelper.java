@@ -7,6 +7,7 @@ import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.LinearTransform;
 
 import javax.imageio.ImageIO;
@@ -26,7 +27,7 @@ public class PaintImageHelper extends PaintHelperBasics{
     public static BufferedImage paintImage(Path path, LinearTransform lt) {
         BufferedImage image = path.getMap().getImage();
 
-        BufferedImage bi = PaintHelperBasics.resize(image, (int)(image.getWidth()*lt.getScale()), (int)(image.getHeight()*lt.getScale()));
+        BufferedImage bi = ImageHelper.resizeImage(image, lt.getScale());
         Graphics2D g2 = bi.createGraphics();
 
         paintMultiMaps(g2, path, lt);

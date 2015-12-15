@@ -6,6 +6,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.Database;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.List;
 
@@ -120,6 +121,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         {
             NodeInformationDaoImpl nodeInfoDao =new NodeInformationDaoImpl();
             nodeInfoDao.saveNodeInformation(infoWrapper());
+            Database.InitFromDatabase();
             this.dispose();
 
         }
