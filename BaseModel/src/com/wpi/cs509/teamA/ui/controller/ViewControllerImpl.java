@@ -249,9 +249,9 @@ class ViewControllerImpl extends ViewControllerBase {
 	private void addHistory(){
 		ArrayList<History> newHistory = (ArrayList<History>) model.getMyAccount().getHistory();
 		
-		newHistory.add(new History(model.getStartNode().getName(), model.getStartNode().getId(), 1));
+		newHistory.add(new History(inputPanel.getFromText().getText(), model.getStartNode().getId(), 0));
 		if(model.getEndNode().size()==1){
-			newHistory.add(new History(model.getEndNode().get(0).getName(), model.getEndNode().get(0).getId(), 1));
+			newHistory.add(new History(inputPanel.getToText().getText(), model.getEndNode().get(0).getId(), 0));
 		}
 		
 		model.getMyAccount().setHistory(newHistory);
