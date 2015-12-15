@@ -1,11 +1,8 @@
 package com.wpi.cs509.teamA.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
@@ -15,10 +12,7 @@ import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
+import com.wpi.cs509.teamA.strategy.impl.*;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -41,7 +35,7 @@ public class AlgoController {
 	/**
 	 * The destination node get from the front end It is a String
 	 */
-	private Node endNode;
+	private Node endNode=null;
 	/**
 	 * the result of the path finding
 	 */
@@ -62,10 +56,28 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
+	 private allEdges edges;
+	 private boolean flag=false;
+	 boolean isMultipleDestination = false;
+	 
 	public AlgoController(Node from, Node to) {
 
-		this.startNode = from;
-		this.endNode = to;
+		
+		
+	}
+	
+	public AlgoController(Node from, ArrayList<Node> to) {
+		if(to.size()==1){
+			edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to.get(0));
+			flag=true;
+		}
+	}
+	
+	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
+		Node[] end = new Node[to.size()];
+		to.toArray(end);
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, end);
+		this.isMultipleDestination=true;
 	}
 
 	/**
@@ -83,13 +95,32 @@ public class AlgoController {
 		//Node fromNode = Database.getNodeFromName(startNode);    /////////////////
         // TODO this is a hack need to get the function working
 
-        allEdges edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),startNode, endNode);
+       
+        
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-
-		generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-		//generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+		if(flag){
+			edges.init();
+			System.out.println("normal path");
+//			if(edges.getMaps().size()>3)
+//				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+//			else
+				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+			//flag=false;
+			return result = generalAlgorithm.findPath(edges);
+		}
+		
+		if(this.isMultipleDestination){
+			System.out.println("multiple destination");
+			generalAlgorithm.setAlgoStrategy(new MultipleDestinations());
+			this.isMultipleDestination=false;
+		}
+		else{
+			System.out.println("Find nearest");
+			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+		}
+		
 		return result = generalAlgorithm.findPath(edges);
 
 	}

@@ -8,9 +8,12 @@ import com.wpi.cs509.teamA.util.Coordinate;
  * class is for persistence to record the relationship of two node. Logically,
  * it is the edge.
  * 
- * @author JLou
+ * 
+ * @author Team-A
  *
  */
+
+@Deprecated
 public class NodeRelation {
 
 	// must initialize the Coordinate here..

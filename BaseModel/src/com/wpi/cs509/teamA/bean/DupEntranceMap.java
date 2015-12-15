@@ -12,8 +12,6 @@ import java.util.Map;
  * @author CS 509-Team A
  * @version Oct 5th
  */
-
-// I will handle all the stuff related to this class..
 public class DupEntranceMap {
 
 	/**
@@ -31,12 +29,6 @@ public class DupEntranceMap {
 	 * the duplicate points in different map
 	 */
 	private DupEntranceMap() {
-
-		// TODO: get data from database to build a relation map, assign the
-		// return value to resultMap
-
-		System.out
-				.println("initializing the relationship map.. getting data from database..this should happen only once");
 
 	}
 
@@ -69,11 +61,10 @@ public class DupEntranceMap {
 	/**
 	 * This class represents a record from database that two same point in
 	 * different map and their distance
-	 * 
-	 * @author DupEntranceMap
 	 *
 	 */
 	class SamePoint {
+		
 		private int firstNodeId;
 		private int firstNodeMapId;
 		private int secondNodeId;

@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.util;
 
+import javax.swing.*;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -17,8 +18,13 @@ public class JdbcConnect {
 
 	// TODO: Make this in the file
 	private static String url = "jdbc:mysql://localhost:3306/routefinder";
+	private static String password = "123456";
+
+
+	//private static String url = "jdbc:mysql://130.215.28.216:3306/routefinder";
+	//private static String password = "hammer";
+
 	private static String user = "root";
-	private static String password = "root";
 	private static Connection conn = null;
 
 	private JdbcConnect() {
@@ -37,9 +43,14 @@ public class JdbcConnect {
 
 		if (conn == null || conn.isClosed()) {
 
-			conn = DriverManager.getConnection(url, user, password);
-			// should commit
-			conn.setAutoCommit(false);
+			try {
+				conn = DriverManager.getConnection(url, user, password);
+				// should commit
+				conn.setAutoCommit(false);
+			}catch(Exception e){
+				JOptionPane.showMessageDialog(null, "Internet Connection Error", "Error Message",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 		return conn;

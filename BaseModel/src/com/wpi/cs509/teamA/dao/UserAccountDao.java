@@ -3,7 +3,10 @@ package com.wpi.cs509.teamA.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.exception.PwdIncorrectException;
+import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 
 public interface UserAccountDao {
 
@@ -13,15 +16,25 @@ public interface UserAccountDao {
 	 * @return a list of user accounts
 	 * 
 	 */
-	public List<UserAccount> getAllUserAccounts();	
-	
+	public List<UserAccount> getAllUserAccounts();
+
 	/**
-	 * get all history for a user and return a HashMap including searching string and count
+	 * get all history for a user and return a HashMap including searching
+	 * string and count
 	 * 
 	 * @return a HashMap<String, Integer>
 	 * 
 	 */
-	public Map<String,Integer> getAllHistoryForUser(int user_id);
+	public List<History> getAllHistoryForUser(int user_id);
+
+	/**
+	 * save all user history back to database
+	 * that includes delete all existing searching data for this user 
+	 * and also insert all searching data in
+	 * 
+	 * @param user
+	 */
+	public void saveSearchHistoryToDatabase(UserAccount user);
 	
 	/**
 	 * insert user account into the database
@@ -29,6 +42,27 @@ public interface UserAccountDao {
 	 * @return a HashMap<String, Integer>
 	 * 
 	 */
-	public void addAccountToDatabase(UserAccount add_user);
 	
+	public boolean addAccountToDatabase(UserAccount add_user);
+
+	/**
+	 * 
+	 * @param username
+	 * @return true if user exists, false otherwise
+	 */
+	public boolean checkUserNameInDatabase(String username);
+
+	/**
+	 * 
+	 * TODO: Do not throw exception here
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws UserAccountNotFoundException
+	 * @throws PwdIncorrectException
+	 */
+	public UserAccount loginAuthorization(String username, String password)
+			throws UserAccountNotFoundException, PwdIncorrectException;
+
 }

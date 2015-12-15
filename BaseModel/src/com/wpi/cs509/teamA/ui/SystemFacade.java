@@ -45,9 +45,9 @@ public class SystemFacade implements Runnable {
 		// load all data from the database
 		Database.InitFromDatabase();
 		// initialize the relationship map
-		DupEntranceMap.initDupEntranceMap();
+		//DupEntranceMap.initDupEntranceMap();
 		// initialize all the matrix for the map
-		InitAllMatrixDaoImpl.initAllMatrix();
+		//InitAllMatrixDaoImpl.initAllMatrix();
 		
 	}
 

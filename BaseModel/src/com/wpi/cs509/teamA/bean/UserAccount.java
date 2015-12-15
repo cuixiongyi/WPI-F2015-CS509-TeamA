@@ -1,6 +1,8 @@
 package com.wpi.cs509.teamA.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * this class represents all the users, if this user is an admin
@@ -16,16 +18,15 @@ public class UserAccount {
 	private String username;
 	/** pass word of the account */
 	private String password;
-	/** email of the user*/
+	/** email of the user */
 	private String email;
 	/**
 	 * if this account is an admin
 	 */
 	private boolean isAdmin;
 
-	private HashMap<String, Integer> history;
-	
-	
+	private List<History> history;
+
 	/** default constructor */
 	public UserAccount() {
 		this.id = -1;
@@ -33,10 +34,8 @@ public class UserAccount {
 		this.email = "";
 		this.password = "";
 		this.isAdmin = false;
-
+		this.history = new ArrayList<History>();
 	}
-
-	
 
 	/**
 	 * constructor with information
@@ -99,13 +98,14 @@ public class UserAccount {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
-	public HashMap<String, Integer> getHistory() {
+
+	public List<History> getHistory() {
 		return history;
 	}
 
-	public void setHistory(HashMap<String, Integer> history) {
+	public void setHistory(List<History> history) {
 		this.history = history;
+	//	System.out.println("H: "+history.size());
 	}
 
 	public String getEmail() {

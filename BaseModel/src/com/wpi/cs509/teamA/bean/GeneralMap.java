@@ -1,8 +1,6 @@
 package com.wpi.cs509.teamA.bean;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +12,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
-import com.wpi.cs509.teamA.util.PaintHelper;
+import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 /**
  * This is a class that defines all the map we want. It is also the class that
@@ -37,15 +35,15 @@ public class GeneralMap implements AdjacencyMatrix {
 	private String mapName;
 	private String mapAbbrName;
 
-    public String getImageName() {
-        return imageName;
-    }
+	public String getImageName() {
+		return imageName;
+	}
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
 
-    private String imageName;
+	private String imageName;
 	/**
 	 * the map scale
 	 */
@@ -55,16 +53,15 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	private InputMatrix adjacencyMatrix;
 
-	
-    // Refactor
-    private String mapImgPath;
+	// Refactor
+	private String mapImgPath;
 
-    private float displayScale = 1;
+	private float displayScale = 1;
 
-    private List<Node> nodes;
+	private List<Node> nodes;
 
 	private BufferedImage image;
-	
+
 	private List<Edge> BoundaryEdges = new ArrayList<>();
 
 	/**
@@ -73,10 +70,11 @@ public class GeneralMap implements AdjacencyMatrix {
 	public GeneralMap() {
 
 	}
-	////for algo testing
+
+	//// for algo testing
 	public GeneralMap(int id, int measureScale) {
-		this.mapId=id;
-		this.measureScale=measureScale;
+		this.mapId = id;
+		this.measureScale = measureScale;
 		this.imageName = "";
 	}
 
@@ -91,22 +89,17 @@ public class GeneralMap implements AdjacencyMatrix {
 	 */
 	public GeneralMap(String mapName) {
 
-		// TODO:get data from database here, what data we need?
-		System.out.println(
-				"general map is getting data from database and making a matrix.. this should happen only once.. ");
-		// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
-		// adjacencyMatrix = makeMatrix();
-
-        this.measureScale = 1.0f;
+		this.measureScale = 1.0f;
 
 	}
-	
-	// TODO: assign value from the database to the adjacencyMatrix, make a new Matrix
-	private InputMatrix makeMatrix(){
-		
+
+	// TODO: assign value from the database to the adjacencyMatrix, make a new
+	// Matrix
+	private InputMatrix makeMatrix() {
+
 		// test..
 		return new InputMatrix();
-		
+
 	}
 
 	@Override
@@ -127,7 +120,8 @@ public class GeneralMap implements AdjacencyMatrix {
 	}
 
 	/**
-	 * @param mapId the mapId to set
+	 * @param mapId
+	 *            the mapId to set
 	 */
 	public void setMapId(int mapId) {
 		this.mapId = mapId;
@@ -141,13 +135,12 @@ public class GeneralMap implements AdjacencyMatrix {
 	}
 
 	/**
-	 * @param mapName the mapName to set
+	 * @param mapName
+	 *            the mapName to set
 	 */
 	public void setMapName(String mapName) {
 		this.mapName = mapName;
 	}
-	
-	
 
 	public String getMapAbbrName() {
 		return mapAbbrName;
@@ -165,53 +158,53 @@ public class GeneralMap implements AdjacencyMatrix {
 	}
 
 	/**
-	 * @param scale the scale to set
+	 * @param scale
+	 *            the scale to set
 	 */
 	public void setScale(float scale) {
 		measureScale = scale;
 	}
 
-    public String getMapImgPath() {
-        return mapImgPath;
-    }
+	public String getMapImgPath() {
+		return mapImgPath;
+	}
 
-    public void readImage() {
+	public void readImage() {
 
-        // display the image. Note that "	/" only works on UNIX
-        this.mapImgPath = PaintHelper.getUserDir() + this.imageName;
-        try {
-            image = ImageIO.read(new FileInputStream(mapImgPath));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+		// display the image. Note that " /" only works on UNIX
+		this.mapImgPath = PaintHelperBasics.getUserDir() + this.imageName;
+		try {
+			image = ImageIO.read(new FileInputStream(mapImgPath));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public BufferedImage getImage() {
 		return image;
 	}
 
 	public float getDisplayScale() {
-        return displayScale;
-    }
+		return displayScale;
+	}
 
-    public void setDisplayScale(float displayScale) {
-        this.displayScale = displayScale;
-    }
+	public void setDisplayScale(float displayScale) {
+		this.displayScale = displayScale;
+	}
 
-    public List<Node> getNodes() {
-        return Database.getAllNodesForCurrentMap(this.getMapId());
-    }
+	public List<Node> getNodes() {
+		return Database.getAllNodesForCurrentMap(this.getMapId());
+	}
 
 	public List<Edge> getEdges() {
 		return Database.getAllEdgesForCurrentMap(this.getMapId());
 	}
 
-    public void setNodes(List<Node> nodes) {
-        this.nodes = nodes;
-    }
+	public void setNodes(List<Node> nodes) {
+		this.nodes = nodes;
+	}
 
 	public List<Edge> getBoundaryEdges() {
 		return BoundaryEdges;
@@ -221,6 +214,4 @@ public class GeneralMap implements AdjacencyMatrix {
 		BoundaryEdges = boundryEdges;
 	}
 
-
-    
 }
