@@ -214,6 +214,8 @@ public final class MainModel extends StateContext {
 	public synchronized void setStartNode(Node pStartNode) {
 
 		if (pStartNode == this.startNode) {
+			this.startNode = null;
+			modelChanged();
 			return;
 		}
         if (null != pStartNode) {
@@ -238,8 +240,12 @@ public final class MainModel extends StateContext {
 		if (null == this.endNode) {
 			endNode = new ArrayList<Node>();
 		}
-		
-		this.endNode.add(pendNode);
+		if (this.endNode.contains(pendNode)) {
+            this.endNode.remove(pendNode);
+        }
+        else {
+            this.endNode.add(pendNode);
+        }
  //       this.endNearestNodes = null;
         modelChanged();
 	}
