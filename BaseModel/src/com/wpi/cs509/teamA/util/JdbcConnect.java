@@ -19,6 +19,7 @@ public class JdbcConnect {
 	private static String url = "jdbc:mysql://localhost:3306/routefinder";
 	private static String password = "123456";
 
+
 	//private static String url = "jdbc:mysql://130.215.28.216:3306/routefinder";
 	//private static String password = "hammer";
 
