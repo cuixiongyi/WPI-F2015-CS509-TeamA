@@ -153,6 +153,9 @@ public class PaintHelperComposite extends PaintHelperBasics{
         g2.setColor(Color.BLACK);
         if (null == nodes)
             return;
+        if (pLinearTransform.getScale() < 0.5) {
+            return;
+        }
         for (Node node : nodes) {
             if (!model.hasFilter(node.getNodeType())) {
                 PaintHelperBasics.paintIcon(node, g2);

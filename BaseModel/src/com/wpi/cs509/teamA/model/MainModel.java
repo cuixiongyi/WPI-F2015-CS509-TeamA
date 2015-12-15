@@ -101,6 +101,7 @@ public final class MainModel extends StateContext {
 	public synchronized void cleanUpRoute() {
 		this.setStartNode(null);
 		this.clearEndNode();
+		this.setEndNearestNodes(null);
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
 		this.setAnimationNode(null);
