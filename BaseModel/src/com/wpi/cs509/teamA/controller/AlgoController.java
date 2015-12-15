@@ -1,11 +1,8 @@
 package com.wpi.cs509.teamA.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
@@ -15,11 +12,7 @@ import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
-import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
+import com.wpi.cs509.teamA.strategy.impl.*;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -85,8 +78,10 @@ public class AlgoController {
 		}
 	}
 	
-	public AlgoController(Node from, Node[] to, boolean isMultiopleDestination) {
-		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, to);
+	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
+		Node[] end = new Node[to.size()];
+		to.toArray(end);
+		edges= new allEdges(Database.getAllEdges(),Database.getAllMapEdges(),from, end);
 		this.isMultipleDestination=true;
 	}
 
@@ -113,22 +108,24 @@ public class AlgoController {
 		if(flag){
 			edges.init();
 			System.out.println("normal path");
-			if(edges.getMaps().size()>10)
+			if(edges.getMaps().size()>3)
 				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 			else
 				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-			endNode=null;
+			//flag=false;
+			return result = generalAlgorithm.findPath(edges);
 		}
 		
 		if(this.isMultipleDestination){
 			System.out.println("multiple destination");
-			generalAlgorithm.setAlgoStrategy(new DijkstraMultipleDestinations());
+			generalAlgorithm.setAlgoStrategy(new MultipleDestinations());
 			this.isMultipleDestination=false;
 		}
 		else{
 			System.out.println("Find nearest");
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 		}
+		
 		return result = generalAlgorithm.findPath(edges);
 
 	}
