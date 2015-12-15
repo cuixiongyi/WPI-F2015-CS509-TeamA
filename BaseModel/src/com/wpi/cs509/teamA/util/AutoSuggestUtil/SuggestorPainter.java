@@ -88,7 +88,7 @@ public class SuggestorPainter {
 	// labels: find nearst
 	// others:
 	public enum SuggestorEnum {
-		Location(1), Professor(2), Major(2), History(3), Activity(1), Others(1), Labels(10);
+		Location(1), Professor(2), Major(2), History(5), Activity(1), Others(1), Labels(10);
 		private int part_value;
 
 		private SuggestorEnum(int value) {
