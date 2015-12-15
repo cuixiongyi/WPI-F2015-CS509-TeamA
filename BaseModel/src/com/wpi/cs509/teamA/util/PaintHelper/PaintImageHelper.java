@@ -67,7 +67,7 @@ public class PaintImageHelper extends PaintHelperBasics{
         PaintHelperComposite.paintPath(path, g2, plt);
 
         PaintHelperComposite.paintNodes(path.getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, plt);
-        PaintHelperComposite.paintStartEndNode(g2, plt);
+        PaintHelperComposite.paintStartEndNode( g2, path, plt);
 
 //        PaintHelperBasics.restorePrintMap(originalMap, scale, imageXpos, imageYpos);
 
