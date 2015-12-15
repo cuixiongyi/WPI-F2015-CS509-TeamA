@@ -101,7 +101,7 @@ public final class MainModel extends StateContext {
 	public synchronized void cleanUpRoute() {
 		this.setStartNode(null);
 		this.clearEndNode();
-	//	this.setEndNearestNodes(null);
+
 		this.setMultiMapPathListsForEachMap(null);
 		this.setMultiMapPathLists(null);
 		this.setAnimationNode(null);
@@ -168,15 +168,37 @@ public final class MainModel extends StateContext {
 			return;
 		}
 		this.currentMap = pCurrentMap;
-		currentMap.setDisplayScale(1.0f);
+//		currentMap.setDisplayScale(1.0f);
+
 		isFirstChangeMap = true;
 		addAllFilters();
-		modelChanged();
+        setAnimationNode(null);
+
+        if (null != paths ) {
+            if ( null != getCurrentPath() && this.currentMap == getCurrentPath().getMap()) {
+
+            }
+            else {
+                boolean foundMap = false;
+                clearCurrentPath();
+                for(int ii = 0; ii < paths.size(); ii++) {
+                    if (paths.get(ii).getMap() == this.currentMap) {
+                        setCurrentPath(ii);
+                        foundMap = true;
+                        break;
+                    }
+                }
+                if (! foundMap) {
+                    clearCurrentPath();
+                }
+            }
+        }
+
+        modelChanged();
 	}
 
 	public synchronized void setCurrentMapID(int mapID) {
 		setCurrentMap( Database.getMapEntityFromMapId(mapID));
-		setAnimationNode(null);
 		modelChanged();
 	}
 
@@ -286,7 +308,7 @@ public final class MainModel extends StateContext {
 			isFirstFocusNode = false;
 		}
 		isFirstFocusNode = true;
-
+        setCurrentMap(focusNode.getMap());
 		modelChanged();
 
 	}
@@ -363,6 +385,11 @@ public final class MainModel extends StateContext {
         return currentPathIdx;
     }
 
+    public synchronized void clearCurrentPath() {
+        this.currentPathIdx = -1;
+        return;
+    }
+
     public synchronized void setCurrentPath(int idx) {
 		if (null == paths) {
 			return;
@@ -371,14 +398,19 @@ public final class MainModel extends StateContext {
             return;
 //            throw new ArrayIndexOutOfBoundsException();
         }
+        if (idx == this.currentPathIdx) {
+            return;
+        }
         this.currentPathIdx = idx;
         Path path = getOnePath(currentPathIdx);
 		if (null == path) {
 			return;
 		}
         this.setFocusNode(path.getNodes().get(0));
-		this.setCurrentMap(path.getMap());
-		this.setAnimationNode(getCurrentPath().getNodes().get(0));
+        if (path.getMap() != getCurrentMap()) {
+            this.setCurrentMap(path.getMap());
+            this.setAnimationNode(getCurrentPath().getNodes().get(0));
+        }
     }
 
     public synchronized boolean setNextPath() {

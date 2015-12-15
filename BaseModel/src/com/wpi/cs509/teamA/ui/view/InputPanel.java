@@ -313,7 +313,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
             tabbedPane.setEnabledAt(2, false);
         }
         Path path = model.getCurrentPath();
-		if (null == path) {
+		if (null == model.getPaths()) {
             DefaultListModel<String> mapListModel = new DefaultListModel<>();
             getMapList().setModel(mapListModel);
         }
