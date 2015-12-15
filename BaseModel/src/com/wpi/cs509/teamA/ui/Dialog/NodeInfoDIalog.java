@@ -145,7 +145,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
             }
         }else{
             majors.add(new Major(majorName.getText(),"",node.getId()));
-            System.out.println(majorName.getText().split(";"));
+           
         }
     
         if(professor.getText().equals(""))
@@ -154,7 +154,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
 
         }else{
         	if(professor.getText().contains(";")){
-	            for(int j=0;j<professor.getText().split(";").length-1;j++) {
+	            for(int j=0;j<professor.getText().split(";").length;j++) {
 	                Professor p=new Professor(professor.getText().split(";")[j],node.getId());
 	                professors.add(p);
 	            }
