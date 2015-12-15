@@ -104,13 +104,13 @@ public class AlgoController {
         
 		// TODO: use singleton here..
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
-		
+
 		if(flag){
 			edges.init();
 			System.out.println("normal path");
-			if(edges.getMaps().size()>3)
-				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
-			else
+//			if(edges.getMaps().size()>3)
+//				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
+//			else
 				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 			//flag=false;
 			return result = generalAlgorithm.findPath(edges);
