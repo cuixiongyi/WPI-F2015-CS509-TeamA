@@ -1,7 +1,9 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.dao.impl.NodeInformationDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.util.Database;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +22,8 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
 
     private JButton okButton;
     private JButton cancelButton;
-    private JLabel lbMajor;
-    private JTextField major;
+    private JLabel lbMajorName;
+    private JTextField majorName;
     private JLabel lbProfessor;
     private JTextField professor;
     private JLabel lbFeature;
@@ -39,20 +41,20 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.CENTER;
 
-        lbMajor = new JLabel("Major: ");
+        lbMajorName = new JLabel("MajorName: ");
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
-        contentPanel.add(lbMajor, cs);
+        contentPanel.add(lbMajorName, cs);
 
 
-        major = new JTextField(20);
+        majorName = new JTextField(20);
         cs.gridx = 1;
         cs.gridy = 0;
         cs.gridwidth = 2;
-        contentPanel.add(major, cs);
+        contentPanel.add(majorName, cs);
 
-        lbProfessor = new JLabel("Information2: ");
+        lbProfessor = new JLabel("Professor: ");
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
@@ -64,7 +66,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         cs.gridwidth = 2;
         contentPanel.add(professor, cs);
 
-        lbFeature = new JLabel("OtherFeature: ");
+        lbFeature = new JLabel("OtherFeatures: ");
         cs.gridx = 0;
         cs.gridy = 2;
         cs.gridwidth = 1;
@@ -77,7 +79,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         cs.gridwidth = 2;
         contentPanel.add(feature, cs);
 
-        lbActivity = new JLabel("MapScale: ");
+        lbActivity = new JLabel("Activities: ");
         cs.gridx = 0;
         cs.gridy = 3;
         cs.gridwidth = 1;
@@ -118,8 +120,13 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
 
         if(e.getSource()==okButton)
         {
+            NodeInformationDaoImpl nodeInfoDao =new NodeInformationDaoImpl();
+            nodeInfoDao.saveNodeInformation(infoWrapper());
+            this.dispose();
 
         }
+        if(e.getSource()==cancelButton)
+            this.dispose();
 
     }
 
@@ -131,29 +138,47 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         List<OtherFeature> labels=new ArrayList<OtherFeature>();
         List<Activity> activities=new ArrayList<Activity>();
 
-        for(int i=0;i<major.getText().split(";").length-1;i=i+2)
-        {
-            Major m=new Major(major.getText().split(";")[i],major.getText().split(";")[i+1],node.getId());
-            majors.add(m);
+        if(majorName.getText().equals("")){
+            majors.add(new Major("","",node.getId()));
+
+        }else if(majorName.getText().split(";").length>=2){
+            for (int i = 0; i < majorName.getText().split(";").length - 1; i = i + 2) {
+                Major m = new Major(majorName.getText().split(";")[i], majorName.getText().split(";")[i + 1], node.getId());
+                majors.add(m);
+            }
+        }else{
+            majors.add(new Major(majorName.getText(),"",node.getId()));
+            System.out.println(majorName.getText().split(";"));
         }
 
-        for(int j=0;j<professor.getText().split(";").length-1;j++)
+        if(professor.getText().equals(""))
         {
-            Professor p=new Professor(professor.getText().split(";")[j],node.getId());
-            professors.add(p);
+            professors.add(new Professor("",node.getId()));
+
+        }else{
+            for(int j=0;j<professor.getText().split(";").length-1;j++) {
+                Professor p=new Professor(professor.getText().split(";")[j],node.getId());
+                professors.add(p);
+            }
         }
 
-        for(int k=0;k<feature.getText().split(";").length-1;k++)
-        {
-            OtherFeature f=new OtherFeature(feature.getText().split(";")[k],node.getId());
-            labels.add(f);
+        if(feature.getText().equals("")){
+            labels.add(new OtherFeature("",node.getId()));
+        }else {
+            for (int k = 0; k < feature.getText().split(";").length - 1; k++) {
+                OtherFeature f = new OtherFeature(feature.getText().split(";")[k], node.getId());
+                labels.add(f);
+            }
         }
 
-        for(int ii=0;ii<activity.getText().split(";").length-1;ii++)
-        {
-            Activity a=new Activity();
-            activities.add(a);
+        if(activity.getText().equals("")){
+            activities.add(new Activity());
+        }else {
+            for (int ii = 0; ii < activity.getText().split(";").length - 1; ii++) {
+                Activity a = new Activity();
+                activities.add(a);
 
+            }
         }
 
         NodeInformation nodeInfo =new NodeInformation(node,majors,professors,labels,activities);
