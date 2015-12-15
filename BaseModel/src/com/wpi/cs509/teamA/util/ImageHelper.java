@@ -10,7 +10,7 @@ import java.net.URL;
  */
 public class ImageHelper {
     public static BufferedImage readImage(String name) {
-        URL imageURL = ImageHelper.class.getResource("../resource/"+name);
+        URL imageURL = ImageHelper.class.getResource("/com/wpi/cs509/teamA/resource/"+name);
         System.out.println(imageURL);
         Image img = new ImageIcon((imageURL)).getImage() ;
         return toBufferedImage(img);

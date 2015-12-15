@@ -59,12 +59,12 @@ public class InformationPanel extends JPanel implements ActionListener {
         this.add(textLabel);
 
         try{
-            informationPic= ImageHelper.resizeImage(ImageIO.read(new File(node.getMap().getMapImgPath())),120,120) ;
+            informationPic= ImageHelper.resizeImage(node.getMap().getImage(),120,120) ;
             picLabel.setIcon(new ImageIcon(informationPic));
             picLabel.setBounds(3,3,120,120);
             this.add(picLabel);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

@@ -66,5 +66,7 @@ public class MouseActionEditNodeInfo extends MouseActionState {
         LinearTransform lt = model.getLinearTransform();
 
         PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
+        PaintHelperComposite.paintDots(model.getCurrentMap().getNodes(), g2, lt);
+
     }
 }
