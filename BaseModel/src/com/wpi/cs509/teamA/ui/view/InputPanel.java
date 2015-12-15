@@ -159,7 +159,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		lblSwapStartEnd =new JLabel();
 		lblSwapStartEnd.setIcon(NodeIcon.getRotateIcon());
-		lblSwapStartEnd.setBounds(228,112,20,30);
+		lblSwapStartEnd.setBounds(232,112,20,30);
 		add(lblSwapStartEnd);
 
 		txtTo = new JTextField();
@@ -177,7 +177,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		// tab panel-search result
 		mapList = new JList<>();
-		mapList.setPreferredSize(new Dimension(250, 450));
+		mapList.setPreferredSize(new Dimension(250, 430));
 		// mapList.setFixedCellHeight(40);
 		mapList.setCellRenderer(new MarioListRenderer());
 		searchResultTab.add(mapList);

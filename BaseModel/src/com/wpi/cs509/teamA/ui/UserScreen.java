@@ -72,7 +72,7 @@ public class UserScreen extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		this.setBounds(50, 0, 1200, 770);
+		this.setBounds(50, 0, 1200, 730);
 		contentPane = new JLayeredPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
