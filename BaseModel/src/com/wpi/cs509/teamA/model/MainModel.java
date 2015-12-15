@@ -247,6 +247,7 @@ public final class MainModel extends StateContext {
 	public synchronized void setOneEndNode(Node pEndNode) {
 		endNode = new ArrayList<Node>();
 		addOneEndNode(pEndNode);
+		setFocusNode(pEndNode);
 		return;
 		
 	}
@@ -383,6 +384,7 @@ public final class MainModel extends StateContext {
 
 	public synchronized void clearPaths() {
 		this.paths = null;
+		this.currentPathIdx = -1;
 	}
 
     public synchronized Path getCurrentPath() {
