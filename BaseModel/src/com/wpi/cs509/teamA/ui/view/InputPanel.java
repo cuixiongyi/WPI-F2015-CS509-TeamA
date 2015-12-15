@@ -236,7 +236,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		
 		
 
-		openMap=new JButton("AddMap");
+		openMap=new JButton("Add Map");
 //		adminTab.add(openMap);
 //		openMap.setFont(buttonFont);
 		
