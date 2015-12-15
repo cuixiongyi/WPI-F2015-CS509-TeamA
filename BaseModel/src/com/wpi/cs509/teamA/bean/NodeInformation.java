@@ -67,13 +67,13 @@ public class NodeInformation {
 	
 	public String PrintNodeInfo(){
 		String line = "";
-		line = line+bold+"Node name: "+cbold+breakLine+ this.node.getName() +breakLine+bold+
-				"Map name: "+cbold+ breakLine+ this.node.getMap().getMapName()+breakLine;
+		line = line+bold+"Node name: "+cbold+ this.node.getName() +breakLine+bold+
+				"Map name: "+cbold+ this.node.getMap().getMapName()+breakLine;
 		
 		//print majors
 		if((major!=null) && (major.size()!=0)){
 			for(Major m: major){
-				line = line+bold+"Major: "+cbold+breakLine+ m.getMajorName()+breakLine;
+				line = line+bold+"Major: "+cbold+ m.getMajorName()+breakLine;
 		//		listOfString.add("Major");
 		//		listOfString.add(m.getMajorName());
 			}
@@ -81,7 +81,7 @@ public class NodeInformation {
 		// print professors
 		if((professor!=null)&&(professor.size()!=0)){
 			for(Professor p:professor){
-				line = line+bold+"Professor: "+cbold+breakLine+ p.getProfessorName()+breakLine;
+				line = line+bold+"Professor: "+cbold+ p.getProfessorName()+breakLine;
 		//		listOfString.add("Professor");
 		//		listOfString.add(p.getProfessorName());
 			}
@@ -89,7 +89,7 @@ public class NodeInformation {
 		//print labels
 		if((labels!=null)&&(labels.size()!=0)){
 			for(OtherFeature ll:labels){
-				line = line+bold+"Labels: "+cbold+breakLine+ ll.getFeatureLabel()+breakLine;
+				line = line+bold+"Labels: "+cbold+ ll.getFeatureLabel()+breakLine;
 		//		listOfString.add("Labels");
 		//		listOfString.add(ll.getFeatureLabel());
 			}
@@ -97,7 +97,7 @@ public class NodeInformation {
 		//print activities
 		if((activities!=null)&&(activities.size()!=0)){
 			for(Activity aa:activities){
-				line = line+bold+"Activity desc: "+cbold+breakLine+ aa.getActivityName()+breakLine;
+				line = line+bold+"Activity desc: "+cbold+ aa.getActivityName()+breakLine;
 		//		listOfString.add("Activity desc");
 		//		listOfString.add(aa.getActivityName());
 			}

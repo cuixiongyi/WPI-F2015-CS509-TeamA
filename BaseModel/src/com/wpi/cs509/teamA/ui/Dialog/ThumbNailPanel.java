@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 /**
  * Created by xiongkuang on 12/13/15.
@@ -28,7 +29,6 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
     private MainModel model;
     private List<Path> paths;
     private List<JLabel> icons;
-    private List<JLabel> iconTexts;
     private int resizeX = 150;
     private int resizeY = 150;
     private int picInset = 160;
@@ -37,6 +37,7 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
 
     public  ThumbNailPanel(MainModel model){
         this.model = model;
+//        this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         newLayout();
         setVisible(false);
 
@@ -53,10 +54,8 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
     }
 
     private void newLayout() {
-//        contentPane.removeAll();
         this.removeAll();
         this.icons = new ArrayList<JLabel>();
-        this.iconTexts = new ArrayList<JLabel>();
 
         innerComponent = new JPanel();
 
@@ -67,11 +66,13 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
         for (int ii = 0; ii < icons.size(); ii++) {
             innerComponent.add(icons.get(ii));
         }
-        JScrollPane scroll = new JScrollPane(innerComponent);
-//        contentPane.add(scroll);
-        this.add(scroll);
-        this.setSize(onePicSize, onePicSize*icons.size());
+
+//        JScrollPane scroll = new JScrollPane(innerComponent);
+        this.add(innerComponent);
+        innerComponent.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+        this.setSize(onePicSize+4,(onePicSize+6)*icons.size());
         setVisible(true);
+
     }
 
     public boolean update()
@@ -88,30 +89,18 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
         this.paths = this.model.getPaths();
 
 
-        int picX=10;
-        int picY=10;
-        int textX=0;
-        int textY=165;
-
         for(Path newPath : this.paths)
         {
             LinearTransform lt = new LinearTransform();
             lt.setScale((float)onePicSize/newPath.getMap().getImage().getHeight());
             BufferedImage bi = PaintImageHelper.paintImage(newPath, lt);
             JLabel newIcon = new JLabel(new ImageIcon(bi));
-            JLabel newText = new JLabel(newPath.getMap().getMapName());
             newIcon.addMouseListener(this);
             icons.add(newIcon);
-            iconTexts.add(newText);
 
-            newIcon.setBounds(onePicSize*(icons.size()-1),0,onePicSize,onePicSize);
-            newText.setBounds(textX,textY,150,30);
+            newIcon.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
-            picX=picX+picInset;
-            textX=textX+picInset;
 
-//            this.add(newIcon);
-//            this.add(newText);
         }
         setLayoutPost();
         setCurrentMap(0);
