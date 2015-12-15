@@ -3,6 +3,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Arc2D;
 import java.io.File;
 
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.wpi.cs509.teamA.dao.impl.MapDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 
 
@@ -148,10 +150,11 @@ public class OpenMapDialog  extends JDialog  implements ActionListener{
 		
 	}
 	
-	
+
 	public void saveMap()
 	{
-		
+        MapDaoImpl mapDaoImpl =new MapDaoImpl();
+        mapDaoImpl.saveMap(fileName.getText(),abbrName.getText(),filePath.getText(), Float.parseFloat(mapScale.getText()));
 	}
 	
 	
