@@ -59,6 +59,13 @@ public class AnimationObject {
 
     }
 
+    public void setToVertical_Middle() {
+        stateContext.getMyState().setToVertical_Middle();
+    }
+    public void setToHorizontal_Middle() {
+        stateContext.getMyState().setToHorizontal_Middle();
+
+    }
 
     public void execute() {
         stateContext.execute();

@@ -45,7 +45,7 @@ public class AutoSuggestor {
 	private double windowLocationX;
 	private double windowLocationY;
 	private InputPanel inputPanel;
-	private final static int MAXNUMLABEL = 4;
+	private final static int MAXNUMLABEL = 20;
 	
 	private DocumentListener documentListener = new DocumentListener() {
 		@Override
@@ -397,7 +397,7 @@ public class AutoSuggestor {
 
 		int windowX = 0;
 		int windowY = 0;
-		 System.out.println(container);
+
 		// System.out.println(container.getHeight());
 
 		windowX = container.getX()+textField.getX() + inputPanel.getX();
@@ -463,22 +463,22 @@ public class AutoSuggestor {
 			return false;
 		}
 		
-		while (iter.hasNext()) {
+		while (iter.hasNext()&&i<MAXNUMLABEL) {
 			NodeForSearch nodeInfo = iter.next();
 			//skip label on source textfield
 			if(this.setNodeOption==setNodeOption.setStartNode&&nodeInfo.getNode_label()==SuggestorEnum.Labels)
 				continue;
 			//set limitation on same node_label
-			if(nodeInfo.getNode_label()==temp){
-				i++;
-			}else{
-				temp = nodeInfo.getNode_label();
-				i = 0;
-			}
-			if(i>=MAXNUMLABEL){
-				continue;
-			}
-			
+//			if(nodeInfo.getNode_label()==temp){
+//				i++;
+//			}else{
+//				temp = nodeInfo.getNode_label();
+//				i = 0;
+//			}
+//			if(i>=MAXNUMLABEL){
+//				continue;
+//			}
+			i++;
 
 			addWordToSuggestions(nodeInfo.getStringForDisplay(), nodeInfo.getNode(), nodeInfo.getNode_label(), nodeInfo.getStringForDisplay());
 			

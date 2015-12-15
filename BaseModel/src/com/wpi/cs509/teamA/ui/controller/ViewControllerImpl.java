@@ -67,8 +67,22 @@ class ViewControllerImpl extends ViewControllerBase {
 
 	public void clickOnSwapStartEnd()
 	{
-		if(inputPanel.getFromText().getText()!=null && inputPanel.getToText().getText()!=null )
-		{}
+		if(model.getStartNode()!=null&&model.getEndNode()!=null&&model.getEndNode().size()==1)
+		{
+
+			Node tmpEnd=model.getEndNode().get(0);
+			Node tmpStart=model.getStartNode();
+			model.setOneEndNode(tmpStart);
+			model.setStartNode(tmpEnd);
+			String tmpFromText=inputPanel.getFromText().getText();
+			String tmpToText=inputPanel.getToText().getText();
+			inputPanel.getFromText().setText(tmpToText);
+			inputPanel.getToText().setText(tmpFromText);
+			inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
+			inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
+			this.clickSearch();
+			
+		}
 	}
 
 	public void clickEditNode() {
@@ -154,8 +168,16 @@ class ViewControllerImpl extends ViewControllerBase {
 //		inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
+		AlgoController algoController;
+		if (1 == model.getEndNode().size()) {
+			algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 
-		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode());
+		}
+		else
+		{
+			algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
+
+		}
 
 		Stack<Node> pathNodes = algoController.getRoute();
 
@@ -249,9 +271,9 @@ class ViewControllerImpl extends ViewControllerBase {
 	private void addHistory(){
 		ArrayList<History> newHistory = (ArrayList<History>) model.getMyAccount().getHistory();
 		
-		newHistory.add(new History(model.getStartNode().getName(), model.getStartNode().getId(), 1));
+		newHistory.add(new History(inputPanel.getFromText().getText(), model.getStartNode().getId(), 0));
 		if(model.getEndNode().size()==1){
-			newHistory.add(new History(model.getEndNode().get(0).getName(), model.getEndNode().get(0).getId(), 1));
+			newHistory.add(new History(inputPanel.getToText().getText(), model.getEndNode().get(0).getId(), 0));
 		}
 		
 		model.getMyAccount().setHistory(newHistory);

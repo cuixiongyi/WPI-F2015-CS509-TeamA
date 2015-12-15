@@ -35,6 +35,7 @@ public abstract class AnimationState {
 
         }
     }
+
     public final void setToMiddleBottom() {
         setToBottom();
         setToHorizontal_Middle();
