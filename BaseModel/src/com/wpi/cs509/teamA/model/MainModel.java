@@ -214,6 +214,8 @@ public final class MainModel extends StateContext {
 	public synchronized void setStartNode(Node pStartNode) {
 
 		if (pStartNode == this.startNode) {
+			this.startNode = null;
+			modelChanged();
 			return;
 		}
         if (null != pStartNode) {

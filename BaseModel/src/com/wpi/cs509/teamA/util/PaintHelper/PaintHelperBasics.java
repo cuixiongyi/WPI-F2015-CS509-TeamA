@@ -210,7 +210,10 @@ public class PaintHelperBasics {
 		PaintHelperBasics.model = model;
 	}
 
-	 public static String dirtmp = "/BaseModel/src/resource/";
+
+//	 public static String dirtmp = "/BaseModel/src/";
+	public static String dirtmp = "/src/";
+
 
 	public static String getUserDir() {
 		return System.getProperty("user.dir") + dirtmp;
