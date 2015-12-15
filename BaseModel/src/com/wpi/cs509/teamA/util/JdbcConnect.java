@@ -1,5 +1,6 @@
 package com.wpi.cs509.teamA.util;
 
+import javax.swing.*;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -42,9 +43,14 @@ public class JdbcConnect {
 
 		if (conn == null || conn.isClosed()) {
 
-			conn = DriverManager.getConnection(url, user, password);
-			// should commit
-			conn.setAutoCommit(false);
+			try {
+				conn = DriverManager.getConnection(url, user, password);
+				// should commit
+				conn.setAutoCommit(false);
+			}catch(Exception e){
+				JOptionPane.showMessageDialog(null, "Internet Connection Error", "Error Message",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 		return conn;
