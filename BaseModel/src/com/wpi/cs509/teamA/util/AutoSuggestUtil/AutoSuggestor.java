@@ -354,11 +354,11 @@ public class AutoSuggestor {
 			SuggestionBasicPanel suggestionMajorPanel = new SuggestionMajorPanel(word, this, nodeInformation, displayName);
 			addSugestionsPanel(suggestionMajorPanel);
 			break;
-		case Labels:
-			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation, displayName);
-			
-			addSugestionsPanel(suggestionLabelPanel);
-			break;
+//		case Labels:
+//			SuggestionBasicPanel suggestionLabelPanel = new SuggestionLabelPanel(word, this, nodeInformation, displayName);
+//			
+//			addSugestionsPanel(suggestionLabelPanel);
+//			break;
 		
 		}
 
@@ -466,7 +466,7 @@ public class AutoSuggestor {
 		while (iter.hasNext()&&i<MAXNUMLABEL) {
 			NodeForSearch nodeInfo = iter.next();
 			//skip label on source textfield
-			if(this.setNodeOption==setNodeOption.setStartNode&&nodeInfo.getNode_label()==SuggestorEnum.Labels)
+			if(nodeInfo.getNode_label()==SuggestorEnum.Labels)
 				continue;
 			//set limitation on same node_label
 //			if(nodeInfo.getNode_label()==temp){
