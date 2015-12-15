@@ -64,5 +64,8 @@ public class MouseActionEditNode extends MouseActionState {
     public void paintOnImage(Graphics2D g2) {
         LinearTransform lt = model.getLinearTransform();
         PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
+        PaintHelperComposite.paintEdges(model.getCurrentMap().getEdges(), g2, PaintHelperBasics.DrawStyleEnum.BasicEdge, lt);
+        //PaintHelperComposite.paintRoute(g2, lt);
+        //PaintHelperComposite.paintStartEndNode(g2, lt);
     }
 }
