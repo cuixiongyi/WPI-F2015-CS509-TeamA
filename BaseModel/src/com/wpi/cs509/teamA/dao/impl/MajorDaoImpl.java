@@ -26,6 +26,8 @@ public class MajorDaoImpl implements MajorDao {
 
 	public void saveMajors(Major major) {
 		// TODO Auto-generated method stub
+		if(major.getMajorAbbr().equals("") && major.getMajorName().equals(""))
+			return;
 		try {
 			String insertMajorToDB = "INSERT INTO routefinder.major (major, node_id,majorabbr) VALUES (?, ?,?)";
 			pstmt = conn.prepareStatement(insertMajorToDB);
