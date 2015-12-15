@@ -149,8 +149,16 @@ class ViewControllerImpl extends ViewControllerBase {
 //		inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
+		AlgoController algoController;
+		if (1 == model.getEndNode().size()) {
+			algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 
-		AlgoController algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
+		}
+		else
+		{
+			algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
+
+		}
 
 		Stack<Node> pathNodes = algoController.getRoute();
 
