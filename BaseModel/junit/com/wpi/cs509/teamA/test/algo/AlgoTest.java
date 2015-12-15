@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
@@ -12,7 +13,10 @@ import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
+import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
+import com.wpi.cs509.teamA.strategy.impl.MultipleDestinations;
+import static org.junit.Assert.*;
 
 public class AlgoTest {
 
@@ -24,7 +28,7 @@ public class AlgoTest {
 //		Edge edge2 = new Edge(2, 3, 1);
 //		Edge edge3 = new Edge(3, 4, 3);
 //		Edge edge4 = new Edge(4, 5, 6);
-//		
+//
 //		List<Integer> route = new ArrayList<Integer>();
 //		Edge[] edges = {edge1, edge2, edge3, edge4};
 //		Graph context = new Graph (edges);
@@ -52,7 +56,7 @@ public class AlgoTest {
 //		Edge edge9 = new Edge(3, 6, 5);
 //		Edge edge10 = new Edge(5, 8, 8);
 //		Edge edge11 = new Edge(6, 8, 8);
-//		
+//
 //		List<Integer> route = new ArrayList<Integer>();
 //		Edge[] edges = {edge1, edge2, edge3, edge4, edge5, edge6, edge7, edge8, edge9, edge10, edge11};
 //		Graph context = new Graph (edges);
@@ -64,7 +68,7 @@ public class AlgoTest {
 //			System.out.print(i + " -> ");
 //		}
 //	}
-	
+
 	@Test
 	public void testAlgoStrategy3(){
 		GeneralMap map1=new GeneralMap(0,1);
@@ -93,7 +97,7 @@ public class AlgoTest {
 		Edge edge12 = new Edge(node9, node11);
 		Edge edge13 = new Edge(node9, node10);
 		Edge edge14= new Edge(node10, node11);
-		
+
 		GeneralMap map2=new GeneralMap(1,1);
 		Node node12 = new Node(12, 10, 20, map2);
 		Node node13 = new Node(13, 20, 30,map2);
@@ -103,7 +107,7 @@ public class AlgoTest {
 		Edge edge16= new Edge(node15, node13);
 		Edge edge17= new Edge(node12, node13);
 		Edge edge18= new Edge(node1, node12,50);
-		
+
 		GeneralMap map3=new GeneralMap(2,1);
 		Node node16 = new Node(16, 10, 20, map3);
 		Node node17 = new Node(17, 20, 30,map3);
@@ -112,8 +116,8 @@ public class AlgoTest {
 		Edge edge20= new Edge(node18, node17);
 		Edge edge21= new Edge(node16, node18);
 		Edge edge22= new Edge(node16, node14,100);
-		
-		
+
+
 		List<Edge> edges= new ArrayList<Edge>();
 		List<Edge> mapedges= new ArrayList<Edge>();
 		edges.add(edge1);
@@ -143,22 +147,30 @@ public class AlgoTest {
 //				,edge17,edge18};
 		//Graph context = new Graph (edges); //for running the algorithm
 		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
-	
+
 		//AstarAlgoStrategy d= new AstarAlgoStrategy();
-		Node[] end={node11, node14};
-		 AlgoController algoController = new AlgoController(node4,
-	               end);
+
+		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
+		//DijkstraMultipleDestinations d = new DijkstraMultipleDestinations();
+		MultipleDestinations d = new MultipleDestinations();
+		//AstarAlgoStrategy d= new AstarAlgoStrategy();
 		Stack<Node> route= new Stack<Node>();
-		//allEdges edgess= new allEdges(edges, mapedges,node9, node18);
-		//route=d.getRoute(edgess);
-		route=algoController.getRoute();
+
+
+		/// endNodes
+		Node[] node00={node15, node4};
+		allEdges edgess= new allEdges(edges, mapedges,node9, node00);
+		route=d.getRoute(edgess);
+
+		//route=algoController.getRoute();
+		Assert.assertEquals(route.size(), 12);
 		System.out.print("Route: ");
 		while (!route.isEmpty())
 		{
 			System.out.print(route.pop().getId() + " -> ");
 		}
 	}
-	
-	
-	
+
+
+
 }
