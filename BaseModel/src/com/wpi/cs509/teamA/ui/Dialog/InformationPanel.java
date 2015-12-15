@@ -44,8 +44,8 @@ public class InformationPanel extends JPanel implements ActionListener {
 
     public void updateDisplay(Node pnode){
 
-        String pre = "<html><body style='width: 145px;'>";
-        this.setSize(306,146);
+        String pre = "<html><body style='width: 150px;'>";
+        this.setSize(306,126);
         this.setLayout(null);
 
         node=pnode;
@@ -53,14 +53,14 @@ public class InformationPanel extends JPanel implements ActionListener {
         this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 
         textLabel.setText(pre+Database.getNodeInformation(node.getId()).PrintNodeInfo());
-        textLabel.setBounds(125,3,200,140);
+        textLabel.setBounds(123,3,180,120);
         textLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         this.add(textLabel);
 
         try{
             informationPic= PaintHelperBasics.resize(ImageIO.read(new File(node.getMap().getMapImgPath())),120,120) ;
             picLabel.setIcon(new ImageIcon(informationPic));
-            picLabel.setBounds(3,13,120,120);
+            picLabel.setBounds(3,3,120,120);
             this.add(picLabel);
 
         } catch (IOException e) {
