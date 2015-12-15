@@ -4,13 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
-import com.wpi.cs509.teamA.util.NodeIcon;
+import com.wpi.cs509.teamA.util.ImageHelper;
 
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
@@ -51,19 +46,19 @@ public class SuggestorPainter {
 	private static Color activityTxtBorderColor = Color.BLACK;
 	private static Color professorTxtBorderColor = Color.BLACK;
 
-	private static String professorIconName = "Professor_Icon.png";
-	private static String historyIconName = "History_Icon.png";
-	private static String locationIconName = "Location_Icon.png";
-	private static String othersIconName = "Others_Icon.png";
-	private static String activityIconName = "Activity_Icon.jpg";
-	private static String majorIconName = "Major_Icon.png";
+	private static String professorIconName = "suggestionicon/Professor_Icon.png";
+	private static String historyIconName = "suggestionicon/History_Icon.png";
+	private static String locationIconName = "suggestionicon/Location_Icon.png";
+	private static String othersIconName = "suggestionicon/Others_Icon.png";
+	private static String activityIconName = "suggestionicon/Activity_Icon.jpg";
+	private static String majorIconName = "suggestionicon/Major_Icon.png";
 
-	private static String professorIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + professorIconName;
-	private static String historyIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + historyIconName;
-	private static String locationIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + locationIconName;
-	private static String majorIconFilePath = PaintHelperBasics.getUserDir() +"suggestionicon/" + majorIconName;
-	private static String activityIconFilePath = PaintHelperBasics.getUserDir() +"suggestionicon/" + activityIconName;
-	private static String othersIconFilePath = PaintHelperBasics.getUserDir() + "suggestionicon/" + othersIconName;
+	private static String professorIconFilePath = PaintHelperBasics.getUserDir() + "com/wpi/cs509/teamA/resource/suggestionicon/" + professorIconName;
+	private static String historyIconFilePath = PaintHelperBasics.getUserDir() + "com/wpi/cs509/teamA/resource/suggestionicon/" + historyIconName;
+	private static String locationIconFilePath = PaintHelperBasics.getUserDir() + "com/wpi/cs509/teamA/resource/suggestionicon/" + locationIconName;
+	private static String majorIconFilePath = PaintHelperBasics.getUserDir() + "com/wpi/cs509/teamA/resource/suggestionicon/" + majorIconName;
+	private static String activityIconFilePath = PaintHelperBasics.getUserDir() + "com/wpi/cs509/teamA/resource/suggestionicon/" + activityIconName;
+	private static String othersIconFilePath = PaintHelperBasics.getUserDir() + "com/wpi/cs509/teamA/resource/suggestionicon/" + othersIconName;
 
 	private static BufferedImage professorIcon;
 	private static BufferedImage locationIcon;
@@ -74,12 +69,12 @@ public class SuggestorPainter {
 
 	static {
 		try {
-			professorIcon = ImageIO.read(new FileInputStream(professorIconFilePath));
-			locationIcon = ImageIO.read(new FileInputStream(locationIconFilePath));
-			historyIcon = ImageIO.read(new FileInputStream(historyIconFilePath));
-			othersIcon = ImageIO.read(new FileInputStream(othersIconFilePath));
-			majorIcon = ImageIO.read(new FileInputStream(majorIconFilePath));
-			activityIcon = ImageIO.read(new FileInputStream(activityIconFilePath));
+			professorIcon = ImageHelper.readImage(professorIconName);
+			locationIcon = ImageHelper.readImage((historyIconName));
+			historyIcon = ImageHelper.readImage((locationIconName));
+			othersIcon = ImageHelper.readImage((othersIconName));
+			majorIcon = ImageHelper.readImage((activityIconName));
+			activityIcon = ImageHelper.readImage((majorIconName));
 
 		} catch (Exception e) {
 			e.printStackTrace();

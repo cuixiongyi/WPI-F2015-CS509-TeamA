@@ -101,8 +101,8 @@ public class UserScreen extends JFrame {
 		parkingManager.setModel(mainModel);
 		// input panel and components
 
-		inputPanel.setBounds(905, 0, 300, 750);
-		imgComponent.setBounds(0, 0, 900, 750);
+		inputPanel.setBounds(905, 0, 300, 710);
+		imgComponent.setBounds(0, 0, 900, 710);
 		contentPane.add(inputPanel, new Integer(0));
 		contentPane.add(imgComponent, new Integer(0));
 		imgComponent.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));

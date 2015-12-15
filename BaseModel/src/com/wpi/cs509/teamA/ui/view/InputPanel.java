@@ -273,12 +273,12 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		
 		BufferedImage logo;
 		try {
-			logo = ImageIO.read(new File(PaintHelperBasics.getUserDir() + "logo_iteration1.png"));
+			logo = ImageHelper.readImage("logo_iteration1.png");
 			// picLabel = new JLabel(new ImageIcon(logo));
 			// picLabel.setBounds(50, 480, 200, 200);
 			// add(picLabel);
 			// picLabel.setOpaque(true);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
