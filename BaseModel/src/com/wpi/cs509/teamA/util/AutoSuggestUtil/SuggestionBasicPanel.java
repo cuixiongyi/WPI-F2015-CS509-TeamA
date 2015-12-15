@@ -55,11 +55,11 @@ public class SuggestionBasicPanel extends JPanel {
 	}
 
 	protected void initComponent() {
-				
-		this.add(textLabel, BorderLayout.EAST);	
-		this.add(new JLabel(new ImageIcon(imageIcon), JLabel.LEFT), BorderLayout.WEST);
+		this.add(new JLabel(new ImageIcon(imageIcon), JLabel.LEFT), BorderLayout.WEST);	
+		this.add(textLabel, BorderLayout.CENTER);	
+		//this.add(new JLabel(new ImageIcon(imageIcon), JLabel.LEFT), BorderLayout.WEST);
 		this.setBorder(BorderFactory.createLineBorder(suggestionLineBorderColor));
-		
+	//	this.setPreferredSize(new Dimension(800,30));		
 		textLabel.setFocusable(true);
 		textLabel.setForeground(suggestionsTextColor);
 		textLabel.setPreferredSize(preferredSize);

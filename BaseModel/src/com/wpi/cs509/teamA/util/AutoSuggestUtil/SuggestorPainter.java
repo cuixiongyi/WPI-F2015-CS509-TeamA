@@ -16,7 +16,8 @@ import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
 public class SuggestorPainter {
 
-	private static Dimension preferredSize = new Dimension(115, 23);
+	private static Dimension preferredSize = new Dimension(500, 30);
+
 
 	private static Font historyFont = new Font("SimSun", Font.PLAIN, 23);
 	private static Font locationFont = new Font("SimSun", Font.PLAIN, 23);
