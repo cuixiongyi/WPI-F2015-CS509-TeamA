@@ -74,8 +74,10 @@ class ViewControllerImpl extends ViewControllerBase {
 			String tmpToText=inputPanel.getToText().getText();
 			inputPanel.getFromText().setText(tmpToText);
 			inputPanel.getToText().setText(tmpFromText);
-
-
+			inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
+			inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
+			this.clickSearch();
+			
 		}
 	}
 
