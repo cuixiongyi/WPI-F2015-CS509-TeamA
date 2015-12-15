@@ -141,7 +141,7 @@ public class allEdges {
 	}
 
 	public Node[] getEnd() {
-		return end;
+		return this.end;
 	}
 
 	public void setEnd(Node[] end) {

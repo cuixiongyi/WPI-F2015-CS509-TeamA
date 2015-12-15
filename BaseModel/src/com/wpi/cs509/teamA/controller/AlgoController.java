@@ -12,11 +12,7 @@ import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
-import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
-import com.wpi.cs509.teamA.strategy.impl.GeneralAlgorithm;
-import com.wpi.cs509.teamA.strategy.impl.Graph;
+import com.wpi.cs509.teamA.strategy.impl.*;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.InputMatrix;
 
@@ -122,7 +118,7 @@ public class AlgoController {
 		
 		if(this.isMultipleDestination){
 			System.out.println("multiple destination");
-			generalAlgorithm.setAlgoStrategy(new DijkstraMultipleDestinations());
+			generalAlgorithm.setAlgoStrategy(new MultipleDestinations());
 			this.isMultipleDestination=false;
 		}
 		else{
