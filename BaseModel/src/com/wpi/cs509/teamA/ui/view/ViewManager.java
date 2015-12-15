@@ -52,6 +52,14 @@ public class ViewManager extends ViewControllerBase implements Observer{
     static public void updateView() {
         updateImageComponent();
         updateInputePanel();
+        if (getThumbNailPanel().update()) {
+            AnimationObject ao = getAC().checkObjectExist(getThumbNailPanel());
+            if (null != ao) {
+                ao.setToVertical_Middle();
+            }
+        }
+
+
 
     }
     static public ImageComponent getImageComponent() {
