@@ -126,7 +126,8 @@ public class SearchSupply {
 			Matcher m = r.matcher(tempKey.toLowerCase());
 			if (m.find()) {
 				// System.out.println(tempNode.getStringForSearch());
-				tempNode.setPriority(updatePriority(searchingStr, tempKey, tempNode.getPriority()));
+				if(tempNode.getNode_label().name().equals("History")){
+				tempNode.setPriority(updatePriority(searchingStr, tempKey, tempNode.getPriority()));}
 				searchResultsList.put(tempNode, tempNode.getPriority());
 			}
 		}

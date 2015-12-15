@@ -51,6 +51,9 @@ public class ProfessorDaoImpl implements ProfessorDao {
 	@Override
 	public void saveProfessor(Professor professor) {
 		// TODO Auto-generated method stub
+		System.out.println("Adding professor"+professor.getProfessorName());
+		if(professor.getProfessorName().equals(""))
+			return;
 		try {
 			String insertProfessorToDB = "INSERT INTO routefinder.professor (professor,nodeid) VALUES (?, ?)";
 			pstmt = conn.prepareStatement(insertProfessorToDB);
