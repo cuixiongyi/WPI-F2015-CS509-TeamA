@@ -27,10 +27,11 @@ public class MajorDaoImpl implements MajorDao {
 	public void saveMajors(Major major) {
 		// TODO Auto-generated method stub
 		try {
-			String insertMajorToDB = "INSERT INTO routefinder.major (major, node_id) VALUES (?, ?)";
+			String insertMajorToDB = "INSERT INTO routefinder.major (major, node_id,majorabbr) VALUES (?, ?,?)";
 			pstmt = conn.prepareStatement(insertMajorToDB);
 			pstmt.setString(1, major.getMajorName());
 			pstmt.setInt(2, major.getNodeId());
+			pstmt.setString(3, major.getMajorAbbr());
 			pstmt.executeUpdate();
 			conn.commit();
 		} catch (SQLException se) {
