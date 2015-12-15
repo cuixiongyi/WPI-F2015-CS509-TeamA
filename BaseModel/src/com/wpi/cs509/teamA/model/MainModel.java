@@ -211,13 +211,17 @@ public final class MainModel extends StateContext {
 	}
 
 	public synchronized void setStartNode(Node pStartNode) {
+
 		if (pStartNode == this.startNode) {
 			return;
 		}
-		this.multiMapPathListsForEachMap = null;
+        if (null != pStartNode) {
+            this.setFocusNode(pStartNode);
+        }
+
+        this.multiMapPathListsForEachMap = null;
 
 		this.startNode = pStartNode;
-		this.setFocusNode(pStartNode);
  //       this.endNearestNodes = null;
 		modelChanged();
 
@@ -306,7 +310,10 @@ public final class MainModel extends StateContext {
 		this.focusNode = focusNode;
 		if (null == focusNode) {
 			isFirstFocusNode = false;
-		}
+            modelChanged();
+
+            return;
+        }
 		isFirstFocusNode = true;
         setCurrentMap(focusNode.getMap());
 		modelChanged();
