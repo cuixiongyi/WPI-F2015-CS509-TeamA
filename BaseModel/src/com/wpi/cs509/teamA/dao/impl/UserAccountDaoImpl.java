@@ -180,6 +180,27 @@ public class UserAccountDaoImpl implements UserAccountDao {
 		return null;
 	}
 
+	public boolean checkHistoryInDatabase(int userid,int nodeid,String searchString){
+		ResultSet resultSet = null;
+		try {
+			String checkUserNameInDB = "SELECT * FROM routefinder.history where userid=? and nodeid=? and searchString=?";
+			pstmt = conn.prepareStatement(checkUserNameInDB);
+			pstmt.setInt(1, userid);
+			pstmt.setInt(2, nodeid);
+			pstmt.setString(3, searchString);
+			resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+					return true;
+			} else
+				return false;
+		} catch (SQLException se) {
+			System.out.println("fail to connect database..");
+			se.printStackTrace();
+		} finally {
+			JdbcConnect.resultClose(resultSet, pstmt);
+		}
+		return false;
+	}
 	@Override
 	public void saveSearchHistoryToDatabase(UserAccount user) {
 		try {
@@ -192,6 +213,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 
 			// save new history for this user
 			for (History history : user.getHistory()) {
+				if(!checkHistoryInDatabase(user.getId(),history.getNodeid(),history.getHistoryStr())){
 				String insertHistoryToDB = "INSERT INTO routefinder.history (userid,count, nodeid, searchString)  VALUES (?, ?, ?, ?)";
 				pstmt = conn.prepareStatement(insertHistoryToDB);
 				pstmt.setInt(1, user.getId());
@@ -200,6 +222,7 @@ public class UserAccountDaoImpl implements UserAccountDao {
 				pstmt.setString(4, history.getHistoryStr());
 				pstmt.executeUpdate();
 				conn.commit();
+				}
 			}
 		} catch (SQLException se) {
 			System.out.println("fail to connect database..");
