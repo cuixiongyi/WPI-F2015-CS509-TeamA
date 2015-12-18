@@ -1,6 +1,5 @@
 package com.wpi.cs509.teamA.util;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -24,7 +23,7 @@ public class NodeIcon {
 	private static String startIconName = "Start_Icon.png";
 	private static String endIconName = "End_Icon.png";
 	private static String nextIconName = "next_Icon.png";
-	private static String rotateIconName="rotate_Icon.png";
+	private static String rotateIconName= "rotate_Icon.png";
 
 	private static String numPrefix = "numbers-";
 	private static String numPostfix = "-icon.png";
@@ -40,6 +39,8 @@ public class NodeIcon {
 	private static String endIconFilePath = PaintHelperBasics.getUserDir() + endIconName;
 	private static String nextIconFilePath = PaintHelperBasics.getUserDir() + nextIconName;
 	private static String rotateIconFilePath = PaintHelperBasics.getUserDir() + rotateIconName;
+
+
 
 	private static String iconDir= PaintHelperBasics.getUserDir()+"numicon/"+numPrefix;
 	
@@ -59,22 +60,22 @@ public class NodeIcon {
 	
 	static {
 		try {
-			labIcon = ImageIO.read(new FileInputStream(labIconFilePath));
-			classroomIcon = ImageIO.read(new FileInputStream(classroomIconFilePath));
-			officeIcon = ImageIO.read(new FileInputStream(officeIconFilePath));
-			restroomIcon = ImageIO.read(new FileInputStream(restroomIconFilePath));
-			parkingIcon = ImageIO.read(new FileInputStream(parkingIconFilePath));
-			startIcon = ImageIO.read(new FileInputStream(startIconFilePath));
-			endIcon = ImageIO.read(new FileInputStream(endIconFilePath));
-			nextIcon=ImageIO.read(new FileInputStream(nextIconFilePath));
-			rotateIcon=ImageIO.read(new FileInputStream(rotateIconFilePath));
+			labIcon = ImageHelper.readImage(labIconName);
+			classroomIcon = ImageHelper.readImage(classroomIconName);
+			officeIcon = ImageHelper.readImage(officeIconName);
+			restroomIcon = ImageHelper.readImage(restroomIconName);
+			parkingIcon = ImageHelper.readImage(parkingIconName);
+			startIcon = ImageHelper.readImage(startIconName);
+			endIcon = ImageHelper.readImage(endIconName);
+			nextIcon=ImageHelper.readImage(nextIconName);
+			rotateIcon=ImageHelper.readImage(rotateIconName);
 
 			int numCount = 9;
 			numIcons = new ArrayList<BufferedImage>(numCount);
 
 			for (int ii = 0; ii <= numCount; ii++) {
 				String tmp = iconDir+Integer.toString(ii)+numPostfix;
-				numIcons.add(ImageIO.read(new FileInputStream(tmp)));
+//				numIcons.add(ImageIO.read(new FileInputStream(tmp)));
 			}
 
 			
@@ -224,7 +225,7 @@ public class NodeIcon {
 	}
 
 	public static ImageIcon getRotateIcon(){
-		return new ImageIcon(PaintHelperBasics.resize(rotateIcon,20,30));
+		return new ImageIcon(ImageHelper.resizeImage(rotateIcon,20,30));
 
 	}
 

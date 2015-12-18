@@ -159,7 +159,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		lblSwapStartEnd =new JLabel();
 		lblSwapStartEnd.setIcon(NodeIcon.getRotateIcon());
-		lblSwapStartEnd.setBounds(228,112,20,30);
+		lblSwapStartEnd.setBounds(232,112,20,30);
 		add(lblSwapStartEnd);
 
 		txtTo = new JTextField();
@@ -177,7 +177,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 		// tab panel-search result
 		mapList = new JList<>();
-		mapList.setPreferredSize(new Dimension(250, 450));
+		mapList.setPreferredSize(new Dimension(250, 430));
 		// mapList.setFixedCellHeight(40);
 		mapList.setCellRenderer(new MarioListRenderer());
 		searchResultTab.add(mapList);
@@ -236,7 +236,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		
 		
 
-		openMap=new JButton("AddMap");
+		openMap=new JButton("Add Map");
 //		adminTab.add(openMap);
 //		openMap.setFont(buttonFont);
 		
@@ -273,12 +273,12 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		
 		BufferedImage logo;
 		try {
-			logo = ImageIO.read(new File(PaintHelperBasics.getUserDir() + "logo_iteration1.png"));
+			logo = ImageHelper.readImage("logo_iteration1.png");
 			// picLabel = new JLabel(new ImageIcon(logo));
 			// picLabel.setBounds(50, 480, 200, 200);
 			// add(picLabel);
 			// picLabel.setOpaque(true);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -6,6 +6,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.Database;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.List;
 
@@ -120,6 +121,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
         {
             NodeInformationDaoImpl nodeInfoDao =new NodeInformationDaoImpl();
             nodeInfoDao.saveNodeInformation(infoWrapper());
+            Database.InitFromDatabase();
             this.dispose();
 
         }
@@ -138,7 +140,6 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
 
         if(majorName.getText().equals("")){
             majors.add(new Major("","",node.getId()));
-
         }else if(majorName.getText().split(";").length>=2){
             for (int i = 0; i < majorName.getText().split(";").length - 1; i = i + 2) {
                 Major m = new Major(majorName.getText().split(";")[i], majorName.getText().split(";")[i + 1], node.getId());
@@ -146,18 +147,24 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
             }
         }else{
             majors.add(new Major(majorName.getText(),"",node.getId()));
-            System.out.println(majorName.getText().split(";"));
+           
         }
-
+    
         if(professor.getText().equals(""))
         {
             professors.add(new Professor("",node.getId()));
 
         }else{
-            for(int j=0;j<professor.getText().split(";").length-1;j++) {
-                Professor p=new Professor(professor.getText().split(";")[j],node.getId());
-                professors.add(p);
+        	if(professor.getText().contains(";")){
+	            for(int j=0;j<professor.getText().split(";").length;j++) {
+	                Professor p=new Professor(professor.getText().split(";")[j],node.getId());
+	                professors.add(p);
+	            }
             }
+        	else{
+        		Professor p=new Professor(professor.getText(),node.getId());
+                professors.add(p);
+        	}
         }
 
         if(feature.getText().equals("")){
@@ -166,6 +173,7 @@ public class NodeInfoDIalog extends JDialog implements ActionListener {
             for (int k = 0; k < feature.getText().split(";").length - 1; k++) {
                 OtherFeature f = new OtherFeature(feature.getText().split(";")[k], node.getId());
                 labels.add(f);
+                
             }
         }
 

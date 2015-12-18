@@ -56,17 +56,19 @@ public class MouseActionEditNode extends MouseActionState {
                 }
                 else {
                     xy.setX(lastNode.getLocation().getX());
+                    
 
                 }
 
 //                Coordinate transxy = getTransCoor(xy);
                 addNewNode(xy);
+                lastNode = null;
             }
 
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
 
-
+        	lastNode = null;
             if (null != node) {
                 /// TODO add edit node action
                 NodeEditDialog nodeInfo = new NodeEditDialog(ViewManager.getImageComponent(), model, node);
@@ -76,6 +78,7 @@ public class MouseActionEditNode extends MouseActionState {
             } else {
                 // Create a NodeEditDialog
                 addNewNode(coorTrans);
+                
 
                 //nodesToPaint.add(node);
             }

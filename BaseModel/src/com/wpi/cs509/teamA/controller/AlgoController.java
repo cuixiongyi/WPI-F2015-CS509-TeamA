@@ -101,14 +101,21 @@ public class AlgoController {
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
 		if(flag){
-			edges.init();
+//			edges.init();
 			System.out.println("normal path");
 //			if(edges.getMaps().size()>3)
 //				generalAlgorithm.setAlgoStrategy(new AstarAlgoStrategy());
 //			else
-				generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+			long tStart = System.currentTimeMillis();
+
+			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
+
 			//flag=false;
-			return result = generalAlgorithm.findPath(edges);
+			 result = generalAlgorithm.findPath(edges);
+//			long tEnd = System.currentTimeMillis();
+//			long tDelta = tEnd - tStart;
+//			double elapsedSeconds = tDelta / 1000.0;
+			return result;
 		}
 		
 		if(this.isMultipleDestination){

@@ -125,6 +125,17 @@ public class PaintHelperComposite extends PaintHelperBasics{
         }
     }
 
+
+    public static void paintDots(List<Node> nodes, Graphics2D g2, LinearTransform pLinearTransform , DrawStyleEnum style) {
+        PaintHelperBasics.setLinearTransform(pLinearTransform);
+        for (Node node :
+                nodes) {
+            PaintHelperBasics.paintDot(node, g2, style);
+
+        }
+    }
+
+
     public static void paintEdgeAndNodes(java.util.List<Node> nodes, Graphics2D g2) {
         for (int i = 0; i < nodes.size() - 1; ++i) {
             PaintHelperBasics.paintDot(nodes.get(i), g2);

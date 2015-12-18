@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.InputMatrix;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 
@@ -174,10 +175,8 @@ public class GeneralMap implements AdjacencyMatrix {
 		// display the image. Note that " /" only works on UNIX
 		this.mapImgPath = PaintHelperBasics.getUserDir() + this.imageName;
 		try {
-			image = ImageIO.read(new FileInputStream(mapImgPath));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+			image = ImageHelper.readImage(this.imageName);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

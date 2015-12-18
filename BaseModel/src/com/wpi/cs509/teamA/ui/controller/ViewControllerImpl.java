@@ -119,7 +119,7 @@ class ViewControllerImpl extends ViewControllerBase {
 	public  void clickEditNodeInfo(){
 		JToggleButton button = inputPanel.getBtnEditNodeInfo();
 
-		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
+		if (MouseActionEditNodeInfo.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
 			model.switchToState(new MouseActionSelectNode(model));
 		} else {

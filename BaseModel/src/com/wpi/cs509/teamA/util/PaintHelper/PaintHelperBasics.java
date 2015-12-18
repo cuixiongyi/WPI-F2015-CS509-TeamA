@@ -46,16 +46,7 @@ public class PaintHelperBasics {
 		Undefined, BasicNode, BasicEdge, BasicText, NewNode, NewEdge, SelectedNode,
 	}
 
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
-		Graphics2D g2d = dimg.createGraphics();
-		g2d.drawImage(tmp, 0, 0, null);
-		g2d.dispose();
-
-		return dimg;
-	}
 
 	protected static void setStyle(DrawStyleEnum style, Graphics2D g2) {
 		switch (style) {
@@ -219,8 +210,10 @@ public class PaintHelperBasics {
 		PaintHelperBasics.model = model;
 	}
 
-	 public static String dirtmp = "/BaseModel/src/";
-//	public static String dirtmp = "/src/";
+
+//	 public static String dirtmp = "/BaseModel/src/";
+	public static String dirtmp = "/src/";
+
 
 	public static String getUserDir() {
 		return System.getProperty("user.dir") + dirtmp;

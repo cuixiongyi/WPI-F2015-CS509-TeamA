@@ -39,7 +39,9 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem printRoute;
 
 	private final static String SOURCE = "Add as source";
+	private final static String rmSOURCE = "Remove source";
 	private final static String DES = "Add as destination";
+	private final static String rmDES = "Remove destination";
 	private final static String CLEAN = "Clean up route";
 	private final static String PRINT = "Print Route";
 
@@ -56,11 +58,22 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 		setBounds(100, 100, 450, 300);
 
 		// set up menu item
-		mntmSrc = new JMenuItem(SOURCE);
+		if (null != node && model.getStartNode() == node) {
+			mntmSrc = new JMenuItem(rmSOURCE);
+		}
+		else {
+			mntmSrc = new JMenuItem(SOURCE);
+
+		}
 		mntmSrc.addActionListener(this);
 		add(mntmSrc);
 
-		mntmDes = new JMenuItem(DES);
+		if (model.getEndNode().contains(node)) {
+			mntmDes = new JMenuItem(rmDES);
+		}
+		else {
+			mntmDes = new JMenuItem(DES);
+		}
 		add(mntmDes);
 		mntmDes.addActionListener(this);
 		
@@ -76,6 +89,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 			mntmDes.setEnabled(false);
 			mntmSrc.setEnabled(false);
 		}
+
 	}
 
 	@Override
@@ -84,15 +98,17 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 
 		if (e.getSource() == mntmSrc) {
 
-			this.inputPanel.getFromText().setText(node.getMap().getMapName()+" "+node.getName());
 			model.setStartNode(node);
-			this.inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
-					
+			
+				this.inputPanel.getFromText().setText(node.getMap().getMapName()+" "+node.getName());
+				this.inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
+
 		} else if (e.getSource()==mntmDes){
 
-			this.inputPanel.getToText().setText(node.getMap().getMapName()+" "+node.getName());
 			model.addOneEndNode(node);
-			this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
+			
+				this.inputPanel.getToText().setText(node.getMap().getMapName()+" "+node.getName());
+				this.inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 		} else if(e.getSource()==cleanupMap){
 			inputPanel.getFromText().setText("");
 			inputPanel.getToText().setText("");

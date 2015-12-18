@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.junit;
+package com.wpi.cs509.teamA.test.algo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,60 +16,16 @@ import com.wpi.cs509.teamA.strategy.impl.DijkstraMultipleDestinations;
 import com.wpi.cs509.teamA.strategy.impl.Graph;
 import com.wpi.cs509.teamA.strategy.impl.MultipleDestinations;
 
-public class AlgoTest {
-
-//	@Test
-//	public void testAlgoStrategy1() {
-//		Node startNode = new Node(1);
-//		Node endNode = new Node(5);
-//		Edge edge1 = new Edge(1, 2, 10);
-//		Edge edge2 = new Edge(2, 3, 1);
-//		Edge edge3 = new Edge(3, 4, 3);
-//		Edge edge4 = new Edge(4, 5, 6);
-//		
-//		List<Integer> route = new ArrayList<Integer>();
-//		Edge[] edges = {edge1, edge2, edge3, edge4};
-//		Graph context = new Graph (edges);
-//		DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
-//		route = d.getRoute(startNode, endNode, context);
-//		System.out.print("Route: ");
-//		for (int i : route)
-//		{
-//			System.out.print(i + " -> ");
-//		}
-//	}
-//
-//	@Test
-//	public void testAlgoStrategy2() {
-//		Node startNode = new Node(2);
-//		Node endNode = new Node(3);
-//		Edge edge1 = new Edge(7, 2, 10);
-//		Edge edge2 = new Edge(7, 4, 8);
-//		Edge edge3 = new Edge(2, 4, 6);
-//		Edge edge4 = new Edge(2, 1, 9);
-//		Edge edge5 = new Edge(1, 4, 12);
-//		Edge edge6 = new Edge(1, 3, 11);
-//		Edge edge7 = new Edge(4, 5, 7);
-//		Edge edge8 = new Edge(3, 5, 2);
-//		Edge edge9 = new Edge(3, 6, 5);
-//		Edge edge10 = new Edge(5, 8, 8);
-//		Edge edge11 = new Edge(6, 8, 8);
-//		
-//		List<Integer> route = new ArrayList<Integer>();
-//		Edge[] edges = {edge1, edge2, edge3, edge4, edge5, edge6, edge7, edge8, edge9, edge10, edge11};
-//		Graph context = new Graph (edges);
-//		DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
-//		route = d.getRoute(startNode, endNode, context);
-//		System.out.print("Route: ");
-//		for (int i : route)
-//		{
-//			System.out.print(i + " -> ");
-//		}
-//	}
+public class AlgoTestDriver {
 	
-	@Test
-	public void testAlgoStrategy3(){
+	private ArrayList<Edge> edges = new ArrayList<Edge>();
+	private ArrayList<Edge> mapedges = new ArrayList<Edge>();
+	private ArrayList<Node> nodes = new ArrayList<Node>();
+	
+	public AlgoTestDriver(){
+		
 		GeneralMap map1=new GeneralMap(0,1);
+		Node node0 = new Node(1, 20, 20, map1);
 		Node node1 = new Node(1, 10, 20, map1);
 		Node node2 = new Node(2, 20, 30,map1);
 		Node node3 = new Node(3, 20, 40,map1);
@@ -115,9 +71,7 @@ public class AlgoTest {
 		Edge edge21= new Edge(node16, node18);
 		Edge edge22= new Edge(node16, node14,100);
 		
-		
-		List<Edge> edges= new ArrayList<Edge>();
-		List<Edge> mapedges= new ArrayList<Edge>();
+
 		edges.add(edge1);
 		edges.add(edge2);
 		edges.add(edge3);
@@ -141,31 +95,56 @@ public class AlgoTest {
 		edges.add(edge21);
 		mapedges.add(edge18);
 		mapedges.add(edge22);
-//		Edge[] edges = {edge1, edge2, edge3, edge4, edge5,edge6, edge7, edge8, edge9, edge10,edge11, edge12, edge13, edge14,edge15,edge16
-//				,edge17,edge18};
-		//Graph context = new Graph (edges); //for running the algorithm
-		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
-	
-		//AstarAlgoStrategy d= new AstarAlgoStrategy();
 		
-		//DijkstraAlgoStrategy d = new DijkstraAlgoStrategy();
-		//DijkstraMultipleDestinations d = new DijkstraMultipleDestinations();
-		MultipleDestinations d = new MultipleDestinations();
-		//AstarAlgoStrategy d= new AstarAlgoStrategy();
-		Stack<Node> route= new Stack<Node>();
-		Node[] node00={node15, node7, node4};
-		allEdges edgess= new allEdges(edges, mapedges,node9, node00);
-		route=d.getRoute(edgess);
+		nodes.add(node0);
+		nodes.add(node1);
+		nodes.add(node2);
+		nodes.add(node3);
+		nodes.add(node4);
+		nodes.add(node5);
+		nodes.add(node6);
+		nodes.add(node7);
+		nodes.add(node8);
+		nodes.add(node9);
+		nodes.add(node10);
+		nodes.add(node11);
+		nodes.add(node12);
+		nodes.add(node13);
+		nodes.add(node14);
+		nodes.add(node15);
+		nodes.add(node16);
+		nodes.add(node17);
+		nodes.add(node18);
 		
-		//route=algoController.getRoute();
-		
-		System.out.print("Route: ");
-		while (!route.isEmpty())
-		{
-			System.out.print(route.pop().getId() + " -> ");
-		}
+
 	}
 	
+
+	public ArrayList<Node> getNodes() {
+		return nodes;
+	}
+
+
+	public void setNodes(ArrayList<Node> nodes) {
+		this.nodes = nodes;
+	}
+
+
+	public ArrayList<Edge> getEdges() {
+		return edges;
+	}
+
+	public void setEdges(ArrayList<Edge> edges) {
+		this.edges = edges;
+	}
+
+	public ArrayList<Edge> getMapedges() {
+		return mapedges;
+	}
+
+	public void setMapedges(ArrayList<Edge> mapedges) {
+		this.mapedges = mapedges;
+	}
 	
 	
 }
