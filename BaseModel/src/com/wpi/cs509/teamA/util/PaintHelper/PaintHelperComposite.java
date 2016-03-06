@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.util.PaintHelper;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Edge;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.Node;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class PaintHelperComposite extends PaintHelperBasics{
 
-    static private MainModel model = null;
+    static private DataModel model = null;
 
     static private LinearTransform linearTransform = null;
 
@@ -191,7 +191,7 @@ public class PaintHelperComposite extends PaintHelperBasics{
         }
     }
 
-    public static void setModel(MainModel model) {
+    public static void setModel(DataModel model) {
         PaintHelperComposite.model = model;
     }
 

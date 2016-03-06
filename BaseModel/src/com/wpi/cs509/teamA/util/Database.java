@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.persistence.bean.Edge;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;

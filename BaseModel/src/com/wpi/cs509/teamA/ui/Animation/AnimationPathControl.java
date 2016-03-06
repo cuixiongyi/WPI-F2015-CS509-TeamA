@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.bean.Path;
@@ -17,7 +17,7 @@ import com.wpi.cs509.teamA.persistence.bean.Path;
 public class AnimationPathControl {
 
 	private static Timer timer = null;
-	private static MainModel model;
+	private static DataModel model;
 	private static Path path;
 	private static int currentNodeIndex;
 
@@ -25,7 +25,7 @@ public class AnimationPathControl {
 
 	}
 
-	public static void init(MainModel model) {
+	public static void init(DataModel model) {
 		AnimationPathControl.model = model;
 		path = null;
 		currentNodeIndex = 0;

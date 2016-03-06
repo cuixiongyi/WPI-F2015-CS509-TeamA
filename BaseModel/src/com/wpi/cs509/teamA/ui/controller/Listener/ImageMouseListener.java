@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.Listener;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingIn;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
@@ -19,9 +19,9 @@ public class ImageMouseListener implements MouseInputListener {
 
 
     private ImageComponent imageComponent = null;
-    private MainModel model = null;
+    private DataModel model = null;
 
-    public ImageMouseListener(ImageComponent pImageComponent, MainModel pModel) {
+    public ImageMouseListener(ImageComponent pImageComponent, DataModel pModel) {
         this.imageComponent = pImageComponent;
         model = pModel;
         addMouseMotionListener();

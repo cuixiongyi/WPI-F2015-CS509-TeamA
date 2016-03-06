@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.controller.Listener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.util.Coordinate;
@@ -18,9 +18,9 @@ public class ImageMouseWheelListener implements MouseWheelListener {
 	static private double lowerBound = 0.5;
 
 	private ImageComponent imageComponent = null;
-	private MainModel model = null;
+	private DataModel model = null;
 
-	public ImageMouseWheelListener(ImageComponent pImageComponent, MainModel pModel) {
+	public ImageMouseWheelListener(ImageComponent pImageComponent, DataModel pModel) {
 		this.imageComponent = pImageComponent;
 		model = pModel;
 		if (null == pModel) {

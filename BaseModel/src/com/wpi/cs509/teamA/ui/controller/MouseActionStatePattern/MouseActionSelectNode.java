@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.bean.Path;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
@@ -25,7 +25,7 @@ public class MouseActionSelectNode extends MouseActionState {
 
 	private java.util.List<Node> nodesToPaintIcon = new ArrayList<Node>();
 
-	public MouseActionSelectNode(MainModel pMM) {
+	public MouseActionSelectNode(DataModel pMM) {
 		super(pMM);
 
 	}

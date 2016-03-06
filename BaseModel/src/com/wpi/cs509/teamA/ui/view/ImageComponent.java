@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.LinearTransform;
@@ -27,7 +27,7 @@ import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 public class ImageComponent extends JComponent {
 
 
-	private MainModel model = null;
+	private DataModel model = null;
 
 	private BufferedImage image;
 
@@ -210,7 +210,7 @@ public class ImageComponent extends JComponent {
 		this.pressyPos = pressyPos;
 	}
 
-	public void setModel(MainModel model) {
+	public void setModel(DataModel model) {
 		this.model = model;
 	}
 

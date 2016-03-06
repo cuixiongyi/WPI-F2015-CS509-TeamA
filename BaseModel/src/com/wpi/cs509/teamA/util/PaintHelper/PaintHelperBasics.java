@@ -5,7 +5,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Edge;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.ui.UIConstant;
@@ -25,7 +25,7 @@ public class PaintHelperBasics {
 	 * paintEdge) use current style to draw
 	 */
 
-	static private MainModel model = null;
+	static private DataModel model = null;
 	static private LinearTransform linearTransform = null;
 	private final static int ovalOffset = 10;
 	private final static int ovalOffset_SelectedNode = ovalOffset + 5;
@@ -205,7 +205,7 @@ public class PaintHelperBasics {
 	}
 
 
-	public static void setModel(MainModel model) {
+	public static void setModel(DataModel model) {
 		PaintHelperBasics.model = model;
 	}
 

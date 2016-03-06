@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.History;
 import com.wpi.cs509.teamA.persistence.bean.Node;
@@ -89,10 +89,10 @@ public class SearchSupply {
 		// System.out.println(allFromDatabase.size());
 		// get User Account
 
-		if (MainModel.getStaticModel().getMyAccount() == null) {
+		if (DataModel.getStaticModel().getMyAccount() == null) {
 			return allFromDatabase;
 		}
-		UserAccount currentUser = MainModel.getStaticModel().getMyAccount();
+		UserAccount currentUser = DataModel.getStaticModel().getMyAccount();
 		System.out.println("User information: " + currentUser.getEmail());
 		System.out.println("History size: " + currentUser.getHistory().size());
 		Iterator<History> iter = currentUser.getHistory().iterator();

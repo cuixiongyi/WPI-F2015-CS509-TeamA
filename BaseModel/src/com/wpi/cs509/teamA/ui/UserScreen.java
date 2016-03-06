@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 //import com.sun.prism.paint.Color;
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 
 import com.wpi.cs509.teamA.ui.Animation.AnimationPathControl;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
@@ -45,9 +45,9 @@ public class UserScreen extends JFrame {
 	private JPanel popUpPane;
 	private JPanel popUpPaneLeft;
 
-	MainModel mainModel = null;
-	ViewManager viewManager = null;
-	ParkingManager parkingManager = null;
+	private DataModel mainModel = null;
+	private ViewManager viewManager = null;
+	private ParkingManager parkingManager = null;
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -82,10 +82,10 @@ public class UserScreen extends JFrame {
 		 */
 		inputPanel = new InputPanel();
 		imgComponent = new ImageComponent();
-		mainModel = new MainModel();
+		mainModel = new DataModel();
 		mainModel.switchToState(new MouseActionSelectNode(mainModel));
-		MainModel.setStaticModel(mainModel);
-		MainModel.setStaticModel(mainModel);
+		DataModel.setStaticModel(mainModel);
+		DataModel.setStaticModel(mainModel);
 		BaseViewController.init(imgComponent, inputPanel, mainModel, this);
 		AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();

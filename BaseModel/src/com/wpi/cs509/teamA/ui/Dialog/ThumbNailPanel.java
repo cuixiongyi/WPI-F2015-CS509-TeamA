@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Path;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
@@ -26,7 +26,7 @@ import javax.swing.border.EtchedBorder;
 public class ThumbNailPanel extends JPanel implements MouseListener {
     private JPanel contentPane;
     private JPanel innerComponent;
-    private MainModel model;
+    private DataModel model;
     private List<Path> paths;
     private List<JLabel> icons;
     private int resizeX = 150;
@@ -35,7 +35,7 @@ public class ThumbNailPanel extends JPanel implements MouseListener {
 
     private static int onePicSize = 100;
 
-    public  ThumbNailPanel(MainModel model){
+    public  ThumbNailPanel(DataModel model){
         this.model = model;
 //        this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         newLayout();

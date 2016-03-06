@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Edge;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.dao.NodeRelationDao;
@@ -26,7 +26,7 @@ public class MouseActionEditEdge extends MouseActionState {
 
 	private Node lastNode = null;
 
-	public MouseActionEditEdge(MainModel pMM) {
+	public MouseActionEditEdge(DataModel pMM) {
 		super(pMM);
 
 		model.cleanUpRoute();

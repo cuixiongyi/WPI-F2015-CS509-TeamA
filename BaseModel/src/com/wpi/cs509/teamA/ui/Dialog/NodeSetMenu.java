@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 
 import javax.swing.JPopupMenu;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.bean.Path;
@@ -35,7 +35,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmDes;
 	private JMenuItem cleanupMap;
 	
-	private MainModel model = null;
+	private DataModel model = null;
 	private JMenuItem printRoute;
 
 	private final static String SOURCE = "Add as source";
@@ -49,7 +49,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	 * Create the Menu.
 	 */
 	public NodeSetMenu(InputPanel inputPanel,
-					   MainModel pModel,
+					   DataModel pModel,
 					   Node node) {
 		this.node = node;
 		this.inputPanel = inputPanel;

@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 
 import com.wpi.cs509.teamA.exception.PwdIncorrectException;
 import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.UserAccount;
 import com.wpi.cs509.teamA.persistence.dao.UserAccountDao;
 import com.wpi.cs509.teamA.persistence.dao.impl.UserAccountDaoImpl;
@@ -47,7 +47,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private InputPanel inputPanel;
 	private UserAccount user;
 
-    private MainModel model;
+    private DataModel model;
 
 	private final static String OK = "OK";
 	private final static String CANCEL = "Cancel";
@@ -59,7 +59,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public AdminDialog(MainModel pModel, InputPanel inputPanel) {
+	public AdminDialog(DataModel pModel, InputPanel inputPanel) {
 		this.model = pModel;
 		this.inputPanel = inputPanel;
 		setTitle(LOG);

@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
@@ -14,7 +14,7 @@ import com.wpi.cs509.teamA.util.Database;
  */
 public abstract class MouseActionState {
 
-	protected MainModel model;
+	protected DataModel model;
 
 	protected int xPos;
 	protected int yPos;
@@ -26,7 +26,7 @@ public abstract class MouseActionState {
 
 	}
 
-	public MouseActionState(MainModel pSC) {
+	public MouseActionState(DataModel pSC) {
 		model = pSC;
 		this.xPos = -1;
 		this.yPos = -1;

@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.util;
 
 import java.util.TimerTask;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
@@ -12,7 +12,7 @@ import java.util.Timer;
 
 public class ParkingManager {
 	private static Timer timer = new Timer();
-	static private MainModel model = null;
+	static private DataModel model = null;
 	static ArrayList<String> parkingName;
 	static ArrayList<Integer> originalNum;
 
@@ -52,7 +52,7 @@ public class ParkingManager {
 	
 
 	@SuppressWarnings("static-access")
-	public void setModel(MainModel mainModel) {
+	public void setModel(DataModel mainModel) {
 		// TODO Auto-generated method stub
 		this.model = mainModel;
 	}

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.dao.impl.MapDaoImpl;
 
 
@@ -25,7 +25,7 @@ import com.wpi.cs509.teamA.persistence.dao.impl.MapDaoImpl;
 public class OpenMapDialog  extends JDialog  implements ActionListener{
 	
 	private JButton open;
-	private MainModel model;
+	private DataModel model;
 	private JLabel lbFileName;
 	private JTextField fileName;
 	private JLabel lbScale;
@@ -39,7 +39,7 @@ public class OpenMapDialog  extends JDialog  implements ActionListener{
 	private JTextField filePath;
 	
 	
-	public OpenMapDialog(MainModel pModel){
+	public OpenMapDialog(DataModel pModel){
 		this.model=pModel;
 		
 		JPanel contentPanel = new JPanel(new GridBagLayout());

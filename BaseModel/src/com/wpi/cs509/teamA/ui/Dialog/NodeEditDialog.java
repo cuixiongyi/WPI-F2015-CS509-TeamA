@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -56,13 +56,13 @@ public class NodeEditDialog extends JDialog implements ActionListener {
 	private final static String ID = "Map ID";
 	private final static String CANCEL = "Cancel";
 	private JComboBox<String> comboBoxType;
-	private MainModel model = null;
+	private DataModel model = null;
 
 	/**
 	 * Create the dialog.
 	 */
 	public NodeEditDialog(ImageComponent imageComponent,
-						  MainModel pModel,
+						  DataModel pModel,
 						  int xPosition, int yPosition) {
 		xPos = xPosition;
 		yPos = yPosition;
@@ -166,7 +166,7 @@ public class NodeEditDialog extends JDialog implements ActionListener {
 	}
 
 	public NodeEditDialog(ImageComponent imageComponent,
-						  MainModel pModel,
+						  DataModel pModel,
 						  Node pNode) {
 		this( imageComponent, pModel, pNode.getLocation().getX(), pNode.getLocation().getY());
 		if (null == pNode) {

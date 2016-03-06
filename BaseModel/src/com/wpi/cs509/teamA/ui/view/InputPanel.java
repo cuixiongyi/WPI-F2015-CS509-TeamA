@@ -1,26 +1,42 @@
 package com.wpi.cs509.teamA.ui.view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.bean.Path;
-import com.wpi.cs509.teamA.ui.*;
-import com.wpi.cs509.teamA.util.*;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.ui.UIConstant;
+import com.wpi.cs509.teamA.ui.UserScreen;
+import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.ImageHelper;
+import com.wpi.cs509.teamA.util.MarioListRenderer;
+import com.wpi.cs509.teamA.util.NodeIcon;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
 
 
@@ -36,7 +52,7 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
  */
 @SuppressWarnings("serial")
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
-    private MainModel model = null;
+    private DataModel model = null;
 
     private JButton btnSearch;
     private JButton adminLogin;
@@ -475,7 +491,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		return txtFrom;
 	}
 
-	public void setModel(MainModel pmodel) {
+	public void setModel(DataModel pmodel) {
 		this.model = pmodel;
 	}
 

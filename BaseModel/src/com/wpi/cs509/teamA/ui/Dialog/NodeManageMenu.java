@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.model.StateContextModel;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -27,7 +27,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private JMenuItem mntmAdd;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
-	private MainModel model;
+	private DataModel model;
 
 	private final static String ADD = "Add Node";
 	private final static String DELETE = "Delete Node";
@@ -37,7 +37,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, MainModel pmodel) {
+	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, DataModel pmodel) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;

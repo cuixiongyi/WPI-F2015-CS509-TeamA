@@ -24,7 +24,7 @@ import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.newfeature.SearchSupply;
 import com.wpi.cs509.teamA.persistence.bean.Node;
@@ -75,10 +75,10 @@ public class AutoSuggestor {
 
 	private SetNodeOption setNodeOption = SetNodeOption.Undefined;
 
-	private MainModel model = null;
+	private DataModel model = null;
 
 	public AutoSuggestor(JTextField textField, JFrame container, ArrayList<String> words, Color popUpBackground,
-			float opacity, double locationX, double locationY, MainModel pModel, SetNodeOption pSetNodeOption) {
+			float opacity, double locationX, double locationY, DataModel pModel, SetNodeOption pSetNodeOption) {
 		this.textField = textField;
 
 		this.container = container;
@@ -504,7 +504,7 @@ public class AutoSuggestor {
 		this.inputPanel = inputPanel;
 	}
 
-	public MainModel getModel() {
+	public DataModel getModel() {
 		return model;
 	}
 

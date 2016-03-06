@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.DataModel;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.ui.Dialog.NodeEditDialog;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
@@ -18,7 +18,7 @@ public class MouseActionEditNode extends MouseActionState {
     private Node lastNode = null;
 
 
-    public MouseActionEditNode(MainModel pMM) {
+    public MouseActionEditNode(DataModel pMM) {
         super( pMM);
 
 
