@@ -24,8 +24,6 @@ import java.util.List;
  */
 public final class DataModel extends BaseModel {
 
-	public static DataModel staticModel = null;
-
 	private UserAccount myAccount;
 	private GeneralMap currentMap = null;
 	private List<NodeType> iconFilter = null;
@@ -48,9 +46,21 @@ public final class DataModel extends BaseModel {
 	private int currentPathIdx = 0;
 
 	private Node nodeAnimation = null;
-	private LinearTransform linearTransform = new LinearTransform();;
+	private LinearTransform linearTransform = new LinearTransform();
 
-	public DataModel() {
+	private static DataModel dataModel = null;
+
+	// this is a singleton
+	public static synchronized DataModel getDataModel() {
+		if (dataModel == null) {
+			dataModel = new DataModel();
+		}
+
+		return dataModel;
+	}
+
+	// initialize all the data
+	private DataModel() {
 
 		this.myAccount = new UserAccount();
 		myAccount = null;
@@ -68,6 +78,14 @@ public final class DataModel extends BaseModel {
 				parkingAvilibility.put(n.getName(), 0);
 			}
 		}
+	}
+
+	public static DataModel getStaticModel() {
+		return dataModel;
+	}
+
+	public static void setDatacModel(DataModel pModel) {
+		dataModel = pModel;
 	}
 
 	public synchronized void setFilter(NodeType filter) {
@@ -272,24 +290,9 @@ public final class DataModel extends BaseModel {
 	}
 
 	public synchronized void setMultiMapPathListsForEachMap(ArrayList<ArrayList<Node>> pMultiMapPathLists) {
-		List<GeneralMap> maps = Database.getAllMapFromDatabase();
 		this.setMultiMapPathLists(pMultiMapPathLists);
 		this.multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
-		//
-		// for (int ii = 1; ii <= maps.size(); ++ii) {
-		// ArrayList<Node> path = new ArrayList<Node>();
-		// int idx = -1;
-		// for (int jj = 0; jj < pMultiMapPathLists.size(); ++jj) {
-		// if (pMultiMapPathLists.get(jj).get(0).getMap().getMapId() == ii) {
-		// idx = jj;
-		// break;
-		// }
-		// }
-		// if (-1 != idx) {
-		// path = pMultiMapPathLists.get(idx);
-		// }
-		// this.multiMapPathListsForEachMap.add(path);
-		// }
+
 		modelChanged();
 	}
 
@@ -366,14 +369,6 @@ public final class DataModel extends BaseModel {
 
 	public synchronized boolean isLoginAdmin() {
 		return false;
-	}
-
-	public static DataModel getStaticModel() {
-		return staticModel;
-	}
-
-	public static void setStaticModel(DataModel pModel) {
-		staticModel = pModel;
 	}
 
 	public synchronized ArrayList<Path> getPaths() {

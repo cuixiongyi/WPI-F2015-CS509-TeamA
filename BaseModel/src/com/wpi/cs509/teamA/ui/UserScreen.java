@@ -12,7 +12,8 @@ import javax.swing.border.EtchedBorder;
 
 //import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.DataModel;
-
+import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.model.StateContextModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPathControl;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.controller.BaseViewController;
@@ -45,7 +46,7 @@ public class UserScreen extends JFrame {
 	private JPanel popUpPane;
 	private JPanel popUpPaneLeft;
 
-	private DataModel mainModel = null;
+	private MainModel mainModel = null;
 	private ViewManager viewManager = null;
 	private ParkingManager parkingManager = null;
 
@@ -82,10 +83,8 @@ public class UserScreen extends JFrame {
 		 */
 		inputPanel = new InputPanel();
 		imgComponent = new ImageComponent();
-		mainModel = new DataModel();
-		mainModel.switchToState(new MouseActionSelectNode(mainModel));
-		DataModel.setStaticModel(mainModel);
-		DataModel.setStaticModel(mainModel);
+		mainModel = MainModel.getMainModel();
+		StateContextModel.getStateContextModel().switchToState(new MouseActionSelectNode(mainModel));
 		BaseViewController.init(imgComponent, inputPanel, mainModel, this);
 		AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();

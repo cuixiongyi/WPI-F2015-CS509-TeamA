@@ -17,6 +17,8 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionStat
 
 public class StateContextModel extends BaseModel {
 
+	private static StateContextModel stateContextModel;
+
 	/**
 	 * The current state
 	 */
@@ -28,6 +30,19 @@ public class StateContextModel extends BaseModel {
 	protected StateContextModel() {
 		myState = null;
 
+	}
+
+	// this is a singleton
+	public static synchronized StateContextModel getStateContextModel() {
+		if (stateContextModel == null) {
+			stateContextModel = new StateContextModel();
+		}
+
+		return stateContextModel;
+	}
+	
+	public static void setStateContextModel(StateContextModel pModel) {
+		StateContextModel.setStateContextModel(pModel);
 	}
 
 	/**

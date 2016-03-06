@@ -7,12 +7,12 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 import com.wpi.cs509.teamA.model.DataModel;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
-
 
 /**
  * An component to show the images. This component has two different states
@@ -26,8 +26,8 @@ import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 @SuppressWarnings("serial")
 public class ImageComponent extends JComponent {
 
-
-	private DataModel model = null;
+	private MainModel mainModel = null;
+	private DataModel model = MainModel.getDataModel();
 
 	private BufferedImage image;
 
@@ -51,37 +51,29 @@ public class ImageComponent extends JComponent {
 
 	}
 
-
-    private boolean testBeforeRepaint()
-    {
-        try {
-            if (null == model)
-            {
-//                return false;
+	private boolean testBeforeRepaint() {
+		try {
+			if (null == model) {
+				// return false;
 				throw new NullPointerException();
-            }
-            if (null == model.getCurrentMap().getImage()) {
-//                return false;
-                throw new NullPointerException();
-            }
+			}
+			if (null == model.getCurrentMap().getImage()) {
+				// return false;
+				throw new NullPointerException();
+			}
 			if (null == this.image) {
 				return false;
 			}
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-
-
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 
-        /// test for null stateContext and null image
+		/// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
 		image = map.getImage();
 
@@ -95,7 +87,7 @@ public class ImageComponent extends JComponent {
 		}
 		// if isInitilized
 		// no need to paint the image again
-	 
+
 		Graphics2D g2 = (Graphics2D) g;
 		if (model.isFisrtChangeMap()) {
 			this.setImageXpos(0);
@@ -111,18 +103,18 @@ public class ImageComponent extends JComponent {
 		}
 		Node nodeFocus = model.getFocusNode();
 		if (model.isFisrtFocusNode() && null != nodeFocus) {
-			lt.setX(this.getWidth()/2 - (int)(nodeFocus.getLocation().getX()*lt.getScale()));
-			lt.setY(this.getHeight()/2 - (int)(nodeFocus.getLocation().getY()*lt.getScale()));
+			lt.setX(this.getWidth() / 2 - (int) (nodeFocus.getLocation().getX() * lt.getScale()));
+			lt.setY(this.getHeight() / 2 - (int) (nodeFocus.getLocation().getY() * lt.getScale()));
 			model.setFisrtFocusNode2False();
 		}
 
 		PaintHelperComposite.paintEverything(g2, image, lt);
-//		ViewManager.getThumbNailPanel().setLocation(0,0);
+		// ViewManager.getThumbNailPanel().setLocation(0,0);
 		Node animationNode = model.getAnimationNode();
 
 		if (null != animationNode) {
 			PaintHelperBasics.paintDot(animationNode, g2);
-			//model.setAnimationNode(null);
+			// model.setAnimationNode(null);
 		}
 
 		/// CXY test
@@ -134,84 +126,69 @@ public class ImageComponent extends JComponent {
 		// g.drawString("Start", this.getImageStartXpos(),
 		// this.getImageStartYpos());
 
-       
-        
+		/// CXY test
+		// GeneralMap tmp = stateContext.getCurrentMap();
+		// List<Node> nodes = tmp.getNodes();
+		// PaintHelperBasics.paintPath(nodes, g2);
 
-            /// CXY test
-            //GeneralMap tmp = stateContext.getCurrentMap();
-            //List<Node> nodes = tmp.getNodes();
-            //PaintHelperBasics.paintPath(nodes, g2);
-        
-//        g.drawString("XY", this.getImageXpos(), this.getImageYpos());
-//        g.drawString("Start", this.getImageStartXpos(), this.getImageStartYpos());
-
+		// g.drawString("XY", this.getImageXpos(), this.getImageYpos());
+		// g.drawString("Start", this.getImageStartXpos(),
+		// this.getImageStartYpos());
 
 		g2 = null;
 
 	}
 
-
 	public int getImageXpos() {
 		return imageXpos;
 	}
-
 
 	public void setImageXpos(int imageXpos) {
 		this.imageXpos = imageXpos;
 	}
 
-
 	public int getImageYpos() {
 		return imageYpos;
 	}
-
 
 	public void setImageYpos(int imageYpos) {
 		this.imageYpos = imageYpos;
 	}
 
-
 	public int getImageStartXpos() {
 		return imageStartXpos;
 	}
-
 
 	public void setImageStartXpos(int imageStartXpos) {
 		this.imageStartXpos = imageStartXpos;
 	}
 
-
 	public int getImageStartYpos() {
 		return imageStartYpos;
 	}
-
 
 	public void setImageStartYpos(int imageStartYpos) {
 		this.imageStartYpos = imageStartYpos;
 	}
 
-
 	public int getPressxPos() {
 		return pressxPos;
 	}
-
 
 	public void setPressxPos(int pressxPos) {
 		this.pressxPos = pressxPos;
 	}
 
-
 	public int getPressyPos() {
 		return pressyPos;
 	}
-
 
 	public void setPressyPos(int pressyPos) {
 		this.pressyPos = pressyPos;
 	}
 
-	public void setModel(DataModel model) {
-		this.model = model;
+	public void setModel(MainModel model) {
+		this.mainModel = model;
 	}
 
 }
