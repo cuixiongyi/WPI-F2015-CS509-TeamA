@@ -9,8 +9,8 @@ import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 
 /**
- *
- * This is the abstract class for state pattern
+ * This is the abstract class for state pattern, different state will have
+ * different permissions(actions)
  */
 public abstract class MouseActionState {
 
@@ -22,7 +22,10 @@ public abstract class MouseActionState {
 	protected Coordinate coor = null;
 	protected Coordinate coorTrans = null;
 
-	// MainModel model = null;
+	public MouseActionState() {
+
+	}
+
 	public MouseActionState(MainModel pSC) {
 		model = pSC;
 		this.xPos = -1;

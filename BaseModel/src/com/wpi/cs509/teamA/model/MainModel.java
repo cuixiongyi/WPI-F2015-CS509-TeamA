@@ -16,6 +16,11 @@ import java.util.List;
 
 /**
  * Model contains all the data of the application
+ * 
+ * TODO: this model should not extend StateContextModel but should extend
+ * BaseModel, the do not have a relationship like this
+ * 
+ * @author teama
  */
 public final class MainModel extends BaseModel {
 

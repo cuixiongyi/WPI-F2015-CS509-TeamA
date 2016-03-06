@@ -2,14 +2,12 @@ package com.wpi.cs509.teamA.model;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Observable;
-
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionState;
 
 /**
  * This model listens to the mouse action changes specifically.
  * 
- * Different permissions will give different mouse operation.
+ * Different permissions will give different mouse actions.
  * 
  * It is part of the state pattern implementation.
  * 

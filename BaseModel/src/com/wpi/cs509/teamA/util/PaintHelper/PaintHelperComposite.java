@@ -28,13 +28,7 @@ public class PaintHelperComposite extends PaintHelperBasics{
 
 
     public static void paintRoute(Graphics2D g2, LinearTransform pLinearTransform) {
-        // ArrayList<ArrayList<Node>> multiMapPath =
-        // model.getMultiMapPathLists();
-        // if (null != multiMapPath && 0 != multiMapPath.size()) {
-        // int idx = model.getCurrentMapID()-1;
-        // PaintHelperBasics.paintPath(multiMapPath.get(idx), g2);
-        //
-        // }
+
         PaintHelperBasics.setLinearTransform(pLinearTransform);
 
         Path path = model.getCurrentPath();
