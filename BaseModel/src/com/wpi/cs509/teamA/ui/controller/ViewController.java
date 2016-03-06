@@ -44,7 +44,7 @@ public class ViewController extends BaseViewController {
 
 	private void addOpenFile() {
 		// TODO Auto-generated method stub
-		inp utPanel.getOpenMap().addActionListener(new ActionListener() {
+		inputPanel.getOpenMap().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				impl.clickOpenMap();

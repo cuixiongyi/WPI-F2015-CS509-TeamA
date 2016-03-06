@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Model contains all the data of the application
  */
-public final class MainModel extends StateContext {
+public final class MainModel extends BaseModel {
 
 	public static MainModel staticModel = null;
 

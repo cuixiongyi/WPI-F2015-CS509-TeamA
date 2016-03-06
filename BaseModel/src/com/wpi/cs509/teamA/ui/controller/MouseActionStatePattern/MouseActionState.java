@@ -1,8 +1,9 @@
-package com.wpi.cs509.teamA.model;
+package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;

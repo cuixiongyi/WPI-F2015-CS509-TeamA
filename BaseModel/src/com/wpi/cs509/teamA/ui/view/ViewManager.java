@@ -16,81 +16,74 @@ import java.util.Observer;
 /**
  * Created by cuixi on 12/3/2015.
  */
-public class ViewManager extends BaseViewController implements Observer{
+public class ViewManager extends BaseViewController implements Observer {
 
+	private int mousePos = 0;
+	private static InformationPanel nodeInformation = new InformationPanel();
+	private static ThumbNailPanel thumbNailPanel = new ThumbNailPanel(model);
 
-    private int mousePos = 0;
-    private static InformationPanel nodeInformation =new InformationPanel();
-    private static ThumbNailPanel thumbNailPanel=new ThumbNailPanel(model);
-    public ViewManager() {
+	public ViewManager() {
 
+	}
 
-    }
+	static public void infoPanelSlideDown() {
+		AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
+		if (null == AO) {
+			return;
+		}
+		AO.switchState(new AnimationStateSlidingDown(AO));
 
-    static public void infoPanelSlideDown() {
-        AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
-        if (null == AO) {
-            return ;
-        }
-        AO.switchState(new AnimationStateSlidingDown(AO));
+	}
 
-    }
+	static public void updateImageComponent() {
+		imageComponent.repaint();
+	}
 
-    static public void updateImageComponent() {
-        imageComponent.repaint();
-    }
+	static public void updateInputePanel() {
+		inputPanel.repaint();
+	}
 
-    static public void updateInputePanel() {
-        inputPanel.repaint();
-    }
+	static public void updateView() {
+		updateImageComponent();
+		updateInputePanel();
+		if (getThumbNailPanel().update()) {
+			AnimationObject ao = getAC().checkObjectExist(getThumbNailPanel());
+			if (null != ao) {
+				ao.setToVertical_Middle();
+			}
+		}
 
-    static public void updateView() {
-        updateImageComponent();
-        updateInputePanel();
-        if (getThumbNailPanel().update()) {
-            AnimationObject ao = getAC().checkObjectExist(getThumbNailPanel());
-            if (null != ao) {
-                ao.setToVertical_Middle();
-            }
-        }
+	}
 
+	static public ImageComponent getImageComponent() {
+		return imageComponent;
+	}
 
+	static public InputPanel getInputPanel() {
+		return inputPanel;
+	}
 
-    }
-    static public ImageComponent getImageComponent() {
-        return imageComponent;
-    }
-    static public InputPanel getInputPanel() {
-        return inputPanel;
-    }
+	@Override
+	public void update(Observable obs, Object arg) {
+		if (model != obs) {
+			return;
+		}
+		ViewManager.updateView();
+	}
 
-    @Override
-    public void update(Observable obs, Object arg) {
-        if ( model != obs) {
-            return;
-        }
-        ViewManager.updateView();
-    }
+	static public AnimationControl getAC() {
+		return ac;
+	}
 
-    static public AnimationControl getAC() {
-        return ac;
-    }
+	static public InformationPanel getNodeInformation() {
+		return nodeInformation;
+	}
 
-//    public void setAC(AnimationControl ac) {
-//        this.ac = ac;
-//    }
+	public static void setInformationNode(Node pnode) {
+		nodeInformation.setNode(pnode);
+	}
 
-
-    static public  InformationPanel getNodeInformation() {
-        return nodeInformation;
-    }
-
-    public static void setInformationNode(Node pnode) {
-        nodeInformation.setNode(pnode);
-    }
-
-    public static ThumbNailPanel getThumbNailPanel() {
-        return thumbNailPanel;
-    }
+	public static ThumbNailPanel getThumbNailPanel() {
+		return thumbNailPanel;
+	}
 }
-

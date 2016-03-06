@@ -26,7 +26,6 @@ import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
 import com.wpi.cs509.teamA.util.ParkingManager;
 
-
 import javax.swing.BorderFactory;
 
 /**
@@ -96,6 +95,7 @@ public class UserScreen extends JFrame {
 		PaintHelperComposite.setModel(mainModel);
 		PaintImageHelper.setModel(mainModel);
 		controller = new ViewController();
+		// 添加到observer
 		mainModel.addObserver(viewManager);
 		parkingManager = new ParkingManager();
 		parkingManager.setModel(mainModel);
@@ -117,30 +117,7 @@ public class UserScreen extends JFrame {
 		imgComponent.repaint();
 		mainModel.switchToState(new MouseActionSelectNode(mainModel));
 		// stateContext.switchUserState(new NormalUserState(stateContext));
-		viewManager.updateView();
-
-//		popUpPane = new PopupPanel();
-//		contentPane.add(popUpPane, new Integer(2));
-//		ViewManager.getAC().create(popUpPane, imgComponent, AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
-//				popUpPane.getHeight());
-//		AnimationObject AO = ViewManager.getAC().checkObjectExist(popUpPane);
-//		AO.switchState(new AnimationStateSlidingUp(AO));
-//		AO.setSpeed(0.5);
-//		popUpPane.setVisible(true);
-
-
-
-		// popUpPaneLeft=new PopupPanel();
-		// contentPane.add(popUpPaneLeft,new Integer(5));
-		// ViewManager.getAC().create(popUpPaneLeft, contentPane,
-		// AnimationStyle.SLIDE_UP, AnimationPosition.LEFT_MIDDLE,
-		// popUpPaneLeft.getWidth());
-		// AnimationObject AO2 =
-		// ViewManager.getAC().checkObjectExist(popUpPaneLeft);
-		// AO2.switchState(new AnimationStateSlidingOut(AO2));
-		// AO2.setSpeed(0.5);
-
-		// popUpPaneLeft.setVisible(true);
+		ViewManager.updateView();
 
 	}
 

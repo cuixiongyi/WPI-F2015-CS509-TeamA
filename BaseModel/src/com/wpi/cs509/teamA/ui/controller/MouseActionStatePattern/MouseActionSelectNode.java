@@ -1,7 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.model.MouseActionState;
 import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.persistence.bean.Path;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
