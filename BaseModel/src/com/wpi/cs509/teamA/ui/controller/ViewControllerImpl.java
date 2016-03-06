@@ -8,17 +8,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.History;
-import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.AlgoController;
-import com.wpi.cs509.teamA.dao.UserAccountDao;
-import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
+import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
+import com.wpi.cs509.teamA.persistence.bean.History;
+import com.wpi.cs509.teamA.persistence.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.Path;
+import com.wpi.cs509.teamA.persistence.dao.UserAccountDao;
+import com.wpi.cs509.teamA.persistence.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
-import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.Dialog.AdminDialog;
@@ -34,7 +33,7 @@ import com.wpi.cs509.teamA.util.Database;
 
 import com.wpi.cs509.teamA.util.NodeType;
 
-class ViewControllerImpl extends ViewControllerBase {
+class ViewControllerImpl extends BaseViewController {
 
 	public void clickLogin() {
 		if (model.getMyAccount() == null) {
@@ -45,10 +44,10 @@ class ViewControllerImpl extends ViewControllerBase {
 			ViewManager.updateView();
 
 		} else {
-			//save history back to database
+			// save history back to database
 			UserAccountDao uad = new UserAccountDaoImpl();
 			uad.saveSearchHistoryToDatabase(model.getMyAccount());
-			
+
 			JOptionPane.showMessageDialog(null, "You have logged out");
 			model.setMyAccount(null);
 			Database.InitFromDatabase();
@@ -61,27 +60,21 @@ class ViewControllerImpl extends ViewControllerBase {
 		}
 	}
 
+	public void clickOnSwapStartEnd() {
+		if (model.getStartNode() != null && model.getEndNode() != null && model.getEndNode().size() == 1) {
 
-
-
-
-	public void clickOnSwapStartEnd()
-	{
-		if(model.getStartNode()!=null&&model.getEndNode()!=null&&model.getEndNode().size()==1)
-		{
-
-			Node tmpEnd=model.getEndNode().get(0);
-			Node tmpStart=model.getStartNode();
+			Node tmpEnd = model.getEndNode().get(0);
+			Node tmpStart = model.getStartNode();
 			model.setOneEndNode(tmpStart);
 			model.setStartNode(tmpEnd);
-			String tmpFromText=inputPanel.getFromText().getText();
-			String tmpToText=inputPanel.getToText().getText();
+			String tmpFromText = inputPanel.getFromText().getText();
+			String tmpToText = inputPanel.getToText().getText();
 			inputPanel.getFromText().setText(tmpToText);
 			inputPanel.getToText().setText(tmpFromText);
 			inputPanel.getAutoSuggestorFrom().getAutoSuggestionPopUpWindow().setVisible(false);
 			inputPanel.getAutoSuggestorTo().getAutoSuggestionPopUpWindow().setVisible(false);
 			this.clickSearch();
-			
+
 		}
 	}
 
@@ -90,14 +83,14 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		if (MouseActionEditNode.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
-            model.switchToState(new MouseActionSelectNode(model));
+			model.switchToState(new MouseActionSelectNode(model));
 		} else {
 			model.switchToState(new MouseActionEditNode(model));
 			button.setSelected(true);
-            inputPanel.getBtnMngEdge().setSelected(false);
+			inputPanel.getBtnMngEdge().setSelected(false);
 			inputPanel.getBtnEditNodeInfo().setSelected(false);
 
-        }
+		}
 	}
 
 	public void clickEditEdge() {
@@ -105,18 +98,17 @@ class ViewControllerImpl extends ViewControllerBase {
 
 		if (MouseActionEditEdge.class.isInstance(model.getMyState())) {
 			button.setSelected(false);
-            model.switchToState(new MouseActionSelectNode(model));
+			model.switchToState(new MouseActionSelectNode(model));
 		} else {
 			model.switchToState(new MouseActionEditEdge(model));
 			button.setSelected(true);
 			inputPanel.getBtnEditNodeInfo().setSelected(false);
 			inputPanel.getBtnMngNode().setSelected(false);
 
-
-        }
+		}
 	}
 
-	public  void clickEditNodeInfo(){
+	public void clickEditNodeInfo() {
 		JToggleButton button = inputPanel.getBtnEditNodeInfo();
 
 		if (MouseActionEditNodeInfo.class.isInstance(model.getMyState())) {
@@ -127,7 +119,6 @@ class ViewControllerImpl extends ViewControllerBase {
 			button.setSelected(true);
 			inputPanel.getBtnMngEdge().setSelected(false);
 			inputPanel.getBtnMngNode().setSelected(false);
-
 
 		}
 	}
@@ -154,18 +145,18 @@ class ViewControllerImpl extends ViewControllerBase {
 	}
 
 	public void clickSearch() {
-		if (model.getStartNode() == null || model.getEndNode() == null || model.getEndNode().size()==0)
+		if (model.getStartNode() == null || model.getEndNode() == null || model.getEndNode().size() == 0)
 			return;
 		ArrayList<Node> temp = model.getEndNode();
-		if(model.getMyAccount()!=null){
+		if (model.getMyAccount() != null) {
 			addHistory();
-		
+
 		}
-		
+
 		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
-//		inputPanel.getMapList().setEnabled(true);
-//		inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
+		// inputPanel.getMapList().setEnabled(true);
+		// inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
 		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
 		try {
@@ -194,7 +185,6 @@ class ViewControllerImpl extends ViewControllerBase {
 				if (node.getMap().getMapId() == tmpMapId) {
 					singleMapPath.add(node);
 					path.addNode(node);
-
 
 				} else {
 					multiMapPathLists.add(singleMapPath);
@@ -229,41 +219,29 @@ class ViewControllerImpl extends ViewControllerBase {
 			System.out.println(mapList);
 			inputPanel.getMapList().setModel(mapListModel);
 
-
-		}catch (Exception e){
-			JOptionPane.showMessageDialog(null, "No Connected Path!", "Warning Message",
-					JOptionPane.WARNING_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No Connected Path!", "Warning Message", JOptionPane.WARNING_MESSAGE);
 
 		}
 		addThumbNail();
 		ViewManager.updateView();
 
-
-
 	}
-	
+
 	public void clickOpenMap() {
 		// TODO Auto-generated method stub
 		OpenMapDialog openMapDialog = new OpenMapDialog(model);
 		openMapDialog.setVisible(true);
 		ViewManager.updateView();
-		// int returnVal = inputPanel.getFc().showOpenDialog(null);
-		// if (returnVal == JFileChooser.APPROVE_OPTION) {
-		// File file = inputPanel.getFc().getSelectedFile();
-		// This is where a real application would open the file.
-		// } else {
-		// log.append("Open command cancelled by user." + newline);
-		// }
-		// }
-
 	}
 
 	private AnimationObject addThumbNail() {
 		ViewManager.getThumbNailPanel().update();
 		AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
 		if (null == ret) {
-			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(),new Integer(5));
-			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
+			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(), new Integer(5));
+			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(), ViewManager.getImageComponent(),
+					AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
 					ViewManager.getThumbNailPanel().getWidth());
 			ret.switchState(new AnimationStateSlidingOut(ret));
 			ret.setSpeed(2.0);
@@ -272,15 +250,15 @@ class ViewControllerImpl extends ViewControllerBase {
 		return ret;
 
 	}
-	
-	private void addHistory(){
+
+	private void addHistory() {
 		ArrayList<History> newHistory = (ArrayList<History>) model.getMyAccount().getHistory();
-		
+
 		newHistory.add(new History(inputPanel.getFromText().getText(), model.getStartNode().getId(), 0));
-		if(model.getEndNode().size()==1){
+		if (model.getEndNode().size() == 1) {
 			newHistory.add(new History(inputPanel.getToText().getText(), model.getEndNode().get(0).getId(), 0));
 		}
-		
+
 		model.getMyAccount().setHistory(newHistory);
 	}
 

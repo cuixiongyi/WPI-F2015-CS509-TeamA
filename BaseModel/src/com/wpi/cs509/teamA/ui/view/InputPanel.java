@@ -14,10 +14,10 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
+import com.wpi.cs509.teamA.persistence.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.Path;
 import com.wpi.cs509.teamA.ui.*;
 import com.wpi.cs509.teamA.util.*;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;

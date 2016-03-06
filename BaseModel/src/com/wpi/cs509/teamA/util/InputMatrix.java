@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.util;
 
-import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 
 /**
  * This class contains information for a map matrix This is only a data

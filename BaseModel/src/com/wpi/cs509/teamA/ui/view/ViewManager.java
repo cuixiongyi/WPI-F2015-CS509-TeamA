@@ -1,27 +1,22 @@
 package com.wpi.cs509.teamA.ui.view;
 
-import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
-import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
-import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.Dialog.InformationPanel;
-import com.wpi.cs509.teamA.ui.Dialog.PopupPanel;
 import com.wpi.cs509.teamA.ui.Dialog.ThumbNailPanel;
-import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
+import com.wpi.cs509.teamA.ui.controller.BaseViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 
-import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * Created by cuixi on 12/3/2015.
  */
-public class ViewManager extends ViewControllerBase implements Observer{
+public class ViewManager extends BaseViewController implements Observer{
 
 
     private int mousePos = 0;

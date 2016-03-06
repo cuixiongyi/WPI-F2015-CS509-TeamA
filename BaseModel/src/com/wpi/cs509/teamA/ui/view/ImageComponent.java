@@ -6,10 +6,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
-
-import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;

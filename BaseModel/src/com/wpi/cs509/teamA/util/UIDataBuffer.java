@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.Edge;
-import com.wpi.cs509.teamA.bean.NodeRelation;
-import com.wpi.cs509.teamA.dao.NodeRelationDao;
-import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
-import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
+
+import com.wpi.cs509.teamA.persistence.bean.Edge;
+import com.wpi.cs509.teamA.persistence.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.NodeRelation;
+import com.wpi.cs509.teamA.persistence.dao.NodeRelationDao;
+import com.wpi.cs509.teamA.persistence.dao.impl.NodeDaoImpl;
+import com.wpi.cs509.teamA.persistence.dao.impl.NodeRelationDaoImpl;
 
 public class UIDataBuffer {
 

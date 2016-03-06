@@ -1,9 +1,10 @@
 package com.wpi.cs509.teamA.util.AutoSuggestUtil;
 
-import com.wpi.cs509.teamA.bean.Node;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import com.wpi.cs509.teamA.persistence.bean.Node;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;

@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.util.Database;
@@ -11,7 +11,13 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.util.List;
 
-public class ViewController extends ViewControllerBase {
+/**
+ * This  
+ * 
+ * @author tema
+ *
+ */
+public class ViewController extends BaseViewController {
 
 	private ImageMouseListener mouseListener = null;
 	private ImageMouseWheelListener wheelListener = null;
@@ -38,7 +44,7 @@ public class ViewController extends ViewControllerBase {
 
 	private void addOpenFile() {
 		// TODO Auto-generated method stub
-		inputPanel.getOpenMap().addActionListener(new ActionListener() {
+		inp utPanel.getOpenMap().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				impl.clickOpenMap();
@@ -48,7 +54,7 @@ public class ViewController extends ViewControllerBase {
 
 	}
 
-	private void addButtonEditNodeInfo(){
+	private void addButtonEditNodeInfo() {
 		inputPanel.getBtnEditNodeInfo().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -57,7 +63,7 @@ public class ViewController extends ViewControllerBase {
 		});
 	}
 
-	private void addLabelRotate(){
+	private void addLabelRotate() {
 		inputPanel.getLblSwapStartEnd().addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -182,11 +188,11 @@ public class ViewController extends ViewControllerBase {
 	public void addListSelectionListener() {
 		inputPanel.getMapList().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-//				Object value = inputPanel.getMapList().getSelectedValue();
+				// Object value = inputPanel.getMapList().getSelectedValue();
 				int idx = inputPanel.getMapList().getSelectedIndex();
 				model.setCurrentPath(idx);
 
-//				boolean tmp = matchAndSetMapIDFromString(value);
+				// boolean tmp = matchAndSetMapIDFromString(value);
 			}
 		});
 	}
@@ -195,7 +201,7 @@ public class ViewController extends ViewControllerBase {
 		inputPanel.getComboBoxMap().addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-//				model.setCurrentPath(inputPanel.getComboBoxMap().getSelectedIndex());
+				// model.setCurrentPath(inputPanel.getComboBoxMap().getSelectedIndex());
 				Object value = inputPanel.getComboBoxMap().getSelectedItem();
 				boolean tmp = matchAndSetMapIDFromString(value);
 			}

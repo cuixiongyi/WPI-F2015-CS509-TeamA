@@ -19,9 +19,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import com.wpi.cs509.teamA.bean.UserAccount;
-import com.wpi.cs509.teamA.dao.UserAccountDao;
-import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
+import com.wpi.cs509.teamA.persistence.bean.UserAccount;
+import com.wpi.cs509.teamA.persistence.dao.UserAccountDao;
+import com.wpi.cs509.teamA.persistence.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 

@@ -1,12 +1,11 @@
 package com.wpi.cs509.teamA.model;
 
-import com.wpi.cs509.teamA.bean.Node;
+import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  *

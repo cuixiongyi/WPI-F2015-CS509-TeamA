@@ -2,8 +2,8 @@ package com.wpi.cs509.teamA.strategy;
 
 import java.util.Stack;
 
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.allEdges;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 
 /**
  * We decided to use a Strategy Pattern for the path finding algorithms. We did

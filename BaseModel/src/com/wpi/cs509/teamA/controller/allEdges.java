@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
-import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.persistence.bean.*;
 
 public class allEdges {
 	private Map<Integer, List<Edge>> edgesOnMap;

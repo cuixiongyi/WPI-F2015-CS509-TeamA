@@ -5,10 +5,9 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.wpi.cs509.teamA.bean.Edge;
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
-
+import com.wpi.cs509.teamA.persistence.bean.Edge;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Coordinate;

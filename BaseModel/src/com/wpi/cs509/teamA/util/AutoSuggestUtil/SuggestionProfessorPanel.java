@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.util.AutoSuggestUtil;
 
-import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 
 public class SuggestionProfessorPanel extends SuggestionBasicPanel {
 

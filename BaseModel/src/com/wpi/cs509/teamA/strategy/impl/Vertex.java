@@ -1,9 +1,9 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
-import com.wpi.cs509.teamA.bean.*;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.wpi.cs509.teamA.persistence.bean.*;
 
 public class Vertex extends Node implements Comparable<Vertex> {
 	private GeneralMap map;

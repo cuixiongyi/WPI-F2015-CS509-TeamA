@@ -3,8 +3,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 import java.util.HashMap;
 import java.util.Stack;
 
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.allEdges;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
 
 public class DijkstraMultipleDestinations implements AlgoStrategy {

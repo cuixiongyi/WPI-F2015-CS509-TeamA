@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.wpi.cs509.teamA.dao.impl.MapDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.persistence.dao.impl.MapDaoImpl;
 
 
 /**

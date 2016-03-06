@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.ui;
 
-import com.wpi.cs509.teamA.bean.DupEntranceMap;
-import com.wpi.cs509.teamA.dao.impl.InitAllMatrixDaoImpl;
+import com.wpi.cs509.teamA.persistence.bean.DupEntranceMap;
+import com.wpi.cs509.teamA.persistence.dao.impl.InitAllMatrixDaoImpl;
 import com.wpi.cs509.teamA.util.Database;
 
 /**

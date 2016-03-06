@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.util;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 
 /**
  * We decided to use Proxy Pattern to provide distributed control over all map

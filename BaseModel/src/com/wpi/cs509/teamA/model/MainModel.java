@@ -1,11 +1,11 @@
 package com.wpi.cs509.teamA.model;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.Path;
-import com.wpi.cs509.teamA.bean.UserAccount;
-import com.wpi.cs509.teamA.dao.NodeDao;
-import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
+import com.wpi.cs509.teamA.persistence.bean.GeneralMap;
+import com.wpi.cs509.teamA.persistence.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.Path;
+import com.wpi.cs509.teamA.persistence.bean.UserAccount;
+import com.wpi.cs509.teamA.persistence.dao.NodeDao;
+import com.wpi.cs509.teamA.persistence.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 
+ * Model contains all the data of the application
  */
 public final class MainModel extends StateContext {
 
@@ -36,16 +36,16 @@ public final class MainModel extends StateContext {
 	private ArrayList<ArrayList<Node>> multiMapPathLists = null;
 
 	private ArrayList<GeneralMap> multiMapLists = null;
-	
+
 	private HashMap<String, Integer> parkingAvilibility = null;
 
-    private ArrayList<Path> paths = null;
-    private int currentPathIdx = 0;
+	private ArrayList<Path> paths = null;
+	private int currentPathIdx = 0;
 
-    private Node nodeAnimation = null;
+	private Node nodeAnimation = null;
 	private LinearTransform linearTransform = new LinearTransform();;
 
-//	private ArrayList<Node> endNearestNodes;
+	// private ArrayList<Node> endNearestNodes;
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -58,12 +58,12 @@ public final class MainModel extends StateContext {
 		setCurrentMapID(1);
 		endNode = new ArrayList<Node>();
 		parkingAvilibility = new HashMap<String, Integer>();
-        linearTransform = new LinearTransform();
-		for(Node n: Database.getAllNodeListFromDatabase()){
-			if(n.getNodeType() == NodeType.PARKING){
+		linearTransform = new LinearTransform();
+		for (Node n : Database.getAllNodeListFromDatabase()) {
+			if (n.getNodeType() == NodeType.PARKING) {
 				parkingAvilibility.put(n.getName(), 0);
 			}
-		}	
+		}
 	}
 
 	public synchronized void setFilter(NodeType filter) {
@@ -106,8 +106,7 @@ public final class MainModel extends StateContext {
 		this.setMultiMapPathLists(null);
 		this.setAnimationNode(null);
 		this.setFocusNode(null);
-        this.clearPaths();
-
+		this.clearPaths();
 
 	}
 
@@ -169,37 +168,36 @@ public final class MainModel extends StateContext {
 			return;
 		}
 		this.currentMap = pCurrentMap;
-//		currentMap.setDisplayScale(1.0f);
+		// currentMap.setDisplayScale(1.0f);
 
 		isFirstChangeMap = true;
 		addAllFilters();
-        setAnimationNode(null);
+		setAnimationNode(null);
 
-        if (null != paths ) {
-            if ( null != getCurrentPath() && this.currentMap == getCurrentPath().getMap()) {
+		if (null != paths) {
+			if (null != getCurrentPath() && this.currentMap == getCurrentPath().getMap()) {
 
-            }
-            else {
-                boolean foundMap = false;
-                clearCurrentPath();
-                for(int ii = 0; ii < paths.size(); ii++) {
-                    if (paths.get(ii).getMap() == this.currentMap) {
-                        setCurrentPath(ii);
-                        foundMap = true;
-                        break;
-                    }
-                }
-                if (! foundMap) {
-                    clearCurrentPath();
-                }
-            }
-        }
+			} else {
+				boolean foundMap = false;
+				clearCurrentPath();
+				for (int ii = 0; ii < paths.size(); ii++) {
+					if (paths.get(ii).getMap() == this.currentMap) {
+						setCurrentPath(ii);
+						foundMap = true;
+						break;
+					}
+				}
+				if (!foundMap) {
+					clearCurrentPath();
+				}
+			}
+		}
 
-        modelChanged();
+		modelChanged();
 	}
 
 	public synchronized void setCurrentMapID(int mapID) {
-		setCurrentMap( Database.getMapEntityFromMapId(mapID));
+		setCurrentMap(Database.getMapEntityFromMapId(mapID));
 		modelChanged();
 	}
 
@@ -218,21 +216,20 @@ public final class MainModel extends StateContext {
 			modelChanged();
 			return;
 		}
-        if (null != pStartNode) {
-            this.setFocusNode(pStartNode);
-        }
+		if (null != pStartNode) {
+			this.setFocusNode(pStartNode);
+		}
 
-        this.multiMapPathListsForEachMap = null;
+		this.multiMapPathListsForEachMap = null;
 
 		this.startNode = pStartNode;
- //       this.endNearestNodes = null;
+		// this.endNearestNodes = null;
 		modelChanged();
 
 	}
 
 	public synchronized ArrayList<Node> getEndNode() {
-		
-		
+
 		return endNode;
 	}
 
@@ -244,22 +241,21 @@ public final class MainModel extends StateContext {
 		if (endNode.contains(pendNode)) {
 			endNode.remove(pendNode);
 			return false;
-		}
-		else {
+		} else {
 			this.endNode.add(pendNode);
 		}
- //       this.endNearestNodes = null;
-        modelChanged();
+		// this.endNearestNodes = null;
+		modelChanged();
 		return true;
 	}
-	
+
 	public synchronized void setOneEndNode(Node pEndNode) {
 		endNode = new ArrayList<Node>();
 		if (addOneEndNode(pEndNode)) {
 			setFocusNode(pEndNode);
 		}
 		return;
-		
+
 	}
 
 	public synchronized void clearEndNode() {
@@ -275,21 +271,21 @@ public final class MainModel extends StateContext {
 		List<GeneralMap> maps = Database.getAllMapFromDatabase();
 		this.setMultiMapPathLists(pMultiMapPathLists);
 		this.multiMapPathListsForEachMap = new ArrayList<ArrayList<Node>>();
-//
-//		for (int ii = 1; ii <= maps.size(); ++ii) {
-//			ArrayList<Node> path = new ArrayList<Node>();
-//			int idx = -1;
-//			for (int jj = 0; jj < pMultiMapPathLists.size(); ++jj) {
-//				if (pMultiMapPathLists.get(jj).get(0).getMap().getMapId() == ii) {
-//					idx = jj;
-//					break;
-//				}
-//			}
-//			if (-1 != idx) {
-//				path = pMultiMapPathLists.get(idx);
-//			}
-//			this.multiMapPathListsForEachMap.add(path);
-//		}
+		//
+		// for (int ii = 1; ii <= maps.size(); ++ii) {
+		// ArrayList<Node> path = new ArrayList<Node>();
+		// int idx = -1;
+		// for (int jj = 0; jj < pMultiMapPathLists.size(); ++jj) {
+		// if (pMultiMapPathLists.get(jj).get(0).getMap().getMapId() == ii) {
+		// idx = jj;
+		// break;
+		// }
+		// }
+		// if (-1 != idx) {
+		// path = pMultiMapPathLists.get(idx);
+		// }
+		// this.multiMapPathListsForEachMap.add(path);
+		// }
 		modelChanged();
 	}
 
@@ -322,12 +318,12 @@ public final class MainModel extends StateContext {
 		this.focusNode = focusNode;
 		if (null == focusNode) {
 			isFirstFocusNode = false;
-            modelChanged();
+			modelChanged();
 
-            return;
-        }
+			return;
+		}
 		isFirstFocusNode = true;
-        setCurrentMap(focusNode.getMap());
+		setCurrentMap(focusNode.getMap());
 		modelChanged();
 
 	}
@@ -363,6 +359,7 @@ public final class MainModel extends StateContext {
 	public synchronized void setFisrtChangeMapFalse() {
 		this.isFirstChangeMap = false;
 	}
+
 	public synchronized boolean isLoginAdmin() {
 		return false;
 	}
@@ -378,8 +375,9 @@ public final class MainModel extends StateContext {
 	public synchronized ArrayList<Path> getPaths() {
 		return paths;
 	}
+
 	public synchronized Path getOnePath(int idx) {
-		if (null == paths || 0 > idx || paths.size() <= idx )
+		if (null == paths || 0 > idx || paths.size() <= idx)
 			return null;
 		return paths.get(idx);
 	}
@@ -397,83 +395,85 @@ public final class MainModel extends StateContext {
 		this.currentPathIdx = -1;
 	}
 
-    public synchronized Path getCurrentPath() {
-        return getOnePath(currentPathIdx);
-    }
+	public synchronized Path getCurrentPath() {
+		return getOnePath(currentPathIdx);
+	}
 
-    public synchronized int getCurrentPathIdx() {
-        return currentPathIdx;
-    }
+	public synchronized int getCurrentPathIdx() {
+		return currentPathIdx;
+	}
 
-    public synchronized void clearCurrentPath() {
-        this.currentPathIdx = -1;
-        return;
-    }
+	public synchronized void clearCurrentPath() {
+		this.currentPathIdx = -1;
+		return;
+	}
 
-    public synchronized void setCurrentPath(int idx) {
+	public synchronized void setCurrentPath(int idx) {
 		if (null == paths) {
 			return;
 		}
-        if (idx >= paths.size() || idx < 0) {
-            return;
-//            throw new ArrayIndexOutOfBoundsException();
-        }
-        if (idx == this.currentPathIdx) {
-            return;
-        }
-        this.currentPathIdx = idx;
-        Path path = getOnePath(currentPathIdx);
+		if (idx >= paths.size() || idx < 0) {
+			return;
+			// throw new ArrayIndexOutOfBoundsException();
+		}
+		if (idx == this.currentPathIdx) {
+			return;
+		}
+		this.currentPathIdx = idx;
+		Path path = getOnePath(currentPathIdx);
 		if (null == path) {
 			return;
 		}
-        this.setFocusNode(path.getNodes().get(0));
-        if (path.getMap() != getCurrentMap()) {
-            this.setCurrentMap(path.getMap());
-            this.setAnimationNode(getCurrentPath().getNodes().get(0));
-        }
-    }
+		this.setFocusNode(path.getNodes().get(0));
+		if (path.getMap() != getCurrentMap()) {
+			this.setCurrentMap(path.getMap());
+			this.setAnimationNode(getCurrentPath().getNodes().get(0));
+		}
+	}
 
-    public synchronized boolean setNextPath() {
-        if (currentPathIdx+1 >= paths.size()) {
-            return false;
-        }
-        setCurrentPath(currentPathIdx+1);
-        return true;
-    }
+	public synchronized boolean setNextPath() {
+		if (currentPathIdx + 1 >= paths.size()) {
+			return false;
+		}
+		setCurrentPath(currentPathIdx + 1);
+		return true;
+	}
 
-    public synchronized boolean setPrivousPath() {
-        if (currentPathIdx-1 < 0) {
-            return false;
-        }
-        setCurrentPath(currentPathIdx-1);
-        return true;
-    }
+	public synchronized boolean setPrivousPath() {
+		if (currentPathIdx - 1 < 0) {
+			return false;
+		}
+		setCurrentPath(currentPathIdx - 1);
+		return true;
+	}
 
-    public synchronized LinearTransform getLinearTransform() {
-        modelChanged();
-        return linearTransform;
-    }
+	public synchronized LinearTransform getLinearTransform() {
+		modelChanged();
+		return linearTransform;
+	}
 
-    public synchronized void setLinearTransform(LinearTransform linearTransform) {
-        this.linearTransform = linearTransform;
-        modelChanged();
-    }
-//
-//	public ArrayList<Node> getEndNearestNodes() {
-//		return endNearestNodes;
-//	}
-//
-//	public void setEndNearestNodes(ArrayList<Node> endNearestNodes) {
-//		this.endNearestNodes = endNearestNodes;
-//	}
+	public synchronized void setLinearTransform(LinearTransform linearTransform) {
+		this.linearTransform = linearTransform;
+		modelChanged();
+	}
+	//
+	// public ArrayList<Node> getEndNearestNodes() {
+	// return endNearestNodes;
+	// }
+	//
+	// public void setEndNearestNodes(ArrayList<Node> endNearestNodes) {
+	// this.endNearestNodes = endNearestNodes;
+	// }
 
 	public void setAnimationNode(Node node) {
-    	this.nodeAnimation = node;
-    	modelChanged();
-    }
-    public Node getAnimationNode() {
-    	return this.nodeAnimation;
-    }
+		this.nodeAnimation = node;
+		modelChanged();
+	}
+
+	public Node getAnimationNode() {
+		return this.nodeAnimation;
+	}
+
 	public HashMap<String, Integer> getParkingAvilibility() {
 		return parkingAvilibility;
 	}
@@ -481,6 +481,5 @@ public final class MainModel extends StateContext {
 	public void setParkingAvilibility(HashMap<String, Integer> parkingAvilibility) {
 		this.parkingAvilibility = parkingAvilibility;
 	}
-
 
 }

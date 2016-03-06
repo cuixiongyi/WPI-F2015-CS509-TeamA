@@ -2,8 +2,8 @@ package com.wpi.cs509.teamA.util;
 
 import java.util.TimerTask;
 
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 
 import java.util.ArrayList;

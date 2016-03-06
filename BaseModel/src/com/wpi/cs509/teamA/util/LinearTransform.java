@@ -1,9 +1,8 @@
 package com.wpi.cs509.teamA.util;
 
-import com.wpi.cs509.teamA.ui.view.ViewManager;
-
 /**
- * Created by cuixi on 12/14/2015.
+ * This class handles the scale of the map
+ * 
  */
 public class LinearTransform {
     private double x = 0;

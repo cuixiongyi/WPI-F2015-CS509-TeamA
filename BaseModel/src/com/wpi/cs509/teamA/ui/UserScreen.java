@@ -15,7 +15,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 
 import com.wpi.cs509.teamA.ui.Animation.AnimationPathControl;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
+import com.wpi.cs509.teamA.ui.controller.BaseViewController;
 
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -87,7 +87,7 @@ public class UserScreen extends JFrame {
 		mainModel.switchToState(new MouseActionSelectNode(mainModel));
 		MainModel.setStaticModel(mainModel);
 		MainModel.setStaticModel(mainModel);
-		ViewControllerBase.init(imgComponent, inputPanel, mainModel, this);
+		BaseViewController.init(imgComponent, inputPanel, mainModel, this);
 		AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();
 		imgComponent.setModel(mainModel);

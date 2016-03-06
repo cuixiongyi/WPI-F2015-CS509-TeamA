@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.newfeature;
 
-import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.persistence.bean.Node;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
 public class NodeForSearch {

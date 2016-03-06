@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
-import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-
 /**
  * Instead of using a lot of if and else statements to capture the state of an
  * object, a state machine design pattern is a better solution that's more

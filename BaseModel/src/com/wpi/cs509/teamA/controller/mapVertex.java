@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.persistence.bean.*;
 import com.wpi.cs509.teamA.strategy.impl.Vertex;
 
 public class mapVertex extends GeneralMap implements Comparable<mapVertex> {
