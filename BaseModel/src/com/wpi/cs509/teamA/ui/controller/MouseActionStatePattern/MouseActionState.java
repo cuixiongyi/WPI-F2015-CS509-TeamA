@@ -1,6 +1,7 @@
-package com.wpi.cs509.teamA.model;
+package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;

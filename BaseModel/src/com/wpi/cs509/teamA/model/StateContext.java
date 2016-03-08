@@ -5,9 +5,11 @@ import java.awt.event.MouseEvent;
 import java.util.Observable;
 
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionState;
 
 /**
- * TODO: extends this class from a base observable class
+ * TODO: extends this class from a base observable class and this should also be
+ * a model for the state
  * 
  * @author CS 509-Team A
  *
