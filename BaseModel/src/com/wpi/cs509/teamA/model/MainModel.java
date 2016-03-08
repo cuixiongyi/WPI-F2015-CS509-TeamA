@@ -48,7 +48,6 @@ public final class MainModel extends StateContext {
     private Node nodeAnimation = null;
 	private LinearTransform linearTransform = new LinearTransform();;
 
-//	private ArrayList<Node> endNearestNodes;
 	public MainModel() {
 
 		this.myAccount = new UserAccount();
@@ -115,13 +114,7 @@ public final class MainModel extends StateContext {
 	}
 
 	public synchronized ArrayList<Node> getRouteOnCurrentMap() {
-		// ArrayList<ArrayList<Node>> multiMapPath =
-		// getMultiMapPathListsForEachMap();
-		// if (null != multiMapPath && 0 != multiMapPath.size()) {
-		// int idx = getCurrentMapID()-1;
-		// return multiMapPath.get(idx);
-		//
-		// }
+
 		ArrayList<Node> ret = null;
 		try {
 			int idx = getCurrentMapID() - 1;
@@ -251,7 +244,6 @@ public final class MainModel extends StateContext {
 		else {
 			this.endNode.add(pendNode);
 		}
- //       this.endNearestNodes = null;
         modelChanged();
 		return true;
 	}
@@ -453,7 +445,7 @@ public final class MainModel extends StateContext {
     }
 
     public synchronized LinearTransform getLinearTransform() {
-        modelChanged();
+        // modelChanged();
         return linearTransform;
     }
 
@@ -461,14 +453,6 @@ public final class MainModel extends StateContext {
         this.linearTransform = linearTransform;
         modelChanged();
     }
-//
-//	public ArrayList<Node> getEndNearestNodes() {
-//		return endNearestNodes;
-//	}
-//
-//	public void setEndNearestNodes(ArrayList<Node> endNearestNodes) {
-//		this.endNearestNodes = endNearestNodes;
-//	}
 
 	public void setAnimationNode(Node node) {
     	this.nodeAnimation = node;

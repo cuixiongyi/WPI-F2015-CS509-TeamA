@@ -73,10 +73,6 @@ public class ImageComponent extends JComponent {
 			return;
 
 		LinearTransform lt = model.getLinearTransform();
-		if (null == lt) {
-			int a = 0;
-			a++;
-		}
 
 		// if isInitilized
 		// no need to paint the image again

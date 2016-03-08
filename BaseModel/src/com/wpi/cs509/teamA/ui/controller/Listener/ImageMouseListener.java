@@ -34,12 +34,14 @@ public class ImageMouseListener implements MouseInputListener {
 
 	public void addMouseMotionListener() {
 		imageComponent.addMouseMotionListener(new MouseMotionListener() {
-			@Override
+
 			/**
 			 * 
 			 * drag the map, drag and see
 			 * 
 			 */
+
+			@Override
 			public void mouseDragged(MouseEvent e) {
 				// TODO Auto-generated method stub
 				int x = imageComponent.getImageXpos();
