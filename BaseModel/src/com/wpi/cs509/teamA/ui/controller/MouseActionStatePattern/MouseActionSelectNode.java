@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
@@ -47,7 +47,7 @@ public class MouseActionSelectNode extends MouseActionState {
 		if (e.getButton() == MouseEvent.BUTTON3) {
 
             /// TODO add edit node action
-            NodeSetMenu nodeSetMenu = new NodeSetMenu(ViewManager.getInputPanel(), model, node);
+            NodeSetMenu nodeSetMenu = new NodeSetMenu(ViewRerenderController.getInputPanel(), model, node);
             nodeSetMenu.show(e.getComponent(), xPos, yPos);
 
 		}
@@ -59,12 +59,12 @@ public class MouseActionSelectNode extends MouseActionState {
             }
 
 			if (null != node) {
-				ViewManager.getNodeInformation().setNode(node);
+				ViewRerenderController.getNodeInformation().setNode(node);
 				AnimationObject ret = addInfoAnimation();
 				ret.switchState(new AnimationStateSlidingUp(ret));
 
 			}else{
-				ViewManager.infoPanelSlideDown();
+				ViewRerenderController.infoPanelSlideDown();
 
 			}
 		}
@@ -119,13 +119,13 @@ public class MouseActionSelectNode extends MouseActionState {
     }
 
 	private AnimationObject addInfoAnimation() {
-		AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
+		AnimationObject ret = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getNodeInformation());
 		if (null == ret) {
-			UserScreen.getUserScreen().getContentPane().add(ViewManager.getNodeInformation(),new Integer(3));
-			ret = ViewManager.getAC().create(ViewManager.getNodeInformation(),ViewManager.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
-						ViewManager.getNodeInformation().getHeight());
+			UserScreen.getUserScreen().getContentPane().add(ViewRerenderController.getNodeInformation(),new Integer(3));
+			ret = ViewRerenderController.getAC().create(ViewRerenderController.getNodeInformation(),ViewRerenderController.getImageComponent() , AnimationStyle.SLIDE_UP, AnimationPosition.BOTTOMM_MIDDLE,
+						ViewRerenderController.getNodeInformation().getHeight());
 			ret.setSpeed(4.0);
-			ViewManager.getNodeInformation().setVisible(true);
+			ViewRerenderController.getNodeInformation().setVisible(true);
 		}
 
 

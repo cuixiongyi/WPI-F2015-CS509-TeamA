@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.dialog.NodeEditDialog;
 import com.wpi.cs509.teamA.util.Coordinate;
@@ -61,7 +61,7 @@ public class MouseActionEditNode extends MouseActionState {
 			lastNode = null;
 			if (null != node) {
 				/// TODO add edit node action
-				NodeEditDialog nodeInfo = new NodeEditDialog(ViewManager.getImageComponent(), model, node);
+				NodeEditDialog nodeInfo = new NodeEditDialog(ViewRerenderController.getImageComponent(), model, node);
 				nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 				nodeInfo.setVisible(nodeInfo.isFocusable());
 
@@ -88,7 +88,7 @@ public class MouseActionEditNode extends MouseActionState {
 	}
 
 	private void addNewNode(Coordinate xy) {
-		NodeEditDialog nodeInfo = new NodeEditDialog(ViewManager.getImageComponent(), model, xy.getX(), xy.getY());
+		NodeEditDialog nodeInfo = new NodeEditDialog(ViewRerenderController.getImageComponent(), model, xy.getX(), xy.getY());
 		nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		nodeInfo.setVisible(nodeInfo.isFocusable());
 	}

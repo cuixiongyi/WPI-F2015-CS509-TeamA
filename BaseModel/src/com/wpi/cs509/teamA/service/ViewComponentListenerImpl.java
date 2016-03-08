@@ -12,7 +12,7 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
@@ -53,7 +53,7 @@ public class ViewComponentListenerImpl {
 			adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 			adminDialog.setVisible(inputPanel.isFocusable());
 			// stateContext.switchToAdminUser();
-			ViewManager.updateView();
+			ViewRerenderController.updateView();
 
 		} else {
 			// save history back to database
@@ -68,7 +68,7 @@ public class ViewComponentListenerImpl {
 			// InputPanel.this.getBtnSynchronize().setVisible(false);
 			model.switchToState(new MouseActionSelectNode(model));
 
-			ViewManager.updateView();
+			ViewRerenderController.updateView();
 		}
 	}
 
@@ -143,7 +143,7 @@ public class ViewComponentListenerImpl {
 
 	public void clickFilter(NodeType nodeType) {
 		model.setFilter(nodeType);
-		ViewManager.updateView();
+		ViewRerenderController.updateView();
 	}
 
 	public void clickAllFilter() {
@@ -236,7 +236,7 @@ public class ViewComponentListenerImpl {
 
 		}
 		addThumbNail();
-		ViewManager.updateView();
+		ViewRerenderController.updateView();
 
 	}
 
@@ -244,20 +244,20 @@ public class ViewComponentListenerImpl {
 		// TODO Auto-generated method stub
 		OpenMapDialog openMapDialog = new OpenMapDialog(model);
 		openMapDialog.setVisible(true);
-		ViewManager.updateView();
+		ViewRerenderController.updateView();
 	}
 
 	private AnimationObject addThumbNail() {
-		ViewManager.getThumbNailPanel().update();
-		AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+		ViewRerenderController.getThumbNailPanel().update();
+		AnimationObject ret = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getThumbNailPanel());
 		if (null == ret) {
-			UserScreen.getUserScreen().getContentPane().add(ViewManager.getThumbNailPanel(), new Integer(5));
-			ret = ViewManager.getAC().create(ViewManager.getThumbNailPanel(), ViewManager.getImageComponent(),
+			UserScreen.getUserScreen().getContentPane().add(ViewRerenderController.getThumbNailPanel(), new Integer(5));
+			ret = ViewRerenderController.getAC().create(ViewRerenderController.getThumbNailPanel(), ViewRerenderController.getImageComponent(),
 					AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
-					ViewManager.getThumbNailPanel().getWidth());
+					ViewRerenderController.getThumbNailPanel().getWidth());
 			ret.switchState(new AnimationStateSlidingOut(ret));
 			ret.setSpeed(2.0);
-			ViewManager.getThumbNailPanel().setVisible(true);
+			ViewRerenderController.getThumbNailPanel().setVisible(true);
 		}
 		return ret;
 

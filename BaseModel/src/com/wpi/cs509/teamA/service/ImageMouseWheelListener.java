@@ -10,7 +10,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 /**
- * This class implements what the should do when mouse has some certatin events
+ * This class implements what the should do when mouse has some certain events
  * 
  * @author teama
  */

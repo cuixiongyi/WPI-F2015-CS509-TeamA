@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
@@ -80,7 +80,7 @@ public class ImageComponentRenderer extends JComponent {
 			this.setImageYpos(0);
 			model.getCurrentMap().setDisplayScale(1.0f);
 
-			ViewManager.infoPanelSlideDown();
+			ViewRerenderController.infoPanelSlideDown();
 			if (!model.isFisrtFocusNode()) {
 				model.setLinearTransform(new LinearTransform());
 

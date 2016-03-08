@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Path;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.LinearTransform;
@@ -53,8 +53,8 @@ public class PaintImageHelper extends PaintHelperBasics {
 	public static void restorePrintMap(GeneralMap originalMap, float scale, int imageXpos, int imageYpos) {
 		model.setCurrentMap(originalMap);
 		model.getCurrentMap().setDisplayScale(scale);
-		ViewManager.getImageComponent().setImageXpos(imageXpos);
-		ViewManager.getImageComponent().setImageYpos(imageYpos);
+		ViewRerenderController.getImageComponent().setImageXpos(imageXpos);
+		ViewRerenderController.getImageComponent().setImageYpos(imageYpos);
 	}
 
 	public static void paintMultiMaps(Graphics2D g2, Path path, LinearTransform plt) {
@@ -73,8 +73,8 @@ public class PaintImageHelper extends PaintHelperBasics {
 	public static void setPrintMap(GeneralMap map, float scale, int imageXpos, int imageYpos) {
 		model.setCurrentMap(map);
 		model.getCurrentMap().setDisplayScale(scale);
-		ViewManager.getImageComponent().setImageXpos(imageXpos);
-		ViewManager.getImageComponent().setImageYpos(imageYpos);
+		ViewRerenderController.getImageComponent().setImageXpos(imageXpos);
+		ViewRerenderController.getImageComponent().setImageYpos(imageYpos);
 	}
 
 	public static void setModel(MainModel model) {

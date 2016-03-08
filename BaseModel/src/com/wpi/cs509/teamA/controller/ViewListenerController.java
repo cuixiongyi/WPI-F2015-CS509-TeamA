@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * 
- * This calss behaves like a controller
+ * This class behaves like a controller
  * 
  * Based on the button, it decides which operation will be binded to
  * 
@@ -27,7 +27,7 @@ import java.util.List;
  * @author teama
  *
  */
-public class ViewComponentListener {
+public class ViewListenerController {
 
 	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
 	private static MainModel model = ViewComponent.getModel();
@@ -38,7 +38,7 @@ public class ViewComponentListener {
 
 	private ViewComponentListenerImpl impl;
 
-	public ViewComponentListener() {
+	public ViewListenerController() {
 		mouseListener = new ImageMouseListener(imageComponent, model);
 		wheelListener = new ImageMouseWheelListener(imageComponent, model);
 

@@ -11,8 +11,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import com.wpi.cs509.teamA.controller.ViewComponentListener;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewListenerController;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.DBInitializer;
@@ -22,7 +22,7 @@ import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintImageHelper;
 
 /**
- * This is the class that construct the main user interface of the application
+ * Initialization of the view
  * 
  * @author CS 509-Team A
  *
@@ -33,14 +33,14 @@ public class UserScreen extends JFrame {
 
 	// singleton
 	private static UserScreen userScreen;
-	
+
 	private JLayeredPane contentPane;
 	private ImageComponentRenderer imgComponent;
-	private ViewComponentListener controller;
+	private ViewListenerController controller;
 
-	MainModel mainModel = null;
-	ViewManager viewManager = null;
-	ParkingManager parkingManager = null;
+	private MainModel mainModel;
+	private ViewRerenderController viewManager;
+	private ParkingManager parkingManager;
 
 	/**
 	 * A JPanel that have input text fields and buttons which will be shown on
@@ -85,14 +85,14 @@ public class UserScreen extends JFrame {
 		ViewComponent.init(imgComponent, inputPanel, mainModel);
 
 		// AnimationPathControl.init(mainModel);
-		viewManager = new ViewManager();
+
 		imgComponent.setModel(mainModel);
 		inputPanel.setModel(mainModel);
 		PaintHelperBasics.setModel(mainModel);
 		PaintHelperComposite.setModel(mainModel);
 		PaintImageHelper.setModel(mainModel);
-		controller = new ViewComponentListener();
-		mainModel.addObserver(viewManager);
+		controller = new ViewListenerController();
+
 		parkingManager = new ParkingManager();
 		parkingManager.setModel(mainModel);
 		// input panel and components
@@ -113,7 +113,11 @@ public class UserScreen extends JFrame {
 		imgComponent.repaint();
 		mainModel.switchToState(new MouseActionSelectNode(mainModel));
 		// stateContext.switchUserState(new NormalUserState(stateContext));
-		ViewManager.updateView();
+
+		// init the observe pattern
+		viewManager = new ViewRerenderController();
+		mainModel.addObserver(viewManager);
+		ViewRerenderController.updateView();
 
 	}
 

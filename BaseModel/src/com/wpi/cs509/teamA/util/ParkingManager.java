@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.util;
 import java.util.TimerTask;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 
 import java.util.ArrayList;

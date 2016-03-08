@@ -9,6 +9,8 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
  * 
  * What view need to do is render
  * 
+ * This class just put all the renders together
+ * 
  * @author teama
  *
  */

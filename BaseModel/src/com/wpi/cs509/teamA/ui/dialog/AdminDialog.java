@@ -1,7 +1,7 @@
 package com.wpi.cs509.teamA.ui.dialog;
 
 import com.wpi.cs509.teamA.bean.UserAccount;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.exception.PwdIncorrectException;

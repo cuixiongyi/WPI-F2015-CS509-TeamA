@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.service;
 
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingIn;
@@ -13,7 +13,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.event.MouseInputListener;
 
 /**
- * This class implements what the should do when mouse has some certatin events
+ * This class implements what the should do when mouse has some certain events
  * 
  * @author teama
  */
@@ -60,7 +60,7 @@ public class ImageMouseListener implements MouseInputListener {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
-				AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+				AnimationObject ret = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getThumbNailPanel());
 				if (null == ret) {
 					return;
 				}

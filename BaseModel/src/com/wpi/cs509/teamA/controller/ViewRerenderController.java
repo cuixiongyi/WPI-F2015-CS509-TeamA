@@ -22,7 +22,7 @@ import java.util.Observer;
  * 
  * when the model changes, it will decide how to rerender the component
  */
-public class ViewManager implements Observer {
+public class ViewRerenderController implements Observer {
 
 	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
 	private static MainModel model = ViewComponent.getModel();
@@ -32,12 +32,12 @@ public class ViewManager implements Observer {
 	private static InformationPanel nodeInformation = new InformationPanel();
 	private static ThumbNailPanel thumbNailPanel = new ThumbNailPanel(model);
 
-	public ViewManager() {
+	public ViewRerenderController() {
 
 	}
 
 	static public void infoPanelSlideDown() {
-		AnimationObject AO = ViewManager.getAC().checkObjectExist(ViewManager.getNodeInformation());
+		AnimationObject AO = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getNodeInformation());
 		if (null == AO) {
 			return;
 		}
@@ -65,6 +65,10 @@ public class ViewManager implements Observer {
 
 	/**
 	 * Update the all the views
+	 * 
+	 * We can call this method to force update or we can update the view via
+	 * observe pattern
+	 * 
 	 */
 	static public void updateView() {
 		updateImageComponent();

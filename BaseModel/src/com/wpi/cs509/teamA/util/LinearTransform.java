@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.util;
 
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 
 /**
  * Created by cuixi on 12/14/2015.

@@ -5,7 +5,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.LinearTransform;
@@ -75,8 +75,8 @@ public class PaintHelperBasics {
 		Coordinate coorTrans = linearTransform.transferCoor(node.getLocation());
 		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
-		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
-				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewRerenderController.getImageComponent()),
+				image.getHeight(ViewRerenderController.getImageComponent()), ViewRerenderController.getImageComponent());
 
 	}
 
@@ -99,8 +99,8 @@ public class PaintHelperBasics {
 		Coordinate coorTrans = linearTransform.transferCoor(node.getLocation());
 		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
-		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
-				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
+		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewRerenderController.getImageComponent()),
+				image.getHeight(ViewRerenderController.getImageComponent()), ViewRerenderController.getImageComponent());
 
 		if (linearTransform.getScale() > SCALELOWWERBOUND_DRAWICON) {
 			String nodeTitle = node.getName();
