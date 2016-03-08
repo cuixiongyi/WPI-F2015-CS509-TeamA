@@ -10,7 +10,6 @@ public class ViewControllerBase {
 
 	static protected ImageComponent imageComponent = null;
 	static protected InputPanel inputPanel = null;
-	static protected UserScreen userScreen = null;
 	static protected MainModel model = null;
 	static protected AnimationControl ac = new AnimationControl();
 
@@ -18,20 +17,17 @@ public class ViewControllerBase {
 
 	}
 
-	static public void init(ImageComponent pIC, InputPanel pIP, MainModel pMM, UserScreen pUS) {
+	static public void init(ImageComponent pIC, InputPanel pIP, MainModel pMM) {
 		if (null == pIC)
 			throw new NullPointerException("Empty ImageComponent");
 		if (null == pIP)
 			throw new NullPointerException("Empty ImageComponent");
 		if (null == pMM)
 			throw new NullPointerException("Empty MainModel");
-		if (null == pUS)
-			throw new NullPointerException("Empty UserScreen");
 
 		imageComponent = pIC;
 		inputPanel = pIP;
 		model = pMM;
-		userScreen = pUS;
 	}
 
 }

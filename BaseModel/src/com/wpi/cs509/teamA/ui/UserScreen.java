@@ -87,7 +87,9 @@ public class UserScreen extends JFrame {
 		// set up a static model for further references
 		MainModel.setStaticModel(mainModel);
 
-		ViewControllerBase.init(imgComponent, inputPanel, mainModel, this);
+		ViewControllerBase.init(imgComponent, inputPanel, mainModel);
+		
+		
 		// AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();
 		imgComponent.setModel(mainModel);

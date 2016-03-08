@@ -9,10 +9,7 @@ import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-/**
- *
- * TODO: This class should be put into mouse action state package
- * 
+/** 
  * this class is an interface for all the implementation class to follow
  * so all the mouse action will have same method interface
  *
