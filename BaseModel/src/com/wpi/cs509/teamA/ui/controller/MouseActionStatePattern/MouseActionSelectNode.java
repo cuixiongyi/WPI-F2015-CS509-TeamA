@@ -2,13 +2,13 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
+import com.wpi.cs509.teamA.controller.ViewManager;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
 import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.ui.view.renderer.UserScreen;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.LinearTransform;

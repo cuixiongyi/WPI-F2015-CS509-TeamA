@@ -8,8 +8,8 @@ import javax.swing.JComponent;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.controller.ViewManager;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;

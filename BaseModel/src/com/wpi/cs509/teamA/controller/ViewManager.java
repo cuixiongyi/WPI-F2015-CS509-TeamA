@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.view;
+package com.wpi.cs509.teamA.controller;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
@@ -17,6 +17,10 @@ import java.util.Observer;
 /**
  * This class will listen to the change of the view and then update the view or
  * to say, rerender the view
+ * 
+ * this class behaves like a controller
+ * 
+ * when the model changes, it will decide how to rerender the component
  */
 public class ViewManager implements Observer {
 
@@ -41,16 +45,26 @@ public class ViewManager implements Observer {
 
 	}
 
+	/**
+	 * Repaint the image
+	 * 
+	 * TODO: we can only rerender the image component
+	 */
 	static public void updateImageComponent() {
 		imageComponent.repaint();
 	}
 
+	/**
+	 * Repaint the input panel
+	 * 
+	 * TODO: we can only rerender the input panel
+	 */
 	static public void updateInputePanel() {
 		inputPanel.repaint();
 	}
 
 	/**
-	 * Update the view, call repaint methods
+	 * Update the all the views
 	 */
 	static public void updateView() {
 		updateImageComponent();
@@ -72,6 +86,7 @@ public class ViewManager implements Observer {
 		if (model != obs) {
 			return;
 		}
+		// TODO: based on the model, we can decide which view to rerender
 		updateView();
 	}
 

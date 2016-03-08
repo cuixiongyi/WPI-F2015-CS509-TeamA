@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.ui.Animation;
 
 import javax.swing.*;
 
-import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.controller.ViewManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

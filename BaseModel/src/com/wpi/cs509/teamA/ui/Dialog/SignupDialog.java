@@ -20,9 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.controller.ViewManager;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 
 public class SignupDialog extends JDialog implements ActionListener  {

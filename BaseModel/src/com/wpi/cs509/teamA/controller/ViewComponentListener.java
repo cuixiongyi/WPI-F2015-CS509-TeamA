@@ -18,7 +18,11 @@ import java.util.List;
 
 /**
  * 
+ * This calss behaves like a controller
  * 
+ * Based on the button, it decides which operation will be binded to
+ * 
+ * The implementation class is in the service layer
  * 
  * @author teama
  *

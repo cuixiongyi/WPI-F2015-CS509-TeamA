@@ -1,13 +1,13 @@
 package com.wpi.cs509.teamA.ui.Dialog;
 
 import com.wpi.cs509.teamA.bean.UserAccount;
+import com.wpi.cs509.teamA.controller.ViewManager;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.exception.PwdIncorrectException;
 import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 
