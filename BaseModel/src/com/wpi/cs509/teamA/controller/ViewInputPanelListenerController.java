@@ -225,7 +225,7 @@ public class ViewInputPanelListenerController {
 			public void itemStateChanged(ItemEvent e) {
 				// model.setCurrentPath(inputPanel.getComboBoxMap().getSelectedIndex());
 				Object value = inputPanel.getComboBoxMap().getSelectedItem();
-				boolean tmp = matchAndSetMapIDFromString(value);
+				matchAndSetMapIDFromString(value);
 			}
 		});
 	}

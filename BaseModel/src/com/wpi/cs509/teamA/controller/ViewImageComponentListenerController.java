@@ -49,6 +49,7 @@ public class ViewImageComponentListenerController {
 		// TODO: singleton
 		new ImageMouseListener(imageComponent, model);
 		new ImageMouseWheelListener(imageComponent, model);
+		// imageComponent.addMouseWheelListener(new ImageMouseWheelListener());
 
 	}
 
