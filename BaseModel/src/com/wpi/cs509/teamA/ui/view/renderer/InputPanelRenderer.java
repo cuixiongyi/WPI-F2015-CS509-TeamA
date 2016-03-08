@@ -12,8 +12,8 @@ import javax.swing.*;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.constants.*;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.resource.constants.*;
 import com.wpi.cs509.teamA.util.*;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
 

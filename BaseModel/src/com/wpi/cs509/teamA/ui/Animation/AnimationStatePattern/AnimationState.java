@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-import com.wpi.cs509.teamA.constants.UIConstant;
+import com.wpi.cs509.teamA.resource.constants.UIConstant;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.Point2d;

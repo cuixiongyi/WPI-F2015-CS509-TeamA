@@ -41,7 +41,6 @@ public class ViewManager implements Observer {
 	}
 
 	static public void updateImageComponent() {
-		System.out.println("ViewManager updateImageComponent");
 		imageComponent.repaint();
 	}
 
@@ -64,20 +63,23 @@ public class ViewManager implements Observer {
 
 	}
 
+	/**
+	 * This method get executed when change in model triggered
+	 */
+	@Override
+	public void update(Observable obs, Object arg) {
+		if (model != obs) {
+			return;
+		}
+		updateView();
+	}
+
 	static public ImageComponentRenderer getImageComponent() {
 		return imageComponent;
 	}
 
 	static public InputPanelRenderer getInputPanel() {
 		return inputPanel;
-	}
-
-	@Override
-	public void update(Observable obs, Object arg) {
-		if (model != obs) {
-			return;
-		}
-		ViewManager.updateView();
 	}
 
 	static public AnimationControl getAC() {

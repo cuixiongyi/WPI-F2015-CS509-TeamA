@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.constants;
+package com.wpi.cs509.teamA.resource.constants;
 
 /**
  * Team-A
