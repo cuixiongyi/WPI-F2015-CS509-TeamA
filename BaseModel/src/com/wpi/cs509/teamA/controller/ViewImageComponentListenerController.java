@@ -20,9 +20,7 @@ import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 public class ViewImageComponentListenerController {
 
 	private static ViewImageComponentListenerController viewImageComponentListenerController;
-
-	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
-	private static MainModel model = ViewComponent.getModel();
+	private static ImageComponentRenderer imageComponent;
 
 	/**
 	 * 
@@ -32,6 +30,7 @@ public class ViewImageComponentListenerController {
 	 */
 	public synchronized static boolean bindListeners() {
 		if (null == viewImageComponentListenerController) {
+			imageComponent = ViewComponent.getImageComponent();
 			viewImageComponentListenerController = new ViewImageComponentListenerController();
 			return true;
 		}
@@ -46,10 +45,8 @@ public class ViewImageComponentListenerController {
 	 */
 	private ViewImageComponentListenerController() {
 
-		// TODO: singleton
-		new ImageMouseListener(imageComponent, model);
-		// new ImageMouseWheelListener(imageComponent, model);
-		// imageComponent.addMouseWheelListener(new ImageMouseWheelListener());
+		// new ImageMouseListener(imageComponent, model);
+		imageComponent.addMouseListener(new ImageMouseListener());
 		imageComponent.addMouseWheelListener(new ImageMouseWheelListener());
 	}
 

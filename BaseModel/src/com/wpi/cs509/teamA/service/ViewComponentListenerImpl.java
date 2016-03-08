@@ -47,6 +47,9 @@ public class ViewComponentListenerImpl {
 	private static MainModel model = ViewComponent.getModel();
 	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
 
+	/**
+	 * Login
+	 */
 	public void clickLogin() {
 		if (model.getMyAccount() == null) {
 			AdminDialog adminDialog = new AdminDialog(model, inputPanel);
@@ -72,6 +75,11 @@ public class ViewComponentListenerImpl {
 		}
 	}
 
+	/**
+	 * 
+	 * Swap the start and end input and search again
+	 * 
+	 */
 	public void clickOnSwapStartEnd() {
 		if (model.getStartNode() != null && model.getEndNode() != null && model.getEndNode().size() == 1) {
 
@@ -148,32 +156,33 @@ public class ViewComponentListenerImpl {
 
 	public void clickAllFilter() {
 		model.addAllFilters();
-		// ViewManager.updateView();
 	}
 
 	public void clickClearFilter() {
 		model.clearFilters();
-		// ViewManager.updateView();
 	}
 
+	/**
+	 * Search functionality begins here
+	 */
 	public void clickSearch() {
+
 		if (model.getStartNode() == null || model.getEndNode() == null || model.getEndNode().size() == 0)
 			return;
-		ArrayList<Node> temp = model.getEndNode();
+
 		if (model.getMyAccount() != null) {
 			addHistory();
-
 		}
 
-		// inputPanel.picLabel.setVisible(false);
 		inputPanel.getMapList().setVisible(true);
-		// inputPanel.getMapList().setEnabled(true);
-		// inputPanel.getMapList().setCellRenderer(new MarioListRenderer());
-		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 		inputPanel.getMapList().removeAll();
+
+		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
+
 		try {
 			AlgoController algoController;
 			if (1 == model.getEndNode().size()) {
+				// single destination
 				algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 
 			} else {
@@ -228,7 +237,6 @@ public class ViewComponentListenerImpl {
 			}
 			model.setCurrentPath(0);
 			model.setMultiMapLists(mapList);
-			System.out.println(mapList);
 			inputPanel.getMapList().setModel(mapListModel);
 
 		} catch (Exception e) {
@@ -249,12 +257,13 @@ public class ViewComponentListenerImpl {
 
 	private AnimationObject addThumbNail() {
 		ViewRerenderController.getThumbNailPanel().update();
-		AnimationObject ret = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getThumbNailPanel());
+		AnimationObject ret = ViewRerenderController.getAC()
+				.checkObjectExist(ViewRerenderController.getThumbNailPanel());
 		if (null == ret) {
 			UserScreen.getUserScreen().getContentPane().add(ViewRerenderController.getThumbNailPanel(), new Integer(5));
-			ret = ViewRerenderController.getAC().create(ViewRerenderController.getThumbNailPanel(), ViewRerenderController.getImageComponent(),
-					AnimationStyle.SLIDE_LEFT, AnimationPosition.LEFT_MIDDLE,
-					ViewRerenderController.getThumbNailPanel().getWidth());
+			ret = ViewRerenderController.getAC().create(ViewRerenderController.getThumbNailPanel(),
+					ViewRerenderController.getImageComponent(), AnimationStyle.SLIDE_LEFT,
+					AnimationPosition.LEFT_MIDDLE, ViewRerenderController.getThumbNailPanel().getWidth());
 			ret.switchState(new AnimationStateSlidingOut(ret));
 			ret.setSpeed(2.0);
 			ViewRerenderController.getThumbNailPanel().setVisible(true);

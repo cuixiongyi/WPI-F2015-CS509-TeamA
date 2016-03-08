@@ -6,6 +6,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingIn;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
 import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -24,9 +25,10 @@ public class ImageMouseListener implements MouseInputListener {
 	private ImageComponentRenderer imageComponent;
 	private MainModel model;
 
-	public ImageMouseListener(ImageComponentRenderer pImageComponent, MainModel pModel) {
-		this.imageComponent = pImageComponent;
-		model = pModel;
+	public ImageMouseListener() {
+		imageComponent = ViewComponent.getImageComponent();
+		model = ViewComponent.getModel();
+
 		addMouseMotionListener();
 		addMouseInputListener();
 
@@ -62,7 +64,8 @@ public class ImageMouseListener implements MouseInputListener {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
-				AnimationObject ret = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getThumbNailPanel());
+				AnimationObject ret = ViewRerenderController.getAC()
+						.checkObjectExist(ViewRerenderController.getThumbNailPanel());
 				if (null == ret) {
 					return;
 				}
