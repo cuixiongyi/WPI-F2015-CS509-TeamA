@@ -1,30 +1,27 @@
 package com.wpi.cs509.teamA.ui;
 
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-//import com.sun.prism.paint.Color;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.Animation.AnimationPathControl;
 import com.wpi.cs509.teamA.ui.controller.ViewController;
 import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.util.ParkingManager;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
-import com.wpi.cs509.teamA.util.ParkingManager;
-
-import javax.swing.BorderFactory;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -39,9 +36,7 @@ public class UserScreen extends JFrame {
 	private static UserScreen userScreen;
 	private JLayeredPane contentPane;
 	private ImageComponent imgComponent;
-	private ViewController controller = null;
-	private JPanel popUpPane;
-	private JPanel popUpPaneLeft;
+	private ViewController controller;
 
 	MainModel mainModel = null;
 	ViewManager viewManager = null;
@@ -88,8 +83,7 @@ public class UserScreen extends JFrame {
 		MainModel.setStaticModel(mainModel);
 
 		ViewControllerBase.init(imgComponent, inputPanel, mainModel);
-		
-		
+
 		// AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();
 		imgComponent.setModel(mainModel);
@@ -123,11 +117,8 @@ public class UserScreen extends JFrame {
 
 	}
 
-	public static UserScreen getUserScreen() {
-		return userScreen;
-	}
-
-	public static UserScreen launchUserScreen() {
+	// singleton
+	public static synchronized UserScreen getUserScreen() {
 		if (userScreen == null) {
 			userScreen = new UserScreen();
 		}
@@ -143,13 +134,14 @@ public class UserScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 
+		// TODO: this should be a singleton
 		new DBInitializer();
 
 		// singleton
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
-				UserScreen.launchUserScreen();
+				UserScreen.getUserScreen();
 			}
 		});
 
