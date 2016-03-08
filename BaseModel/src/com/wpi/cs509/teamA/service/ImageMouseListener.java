@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.controller.Listener;
+package com.wpi.cs509.teamA.service;
 
 import com.wpi.cs509.teamA.controller.ViewManager;
 import com.wpi.cs509.teamA.model.MainModel;
@@ -13,7 +13,9 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.event.MouseInputListener;
 
 /**
- * Created by cuixi on 11/24/2015.
+ * This class implements what the should do when mouse has some certatin events
+ * 
+ * @author teama
  */
 public class ImageMouseListener implements MouseInputListener {
 

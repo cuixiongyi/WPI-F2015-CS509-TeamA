@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.Dialog;
+package com.wpi.cs509.teamA.ui.dialog;
 
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.ViewManager;

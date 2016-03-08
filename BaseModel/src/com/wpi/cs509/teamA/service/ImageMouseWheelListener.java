@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.controller.Listener;
+package com.wpi.cs509.teamA.service;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
@@ -10,7 +10,9 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
 /**
- * Created by cuixi on 11/27/2015.
+ * This class implements what the should do when mouse has some certatin events
+ * 
+ * @author teama
  */
 public class ImageMouseWheelListener implements MouseWheelListener {
 

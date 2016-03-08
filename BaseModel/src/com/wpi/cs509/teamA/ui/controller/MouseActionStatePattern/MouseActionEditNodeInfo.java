@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.Dialog.NodeInfoDIalog;
+import com.wpi.cs509.teamA.ui.dialog.NodeInfoDIalog;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;

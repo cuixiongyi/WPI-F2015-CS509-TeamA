@@ -2,9 +2,9 @@ package com.wpi.cs509.teamA.controller;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.service.ImageMouseListener;
+import com.wpi.cs509.teamA.service.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.service.ViewComponentListenerImpl;
-import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
-import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;

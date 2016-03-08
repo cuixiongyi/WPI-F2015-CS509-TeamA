@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.ViewManager;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.Dialog.NodeEditDialog;
+import com.wpi.cs509.teamA.ui.dialog.NodeEditDialog;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;

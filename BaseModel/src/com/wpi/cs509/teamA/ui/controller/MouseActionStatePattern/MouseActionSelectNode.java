@@ -8,7 +8,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingUp;
-import com.wpi.cs509.teamA.ui.Dialog.NodeSetMenu;
+import com.wpi.cs509.teamA.ui.dialog.NodeSetMenu;
 import com.wpi.cs509.teamA.ui.view.renderer.UserScreen;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.LinearTransform;

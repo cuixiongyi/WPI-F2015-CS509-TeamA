@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.Dialog;
+package com.wpi.cs509.teamA.ui.dialog;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

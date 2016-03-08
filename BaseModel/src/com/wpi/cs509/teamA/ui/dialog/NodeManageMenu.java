@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.Dialog;
+package com.wpi.cs509.teamA.ui.dialog;
 
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContextModel;
