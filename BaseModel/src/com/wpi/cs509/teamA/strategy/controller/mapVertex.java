@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.controller;
+package com.wpi.cs509.teamA.strategy.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

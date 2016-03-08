@@ -1,9 +1,9 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
 import com.wpi.cs509.teamA.bean.*;
-import com.wpi.cs509.teamA.controller.allEdges;
-import com.wpi.cs509.teamA.controller.mapVertex;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.controller.allEdges;
+import com.wpi.cs509.teamA.strategy.controller.mapVertex;
 
 import java.util.ArrayList;
 import java.util.HashMap;

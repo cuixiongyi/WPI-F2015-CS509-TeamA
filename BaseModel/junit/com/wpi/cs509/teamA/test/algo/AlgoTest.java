@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
-import com.wpi.cs509.teamA.controller.AlgoController;
-import com.wpi.cs509.teamA.controller.allEdges;
+import com.wpi.cs509.teamA.strategy.controller.AlgoController;
+import com.wpi.cs509.teamA.strategy.controller.allEdges;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;

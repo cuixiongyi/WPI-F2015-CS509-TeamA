@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.allEdges;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.controller.allEdges;
 
 public class DijkstraMultipleDestinations implements AlgoStrategy {
 	private int startNodeId;
