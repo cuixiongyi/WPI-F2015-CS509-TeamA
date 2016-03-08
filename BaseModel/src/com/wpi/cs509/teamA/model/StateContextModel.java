@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
-import com.wpi.cs509.teamA.ui.initializer.controller.MouseActionStatePattern.MouseActionState;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionState;
 
 /**
  * TODO: extends this class from a base observable class and this should also be

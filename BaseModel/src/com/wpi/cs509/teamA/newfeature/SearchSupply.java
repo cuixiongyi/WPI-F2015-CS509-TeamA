@@ -22,7 +22,7 @@ import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.OtherFeatureDao;
 import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.initializer.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
