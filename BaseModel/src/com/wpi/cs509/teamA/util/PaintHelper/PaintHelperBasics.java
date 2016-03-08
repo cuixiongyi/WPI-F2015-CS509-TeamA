@@ -3,13 +3,10 @@ package com.wpi.cs509.teamA.util.PaintHelper;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
-
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 
-import com.wpi.cs509.teamA.ui.UIConstant;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.LinearTransform;
@@ -46,8 +43,6 @@ public class PaintHelperBasics {
 		Undefined, BasicNode, BasicEdge, BasicText, NewNode, NewEdge, SelectedNode,
 	}
 
-
-
 	protected static void setStyle(DrawStyleEnum style, Graphics2D g2) {
 		switch (style) {
 		case Undefined:
@@ -77,7 +72,6 @@ public class PaintHelperBasics {
 		}
 	}
 
-
 	public static void paintIconForce(Node node, Graphics2D g2, BufferedImage image) {
 		Coordinate coorTrans = linearTransform.transferCoor(node.getLocation());
 		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
@@ -92,8 +86,6 @@ public class PaintHelperBasics {
 			return;
 		paintIconForce(node, g2, image);
 	}
-
-
 
 	public static boolean paintIcon(Node node, Graphics2D g2) {
 		BufferedImage image = null;
@@ -110,19 +102,21 @@ public class PaintHelperBasics {
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewManager.getImageComponent()),
 				image.getHeight(ViewManager.getImageComponent()), ViewManager.getImageComponent());
-		
-		if (linearTransform.getScale() > SCALELOWWERBOUND_DRAWICON)
-		{
+
+		if (linearTransform.getScale() > SCALELOWWERBOUND_DRAWICON) {
 			String nodeTitle = node.getName();
-			if (node.getNodeType() == NodeType.PARKING)
-			{
-				nodeTitle += " (" + model.getParkingAvilibility().get(node.getName()) + ")"; // where to change parking info
+			if (node.getNodeType() == NodeType.PARKING) {
+				nodeTitle += " (" + model.getParkingAvilibility().get(node.getName()) + ")"; // where
+																								// to
+																								// change
+																								// parking
+																								// info
 			}
 
-		    FontMetrics metrics = g2.getFontMetrics();
-		    int titleXCoor = (coorTrans.getX() - (metrics.stringWidth(nodeTitle)/2));
-		    int titleYCoor = coorTrans.getY() - 25;
-			
+			FontMetrics metrics = g2.getFontMetrics();
+			int titleXCoor = (coorTrans.getX() - (metrics.stringWidth(nodeTitle) / 2));
+			int titleYCoor = coorTrans.getY() - 25;
+
 			g2.drawString(nodeTitle, titleXCoor, titleYCoor);
 		}
 		return true;
@@ -156,8 +150,6 @@ public class PaintHelperBasics {
 		g2.fillOval(xy.getX() - ovalOffset, xy.getY() - ovalOffset, ovalOffset * 2, ovalOffset * 2);
 	}
 
-
-
 	public static void paintEdge(Edge edge, Graphics2D g2) {
 		if (null == edge)
 			return;
@@ -175,27 +167,8 @@ public class PaintHelperBasics {
 		if (null == nodeSrc || null == nodeDest)
 			return;
 
-		// g2.setStroke(new BasicStroke(5));
 		g2.draw(new Line2D.Float(start.getX(), start.getY(), end.getX(), end.getY()));
 	}
-
-//	public static void paintPath(List<Node> nodes, Graphics2D g2) {
-//		if (null != nodes || nodes.size() > 0) {
-//			setStyle(DrawStyleEnum.NewEdge, g2);
-//			if (model.getCurrentMap().getMapId() != nodes.get(0).getMap().getMapId()) {
-//				return;
-//			}
-//
-//			for (int i = 0; i < nodes.size() - 1; ++i) {
-//				paintEdge(nodes.get(i), nodes.get(i + 1), g2);
-//			}
-//		}
-//	}
-
-
-
-
-
 
 	public static LinearTransform getLinearTransform() {
 		return linearTransform;
@@ -205,19 +178,15 @@ public class PaintHelperBasics {
 		PaintHelperBasics.linearTransform = linearTransform;
 	}
 
-
 	public static void setModel(MainModel model) {
 		PaintHelperBasics.model = model;
 	}
 
-
-//	 public static String dirtmp = "/BaseModel/src/";
+	// public static String dirtmp = "/BaseModel/src/";
 	public static String dirtmp = "/src/";
-
 
 	public static String getUserDir() {
 		return System.getProperty("user.dir") + dirtmp;
 	}
-
 
 }

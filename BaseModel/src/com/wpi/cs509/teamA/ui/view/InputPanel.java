@@ -5,29 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.*;
 import com.wpi.cs509.teamA.util.*;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
 
-
-
 /**
- * JPanel that have input text fields and buttons which will be shown on the top
- * of the UI
+ * All the interactive part
  * 
  * TODO: we need a singleton here..
  * 
@@ -36,22 +27,22 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
  */
 @SuppressWarnings("serial")
 public class InputPanel extends JPanel implements ActionListener, FocusListener {
-    private MainModel model = null;
+	private MainModel model = null;
 
-    private JButton btnSearch;
-    private JButton adminLogin;
-    private JButton signUp;
-    private JLabel lblFrom;
-    private JLabel lblTo;
+	private JButton btnSearch;
+	private JButton adminLogin;
+	private JButton signUp;
+	private JLabel lblFrom;
+	private JLabel lblTo;
 	private JLabel lblSwapStartEnd;
-    private JButton btnNeighborManage;
-    private JButton btnSynchronize;
-    private JButton classroomFilter;
-    private JButton officeFilter;
-    private JButton restroomFilter;
-    private JButton labFilter;
-    private JButton parkingFilter;
-    private JButton openMap;
+	private JButton btnNeighborManage;
+	private JButton btnSynchronize;
+	private JButton classroomFilter;
+	private JButton officeFilter;
+	private JButton restroomFilter;
+	private JButton labFilter;
+	private JButton parkingFilter;
+	private JButton openMap;
 	private JButton allFilter;
 	private JButton clearFilter;
 
@@ -59,40 +50,27 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	private JToggleButton btnMngEdge;
 	private JToggleButton btnEditNodeInfo;
 
-    JTabbedPane tabbedPane;
+	JTabbedPane tabbedPane;
 
-
-    private static int numNodeBtn;
-	private static int numEdgeBtn;
-
-    private JFileChooser fc;
-    private JComboBox<String> comboBoxMap;
+	private JComboBox<String> comboBoxMap;
 
 	private UserScreen userScreen;
 	private AutoSuggestor autoSuggestorFrom;
 	private AutoSuggestor autoSuggestorTo;
-	private boolean lastSetEmptySearchWord = false;
-	private boolean lastSetSearchWord = false;
-
 	private DefaultListModel<String> mapListModel = new DefaultListModel<>();
 	private JList<String> mapList;
 	private ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
-	private JLabel picLabel;
-
-	private int adminClicked = 0;
-
 	private JTextField txtFrom;
 	private JTextField txtTo;
 
 	/**
-	 * Constructor. Initialize all the input panel.
+	 * Constructor. Initialize all the component in the input panel.
 	 */
 	public InputPanel() {
-		// // User input block
 
 		this.setLayout(null);
 
-        tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 		JPanel searchResultTab = new JPanel();
 		JPanel filterTab = new JPanel();
 		JPanel adminTab = new JPanel();
@@ -157,9 +135,9 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		lblTo.setBounds(15, 130, 61, 16);
 		add(lblTo);
 
-		lblSwapStartEnd =new JLabel();
+		lblSwapStartEnd = new JLabel();
 		lblSwapStartEnd.setIcon(NodeIcon.getRotateIcon());
-		lblSwapStartEnd.setBounds(232,112,20,30);
+		lblSwapStartEnd.setBounds(232, 112, 20, 30);
 		add(lblSwapStartEnd);
 
 		txtTo = new JTextField();
@@ -181,8 +159,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		// mapList.setFixedCellHeight(40);
 		mapList.setCellRenderer(new MarioListRenderer());
 		searchResultTab.add(mapList);
-		/// for test
-		DefaultListModel<String> model = new DefaultListModel<>();
+		new DefaultListModel<>();
 
 		// tab panel-filter
 		this.clearFilter = new JButton("ALL");
@@ -233,60 +210,46 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		}
 
 		// tab panel-admin tool
-		
-		
 
-		openMap=new JButton("Add Map");
-//		adminTab.add(openMap);
-//		openMap.setFont(buttonFont);
-		
+		openMap = new JButton("Add Map");
+		// adminTab.add(openMap);
+		// openMap.setFont(buttonFont);
+
 		btnMngNode = new JToggleButton("Manage Node");
-//		adminTab.add(btnMngNode);
-//		btnMngNode.setFont(buttonFont);
+		// adminTab.add(btnMngNode);
+		// btnMngNode.setFont(buttonFont);
 
 		btnMngEdge = new JToggleButton("Manage Edge");
-//		btnMngEdge.setFont(buttonFont);
-//		adminTab.add(btnMngEdge);
+		// btnMngEdge.setFont(buttonFont);
+		// adminTab.add(btnMngEdge);
 
-		btnEditNodeInfo =new JToggleButton("Edit Node Information");
-		
+		btnEditNodeInfo = new JToggleButton("Edit Node Information");
+
 		ArrayList<AbstractButton> adminButtons = new ArrayList<AbstractButton>();
 		adminButtons.add(openMap);
 		adminButtons.add(btnMngNode);
 		adminButtons.add(btnMngEdge);
 		adminButtons.add(btnEditNodeInfo);
-		
+
 		int adminIconWidth = 255;
 		int adminIconHeight = 50;
 		int adminYspacing = 10;
 		int adminXpos = 15;
 		int adminYpos = 10;
-		
-		for (AbstractButton button : adminButtons)
-		{
+
+		for (AbstractButton button : adminButtons) {
 			button.setBounds(adminXpos, adminYpos, adminIconWidth, adminIconHeight);
 			button.setFont(buttonFont);
 			adminYpos += adminYspacing + adminIconHeight;
 			adminTab.add(button);
 		}
-		
-		
-		BufferedImage logo;
+
 		try {
-			logo = ImageHelper.readImage("logo_iteration1.png");
-			// picLabel = new JLabel(new ImageIcon(logo));
-			// picLabel.setBounds(50, 480, 200, 200);
-			// add(picLabel);
-			// picLabel.setOpaque(true);
+			ImageHelper.readImage("logo_iteration1.png");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		numNodeBtn = 0;
-		numEdgeBtn = 0;
-
-		
 
 		// result list
 
@@ -294,53 +257,44 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 
 	@Override
 	public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (null != model.getCurrentPath())
-            getMapList().setSelectedIndex(model.getCurrentPathIdx());
+		super.paintComponent(g);
+		if (null != model.getCurrentPath())
+			getMapList().setSelectedIndex(model.getCurrentPathIdx());
 
-        if (null != model.getMyAccount() && model.getMyAccount().isAdmin()) {
+		if (null != model.getMyAccount() && model.getMyAccount().isAdmin()) {
 
-            getBtnMngEdge().setEnabled(true);
-            getBtnMngNode().setEnabled(true);
-            getOpenMap().setEnabled(true);
-            tabbedPane.setEnabledAt(2, true);
+			getBtnMngEdge().setEnabled(true);
+			getBtnMngNode().setEnabled(true);
+			getOpenMap().setEnabled(true);
+			tabbedPane.setEnabledAt(2, true);
 
-        }
-        else {
-            getBtnMngEdge().setEnabled(false);
-            getBtnMngNode().setEnabled(false);
-            getOpenMap().setEnabled(false);
-            tabbedPane.setEnabledAt(2, false);
-        }
-        Path path = model.getCurrentPath();
+		} else {
+			getBtnMngEdge().setEnabled(false);
+			getBtnMngNode().setEnabled(false);
+			getOpenMap().setEnabled(false);
+			tabbedPane.setEnabledAt(2, false);
+		}
+		model.getCurrentPath();
 		if (null == model.getPaths()) {
-            DefaultListModel<String> mapListModel = new DefaultListModel<>();
-            getMapList().setModel(mapListModel);
-        }
-        if (null != model.getCurrentMap()) {
-            getComboBoxMap().setSelectedIndex(model.getCurrentMap().getMapId()-1);
-        }
-        if (null != model.getStartNode()) {
-//            getFromText().setText(model.getStartNode().getName());
-        }
-    }
+			DefaultListModel<String> mapListModel = new DefaultListModel<>();
+			getMapList().setModel(mapListModel);
+		}
+		if (null != model.getCurrentMap()) {
+			getComboBoxMap().setSelectedIndex(model.getCurrentMap().getMapId() - 1);
+		}
+		if (null != model.getStartNode()) {
+			// getFromText().setText(model.getStartNode().getName());
+		}
+	}
 
 	public void focusLost(FocusEvent e) {
-	
+
 	}
 
 	private void processTextField(JTextField txt) {
 		if (txt.getText().trim().equals(UIConstant.SEARCHWORD)) {
-			// if (!lastSetSearchWord) {
-			// lastSetEmptySearchWord = true;
-			// lastSetSearchWord = false;
 			txt.setText("");
-			// }
 		}
-		/*
-		 * else if (lastSetSearchWord){ lastSetSearchWord = false;
-		 * lastSetEmptySearchWord = false; }
-		 */
 	}
 
 	public void focusGained(FocusEvent e) {
@@ -361,7 +315,6 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	 * @param e
 	 */
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 		// TODO: we need a pop up window here to verify the admin role.
 		// If it is the admin, give it the admin mouse click event. If
@@ -375,17 +328,11 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		if (e.getSource() == getBtnSearch()) {
 
 		}
-	
 
 	}
-	
 
-	
 	public void incrementAdminClicked() {
-		this.adminClicked++;
 	}
-
-
 
 	public JButton getBtnSynchronize() {
 		return btnSynchronize;
@@ -526,9 +473,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 		return clearFilter;
 	}
 
-	
-	public JButton getAllFilter() 
-	{
+	public JButton getAllFilter() {
 		return allFilter;
 
 	}

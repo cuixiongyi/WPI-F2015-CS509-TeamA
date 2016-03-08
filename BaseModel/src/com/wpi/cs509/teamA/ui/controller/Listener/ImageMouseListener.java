@@ -17,104 +17,97 @@ import javax.swing.event.MouseInputListener;
  */
 public class ImageMouseListener implements MouseInputListener {
 
+	private ImageComponent imageComponent = null;
+	private MainModel model = null;
 
-    private ImageComponent imageComponent = null;
-    private MainModel model = null;
+	public ImageMouseListener(ImageComponent pImageComponent, MainModel pModel) {
+		this.imageComponent = pImageComponent;
+		model = pModel;
+		addMouseMotionListener();
+		addMouseInputListener();
 
-    public ImageMouseListener(ImageComponent pImageComponent, MainModel pModel) {
-        this.imageComponent = pImageComponent;
-        model = pModel;
-        addMouseMotionListener();
-        addMouseInputListener();
+	}
 
-    }
+	public void addMouseInputListener() {
+		imageComponent.addMouseListener(this);
+	}
 
-    public void addMouseInputListener() {
-        imageComponent.addMouseListener(this);
-    }
+	public void addMouseMotionListener() {
+		imageComponent.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			/**
+			 * 
+			 * drag the map, drag and see
+			 * 
+			 */
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int x = imageComponent.getImageXpos();
+				int y = imageComponent.getImageYpos();
+				int x2 = imageComponent.getImageStartXpos() + e.getX() - imageComponent.getPressxPos();
+				int y2 = imageComponent.getImageStartYpos() + e.getY() - imageComponent.getPressyPos();
+				imageComponent.setImageXpos(x2);
+				imageComponent.setImageYpos(y2);
+				model.getLinearTransform().setX(x2);
+				model.getLinearTransform().setY(y2);
+				imageComponent.repaint();
+			}
 
-    public void addMouseMotionListener() {
-        imageComponent.addMouseMotionListener(new MouseMotionListener() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                // TODO Auto-generated method stub
-//                if (e.getButton() == MouseEvent.BUTTON1) {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
+				if (null == ret) {
+					return;
+				}
+				int x = e.getX();
+				int y = e.getY();
+				if (x < 120) {
+					ret.switchState(new AnimationStateSlidingOut(ret));
+				} else {
+					ret.switchState(new AnimationStateSlidingIn(ret));
+				}
+			}
+		});
+	}
 
-                    int x = imageComponent.getImageXpos();
-                    int y = imageComponent.getImageYpos();
-                    int x2 = imageComponent.getImageStartXpos() + e.getX() - imageComponent.getPressxPos();
-                    int y2 = imageComponent.getImageStartYpos() + e.getY() - imageComponent.getPressyPos();
-                    imageComponent.setImageXpos(x2);
-                    imageComponent.setImageYpos(y2);
-                model.getLinearTransform().setX(x2);
-                model.getLinearTransform().setY(y2);
-                    imageComponent.repaint();
-//                }
-            }
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                // TODO Auto-generated method stub
-                AnimationObject ret = ViewManager.getAC().checkObjectExist(ViewManager.getThumbNailPanel());
-                if (null == ret) {
-                    return;
-                }
-                int x = e.getX();
-                int y = e.getY();
-                if (x < 120) {
-                    ret.switchState(new AnimationStateSlidingOut(ret));
-                }
-                else {
-                    ret.switchState(new AnimationStateSlidingIn(ret));
-                }
-            }
-        });
-    }
+	@Override
+	public void mouseClicked(MouseEvent e) {
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+		model.execute(e);
 
-        model.execute(e);
+	}
 
-    }
+	@Override
+	public void mousePressed(MouseEvent e) {
+		imageComponent.setPressxPos(e.getX());
+		imageComponent.setPressyPos(e.getY());
+		imageComponent.setImageStartXpos((int) model.getLinearTransform().getX());
+		imageComponent.setImageStartYpos((int) model.getLinearTransform().getY());
+	}
 
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-//        if (e.getButton() == MouseEvent.BUTTON1) {
-            imageComponent.setPressxPos(e.getX());
-            imageComponent.setPressyPos(e.getY());
-            imageComponent.setImageStartXpos((int)model.getLinearTransform().getX());
-            imageComponent.setImageStartYpos((int)model.getLinearTransform().getY());
-//        }
-    }
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-//		stateContext.getImageComponent().setImageXpos(stateContext.getImageComponent().getImageStartXpos()+  e.getX()-stateContext.getImageComponent().getPressxPos());
-//		stateContext.getImageComponent().setImageYpos(stateContext.getImageComponent().getImageStartYpos()+  e.getY()-stateContext.getImageComponent().getPressyPos());
-//		stateContext.getImageComponent().repaint();
-		
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 }

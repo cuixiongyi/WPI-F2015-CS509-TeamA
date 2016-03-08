@@ -7,15 +7,7 @@ import java.util.Observable;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 
 /**
- * Instead of using a lot of if and else statements to capture the state of an
- * object, a state machine design pattern is a better solution that's more
- * powerful and expandable. The state of the control class is tracked by the
- * state machine and the user input will cause a state change, with all the
- * related parameters stored in the control class. States changes will occur
- * based on the state of the user. This means that the application will respond
- * to user input differently depending on whether the user is an administrator,
- * regular user, or not logged in. The will prove the be very powerful when
- * implementing new features.
+ * TODO: extends this class from a base observable class
  * 
  * @author CS 509-Team A
  *

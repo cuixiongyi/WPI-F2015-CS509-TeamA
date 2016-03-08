@@ -18,87 +18,83 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
-public class MouseActionEditEdge  extends MouseActionState {
+public class MouseActionEditEdge extends MouseActionState {
 
-    private JButton btnNeighborManage;
+	private JButton btnNeighborManage;
 
-    private java.util.List<Edge> edgeToAdd = new ArrayList<Edge>();
+	private java.util.List<Edge> edgeToAdd = new ArrayList<Edge>();
 
-    private List<Node> nodesToPaint = new ArrayList<>();
+	private List<Node> nodesToPaint = new ArrayList<>();
 
-    private Node lastNode = null;
+	private Node lastNode = null;
 
-    public MouseActionEditEdge(MainModel pMM) {
-        super(pMM);
+	public MouseActionEditEdge(MainModel pMM) {
+		super(pMM);
 
+		model.cleanUpRoute();
+	}
 
-        model.cleanUpRoute();
-    }
+	@Override
+	public boolean cleanup() {
 
-    @Override
-    public boolean cleanup() {
+		return false;
+	}
 
+	@Override
+	public boolean execute(MouseEvent e) {
+		/// update coor and coorTrans
+		getMouseTransCoor(e);
 
-        return false;
-    }
+		// we have to minus 5 to correct deviation
+		xPos = e.getX();
+		yPos = e.getY();
+		// TODO Auto-generated method stub
+		// TODO this is a hack
+		if (e.getButton() == MouseEvent.BUTTON1) {
 
-    @Override
-    public boolean execute(MouseEvent e) {
-        /// update coor and coorTrans
-        getMouseTransCoor(e);
+			Node node = Database.getNodeFromCoordinate(coorTrans, model.getCurrentMap().getMapId());
+			if (null == node) {
+				return false;
+			}
+			System.out.println(node.getId());
+			if (null == lastNode) {
+				lastNode = node;
+				nodesToPaint.add(node);
 
-        // we have to minus 5 to correct deviation
-        xPos = e.getX();
-        yPos = e.getY();
-        // TODO Auto-generated method stub
-        // TODO this is a hack
-        if (e.getButton() == MouseEvent.BUTTON1 ) {//&& neighborDialog != null && neighborDialog.isVisible()) {
-           // neighborDialog.setFieldTitle(xPos, yPos);
-            Node node = Database.getNodeFromCoordinate(coorTrans, model.getCurrentMap().getMapId());
-            if (null == node)
-            {
-                return false;
-            }
-            System.out.println(node.getId());
-            if (null == lastNode) {
-                lastNode = node;
-                nodesToPaint.add(node);
+			} else {
+				// TODO this is a hack, distance is set to -1 as default
+				edgeToAdd.add(new Edge(lastNode, node));
+				nodesToPaint.add(node);
+				NodeRelationDao nrd = new NodeRelationDaoImpl();
+				nrd.deleteOrAddEdge(lastNode, node);
+				Database.InitFromDatabase();
+				lastNode = null;
 
-            }
-            else {
-                // TODO this is a hack, distance is set to -1 as default
-                edgeToAdd.add(new Edge(lastNode, node ));
-                nodesToPaint.add(node);
-                NodeRelationDao nrd = new NodeRelationDaoImpl();
-                nrd.deleteOrAddEdge(lastNode, node);
-                Database.InitFromDatabase();
-                lastNode = null;
+			}
+		} else if (e.getButton() == MouseEvent.BUTTON1) {
+			//
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
 
-            }
-        } else if (e.getButton() == MouseEvent.BUTTON1) {
-            //
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
+		}
 
-        }
+		return false;
+	}
 
-        return false;
-    }
+	@Override
+	public void paintOnImage(Graphics2D g2) {
 
-    @Override
-    public void paintOnImage(Graphics2D g2) {
+		// TODO draw newly added edge
+		LinearTransform lt = model.getLinearTransform();
+		PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode,
+				lt);
+		PaintHelperComposite.paintEdges(model.getCurrentMap().getEdges(), g2, PaintHelperBasics.DrawStyleEnum.BasicEdge,
+				lt);
+		PaintHelperComposite.paintDots(model.getCurrentMap().getNodes(), g2, lt);
 
-        //TODO draw newly added edge
-        LinearTransform lt = model.getLinearTransform();
-        PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(),
-                g2, PaintHelperBasics.DrawStyleEnum.BasicNode, lt);
-        PaintHelperComposite.paintEdges(model.getCurrentMap().getEdges(),
-                g2, PaintHelperBasics.DrawStyleEnum.BasicEdge, lt);
-        PaintHelperComposite.paintDots(model.getCurrentMap().getNodes(), g2, lt);
-
-        PaintHelperComposite.paintDots(Database.getAllMapRelationNodesFromMapId(model.getCurrentMapID()), g2, lt, PaintHelperBasics.DrawStyleEnum.NewNode);
-        ;
-        if (null != lastNode && model.getCurrentMap().getMapId() == lastNode.getMap().getMapId()) {
-            PaintHelperBasics.paintDot(lastNode, g2, PaintHelperBasics.DrawStyleEnum.SelectedNode);
-        }
-    }
+		PaintHelperComposite.paintDots(Database.getAllMapRelationNodesFromMapId(model.getCurrentMapID()), g2, lt,
+				PaintHelperBasics.DrawStyleEnum.NewNode);
+		if (null != lastNode && model.getCurrentMap().getMapId() == lastNode.getMap().getMapId()) {
+			PaintHelperBasics.paintDot(lastNode, g2, PaintHelperBasics.DrawStyleEnum.SelectedNode);
+		}
+	}
 }

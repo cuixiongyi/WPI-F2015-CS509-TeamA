@@ -1,8 +1,6 @@
 package com.wpi.cs509.teamA.util.PaintHelper;
 
-import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
@@ -15,7 +13,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Created by cuixi on 12/14/2015.
@@ -60,7 +57,7 @@ public class PaintImageHelper extends PaintHelperBasics{
 
 
     public static void paintMultiMaps(Graphics2D g2, Path path, LinearTransform plt) {
-//        setPrintMap(map, 1, 0, 0);
+    	
         if (null == path || path.getNodes().size() == 0) {
 
             return;
@@ -69,8 +66,6 @@ public class PaintImageHelper extends PaintHelperBasics{
 
         PaintHelperComposite.paintNodes(path.getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode, plt);
         PaintHelperComposite.paintStartEndNode( g2, path, plt);
-
-//        PaintHelperBasics.restorePrintMap(originalMap, scale, imageXpos, imageYpos);
 
     }
 

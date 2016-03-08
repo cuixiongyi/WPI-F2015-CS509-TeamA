@@ -17,7 +17,7 @@ public class ParkingManager {
 	static ArrayList<Integer> originalNum;
 
 	public ParkingManager() {
-		timer.schedule(new UpdateParkingLot(), 1000, 2000);
+		// timer.schedule(new UpdateParkingLot(), 1000, 2000);
 		parkingName = new ArrayList<String>();
 		originalNum = new ArrayList<Integer>();
 		for (Node n : Database.getAllNodeListFromDatabase()) {
@@ -58,7 +58,7 @@ public class ParkingManager {
 	}
 }
 
-class UpdateParkingLot extends TimerTask {
+/*class UpdateParkingLot extends TimerTask {
 
 	public void run() {
 		ParkingManager.updateParkingLot();
@@ -66,4 +66,4 @@ class UpdateParkingLot extends TimerTask {
 		ViewManager.updateView();
 		
 	}
-}
+}*/

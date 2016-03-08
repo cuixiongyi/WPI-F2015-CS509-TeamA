@@ -10,6 +10,11 @@ import java.awt.event.MouseEvent;
 
 /**
  *
+ * TODO: This class should be put into mouse action state package
+ * 
+ * this class is an interface for all the implementation class to follow
+ * so all the mouse action will have same method interface
+ *
  * This is the abstract class for state pattern
  */
 public abstract class MouseActionState {

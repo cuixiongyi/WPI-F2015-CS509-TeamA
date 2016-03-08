@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * This model should extends from a base observable class
+ * 
+ * This class should contains only data
  * 
  */
 public final class MainModel extends StateContext {
