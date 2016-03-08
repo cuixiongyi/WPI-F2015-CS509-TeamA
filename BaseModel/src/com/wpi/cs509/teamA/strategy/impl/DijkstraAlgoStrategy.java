@@ -44,7 +44,6 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 				des = context.getGraph().get(n.getId());
 				if (des.getDist() < i) {
 					i = des.getDist();
-					//System.out.println("Des ID: "+ des.getId()+ "\n"+"Des Dis: "+des.getDist());
 					destination = des;
 				}
 			}
@@ -53,9 +52,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	}
 
 	private Stack<Node> findPathFromDij(Vertex source, Vertex d) {
-		// Vertex d= new Vertex();
-		// d=d;
-		// System.out.println(d.getDist());
+
 		Stack<Node> result = new Stack<Node>();
 		do {
 			result.push(d);

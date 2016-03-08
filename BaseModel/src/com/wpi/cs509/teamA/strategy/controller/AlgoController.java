@@ -71,6 +71,8 @@ public class AlgoController {
 
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
+		// this is legacy code for the first iteration
+		// leave here for memory
 		if (flag) {
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 
@@ -79,11 +81,9 @@ public class AlgoController {
 		}
 
 		if (this.isMultipleDestination) {
-			System.out.println("multiple destination");
 			generalAlgorithm.setAlgoStrategy(new MultipleDestinations());
 			this.isMultipleDestination = false;
 		} else {
-			System.out.println("Find nearest");
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 		}
 

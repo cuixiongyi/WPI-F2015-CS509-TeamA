@@ -45,7 +45,6 @@ public class ViewImageComponentListenerController {
 	 */
 	private ViewImageComponentListenerController() {
 
-		// new ImageMouseListener(imageComponent, model);
 		imageComponent.addMouseListener(new ImageMouseListener());
 		imageComponent.addMouseWheelListener(new ImageMouseWheelListener());
 	}

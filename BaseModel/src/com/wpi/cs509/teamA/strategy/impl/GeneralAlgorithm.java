@@ -54,17 +54,8 @@ public class GeneralAlgorithm {
 
 		Stack<Node> result = new Stack<Node>();
 
-		// different strategy will use different algorithm..
+		// different strategy will use different algorithm
 		result = algoStrategy.getRoute(edges);
-
-//		// TODO: Query node objects from node Id's and add all node objects to
-//		// result
-//		NodeDao nd = new NodeDaoImpl();
-//		// add this one by one to the result
-//		List<Node> routeOnOneMap = nd.getNodeFromIds(nodeIds);
-//
-//		// 
-//		result.put(UIDataBuffer.getCurrentMapId(), routeOnOneMap);
 
 		return result;
 	}

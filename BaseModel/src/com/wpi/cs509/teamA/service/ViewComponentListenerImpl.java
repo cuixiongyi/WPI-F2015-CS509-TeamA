@@ -190,6 +190,7 @@ public class ViewComponentListenerImpl {
 
 			}
 
+			// get the result
 			Stack<Node> pathNodes = algoController.getRoute();
 			ArrayList<Node> singleMapPath = new ArrayList<Node>();
 			ArrayList<String> mapNameList = new ArrayList<String>();
@@ -197,7 +198,9 @@ public class ViewComponentListenerImpl {
 			int tmpMapId = pathNodes.peek().getMap().getMapId();
 			mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
 			mapList.add(pathNodes.peek().getMap());
+
 			model.clearPaths();
+
 			Path path = new Path();
 
 			while (pathNodes.size() > 0) {

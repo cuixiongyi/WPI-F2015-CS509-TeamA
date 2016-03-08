@@ -3,8 +3,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-/*Takes one source and one graph
- * run Dijkstra
+/**
+ * Takes one source and one graph run Dijkstra
  */
 
 public class Dijkstra {
