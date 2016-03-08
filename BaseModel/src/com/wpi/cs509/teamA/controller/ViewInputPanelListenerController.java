@@ -2,10 +2,7 @@ package com.wpi.cs509.teamA.controller;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.service.ImageMouseListener;
-import com.wpi.cs509.teamA.service.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.service.ViewComponentListenerImpl;
-import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
@@ -31,12 +28,8 @@ public class ViewInputPanelListenerController {
 
 	private static ViewInputPanelListenerController viewListenerController;
 
-	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
 	private static MainModel model = ViewComponent.getModel();
 	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
-
-	private ImageMouseListener mouseListener;
-	private ImageMouseWheelListener wheelListener;
 
 	private ViewComponentListenerImpl impl;
 
@@ -57,9 +50,6 @@ public class ViewInputPanelListenerController {
 
 	private ViewInputPanelListenerController() {
 
-		mouseListener = new ImageMouseListener(imageComponent, model);
-		wheelListener = new ImageMouseWheelListener(imageComponent, model);
-
 		impl = new ViewComponentListenerImpl();
 		addButtonSearch();
 		addButtonSignup();
@@ -72,10 +62,6 @@ public class ViewInputPanelListenerController {
 		addButtonEditEdge();
 		addLabelRotate();
 		addButtonEditNodeInfo();
-	}
-
-	public static void addViewListenders() {
-
 	}
 
 	private void addOpenFile() {

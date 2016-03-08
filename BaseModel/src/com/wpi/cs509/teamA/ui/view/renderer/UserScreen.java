@@ -11,6 +11,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import com.wpi.cs509.teamA.controller.ViewImageComponentListenerController;
 import com.wpi.cs509.teamA.controller.ViewInputPanelListenerController;
 import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
@@ -90,7 +91,9 @@ public class UserScreen extends JFrame {
 		PaintHelperBasics.setModel(mainModel);
 		PaintHelperComposite.setModel(mainModel);
 		PaintImageHelper.setModel(mainModel);
+		// TODO: Refactor, should be able to bind them together
 		ViewInputPanelListenerController.bindListeners();
+		ViewImageComponentListenerController.bindListeners();
 
 		parkingManager = new ParkingManager();
 		parkingManager.setModel(mainModel);

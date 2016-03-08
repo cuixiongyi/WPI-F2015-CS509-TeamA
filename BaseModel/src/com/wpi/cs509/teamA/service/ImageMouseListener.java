@@ -15,6 +15,8 @@ import javax.swing.event.MouseInputListener;
 /**
  * This class implements what the should do when mouse has some certain events
  * 
+ * TODO: singleton, this should be initialized only once
+ * 
  * @author teama
  */
 public class ImageMouseListener implements MouseInputListener {

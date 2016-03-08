@@ -1,16 +1,17 @@
 package com.wpi.cs509.teamA.service;
 
-import com.wpi.cs509.teamA.bean.GeneralMap;
-import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.model.StateContextModel;
-import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
-import com.wpi.cs509.teamA.util.Coordinate;
-
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
+import com.wpi.cs509.teamA.util.Coordinate;
+
 /**
  * This class implements what the should do when mouse has some certain events
+ * 
+ * TODO: singleton, this should be initialized only once
  * 
  * @author teama
  */
@@ -51,7 +52,7 @@ public class ImageMouseWheelListener implements MouseWheelListener {
 		if (scale + scaleInc > upperBound || scale + scaleInc < lowerBound)
 			return;
 
-		changeDisplayScale(scaleInc, new Coordinate(Math.round(e.getX()), Math.round(e.getY())));
+		this.changeDisplayScale(scaleInc, new Coordinate(Math.round(e.getX()), Math.round(e.getY())));
 	}
 
 	private void changeDisplayScale(float scaleInc, Coordinate coor) {
@@ -59,6 +60,7 @@ public class ImageMouseWheelListener implements MouseWheelListener {
 		double scale = map.getDisplayScale() + scaleInc;
 		map.setDisplayScale((float) scale);
 		model.getLinearTransform().setScale(scale);
+		// TODO: Refactor
 		int xpos = imageComponent.getImageXpos();
 		int ypos = imageComponent.getImageYpos();
 		int x = scaleImageOffset(xpos, scaleInc, coor.getX());

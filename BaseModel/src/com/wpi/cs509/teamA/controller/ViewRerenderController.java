@@ -15,7 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This class will listen to the change of the view and then update the view or
+ * This controller will listen to the change of the model and then update the view or
  * to say, rerender the view
  * 
  * this class behaves like a controller
