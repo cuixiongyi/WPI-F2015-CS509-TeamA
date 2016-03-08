@@ -20,14 +20,16 @@ import java.util.List;
  * 
  * This class behaves like a controller
  * 
- * Based on the button, it decides which operation will be binded to
+ * Based on the button, it decides which listener will be binded to
  * 
  * The implementation class is in the service layer
  * 
  * @author teama
  *
  */
-public class ViewListenerController {
+public class ViewInputPanelListenerController {
+
+	private static ViewInputPanelListenerController viewListenerController;
 
 	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
 	private static MainModel model = ViewComponent.getModel();
@@ -38,7 +40,23 @@ public class ViewListenerController {
 
 	private ViewComponentListenerImpl impl;
 
-	public ViewListenerController() {
+	/**
+	 * 
+	 * This singleton makes sure that the listeners will be only binded once
+	 * 
+	 * @return true the first time the listeners are binded
+	 */
+	public static synchronized boolean bindListeners() {
+		if (viewListenerController == null) {
+			viewListenerController = new ViewInputPanelListenerController();
+			return true;
+		}
+
+		return false;
+	}
+
+	private ViewInputPanelListenerController() {
+
 		mouseListener = new ImageMouseListener(imageComponent, model);
 		wheelListener = new ImageMouseWheelListener(imageComponent, model);
 
@@ -54,6 +72,10 @@ public class ViewListenerController {
 		addButtonEditEdge();
 		addLabelRotate();
 		addButtonEditNodeInfo();
+	}
+
+	public static void addViewListenders() {
+
 	}
 
 	private void addOpenFile() {
