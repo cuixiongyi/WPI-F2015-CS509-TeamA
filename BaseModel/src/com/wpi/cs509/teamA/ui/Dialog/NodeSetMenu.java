@@ -6,8 +6,8 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
@@ -30,7 +30,7 @@ import javax.swing.JMenuItem;
 @SuppressWarnings("serial")
 public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	private Node node;
-	private InputPanel inputPanel;
+	private InputPanelComponent inputPanel;
 	private JMenuItem mntmSrc;
 	private JMenuItem mntmDes;
 	private JMenuItem cleanupMap;
@@ -48,7 +48,7 @@ public class NodeSetMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeSetMenu(InputPanel inputPanel,
+	public NodeSetMenu(InputPanelComponent inputPanel,
 					   MainModel pModel,
 					   Node node) {
 		this.node = node;

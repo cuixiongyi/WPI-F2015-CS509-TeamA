@@ -1,22 +1,20 @@
-package com.wpi.cs509.teamA.ui.controller;
+package com.wpi.cs509.teamA.ui.view.component;
 
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
-import com.wpi.cs509.teamA.ui.view.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.InputPanel;
 
-public class ViewControllerBase {
+public class ViewComponent {
 
 	static protected ImageComponent imageComponent = null;
-	static protected InputPanel inputPanel = null;
+	static protected InputPanelComponent inputPanel = null;
 	static protected MainModel model = null;
 	static protected AnimationControl ac = new AnimationControl();
 
-	protected ViewControllerBase() {
+	protected ViewComponent() {
 
 	}
 
-	static public void init(ImageComponent pIC, InputPanel pIP, MainModel pMM) {
+	static public void init(ImageComponent pIC, InputPanelComponent pIP, MainModel pMM) {
 		if (null == pIC)
 			throw new NullPointerException("Empty ImageComponent");
 		if (null == pIP)

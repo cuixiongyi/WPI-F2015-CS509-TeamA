@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.view;
+package com.wpi.cs509.teamA.ui.view.component;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;

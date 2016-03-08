@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.view;
+package com.wpi.cs509.teamA.ui.view.component;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
  *
  */
 @SuppressWarnings("serial")
-public class InputPanel extends JPanel implements ActionListener, FocusListener {
+public class InputPanelComponent extends JPanel implements ActionListener, FocusListener {
 	private MainModel model = null;
 
 	private JButton btnSearch;
@@ -66,7 +66,7 @@ public class InputPanel extends JPanel implements ActionListener, FocusListener 
 	/**
 	 * Constructor. Initialize all the component in the input panel.
 	 */
-	public InputPanel() {
+	public InputPanelComponent() {
 
 		this.setLayout(null);
 

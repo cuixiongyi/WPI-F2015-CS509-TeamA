@@ -12,12 +12,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.controller.ViewController;
-import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.view.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.ViewComponentListener;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
+import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
 import com.wpi.cs509.teamA.util.ParkingManager;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
@@ -36,7 +36,7 @@ public class UserScreen extends JFrame {
 	private static UserScreen userScreen;
 	private JLayeredPane contentPane;
 	private ImageComponent imgComponent;
-	private ViewController controller;
+	private ViewComponentListener controller;
 
 	MainModel mainModel = null;
 	ViewManager viewManager = null;
@@ -46,7 +46,7 @@ public class UserScreen extends JFrame {
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
 	 */
-	private InputPanel inputPanel;
+	private InputPanelComponent inputPanel;
 
 	/**
 	 * Initialize the user screen, constructor
@@ -73,7 +73,7 @@ public class UserScreen extends JFrame {
 		/**
 		 * set dependence
 		 */
-		inputPanel = new InputPanel();
+		inputPanel = new InputPanelComponent();
 		imgComponent = new ImageComponent();
 
 		// set up the data model
@@ -82,7 +82,7 @@ public class UserScreen extends JFrame {
 		// set up a static model for further references
 		MainModel.setStaticModel(mainModel);
 
-		ViewControllerBase.init(imgComponent, inputPanel, mainModel);
+		ViewComponent.init(imgComponent, inputPanel, mainModel);
 
 		// AnimationPathControl.init(mainModel);
 		viewManager = new ViewManager();
@@ -91,7 +91,7 @@ public class UserScreen extends JFrame {
 		PaintHelperBasics.setModel(mainModel);
 		PaintHelperComposite.setModel(mainModel);
 		PaintImageHelper.setModel(mainModel);
-		controller = new ViewController();
+		controller = new ViewComponentListener();
 		mainModel.addObserver(viewManager);
 		parkingManager = new ParkingManager();
 		parkingManager.setModel(mainModel);

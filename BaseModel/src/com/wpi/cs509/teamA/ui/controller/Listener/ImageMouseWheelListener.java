@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.controller.Listener;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContextModel;
-import com.wpi.cs509.teamA.ui.view.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
 import com.wpi.cs509.teamA.util.Coordinate;
 
 import java.awt.event.MouseWheelEvent;

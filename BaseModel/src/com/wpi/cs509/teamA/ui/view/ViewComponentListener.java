@@ -1,8 +1,9 @@
-package com.wpi.cs509.teamA.ui.controller;
+package com.wpi.cs509.teamA.ui.view;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
+import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 
@@ -11,18 +12,18 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.util.List;
 
-public class ViewController extends ViewControllerBase {
+public class ViewComponentListener extends ViewComponent {
 
 	private ImageMouseListener mouseListener = null;
 	private ImageMouseWheelListener wheelListener = null;
 
-	private ViewControllerImpl impl = null;
+	private ViewComponentListenerImpl impl = null;
 
-	public ViewController() {
+	public ViewComponentListener() {
 		mouseListener = new ImageMouseListener(imageComponent, model);
 		wheelListener = new ImageMouseWheelListener(imageComponent, model);
 
-		impl = new ViewControllerImpl();
+		impl = new ViewComponentListenerImpl();
 		addButtonSearch();
 		addButtonSignup();
 		addListSelectionListener();

@@ -7,9 +7,9 @@ import com.wpi.cs509.teamA.exception.PwdIncorrectException;
 import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.view.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,7 +44,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private JButton okButton;
 	private JButton cancelButton;
 	private ImageComponent imgPanel;
-	private InputPanel inputPanel;
+	private InputPanelComponent inputPanel;
 	private UserAccount user;
 
     private MainModel model;
@@ -59,7 +59,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public AdminDialog(MainModel pModel, InputPanel inputPanel) {
+	public AdminDialog(MainModel pModel, InputPanelComponent inputPanel) {
 		this.model = pModel;
 		this.inputPanel = inputPanel;
 		setTitle(LOG);

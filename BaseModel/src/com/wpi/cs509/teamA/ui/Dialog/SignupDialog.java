@@ -22,8 +22,8 @@ import javax.swing.border.LineBorder;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
-import com.wpi.cs509.teamA.ui.view.InputPanel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 
 public class SignupDialog extends JDialog implements ActionListener  {
 	
@@ -42,13 +42,13 @@ public class SignupDialog extends JDialog implements ActionListener  {
 	private JLabel lbPassword2;
 	private JButton okButton;
 	private JButton cancelButton;
-	private InputPanel inputPanel;
+	private InputPanelComponent inputPanel;
 	
 	private enum adminName{
 		cui,zhaojun,nick,xiongkuang,yizhou,jie,stella
 	}
 	
-	public SignupDialog(InputPanel inputPanel)
+	public SignupDialog(InputPanelComponent inputPanel)
 	{
 		this.inputPanel = inputPanel;
 		setTitle("Sign Up");

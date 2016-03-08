@@ -6,9 +6,9 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
 import com.wpi.cs509.teamA.ui.Dialog.InformationPanel;
 import com.wpi.cs509.teamA.ui.Dialog.ThumbNailPanel;
-import com.wpi.cs509.teamA.ui.controller.ViewControllerBase;
-import com.wpi.cs509.teamA.ui.view.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.InputPanel;
+import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
+import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -16,7 +16,7 @@ import java.util.Observer;
 /**
  * Created by cuixi on 12/3/2015.
  */
-public class ViewManager extends ViewControllerBase implements Observer {
+public class ViewManager extends ViewComponent implements Observer {
 
 	private int mousePos = 0;
 	private static InformationPanel nodeInformation = new InformationPanel();
@@ -63,7 +63,7 @@ public class ViewManager extends ViewControllerBase implements Observer {
 		return imageComponent;
 	}
 
-	static public InputPanel getInputPanel() {
+	static public InputPanelComponent getInputPanel() {
 		return inputPanel;
 	}
 

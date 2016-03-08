@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.controller;
+package com.wpi.cs509.teamA.ui.view;
 
 import java.awt.Dialog;
 import java.util.ArrayList;
@@ -28,11 +28,11 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEdit
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNodeInfo;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.view.ViewManager;
+import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 
-class ViewControllerImpl extends ViewControllerBase {
+class ViewComponentListenerImpl extends ViewComponent {
 
 	public void clickLogin() {
 		if (model.getMyAccount() == null) {
