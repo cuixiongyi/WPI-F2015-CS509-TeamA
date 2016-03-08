@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.view;
+package com.wpi.cs509.teamA.service;
 
 import java.awt.Dialog;
 import java.util.ArrayList;
@@ -28,13 +28,21 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEdit
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNodeInfo;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.UserScreen;
 import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 
-class ViewComponentListenerImpl {
+/**
+ * 
+ * This class implements all the operations that will change the model
+ * 
+ * @author teama
+ *
+ */
+public class ViewComponentListenerImpl {
 
 	private static MainModel model = ViewComponent.getModel();
 	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
@@ -140,12 +148,12 @@ class ViewComponentListenerImpl {
 
 	public void clickAllFilter() {
 		model.addAllFilters();
-		ViewManager.updateView();
+		// ViewManager.updateView();
 	}
 
 	public void clickClearFilter() {
 		model.clearFilters();
-		ViewManager.updateView();
+		// ViewManager.updateView();
 	}
 
 	public void clickSearch() {

@@ -11,9 +11,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import com.wpi.cs509.teamA.controller.ViewComponentListener;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
-import com.wpi.cs509.teamA.ui.view.ViewComponentListener;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.DBInitializer;
 import com.wpi.cs509.teamA.util.ParkingManager;
@@ -31,7 +31,9 @@ import com.wpi.cs509.teamA.util.view.renderer.helper.PaintImageHelper;
 @SuppressWarnings("serial")
 public class UserScreen extends JFrame {
 
+	// singleton
 	private static UserScreen userScreen;
+	
 	private JLayeredPane contentPane;
 	private ImageComponentRenderer imgComponent;
 	private ViewComponentListener controller;

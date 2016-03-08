@@ -15,7 +15,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Created by cuixi on 12/3/2015.
+ * This class will listen to the change of the view and then update the view or
+ * to say, rerender the view
  */
 public class ViewManager implements Observer {
 

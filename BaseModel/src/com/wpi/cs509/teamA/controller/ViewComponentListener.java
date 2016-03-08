@@ -1,7 +1,8 @@
-package com.wpi.cs509.teamA.ui.view;
+package com.wpi.cs509.teamA.controller;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.service.ViewComponentListenerImpl;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
 import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
@@ -15,16 +16,23 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * 
+ * @author teama
+ *
+ */
 public class ViewComponentListener {
 
 	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
 	private static MainModel model = ViewComponent.getModel();
 	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
 
-	private ImageMouseListener mouseListener = null;
-	private ImageMouseWheelListener wheelListener = null;
+	private ImageMouseListener mouseListener;
+	private ImageMouseWheelListener wheelListener;
 
-	private ViewComponentListenerImpl impl = null;
+	private ViewComponentListenerImpl impl;
 
 	public ViewComponentListener() {
 		mouseListener = new ImageMouseListener(imageComponent, model);
