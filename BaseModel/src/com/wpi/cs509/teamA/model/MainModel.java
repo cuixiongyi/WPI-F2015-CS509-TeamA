@@ -20,7 +20,7 @@ import java.util.List;
  * This class should contains only data
  * 
  */
-public final class MainModel extends StateContext {
+public final class MainModel extends StateContextModel {
 
 	public static MainModel staticModel = null;
 

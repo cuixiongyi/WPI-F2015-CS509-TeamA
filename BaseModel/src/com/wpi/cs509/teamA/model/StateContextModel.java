@@ -1,10 +1,9 @@
 package com.wpi.cs509.teamA.model;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
-import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionState;
 
 /**
@@ -15,7 +14,7 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionStat
  *
  */
 
-public class StateContext extends Observable {
+public class StateContextModel extends Observable {
 
 	/**
 	 * The current state
@@ -25,7 +24,7 @@ public class StateContext extends Observable {
 	/**
 	 * Constructor. Initialize a default state.
 	 */
-	protected StateContext() {
+	protected StateContextModel() {
 		myState = null;
 
 	}

@@ -2,7 +2,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
-import com.wpi.cs509.teamA.model.StateContext;
+import com.wpi.cs509.teamA.model.StateContextModel;
 import com.wpi.cs509.teamA.ui.view.ImageComponent;
 
 import javax.swing.JPopupMenu;

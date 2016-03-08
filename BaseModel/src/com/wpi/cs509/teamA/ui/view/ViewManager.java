@@ -37,6 +37,7 @@ public class ViewManager extends ViewControllerBase implements Observer{
     }
 
     static public void updateImageComponent() {
+    	System.out.println("ViewManager updateImageComponent");
         imageComponent.repaint();
     }
 
