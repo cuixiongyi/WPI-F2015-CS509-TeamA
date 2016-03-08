@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui;
+package com.wpi.cs509.teamA.ui.init;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;

@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui;
+package com.wpi.cs509.teamA.ui.init;
 
 import com.wpi.cs509.teamA.util.Database;
 

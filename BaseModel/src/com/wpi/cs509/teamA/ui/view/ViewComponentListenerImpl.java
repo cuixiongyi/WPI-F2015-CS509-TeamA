@@ -15,8 +15,6 @@ import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.strategy.controller.AlgoController;
-import com.wpi.cs509.teamA.ui.UIConstant;
-import com.wpi.cs509.teamA.ui.UserScreen;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;
@@ -28,6 +26,8 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEdit
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNodeInfo;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.init.UIConstant;
+import com.wpi.cs509.teamA.ui.init.UserScreen;
 import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;

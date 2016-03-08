@@ -28,7 +28,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.newfeature.SearchSupply;
-import com.wpi.cs509.teamA.ui.UIConstant;
+import com.wpi.cs509.teamA.ui.init.UIConstant;
 import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
