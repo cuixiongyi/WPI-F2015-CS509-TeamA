@@ -1,15 +1,10 @@
 package com.wpi.cs509.teamA.util;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
@@ -25,15 +20,12 @@ import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.OtherFeatureDao;
 import com.wpi.cs509.teamA.dao.ProfessorDao;
-import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.MajorDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.MapDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.dao.impl.ProfessorDaoImpl;
-import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
-import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 

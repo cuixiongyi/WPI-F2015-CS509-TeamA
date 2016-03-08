@@ -8,9 +8,11 @@ package com.wpi.cs509.teamA.model;
  * This will composites both data and state model and provides method to operate
  * on those two models
  * 
- * @author JLou
+ * @author teama
  *
  */
 public class ModelService {
+	
+	
 
 }
