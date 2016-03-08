@@ -4,7 +4,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.NodeIcon;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

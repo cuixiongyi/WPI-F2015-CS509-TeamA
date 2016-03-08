@@ -29,7 +29,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.newfeature.SearchSupply;
 import com.wpi.cs509.teamA.ui.init.UIConstant;
-import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 import com.wpi.cs509.teamA.util.NodeType;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
@@ -44,7 +44,7 @@ public class AutoSuggestor {
 	private int currentIndexOfSpace, tW, tH;
 	private double windowLocationX;
 	private double windowLocationY;
-	private InputPanelComponent inputPanel;
+	private InputPanelRenderer inputPanel;
 	private final static int MAXNUMLABEL = 20;
 	
 	private DocumentListener documentListener = new DocumentListener() {
@@ -500,7 +500,7 @@ public class AutoSuggestor {
 		return suggestionAdded;
 	}
 
-	public void setInputPanel(InputPanelComponent inputPanel) {
+	public void setInputPanel(InputPanelRenderer inputPanel) {
 		this.inputPanel = inputPanel;
 	}
 

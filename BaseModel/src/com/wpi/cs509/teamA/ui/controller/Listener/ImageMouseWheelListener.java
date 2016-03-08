@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.controller.Listener;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContextModel;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.util.Coordinate;
 
 import java.awt.event.MouseWheelEvent;
@@ -18,10 +18,10 @@ public class ImageMouseWheelListener implements MouseWheelListener {
 	static private double upperBound = 2.5;
 	static private double lowerBound = 0.5;
 
-	private ImageComponent imageComponent = null;
+	private ImageComponentRenderer imageComponent = null;
 	private MainModel model = null;
 
-	public ImageMouseWheelListener(ImageComponent pImageComponent, MainModel pModel) {
+	public ImageMouseWheelListener(ImageComponentRenderer pImageComponent, MainModel pModel) {
 		this.imageComponent = pImageComponent;
 		model = pModel;
 		if (null == pModel) {

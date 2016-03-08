@@ -23,7 +23,7 @@ import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 
 public class SignupDialog extends JDialog implements ActionListener  {
 	
@@ -42,13 +42,13 @@ public class SignupDialog extends JDialog implements ActionListener  {
 	private JLabel lbPassword2;
 	private JButton okButton;
 	private JButton cancelButton;
-	private InputPanelComponent inputPanel;
+	private InputPanelRenderer inputPanel;
 	
 	private enum adminName{
 		cui,zhaojun,nick,xiongkuang,yizhou,jie,stella
 	}
 	
-	public SignupDialog(InputPanelComponent inputPanel)
+	public SignupDialog(InputPanelRenderer inputPanel)
 	{
 		this.inputPanel = inputPanel;
 		setTitle("Sign Up");

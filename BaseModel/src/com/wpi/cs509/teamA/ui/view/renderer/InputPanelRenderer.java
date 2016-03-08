@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.view.component;
+package com.wpi.cs509.teamA.ui.view.renderer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,11 +22,13 @@ import com.wpi.cs509.teamA.util.AutoSuggestUtil.AutoSuggestor;
  * 
  * TODO: we need a singleton here..
  * 
+ * This is the actuall view of all the input panel components
+ * 
  * @author CS 509-Team A
  *
  */
 @SuppressWarnings("serial")
-public class InputPanelComponent extends JPanel implements ActionListener, FocusListener {
+public class InputPanelRenderer extends JPanel implements ActionListener, FocusListener {
 	private MainModel model = null;
 
 	private JButton btnSearch;
@@ -66,7 +68,7 @@ public class InputPanelComponent extends JPanel implements ActionListener, Focus
 	/**
 	 * Constructor. Initialize all the component in the input panel.
 	 */
-	public InputPanelComponent() {
+	public InputPanelRenderer() {
 
 		this.setLayout(null);
 

@@ -5,7 +5,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingIn;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingOut;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -17,10 +17,10 @@ import javax.swing.event.MouseInputListener;
  */
 public class ImageMouseListener implements MouseInputListener {
 
-	private ImageComponent imageComponent;
+	private ImageComponentRenderer imageComponent;
 	private MainModel model;
 
-	public ImageMouseListener(ImageComponent pImageComponent, MainModel pModel) {
+	public ImageMouseListener(ImageComponentRenderer pImageComponent, MainModel pModel) {
 		this.imageComponent = pImageComponent;
 		model = pModel;
 		addMouseMotionListener();

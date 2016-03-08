@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.view.component;
+package com.wpi.cs509.teamA.ui.view.renderer;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,17 +11,17 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.LinearTransform;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperComposite;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;
 
 /**
- * 
+ * This is the view for the image, render the image here
  * 
  * @author CS 509-Team A
  *
  */
 @SuppressWarnings("serial")
-public class ImageComponent extends JComponent {
+public class ImageComponentRenderer extends JComponent {
 
 	private MainModel model;
 
@@ -40,7 +40,7 @@ public class ImageComponent extends JComponent {
 	 * 
 	 *
 	 */
-	public ImageComponent() {
+	public ImageComponentRenderer() {
 
 	}
 

@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -46,7 +46,7 @@ public class NodeEditDialog extends JDialog implements ActionListener {
 
 	private Node existingNode = null;
 
-	private ImageComponent imagePanel;
+	private ImageComponentRenderer imagePanel;
 
 	private final static String COORDINATE = "Node Coordinate";
 	private final static String TYPE = "Node Type";
@@ -60,7 +60,7 @@ public class NodeEditDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public NodeEditDialog(ImageComponent imageComponent,
+	public NodeEditDialog(ImageComponentRenderer imageComponent,
 						  MainModel pModel,
 						  int xPosition, int yPosition) {
 		xPos = xPosition;
@@ -164,7 +164,7 @@ public class NodeEditDialog extends JDialog implements ActionListener {
 
 	}
 
-	public NodeEditDialog(ImageComponent imageComponent,
+	public NodeEditDialog(ImageComponentRenderer imageComponent,
 						  MainModel pModel,
 						  Node pNode) {
 		this( imageComponent, pModel, pNode.getLocation().getX(), pNode.getLocation().getY());

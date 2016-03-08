@@ -6,8 +6,8 @@ import com.wpi.cs509.teamA.ui.Dialog.NodeEditDialog;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.LinearTransform;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperComposite;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

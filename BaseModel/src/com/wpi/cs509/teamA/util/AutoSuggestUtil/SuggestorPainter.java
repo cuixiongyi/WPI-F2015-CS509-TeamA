@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 
 import com.wpi.cs509.teamA.util.ImageHelper;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 
 public class SuggestorPainter {
 

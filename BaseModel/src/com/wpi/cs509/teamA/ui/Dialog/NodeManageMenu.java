@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.Dialog;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.model.StateContextModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 
 import javax.swing.JPopupMenu;
 
@@ -23,7 +23,7 @@ import javax.swing.JMenuItem;
 public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	private int xPos;
 	private int yPos;
-	private ImageComponent imagePanel;
+	private ImageComponentRenderer imagePanel;
 	private JMenuItem mntmAdd;
 	private JMenuItem mntmDelete;
 	private JMenuItem mntmEdit;
@@ -37,7 +37,7 @@ public class NodeManageMenu extends JPopupMenu implements ActionListener {
 	/**
 	 * Create the Menu.
 	 */
-	public NodeManageMenu(ImageComponent imageComponent, int xPosition, int yPosition, MainModel pmodel) {
+	public NodeManageMenu(ImageComponentRenderer imageComponent, int xPosition, int yPosition, MainModel pmodel) {
 		xPos = xPosition;
 		yPos = yPosition;
 		imagePanel = imageComponent;

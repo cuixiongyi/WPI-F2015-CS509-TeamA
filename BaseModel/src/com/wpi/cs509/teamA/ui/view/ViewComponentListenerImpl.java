@@ -28,7 +28,7 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEdit
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.init.UIConstant;
 import com.wpi.cs509.teamA.ui.init.UserScreen;
-import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 

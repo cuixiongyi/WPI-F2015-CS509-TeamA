@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 
 
 public class NodeIcon {

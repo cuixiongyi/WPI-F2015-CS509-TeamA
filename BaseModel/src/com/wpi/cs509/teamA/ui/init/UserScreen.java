@@ -15,13 +15,13 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewComponentListener;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
-import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 import com.wpi.cs509.teamA.util.ParkingManager;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperComposite;
-import com.wpi.cs509.teamA.util.renderer.PaintImageHelper;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintImageHelper;
 
 /**
  * This is the class that construct the main user interface of the application
@@ -35,7 +35,7 @@ public class UserScreen extends JFrame {
 
 	private static UserScreen userScreen;
 	private JLayeredPane contentPane;
-	private ImageComponent imgComponent;
+	private ImageComponentRenderer imgComponent;
 	private ViewComponentListener controller;
 
 	MainModel mainModel = null;
@@ -46,7 +46,7 @@ public class UserScreen extends JFrame {
 	 * A JPanel that have input text fields and buttons which will be shown on
 	 * the top of the UI
 	 */
-	private InputPanelComponent inputPanel;
+	private InputPanelRenderer inputPanel;
 
 	/**
 	 * Initialize the user screen, constructor
@@ -73,8 +73,8 @@ public class UserScreen extends JFrame {
 		/**
 		 * set dependence
 		 */
-		inputPanel = new InputPanelComponent();
-		imgComponent = new ImageComponent();
+		inputPanel = new InputPanelRenderer();
+		imgComponent = new ImageComponentRenderer();
 
 		// set up the data model
 		mainModel = new MainModel();

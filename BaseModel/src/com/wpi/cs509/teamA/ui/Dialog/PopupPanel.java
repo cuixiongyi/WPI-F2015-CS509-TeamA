@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

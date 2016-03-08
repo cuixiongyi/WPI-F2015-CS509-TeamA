@@ -8,8 +8,8 @@ import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -43,8 +43,8 @@ public class AdminDialog extends JDialog implements ActionListener {
 	private JLabel lbPassword;
 	private JButton okButton;
 	private JButton cancelButton;
-	private ImageComponent imgPanel;
-	private InputPanelComponent inputPanel;
+	private ImageComponentRenderer imgPanel;
+	private InputPanelRenderer inputPanel;
 	private UserAccount user;
 
     private MainModel model;
@@ -59,7 +59,7 @@ public class AdminDialog extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public AdminDialog(MainModel pModel, InputPanelComponent inputPanel) {
+	public AdminDialog(MainModel pModel, InputPanelRenderer inputPanel) {
 		this.model = pModel;
 		this.inputPanel = inputPanel;
 		setTitle(LOG);

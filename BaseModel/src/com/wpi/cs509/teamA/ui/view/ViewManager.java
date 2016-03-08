@@ -6,9 +6,9 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
 import com.wpi.cs509.teamA.ui.Dialog.InformationPanel;
 import com.wpi.cs509.teamA.ui.Dialog.ThumbNailPanel;
-import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
-import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
-import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -59,11 +59,11 @@ public class ViewManager extends ViewComponent implements Observer {
 
 	}
 
-	static public ImageComponent getImageComponent() {
+	static public ImageComponentRenderer getImageComponent() {
 		return imageComponent;
 	}
 
-	static public InputPanelComponent getInputPanel() {
+	static public InputPanelRenderer getInputPanel() {
 		return inputPanel;
 	}
 
