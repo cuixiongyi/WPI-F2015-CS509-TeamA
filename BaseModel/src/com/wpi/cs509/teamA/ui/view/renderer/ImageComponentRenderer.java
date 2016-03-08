@@ -23,6 +23,9 @@ import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;
 @SuppressWarnings("serial")
 public class ImageComponentRenderer extends JComponent {
 
+	/**
+	 * All the data
+	 */
 	private MainModel model;
 
 	private BufferedImage image;
@@ -34,12 +37,6 @@ public class ImageComponentRenderer extends JComponent {
 	private int pressxPos;
 	private int pressyPos;
 
-	/**
-	 * Constructor for image component The constructor will also add all the
-	 * Listeners to the inputPanel it got
-	 * 
-	 *
-	 */
 	public ImageComponentRenderer() {
 
 	}

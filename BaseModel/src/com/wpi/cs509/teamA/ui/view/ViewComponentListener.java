@@ -1,8 +1,11 @@
 package com.wpi.cs509.teamA.ui.view;
 
 import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseListener;
 import com.wpi.cs509.teamA.ui.controller.Listener.ImageMouseWheelListener;
+import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
@@ -12,7 +15,11 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.util.List;
 
-public class ViewComponentListener extends ViewComponent {
+public class ViewComponentListener {
+
+	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
+	private static MainModel model = ViewComponent.getModel();
+	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
 
 	private ImageMouseListener mouseListener = null;
 	private ImageMouseWheelListener wheelListener = null;

@@ -1,6 +1,7 @@
 package com.wpi.cs509.teamA.ui.view;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateSlidingDown;
@@ -16,9 +17,13 @@ import java.util.Observer;
 /**
  * Created by cuixi on 12/3/2015.
  */
-public class ViewManager extends ViewComponent implements Observer {
+public class ViewManager implements Observer {
 
-	private int mousePos = 0;
+	private static ImageComponentRenderer imageComponent = ViewComponent.getImageComponent();
+	private static MainModel model = ViewComponent.getModel();
+	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
+	private static AnimationControl ac = ViewComponent.getAc();
+
 	private static InformationPanel nodeInformation = new InformationPanel();
 	private static ThumbNailPanel thumbNailPanel = new ThumbNailPanel(model);
 

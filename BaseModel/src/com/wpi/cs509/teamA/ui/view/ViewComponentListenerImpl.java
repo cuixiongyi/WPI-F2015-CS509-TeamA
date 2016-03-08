@@ -15,6 +15,7 @@ import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.constants.UIConstant;
 import com.wpi.cs509.teamA.dao.UserAccountDao;
 import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
+import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.strategy.controller.AlgoController;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
@@ -27,12 +28,16 @@ import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEdit
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNode;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionEditNodeInfo;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.UserScreen;
 import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.NodeType;
 
-class ViewComponentListenerImpl extends ViewComponent {
+class ViewComponentListenerImpl {
+
+	private static MainModel model = ViewComponent.getModel();
+	private static InputPanelRenderer inputPanel = ViewComponent.getInputPanel();
 
 	public void clickLogin() {
 		if (model.getMyAccount() == null) {

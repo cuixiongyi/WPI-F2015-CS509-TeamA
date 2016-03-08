@@ -14,10 +14,10 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
  */
 public class ViewComponent {
 
-	static protected ImageComponentRenderer imageComponent = null;
-	static protected InputPanelRenderer inputPanel = null;
-	static protected MainModel model = null;
-	static protected AnimationControl ac = new AnimationControl();
+	static private ImageComponentRenderer imageComponent = null;
+	static private InputPanelRenderer inputPanel = null;
+	static private MainModel model = null;
+	static private AnimationControl ac = new AnimationControl();
 
 	protected ViewComponent() {
 
@@ -34,6 +34,66 @@ public class ViewComponent {
 		imageComponent = pIC;
 		inputPanel = pIP;
 		model = pMM;
+	}
+
+	/**
+	 * @return the imageComponent
+	 */
+	public static ImageComponentRenderer getImageComponent() {
+		return imageComponent;
+	}
+
+	/**
+	 * @param imageComponent
+	 *            the imageComponent to set
+	 */
+	public static void setImageComponent(ImageComponentRenderer imageComponent) {
+		ViewComponent.imageComponent = imageComponent;
+	}
+
+	/**
+	 * @return the inputPanel
+	 */
+	public static InputPanelRenderer getInputPanel() {
+		return inputPanel;
+	}
+
+	/**
+	 * @param inputPanel
+	 *            the inputPanel to set
+	 */
+	public static void setInputPanel(InputPanelRenderer inputPanel) {
+		ViewComponent.inputPanel = inputPanel;
+	}
+
+	/**
+	 * @return the model
+	 */
+	public static MainModel getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model
+	 *            the model to set
+	 */
+	public static void setModel(MainModel model) {
+		ViewComponent.model = model;
+	}
+
+	/**
+	 * @return the ac
+	 */
+	public static AnimationControl getAc() {
+		return ac;
+	}
+
+	/**
+	 * @param ac
+	 *            the ac to set
+	 */
+	public static void setAc(AnimationControl ac) {
+		ViewComponent.ac = ac;
 	}
 
 }
