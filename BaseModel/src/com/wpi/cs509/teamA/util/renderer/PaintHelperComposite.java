@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.util.PaintHelper;
+package com.wpi.cs509.teamA.util.renderer;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;

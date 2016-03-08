@@ -6,7 +6,7 @@ import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeIcon;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
+import com.wpi.cs509.teamA.util.renderer.PaintImageHelper;
 
 import javax.swing.*;
 import java.awt.*;

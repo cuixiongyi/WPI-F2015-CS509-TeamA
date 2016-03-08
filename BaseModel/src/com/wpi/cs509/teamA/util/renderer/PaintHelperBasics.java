@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.util.PaintHelper;
+package com.wpi.cs509.teamA.util.renderer;
 
 import java.awt.*;
 import java.awt.geom.Line2D;

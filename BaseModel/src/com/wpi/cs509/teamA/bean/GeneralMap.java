@@ -13,7 +13,7 @@ import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.InputMatrix;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
 
 /**
  * This is a class that defines all the map we want. It is also the class that

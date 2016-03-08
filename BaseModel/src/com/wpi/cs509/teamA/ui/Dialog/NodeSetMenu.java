@@ -9,8 +9,8 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
 import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 import com.wpi.cs509.teamA.util.LinearTransform;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
+import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.renderer.PaintImageHelper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

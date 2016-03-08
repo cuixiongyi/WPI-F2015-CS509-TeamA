@@ -19,9 +19,9 @@ import com.wpi.cs509.teamA.ui.view.component.ImageComponent;
 import com.wpi.cs509.teamA.ui.view.component.InputPanelComponent;
 import com.wpi.cs509.teamA.ui.view.component.ViewComponent;
 import com.wpi.cs509.teamA.util.ParkingManager;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintImageHelper;
+import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.renderer.PaintHelperComposite;
+import com.wpi.cs509.teamA.util.renderer.PaintImageHelper;
 
 /**
  * This is the class that construct the main user interface of the application

@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.util.PaintHelper;
+package com.wpi.cs509.teamA.util.renderer;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

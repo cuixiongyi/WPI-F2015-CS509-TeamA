@@ -4,8 +4,8 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.Dialog.NodeInfoDIalog;
 import com.wpi.cs509.teamA.util.LinearTransform;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperBasics;
-import com.wpi.cs509.teamA.util.PaintHelper.PaintHelperComposite;
+import com.wpi.cs509.teamA.util.renderer.PaintHelperBasics;
+import com.wpi.cs509.teamA.util.renderer.PaintHelperComposite;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
