@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.init;
+package com.wpi.cs509.teamA.constants;
 
 /**
  * Team-A

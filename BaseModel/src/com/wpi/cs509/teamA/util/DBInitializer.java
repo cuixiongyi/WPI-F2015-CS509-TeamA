@@ -1,6 +1,4 @@
-package com.wpi.cs509.teamA.ui.init;
-
-import com.wpi.cs509.teamA.util.Database;
+package com.wpi.cs509.teamA.util;
 
 /**
  * We would like to initialize database in a different thread

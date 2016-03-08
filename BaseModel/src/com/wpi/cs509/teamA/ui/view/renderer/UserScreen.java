@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.init;
+package com.wpi.cs509.teamA.ui.view.renderer;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -15,9 +15,7 @@ import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.ViewComponentListener;
 import com.wpi.cs509.teamA.ui.view.ViewManager;
-import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
-import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
-import com.wpi.cs509.teamA.ui.view.renderer.ViewComponent;
+import com.wpi.cs509.teamA.util.DBInitializer;
 import com.wpi.cs509.teamA.util.ParkingManager;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;

@@ -2,10 +2,10 @@ package com.wpi.cs509.teamA.ui.Animation;
 
 import javax.swing.*;
 
+import com.wpi.cs509.teamA.constants.UIConstant;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationState;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateContext;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStatePattern.AnimationStateStayIn;
-import com.wpi.cs509.teamA.ui.init.UIConstant;
 
 /**
  * Created by cuixi on 12/10/2015.
