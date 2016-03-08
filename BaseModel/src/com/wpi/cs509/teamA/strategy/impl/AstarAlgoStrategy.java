@@ -2,8 +2,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 
 import com.wpi.cs509.teamA.bean.*;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.controller.allEdges;
-import com.wpi.cs509.teamA.strategy.controller.mapVertex;
+import com.wpi.cs509.teamA.strategy.controller.AllEdges;
+import com.wpi.cs509.teamA.strategy.controller.MapVertex;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class AstarAlgoStrategy implements AlgoStrategy {
 	private int startNodeId;
 	private int endNodeId;
 
-	public Stack<Node> getRoute(allEdges alledges) {
+	public Stack<Node> getRoute(AllEdges alledges) {
 		this.startNode = alledges.getStartNode();
 		this.endNode = alledges.getEndNode();
 		List<Node> l = new ArrayList<Node>();
@@ -37,8 +37,8 @@ public class AstarAlgoStrategy implements AlgoStrategy {
 		}
 
 		@SuppressWarnings("unchecked")
-		Stack<mapVertex> s = (Stack<mapVertex>) alledges.getMapsOnPath().clone();
-		mapVertex m = new mapVertex();
+		Stack<MapVertex> s = (Stack<MapVertex>) alledges.getMapsOnPath().clone();
+		MapVertex m = new MapVertex();
 		while (!s.isEmpty()) {
 			Stack<Node> r = new Stack<Node>();
 			m = s.pop();

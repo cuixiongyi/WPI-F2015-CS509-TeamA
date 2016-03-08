@@ -9,7 +9,7 @@ import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.*;
 
-public class allEdges {
+public class AllEdges {
 	private Map<Integer, List<Edge>> edgesOnMap;
 	private Stack<GeneralMap> mapsOnPath;
 	private Stack<Integer> mapsId;
@@ -18,10 +18,10 @@ public class allEdges {
 	private Node startNode;
 	private Node endNode;// when there is one certain destination
 	private Node[] end;
-	private HashMap<Integer, mapVertex> graphMaps;
+	private HashMap<Integer, MapVertex> graphMaps;
 	private boolean isMulEndNodes;
 
-	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
+	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
@@ -29,7 +29,7 @@ public class allEdges {
 		this.isMulEndNodes=false;
 	}
 
-	public allEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
+	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
@@ -71,7 +71,7 @@ public class allEdges {
 	/**
 	 * return boundary nodes on map1
 	 */
-	public List<Node> getBoundaryNodes(mapVertex map1, mapVertex map2) {
+	public List<Node> getBoundaryNodes(MapVertex map1, MapVertex map2) {
 		if (!this.mapsId.contains(map1.getMapId())) {
 			System.out.println("Requested Map not on path...");
 			return null;
@@ -196,10 +196,10 @@ public class allEdges {
 
 		for (Edge e : mapEdges) {
 			if (!graphMaps.containsKey(e.getNode1().getMap().getMapId())) {
-				graphMaps.put(e.getNode1().getMap().getMapId(), new mapVertex(e.getNode1().getMap()));
+				graphMaps.put(e.getNode1().getMap().getMapId(), new MapVertex(e.getNode1().getMap()));
 			}
 			if (!graphMaps.containsKey(e.getNode2().getMap().getMapId())) {
-				graphMaps.put(e.getNode2().getMap().getMapId(), new mapVertex(e.getNode2().getMap()));
+				graphMaps.put(e.getNode2().getMap().getMapId(), new MapVertex(e.getNode2().getMap()));
 			}
 		}
 		// System.out.println(graphMaps.get(0).getMapId());
@@ -220,17 +220,17 @@ public class allEdges {
 			// return 0;
 		}
 
-		mapVertex source = new mapVertex();
+		MapVertex source = new MapVertex();
 		source = graphMaps.get(startNode.getMap().getMapId());
-		mapVertex destination = new mapVertex();
+		MapVertex destination = new MapVertex();
 		destination = graphMaps.get(endNode.getMap().getMapId());
 		// System.out.println(destination.getMapId());
 		// System.out.println(source.getMapId());
 
-		PriorityQueue<mapVertex> q = new PriorityQueue<mapVertex>();
+		PriorityQueue<MapVertex> q = new PriorityQueue<MapVertex>();
 
 		// set-up vertices
-		for (mapVertex v : graphMaps.values()) {
+		for (MapVertex v : graphMaps.values()) {
 			v.setPrevious((v == source) ? source : null);
 			v.setDist((v == source) ? 0 : Integer.MAX_VALUE);
 			// System.out.println("++++++++++++++");
@@ -239,7 +239,7 @@ public class allEdges {
 		// System.out.println(q.size());
 		dijkstraMap(q);
 
-		mapVertex d = new mapVertex();
+		MapVertex d = new MapVertex();
 		d = destination;
 		// System.out.println(d.getDist());
 		do {
@@ -252,8 +252,8 @@ public class allEdges {
 
 	}
 
-	private void dijkstraMap(final PriorityQueue<mapVertex> q) {
-		mapVertex u;
+	private void dijkstraMap(final PriorityQueue<MapVertex> q) {
+		MapVertex u;
 		while (!q.isEmpty()) {
 
 			u = q.poll(); // vertex with shortest distance (first iteration
@@ -265,7 +265,7 @@ public class allEdges {
 				// since they are unreachable
 
 			// look at distances to each neighbor
-			for (mapVertex v : u.getNeighborM()) {
+			for (MapVertex v : u.getNeighborM()) {
 				// System.out.println("++++++++++++++");
 				int alternateDist = u.getDist() + 1;
 				if (alternateDist < v.getDist()) { // shorter path to neighbor

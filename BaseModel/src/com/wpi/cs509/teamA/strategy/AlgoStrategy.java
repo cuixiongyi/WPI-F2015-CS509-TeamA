@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.strategy;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.strategy.controller.allEdges;
+import com.wpi.cs509.teamA.strategy.controller.AllEdges;
 
 /**
  * We decided to use a Strategy Pattern for the path finding algorithms. We did
@@ -20,6 +20,6 @@ import com.wpi.cs509.teamA.strategy.controller.allEdges;
  */
 public interface AlgoStrategy {
 	
-	Stack<Node> getRoute(allEdges edges);
+	Stack<Node> getRoute(AllEdges edges);
 
 }

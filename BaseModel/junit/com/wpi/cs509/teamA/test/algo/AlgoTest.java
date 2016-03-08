@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
 import com.wpi.cs509.teamA.strategy.controller.AlgoController;
-import com.wpi.cs509.teamA.strategy.controller.allEdges;
+import com.wpi.cs509.teamA.strategy.controller.AllEdges;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 //import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
@@ -159,7 +159,7 @@ public class AlgoTest {
 
 		/// endNodes
 		Node[] node00={node15, node4};
-		allEdges edgess= new allEdges(edges, mapedges,node9, node00);
+		AllEdges edgess= new AllEdges(edges, mapedges,node9, node00);
 		route=d.getRoute(edgess);
 
 		//route=algoController.getRoute();

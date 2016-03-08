@@ -38,7 +38,7 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-	private allEdges edges;
+	private AllEdges edges;
 	private boolean flag = false;
 	boolean isMultipleDestination = false;
 
@@ -48,7 +48,7 @@ public class AlgoController {
 
 	public AlgoController(Node from, ArrayList<Node> to) {
 		if (to.size() == 1) {
-			edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, to.get(0));
+			edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, to.get(0));
 			flag = true;
 		}
 	}
@@ -56,7 +56,7 @@ public class AlgoController {
 	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
 		Node[] end = new Node[to.size()];
 		to.toArray(end);
-		edges = new allEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, end);
+		edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, end);
 		this.isMultipleDestination = true;
 	}
 

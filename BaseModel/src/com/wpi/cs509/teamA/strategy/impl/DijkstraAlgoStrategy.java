@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Stack;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.controller.allEdges;
+import com.wpi.cs509.teamA.strategy.controller.AllEdges;
 
 /**
  * Dijkstra Strategy
@@ -17,7 +17,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int endNodeId;
 
 	@Override
-	public Stack<Node> getRoute(allEdges alledges) {
+	public Stack<Node> getRoute(AllEdges alledges) {
 		this.startNodeId = alledges.getStartNode().getId();
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();

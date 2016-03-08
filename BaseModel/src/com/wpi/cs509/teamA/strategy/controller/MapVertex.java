@@ -8,18 +8,18 @@ import java.util.Map;
 import com.wpi.cs509.teamA.bean.*;
 import com.wpi.cs509.teamA.strategy.impl.Vertex;
 
-public class mapVertex extends GeneralMap implements Comparable<mapVertex> {
+public class MapVertex extends GeneralMap implements Comparable<MapVertex> {
 	private Integer id;
 	private int dist = Integer.MAX_VALUE;
-	private mapVertex previous = null;
-	private List<mapVertex> neighborM = new ArrayList<>();
+	private MapVertex previous = null;
+	private List<MapVertex> neighborM = new ArrayList<>();
 	private List<Edge> BoundaryEdges = new ArrayList<>();
 
-	public mapVertex() {
+	public MapVertex() {
 
 	}
 
-	public mapVertex(GeneralMap map) {
+	public MapVertex(GeneralMap map) {
 		this.id = (Integer) map.getMapId();
 		this.BoundaryEdges = map.getBoundaryEdges();
 	}
@@ -41,19 +41,19 @@ public class mapVertex extends GeneralMap implements Comparable<mapVertex> {
 		this.dist = dist;
 	}
 
-	public mapVertex getPrevious() {
+	public MapVertex getPrevious() {
 		return previous;
 	}
 
-	public void setPrevious(mapVertex map) {
+	public void setPrevious(MapVertex map) {
 		this.previous = map;
 	}
 
-	public List<mapVertex> getNeighborM() {
+	public List<MapVertex> getNeighborM() {
 		return neighborM;
 	}
 
-	public void setNeighborM(List<mapVertex> neighborM) {
+	public void setNeighborM(List<MapVertex> neighborM) {
 		this.neighborM = neighborM;
 	}
 
@@ -65,7 +65,7 @@ public class mapVertex extends GeneralMap implements Comparable<mapVertex> {
 		BoundaryEdges = boundaryEdges;
 	}
 
-	public int compareTo(mapVertex other) {
+	public int compareTo(MapVertex other) {
 		return Integer.compare(dist, other.dist);
 	}
 
