@@ -34,7 +34,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		Vertex source = context.getGraph().get(startNodeId);
 
 		// TODO: need to get a return value here!
-		new Dijkstra(graph, source).runDijkstra();
+		new DijkstraImpl(graph, source).runDijkstra();
 		Vertex destination = new Vertex();
 
 		if (alledges.isNormal()) {

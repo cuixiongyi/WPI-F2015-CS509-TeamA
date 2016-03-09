@@ -10,11 +10,11 @@ import java.util.PriorityQueue;
  * @author JLou
  *
  */
-public class Dijkstra {
+public class DijkstraImpl {
 
 	private PriorityQueue<Vertex> q;
 
-	public Dijkstra(Map<Integer, Vertex> graph, Vertex source) {
+	public DijkstraImpl(Map<Integer, Vertex> graph, Vertex source) {
 
 		q = new PriorityQueue<Vertex>();
 

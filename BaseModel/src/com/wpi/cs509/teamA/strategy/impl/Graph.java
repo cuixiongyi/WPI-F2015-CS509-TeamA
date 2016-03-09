@@ -50,6 +50,7 @@ public class Graph {
 		 */
 
 		for (Edge e : edges) {
+			// TODO: Should we refactor this to set neighbor?
 			graph.get(e.getNode1().getId()).getNeighborV().put(graph.get(e.getNode2().getId()), e.getDist());
 			graph.get(e.getNode2().getId()).getNeighborV().put(graph.get(e.getNode1().getId()), e.getDist());
 		}

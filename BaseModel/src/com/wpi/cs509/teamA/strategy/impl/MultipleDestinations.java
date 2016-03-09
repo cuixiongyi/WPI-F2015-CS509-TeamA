@@ -42,7 +42,7 @@ public class MultipleDestinations implements AlgoStrategy {
 		while (i < endNodeId.length) { // last end node does not need to run
 										// Dijkstra on
 			source = context.getGraph().get(endNodeId[i]);
-			Dijkstra dij = new Dijkstra(graph, source);
+			DijkstraImpl dij = new DijkstraImpl(graph, source);
 			Vertex des = new Vertex();
 			for (int j = 0; j < endNodeId.length; j++) {
 				des = context.getGraph().get(endNodeId[j]);
