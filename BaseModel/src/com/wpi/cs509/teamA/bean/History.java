@@ -2,13 +2,13 @@ package com.wpi.cs509.teamA.bean;
 
 /**
  * 
- * This class record the user searchin history
+ * This class record the user search history
  * 
  * @author Team-A
  *
  */
 public class History {
-	
+
 	private int nodeid;
 	private String historyStr;
 	private int count;

@@ -1,13 +1,8 @@
 package com.wpi.cs509.teamA.bean;
 
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
@@ -16,9 +11,7 @@ import com.wpi.cs509.teamA.util.InputMatrix;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 
 /**
- * This is a class that defines all the map we want. It is also the class that
- * really get the matrix from the data from database. In the other words, it
- * provides the matrix to the ProxyMap class.
+ * This is a class that defines all the map we want.
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -94,15 +87,6 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	}
 
-	// TODO: assign value from the database to the adjacencyMatrix, make a new
-	// Matrix
-	private InputMatrix makeMatrix() {
-
-		// test..
-		return new InputMatrix();
-
-	}
-
 	@Override
 	/**
 	 * the implementation of getting an adjacency matrix, this method will
@@ -111,6 +95,17 @@ public class GeneralMap implements AdjacencyMatrix {
 	public InputMatrix getAdjacencyMatrix() {
 		// TODO Auto-generated method stub
 		return adjacencyMatrix;
+	}
+
+	public void readImage() {
+
+		// display the image. Note that " /" only works on UNIX
+		this.mapImgPath = PaintHelperBasics.getUserDir() + this.imageName;
+		try {
+			image = ImageHelper.readImage(this.imageName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -168,17 +163,6 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	public String getMapImgPath() {
 		return mapImgPath;
-	}
-
-	public void readImage() {
-
-		// display the image. Note that " /" only works on UNIX
-		this.mapImgPath = PaintHelperBasics.getUserDir() + this.imageName;
-		try {
-			image = ImageHelper.readImage(this.imageName);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public BufferedImage getImage() {

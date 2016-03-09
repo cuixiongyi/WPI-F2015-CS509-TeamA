@@ -6,9 +6,11 @@ import java.util.List;
 
 /**
  * 
- * A Graph that consists of all the Edge data
+ * A Graph that has all the vertex information
  * 
- * We get all the edges to construct the graph
+ * This is more like mapping a node to vertex
+ * 
+ * We use all the edges to construct the graph
  * 
  * and we also have a hashmap that contains node id and the Vertex
  * 
@@ -40,7 +42,7 @@ public class Graph {
 		}
 
 		/**
-		 * another pass to set neighboring vertices
+		 * another pass to set neighboring for all the vertices
 		 * 
 		 * must add vertex neighbor when all edges information are collected
 		 * 

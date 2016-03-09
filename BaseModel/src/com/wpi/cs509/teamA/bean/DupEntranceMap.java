@@ -5,9 +5,11 @@ import java.util.Map;
 
 /**
  * This class will handle all the points those are in the same position but
- * indifferent map The class will get data from database via using method
- * initDupEntranceMap(), then use method getDupEntranceMap() you will be able to
- * get all the point pairs in a map.
+ * indifferent map
+ * 
+ * The class will get data from database via using method initDupEntranceMap(),
+ * then use method getDupEntranceMap() you will be able to get all the point
+ * pairs in a map.
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -64,7 +66,7 @@ public class DupEntranceMap {
 	 *
 	 */
 	class SamePoint {
-		
+
 		private int firstNodeId;
 		private int firstNodeMapId;
 		private int secondNodeId;

@@ -11,7 +11,7 @@ public class Path {
 	private GeneralMap map;
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 
-	Path(GeneralMap pmap, ArrayList<Node> pnodes) {
+	public Path(GeneralMap pmap, ArrayList<Node> pnodes) {
 		map = pmap;
 		nodes = pnodes;
 	}

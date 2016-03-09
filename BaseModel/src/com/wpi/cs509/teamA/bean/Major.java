@@ -8,7 +8,7 @@ package com.wpi.cs509.teamA.bean;
  *
  */
 public class Major {
-	
+
 	private String majorName;
 	private String majorAbbr;
 	private int nodeId;
