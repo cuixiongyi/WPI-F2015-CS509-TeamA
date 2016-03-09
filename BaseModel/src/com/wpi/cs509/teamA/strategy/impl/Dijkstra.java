@@ -8,20 +8,18 @@ import java.util.PriorityQueue;
  */
 
 public class Dijkstra {
-	PriorityQueue<Vertex> q;
-	// HashMap<Integer, Vertex> g;
+
+	private PriorityQueue<Vertex> q;
 
 	public Dijkstra(Map<Integer, Vertex> graph, Vertex source) {
+		
 		q = new PriorityQueue<Vertex>();
-		// g=(HashMap<Integer, Vertex>) graph;
 
 		// set-up vertices
 		for (Vertex v : graph.values()) {
 			v.setPrevious((v == source) ? source : null);
 			v.setDist((v == source) ? 0 : Double.MAX_VALUE);
 			q.add(v);
-			// System.out.println("+++"+v.id);
-			// System.out.println(q.size());
 		}
 
 		dijkstra(q);
@@ -32,31 +30,27 @@ public class Dijkstra {
 		Vertex u, v;
 		while (!q.isEmpty()) {
 
-			u = q.poll(); // vertex with shortest distance (first iteration
-							// will return source)
-			// System.out.println("id is"+u.getId());
-			// System.out.println(u.getDist());
-			// System.out.println(u.getNeighborV().size());
-			// System.out.println(this.endNodeId)
+			// vertex with shortest distance (first iteration will return
+			// source)
+			u = q.poll();
+
+			// we can ignore u (and any other remaining vertices) since they are
+			// unreachable
 			if (u.getDist() == Double.MAX_VALUE)
-				break; // we can ignore u (and any other remaining vertices)
-						// since they are unreachable
+				break;
 
 			// look at distances to each neighbor
 			for (Map.Entry<Vertex, Double> a : u.getNeighborV().entrySet()) {
-				v = a.getKey(); // the neighbor in this iteration
+				// the neighbor in this iteration
+				v = a.getKey();
 
 				double alternateDist = u.getDist() + a.getValue();
-				if (alternateDist < v.getDist()) { // shorter path to neighbor
-													// found
-					// System.out.println("+++++");
+				if (alternateDist < v.getDist()) {
+					// shorter path to neighbor found
 					q.remove(v);
 					v.setDist(alternateDist);
-					// System.out.println(v.getId());
-					// System.out.println(v.getDist());
 					v.setPrevious(u);
 					q.add(v);
-					// System.out.println(q.size());
 				}
 			}
 		}

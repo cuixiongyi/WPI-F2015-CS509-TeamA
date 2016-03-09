@@ -56,6 +56,8 @@ public class AlgoController {
 	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
 		Node[] end = new Node[to.size()];
 		to.toArray(end);
+		// TODO: this is very error prone to init from node here in all edges
+		// but not the algo itself
 		edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, end);
 		this.isMultipleDestination = true;
 	}

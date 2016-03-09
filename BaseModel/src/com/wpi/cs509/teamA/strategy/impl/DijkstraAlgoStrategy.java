@@ -13,24 +13,25 @@ import com.wpi.cs509.teamA.strategy.controller.AllEdges;
  *
  */
 public class DijkstraAlgoStrategy implements AlgoStrategy {
-	
+
 	private int startNodeId;
 	private int endNodeId;
 
 	@Override
 	public Stack<Node> getRoute(AllEdges alledges) {
+
+		// TODO: the start node should not get from all edges.. so obscure and
+		// very unsafe
 		this.startNodeId = alledges.getStartNode().getId();
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 		if (!graph.containsKey(startNodeId)) {
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
-			// return 0;
 		}
 
-		Vertex source = new Vertex();
-		source = context.getGraph().get(startNodeId);
+		Vertex source = context.getGraph().get(startNodeId);
 
-		// what is dij about?
+		// TODO: what is Dijkstra about?
 		Dijkstra dij = new Dijkstra(graph, source);
 		Vertex destination = new Vertex();
 

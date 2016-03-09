@@ -5,10 +5,19 @@ import com.wpi.cs509.teamA.bean.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ *  
+ * 
+ * @author JLou
+ *
+ */
 public class Vertex extends Node implements Comparable<Vertex> {
+
 	private GeneralMap map;
-	private double dist = Double.MAX_VALUE; // MAX_VALUE assumed to be infinity
-	private Vertex previous = null;
+	private double dist = Double.MAX_VALUE;
+	private Vertex previous;
+	// the next two are for a star
 	private double hcost;
 	private double gcost;
 
@@ -19,10 +28,17 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	}
 
 	public Vertex(Node node) {
+
+		// TODO: refactor to super
 		this.id = node.getId();
 		this.location = node.getLocation();
 		this.map = node.getMap();
-		;
+
+	}
+
+	@Override
+	public int compareTo(Vertex other) {
+		return Double.compare(dist, other.dist);
 	}
 
 	public GeneralMap getMap() {
@@ -54,10 +70,6 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	 */
 	public void setHcost(double hcost) {
 		this.hcost = hcost;
-	}
-
-	public int compareTo(Vertex other) {
-		return Double.compare(dist, other.dist);
 	}
 
 	/**

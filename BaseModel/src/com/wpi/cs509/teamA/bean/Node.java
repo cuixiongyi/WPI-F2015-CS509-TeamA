@@ -1,7 +1,5 @@
 package com.wpi.cs509.teamA.bean;
 
-import com.wpi.cs509.teamA.dao.NodeDao;
-import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
 import com.wpi.cs509.teamA.util.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +22,6 @@ public class Node {
 	/** the coordinate of the node */
 	protected Coordinate location;
 
-	// which map this node belongs to
 	/** define which map the node belongs to */
 	protected GeneralMap map;
 
@@ -35,6 +32,7 @@ public class Node {
 	private NodeType nodeType;
 
 	/** Display coordinate on map image */
+	// TODO: why we need this?
 	private Coordinate displayCoor;
 
 	/** default constructor */
@@ -74,18 +72,6 @@ public class Node {
 		this.map = map;
 		this.nodeType = NodeType.valueOf(nodeType);
 		this.displayCoor = new Coordinate(x, y);
-	}
-
-	/** add neighbors to the node */
-	public void addNeighbour(String nodeId) {
-
-	}
-
-	/**
-	 * delete the node itself and also delte this node from all its neighbors
-	 */
-	public void deleteNode() {
-
 	}
 
 	/**

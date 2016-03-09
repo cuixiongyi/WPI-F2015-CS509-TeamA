@@ -1,7 +1,16 @@
 package com.wpi.cs509.teamA.bean;
 
+/**
+ * 
+ * An Edge class consists of 2 node and the distance
+ * 
+ * @author JLou
+ *
+ */
 public class Edge {
+
 	private Node node1, node2;
+
 	// distance between the two nodes
 	private double dist;
 

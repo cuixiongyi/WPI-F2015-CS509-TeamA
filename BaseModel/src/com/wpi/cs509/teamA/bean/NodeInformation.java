@@ -2,8 +2,6 @@ package com.wpi.cs509.teamA.bean;
 
 import java.util.List;
 
-import com.wpi.cs509.teamA.util.Database;
-
 public class NodeInformation {
 
 	private Node node;
@@ -102,12 +100,6 @@ public class NodeInformation {
 			}
 		}
 		return line;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Database.InitFromDatabase();
-		System.out.println(Database.getNodeInformation(53).PrintNodeInfo());
 	}
 
 }

@@ -4,16 +4,31 @@ import com.wpi.cs509.teamA.bean.*;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 
+ * A Graph that consists of all the Edge data
+ * 
+ * We get all the edges to construct the graph
+ * 
+ * and we also have a hashmap that contains node id and the Vertex
+ * 
+ * @author JLou
+ *
+ */
 public class Graph {
 
 	// mapping of vertex names to Vertex objects, built from a set of Edges
 	private HashMap<Integer, Vertex> graph;
 	private List<Edge> edges;
 
+	public Graph() {
+
+	}
+
 	/** Builds a graph from a set of edges */
 	public Graph(List<Edge> edges) {
 		graph = new HashMap<>(edges.size());
-		//
+
 		// one pass to find all vertices
 		for (Edge e : edges) {
 			if (!graph.containsKey(e.getNode1().getId())) {
@@ -30,8 +45,7 @@ public class Graph {
 			graph.get(e.getNode1().getId()).getNeighborV().put(graph.get(e.getNode2().getId()), e.getDist());
 			graph.get(e.getNode2().getId()).getNeighborV().put(graph.get(e.getNode1().getId()), e.getDist());
 		}
-
-		// add edges info to nodes for deletions
+		
 	}
 
 	public List<Edge> getEdges() {
