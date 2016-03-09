@@ -33,8 +33,8 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		// get the start vertex
 		Vertex source = context.getGraph().get(startNodeId);
 
-		// TODO: what is Dijkstra about?
-		Dijkstra dij = new Dijkstra(graph, source);
+		// TODO: need to get a return value here!
+		new Dijkstra(graph, source).runDijkstra();
 		Vertex destination = new Vertex();
 
 		if (alledges.isNormal()) {
@@ -51,6 +51,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 				}
 			}
 		}
+		
 		return findPathFromDij(source, destination);
 	}
 

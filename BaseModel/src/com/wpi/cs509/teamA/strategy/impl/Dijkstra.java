@@ -28,11 +28,15 @@ public class Dijkstra {
 			q.add(v);
 		}
 
-		dijkstra(q);
 	}
 
 	/** Implementation of dijkstra's algorithm using a binary heap. */
-	private void dijkstra(final PriorityQueue<Vertex> q) {
+	public void runDijkstra() {
+
+		if (q == null) {
+			throw new RuntimeException("PriorityQueue is not initialized yet!!");
+		}
+
 		Vertex currNode, neighborNode;
 		while (!q.isEmpty()) {
 
@@ -70,6 +74,9 @@ public class Dijkstra {
 					// shorter path to neighbor found
 					q.remove(neighborNode);
 					neighborNode.setDist(alternateDist);
+					/**
+					 * This contains the result set...
+					 */
 					neighborNode.setPrevious(currNode);
 					q.add(neighborNode);
 				}
