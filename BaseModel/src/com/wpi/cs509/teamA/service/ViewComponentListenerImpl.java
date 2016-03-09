@@ -52,6 +52,7 @@ public class ViewComponentListenerImpl {
 	 */
 	public void clickLogin() {
 		if (model.getMyAccount() == null) {
+
 			AdminDialog adminDialog = new AdminDialog(model, inputPanel);
 			adminDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 			adminDialog.setVisible(inputPanel.isFocusable());
@@ -177,24 +178,28 @@ public class ViewComponentListenerImpl {
 		inputPanel.getMapList().setVisible(true);
 		inputPanel.getMapList().removeAll();
 
-		ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
+		// ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
 
 		try {
 			AlgoController algoController;
 			if (1 == model.getEndNode().size()) {
+
 				// single destination
 				algoController = new AlgoController(model.getStartNode(), model.getEndNode());
 
 			} else {
+
 				algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
 
 			}
 
 			// get the result
 			Stack<Node> pathNodes = algoController.getRoute();
+
 			ArrayList<Node> singleMapPath = new ArrayList<Node>();
 			ArrayList<String> mapNameList = new ArrayList<String>();
 			ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
+
 			int tmpMapId = pathNodes.peek().getMap().getMapId();
 			mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
 			mapList.add(pathNodes.peek().getMap());
@@ -211,7 +216,8 @@ public class ViewComponentListenerImpl {
 					path.addNode(node);
 
 				} else {
-					multiMapPathLists.add(singleMapPath);
+
+					// multiMapPathLists.add(singleMapPath);
 
 					model.addOnePath(path);
 					path = new Path();
@@ -228,16 +234,17 @@ public class ViewComponentListenerImpl {
 				}
 			}
 
+			// we need add the last path to the model
 			model.addOnePath(path);
 
-			multiMapPathLists.add(singleMapPath);
+			// multiMapPathLists.add(singleMapPath);
 
 			// reset and initiate the Jlist
-
 			DefaultListModel<String> mapListModel = new DefaultListModel<>();
 			for (String name : mapNameList) {
 				mapListModel.addElement(name);
 			}
+
 			model.setCurrentPath(0);
 			model.setMultiMapLists(mapList);
 			inputPanel.getMapList().setModel(mapListModel);
@@ -246,6 +253,7 @@ public class ViewComponentListenerImpl {
 			JOptionPane.showMessageDialog(null, "No Connected Path!", "Warning Message", JOptionPane.WARNING_MESSAGE);
 
 		}
+
 		addThumbNail();
 		ViewRerenderController.updateView();
 

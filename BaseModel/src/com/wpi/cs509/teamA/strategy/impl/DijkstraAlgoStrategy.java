@@ -52,10 +52,10 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 			}
 		}
 
-		return findPathFromDij(source, destination);
+		return getPathFromDijRes(source, destination);
 	}
 
-	private Stack<Node> findPathFromDij(Vertex source, Vertex d) {
+	private Stack<Node> getPathFromDijRes(Vertex source, Vertex d) {
 
 		Stack<Node> result = new Stack<Node>();
 		do {

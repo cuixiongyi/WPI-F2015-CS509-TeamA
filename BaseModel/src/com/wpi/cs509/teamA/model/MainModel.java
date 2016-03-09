@@ -361,10 +361,20 @@ public final class MainModel extends StateContextModel {
 		return paths.get(idx);
 	}
 
+	/**
+	 * 
+	 * add a new path to the model.
+	 * 
+	 * if there are several paths in multiple map, we can add them one by one
+	 * using this method
+	 * 
+	 * @param ppath
+	 */
 	public synchronized void addOnePath(Path ppath) {
 		if (null == paths) {
 			paths = new ArrayList<Path>();
 		}
+
 		ppath.setMap(ppath.getNodes().get(0).getMap());
 		this.paths.add(ppath);
 	}

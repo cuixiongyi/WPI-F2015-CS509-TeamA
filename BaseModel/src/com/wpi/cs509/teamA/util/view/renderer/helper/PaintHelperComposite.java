@@ -35,6 +35,7 @@ public class PaintHelperComposite extends PaintHelperBasics {
 	}
 
 	public static void paintEverything(Graphics2D g2, BufferedImage image, LinearTransform pLinearTransform) {
+
 		PaintHelperBasics.setLinearTransform(pLinearTransform);
 		ImageComponentRenderer imageComponent = ViewRerenderController.getImageComponent();
 
@@ -68,29 +69,40 @@ public class PaintHelperComposite extends PaintHelperBasics {
 
 	}
 
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param g2
+	 * @param path
+	 * @param pLinearTransform
+	 */
 	public static void paintStartEndNode(Graphics2D g2, Path path, LinearTransform pLinearTransform) {
+
 		PaintHelperBasics.setLinearTransform(pLinearTransform);
+
 		if (pLinearTransform.getScale() < 0.5) {
 			return;
 		}
+
 		if (null == path) {
 			return;
 		}
 
 		Node node = model.getStartNode();
 		if (node != null) {
+
 			BufferedImage image = NodeIcon.getStartIcon();
 			if (path.getMap() == node.getMap())
 				PaintHelperBasics.paintIconForce(node, g2, image);
+
 		}
 
 		ArrayList<Node> endNodes = model.getEndNode();
 		if (null != endNodes) {
 			BufferedImage image = NodeIcon.getEndIcon();
 			for (Node endNode : endNodes) {
-				if (path.getMap().getMapId() == 1) {
-					int a = 0;
-				}
+
 				if (path.getMap() == endNode.getMap()) {
 					PaintHelperBasics.paintIconForce(endNode, g2, image);
 
