@@ -39,13 +39,21 @@ public class Graph {
 			}
 		}
 
-		// another pass to set neighboring vertices
-		// must add vertex neighbor when all edges information are collected
+		/**
+		 * another pass to set neighboring vertices
+		 * 
+		 * must add vertex neighbor when all edges information are collected
+		 * 
+		 * from edge we can get a pair of neighbor nodes and their distance
+		 * between them
+		 * 
+		 */
+
 		for (Edge e : edges) {
 			graph.get(e.getNode1().getId()).getNeighborV().put(graph.get(e.getNode2().getId()), e.getDist());
 			graph.get(e.getNode2().getId()).getNeighborV().put(graph.get(e.getNode1().getId()), e.getDist());
 		}
-		
+
 	}
 
 	public List<Edge> getEdges() {

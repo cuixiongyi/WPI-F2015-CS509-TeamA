@@ -20,15 +20,17 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	@Override
 	public Stack<Node> getRoute(AllEdges alledges) {
 
-		// TODO: the start node should not get from all edges.. so obscure and
-		// very unsafe
+		// TODO: the start node should not get from all edges.. so obscure
 		this.startNodeId = alledges.getStartNode().getId();
+		// initialize the graph
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
+
 		if (!graph.containsKey(startNodeId)) {
+			// TODO: throw an exception here!
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
 		}
-
+		// get the start vertex
 		Vertex source = context.getGraph().get(startNodeId);
 
 		// TODO: what is Dijkstra about?
