@@ -58,10 +58,12 @@ public class ImageComponentRenderer extends JComponent {
 		return true;
 	}
 
+	/**
+	 * This is like a renderer function
+	 * 
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
-
-		System.out.println("ImageComponent paintComponent....");
 
 		// test for null stateContext and null image
 		GeneralMap map = model.getCurrentMap();
