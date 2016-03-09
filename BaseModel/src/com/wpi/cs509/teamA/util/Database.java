@@ -43,7 +43,7 @@ public class Database {
 	private static List<Major> allMajors;
 	private static List<OtherFeature> allOtherLabels;
 	private static List<String> labelList;
-	
+
 	/** For search supply */
 	private static Map<String, NodeForSearch> allNodesForSearch;
 
@@ -91,10 +91,6 @@ public class Database {
 		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
 		allMapEdgesHL = nrd2.getAllMapEdges();
 
-		// get all user accounts from database
-	//	UserAccountDao uad = new UserAccountDaoImpl();
-	//	allUsersDataHL = uad.getAllUserAccounts();
-
 		// get all professors from database
 		ProfessorDao pd = new ProfessorDaoImpl();
 		allProfessors = pd.getAllProfessors();
@@ -106,11 +102,11 @@ public class Database {
 		// get all other labels from database
 		OtherFeatureDao ofd = new OtherFeatureDaoImpl();
 		allOtherLabels = ofd.getAllOtherFeatures();
-		
+
 		// get all labels from database
 		OtherFeatureDao ofd2 = new OtherFeatureDaoImpl();
 		labelList = ofd2.getAllFeatureLabels();
-		
+
 		// load nodes for searchSupply
 		allNodesForSearch = new HashMap<String, NodeForSearch>();
 		InitNodesForSearchSupply();
@@ -212,15 +208,16 @@ public class Database {
 		return allEdgesDataHM.get(map_id);
 	}
 
-	public static List<Node> getAllMapRelationNodesFromMapId(int map_id){
+	public static List<Node> getAllMapRelationNodesFromMapId(int map_id) {
 		List<Node> tempNodeList = new ArrayList<Node>();
 		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
 		List<Integer> tempListInt = nrd2.getMapRelationsNodeForOneMap(map_id);
-		for(Integer tempInt : tempListInt){
+		for (Integer tempInt : tempListInt) {
 			tempNodeList.add(allNodesDataHM.get(tempInt));
 		}
 		return tempNodeList;
 	}
+
 	/** Deal with User Account */
 	public static List<UserAccount> getAllUserAccount() {
 		return allUsersDataHL;
@@ -250,58 +247,59 @@ public class Database {
 	public static List<Professor> getAllProfessor() {
 		return allProfessors;
 	}
-	
-	public static List<Professor> getProfessorListWithNodeId(int nodeId){
+
+	public static List<Professor> getProfessorListWithNodeId(int nodeId) {
 		List<Professor> tempProfessor = new ArrayList<Professor>();
-		for(Professor pp : allProfessors){
-			if(pp.getNodeId() == nodeId)
+		for (Professor pp : allProfessors) {
+			if (pp.getNodeId() == nodeId)
 				tempProfessor.add(pp);
 		}
 		return tempProfessor;
 	}
-	
+
 	/** Deal with majors */
 	public static List<Major> getAllMajors() {
 		return allMajors;
 	}
-	
-	public static List<Major> getMajorListWithNodeId(int nodeId){
+
+	public static List<Major> getMajorListWithNodeId(int nodeId) {
 		List<Major> tempMajor = new ArrayList<Major>();
-		for(Major m : allMajors){
-			if(m.getNodeId() == nodeId)
+		for (Major m : allMajors) {
+			if (m.getNodeId() == nodeId)
 				tempMajor.add(m);
 		}
 		return tempMajor;
 	}
-	
-	/** Deal with other features*/
+
+	/** Deal with other features */
 	public static List<OtherFeature> getAllOtherFeatures() {
 		return allOtherLabels;
 	}
-	
-	public static List<String> getAllLabels(){
+
+	public static List<String> getAllLabels() {
 		return labelList;
 	}
-	
-	public static List<OtherFeature> getAllOtherFeatureListWithNodeId(int nodeId){
+
+	public static List<OtherFeature> getAllOtherFeatureListWithNodeId(int nodeId) {
 		List<OtherFeature> tempOtherFeatures = new ArrayList<OtherFeature>();
-		for(OtherFeature of: allOtherLabels){
-			if(of.getNodeId() == nodeId)
+		for (OtherFeature of : allOtherLabels) {
+			if (of.getNodeId() == nodeId)
 				tempOtherFeatures.add(of);
 		}
 		return tempOtherFeatures;
 	}
-	
-	/** Deal with Node information*/
-	public static NodeInformation getNodeInformation(int nodeId){
+
+	/** Deal with Node information */
+	public static NodeInformation getNodeInformation(int nodeId) {
 		// find node with this node id
 		Node tempNode = allNodesDataHM.get(nodeId);
-		List<Major> tempMajors = Database.getMajorListWithNodeId(nodeId) ;
+		List<Major> tempMajors = Database.getMajorListWithNodeId(nodeId);
 		List<Professor> tempProfessors = Database.getProfessorListWithNodeId(nodeId);
 		List<OtherFeature> tempOtherFeatures = Database.getAllOtherFeatureListWithNodeId(nodeId);
-		NodeInformation nodeInfo = new NodeInformation(tempNode,tempMajors,tempProfessors,tempOtherFeatures,null);
+		NodeInformation nodeInfo = new NodeInformation(tempNode, tempMajors, tempProfessors, tempOtherFeatures, null);
 		return nodeInfo;
 	}
+
 	/** Deal with searching */
 	public static Map<String, NodeForSearch> getAllNodesForSearch() {
 		return allNodesForSearch;
@@ -353,8 +351,9 @@ public class Database {
 			allNodesForSearch.put(nodeNameComplete, tempNodeForSearch);
 		}
 
-	//	System.out.println("get all professor size: "+ Database.getAllProfessor().size());
-		
+		// System.out.println("get all professor size: "+
+		// Database.getAllProfessor().size());
+
 		// Init major information
 		Iterator<Major> iterMajor = allMajors.iterator();
 		while (iterMajor.hasNext()) {
@@ -368,7 +367,8 @@ public class Database {
 		}
 
 		// Init other information
-	//	System.out.println("get all features size: "+ Database.getAllOtherFeatures().size());
+		// System.out.println("get all features size: "+
+		// Database.getAllOtherFeatures().size());
 		Iterator<OtherFeature> iterOtherFeature = allOtherLabels.iterator();
 		while (iterOtherFeature.hasNext()) {
 			OtherFeature otherFeature = iterOtherFeature.next();
@@ -380,7 +380,7 @@ public class Database {
 					SuggestorEnum.Others);
 			allNodesForSearch.put(nodeNameComplete, tempNodeForSearch);
 		}
-		
+
 		// Init label information
 		Iterator<String> iterLabels = labelList.iterator();
 		while (iterLabels.hasNext()) {
@@ -391,6 +391,6 @@ public class Database {
 					SuggestorEnum.Labels);
 			allNodesForSearch.put(nodeNameComplete, tempNodeForSearch);
 		}
-	//	MainModel model = MainModel.getStaticModel().getMyAccount();
+		// MainModel model = MainModel.getStaticModel().getMyAccount();
 	}
 }

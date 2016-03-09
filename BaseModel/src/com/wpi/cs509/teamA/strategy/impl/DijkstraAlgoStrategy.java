@@ -13,6 +13,7 @@ import com.wpi.cs509.teamA.strategy.controller.AllEdges;
  *
  */
 public class DijkstraAlgoStrategy implements AlgoStrategy {
+	
 	private int startNodeId;
 	private int endNodeId;
 

@@ -13,11 +13,6 @@ public class Graph {
 	/** Builds a graph from a set of edges */
 	public Graph(List<Edge> edges) {
 		graph = new HashMap<>(edges.size());
-
-		// for (Edge e : edges)
-		// {
-		// this.edges.add(e);
-		// }
 		//
 		// one pass to find all vertices
 		for (Edge e : edges) {

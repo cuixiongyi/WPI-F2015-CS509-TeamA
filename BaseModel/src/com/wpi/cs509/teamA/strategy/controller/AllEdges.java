@@ -10,6 +10,7 @@ import java.util.Stack;
 import com.wpi.cs509.teamA.bean.*;
 
 public class AllEdges {
+	
 	private Map<Integer, List<Edge>> edgesOnMap;
 	private Stack<GeneralMap> mapsOnPath;
 	private Stack<Integer> mapsId;
@@ -26,7 +27,7 @@ public class AllEdges {
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
 		this.endNode = end;
-		this.isMulEndNodes=false;
+		this.isMulEndNodes = false;
 	}
 
 	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
@@ -34,7 +35,7 @@ public class AllEdges {
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
 		this.end = end;
-		this.isMulEndNodes=true;
+		this.isMulEndNodes = true;
 
 	}
 
@@ -101,9 +102,9 @@ public class AllEdges {
 	}
 
 	public List<Edge> getEdgesOnMap(GeneralMap map) {
-		// System.out.println(mapsId.size());
+
 		if (!this.mapsId.contains((Integer) map.getMapId())) {
-			// System.out.println(this.mapsOnPath.size());
+
 			System.out.println("Requested Map not on path....");
 			return null;
 		}
@@ -111,7 +112,7 @@ public class AllEdges {
 			List<Edge> value = new ArrayList<Edge>();
 			this.edgesOnMap.put(m, value);
 		}
-		// System.out.println(edgesOnMap.size());
+
 		this.splitEdges();
 		return edgesOnMap.get(map.getMapId());
 
@@ -121,12 +122,9 @@ public class AllEdges {
 
 		for (Edge e : edges) {
 			GeneralMap m = e.getNode1().getMap();
-			// System.out.println(m);
-			// System.out.println("+++"+mapsOnPath.peek());
 			if (this.mapsId.contains(e.getNode1().getMap().getMapId())) {
-				// System.out.println("++++++");
 				edgesOnMap.get(m.getMapId()).add(e);
-				// System.out.println(edgesOnMap.get(m.getMapId()).size());
+
 			}
 		}
 	}
@@ -188,8 +186,8 @@ public class AllEdges {
 	 */
 	public Stack<GeneralMap> getMaps() {
 		Stack<GeneralMap> result = new Stack<GeneralMap>();
-		if (this.startNode.getMap().getMapId()==this.endNode.getMap().getMapId()) {
-		//if (mapEdges.isEmpty()) {
+		if (this.startNode.getMap().getMapId() == this.endNode.getMap().getMapId()) {
+			// if (mapEdges.isEmpty()) {
 			result.push(startNode.getMap());
 			return result;
 		}
