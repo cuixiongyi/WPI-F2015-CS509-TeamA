@@ -13,7 +13,6 @@ public class Edge {
 		this.node1 = node1;
 		this.node2 = node2;
 		this.dist = node1.DistanceTo(node2);
-		// this.dist = -1;
 	}
 
 	// for then two nodes are from different maps

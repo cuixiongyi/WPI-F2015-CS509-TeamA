@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
@@ -16,10 +14,7 @@ import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;
-import com.wpi.cs509.teamA.util.NodeType;
-import com.wpi.cs509.teamA.util.UIDataBuffer;
 
-// TODO: Using proxy pattern to handle all the database connection
 public class NodeRelationDaoImpl implements NodeRelationDao {
 
 	private Connection conn = null;
@@ -159,21 +154,6 @@ public class NodeRelationDaoImpl implements NodeRelationDao {
 	}
 
 	@Override
-	/*
-	 * public int checkNodeInDBByCoordinate(Coordinate coordinate) {
-	 * 
-	 * ResultSet resultSet = null; int x = coordinate.getX(); int y =
-	 * coordinate.getY(); try {
-	 * 
-	 * String checkNodesInDB =
-	 * "select id from routefinder.node where x=? and y=?"; pstmt =
-	 * conn.prepareStatement(checkNodesInDB); pstmt.setInt(1, x);
-	 * pstmt.setInt(2, y); resultSet = pstmt.executeQuery(); if
-	 * (resultSet.next()) { return resultSet.getInt("id"); } else {
-	 * System.out.println("Cannot find node " + x + ", " + y); return -1; } }
-	 * catch (SQLException se) { se.printStackTrace(); return -1; } finally {
-	 * JdbcConnect.resultClose(resultSet, pstmt); } }
-	 */
 	public int checkNodeRelationInDBByNodeRelation(NodeRelation[] nodeRelation) {
 		// TODO Auto-generated method stub
 		return 0;

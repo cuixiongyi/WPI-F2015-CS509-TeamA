@@ -12,8 +12,6 @@ import com.wpi.cs509.teamA.util.Coordinate;
  * @author Team-A
  *
  */
-
-@Deprecated
 public class NodeRelation {
 
 	// must initialize the Coordinate here..

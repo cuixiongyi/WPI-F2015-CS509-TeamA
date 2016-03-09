@@ -48,6 +48,11 @@ public class Node {
 		this.map = mapId;
 	}
 
+	public double DistanceTo(Node a) {
+		return this.getMap().getScale() * Math.sqrt(Math.pow(a.getLocation().getX() - this.getLocation().getX(), 2)
+				+ Math.pow(a.getLocation().getY() - this.getLocation().getY(), 2));
+	}
+
 	/**
 	 * 
 	 * @param id
@@ -175,10 +180,5 @@ public class Node {
 	 */
 	public void setNodeType(NodeType nodeType) {
 		this.nodeType = nodeType;
-	}
-
-	public double DistanceTo(Node a) {
-		return this.getMap().getScale() * Math.sqrt(Math.pow(a.getLocation().getX() - this.getLocation().getX(), 2)
-				+ Math.pow(a.getLocation().getY() - this.getLocation().getY(), 2));
 	}
 }

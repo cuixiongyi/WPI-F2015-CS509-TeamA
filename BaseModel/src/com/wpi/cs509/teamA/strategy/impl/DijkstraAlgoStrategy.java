@@ -28,8 +28,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		}
 
 		Vertex source = new Vertex();
-		source = context.getGraph().get(startNodeId); // point to the same
-														// object
+		source = context.getGraph().get(startNodeId);
 
 		// what is dij about?
 		Dijkstra dij = new Dijkstra(graph, source);

@@ -10,7 +10,7 @@ import java.util.Stack;
 import com.wpi.cs509.teamA.bean.*;
 
 public class AllEdges {
-	
+
 	private Map<Integer, List<Edge>> edgesOnMap;
 	private Stack<GeneralMap> mapsOnPath;
 	private Stack<Integer> mapsId;
@@ -22,6 +22,15 @@ public class AllEdges {
 	private HashMap<Integer, MapVertex> graphMaps;
 	private boolean isMulEndNodes;
 
+	/**
+	 * 
+	 * Search single destination
+	 * 
+	 * @param edges
+	 * @param mapEdges
+	 * @param startNode
+	 * @param end
+	 */
 	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
@@ -30,6 +39,16 @@ public class AllEdges {
 		this.isMulEndNodes = false;
 	}
 
+	/**
+	 * 
+	 * Search multi-destination
+	 * 
+	 * @param edges
+	 * @param mapEdges
+	 * @param startNode
+	 * @param end
+	 *            an array of end nodes
+	 */
 	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
@@ -47,6 +66,12 @@ public class AllEdges {
 		this.edgesOnMap = new HashMap<Integer, List<Edge>>();
 	}
 
+	/**
+	 * 
+	 * check if this is multi-destination
+	 * 
+	 * @return true for multi-destination
+	 */
 	public boolean isNormal() {
 		if (this.isMulEndNodes) {
 			return false;
