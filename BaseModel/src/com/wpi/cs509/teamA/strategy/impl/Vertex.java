@@ -7,7 +7,9 @@ import java.util.Map;
 
 /**
  * 
+ * This class should not extends from node.
  * 
+ * This is a data structure for algorithm.
  * 
  * @author JLou
  *
@@ -15,6 +17,10 @@ import java.util.Map;
 public class Vertex extends Node implements Comparable<Vertex> {
 
 	private GeneralMap map;
+	/**
+	 * this is the distance to the source node, initially, the distance should
+	 * be max_val
+	 */
 	private double dist = Double.MAX_VALUE;
 	// this will make a linked list that returned as result
 	private Vertex previous;
@@ -23,6 +29,10 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	private double hcost;
 	private double gcost;
 
+	/**
+	 * The neighbor vertices and the distance between this vertex and its
+	 * neighbor
+	 */
 	private Map<Vertex, Double> neighborV = new HashMap<>();
 
 	public Vertex() {

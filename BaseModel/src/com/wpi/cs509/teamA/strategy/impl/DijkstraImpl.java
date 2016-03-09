@@ -37,12 +37,11 @@ public class DijkstraImpl {
 			throw new RuntimeException("PriorityQueue is not initialized yet!!");
 		}
 
-		Vertex currNode, neighborNode;
 		while (!q.isEmpty()) {
 
 			// vertex with shortest distance (first iteration will return
 			// source)
-			currNode = q.poll();
+			Vertex currNode = q.poll();
 
 			/**
 			 * we can ignore currNode (and any other remaining vertices) since
@@ -61,17 +60,23 @@ public class DijkstraImpl {
 				break;
 
 			/**
-			 * look at distances to each neighbor
+			 * look at distances to every neighbor
 			 * 
-			 * this will update the tp of the priority q
+			 * this will update the top of the priority q
 			 */
 			for (Map.Entry<Vertex, Double> neighbor : currNode.getNeighborV().entrySet()) {
 				// the neighbor in this iteration
-				neighborNode = neighbor.getKey();
-
-				double alternateDist = currNode.getDist() + neighbor.getValue();
+				Vertex neighborNode = neighbor.getKey();
+				/**
+				 * make a new distance from curr node to neighbor and this
+				 * should be a new distance for the neighbor node to the source
+				 */
+				double distanceFromCurrNode = neighbor.getValue();
+				double alternateDist = currNode.getDist() + distanceFromCurrNode;
+				//
 				if (alternateDist < neighborNode.getDist()) {
-					// shorter path to neighbor found
+					// remove the neighbor node from q and add back again to
+					// rearrange the q
 					q.remove(neighborNode);
 					neighborNode.setDist(alternateDist);
 					/**

@@ -22,7 +22,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 
 		// TODO: the start node should not get from all edges.. so obscure
 		this.startNodeId = alledges.getStartNode().getId();
-		// initialize the graph
+		// initialize the graph, make a grah via all edges
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 
@@ -51,7 +51,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 				}
 			}
 		}
-		
+
 		return findPathFromDij(source, destination);
 	}
 
