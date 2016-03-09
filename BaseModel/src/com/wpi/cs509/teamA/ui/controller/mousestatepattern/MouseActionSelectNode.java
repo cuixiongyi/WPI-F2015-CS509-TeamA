@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
+package com.wpi.cs509.teamA.ui.controller.mousestatepattern;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.Path;

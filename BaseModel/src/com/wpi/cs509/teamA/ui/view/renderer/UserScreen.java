@@ -15,7 +15,7 @@ import com.wpi.cs509.teamA.controller.ViewImageComponentListenerController;
 import com.wpi.cs509.teamA.controller.ViewInputPanelListenerController;
 import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.controller.mousestatepattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.DBInitializer;
 import com.wpi.cs509.teamA.util.ParkingManager;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;

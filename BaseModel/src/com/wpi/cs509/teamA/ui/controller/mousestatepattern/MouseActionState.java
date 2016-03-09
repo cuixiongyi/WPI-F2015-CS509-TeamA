@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern;
+package com.wpi.cs509.teamA.ui.controller.mousestatepattern;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;

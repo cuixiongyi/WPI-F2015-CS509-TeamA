@@ -7,7 +7,7 @@ import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.exception.PwdIncorrectException;
 import com.wpi.cs509.teamA.exception.UserAccountNotFoundException;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.ui.controller.MouseActionStatePattern.MouseActionSelectNode;
+import com.wpi.cs509.teamA.ui.controller.mousestatepattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.ui.view.renderer.InputPanelRenderer;
 
