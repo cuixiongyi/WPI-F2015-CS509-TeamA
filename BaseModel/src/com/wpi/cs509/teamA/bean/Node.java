@@ -5,8 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Node definition. This class represents the smallest unit of a map. It include
- * all the information we need on a point of the map.
+ * Node definition. Entity Class.
+ * 
+ * This class represents the smallest unit of a map. It include all the
+ * information we need on a point of the map.
  * 
  * @author CS 509-Team A
  * @version Oct 5th
@@ -30,10 +32,6 @@ public class Node {
 
 	/** type of the node */
 	private NodeType nodeType;
-
-	/** Display coordinate on map image */
-	// TODO: why we need this?
-	private Coordinate displayCoor;
 
 	/** default constructor */
 	public Node() {
@@ -71,7 +69,6 @@ public class Node {
 		this.location = new Coordinate(x, y);
 		this.map = map;
 		this.nodeType = NodeType.valueOf(nodeType);
-		this.displayCoor = new Coordinate(x, y);
 	}
 
 	/**

@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.ImageHelper;
-import com.wpi.cs509.teamA.util.InputMatrix;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
 
 /**
@@ -41,10 +40,6 @@ public class GeneralMap {
 	 * the map scale
 	 */
 	private float measureScale;
-	/**
-	 * the adjacency matrix of this map
-	 */
-	private InputMatrix adjacencyMatrix;
 
 	// Refactor
 	private String mapImgPath;
