@@ -1,7 +1,9 @@
-package com.wpi.cs509.teamA.bean;
+package com.wpi.cs509.teamA.util;
+
+import com.wpi.cs509.teamA.bean.Node;
 
 /**
- * Node name. This class is is intended for searching, avoid changing the
+ * This class is is intended for searching, avoid changing the
  * original node class. This class saves the node info and also the name that
  * should appear in the search supplement.
  * 

@@ -17,13 +17,13 @@ import java.util.regex.PatternSyntaxException;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.History;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.NodeName;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.OtherFeatureDao;
 import com.wpi.cs509.teamA.dao.impl.OtherFeatureDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.ui.controller.mousestatepattern.MouseActionSelectNode;
 import com.wpi.cs509.teamA.util.Database;
+import com.wpi.cs509.teamA.util.NodeName;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
 public class SearchSupply {
