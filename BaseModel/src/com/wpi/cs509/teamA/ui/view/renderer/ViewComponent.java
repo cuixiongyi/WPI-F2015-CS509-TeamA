@@ -9,7 +9,7 @@ import com.wpi.cs509.teamA.ui.Animation.AnimationControl;
  * 
  * What view need to do is render
  * 
- * This class just put all the renders together
+ * This class just put all the renderers together
  * 
  * We should not consider this as a model since this is still a view not data,
  * or to say the view 'data', a high level view component

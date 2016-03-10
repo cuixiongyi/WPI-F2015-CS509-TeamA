@@ -49,6 +49,8 @@ public class ViewRerenderController implements Observer {
 	/**
 	 * Repaint the image
 	 * 
+	 * call repaint() to rerender
+	 * 
 	 * TODO: we can only rerender the image component
 	 */
 	static public void updateImageComponent() {
@@ -57,6 +59,8 @@ public class ViewRerenderController implements Observer {
 
 	/**
 	 * Repaint the input panel
+	 * 
+	 * call repaint() to rerender
 	 * 
 	 * TODO: we can only rerender the input panel
 	 */

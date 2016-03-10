@@ -41,6 +41,9 @@ public class GeneralMap {
 
 	private BufferedImage image;
 
+	/**
+	 * TODO: for a* but should not be here, this is not entity from database
+	 */
 	private List<Edge> BoundaryEdges = new ArrayList<>();
 
 	/**
