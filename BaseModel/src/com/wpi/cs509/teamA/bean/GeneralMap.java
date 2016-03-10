@@ -27,14 +27,6 @@ public class GeneralMap {
 	private String mapName;
 	private String mapAbbrName;
 
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
 	private String imageName;
 	/**
 	 * the map scale
@@ -88,6 +80,14 @@ public class GeneralMap {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	/**

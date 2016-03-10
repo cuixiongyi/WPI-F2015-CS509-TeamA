@@ -178,8 +178,6 @@ public class ViewComponentListenerImpl {
 		inputPanel.getMapList().setVisible(true);
 		inputPanel.getMapList().removeAll();
 
-		// ArrayList<ArrayList<Node>> multiMapPathLists = new ArrayList<ArrayList<Node>>();
-
 		try {
 			AlgoController algoController;
 			if (1 == model.getEndNode().size()) {
@@ -196,10 +194,10 @@ public class ViewComponentListenerImpl {
 			// get the result
 			Stack<Node> pathNodes = algoController.getRoute();
 
-			ArrayList<Node> singleMapPath = new ArrayList<Node>();
 			ArrayList<String> mapNameList = new ArrayList<String>();
 			ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
 
+			// get the current map id
 			int tmpMapId = pathNodes.peek().getMap().getMapId();
 			mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
 			mapList.add(pathNodes.peek().getMap());
@@ -211,21 +209,17 @@ public class ViewComponentListenerImpl {
 			while (pathNodes.size() > 0) {
 
 				Node node = Database.getNodeFromId(pathNodes.pop().getId());
+				// if the new node is in a same map as the previous node
 				if (node.getMap().getMapId() == tmpMapId) {
-					singleMapPath.add(node);
 					path.addNode(node);
 
 				} else {
-
-					// multiMapPathLists.add(singleMapPath);
 
 					model.addOnePath(path);
 					path = new Path();
 					path.setMap(node.getMap());
 					path.addNode(node);
 
-					singleMapPath = new ArrayList<Node>();
-					singleMapPath.add(node);
 					tmpMapId = node.getMap().getMapId();
 					mapNameList.add(node.getMap().getMapAbbrName());
 
@@ -236,8 +230,6 @@ public class ViewComponentListenerImpl {
 
 			// we need add the last path to the model
 			model.addOnePath(path);
-
-			// multiMapPathLists.add(singleMapPath);
 
 			// reset and initiate the Jlist
 			DefaultListModel<String> mapListModel = new DefaultListModel<>();

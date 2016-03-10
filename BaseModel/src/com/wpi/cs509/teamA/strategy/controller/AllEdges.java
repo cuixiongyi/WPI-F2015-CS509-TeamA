@@ -280,27 +280,26 @@ public class AllEdges {
 		while (!q.isEmpty()) {
 
 			u = q.poll(); // vertex with shortest distance (first iteration
-			// System.out.println(u.getDist());
+
 			if (u.getDist() == Integer.MAX_VALUE) {
-				// System.out.println("++++++++++++++");
+
 				break;
 			} // we can ignore u (and any other remaining vertices)
 				// since they are unreachable
 
 			// look at distances to each neighbor
 			for (MapVertex v : u.getNeighborM()) {
-				// System.out.println("++++++++++++++");
+
 				int alternateDist = u.getDist() + 1;
 				if (alternateDist < v.getDist()) { // shorter path to neighbor
 													// found
-					// System.out.println("+++++");
+
 					q.remove(v);
 					v.setDist(alternateDist);
-					// System.out.println(v.getId());
-					// System.out.println(v.getDist());
+
 					v.setPrevious(u);
 					q.add(v);
-					// System.out.println(q.size());
+
 				}
 			}
 		}

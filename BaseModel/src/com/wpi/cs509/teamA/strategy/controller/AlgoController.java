@@ -84,6 +84,7 @@ public class AlgoController {
 
 		if (this.isMultipleDestination) {
 			generalAlgorithm.setAlgoStrategy(new MultipleDestinations());
+			// set the flag back
 			this.isMultipleDestination = false;
 		} else {
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
