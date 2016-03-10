@@ -198,7 +198,7 @@ public class ViewComponentListenerImpl {
 			ArrayList<GeneralMap> mapList = new ArrayList<GeneralMap>();
 
 			// get the current map id
-			int tmpMapId = pathNodes.peek().getMap().getMapId();
+			int currentMapId = pathNodes.peek().getMap().getMapId();
 			mapNameList.add(pathNodes.peek().getMap().getMapAbbrName());
 			mapList.add(pathNodes.peek().getMap());
 
@@ -209,20 +209,25 @@ public class ViewComponentListenerImpl {
 			while (pathNodes.size() > 0) {
 
 				Node node = Database.getNodeFromId(pathNodes.pop().getId());
-				// if the new node is in a same map as the previous node
-				if (node.getMap().getMapId() == tmpMapId) {
+				/**
+				 * if the new node is in a same map as the previous node
+				 */
+				if (node.getMap().getMapId() == currentMapId) {
 					path.addNode(node);
 
 				} else {
-
+					/**
+					 * this is a node start from another map, which is different
+					 * from the previous map, add the path to the model and
+					 * start a new path
+					 */
 					model.addOnePath(path);
 					path = new Path();
 					path.setMap(node.getMap());
 					path.addNode(node);
-
-					tmpMapId = node.getMap().getMapId();
+					// update the current map id
+					currentMapId = node.getMap().getMapId();
 					mapNameList.add(node.getMap().getMapAbbrName());
-
 					mapList.add(node.getMap());
 
 				}
@@ -247,7 +252,6 @@ public class ViewComponentListenerImpl {
 		}
 
 		addThumbNail();
-		ViewRerenderController.updateView();
 
 	}
 

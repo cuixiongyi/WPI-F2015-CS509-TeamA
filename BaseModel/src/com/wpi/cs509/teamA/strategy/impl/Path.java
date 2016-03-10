@@ -6,12 +6,16 @@ import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 
 /**
- * All node nodes consists of a path in a certain map
+ * All node nodes consists of a path in a certain map. This class is intended
+ * for searching result
  * 
  * @author teama
  */
 public class Path {
+
+	// the map of the path
 	private GeneralMap map;
+	// a list of nodes that represent the path
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 
 	public Path(GeneralMap pmap, ArrayList<Node> pnodes) {

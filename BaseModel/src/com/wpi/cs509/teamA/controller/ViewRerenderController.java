@@ -72,6 +72,7 @@ public class ViewRerenderController implements Observer {
 	 * 
 	 */
 	static public void updateView() {
+
 		updateImageComponent();
 		updateInputePanel();
 		if (getThumbNailPanel().update()) {
