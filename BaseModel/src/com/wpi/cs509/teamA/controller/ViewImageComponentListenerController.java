@@ -23,7 +23,7 @@ public class ViewImageComponentListenerController {
 
 	/**
 	 * 
-	 * bind listeners, singleton
+	 * bind listeners, singleton, the listeners will only be binded once
 	 * 
 	 * @return true the first time bind the listeners
 	 */
@@ -38,8 +38,7 @@ public class ViewImageComponentListenerController {
 	}
 
 	/**
-	 * 
-	 * Add listeners here
+	 * Add listeners here, add implementation class
 	 * 
 	 */
 	private ViewImageComponentListenerController() {
