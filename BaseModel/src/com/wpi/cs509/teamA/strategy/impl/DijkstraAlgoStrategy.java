@@ -22,7 +22,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 
 		// TODO: the start node should not get from all edges.. so obscure
 		this.startNodeId = alledges.getStartNode().getId();
-		// initialize the graph, make a grah via all edges
+		// initialize the graph, make a graph via all edges
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 
@@ -37,7 +37,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		new DijkstraImpl(graph, source).runDijkstra();
 		Vertex destination = new Vertex();
 
-		if (alledges.isNormal()) {
+		if (alledges.isMulEndNodes()) {
 			this.endNodeId = alledges.getEndNode().getId();
 			destination = context.getGraph().get(endNodeId);
 		} else {

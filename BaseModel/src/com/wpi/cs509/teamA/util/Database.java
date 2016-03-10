@@ -30,14 +30,15 @@ import com.wpi.cs509.teamA.newfeature.NodeForSearch;
 import com.wpi.cs509.teamA.util.AutoSuggestUtil.SuggestorPainter.SuggestorEnum;
 
 public class Database {
+
 	/** For basic use */
 	private static Map<Integer, Node> allNodesDataHM;
 	private static Map<Integer, GeneralMap> allMapDataHM;
-	private static List<Node> allNodesDataHL;
-	private static List<GeneralMap> allMapDataHL;
-	private static List<Edge> allEdgesHL;
+	private static List<Node> allNodesDataAL;
+	private static List<GeneralMap> allMapDataAL;
+	private static List<Edge> allEdgesAL;
 	private static Map<Integer, List<Edge>> allEdgesDataHM;
-	private static List<Edge> allMapEdgesHL;
+	private static List<Edge> allMapEdgesAL;
 	private static List<UserAccount> allUsersDataHL;
 	private static List<Professor> allProfessors;
 	private static List<Major> allMajors;
@@ -57,9 +58,9 @@ public class Database {
 
 		// get all maps from database
 		MapDao md = new MapDaoImpl();
-		allMapDataHL = md.getAllMaps();
+		allMapDataAL = md.getAllMaps();
 		allMapDataHM = new HashMap<Integer, GeneralMap>();
-		Iterator<GeneralMap> iterMap = allMapDataHL.iterator();
+		Iterator<GeneralMap> iterMap = allMapDataAL.iterator();
 		while (iterMap.hasNext()) {
 			GeneralMap tempMap = iterMap.next();
 			tempMap.readImage();
@@ -68,9 +69,9 @@ public class Database {
 
 		// get all nodes from database
 		NodeDao nd = new NodeDaoImpl();
-		allNodesDataHL = nd.getAllNodes();
+		allNodesDataAL = nd.getAllNodes();
 		allNodesDataHM = new HashMap<Integer, Node>();
-		Iterator<Node> iter = allNodesDataHL.iterator();
+		Iterator<Node> iter = allNodesDataAL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			allNodesDataHM.put(tempNode.getId(), tempNode);
@@ -78,7 +79,7 @@ public class Database {
 
 		// get all edges from database
 		NodeRelationDao nrd = new NodeRelationDaoImpl();
-		allEdgesHL = nrd.getAllEdges();
+		allEdgesAL = nrd.getAllEdges();
 		allEdgesDataHM = new HashMap<Integer, List<Edge>>();
 		Iterator<Integer> mapIds = allMapDataHM.keySet().iterator();
 		while (mapIds.hasNext()) {
@@ -89,7 +90,7 @@ public class Database {
 
 		// get all maprelations from database
 		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
-		allMapEdgesHL = nrd2.getAllMapEdges();
+		allMapEdgesAL = nrd2.getAllMapEdges();
 
 		// get all professors from database
 		ProfessorDao pd = new ProfessorDaoImpl();
@@ -115,7 +116,7 @@ public class Database {
 	/** Deal with Nodes */
 
 	public static List<Node> getAllNodeListFromDatabase() {
-		return allNodesDataHL;
+		return allNodesDataAL;
 	}
 
 	public static Node getNodeFromId(int nodeId) {
@@ -134,7 +135,7 @@ public class Database {
 
 	public static List<Node> getAllNodesForCurrentMap(int currentMapId) {
 		List<Node> res = new ArrayList<Node>();
-		Iterator<Node> iter = allNodesDataHL.iterator();
+		Iterator<Node> iter = allNodesDataAL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			if (tempNode.getMap().getMapId() == currentMapId)
@@ -144,7 +145,7 @@ public class Database {
 	}
 
 	public static int getNodeIdFromName(String node_name) {
-		Iterator<Node> iter = allNodesDataHL.iterator();
+		Iterator<Node> iter = allNodesDataAL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			if (tempNode.getName().equals(node_name))
@@ -176,7 +177,7 @@ public class Database {
 	}
 
 	public static Node getNodeFromName(String node_name) {
-		Iterator<Node> iter = allNodesDataHL.iterator();
+		Iterator<Node> iter = allNodesDataAL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			if (tempNode.getName().equals(node_name))
@@ -188,7 +189,7 @@ public class Database {
 	/** Deal with Maps */
 
 	public static List<GeneralMap> getAllMapFromDatabase() {
-		return allMapDataHL;
+		return allMapDataAL;
 	}
 
 	public static GeneralMap getMapEntityFromMapId(int map_id) {
@@ -197,11 +198,11 @@ public class Database {
 
 	/** Deal with Edges */
 	public static List<Edge> getAllEdges() {
-		return allEdgesHL;
+		return allEdgesAL;
 	}
 
 	public static List<Edge> getAllMapEdges() {
-		return allMapEdgesHL;
+		return allMapEdgesAL;
 	}
 
 	public static List<Edge> getAllEdgesForCurrentMap(int map_id) {
@@ -312,7 +313,7 @@ public class Database {
 		Map<Integer, String> allMapsSearch = new HashMap<Integer, String>();
 		Map<Integer, String> allMapsabbrSearch = new HashMap<Integer, String>();
 		// get maps
-		Iterator<GeneralMap> iter_map = allMapDataHL.iterator();
+		Iterator<GeneralMap> iter_map = allMapDataAL.iterator();
 		while (iter_map.hasNext()) {
 			GeneralMap tempMap = iter_map.next();
 			int map_id = tempMap.getMapId();
@@ -323,7 +324,7 @@ public class Database {
 		}
 
 		// get nodes and transfer
-		Iterator<Node> iter = allNodesDataHL.iterator();
+		Iterator<Node> iter = allNodesDataAL.iterator();
 		while (iter.hasNext()) {
 			Node tempNode = iter.next();
 			String nodeName = tempNode.getName();

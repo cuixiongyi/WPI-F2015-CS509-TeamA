@@ -23,6 +23,10 @@ public class AlgoController {
 	 */
 	private Stack<Node> result = new Stack<Node>();
 
+	private AllEdges edges;
+	private boolean flag = false;
+	private boolean isMultipleDestination = false;
+
 	/**
 	 * default constructor
 	 */
@@ -38,14 +42,12 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-	private AllEdges edges;
-	private boolean flag = false;
-	boolean isMultipleDestination = false;
 
 	public AlgoController(Node from, Node to) {
 
 	}
 
+	// TODO: refactor with the next constructor
 	public AlgoController(Node from, ArrayList<Node> to) {
 		if (to.size() == 1) {
 			edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, to.get(0));
@@ -53,6 +55,7 @@ public class AlgoController {
 		}
 	}
 
+	// TODO: refactor with the previous constructor
 	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
 		Node[] end = new Node[to.size()];
 		to.toArray(end);

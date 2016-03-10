@@ -27,7 +27,9 @@ public class AllEdges {
 	 * Search single destination
 	 * 
 	 * @param edges
+	 *            all the edges from all the maps
 	 * @param mapEdges
+	 *            edges that cross the maps
 	 * @param startNode
 	 * @param end
 	 */
@@ -72,7 +74,7 @@ public class AllEdges {
 	 * 
 	 * @return true for multi-destination
 	 */
-	public boolean isNormal() {
+	public boolean isMulEndNodes() {
 		if (this.isMulEndNodes) {
 			return false;
 		}
@@ -86,6 +88,12 @@ public class AllEdges {
 			return true;
 	}
 
+	/**
+	 * This method will combine edges and mapedges together
+	 * 
+	 * @return all the edges of the system, including the edges that cross the
+	 *         map
+	 */
 	public List<Edge> getAllEdges() {
 		for (Edge e : mapEdges) {
 			edges.add(e);

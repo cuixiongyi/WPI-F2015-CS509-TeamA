@@ -42,7 +42,9 @@ public final class MainModel extends StateContextModel {
 
 	private HashMap<String, Integer> parkingAvilibility = null;
 
+	// A list of path on different map
 	private ArrayList<Path> paths = null;
+	// current map
 	private int currentPathIdx = 0;
 
 	private Node nodeAnimation = null;
@@ -363,7 +365,7 @@ public final class MainModel extends StateContextModel {
 
 	/**
 	 * 
-	 * add a new path to the model.
+	 * add a new path(a path from a different map) to the model.
 	 * 
 	 * if there are several paths in multiple map, we can add them one by one
 	 * using this method

@@ -180,6 +180,7 @@ public class ViewComponentListenerImpl {
 
 		try {
 			AlgoController algoController;
+			// TODO: refactor, we should not have two constructor
 			if (1 == model.getEndNode().size()) {
 
 				// single destination
@@ -187,6 +188,7 @@ public class ViewComponentListenerImpl {
 
 			} else {
 
+				// multi-destination
 				algoController = new AlgoController(model.getStartNode(), model.getEndNode(), true);
 
 			}
