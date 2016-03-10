@@ -2,6 +2,8 @@ package com.wpi.cs509.teamA.bean;
 
 /**
  * 
+ * Entity Class
+ * 
  * An Edge class consists of 2 node and the distance
  * 
  * @author JLou

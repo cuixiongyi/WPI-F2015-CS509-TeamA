@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wpi.cs509.teamA.util.AdjacencyMatrix;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.InputMatrix;
@@ -17,7 +16,7 @@ import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;
  * @version Oct 5th
  */
 
-public class GeneralMap implements AdjacencyMatrix {
+public class GeneralMap {
 
 	/**
 	 * the map id
@@ -52,8 +51,6 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	private float displayScale = 1;
 
-	private List<Node> nodes;
-
 	private BufferedImage image;
 
 	private List<Edge> BoundaryEdges = new ArrayList<>();
@@ -85,16 +82,6 @@ public class GeneralMap implements AdjacencyMatrix {
 
 		this.measureScale = 1.0f;
 
-	}
-
-	@Override
-	/**
-	 * the implementation of getting an adjacency matrix, this method will
-	 * return a Adjacency Matrix that created in the initialization time.
-	 */
-	public InputMatrix getAdjacencyMatrix() {
-		// TODO Auto-generated method stub
-		return adjacencyMatrix;
 	}
 
 	public void readImage() {
@@ -183,10 +170,6 @@ public class GeneralMap implements AdjacencyMatrix {
 
 	public List<Edge> getEdges() {
 		return Database.getAllEdgesForCurrentMap(this.getMapId());
-	}
-
-	public void setNodes(List<Node> nodes) {
-		this.nodes = nodes;
 	}
 
 	public List<Edge> getBoundaryEdges() {

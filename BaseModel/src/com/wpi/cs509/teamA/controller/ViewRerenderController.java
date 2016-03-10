@@ -15,10 +15,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * This controller will listen to the change of the model and then update the view or
- * to say, rerender the view
+ * This controller will listen to the change of the model and then update the
+ * view or to say, rerender the view
  * 
- * this class behaves like a controller
+ * this class behaves like an "output" controller
  * 
  * when the model changes, it will decide how to rerender the component
  */
@@ -37,7 +37,8 @@ public class ViewRerenderController implements Observer {
 	}
 
 	static public void infoPanelSlideDown() {
-		AnimationObject AO = ViewRerenderController.getAC().checkObjectExist(ViewRerenderController.getNodeInformation());
+		AnimationObject AO = ViewRerenderController.getAC()
+				.checkObjectExist(ViewRerenderController.getNodeInformation());
 		if (null == AO) {
 			return;
 		}
@@ -84,6 +85,9 @@ public class ViewRerenderController implements Observer {
 
 	/**
 	 * This method get executed when change in model triggered
+	 * 
+	 * we can use the first argument to check which model has been changed and
+	 * then update the corresponding view
 	 */
 	@Override
 	public void update(Observable obs, Object arg) {

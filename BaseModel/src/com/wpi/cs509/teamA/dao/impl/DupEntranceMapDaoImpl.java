@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.wpi.cs509.teamA.bean.Edge;
-import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.dao.DupEntranceMapDao;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 
@@ -101,7 +100,6 @@ public class DupEntranceMapDaoImpl implements DupEntranceMapDao {
 	public Map<Integer, Double> initNodesNeighbors(int node_id) {
 
 		Map<Integer, Double> allNeighbors = new HashMap<Integer, Double>();
-		int iter_neighbors = 0;
 		String selectNeighbors = "select node_to,distance from RouteFinder.relations where node_from= ?";
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(selectNeighbors);
