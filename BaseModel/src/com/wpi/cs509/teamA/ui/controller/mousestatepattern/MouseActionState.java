@@ -24,7 +24,6 @@ public abstract class MouseActionState {
 	protected Coordinate coor = null;
 	protected Coordinate coorTrans = null;
 
-	// MainModel model = null;
 	public MouseActionState(MainModel pSC) {
 		model = pSC;
 		this.xPos = -1;

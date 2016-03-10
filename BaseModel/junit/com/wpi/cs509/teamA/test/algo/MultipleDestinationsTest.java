@@ -4,7 +4,7 @@ package com.wpi.cs509.teamA.test.algo;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.strategy.controller.AllEdges;
+import com.wpi.cs509.teamA.strategy.impl.AllEdges;
 import com.wpi.cs509.teamA.strategy.impl.DijkstraAlgoStrategy;
 import org.junit.Test;
 

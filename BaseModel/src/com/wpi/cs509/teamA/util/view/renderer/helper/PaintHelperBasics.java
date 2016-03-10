@@ -3,10 +3,11 @@ package com.wpi.cs509.teamA.util.view.renderer.helper;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
-import com.wpi.cs509.teamA.bean.Edge;
+
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeIcon;

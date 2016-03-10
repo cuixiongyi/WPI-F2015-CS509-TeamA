@@ -29,13 +29,51 @@ public class ImageMouseListener implements MouseInputListener {
 		imageComponent = ViewComponent.getImageComponent();
 		model = ViewComponent.getModel();
 
+		// TODO: not add here
 		addMouseMotionListener();
-		addMouseInputListener();
 
 	}
 
-	public void addMouseInputListener() {
-		imageComponent.addMouseListener(this);
+	/**
+	 * Based on different roles, different click operations
+	 */
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// depends on the implementation of state pattern
+		model.execute(e);
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		imageComponent.setPressxPos(e.getX());
+		imageComponent.setPressyPos(e.getY());
+		imageComponent.setImageStartXpos((int) model.getLinearTransform().getX());
+		imageComponent.setImageStartYpos((int) model.getLinearTransform().getY());
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void addMouseMotionListener() {
@@ -78,45 +116,6 @@ public class ImageMouseListener implements MouseInputListener {
 				}
 			}
 		});
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// depends on the implementation of state pattern
-		model.execute(e);
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		imageComponent.setPressxPos(e.getX());
-		imageComponent.setPressyPos(e.getY());
-		imageComponent.setImageStartXpos((int) model.getLinearTransform().getX());
-		imageComponent.setImageStartYpos((int) model.getLinearTransform().getY());
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

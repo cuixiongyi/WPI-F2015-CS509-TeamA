@@ -1,9 +1,10 @@
 package com.wpi.cs509.teamA.dao;
 
 import java.util.List;
-import com.wpi.cs509.teamA.bean.Edge;
+
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
+import com.wpi.cs509.teamA.strategy.impl.Edge;
 
 public interface NodeRelationDao {
 

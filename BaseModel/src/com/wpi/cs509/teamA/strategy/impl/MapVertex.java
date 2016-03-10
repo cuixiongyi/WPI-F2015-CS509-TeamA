@@ -1,9 +1,8 @@
-package com.wpi.cs509.teamA.strategy.controller;
+package com.wpi.cs509.teamA.strategy.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 
 public class MapVertex extends GeneralMap implements Comparable<MapVertex> {

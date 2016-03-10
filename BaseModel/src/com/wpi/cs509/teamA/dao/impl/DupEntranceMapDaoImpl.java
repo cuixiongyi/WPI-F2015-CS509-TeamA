@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.dao.DupEntranceMapDao;
+import com.wpi.cs509.teamA.strategy.impl.Edge;
 import com.wpi.cs509.teamA.util.JdbcConnect;
 
 /**

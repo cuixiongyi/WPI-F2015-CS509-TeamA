@@ -46,6 +46,7 @@ public class ViewImageComponentListenerController {
 
 		imageComponent.addMouseListener(new ImageMouseListener());
 		imageComponent.addMouseWheelListener(new ImageMouseWheelListener());
+		// TODO: add motion listener here
 	}
 
 }

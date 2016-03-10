@@ -1,8 +1,10 @@
-package com.wpi.cs509.teamA.bean;
+package com.wpi.cs509.teamA.strategy.impl;
+
+import com.wpi.cs509.teamA.bean.Node;
 
 /**
  * 
- * Entity Class
+ * For algo
  * 
  * An Edge class consists of 2 node and the distance
  * 

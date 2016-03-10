@@ -12,6 +12,13 @@ import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperComposite;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+/**
+ * 
+ * Add or delete node
+ * 
+ * @author JLou
+ *
+ */
 public class MouseActionEditNode extends MouseActionState {
 
 	private Node lastNode = null;
@@ -88,7 +95,8 @@ public class MouseActionEditNode extends MouseActionState {
 	}
 
 	private void addNewNode(Coordinate xy) {
-		NodeEditDialog nodeInfo = new NodeEditDialog(ViewRerenderController.getImageComponent(), model, xy.getX(), xy.getY());
+		NodeEditDialog nodeInfo = new NodeEditDialog(ViewRerenderController.getImageComponent(), model, xy.getX(),
+				xy.getY());
 		nodeInfo.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 		nodeInfo.setVisible(nodeInfo.isFocusable());
 	}
