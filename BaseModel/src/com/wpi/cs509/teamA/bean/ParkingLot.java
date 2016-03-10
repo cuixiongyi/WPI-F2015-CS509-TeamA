@@ -6,34 +6,30 @@ package com.wpi.cs509.teamA.bean;
  *
  */
 public class ParkingLot {
-    private Node node = null;
 
+	private Node node;
 
-    private int avaiable = 0;
-    private int capacity = 0;
+	private int avaiable;
+	private int capacity;
 
+	public ParkingLot(Node pnode) {
+		node = pnode;
+	}
 
-    public ParkingLot(Node pnode) {
-        node = pnode;
-    }
+	public synchronized int getAvaiable() {
+		return avaiable;
+	}
 
+	public synchronized void setAvaiable(int avaiable) {
+		this.avaiable = avaiable;
+	}
 
+	public synchronized int getCapacity() {
+		return capacity;
+	}
 
-
-    public synchronized int getAvaiable() {
-        return avaiable;
-    }
-
-    public synchronized void setAvaiable(int avaiable) {
-        this.avaiable = avaiable;
-    }
-
-    public synchronized int getCapacity() {
-        return capacity;
-    }
-
-    public synchronized void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
+	public synchronized void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
 
 }

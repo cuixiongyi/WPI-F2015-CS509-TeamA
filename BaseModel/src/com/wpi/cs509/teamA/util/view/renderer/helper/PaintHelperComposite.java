@@ -2,9 +2,9 @@ package com.wpi.cs509.teamA.util.view.renderer.helper;
 
 import com.wpi.cs509.teamA.bean.Edge;
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.bean.Path;
 import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
+import com.wpi.cs509.teamA.strategy.impl.Path;
 import com.wpi.cs509.teamA.ui.view.renderer.ImageComponentRenderer;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeIcon;

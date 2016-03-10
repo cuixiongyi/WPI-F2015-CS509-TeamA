@@ -1,6 +1,9 @@
-package com.wpi.cs509.teamA.bean;
+package com.wpi.cs509.teamA.strategy.impl;
 
 import java.util.ArrayList;
+
+import com.wpi.cs509.teamA.bean.GeneralMap;
+import com.wpi.cs509.teamA.bean.Node;
 
 /**
  * All node nodes consists of a path in a certain map
