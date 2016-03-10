@@ -29,6 +29,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 			// TODO: throw an exception here!
 			System.err.printf("Graph doesn't contain start vertex \"%d\"\n", startNodeId);
 		}
+
 		// get the start vertex
 		Vertex source = context.getGraph().get(startNodeId);
 

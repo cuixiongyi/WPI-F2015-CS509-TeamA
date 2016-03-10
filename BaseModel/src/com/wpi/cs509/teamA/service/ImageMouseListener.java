@@ -16,6 +16,8 @@ import javax.swing.event.MouseInputListener;
 /**
  * This class implements what the should do when mouse has some certain events
  * 
+ * this class also registered mouse click operation, which is from state pattern
+ * 
  * TODO: singleton, this should be initialized only once
  * 
  * @author teama
@@ -36,6 +38,9 @@ public class ImageMouseListener implements MouseInputListener {
 
 	/**
 	 * Based on different roles, different click operations
+	 * 
+	 * different state, different implementation
+	 * 
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {

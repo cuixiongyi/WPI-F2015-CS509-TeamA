@@ -100,6 +100,7 @@ public class ViewComponentListenerImpl {
 	}
 
 	public void clickEditNode() {
+
 		JToggleButton button = inputPanel.getBtnMngNode();
 
 		if (MouseActionEditNode.class.isInstance(model.getMyState())) {

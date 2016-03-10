@@ -26,15 +26,15 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	// this will make a linked list that returned as result
 	private Vertex previous;
 
-	// the next two are for a star
-	private double hcost;
-	private double gcost;
-
 	/**
 	 * The neighbor vertices and the distance between this vertex and its
 	 * neighbor
 	 */
 	private Map<Vertex, Double> neighborV = new HashMap<>();
+
+	// the next two are for a star
+	private double hcost;
+	private double gcost;
 
 	public Vertex() {
 

@@ -1,6 +1,5 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
-import com.wpi.cs509.teamA.bean.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class Graph {
 
 	// mapping of vertex names to Vertex objects, built from a set of Edges
 	private HashMap<Integer, Vertex> graph;
-	private List<Edge> edges;
 
 	public Graph() {
 
@@ -57,10 +55,6 @@ public class Graph {
 			graph.get(e.getNode2().getId()).getNeighborV().put(graph.get(e.getNode1().getId()), e.getDist());
 		}
 
-	}
-
-	public List<Edge> getEdges() {
-		return this.edges;
 	}
 
 	public HashMap<Integer, Vertex> getGraph() {
