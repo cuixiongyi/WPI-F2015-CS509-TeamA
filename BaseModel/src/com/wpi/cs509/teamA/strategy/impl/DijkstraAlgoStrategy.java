@@ -55,6 +55,17 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		return getPathFromDijRes(source, destination);
 	}
 
+	/**
+	 * 
+	 * The result is a linkedlist, the destination is the head and once we get
+	 * the des node, we get the result
+	 * 
+	 * @param source
+	 *            the end condition
+	 * @param d
+	 *            the head of linkedlist, result head
+	 * @return
+	 */
 	private Stack<Node> getPathFromDijRes(Vertex source, Vertex d) {
 
 		Stack<Node> result = new Stack<Node>();

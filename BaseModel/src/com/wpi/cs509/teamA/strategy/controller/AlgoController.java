@@ -23,6 +23,7 @@ public class AlgoController {
 	 */
 	private Stack<Node> result = new Stack<Node>();
 
+	// all the edges including the edges that cross the maps
 	private AllEdges edges;
 	private boolean flag = false;
 	private boolean isMultipleDestination = false;
@@ -42,14 +43,11 @@ public class AlgoController {
 	 * @param to
 	 *            the destination node
 	 */
-
-	public AlgoController(Node from, Node to) {
-
-	}
-
 	// TODO: refactor with the next constructor
 	public AlgoController(Node from, ArrayList<Node> to) {
 		if (to.size() == 1) {
+			// TODO: We should not initialize the from and end node in the
+			// AllEdges class? why we need to do so?
 			edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, to.get(0));
 			flag = true;
 		}

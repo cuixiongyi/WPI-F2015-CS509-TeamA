@@ -9,6 +9,13 @@ import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.*;
 
+/**
+ * 
+ * TODO: Obviously, we should not initialize the start and end node here
+ * 
+ * @author JLou
+ *
+ */
 public class AllEdges {
 
 	private Map<Integer, List<Edge>> edgesOnMap;
