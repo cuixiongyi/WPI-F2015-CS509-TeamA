@@ -9,6 +9,8 @@ import java.util.Map;
  * 
  * This class should not extends from node.
  * 
+ * This class is more like a wrapper class, maybe, extends is correct
+ * 
  * This is a data structure for algorithm.
  * 
  * @author JLou
@@ -16,7 +18,6 @@ import java.util.Map;
  */
 public class Vertex extends Node implements Comparable<Vertex> {
 
-	private GeneralMap map;
 	/**
 	 * this is the distance to the source node, initially, the distance should
 	 * be max_val
@@ -41,24 +42,13 @@ public class Vertex extends Node implements Comparable<Vertex> {
 
 	public Vertex(Node node) {
 
-		// TODO: refactor to super
-		this.id = node.getId();
-		this.location = node.getLocation();
-		this.map = node.getMap();
+		super(node.getId(), node.getLocation().getX(), node.getLocation().getY(), node.getMap());
 
 	}
 
 	@Override
 	public int compareTo(Vertex other) {
 		return Double.compare(dist, other.dist);
-	}
-
-	public GeneralMap getMap() {
-		return map;
-	}
-
-	public void setMap(GeneralMap map) {
-		this.map = map;
 	}
 
 	public double getGcost() {

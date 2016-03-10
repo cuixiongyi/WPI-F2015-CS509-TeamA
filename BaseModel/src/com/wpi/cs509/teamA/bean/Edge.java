@@ -79,7 +79,7 @@ public class Edge {
 	}
 
 	public Node getTheOtherNode(Node n) {
-		if (n.id == this.node1.id)
+		if (n.getId() == this.node1.getId())
 			return this.node2;
 		return this.node1;
 	}

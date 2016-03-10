@@ -16,16 +16,16 @@ import java.util.Set;
 public class Node {
 
 	/** id of the node */
-	protected int id;
+	private int id;
 
 	/** name of the node */
 	private String name;
 
 	/** the coordinate of the node */
-	protected Coordinate location;
+	private Coordinate location;
 
 	/** define which map the node belongs to */
-	protected GeneralMap map;
+	private GeneralMap map;
 
 	/** neighbor node */
 	private Set<Edge> neighborE = new HashSet<Edge>();
@@ -38,10 +38,10 @@ public class Node {
 
 	}
 
-	public Node(int id, int x, int y, GeneralMap mapId) {
+	public Node(int id, int x, int y, GeneralMap map) {
 		this.id = id;
 		this.location = new Coordinate(x, y);
-		this.map = mapId;
+		this.map = map;
 	}
 
 	public double DistanceTo(Node a) {

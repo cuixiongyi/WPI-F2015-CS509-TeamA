@@ -249,6 +249,7 @@ public class ViewComponentListenerImpl {
 			inputPanel.getMapList().setModel(mapListModel);
 
 		} catch (Exception e) {
+			System.out.println(e);
 			JOptionPane.showMessageDialog(null, "No Connected Path!", "Warning Message", JOptionPane.WARNING_MESSAGE);
 
 		}
