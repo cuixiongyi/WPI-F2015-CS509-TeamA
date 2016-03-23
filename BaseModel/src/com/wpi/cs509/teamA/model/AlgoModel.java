@@ -12,8 +12,7 @@ import com.wpi.cs509.teamA.strategy.datastructure.Edge;
 import com.wpi.cs509.teamA.strategy.datastructure.MapVertex;
 
 /**
- * 
- * TODO: Obviously, we should not initialize the start and end node here
+ * This class is the central of the data
  * 
  * @author JLou
  *
@@ -239,11 +238,9 @@ public class AlgoModel {
 				graphMaps.put(e.getNode2().getMap().getMapId(), new MapVertex(e.getNode2().getMap()));
 			}
 		}
-		// System.out.println(graphMaps.get(0).getMapId());
-		// System.out.println(graphMaps.get(1).getMapId());
+
 		for (Edge e : mapEdges) {
-			// System.out.println(e.getNode1().getMap().getMapId());
-			// System.out.println(graphMaps.get(0).getDist());
+
 			graphMaps.get(e.getNode1().getMap().getMapId()).getNeighborM()
 					.add(graphMaps.get(e.getNode2().getMap().getMapId()));
 			graphMaps.get(e.getNode2().getMap().getMapId()).getNeighborM()
@@ -254,7 +251,7 @@ public class AlgoModel {
 
 		if (!graphMaps.containsKey(startNode.getMap().getMapId())) {
 			System.err.printf("Graph doesn't contain start map \"%d\"\n", startNode.getMap().getMapId());
-			// return 0;
+
 		}
 
 		MapVertex source = new MapVertex();
@@ -279,7 +276,7 @@ public class AlgoModel {
 			d = d.getPrevious();
 		} while (d != source);
 		result.push(source);
-		// System.out.println(destination.getMapId());
+
 		return result;
 
 	}

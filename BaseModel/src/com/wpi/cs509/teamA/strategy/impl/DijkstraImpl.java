@@ -84,7 +84,7 @@ public class DijkstraImpl {
 				//
 				if (alternateDist < neighborNode.getDist()) {
 					// remove the neighbor node from q and add back again to
-					// rearrange the q
+					// reconstruct the q
 					q.remove(neighborNode);
 					neighborNode.setDist(alternateDist);
 					/**
