@@ -20,12 +20,11 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int endNodeId;
 
 	@Override
-	public Stack<Node> getRoute(AlgoModel alledges) {
+	public Stack<Node> getRoute(AlgoModel algoModel) {
 
-		// TODO: the start node should not get from all edges.. so obscure
-		this.startNodeId = alledges.getStartNode().getId();
+		this.startNodeId = algoModel.getStartNode().getId();
 		// initialize the graph, build a graph via all edges
-		Graph context = new Graph(alledges.getAllEdges());
+		Graph context = new Graph(algoModel.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 
 		if (!graph.containsKey(startNodeId)) {
@@ -40,12 +39,14 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 		new DijkstraImpl(graph, source).runDijkstra();
 		Vertex destination = new Vertex();
 
-		if (alledges.isMulEndNodes()) {
-			this.endNodeId = alledges.getEndNode().getId();
+		if ( !algoModel.isMulEndNodes()) {
+			// single destination
+			this.endNodeId = algoModel.getEndNode().getId();
 			destination = context.getGraph().get(endNodeId);
 		} else {
+
 			double i = Integer.MAX_VALUE;
-			for (Node n : alledges.getEnd()) {
+			for (Node n : algoModel.getEnd()) {
 				Vertex des = new Vertex();
 				des = context.getGraph().get(n.getId());
 				if (des.getDist() < i) {

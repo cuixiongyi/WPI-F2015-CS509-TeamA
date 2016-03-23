@@ -70,23 +70,23 @@ public interface NodeRelationDao {
 
 	/**
 	 * 
-	 * This method is for algorithm, the Edge structure is different from node
-	 * relation.
+	 * This method is for algorithm, the Edge data structure is different from
+	 * node relation.
 	 * 
-	 * @return A set of Edge instances
+	 * @return All the edges that in the same map
 	 */
 	public List<Edge> getAllEdges();
 
 	/**
 	 * 
-	 * This method is for algorithm, the Edge structure is different from node
-	 * relation.
+	 * This method is for algorithm, the Edge data structure is different from
+	 * node relation.
 	 * 
-	 * @return A set of Edge instances
+	 * @return Edges that cross maps
 	 */
 	public List<Edge> getAllMapEdges();
 
 	public boolean deleteOrAddEdge(Node n1, Node n2);
-	
+
 	public List<Integer> getMapRelationsNodeForOneMap(int map_id);
 }

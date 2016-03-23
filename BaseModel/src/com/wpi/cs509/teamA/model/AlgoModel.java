@@ -84,10 +84,7 @@ public class AlgoModel {
 	 * @return true for multi-destination
 	 */
 	public boolean isMulEndNodes() {
-		if (this.isMulEndNodes) {
-			return false;
-		}
-		return true;
+		return isMulEndNodes;
 	}
 
 	public boolean isMultipleMap() {

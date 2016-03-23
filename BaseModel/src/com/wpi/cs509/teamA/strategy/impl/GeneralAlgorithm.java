@@ -50,12 +50,12 @@ public class GeneralAlgorithm {
 	 * @param context
 	 * @return
 	 */
-	public Stack<Node> findPath(AlgoModel edges) {
+	public Stack<Node> findPath(AlgoModel algoModel) {
 
 		Stack<Node> result = new Stack<Node>();
 
 		// different strategy will use different algorithm
-		result = algoStrategy.getRoute(edges);
+		result = algoStrategy.getRoute(algoModel);
 
 		return result;
 	}

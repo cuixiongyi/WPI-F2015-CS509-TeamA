@@ -16,6 +16,12 @@ public class DijkstraImpl {
 
 	private PriorityQueue<Vertex> q;
 
+	/**
+	 * Initialize a priority queue for the algorithm
+	 * 
+	 * @param graph
+	 * @param source
+	 */
 	public DijkstraImpl(Map<Integer, Vertex> graph, Vertex source) {
 
 		q = new PriorityQueue<Vertex>();
