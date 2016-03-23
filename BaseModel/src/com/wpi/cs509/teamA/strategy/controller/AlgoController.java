@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.impl.*;
 import com.wpi.cs509.teamA.util.Database;
 
@@ -18,15 +18,8 @@ import com.wpi.cs509.teamA.util.Database;
  */
 public class AlgoController {
 
-	// TODO: Make this class singleton, we use setter and getter to operate it..
-	/**
-	 * the result of the path finding
-	 */
-	private Stack<Node> result = new Stack<Node>();
-
 	// all the edges including the edges that cross the maps
-	private AllEdges edges;
-	private boolean flag = false;
+	private AlgoModel algoModel;
 	private boolean isMultipleDestination = false;
 
 	/**
@@ -42,26 +35,24 @@ public class AlgoController {
 	 * @param from
 	 *            the source node
 	 * @param to
-	 *            the destination node
+	 *            the destination node, maybe a multiple destination one
 	 */
-	// TODO: refactor with the next constructor
-	public AlgoController(Node from, ArrayList<Node> to) {
-		if (to.size() == 1) {
-			// TODO: We should not initialize the from and end node in the
-			// AllEdges class? why we need to do so?
-			edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, to.get(0));
-			flag = true;
-		}
-	}
-
-	// TODO: refactor with the previous constructor
 	public AlgoController(Node from, ArrayList<Node> to, boolean isMultiopleDestination) {
-		Node[] end = new Node[to.size()];
-		to.toArray(end);
-		// TODO: this is very error prone to init from node here in all edges
-		// but not the algo itself
-		edges = new AllEdges(Database.getAllEdges(), Database.getAllMapEdges(), from, end);
-		this.isMultipleDestination = true;
+
+		if (isMultiopleDestination) {
+
+			Node[] end = new Node[to.size()];
+			to.toArray(end);
+			algoModel = new AlgoModel(Database.getAllEdges(), Database.getAllMapEdges(), from, end);
+			this.isMultipleDestination = isMultiopleDestination;
+
+		} else {
+
+			algoModel = new AlgoModel(Database.getAllEdges(), Database.getAllMapEdges(), from, to.get(0));
+			this.isMultipleDestination = isMultiopleDestination;
+
+		}
+
 	}
 
 	/**
@@ -75,24 +66,13 @@ public class AlgoController {
 
 		GeneralAlgorithm generalAlgorithm = new GeneralAlgorithm();
 
-		// this is legacy code for the first iteration
-		// leave here for memory
-		if (flag) {
-			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
-
-			result = generalAlgorithm.findPath(edges);
-			return result;
-		}
-
 		if (this.isMultipleDestination) {
 			generalAlgorithm.setAlgoStrategy(new MultipleDestinations());
-			// set the flag back
-			this.isMultipleDestination = false;
 		} else {
 			generalAlgorithm.setAlgoStrategy(new DijkstraAlgoStrategy());
 		}
 
-		return result = generalAlgorithm.findPath(edges);
+		return generalAlgorithm.findPath(algoModel);
 
 	}
 

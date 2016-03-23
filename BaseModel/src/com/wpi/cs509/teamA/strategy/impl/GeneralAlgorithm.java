@@ -3,8 +3,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 
 /**
  * This is the general algorithm for the strategy pattern. This is the class
@@ -50,7 +50,7 @@ public class GeneralAlgorithm {
 	 * @param context
 	 * @return
 	 */
-	public Stack<Node> findPath(AllEdges edges) {
+	public Stack<Node> findPath(AlgoModel edges) {
 
 		Stack<Node> result = new Stack<Node>();
 

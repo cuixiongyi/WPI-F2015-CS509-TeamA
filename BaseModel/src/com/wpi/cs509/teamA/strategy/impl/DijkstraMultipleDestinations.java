@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 import com.wpi.cs509.teamA.strategy.datastructure.Graph;
 import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
 
@@ -16,7 +16,7 @@ public class DijkstraMultipleDestinations implements AlgoStrategy {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Stack<Node> getRoute(AllEdges alledges) {
+	public Stack<Node> getRoute(AlgoModel alledges) {
 		this.startNodeId = alledges.getStartNode().getId();
 		this.endNodeId = new int[alledges.getEnd().length + 1];
 		this.matrix = new double[alledges.getEnd().length + 1][alledges.getEnd().length + 1];

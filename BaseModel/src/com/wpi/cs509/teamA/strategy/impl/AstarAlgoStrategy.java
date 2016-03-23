@@ -1,8 +1,8 @@
 package com.wpi.cs509.teamA.strategy.impl;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 import com.wpi.cs509.teamA.strategy.datastructure.Graph;
 import com.wpi.cs509.teamA.strategy.datastructure.MapVertex;
 import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
@@ -26,7 +26,7 @@ public class AstarAlgoStrategy implements AlgoStrategy {
 	private int startNodeId;
 	private int endNodeId;
 
-	public Stack<Node> getRoute(AllEdges alledges) {
+	public Stack<Node> getRoute(AlgoModel alledges) {
 		this.startNode = alledges.getStartNode();
 		this.endNode = alledges.getEndNode();
 		List<Node> l = new ArrayList<Node>();

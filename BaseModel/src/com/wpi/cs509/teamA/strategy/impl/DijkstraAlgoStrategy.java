@@ -3,8 +3,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 import java.util.HashMap;
 import java.util.Stack;
 import com.wpi.cs509.teamA.bean.Node;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 import com.wpi.cs509.teamA.strategy.datastructure.Graph;
 import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
 
@@ -20,7 +20,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 	private int endNodeId;
 
 	@Override
-	public Stack<Node> getRoute(AllEdges alledges) {
+	public Stack<Node> getRoute(AlgoModel alledges) {
 
 		// TODO: the start node should not get from all edges.. so obscure
 		this.startNodeId = alledges.getStartNode().getId();

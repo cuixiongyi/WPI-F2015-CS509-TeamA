@@ -7,8 +7,8 @@ import java.util.Stack;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.controller.AlgoController;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 import com.wpi.cs509.teamA.strategy.datastructure.Edge;
 import com.wpi.cs509.teamA.strategy.datastructure.Graph;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;

@@ -88,7 +88,7 @@ public class Database {
 
 		}
 
-		// get all maprelations from database
+		// get all map relations from database
 		NodeRelationDao nrd2 = new NodeRelationDaoImpl();
 		allMapEdgesAL = nrd2.getAllMapEdges();
 

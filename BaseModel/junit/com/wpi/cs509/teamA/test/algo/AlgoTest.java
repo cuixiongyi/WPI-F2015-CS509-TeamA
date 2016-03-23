@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.model.AlgoModel;
 import com.wpi.cs509.teamA.strategy.controller.AlgoController;
-import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 import com.wpi.cs509.teamA.strategy.datastructure.Edge;
 import com.wpi.cs509.teamA.strategy.datastructure.Graph;
 import com.wpi.cs509.teamA.strategy.impl.AstarAlgoStrategy;
@@ -160,7 +160,7 @@ public class AlgoTest {
 
 		/// endNodes
 		Node[] node00={node15, node4};
-		AllEdges edgess= new AllEdges(edges, mapedges,node9, node00);
+		AlgoModel edgess= new AlgoModel(edges, mapedges,node9, node00);
 		route=d.getRoute(edgess);
 
 		//route=algoController.getRoute();

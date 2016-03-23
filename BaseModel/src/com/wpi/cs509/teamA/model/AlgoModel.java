@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.strategy.datastructure;
+package com.wpi.cs509.teamA.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,8 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.*;
+import com.wpi.cs509.teamA.strategy.datastructure.Edge;
+import com.wpi.cs509.teamA.strategy.datastructure.MapVertex;
 
 /**
  * 
@@ -16,7 +18,7 @@ import com.wpi.cs509.teamA.bean.*;
  * @author JLou
  *
  */
-public class AllEdges {
+public class AlgoModel {
 
 	private Map<Integer, List<Edge>> edgesOnMap;
 	private Stack<GeneralMap> mapsOnPath;
@@ -40,7 +42,7 @@ public class AllEdges {
 	 * @param startNode
 	 * @param end
 	 */
-	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
+	public AlgoModel(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
@@ -58,7 +60,7 @@ public class AllEdges {
 	 * @param end
 	 *            an array of end nodes
 	 */
-	public AllEdges(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
+	public AlgoModel(List<Edge> edges, List<Edge> mapEdges, Node startNode, Node[] end) {
 		this.edges = edges;
 		this.mapEdges = mapEdges;
 		this.startNode = startNode;
@@ -262,8 +264,6 @@ public class AllEdges {
 		source = graphMaps.get(startNode.getMap().getMapId());
 		MapVertex destination = new MapVertex();
 		destination = graphMaps.get(endNode.getMap().getMapId());
-		// System.out.println(destination.getMapId());
-		// System.out.println(source.getMapId());
 
 		PriorityQueue<MapVertex> q = new PriorityQueue<MapVertex>();
 
@@ -271,15 +271,12 @@ public class AllEdges {
 		for (MapVertex v : graphMaps.values()) {
 			v.setPrevious((v == source) ? source : null);
 			v.setDist((v == source) ? 0 : Integer.MAX_VALUE);
-			// System.out.println("++++++++++++++");
 			q.add(v);
 		}
-		// System.out.println(q.size());
 		dijkstraMap(q);
 
 		MapVertex d = new MapVertex();
 		d = destination;
-		// System.out.println(d.getDist());
 		do {
 			result.push(d);
 			d = d.getPrevious();

@@ -185,7 +185,7 @@ public class ViewComponentListenerImpl {
 			if (1 == model.getEndNode().size()) {
 
 				// single destination
-				algoController = new AlgoController(model.getStartNode(), model.getEndNode());
+				algoController = new AlgoController(model.getStartNode(), model.getEndNode(), false);
 
 			} else {
 
