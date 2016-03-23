@@ -17,7 +17,7 @@ import com.wpi.cs509.teamA.dao.impl.UserAccountDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
 import com.wpi.cs509.teamA.resource.constants.UIConstant;
 import com.wpi.cs509.teamA.strategy.controller.AlgoController;
-import com.wpi.cs509.teamA.strategy.impl.Path;
+import com.wpi.cs509.teamA.strategy.datastructure.Path;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;

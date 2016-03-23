@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wpi.cs509.teamA.strategy.impl.Edge;
+import com.wpi.cs509.teamA.strategy.datastructure.Edge;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.view.renderer.helper.PaintHelperBasics;

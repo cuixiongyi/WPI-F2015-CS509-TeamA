@@ -2,6 +2,10 @@ package com.wpi.cs509.teamA.strategy.impl;
 
 import com.wpi.cs509.teamA.bean.*;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
+import com.wpi.cs509.teamA.strategy.datastructure.Graph;
+import com.wpi.cs509.teamA.strategy.datastructure.MapVertex;
+import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
 
 import java.util.ArrayList;
 import java.util.HashMap;

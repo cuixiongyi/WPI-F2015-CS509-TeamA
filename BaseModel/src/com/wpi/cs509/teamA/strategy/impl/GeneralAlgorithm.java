@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
 
 /**
  * This is the general algorithm for the strategy pattern. This is the class

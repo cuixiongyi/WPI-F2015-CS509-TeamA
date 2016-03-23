@@ -6,6 +6,10 @@ import java.util.Stack;
 
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
+import com.wpi.cs509.teamA.strategy.datastructure.Graph;
+import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
+import com.wpi.cs509.teamA.strategy.datastructure.endNodeOrder;
 
 public class MultipleDestinations implements AlgoStrategy {
 	private int startNodeId;

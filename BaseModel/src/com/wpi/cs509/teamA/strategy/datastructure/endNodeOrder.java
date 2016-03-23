@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.strategy.impl;
+package com.wpi.cs509.teamA.strategy.datastructure;
 
 public class endNodeOrder {
 	private double dist;

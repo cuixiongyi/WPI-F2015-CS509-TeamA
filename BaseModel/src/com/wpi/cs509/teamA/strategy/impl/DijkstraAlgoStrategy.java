@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Stack;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.strategy.AlgoStrategy;
+import com.wpi.cs509.teamA.strategy.datastructure.AllEdges;
+import com.wpi.cs509.teamA.strategy.datastructure.Graph;
+import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
 
 /**
  * Dijkstra Strategy
@@ -21,7 +24,7 @@ public class DijkstraAlgoStrategy implements AlgoStrategy {
 
 		// TODO: the start node should not get from all edges.. so obscure
 		this.startNodeId = alledges.getStartNode().getId();
-		// initialize the graph, make a graph via all edges
+		// initialize the graph, build a graph via all edges
 		Graph context = new Graph(alledges.getAllEdges());
 		HashMap<Integer, Vertex> graph = context.getGraph();
 

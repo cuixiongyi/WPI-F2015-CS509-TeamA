@@ -5,7 +5,7 @@ import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.UserAccount;
 import com.wpi.cs509.teamA.dao.NodeDao;
 import com.wpi.cs509.teamA.dao.impl.NodeDaoImpl;
-import com.wpi.cs509.teamA.strategy.impl.Path;
+import com.wpi.cs509.teamA.strategy.datastructure.Path;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.LinearTransform;
 import com.wpi.cs509.teamA.util.NodeType;

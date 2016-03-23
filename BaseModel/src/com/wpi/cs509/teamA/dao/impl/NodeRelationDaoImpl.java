@@ -10,7 +10,7 @@ import java.util.List;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.bean.NodeRelation;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
-import com.wpi.cs509.teamA.strategy.impl.Edge;
+import com.wpi.cs509.teamA.strategy.datastructure.Edge;
 import com.wpi.cs509.teamA.util.Coordinate;
 import com.wpi.cs509.teamA.util.Database;
 import com.wpi.cs509.teamA.util.JdbcConnect;

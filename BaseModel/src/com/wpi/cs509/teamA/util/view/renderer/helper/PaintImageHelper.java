@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.strategy.impl.Path;
+import com.wpi.cs509.teamA.strategy.datastructure.Path;
 import com.wpi.cs509.teamA.util.ImageHelper;
 import com.wpi.cs509.teamA.util.LinearTransform;
 

@@ -9,7 +9,7 @@ import javax.swing.Timer;
 import com.wpi.cs509.teamA.bean.GeneralMap;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.strategy.impl.Path;
+import com.wpi.cs509.teamA.strategy.datastructure.Path;
 
 /**
  * Created by cuixi on 12/10/2015.

@@ -3,7 +3,7 @@ package com.wpi.cs509.teamA.ui.controller.mousestatepattern;
 import com.wpi.cs509.teamA.bean.Node;
 import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.model.MainModel;
-import com.wpi.cs509.teamA.strategy.impl.Path;
+import com.wpi.cs509.teamA.strategy.datastructure.Path;
 import com.wpi.cs509.teamA.ui.Animation.AnimationObject;
 import com.wpi.cs509.teamA.ui.Animation.AnimationPosition;
 import com.wpi.cs509.teamA.ui.Animation.AnimationStyle;

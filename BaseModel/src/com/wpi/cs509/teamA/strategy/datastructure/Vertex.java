@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.strategy.impl;
+package com.wpi.cs509.teamA.strategy.datastructure;
 
 import com.wpi.cs509.teamA.bean.*;
 
@@ -75,7 +75,7 @@ public class Vertex extends Node implements Comparable<Vertex> {
 	}
 
 	/**
-	 * @return the dist
+	 * @return the dist to the source node
 	 */
 	public double getDist() {
 		return dist;

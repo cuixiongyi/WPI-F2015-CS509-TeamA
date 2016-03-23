@@ -1,4 +1,4 @@
-package com.wpi.cs509.teamA.strategy.impl;
+package com.wpi.cs509.teamA.strategy.datastructure;
 
 import java.util.HashMap;
 import java.util.List;

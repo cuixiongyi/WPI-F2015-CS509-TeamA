@@ -1,6 +1,6 @@
 package com.wpi.cs509.teamA.bean;
 
-import com.wpi.cs509.teamA.strategy.impl.Edge;
+import com.wpi.cs509.teamA.strategy.datastructure.Edge;
 import com.wpi.cs509.teamA.util.*;
 import java.util.HashSet;
 import java.util.Set;

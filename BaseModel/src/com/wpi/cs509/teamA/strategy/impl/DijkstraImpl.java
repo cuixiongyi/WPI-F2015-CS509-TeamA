@@ -3,6 +3,8 @@ package com.wpi.cs509.teamA.strategy.impl;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import com.wpi.cs509.teamA.strategy.datastructure.Vertex;
+
 /**
  * 
  * Takes one source and one graph to run Dijkstra
