@@ -13,7 +13,8 @@ import com.wpi.cs509.teamA.bean.Node;
  */
 public class Edge {
 
-	private Node node1, node2;
+	private Node node1;
+	private Node node2;
 
 	// distance between the two nodes
 	private double dist;
@@ -28,7 +29,13 @@ public class Edge {
 		this.dist = node1.DistanceTo(node2);
 	}
 
-	// for then two nodes are from different maps
+	/**
+	 * for those two nodes from different maps
+	 * 
+	 * @param node1
+	 * @param node2
+	 * @param dist
+	 */
 	public Edge(Node node1, Node node2, double dist) {
 		this.node1 = node1;
 		this.node2 = node2;
@@ -66,7 +73,7 @@ public class Edge {
 	}
 
 	/**
-	 * @return the dist
+	 * @return the dist between two nodes
 	 */
 	public double getDist() {
 		return dist;

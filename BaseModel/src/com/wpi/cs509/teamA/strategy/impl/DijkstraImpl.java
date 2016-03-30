@@ -74,6 +74,9 @@ public class DijkstraImpl {
 			 */
 			for (Map.Entry<Vertex, Double> neighbor : currNode.getNeighborV().entrySet()) {
 				// the neighbor in this iteration
+				/**
+				 * The neighbor vertex
+				 */
 				Vertex neighborNode = neighbor.getKey();
 				/**
 				 * make a new distance from curr node to neighbor and this
@@ -81,7 +84,11 @@ public class DijkstraImpl {
 				 */
 				double distanceFromCurrNode = neighbor.getValue();
 				double alternateDist = currNode.getDist() + distanceFromCurrNode;
-				//
+				/**
+				 * compare the new dist with the old dist to the source This
+				 * will update the distance between neighbor and source
+				 * 
+				 */
 				if (alternateDist < neighborNode.getDist()) {
 					// remove the neighbor node from q and add back again to
 					// reconstruct the q
@@ -91,6 +98,9 @@ public class DijkstraImpl {
 					 * This contains the result set...
 					 */
 					neighborNode.setPrevious(currNode);
+					/**
+					 * adjust priority q
+					 */
 					q.add(neighborNode);
 				}
 			}

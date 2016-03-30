@@ -31,14 +31,6 @@ public class PaintHelperBasics {
 	private static BasicStroke basicEdgeStrock = new BasicStroke(5);
 	public final static double SCALELOWWERBOUND_DRAWICON = 1.1;
 
-	/**
-	 * currently all paint funcitons have 2 overloads, with or without
-	 * DrawStyleEnum In the case that DrawStyleEnum is not provided - All
-	 * functions that draw a list of items (paintNodes, paintEdges) Set style to
-	 * a default style - All functions that draw one single item (paintDot,
-	 * paintEdge) use current style to draw
-	 */
-
 	public enum DrawStyleEnum {
 		Undefined, BasicNode, BasicEdge, BasicText, NewNode, NewEdge, SelectedNode,
 	}
@@ -77,7 +69,8 @@ public class PaintHelperBasics {
 		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewRerenderController.getImageComponent()),
-				image.getHeight(ViewRerenderController.getImageComponent()), ViewRerenderController.getImageComponent());
+				image.getHeight(ViewRerenderController.getImageComponent()),
+				ViewRerenderController.getImageComponent());
 
 	}
 
@@ -101,7 +94,8 @@ public class PaintHelperBasics {
 		int xCoor = coorTrans.getX() - (image.getWidth() / 2);
 		int yCoor = coorTrans.getY() - (image.getHeight() / 2);
 		g2.drawImage(image, xCoor, yCoor, image.getWidth(ViewRerenderController.getImageComponent()),
-				image.getHeight(ViewRerenderController.getImageComponent()), ViewRerenderController.getImageComponent());
+				image.getHeight(ViewRerenderController.getImageComponent()),
+				ViewRerenderController.getImageComponent());
 
 		if (linearTransform.getScale() > SCALELOWWERBOUND_DRAWICON) {
 			String nodeTitle = node.getName();

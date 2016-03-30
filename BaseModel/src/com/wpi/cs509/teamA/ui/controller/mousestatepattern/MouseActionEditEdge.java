@@ -1,7 +1,6 @@
 package com.wpi.cs509.teamA.ui.controller.mousestatepattern;
 
 import com.wpi.cs509.teamA.bean.Node;
-import com.wpi.cs509.teamA.controller.ViewRerenderController;
 import com.wpi.cs509.teamA.dao.NodeRelationDao;
 import com.wpi.cs509.teamA.dao.impl.NodeRelationDaoImpl;
 import com.wpi.cs509.teamA.model.MainModel;
@@ -28,9 +27,10 @@ public class MouseActionEditEdge extends MouseActionState {
 	private Node lastNode = null;
 
 	public MouseActionEditEdge(MainModel pMM) {
-		super(pMM);
 
+		super(pMM);
 		model.cleanUpRoute();
+
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class MouseActionEditEdge extends MouseActionState {
 			if (null == node) {
 				return false;
 			}
-			System.out.println(node.getId());
+
 			if (null == lastNode) {
 				lastNode = node;
 				nodesToPaint.add(node);

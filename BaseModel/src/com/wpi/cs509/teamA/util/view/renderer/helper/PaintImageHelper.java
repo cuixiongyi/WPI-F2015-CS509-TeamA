@@ -22,7 +22,7 @@ public class PaintImageHelper extends PaintHelperBasics {
 	static private MainModel model = null;
 
 	public static BufferedImage paintImage(Path path, LinearTransform lt) {
-		
+
 		BufferedImage image = path.getMap().getImage();
 
 		BufferedImage bi = ImageHelper.resizeImage(image, lt.getScale());

@@ -63,6 +63,7 @@ public class MouseActionEditNode extends MouseActionState {
 			}
 
 		}
+
 		if (e.getButton() == MouseEvent.BUTTON1) {
 
 			lastNode = null;
@@ -82,6 +83,7 @@ public class MouseActionEditNode extends MouseActionState {
 
 	@Override
 	public void paintOnImage(Graphics2D g2) {
+		
 		LinearTransform lt = model.getLinearTransform();
 		PaintHelperComposite.paintNodes(model.getCurrentMap().getNodes(), g2, PaintHelperBasics.DrawStyleEnum.BasicNode,
 				lt);

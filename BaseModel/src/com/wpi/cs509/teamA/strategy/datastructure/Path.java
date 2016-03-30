@@ -18,13 +18,13 @@ public class Path {
 	// a list of nodes that represent the path
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 
+	public Path() {
+
+	}
+
 	public Path(GeneralMap pmap, ArrayList<Node> pnodes) {
 		map = pmap;
 		nodes = pnodes;
-	}
-
-	public Path() {
-
 	}
 
 	public void addNode(Node node) {
