@@ -10,7 +10,7 @@ import com.wpi.cs509.teamA.util.Database;
 
 /**
  * this class is an interface for all the implementation class to follow so all
- * the mouse action will have same method interface
+ * the mouse action will have same interface
  *
  * This is the abstract class for state pattern
  */

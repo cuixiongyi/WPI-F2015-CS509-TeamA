@@ -20,7 +20,9 @@ import com.wpi.cs509.teamA.ui.controller.mousestatepattern.MouseActionState;
 public class StateContextModel extends Observable {
 
 	/**
-	 * The current state
+	 * The current model state
+	 * 
+	 * MouseActionState is an abstract class that provides a uniform interface
 	 */
 	private MouseActionState myState;
 
@@ -53,6 +55,8 @@ public class StateContextModel extends Observable {
 	/**
 	 * 
 	 * implementation of the mouse action
+	 * 
+	 * this execute has nothing related to myState.execute
 	 * 
 	 * @param e
 	 * @return

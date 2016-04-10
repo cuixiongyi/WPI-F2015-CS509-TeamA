@@ -101,7 +101,7 @@ public class DijkstraImpl {
 					/**
 					 * adjust priority q
 					 */
-					q.add(neighborNode);
+					q.offer(neighborNode);
 				}
 			}
 		}
